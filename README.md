@@ -1,4 +1,4 @@
-# Jaguarundi
+# [Jaguarundi](https://nl.wikipedia.org/wiki/Jaguarundi)
 
 ## Opdracht
 
@@ -6,7 +6,11 @@ Rekenlogboek
 
 ## Leden
 
-
+- Sjaak Kok
+- Stef Schöningh
+- Michael Holstein
+- Rowan Paul Flynn
+- Stefan oude Lohuis
 
 ## Product Owner
 
