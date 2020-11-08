@@ -2,7 +2,7 @@
 
 ## Opdracht
 
-[Rekenlogboek](opdracht-rekenlogboek/REAMDE.md)
+[Rekenlogboek](opdracht-rekenlogboek)
 
 ## Leden
 
