@@ -1,6 +1,5 @@
 # Software guidebook
 
----
 
 ## Table of content
 
