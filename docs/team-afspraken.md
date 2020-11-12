@@ -13,6 +13,8 @@ Om het project soepel te laten verlopen zijn de volgende afspraken gemaakt door 
 
 Wij werken elke werkdag van 9.00 tot 17.00 uur. Dagelijkse stand-up wordt gehouden aan het begin van de dag, om 9.00 uur. De teamleden kunnen een pauze nemen wanneer ze willen, zolang ze de rest van het team maar een bericht sturen over onenigheid. De lunchpauze is van 12.00 tot 12.30 uur.
 
+Naast de daily stand-up wordt er ook op een moment in de middag worden gehouden door het team.
+
 ## Software
 
 De volgende software wordt door het hele team gebruikt:
@@ -20,3 +22,12 @@ De volgende software wordt door het hele team gebruikt:
 - ESlint / Prettier voor code-opmaak
 - Visual Studio Code voor codering
 - Discord voor teamvergaderingen
+- Teams voor officiële gesprekken
+
+## Procesbeschrijving
+
+- Taken en user stories worden bijgehouden in GitHub Projects
+- Er wordt bijgehouden wie met welke taak bezig is door de taak te verschuiven naar "doing"
+- Als je met een taak bezig bent dan zet je jezelf erbij
+- Om te zorgen dat het hele team overzicht houd en alles goed gaat, worden in de daily stand-up besproken wie welk taak neemt en hoe het met de gekozen taken gaat
+- Elke user story krijgt een eigen label en taken van deze users story
