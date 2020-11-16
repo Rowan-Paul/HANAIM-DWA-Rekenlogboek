@@ -20,8 +20,6 @@
 
 ## Context
 
----
-
 In this chapter you'll find the scene of this project. Here we start with explaining what the software is all about, and what it is we are building.
 
 Thereafter we explain how this project will fit in the existing environment. And last but not least we describe who are using this software.
