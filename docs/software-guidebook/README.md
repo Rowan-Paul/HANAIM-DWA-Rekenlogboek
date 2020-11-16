@@ -18,7 +18,7 @@
 - [Operation and Support](#)
 - [Decision Log](#)
 
-## Context
+## 1. Context
 
 In this chapter you'll find the scene of this project. Here we start with explaining what the software is all about, and what it is we are building.
 
@@ -34,12 +34,40 @@ The project team consists of five students. Who work together on a software tool
 
 In this project we develop a software tool that supports teachers by tracking the progress of their pupils.
 
-The intention is that pupils keep a digital log, in this log they indicate for each learning objective wheter this is clear or not.
+The intention is that pupils keep a digital log, in this log they indicate for each learning goal whether this is clear or not.
 
-Based on the logs of pupils teachers can provide support.
+Based on the logs of pupils, teachers can provide support.
 
-### How this software fits into it's current environment
+### How this software fits into its current environment
 
 In the current environment they already make use of logs. Only at the moment these are paper logs.
 
 The principle remains the same. only the environment undergoes a digital transformation.
+
+### Different roles
+
+In the software we work with three different roles. In the list below we describe the roles and their use within the software.
+
+1. **Log Creator**
+
+- Creates logs for different school years.
+- Adds learning goals to logs.
+- Prepares logs for teachers.
+
+2. **Teacher**
+
+- Evaluate logs of pupils.
+
+3. **Pupils**
+
+- Fills in logs for current learning goal.
+
+### Context diagram
+
+In the context diagram below the coherence between the different roles is shown.
+
+![Context diagram](./assets/context-diagram.svg)
+
+---
+
+## 2. Functional overview
