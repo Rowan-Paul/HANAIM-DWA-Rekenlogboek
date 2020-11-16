@@ -1,7 +1,18 @@
 import '../scss/App.scss'
 
 function App() {
-  return <div className="App"></div>
+	const test = t => {
+		const a = 5
+		if (a == t) {
+			return false
+		}
+	}
+
+	return (
+		<div className="App">
+			<div> </div>
+		</div>
+	)
 }
 
 export default App
