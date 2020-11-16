@@ -7,8 +7,8 @@
 - [Software guidebook](#software-guidebook)
 
   - [Table of content](#table-of-content)
-  - [1.Context](#1context)
-    - [1.1What this project is about](#11what-this-project-is-about)
+  - [1.Context](#1-context)
+    - [1.1What this project is about](#11-what-this-project-is-about)
     - [1.2 What it is that's being built](#12-what-it-is-thats-being-built)
     - [1.3 How this software fits into its current environment](#13-how-this-software-fits-into-its-current-environment)
     - [1.4 Different roles](#14-different-roles)
