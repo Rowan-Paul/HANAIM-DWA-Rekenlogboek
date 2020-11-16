@@ -33,31 +33,6 @@
   - [11. Deployment](#11-deployment)
   - [12. Operation and support](#12-operation-and-support)
   - [13. Decision log](#13-decision-log)
-  <!-- chapter 2 -->
-  - [2. Functional overview](#2-functional-overview)
-    - [2.1 user stories](#21-user-stories)
-    - [2.2 use cases (optional)](#22-use-cases-optional)
-    - [2.3 UML-diagram (optional)](#23-uml-diagram-optional)
-    - [2.4 Wireframes](#24-wireframes)
-  - [3. Quality attributes](##3-quality-attributes)
-    <!-- chapter 3 -->
-    - [3.1 Performance](#31-performance)
-    - [3.2 Scalability](#32-scalability)
-    - [3.3 Availability](#33-availability)
-    - [3.4 Security](#34-security)
-    <!-- chapter 4 -->
-  - [4. Constraints](#4-constraints)
-    <!-- chapter 5 -->
-  - [5. Principles](#5-principles)
-    <!-- chapter 6 -->
-  - [6. Software Architecture](#6-software-architecture)
-  - [7. External interfaces](#7-external-interfaces)
-  - [8. Code](#8-code)
-  - [9. Data](#9-data)
-  - [10. Infrastructure Architecture](#10-infrastructure-architecture)
-  - [11. Deployment](#11-deployment)
-  - [12. Operation and support](#12-operation-and-support)
-  - [13. Decision log](#13-decision-log)
 
 ## 1. Context
 
