@@ -59,13 +59,13 @@
   - [12. Operation and support](#12-operation-and-support)
   - [13. Decision log](#13-decision-log)
 
-## 1.Context
+## 1. Context
 
 In this chapter you'll find the scene of this project. Here we start with explaining what the software is all about, and what it is we are building.
 
 Thereafter we explain how this project will fit in the existing environment. And last but not least we describe who are using this software.
 
-### 1.1What this project is about
+### 1.1 What this project is about
 
 In this project an assignment is being realized for the course DWA (development web applications).
 
