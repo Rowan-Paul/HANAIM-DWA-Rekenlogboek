@@ -1,17 +1,16 @@
 # Software guidebook
 
-## Table of content
+## Inhoudsopgave
 
----
+<!-- TOC -->
 
 - [Software guidebook](#software-guidebook)
-
-  - [Table of content](#table-of-content)
-  - [1.Context](#1-context)
-    - [1.1What this project is about](#11-what-this-project-is-about)
-    - [1.2 What it is that's being built](#12-what-it-is-thats-being-built)
-    - [1.3 How this software fits into its current environment](#13-how-this-software-fits-into-its-current-environment)
-    - [1.4 Different roles](#14-different-roles)
+  - [Inhoudsopgave](#inhoudsopgave)
+  - [1. Context](#1-context)
+    - [1.1 Het project](#11-het-project)
+    - [1.2 De applicatie](#12-de-applicatie)
+    - [1.3 Huidige omgeving](#13-huidige-omgeving)
+    - [1.4 Verschillende rollen](#14-verschillende-rollen)
     - [1.5 Context diagram](#15-context-diagram)
   - [2. Functional overview](#2-functional-overview)
     - [2.1 user stories](#21-user-stories)
@@ -34,57 +33,62 @@
   - [12. Operation and support](#12-operation-and-support)
   - [13. Decision log](#13-decision-log)
 
+<!-- /TOC -->
+
+---
+
 ## 1. Context
 
-In this chapter you'll find the scene of this project. Here we start with explaining what the software is all about, and what it is we are building.
+In dit hoofdstuk wordt de context van het project beschreven. Zo wordt er beschreven wat het project inhoud en wat er daadwerkelijk ontwikelt gaat worden.
 
-Thereafter we explain how this project will fit in the existing environment. And last but not least we describe who are using this software.
-
----
-
-### 1.1 What this project is about
-
-In this project an assignment is being realized for the course DWA (development web applications).
-
-The project team consists of five students. Who work together on a software tool.
+Vervolgens wordt er ook beschreven hoe het project past in de bestaande omgeving. En tot slot wordt er beschreven wie het software gaan gebruiken.
 
 ---
 
-### 1.2 What it is that's being built
+### 1.1 Het project
 
-In this project we develop a software tool that supports teachers by tracking the progress of their pupils.
+In dit project wordt er een opdracht gerealiseerd die gekoppeld is aan het vak DWA (development webapplications).
 
-The intention is that pupils keep a digital log, in this log they indicate for each learning goal whether this is clear or not.
-
-Based on the logs of pupils, teachers can provide support.
-Log
+Er wordt aan dit project gewerkt met vijf projectleden die gezamelijk een applicatie ontwikkelen.
 
 ---
 
-### 1.3 How this software fits into its current environment
+### 1.2 De applicatie
 
-In the current environment they already make use of logs. Only at the moment these are paper logs.
+In dit project wordt er een applicatie ontwikkelt die leerkrachten helpt bij het beter begeleiden van leerlingen.
 
-The principle remains the same. only the environment undergoes a digital transformation.
+Met behulp van de applicatie kan een leerling per aangeven of hij/zij een leerdoel begrijpt. Zo krijgt elke leerling een eigen digitaal logboek waarin wekelijks wordt bijgehouden of het leerdoel van de desbetreffende week duidelijk genoeg is.
+
+De leerkracht evalueert de logboeken van de leerlingen en geeft leerlingen extra begeleiding indien nodig.
 
 ---
 
-### 1.4 Different roles
+### 1.3 Huidige omgeving
 
-In the software we work with three different roles. In the list below we describe the roles and their use within the software.
-| # | Role | Task |
-|----|-------------|------------------------------------------|
-| 1. | Log creator | Creates logs for different school years. |
-| 2. | Log creator | Adds learning goals to logs. |
-| 3. | Log creator | Prepares logs for teachers. |
-| 4. | Teachers | Evaluate logs of pupils. |
-| 5. | Pupils | Fills in logs for current learning goal. |
+In de huidige omgeving wordt er ook al gewerkt met logboeken. Op dit moment worden deze logboeken schriftelijk ingevuld door de leerlingen. Door dit te digitaliseren wordt het makkelijker voor de leerkracht om leerlingen te kunnen ondersteunen.
+
+Het project kan dan ook als digitale transformatie worden beschouwd.
+
+---
+
+### 1.4 Verschillende rollen
+
+Binnen de applicatie wordt er gewerkt met drie verschillende rollen. In de onderstaande tabel zijn de verschillende rollen en de daarbij behorende taken beschreven.
+
+| #   | Role         | Task                                                           |
+| --- | ------------ | -------------------------------------------------------------- |
+| 1.  | Logboekmaker | Maakt logboeken aan voor de verschillende leerjaren en blokken |
+| 2.  | Logboekmaker | Voegt leerdoelen toe aan logboeken.                            |
+| 3.  | Logboekmaker | Voorbereiden logboeken voor leerkrachten.                      |
+| 4.  | Logboekmaker | Wijzigt/verwijdert logboeken indien nodig.                     |
+| 5.  | Leerkracht   | Evalueert de logboeken van leerlingen.                         |
+| 5.  | Leerling     | Reflecteert bij ieder leerdoel in een logboek.                 |
 
 ---
 
 ### 1.5 Context diagram
 
-In the context diagram below the coherence between the different roles is shown.
+In de context diagram hieronder wordt de samenhang tussen de verschillende rollen en applicatie beschreven.
 
 ![Context diagram](./assets/context-diagram.svg)
 
@@ -92,13 +96,13 @@ In the context diagram below the coherence between the different roles is shown.
 
 ## 2. Functional overview
 
-In this chapter you'll find different diagrams, drawings and tables that helps understand how the software is working.
+In dit hoofdstuk bevinden zich verschillende diagrammen, tekeningen en tabellen die helpen bij het beter begrijpen van de applicatie.
 
 ---
 
 ### 2.1 user stories
 
-In the table below the different user stories are described.
+In de tabel hieronder worden de verschillende user-stories toegelicht. Deze user-stories maken duidelijk welke eisen de verschillende rollen binnen de applicatie hebben.
 
 | #    | Description                                                                                                                                                                                                                                    |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -125,7 +129,7 @@ In the table below the different user stories are described.
 
 ### 2.2 use cases (optional)
 
-Down below you'll find various use cases that explains how the software is used.
+In dit hoofdstuk bevinden zich use cases. in deze use cases wordt de werking van verschillende processen in de applicatie werken.
 
 _optional use cases_
 
@@ -143,7 +147,7 @@ _optional uml diagrams_
 
 ## 3. Quality attributes
 
-In this chapter you'll find the quality attributes which the software must meet.
+In dit hoofdstuk bevinden zich de verschillende kwaliteitseisen waaran het software moet voldoen. Deze kwaliteitseisen zijn onderverdeeld in de bijpassende deelhoofdstukken.
 
 <!-- zie pdf voor toelichting  -->
 
