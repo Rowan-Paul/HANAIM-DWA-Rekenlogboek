@@ -37,6 +37,7 @@ In this project we develop a software tool that supports teachers by tracking th
 The intention is that pupils keep a digital log, in this log they indicate for each learning goal whether this is clear or not.
 
 Based on the logs of pupils, teachers can provide support.
+Log
 
 ### How this software fits into its current environment
 
@@ -47,20 +48,13 @@ The principle remains the same. only the environment undergoes a digital transfo
 ### Different roles
 
 In the software we work with three different roles. In the list below we describe the roles and their use within the software.
-
-1. **Log Creator**
-
-- Creates logs for different school years.
-- Adds learning goals to logs.
-- Prepares logs for teachers.
-
-2. **Teacher**
-
-- Evaluate logs of pupils.
-
-3. **Pupils**
-
-- Fills in logs for current learning goal.
+| # | Role | Task |
+|----|-------------|------------------------------------------|
+| 1. | Log creator | Creates logs for different school years. |
+| 2. | Log creator | Adds learning goals to logs. |
+| 3. | Log creator | Prepares logs for teachers. |
+| 4. | Teachers | Evaluate logs of pupils. |
+| 5. | Pupils | Fills in logs for current learning goal. |
 
 ### Context diagram
 
