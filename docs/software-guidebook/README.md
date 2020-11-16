@@ -65,11 +65,15 @@ In this chapter you'll find the scene of this project. Here we start with explai
 
 Thereafter we explain how this project will fit in the existing environment. And last but not least we describe who are using this software.
 
+---
+
 ### 1.1 What this project is about
 
 In this project an assignment is being realized for the course DWA (development web applications).
 
 The project team consists of five students. Who work together on a software tool.
+
+---
 
 ### 1.2 What it is that's being built
 
@@ -80,11 +84,15 @@ The intention is that pupils keep a digital log, in this log they indicate for e
 Based on the logs of pupils, teachers can provide support.
 Log
 
+---
+
 ### 1.3 How this software fits into its current environment
 
 In the current environment they already make use of logs. Only at the moment these are paper logs.
 
 The principle remains the same. only the environment undergoes a digital transformation.
+
+---
 
 ### 1.4 Different roles
 
@@ -97,6 +105,8 @@ In the software we work with three different roles. In the list below we describ
 | 4. | Teachers | Evaluate logs of pupils. |
 | 5. | Pupils | Fills in logs for current learning goal. |
 
+---
+
 ### 1.5 Context diagram
 
 In the context diagram below the coherence between the different roles is shown.
@@ -108,6 +118,8 @@ In the context diagram below the coherence between the different roles is shown.
 ## 2. Functional overview
 
 In this chapter you'll find different diagrams, drawings and tables that helps understand how the software is working.
+
+---
 
 ### 2.1 user stories
 
@@ -134,13 +146,19 @@ In the table below the different user stories are described.
 | US17 | Als leerkracht wil ik kunnen kiezen voor een donker thema zodat ik ook in donkere omgevingen kan werken.                                                                                                                                       |
 | US18 | Als leerkracht wil ik notities bij een leerling kunnen bijhouden zodat ik belangrijke info niet vergeet.                                                                                                                                       |
 
+---
+
 ### 2.2 use cases (optional)
 
 Down below you'll find various use cases that explains how the software is used.
 
 _optional use cases_
 
+---
+
 ### 2.3 UML-diagram (optional)
+
+---
 
 _optional uml diagrams_
 
@@ -154,12 +172,16 @@ In this chapter you'll find the quality attributes which the software must meet.
 
 <!-- zie pdf voor toelichting  -->
 
+---
+
 ### 3.1 Performance
 
 <!-- Smart gedefineerd
 
     e.g. latency and througput
  -->
+
+---
 
 ### 3.2 Scalability
 
@@ -168,12 +190,16 @@ In this chapter you'll find the quality attributes which the software must meet.
     e.g. data and traffic volumes
  -->
 
+---
+
 ### 3.3 Availability
 
 <!-- Smart gedefineerd
 
     e.g. uptime,downtime, scheduled maintenance, 24x7, 99.9% etc
  -->
+
+---
 
 ### 3.4 Security
 
