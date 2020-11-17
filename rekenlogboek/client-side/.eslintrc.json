@@ -11,10 +11,15 @@
 		"ecmaVersion": 12,
 		"sourceType": "module"
 	},
-	"plugins": ["react", "prettier"],
+	"plugins": ["react"],
 	"rules": {
-		"prettier/prettier": "error",
 		"no-unused-vars": "warn",
-		"no-console": "off"
+		"no-console": "off",
+		"linebreak-style": "off",
+		"semi": ["warn", "never"],
+		"no-tabs": "off",
+		"indent": ["warn", "tab"],
+		"no-trailing-spaces": "warn",
+		"no-extra-parens": "warn"
 	}
 }
