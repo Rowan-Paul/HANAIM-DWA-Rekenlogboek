@@ -5,16 +5,16 @@ const logbookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    blok: {
+    period: {
         type: Number,
         required: true
     },
-    groep: {
+    group: {
         type: Number,
         required: true
     },
-    jaar: {
-        type: Number,
+    year: {
+        type: String,
         required: true
     },
     teacher: {
@@ -36,7 +36,7 @@ const logbookSchema = new mongoose.Schema({
         },
         placeholder: {
             type: String,
-            isRequired: true
+            isRequired: false
         }
     }],
     goals: [{
@@ -50,7 +50,7 @@ const logbookSchema = new mongoose.Schema({
         },
         imagelink: {
             type: String,
-            isRequired: true
+            isRequired: false
         }
     }]
 });

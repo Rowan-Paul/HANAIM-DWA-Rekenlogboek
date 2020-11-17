@@ -30,9 +30,9 @@ async function seedLogbook() {
     await Logbook.insertMany([
         {
             _id: '1',
-            blok: 1,
-            groep: 5,
-            jaar: 2020,
+            period: 1,
+            group: 5,
+            year: 2020,
             teacher: "xxx",
             isAvailable: false,
             columns: [
