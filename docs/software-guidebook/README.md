@@ -75,7 +75,7 @@ Het project kan dan ook als digitale transformatie worden beschouwd.
 
 Binnen de applicatie wordt er gewerkt met drie verschillende rollen. In de onderstaande tabel zijn de verschillende rollen en de daarbij behorende taken beschreven.
 
-| #   | Rolen        | Taken                                                          |
+| #   | Rollen       | Taken                                                          |
 | --- | ------------ | -------------------------------------------------------------- |
 | 1.  | Logboekmaker | Maakt logboeken aan voor de verschillende leerjaren en blokken |
 | 2.  | Logboekmaker | Voegt leerdoelen toe aan logboeken.                            |
