@@ -5,9 +5,6 @@ import React from "react";
 import "../../App.css";
 import * as microsoftTeams from "@microsoft/teams-js";
 
-// your ngrok site
-const site = "https://1ce0bb0e0922.ngrok.io";
-
 /**
  * The 'Config' component is used to display your group tabs
  * user configuration options.  Here you will allow the user to
@@ -23,7 +20,7 @@ class TabConfig extends React.Component {
      * the settings selected by the user.
      */
     microsoftTeams.settings.setSettings({
-      contentUrl: site + "/tab",
+      contentUrl: "https://localhost:3000/tab",
     });
 
     /**
