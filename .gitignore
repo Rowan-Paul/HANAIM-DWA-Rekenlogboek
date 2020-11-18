@@ -113,3 +113,6 @@ dist
 
 # MSOffice temp files
 ~$*
+
+# VSCODE folder
+.vscode
