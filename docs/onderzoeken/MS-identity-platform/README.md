@@ -43,7 +43,7 @@ We willen dus eenmalig autoriseren en vervolgens data ophalen zonder in te logge
 
 Data ophalen zonder in te loggen is mogelijk door gebruik te maken van tokens/sleutels. In onderstaande afbeelding wordt uitgelegd hoe dit werkt.
 
-![afbeelding ophalen jwt token](/img/ophalen-token.svg)
+![afbeelding ophalen jwt token](img/ophalen-token.svg)
 
 1. Je logt in via een pagina binnen de react app.
 2. Er wordt verwezen naar /auth op de back-end
