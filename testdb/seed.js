@@ -29,11 +29,56 @@ async function seedLogbook() {
 
     await Logbook.insertMany([
         {
-            _id: '1',
             period: 1,
             group: 5,
             year: 2020,
             teacher: "xxx",
+            isAvailable: false,
+            columns: [
+                {
+                    _id: 0,
+                    name: "Doelen",
+                    placeholder: "vul doelen in"
+                },
+                {
+                    _id: 1,
+                    name: "Lesofzo",
+                    placeholder: "vvul lesresult in"
+                },
+                {
+                    _id: 2,
+                    name: "Instructie nodig?",
+                    placeholder: "vvul iets in in"
+                }, 
+                {
+                    _id: 3,
+                    name: "Evaluatie",
+                    placeholder: "Vul evaluatie"
+                }
+            ],
+            goals: [
+                {
+                    _id: 0,
+                    goal: "Leer rekenen",
+                    imagelink: "xxxxxxxxxxxxxx"
+                },
+                {
+                    _id: 1,
+                    goal: "Leer 1+1",
+                    imagelink: "xxxxxxxxxxssaasdasdaxx"
+                },
+                {
+                    _id: 2,
+                    goal: "Leer 1*1",
+                    imagelink: "aaaaaaa"
+                },
+            ]
+        },
+        {
+            period: 2,
+            group: 6,
+            year: 2020,
+            teacher: "yyy",
             isAvailable: false,
             columns: [
                 {
@@ -83,8 +128,7 @@ async function seedStudentLogboek() {
 
     await StudentLogbook.insertMany([
         {
-            _id: '1',
-            logbookID: 1,
+            logbookID: "5fb51d465eebc57020f13a01",
             student: 5,
             answers: [
                 {

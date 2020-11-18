@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const logbookSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
     period: {
         type: Number,
         required: true

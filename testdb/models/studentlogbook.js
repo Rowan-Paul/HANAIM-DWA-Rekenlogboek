@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 
 const studentLogbookSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
     logbookID: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     student: {
