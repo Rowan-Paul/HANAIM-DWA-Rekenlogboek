@@ -8,29 +8,28 @@ Dit document bevat het resultaat van ons onderzoek naar MS identity platform. Er
 
 - [Onderzoek Microsoft Identity Platform](#onderzoek-microsoft-identity-platform)
   - [Inhoudsopgave](#inhoudsopgave)
-  - [1. Ophalen gebruikergegevens](#1-ophalen-gebruikergegevens)
-  - [2. oAuth-flow](#2-oauth-flow)
-    - [2.1 Voorbereidingen](#21-voorbereidingen)
-    - [2.2 Sign in with Microsoft](#22-sign-in-with-microsoft)
-    - [2.2 Gebruik JWT-token](#22-gebruik-jwt-token)
-  - [3. Identificeren rol teams gebruikers](#3-identificeren-rol-teams-gebruikers)
-  - [4. Rol toevoegen/wijzigen gebruiker](#4-rol-toevoegenwijzigen-gebruiker)
-  - [!Foto met instructies](#)
-  - [5. Code example](#5-code-example)
+  - [Ophalen gebruikergegevens](#ophalen-gebruikergegevens)
+  - [oAuth-flow](#oauth-flow)
+    - [Voorbereidingen](#voorbereidingen)
+    - [Sign in with Microsoft](#sign-in-with-microsoft)
+    - [Gebruik JWT-token](#gebruik-jwt-token)
+  - [Identificeren rol teams gebruikers](#identificeren-rol-teams-gebruikers)
+  - [Rol toevoegen/wijzigen gebruiker](#rol-toevoegenwijzigen-gebruiker)
+  - [Code example](#code-example)
 
 <!-- /TOC -->
 
-## 1. Ophalen gebruikergegevens
+## Ophalen gebruikergegevens
 
 Binnen het project willen we dat gebruikers kunnen inloggen met een office-365 account. Nadat een gebruiker is ingelogd, willen wij op basis van de gebruikersrol bepalen tot welke pagina's de desbetreffende gebruiker toegang heeft.
 
 Uit onderzoek blijkt dat het 'inloggen via microsoft' mogelijk is via het oAuth2 principe. Hiermee kunnen er gebruikergevens van een persoon opgehaald worden, zonder dat deze gebruiker steeds hoeft in te loggen.
 
-## 2. oAuth-flow
+## oAuth-flow
 
 In dit hoofdstuk is beschreven hoe de oAuth flow van Microsoft werkt.
 
-### 2.1 Voorbereidingen
+### Voorbereidingen
 
 Onderstaande voorbereidingen zijn getroffen.
 
@@ -38,7 +37,7 @@ Onderstaande voorbereidingen zijn getroffen.
 2. Testgebruikers toegevoegd aan office omgeving.
 3. Tentant-ID aangevraagd via Azure AD.
 
-### 2.2 Sign in with Microsoft
+### Sign in with Microsoft
 
 We willen dus eenmalig autoriseren en vervolgens data ophalen zonder in te loggen.
 
@@ -96,7 +95,7 @@ In het JSON file hieronder kan je zien welke response Microsoft stuurt. de acces
 
 ---
 
-### 2.2 Gebruik JWT-token
+### Gebruik JWT-token
 
 Wanneer er een JWT-token is gegenereerd kan er data opgehaald worden. Dit doen we door de token mee te sturen tijdens een API request. Een token wordt als bearer token meegeven als authorization header. In onderstaand voorbeeld wordt de persoonlijke data opgehaald via teams.
 
@@ -124,13 +123,13 @@ Wanneer er een JWT-token is gegenereerd kan er data opgehaald worden. Dit doen w
 }
 ```
 
-## 3. Identificeren rol teams gebruikers
+## Identificeren rol teams gebruikers
 
 Het identificeren van een gebruikersrol is vrij eenvoudig. In de JSON van het hoofdstuk hierboven zie je dat de response een key `jobTitle` heeft.
 
 Met de waarde van deze key kunnen we de rol van een gebruiker identificeren.
 
-## 4. Rol toevoegen/wijzigen gebruiker
+## Rol toevoegen/wijzigen gebruiker
 
 ---
 
@@ -143,9 +142,11 @@ Naast het ophalen van rollen willen we deze ook kunnen aanmaken en wijzigen. Dit
 5. Klik in het uitschuifmenu op `contactgegevens beheren`
 6. Wijzig de input `Functie` en sla dit vervolgens op.
 
-## ![Foto met instructies](./img/voorbeeld.jpg)
+![Foto met instructies](./img/voorbeeld.jpg)
 
-## 5. Code example
+---
+
+## Code example
 
 In deze folder bevind zich ook een code example, deze is te starten als volgt:
 
