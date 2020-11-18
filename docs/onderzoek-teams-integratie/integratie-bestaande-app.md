@@ -3,7 +3,7 @@
 In de documentatie die hierboven staat wordt een apart project aangemaakt voor de Teams, maar je kan ook een al bestaande app integreren met Teams. De applicatie checkt of hij in Teams zit, en als dat het geval is laat hij andere pagina's zien.
 
 1. Maak een [create-react-app](https://create-react-app.dev/)
-2. Zet in je `package.json` bij `scripts` het volgende: `"start": "set HTTPS=true&&react-scripts start",`. Voordat je de app kan toevoegen moet je naar je site gaan in dezelfde browser als dat je Teams gebruikt en aangeven dat de website veilig is, zie de gif hieronder.
+2. Maak een bestand aan genaamd `.env` in de root van je folder en zet er het volgende in: `HTTPS=true`. Voor gebruikers in een Mac omgeving kan je een .env.local met eventueel [een lokaal certificaat](https://flaviocopes.com/macos-install-ssl-local/). Hierna moet in de browser (als je niet op Mac een lokaal certificaat heb gemaakt) de stappen in de gif hieronder uitproberen. Zet de .env.local in je .gitignore zodat hij niet gecommit wordt met git.
 
 ![entering site without SSL certificate](assets/certificate.gif)
 

@@ -7,5 +7,3 @@ Microsoft Teams is een dominante speler binnnen educatie en ook onze opdrachtgev
 @import "ontwikkelen-voor-teams.md"
 
 @import "integratie-bestaande-app.md"
-
-@import "tijdens-ontwikkelen.md"
