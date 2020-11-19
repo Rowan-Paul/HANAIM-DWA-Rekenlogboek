@@ -76,7 +76,7 @@ Deze response bevat verschillende data en ziet er als volgt uit.
     "uti": "Yi5DwRx6JUqyjUKpgZcaAA",
     "ver": "2.0"
   },
-  "accessToken": "Extreem lang"
+  "accessToken": "Extreem lang",
   "fromCache": false,
   "expiresOn": "2020-11-18T13:37:08.000Z",
   "extExpiresOn": "2020-11-18T14:37:07.000Z",
