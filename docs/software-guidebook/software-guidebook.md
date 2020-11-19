@@ -50,6 +50,8 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
 
 <!-- /code_chunk_output -->
 
+---
+
 @import "1-context.md"
 
 ---
