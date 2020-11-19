@@ -1,4 +1,4 @@
-# 1. Context
+## 1. Context
 
 In dit hoofdstuk wordt beschreven wat de context van de applicatie is, wie er gebruik van gaat maken en waar de applicatie uit bestaat.
 
