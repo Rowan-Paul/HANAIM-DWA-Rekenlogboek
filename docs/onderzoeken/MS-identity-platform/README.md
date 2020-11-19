@@ -1,58 +1,52 @@
 # Onderzoek Microsoft Identity Platform
 
-Dit document bevat het resultaat van ons onderzoek naar MS identity platform. Er is gekeken naar hoe er binnen de applicatie onderscheid gemaakt kan worden tussen de verschillende rollen.
+Dit document bevat het resultaat van ons onderzoek naar MS identity platform. Er is gekeken naar hoe er Microsoft gebruikers opgehaald kunnen worden om vervolgens de rol te bepalen.
 
 ## Inhoudsopgave
 
-<!-- TOC -->
+- [Inleiding](#inleiding)
+- [1. Microsoft Identity platform](#1-microsoft-identity-platform)
+  - [1.1 Wat is Microsoft Identity platform](#11-wat-is-microsoft-identity-platform)
+  - [1.2 Hoe wij dit gaan gebruiken](#12-hoe-wij-dit-gaan-gebruiken)
+  - [1.3 Hoe werkt de authentication service](#13-hoe-werkt-de-authentication-service)
+  - [1.4 Gebruik JWT-token](#14-gebruik-jwt-token)
+  - [1.5 Ophalen gebruikersRol met een JWT-token](#15-ophalen-gebruikersrol-met-een-jwt-token)
+- [2. Rol toevoegen/wijzigen gebruiker](#2-rol-toevoegenwijzigen-gebruiker)
+- [3. Code example](#3-code-example)
 
-- [Onderzoek Microsoft Identity Platform](#onderzoek-microsoft-identity-platform)
-  - [Inhoudsopgave](#inhoudsopgave)
-  - [1.Ophalen gebruikergegevens](#1ophalen-gebruikergegevens)
-  - [2. oAuth-flow](#2-oauth-flow)
-    - [2.1 Voorbereidingen](#21-voorbereidingen)
-    - [2.2 Sign in with Microsoft](#22-sign-in-with-microsoft)
-    - [2.3 Gebruik JWT-token](#23-gebruik-jwt-token)
-  - [3 .Identificeren rol teams gebruikers](#3-identificeren-rol-teams-gebruikers)
-  - [4. Rol toevoegen/wijzigen gebruiker](#4-rol-toevoegenwijzigen-gebruiker)
-  - [5. Code example](#5-code-example)
+## Inleiding
 
-<!-- /TOC -->
+Binnen het project willen we dat gebruikers kunnen inloggen met hun office-365 account. Nadat een gebruiker is ingelogd, willen wij op basis van de gebruikersrol bepalen tot welke pagina's de desbetreffende gebruiker toegang heeft.
 
-## 1.Ophalen gebruikergegevens
+## 1. Microsoft Identity platform
 
-Binnen het project willen we dat gebruikers kunnen inloggen met een office-365 account. Nadat een gebruiker is ingelogd, willen wij op basis van de gebruikersrol bepalen tot welke pagina's de desbetreffende gebruiker toegang heeft.
+In dit hoofdstuk wordt uitgelegd wat het Microsoft Identity platform is. Daarnaast wordt er ook uitgleegd hoe dit werkt.
 
-Uit onderzoek blijkt dat het 'inloggen via microsoft' mogelijk is via het oAuth2 principe. Hiermee kunnen er gebruikergevens van een persoon opgehaald worden, zonder dat deze gebruiker steeds hoeft in te loggen.
+---
 
-## 2. oAuth-flow
+### 1.1 Wat is Microsoft Identity platform
 
-In dit hoofdstuk is beschreven hoe de oAuth flow van Microsoft werkt.
+Micrsoft Identity platform is een authentication service waarmee je gebruikers in apps kan laten inloggen via Microsoft. Dit is erg handig omdat je zo geen eigen wachtwoorden hoeft op te slaan.
 
-### 2.1 Voorbereidingen
+Daarnaast kun je na een autorisatie API's van andere Microsoft services aanspreken zonder daar in te hoeven loggen.
 
-Onderstaande voorbereidingen zijn getroffen.
+---
 
-1. Opzetten van een office-365 omgeving.
-2. Testgebruikers toegevoegd aan office omgeving.
-3. Tentant-ID aangevraagd via Azure AD.
+### 1.2 Hoe wij dit gaan gebruiken
 
-### 2.2 Sign in with Microsoft
+Omdat wij voor het project de API van Micrsoft Teams gaan aanspreken hebben wij toegang nodig tot de info van de gebruikers.
 
-We willen dus eenmalig autoriseren en vervolgens data ophalen zonder in te loggen.
+Met het Microsoft Identity platform kunnen wij gebruikers laten autoriseren. Om vervolgens de data op te halen.
 
-Data ophalen zonder in te loggen is mogelijk door gebruik te maken van tokens/sleutels. In onderstaande afbeelding wordt uitgelegd hoe dit werkt.
+---
 
+### 1.3 Hoe werkt de authentication service
+
+De authentication service van Micrsoft werkt eigenlijk vrij simpel. Het begint met een redirect vanuit een eigen applicatie naar Microsoft. De gebruiker logt hier in en wordt weer teruggestuurd naar de applicatie (webhook). Zie onderstaande model.
 ![afbeelding ophalen jwt token](img/ophalen-token.svg)
 
-1. Je logt in via een pagina binnen de react app.
-2. Er wordt verwezen naar /auth op de back-end
-3. /auth redirect naar Microsoft login in.
-4. Na validatie returned microsoft een token.
-5. Deze token wordt opgeslagen als sessie
-6. In de react app wordt er met een cookie verwezen naar de sessie met de token.
-
-In het JSON file hieronder kan je zien welke response Microsoft stuurt. de accesToken wordt opgeslagen als sessie.
+Wanneer bovenstaand proces succesvol verlopen is, wordt er ook een response meegegeven aan de webhook.
+Deze response bevat verschillende data en ziet er als volgt uit.
 
 ```json
 {
@@ -93,16 +87,26 @@ In het JSON file hieronder kan je zien welke response Microsoft stuurt. de acces
 
 ```
 
+In de response die terugkomt vanuit Microsoft na een succesvolle autorisatie zit ook een key genaamd `accesToken`.
+
+Deze `accesToken` bevat een JWT-token. Met deze JWT-token kan er gebruikersdata opgehaald worden zonder opnieuw te hoeven autoriseren.
+
 ---
 
-### 2.3 Gebruik JWT-token
+### 1.4 Gebruik JWT-token
 
-Wanneer er een JWT-token is gegenereerd kan er data opgehaald worden. Dit doen we door de token mee te sturen tijdens een API request. Een token wordt als bearer token meegeven als authorization header. In onderstaand voorbeeld wordt de persoonlijke data opgehaald via teams.
+Wanneer er een JWT-token is gegenereerd kan er data opgehaald worden. Dit doen we door de token mee te sturen tijdens een API request. Een JWT-token wordt meestal als `bearer token` meegeven in de authorization header.
+
+---
+
+### 1.5 Ophalen gebruikersRol met een JWT-token
+
+Het doel van ons onderzoek was onderzoeken of we een rol van een gebruik konden ophalen. In onderstaande voorbeeld wordt beschreven hoe dit werkt via de Teams API.
 
 **`GET`** : `https://graph.microsoft.com/v1.0/me`
 
 **header**
-`Authorization: Bearer {token hier}`
+`Authorization: Bearer {JWT-token hier}`
 
 **Returns**
 
@@ -123,13 +127,7 @@ Wanneer er een JWT-token is gegenereerd kan er data opgehaald worden. Dit doen w
 }
 ```
 
-## 3 .Identificeren rol teams gebruikers
-
-Het identificeren van een gebruikersrol is vrij eenvoudig. In de JSON van het hoofdstuk hierboven zie je dat de response een key `jobTitle` heeft.
-
-Met de waarde van deze key kunnen we de rol van een gebruiker identificeren.
-
-## 4. Rol toevoegen/wijzigen gebruiker
+## 2. Rol toevoegen/wijzigen gebruiker
 
 ---
 
@@ -146,7 +144,7 @@ Naast het ophalen van rollen willen we deze ook kunnen aanmaken en wijzigen. Dit
 
 ---
 
-## 5. Code example
+## 3. Code example
 
 In deze folder bevind zich ook een code example, deze is te starten als volgt:
 
