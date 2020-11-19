@@ -1,0 +1,23 @@
+## 4. Beperkingen
+
+In dit hoofdstuk worden de beperkingen van dit project opgenoemd. Veel van deze beperkingen vlooien voort vanuit het feit dat dit een schoolproject is.
+
+### 4.1 Tijd en budget
+
+Zoals ook al aangegeven in hoofdstuk 3 is het team beperkt tot 3 sprints van twee weken voor dit project. Ook zal er voor schoolopdrachten tijd moeten worden vrijgemaakt. Zo moet elk teamlid een logboek bijhouden en leerdoelen voor zichzelf zetten.
+
+Omdat de product owner een leraar is, zal deze niet de gehele dag beschikbaar zijn omdat hij/zij ook andere klassen moet onderwijzen. Sowieso is de product owner alleen beschikbaar tijdens schooltijden.
+
+Alles binnen dit project kan worden gedaan met gratis software of een proefabonnement en hiervan zal ook gebruik worden gemaakt.
+
+### 4.2 Technologieën
+
+Omdat dit een schoolopdracht is, is het gebruik van React-Redux met een Node backend verplicht. Dit is een beperking, maar omdat het hele team voor dit project een course heeft gehad over het gebruik van deze technologieën zal dit niet al te erg zijn.
+
+Een andere technologie is de Microsoft Teams API waar het team nog niet intensief mee heeft gewerkt. Er is een onderzoek gedaan naar het gebruiken van Teams en dit onderzoek is beschikbaar op de repo van het project.
+
+Hetzelfde geldt eigenlijk voor de Microsoft Authentication Framework waarmee gebruikers moeten inloggen. Hierover is een onderzoek gedaan wat beschikbaar is in de repo.
+
+### 4.3 SCRUM
+
+Tijdens het project zal gebruik worden gemaakt van SCRUM. Dit betekent dat elke ochtend een daily stand-up wordt gehouden en elke sprint een planning en review. Dit zijn momenten die het team niet kan besteden aan ontwikkelen, maar zijn wel waardevolle momenten omdat deze ervoor zorgen dat het proces goed gaat.
