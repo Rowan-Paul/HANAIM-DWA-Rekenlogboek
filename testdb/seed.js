@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 require("./models/logbook")
 require("./models/studentlogbook")
+require("./models/templates")
 
 const dbName = 'testdbproject';
 
@@ -8,6 +9,7 @@ const db = mongoose.connection;
 
 const Logbook = mongoose.model('Logbook');
 const StudentLogbook = mongoose.model('StudentLogbook');
+const Templates = mongoose.model('Templates');
 
 mongoose.connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true })
     .then(() => {
@@ -15,6 +17,9 @@ mongoose.connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true 
     })
     .then(() => {
         return seedStudentLogboek();
+    })
+    .then(() => {
+        return seedTemplates();
     })
     .catch(err => {
         console.log(err);
@@ -36,86 +41,100 @@ async function seedLogbook() {
             isAvailable: false,
             columns: [
                 {
-                    _id: 0,
-                    name: "Doelen",
+                    position: 0,
+                    title: "Doelen",
+                    inputType: "xx",
                     placeholder: "vul doelen in"
                 },
                 {
-                    _id: 1,
-                    name: "Lesofzo",
+                    position: 1,
+                    title: "Lesofzo",
+                    inputType: "xx",
                     placeholder: "vvul lesresult in"
                 },
                 {
-                    _id: 2,
-                    name: "Instructie nodig?",
+                    position: 2,
+                    title: "Instructie nodig?",
+                    inputType: "xx",
                     placeholder: "vvul iets in in"
-                }, 
+                },
                 {
-                    _id: 3,
-                    name: "Evaluatie",
+                    position: 3,
+                    title: "Evaluatie",
+                    inputType: "xx",
                     placeholder: "Vul evaluatie"
                 }
             ],
             goals: [
                 {
-                    _id: 0,
-                    goal: "Leer rekenen",
+                    position: 0,
+                    title: "Leer rekenen",
+                    description: "test0000",
                     imagelink: "xxxxxxxxxxxxxx"
                 },
                 {
-                    _id: 1,
-                    goal: "Leer 1+1",
+                    position: 1,
+                    title: "Leer 1+1",
+                    description: "test1111",
                     imagelink: "xxxxxxxxxxssaasdasdaxx"
                 },
                 {
-                    _id: 2,
-                    goal: "Leer 1*1",
+                    position: 2,
+                    title: "Leer 1*1",
+                    description: "test2222",
                     imagelink: "aaaaaaa"
                 },
             ]
         },
         {
             period: 2,
-            group: 6,
+            group: 7,
             year: 2020,
-            teacher: "yyy",
+            teacher: "yyyy",
             isAvailable: false,
             columns: [
                 {
-                    _id: 0,
-                    name: "Doelen",
+                    position: 0,
+                    title: "Doelen",
+                    inputType: "xx",
                     placeholder: "vul doelen in"
                 },
                 {
-                    _id: 1,
-                    name: "Lesofzo",
+                    position: 1,
+                    title: "Lesofzo",
+                    inputType: "xx",
                     placeholder: "vvul lesresult in"
                 },
                 {
-                    _id: 2,
-                    name: "Instructie nodig?",
+                    position: 2,
+                    title: "Instructie nodig?",
+                    inputType: "xx",
                     placeholder: "vvul iets in in"
-                }, 
+                },
                 {
-                    _id: 3,
-                    name: "Evaluatie",
+                    position: 3,
+                    title: "Evaluatie",
+                    inputType: "xx",
                     placeholder: "Vul evaluatie"
                 }
             ],
             goals: [
                 {
-                    _id: 0,
-                    goal: "Leer rekenen",
+                    position: 0,
+                    title: "Leer rekenen",
+                    description: "test0000",
                     imagelink: "xxxxxxxxxxxxxx"
                 },
                 {
-                    _id: 1,
-                    goal: "Leer 1+1",
+                    position: 1,
+                    title: "Leer 1+1",
+                    description: "test1111",
                     imagelink: "xxxxxxxxxxssaasdasdaxx"
                 },
                 {
-                    _id: 2,
-                    goal: "Leer 1*1",
+                    position: 2,
+                    title: "Leer 1*1",
+                    description: "test2222",
                     imagelink: "aaaaaaa"
                 },
             ]
@@ -125,34 +144,100 @@ async function seedLogbook() {
 
 async function seedStudentLogboek() {
     await StudentLogbook.deleteMany();
-
+    
     await StudentLogbook.insertMany([
         {
-            logbookID: "5fb51d465eebc57020f13a01",
-            student: 5,
+            logbookID: logbook[0]._id,
+            student: "janpiet",
             answers: [
                 {
-                    goalID: 0,
-                    columnID: 1,
-                    answer: "Antwoorden van rekenen",
-                    instructionNeeded: false
+                    goalPosition: 0,
+                    columnPosition: 3,
+                    answer: {
+                        inputType: "Evaluatie",
+                        value: "Happy",
+                        boolean: false
+
+                    }
                 },
                 {
-                    goalID: 0,
-                    columnID: 2,
-                    answer: "Ik heb moeite",
-                    instructionNeeded: true
-                },
-                {
-                    goalID: 0,
-                    columnID: 3,
-                    answer: "Blij",
-                    instructionNeeded: false
-                },
-            ],
+                    goalPosition: 0,
+                    columnPosition: 2,
+                    answer: {
+                        inputType: "Instruction",
+                        value: "I'm bad at this",
+                        boolean: true
+
+                    }
+                }
+            ]
         },
     ]);
 }
 
+async function seedTemplates() {
+    await Templates.deleteMany();
+
+    await Templates.insertMany([
+        {
+            group: 5,
+            columns: [
+                {
+                    position: 0,
+                    title: "Doelen",
+                    inputType: "xx",
+                    placeholder: "vul doelen in"
+                },
+                {
+                    position: 1,
+                    title: "Lesofzo",
+                    inputType: "xx",
+                    placeholder: "vvul lesresult in"
+                },
+                {
+                    position: 2,
+                    title: "Instructie nodig?",
+                    inputType: "xx",
+                    placeholder: "vvul iets in in"
+                },
+                {
+                    position: 3,
+                    title: "Evaluatie",
+                    inputType: "xx",
+                    placeholder: "Vul evaluatie"
+                }
+            ],
+        },
+        {
+            group: 7,
+            columns: [
+                {
+                    position: 0,
+                    title: "Doelen",
+                    inputType: "xx",
+                    placeholder: "vul doelen in"
+                },
+                {
+                    position: 1,
+                    title: "Lesofzo",
+                    inputType: "xx",
+                    placeholder: "vvul lesresult in"
+                },
+                {
+                    position: 2,
+                    title: "Instructie nodig?",
+                    inputType: "xx",
+                    placeholder: "vvul iets in in"
+                },
+                {
+                    position: 3,
+                    title: "Evaluatie",
+                    inputType: "xx",
+                    placeholder: "Vul evaluatie"
+                }
+            ],
+        },
+    ]);
+}
 
 
