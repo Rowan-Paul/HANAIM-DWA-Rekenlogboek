@@ -22,11 +22,15 @@ const logbookSchema = new mongoose.Schema({
         required: true
     },
     columns: [{
-        _id: {
+        position: {
             type: Number,
             isRequired: true
         },
-        name: {
+        title: {
+            type: String,
+            isRequired: true
+        },
+        inputType: {
             type: String,
             isRequired: true
         },
@@ -36,11 +40,15 @@ const logbookSchema = new mongoose.Schema({
         }
     }],
     goals: [{
-        _id: {
+        position: {
             type: Number,
             isRequired: true
         },
-        goal: {
+        title: {
+            type: String,
+            isRequired: true
+        },
+        description: {
             type: String,
             isRequired: true
         },

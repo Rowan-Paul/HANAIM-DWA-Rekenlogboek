@@ -10,22 +10,28 @@ const studentLogbookSchema = new mongoose.Schema({
         required: true
     },
     answers: [{
-        goalID: {
+        goalPosition: {
             type: Number,
             isRequired: true
         },
-        columnID: {
+        columnPosition: {
             type: Number,
             isRequired: true
         },
         answer: {
-            type: String,
-            isRequired: true
+            inputType: {
+                type: String,
+                isRequired: true
+            },
+            value: {
+                type: String,
+                isRequired: true
+            },
+            boolean: {
+                type: Boolean,
+                isRequired: false
+            }
         },
-        instructionNeeded: {
-            type: Boolean,
-            isRequired: true
-        }
     }],
 });
 
