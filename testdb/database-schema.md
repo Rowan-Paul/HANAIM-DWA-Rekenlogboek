@@ -2,43 +2,73 @@
 Here you can find an overview of the different things inside the database.
 
 ## Logbooks
-Contains all logbooks.
+Contains all general logbooks.
 
 ```text
 +-------------------------------------------------------+
 | Logbooks                                              |
 +-------------------------------------------------------+
-| _id: ObjectID                                         |
+| _id: ObjectID  (auto)                                 |
 | period: Number                                        |
 | group: Number                                         |
 | year: String                                          |
 | teacher: String/Number (ligt miss aan Teams)          |
 | isAvailable: Boolean                                  |
 | columns: [{                                           |
-|            columnID: Number                           |
-|            name: String                               |
+|            _id_: ObjectID (auto)                      |
+|            position: Number                           |
+|            title: String                              |
+|            inputType: String                          |
 |            placeholder: String                        |
 |          }]                                           |
 | goals: [{                                             |
-|            goalID: Number                             |
-|            goal: String                               |
+|            _id_: ObjectID (auto)                      |
+|            position: Number                           |
+|            title: String                              |
+|            description: String                        |
 |            imagelink: String                          |
-|        }]                                             |  
+|        }]                                             |
 +-------------------------------------------------------+
 ```
+
+## Studentlogbooks
+Contains all logbooks for students.
 
 ```text
 +-------------------------------------------------------+
 | Studentlogbooks                                       |
 +-------------------------------------------------------+
-| _id: ObjectID                                         |
+| _id: ObjectID (auto)                                  |
 | logbookID: ObjectID (ref)                             |
 | student: String/Number (ligt miss aan Teams)          |
 | answers: [{                                           |
-|             goalID: Number (ref)                      |
-|             columnID: Number (ref)                    |
-|             answer: String                            |
-|             instructionNeeded: Boolean                |
-|          }]                                           |   
+|             _id: ObjectID (auto)                      |
+|             goalPosition: Number                      |
+|             columnPosition: Number                    |
+|             answer: {                                 |
+|                       inputType: String               |
+|                       value: String                   |
+|                       boolean: Boolean                |
+|                     }                                 |
+|          }]                                           |
++-------------------------------------------------------+
+```
+
+## Templates
+Contains templates for logbooks
+
+```text
++-------------------------------------------------------+
+| Templates                                             |
++-------------------------------------------------------+
+| _id: ObjectID (auto)                                  |
+| group: Number                                         |
+| columns: [{                                           |
+|            _id: ObjectID (auto)                       |
+|            position: Number                           |
+|            title: String                              |
+|            inputType: String                          |
+|            placeholder: String                        |
+|          }]                                           |
 +-------------------------------------------------------+
 ```
