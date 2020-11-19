@@ -40,4 +40,4 @@ Leraren, logboekontwerpers en leerlingen zijn de gebruikers van de applicatie. L
 
 Op de afbeelding hieronder is het context diagram te zien, gebaseerd op het C4 model.
 
-<!-- insert context diagram (C4 model?) -->
+<!-- insert context diagram (C4 model) -->
