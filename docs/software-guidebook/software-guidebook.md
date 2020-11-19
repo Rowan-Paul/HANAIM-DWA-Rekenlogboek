@@ -7,6 +7,49 @@ export_on_save:
 
 Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd.
 
+## Inhoudsopgave
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Software guidebook](#software-guidebook)
+  - [Inhoudsopgave](#inhoudsopgave)
+  - [1. Context](#1-context)
+    - [1.1 Het project](#11-het-project)
+    - [1.2 Huidige situatie](#12-huidige-situatie)
+    - [1.3 De applicatie](#13-de-applicatie)
+    - [1.4 Rollen](#14-rollen)
+    - [1.4 Context diagram](#14-context-diagram)
+  - [2 Functionele overzicht](#2-functionele-overzicht)
+    - [2.1 Logboekontwerper](#21-logboekontwerper)
+      - [2.1.1 User stories](#211-user-stories)
+    - [2.2 Leerling](#22-leerling)
+      - [2.2.1 User stories](#221-user-stories)
+    - [2.3 Leraar](#23-leraar)
+      - [2.3.1 User stories](#231-user-stories)
+  - [3 Kwaliteitsattributen](#3-kwaliteitsattributen)
+    - [3.1 Tijdsduur](#31-tijdsduur)
+    - [3.2 Browser ondersteuning](#32-browser-ondersteuning)
+    - [3.3 Data voor de applicatie](#33-data-voor-de-applicatie)
+    - [3.4 Documentatie](#34-documentatie)
+    - [3.5 Talen en wetgeving](#35-talen-en-wetgeving)
+  - [4. Beperkingen](#4-beperkingen)
+    - [4.1 Tijd en budget](#41-tijd-en-budget)
+    - [4.2 Technologieën](#42-technologieën)
+    - [4.3 SCRUM](#43-scrum)
+  - [5 Principes](#5-principes)
+  - [6 Software architectuur](#6-software-architectuur)
+  - [7 Infrastructuur architectuur](#7-infrastructuur-architectuur)
+    - [7.1 Lokale ontwikkelomgeving](#71-lokale-ontwikkelomgeving)
+    - [7.2 Deployed ontwikkelomgeving](#72-deployed-ontwikkelomgeving)
+  - [8 Deployment](#8-deployment)
+  - [9 Operatie en ondersteuning](#9-operatie-en-ondersteuning)
+    - [9.1 Operatie](#91-operatie)
+    - [9.2 Ondersteuning](#92-ondersteuning)
+
+<!-- /code_chunk_output -->
+
 @import "1-context.md"
 
 ---
