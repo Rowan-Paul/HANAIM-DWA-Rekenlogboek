@@ -21,8 +21,8 @@ router.post('/studentlogbook', (req, res) => {
 });
 
 // Get all information about a specific studentlogbook
-router.get('/studentlogbook/:logbookid', (req, res) => {
-    StudentLogbook.findById(req.params.logbookid)
+router.get('/studentlogbook/:id', (req, res) => {
+    StudentLogbook.findById(req.params.id)
         .then((response) => {
             res.status(200).send(response)
         })
@@ -32,8 +32,8 @@ router.get('/studentlogbook/:logbookid', (req, res) => {
 });
 
 // Get all answers given by the student
-router.get('/studentlogbook/:logbookid/answers', (req, res) => {
-    StudentLogbook.findById(req.params.logbookid).lean()
+router.get('/studentlogbook/:id/answers', (req, res) => {
+    StudentLogbook.findById(req.params.id).lean()
         .then((response) => {
             res.status(200).send(response.answers)
         })
@@ -43,11 +43,11 @@ router.get('/studentlogbook/:logbookid/answers', (req, res) => {
 });
 
 // Get all answers from a student from one column
-router.get('/studentlogbook/:logbookid/answers/column/:columnposition', (req, res) => {
-    StudentLogbook.findById(req.params.logbookid).lean()
+router.get('/studentlogbook/:id/answers/column/:position', (req, res) => {
+    StudentLogbook.findById(req.params.id).lean()
         .then((response) => {
             const columnanswers = response.answers.filter((object) => {
-                return object.columnPosition === Number(req.params.columnposition)
+                return object.columnPosition === Number(req.params.position)
             })
             res.status(200).send(columnanswers)
         })
@@ -57,11 +57,11 @@ router.get('/studentlogbook/:logbookid/answers/column/:columnposition', (req, re
 });
 
 // Get all answers from a student from one row which belongs to one goal
-router.get('/studentlogbook/:logbookid/answers/goal/:goalposition', (req, res) => {
-    StudentLogbook.findById(req.params.logbookid).lean()
+router.get('/studentlogbook/:id/answers/goal/:position', (req, res) => {
+    StudentLogbook.findById(req.params.id).lean()
         .then((response) => {
             const columnanswers = response.answers.filter((object) => {
-                return object.goalPosition === Number(req.params.goalposition)
+                return object.goalPosition === Number(req.params.position)
             })
             res.status(200).send(columnanswers)
         })

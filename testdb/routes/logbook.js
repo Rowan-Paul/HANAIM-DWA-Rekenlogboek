@@ -24,8 +24,8 @@ router.post('/logbook', (req, res) => {
 });
 
 // Get all information about one logbook
-router.get('/logbook/:logbookid', (req, res) => {
-    Logbook.findById(req.params.logbookid)
+router.get('/logbook/:id', (req, res) => {
+    Logbook.findById(req.params.id)
         .then((response) => {
             res.status(200).send(response)
         })
@@ -35,11 +35,11 @@ router.get('/logbook/:logbookid', (req, res) => {
 });
 
 // Get the id, position, title, inputType and placeholder for one column from a specific logbook
-router.get('/logbook/:logbookid/column/:columnposition', (req, res) => {
-    Logbook.findById(req.params.logbookid).lean()
+router.get('/logbook/:id/column/:position', (req, res) => {
+    Logbook.findById(req.params.id).lean()
         .then((response) => {
             const column = response.columns.find((object) => {
-                return object.position === Number(req.params.columnposition)
+                return object.position === Number(req.params.position)
             })
             res.status(200).send(column)
         })
@@ -49,11 +49,11 @@ router.get('/logbook/:logbookid/column/:columnposition', (req, res) => {
 });
 
 // Get the id, position, title, description and imagelink for one goal for one logbook
-router.get('/logbook/:logbookid/goal/:goalposition', (req, res) => {
-    Logbook.findById(req.params.logbookid).lean()
+router.get('/logbook/:id/goal/:position', (req, res) => {
+    Logbook.findById(req.params.id).lean()
         .then((response) => {
             const goal = response.goals.find((object) => {
-                return object.position === Number(req.params.goalposition)
+                return object.position === Number(req.params.position)
             })
             res.status(200).send(goal)
         })
