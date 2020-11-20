@@ -21,7 +21,7 @@ Binnen het project willen we dat gebruikers kunnen inloggen met hun office-365 a
 
 ## 1. Microsoft Identity platform
 
-In dit hoofdstuk wordt uitgelegd wat het Microsoft Identity platform is. Daarnaast wordt er ook uitgleegd hoe dit werkt.
+In dit hoofdstuk wordt uitgelegd wat het Microsoft Identity platform is. Daarnaast wordt er ook uitgelegd hoe dit werkt.
 
 ---
 
@@ -87,9 +87,9 @@ Deze response bevat verschillende data en ziet er als volgt uit.
 }
 ```
 
-In de response die terugkomt vanuit Microsoft na een succesvolle autorisatie zit ook een key genaamd `accesToken`.
+In de response die terugkomt vanuit Microsoft na een succesvolle autorisatie zit ook een key genaamd `accessToken`.
 
-Deze `accesToken` bevat een JWT-token. Met deze JWT-token kan er gebruikersdata opgehaald worden zonder opnieuw te hoeven autoriseren.
+Deze `accessToken` bevat een JWT-token. Met deze JWT-token kan er gebruikersdata opgehaald worden zonder opnieuw te hoeven autoriseren.
 
 ---
 
