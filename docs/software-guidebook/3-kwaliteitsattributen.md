@@ -1,6 +1,6 @@
 ## 3 Kwaliteitsattributen
 
-In dit hoofdstuk bevinden zich de verschillende kwaliteitseisen waaran het software moet voldoen.
+In dit hoofdstuk bevinden zich de verschillende kwaliteitseisen waaraan de software moet voldoen.
 
 ### 3.1 Tijdsduur
 
@@ -10,7 +10,7 @@ Nadat deze periode verlopen is zal het team alles opleveren aan de product owner
 
 ### 3.2 Browser ondersteuning
 
-Bij de opdrachtgever wordt er gebruik gemaakt van Chromebooks, dus is het team er vanuit gegaan dat er alleen browser ondersteuning voor Chromium hoeft te komen. Er is dus geen garantie dat de website werkt in andere browsers zoals bijvoorbeeld Firefox.
+Bij de opdrachtgever wordt er gebruik gemaakt van Chromebooks, dus is het team er vanuit gegaan dat er alleen browser ondersteuning voor Chromium hoeft te komen. Er is dus geen garantie dat de website werkt in andere browsers zoals Firefox.
 
 Ook wordt er niet ontwikkeld voor mobiele browsers, want zoals hierboven genoemd wordt er gebruik gemaakt van Chromebooks. Er zal wel op worden gelet dat de site responsive is voor verschillende monitor grootte, maar niet voor mobiele browsers.
 

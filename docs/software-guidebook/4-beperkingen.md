@@ -1,6 +1,6 @@
 ## 4. Beperkingen
 
-In dit hoofdstuk worden de beperkingen van dit project opgenoemd. Veel van deze beperkingen vlooien voort vanuit het feit dat dit een schoolproject is.
+In dit hoofdstuk worden de beperkingen van dit project opgenoemd. Veel van deze beperkingen vloeien voort vanuit het feit dat dit een schoolproject is.
 
 ### 4.1 Tijd en budget
 

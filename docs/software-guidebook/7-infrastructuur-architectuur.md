@@ -1,6 +1,6 @@
 ## 7 Infrastructuur architectuur
 
-In dit hoofdstuk wordt de infrastructuur getoond van de applicatie. Bij het maken van dit project wordt gebruik gemaakt van git, dus als er iets misgaat kan vanaf daar de data hersteld worden.
+In dit hoofdstuk wordt de infrastructuur getoond van de applicatie. Bij het maken van dit project wordt gebruik gemaakt van Git, dus als er iets misgaat kan vanaf daar de data hersteld worden.
 
 <!-- wordt dit niet duidelijk in context diagram? -->
 
