@@ -182,6 +182,7 @@ async function seedTemplates() {
 
     await Templates.insertMany([
         {
+            name: "groep 5 template",
             group: 5,
             columns: [
                 {
@@ -211,6 +212,7 @@ async function seedTemplates() {
             ],
         },
         {
+            name: "groep 7 18/19 template",
             group: 7,
             columns: [
                 {

@@ -34,7 +34,7 @@ router.get('/logbook/:logbookid', (req, res) => {
         });
 });
 
-// Get the id, name and placeholder for one column from a specific logbook
+// Get the id, position, title, inputType and placeholder for one column from a specific logbook
 router.get('/logbook/:logbookid/column/:columnposition', (req, res) => {
     Logbook.findById(req.params.logbookid).lean()
         .then((response) => {
@@ -48,7 +48,7 @@ router.get('/logbook/:logbookid/column/:columnposition', (req, res) => {
         });
 });
 
-// Get the id, goal and imagelink for one goal for one logbook
+// Get the id, position, title, description and imagelink for one goal for one logbook
 router.get('/logbook/:logbookid/goal/:goalposition', (req, res) => {
     Logbook.findById(req.params.logbookid).lean()
         .then((response) => {
