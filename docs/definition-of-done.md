@@ -21,4 +21,4 @@ Code en documentatie moet worden gecontroleerd door minstens 1 teamlid voordat h
 
 1. Voldoet aan AIM controlekaart.
 2. Geschreven in markdown op basis van de software guidebook.
-3. Documentatie bevat de bijbehorende C4 modellen en zal gereviewed worden volgens de [C4 model checklist](https://c4model.com/assets/software-architecture-diagram-review-checklist.pdf).
+3. C4 modellen in de documentatie zijn gereviewed volgens de [C4 model checklist](https://c4model.com/assets/software-architecture-diagram-review-checklist.pdf).
