@@ -43,7 +43,7 @@ router.get('/studentlogbook/:logbookid/answers', (req, res) => {
 });
 
 // Get all answers from a student from one column
-router.get('/studentlogbook/:logbookid/column/:columnposition/answers', (req, res) => {
+router.get('/studentlogbook/:logbookid/answers/column/:columnposition', (req, res) => {
     StudentLogbook.findById(req.params.logbookid).lean()
         .then((response) => {
             const columnanswers = response.answers.filter((object) => {
@@ -57,7 +57,7 @@ router.get('/studentlogbook/:logbookid/column/:columnposition/answers', (req, re
 });
 
 // Get all answers from a student from one row which belongs to one goal
-router.get('/studentlogbook/:logbookid/goal/:goalposition/answers', (req, res) => {
+router.get('/studentlogbook/:logbookid/answers/goal/:goalposition', (req, res) => {
     StudentLogbook.findById(req.params.logbookid).lean()
         .then((response) => {
             const columnanswers = response.answers.filter((object) => {
