@@ -2,6 +2,8 @@
 
 Na het opzetten van een Microsoft 365 Developer account en administrator account kan met het administrator account worden ingelogd op Teams. Het meest logische voor onze doelstelling was om een tab te maken, maar [hier staan andere mogelijkheden](https://docs.microsoft.com/en-us/microsoftteams/platform/samples/integrating-web-apps#get-to-know-teams-platform-capabilities). Een tab binnen Teams is eigenlijk een normale React app.
 
+Voor ons project is dit niet van toepassing, want wij integreren de Teams tab binnen onze eigen React app.
+
 Nu is het een kwestie van de [Microsoft Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) te installeren uit de Visual Studio Code Marketplace en [Get Started: Build and run your first Microsoft Teams app](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-and-run) van de Microsoft Docs te lezen. Hierin wordt uitgelegd hoe je een app toevoegd aan je persoonlijke Teams. Het opzetten ngrok is niet nodig voor het runnen van een tab.
 
 Problemen die kunnen optreden zijn dat de app weigert toegevoegd te worden aan een account omdat je niet de juiste permissies hebt, ookal ben je een adminorstrator. Dit gebeurde mij ook en deze error verdween vanzelf weer na iets meer dan een uur.
