@@ -44,25 +44,21 @@ async function seedLogbook() {
                     position: 0,
                     title: "Doelen",
                     inputType: "xx",
-                    placeholder: "vul doelen in"
                 },
                 {
                     position: 1,
                     title: "Lesofzo",
                     inputType: "xx",
-                    placeholder: "vvul lesresult in"
                 },
                 {
                     position: 2,
                     title: "Instructie nodig?",
                     inputType: "xx",
-                    placeholder: "vvul iets in in"
                 },
                 {
                     position: 3,
                     title: "Evaluatie",
                     inputType: "xx",
-                    placeholder: "Vul evaluatie"
                 }
             ],
             goals: [
@@ -97,25 +93,21 @@ async function seedLogbook() {
                     position: 0,
                     title: "Doelen",
                     inputType: "xx",
-                    placeholder: "vul doelen in"
                 },
                 {
                     position: 1,
                     title: "Lesofzo",
                     inputType: "xx",
-                    placeholder: "vvul lesresult in"
                 },
                 {
                     position: 2,
                     title: "Instructie nodig?",
                     inputType: "xx",
-                    placeholder: "vvul iets in in"
                 },
                 {
                     position: 3,
                     title: "Evaluatie",
                     inputType: "xx",
-                    placeholder: "Vul evaluatie"
                 }
             ],
             goals: [
@@ -189,25 +181,21 @@ async function seedTemplates() {
                     position: 0,
                     title: "Doelen",
                     inputType: "xx",
-                    placeholder: "vul doelen in"
                 },
                 {
                     position: 1,
                     title: "Lesofzo",
                     inputType: "xx",
-                    placeholder: "vvul lesresult in"
                 },
                 {
                     position: 2,
                     title: "Instructie nodig?",
                     inputType: "xx",
-                    placeholder: "vvul iets in in"
                 },
                 {
                     position: 3,
                     title: "Evaluatie",
                     inputType: "xx",
-                    placeholder: "Vul evaluatie"
                 }
             ],
         },
@@ -219,25 +207,21 @@ async function seedTemplates() {
                     position: 0,
                     title: "Doelen",
                     inputType: "xx",
-                    placeholder: "vul doelen in"
                 },
                 {
                     position: 1,
                     title: "Lesofzo",
                     inputType: "xx",
-                    placeholder: "vvul lesresult in"
                 },
                 {
                     position: 2,
                     title: "Instructie nodig?",
                     inputType: "xx",
-                    placeholder: "vvul iets in in"
                 },
                 {
                     position: 3,
                     title: "Evaluatie",
                     inputType: "xx",
-                    placeholder: "Vul evaluatie"
                 }
             ],
         },

@@ -34,7 +34,7 @@ router.get('/logbook/:id', (req, res) => {
         });
 });
 
-// Get the id, position, title, inputType and placeholder for one column from a specific logbook
+// Get the id, position, title and inputType for one column from a specific logbook
 router.get('/logbook/:id/column/:position', (req, res) => {
     Logbook.findById(req.params.id).lean()
         .then((response) => {

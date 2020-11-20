@@ -33,10 +33,6 @@ const logbookSchema = new mongoose.Schema({
         inputType: {
             type: String,
             isRequired: true
-        },
-        placeholder: {
-            type: String,
-            isRequired: false
         }
     }],
     goals: [{

@@ -19,7 +19,6 @@ Contains all general logbooks.
 |            position: Number                           |
 |            title: String                              |
 |            inputType: String                          |
-|            placeholder: String                        |
 |          }]                                           |
 | goals: [{                                             |
 |            _id_: ObjectID (auto)                      |
@@ -68,7 +67,6 @@ Contains templates for logbooks
 |            position: Number                           |
 |            title: String                              |
 |            inputType: String                          |
-|            placeholder: String                        |
 |          }]                                           |
 +-------------------------------------------------------+
 ```
