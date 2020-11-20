@@ -36,7 +36,7 @@ async function seedLogbook() {
         {
             period: 1,
             group: 5,
-            year: 2020,
+            year: "19/20",
             teacher: "xxx",
             isAvailable: false,
             columns: [
@@ -89,7 +89,7 @@ async function seedLogbook() {
         {
             period: 2,
             group: 7,
-            year: 2020,
+            year: "19/20",
             teacher: "yyyy",
             isAvailable: false,
             columns: [
@@ -144,6 +144,8 @@ async function seedLogbook() {
 
 async function seedStudentLogboek() {
     await StudentLogbook.deleteMany();
+
+    const logbook = await Logbook.find({}).limit(1);
     
     await StudentLogbook.insertMany([
         {
