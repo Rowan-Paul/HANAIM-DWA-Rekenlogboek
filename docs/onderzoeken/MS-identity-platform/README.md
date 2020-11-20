@@ -13,6 +13,7 @@ Dit document bevat het resultaat van ons onderzoek naar MS identity platform. Er
   - [1.5 Ophalen gebruikersRol met een JWT-token](#15-ophalen-gebruikersrol-met-een-jwt-token)
 - [2. Rol toevoegen/wijzigen gebruiker](#2-rol-toevoegenwijzigen-gebruiker)
 - [3. Code example](#3-code-example)
+- [Bronnen](#bronnen)
 
 ## Inleiding
 
@@ -84,7 +85,6 @@ Deze response bevat verschillende data en ziet er als volgt uit.
   "tokenType": "bearer",
   "state": ""
 }
-
 ```
 
 In de response die terugkomt vanuit Microsoft na een succesvolle autorisatie zit ook een key genaamd `accesToken`.
@@ -150,3 +150,8 @@ In deze folder bevind zich ook een code example, deze is te starten als volgt:
 
 1. `npm install`
 2. `node index`
+
+## Bronnen
+
+1. [Wat is het Microsoft Identity Platform](https://docs.microsoft.com/nl-nl/azure/active-directory/develop/v2-overview)
+2. [Teams API](https://docs.microsoft.com/en-us/graph/teams-concept-overview)
