@@ -49,16 +49,16 @@ auth.get('/redirect', (req, res) => {
 		redirectUri: 'http://localhost:3000/auth/redirect'
 	}
 
-	let user;
+	let user
 
 	pca
 		.acquireTokenByCode(tokenRequest)
 		.then(response => {
 			req.session.token = response.accessToken
 
-			return response;
+			return response
 		})
-		.then((response) => {
+		.then(response => {
 			return fetch('https://graph.microsoft.com/v1.0/me', {
 				method: 'GET',
 				headers: { Authorization: 'Bearer ' + req.session.token }
@@ -70,11 +70,11 @@ auth.get('/redirect', (req, res) => {
 				name: res.displayName,
 				jobTitle: res.jobTitle,
 				email: res.mail,
-				groups: ""
+				groups: ''
 			}
 
 			let body = {
-				"securityEnabledOnly": false
+				securityEnabledOnly: false
 			}
 
 			body = JSON.stringify(body)
@@ -82,8 +82,8 @@ auth.get('/redirect', (req, res) => {
 			return fetch('https://graph.microsoft.com/v1.0/me/getMemberGroups', {
 				method: 'POST',
 				headers: {
-					"Content-Type": "application/json",
-					"Content-Length": 33,
+					'Content-Type': 'application/json',
+					'Content-Length': 33,
 					Authorization: 'Bearer ' + req.session.token
 				},
 				body: body
@@ -91,14 +91,16 @@ auth.get('/redirect', (req, res) => {
 		})
 		.then(res => res.json())
 		.then(groups => {
-			return Promise.all(groups.value.map(id =>
-				fetch('https://graph.microsoft.com/v1.0/groups/' + id, {
-					method: 'GET',
-					headers: { Authorization: 'Bearer ' + req.session.token }
-				})
-					.then(res => res.json())
-					.then(response => response.displayName)
-			))
+			return Promise.all(
+				groups.value.map(id =>
+					fetch('https://graph.microsoft.com/v1.0/groups/' + id, {
+						method: 'GET',
+						headers: { Authorization: 'Bearer ' + req.session.token }
+					})
+						.then(res => res.json())
+						.then(response => response.displayName)
+				)
+			)
 		})
 		.then(groups => {
 			return {
