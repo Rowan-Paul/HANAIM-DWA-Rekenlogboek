@@ -3,6 +3,8 @@
 const express = require('express')
 const auth = express.Router()
 const msal = require('@azure/msal-node')
+const session = require('express-session')
+const fetch = require('node-fetch')
 
 // config for msal
 const config = {
@@ -47,11 +49,44 @@ auth.get('/redirect', (req, res) => {
 		redirectUri: 'http://localhost:3000/auth/redirect'
 	}
 
+	let accessToken
+
 	pca
 		.acquireTokenByCode(tokenRequest)
 		.then(response => {
-			console.log('\nResponse: \n:', response)
-			res.sendStatus(200)
+			// req.session.user = response.account.name
+			// req.session.token = response.accessToken
+			// console.log('\nResponse: \n:', response)
+
+			accessToken = response.accessToken
+
+			fetch('https://graph.microsoft.com/v1.0/me', {
+				method: 'GET',
+				headers: { Authorization: 'Bearer ' + accessToken }
+			})
+				.then(res => res.json())
+				.then(res => {
+					fetch('https://graph.microsoft.com/v1.0/groups', {
+						method: 'GET',
+						headers: { Authorization: 'Bearer ' + accessToken }
+					}).then(groups => {
+						groups = groups.json()
+						console.log('groups: ', groups)
+						const user = {
+							name: res.displayName,
+							jobTitle: res.jobTitle,
+							email: res.mail,
+							groups: groups
+						}
+
+						return user
+					})
+				})
+				.then(user => {
+					req.session.user = user
+					console.log(req.session)
+					res.sendStatus(200)
+				})
 		})
 		.catch(error => {
 			console.log(error)
