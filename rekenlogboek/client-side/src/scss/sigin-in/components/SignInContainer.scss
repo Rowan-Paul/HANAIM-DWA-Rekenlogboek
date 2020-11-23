@@ -1,0 +1,16 @@
+@import '../../Variables.scss';
+
+.SignInContainer {
+	background: $formColor;
+	box-shadow: $shadow;
+	border-radius: 8px;
+	color: $fontColor;
+	height: 100%;
+	padding: 0 2.5%;
+	width: 25%;
+
+	p {
+		padding: 0 0 5%;
+		border-bottom: 1px solid $borderColor;
+	}
+}

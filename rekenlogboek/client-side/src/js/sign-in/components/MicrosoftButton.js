@@ -1,5 +1,15 @@
 import React from 'react'
+import MicrosoftLogo from '../../../img/icons/microsoft.svg'
+
+import '../../../scss/sigin-in/components/MicrosoftButton.scss'
 
 export default function MicrosoftButton() {
-	return null
+	return (
+		<button className="MicrosoftButton">
+			<div>
+				<img src={MicrosoftLogo} alt="Microsoft Logo" />
+				<span>Login Met Microsoft</span>
+			</div>
+		</button>
+	)
 }
