@@ -3,7 +3,6 @@
 const express = require('express')
 const auth = express.Router()
 const msal = require('@azure/msal-node')
-const session = require('express-session')
 const fetch = require('node-fetch')
 
 // config for msal
@@ -16,7 +15,7 @@ const config = {
 	system: {
 		loggerOptions: {
 			loggerCallback(loglevel, message, containsPii) {
-				console.log(message)
+				// console.log(message)
 			},
 			piiLoggingEnabled: false,
 			logLevel: msal.LogLevel.Verbose
@@ -58,6 +57,7 @@ auth.get('/redirect', (req, res) => {
 
 			return response
 		})
+		// get acces token
 		.then(response => {
 			return fetch('https://graph.microsoft.com/v1.0/me', {
 				method: 'GET',
@@ -70,7 +70,7 @@ auth.get('/redirect', (req, res) => {
 				name: res.displayName,
 				jobTitle: res.jobTitle,
 				email: res.mail,
-				groups: ''
+				groups: []
 			}
 
 			let body = {
@@ -79,6 +79,7 @@ auth.get('/redirect', (req, res) => {
 
 			body = JSON.stringify(body)
 
+			// get groups for user
 			return fetch('https://graph.microsoft.com/v1.0/me/getMemberGroups', {
 				method: 'POST',
 				headers: {
@@ -90,6 +91,7 @@ auth.get('/redirect', (req, res) => {
 			})
 		})
 		.then(res => res.json())
+		// get group names for user
 		.then(groups => {
 			return Promise.all(
 				groups.value.map(id =>
@@ -108,8 +110,10 @@ auth.get('/redirect', (req, res) => {
 				groups: groups
 			}
 		})
+		// make cookie with user info
 		.then(user => {
 			req.session.user = user
+			console.log('User logged in: ', user)
 			res.sendStatus(200)
 		})
 		.catch(error => {
