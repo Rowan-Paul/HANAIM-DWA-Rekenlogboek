@@ -1,0 +1,25 @@
+@import '../../Variables.scss';
+.bttn {
+	border: 1px solid #000;
+	border-radius: 8px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 700;
+	padding: 1vh 0;
+	width: 100%;
+}
+.yellow {
+	box-shadow: $shadow;
+	background: $yellow;
+	border: 1px solid $yellow;
+}
+.blue {
+	box-shadow: $shadow;
+	background: $blue;
+	border: 1px solid $blue;
+}
+.green {
+	box-shadow: $green;
+	background: $green;
+	border: 1px solid $green;
+}
