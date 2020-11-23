@@ -1,5 +1,6 @@
 import '../scss/App.scss'
 import Header from '../js/common/components/Header'
+import SignIn from '../js/sign-in/SignIn'
 
 function App() {
 	const buttonHandler = e => alert('clickkkk.....')
@@ -7,6 +8,7 @@ function App() {
 		<div className="app">
 			<Header />
 			<main>
+				<SignIn />
 				{/* Router here  */}
 			</main>
 		</div>
