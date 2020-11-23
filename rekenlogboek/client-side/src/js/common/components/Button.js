@@ -1,5 +1,10 @@
 import React from 'react'
+import '../../../scss/common/components/Button.scss'
 
-export default function Button() {
-	return null
+export default function Button(props) {
+	return (
+		<button className={'bttn ' + props.color} onClick={e => props.handler()}>
+			{props.value}
+		</button>
+	)
 }
