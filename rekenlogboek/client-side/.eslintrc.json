@@ -18,7 +18,6 @@
 		"linebreak-style": "off",
 		"semi": ["warn", "never"],
 		"no-tabs": "off",
-		"indent": ["warn", "tab"],
 		"no-trailing-spaces": "warn",
 		"no-extra-parens": "warn"
 	}

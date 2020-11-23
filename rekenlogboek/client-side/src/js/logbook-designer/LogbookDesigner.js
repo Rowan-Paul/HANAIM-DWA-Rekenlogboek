@@ -1,10 +1,18 @@
-import '../../scss/logbook-developer/LogbookDesigner.scss'
+import { useState } from 'react'
+import LogbookDesignerLanding from './containers/LogbookDesignerLanding'
+
+import '../../scss/logbook-designer/LogbookDesigner.scss'
+
 function LogbookDesigner() {
-	return (
-		<div className="logbook-developer">
-			<div> </div>
-		</div>
-	)
+	const [page, setPage] = useState('landing')
+	const getLogbookDesignerPage = () => {
+		switch (page) {
+			case 'landing':
+				return <LogbookDesignerLanding />
+		}
+	}
+
+	return <div className="logbook-developer">{getLogbookDesignerPage()}</div>
 }
 
 export default LogbookDesigner
