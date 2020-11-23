@@ -1,5 +1,5 @@
+// import SVG from 'react-inlinesvg'
 import React from 'react'
-import SVG from 'react-inlinesvg'
 import '../../../scss/common/components/ButtonContainer.scss'
 import icon from '../../../img/icons/archive.svg'
 
