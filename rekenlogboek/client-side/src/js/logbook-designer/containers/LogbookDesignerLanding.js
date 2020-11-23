@@ -3,6 +3,8 @@ import React from 'react'
 import ButtonContainer from '../../common/components/ButtonContainer'
 
 import '../../../scss/logbook-designer/containers/LogbookDesignerLanding.scss'
+import createLogbookSVG from '../../../img/icons/create_log_green.svg'
+import logbookSVG from '../../../img/icons/view_log_yellow.svg'
 
 export default function LogbookDesigner() {
 	return (
@@ -12,11 +14,13 @@ export default function LogbookDesigner() {
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
 					<ButtonContainer
+						icon={logbookSVG}
 						color="yellow"
 						description="Het overzicht van alle logoeken bekijken."
 						value="Bekijk overzicht"
 					/>
 					<ButtonContainer
+						icon={createLogbookSVG}
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
