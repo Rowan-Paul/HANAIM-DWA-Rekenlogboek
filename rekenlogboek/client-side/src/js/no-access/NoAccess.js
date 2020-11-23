@@ -9,7 +9,7 @@ export default function NoAccess() {
 				de beheerder, of niet...
 			</p>
 
-			<div class="illustration"></div>
+			<div className="illustration"></div>
 		</section>
 	)
 }
