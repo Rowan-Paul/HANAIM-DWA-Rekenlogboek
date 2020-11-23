@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../../../scss/common/components/Jumbotron.scss'
 export default function Jumbotron() {
-	return null
+	return <section></section>
 }
