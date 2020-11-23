@@ -1,4 +1,6 @@
 import React from 'react'
+import Button from './Button'
+
 import '../../../scss/common/components/ButtonContainer.scss'
 import icon from '../../../img/icons/archive.svg'
 
@@ -10,7 +12,12 @@ export default function ButtonContainer(props) {
 			</div>
 			<p>{props.description}</p>
 
-			{props.children}
+			
+			<Button
+				color={props.color}
+				handler={props.handler}
+				value={props.value}
+			></Button>
 		</div>
 	)
 }
