@@ -1,0 +1,28 @@
+@import '../../Variables.scss';
+
+.MicrosoftButton {
+	background: #fff;
+	border: none;
+	box-shadow: $shadow;
+	border-radius: 8px;
+	cursor: pointer;
+	margin: 2.5vh 0;
+	padding: 1vh 0;
+	width: 100%;
+	transition: ease-in-out 0.5s;
+
+	&:hover {
+		background: $formColor;
+	}
+	div {
+		text-align: center;
+		width: 100%;
+		img {
+			height: 24px;
+			padding-right: 5%;
+		}
+		span {
+			vertical-align: 5px;
+		}
+	}
+}
