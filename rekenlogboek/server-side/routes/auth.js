@@ -49,44 +49,66 @@ auth.get('/redirect', (req, res) => {
 		redirectUri: 'http://localhost:3000/auth/redirect'
 	}
 
-	let accessToken
+	let user;
 
 	pca
 		.acquireTokenByCode(tokenRequest)
 		.then(response => {
-			// req.session.user = response.account.name
-			// req.session.token = response.accessToken
-			// console.log('\nResponse: \n:', response)
+			req.session.token = response.accessToken
 
-			accessToken = response.accessToken
-
-			fetch('https://graph.microsoft.com/v1.0/me', {
+			return response;
+		})
+		.then((response) => {
+			return fetch('https://graph.microsoft.com/v1.0/me', {
 				method: 'GET',
-				headers: { Authorization: 'Bearer ' + accessToken }
+				headers: { Authorization: 'Bearer ' + req.session.token }
 			})
-				.then(res => res.json())
-				.then(res => {
-					fetch('https://graph.microsoft.com/v1.0/groups', {
-						method: 'GET',
-						headers: { Authorization: 'Bearer ' + accessToken }
-					}).then(groups => {
-						groups = groups.json()
-						console.log('groups: ', groups)
-						const user = {
-							name: res.displayName,
-							jobTitle: res.jobTitle,
-							email: res.mail,
-							groups: groups
-						}
+		})
+		.then(res => res.json())
+		.then(res => {
+			user = {
+				name: res.displayName,
+				jobTitle: res.jobTitle,
+				email: res.mail,
+				groups: ""
+			}
 
-						return user
-					})
+			let body = {
+				"securityEnabledOnly": false
+			}
+
+			body = JSON.stringify(body)
+
+			return fetch('https://graph.microsoft.com/v1.0/me/getMemberGroups', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json",
+					"Content-Length": 33,
+					Authorization: 'Bearer ' + req.session.token
+				},
+				body: body
+			})
+		})
+		.then(res => res.json())
+		.then(groups => {
+			return Promise.all(groups.value.map(id =>
+				fetch('https://graph.microsoft.com/v1.0/groups/' + id, {
+					method: 'GET',
+					headers: { Authorization: 'Bearer ' + req.session.token }
 				})
-				.then(user => {
-					req.session.user = user
-					console.log(req.session)
-					res.sendStatus(200)
-				})
+					.then(res => res.json())
+					.then(response => response.displayName)
+			))
+		})
+		.then(groups => {
+			return {
+				...user,
+				groups: groups
+			}
+		})
+		.then(user => {
+			req.session.user = user
+			res.sendStatus(200)
 		})
 		.catch(error => {
 			console.log(error)
