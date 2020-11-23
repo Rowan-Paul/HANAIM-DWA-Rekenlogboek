@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../js/common/components/Header'
 import LogbookDesigner from '../js/logbook-designer/LogbookDesigner'
+import SignIn from '../js/sign-in/SignIn'
 
 import '../scss/App.scss'
 
