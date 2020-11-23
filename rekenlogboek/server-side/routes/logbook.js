@@ -7,7 +7,7 @@ const router = express.Router();
 const Logbook = mongoose.model("Logbook");
 
 // Create a new logbook
-router.post('/logbook', (req, res) => {
+router.post('/', (req, res) => {
     Logbook.create({
         period: req.body.period,
         group: req.body.group,
@@ -24,7 +24,7 @@ router.post('/logbook', (req, res) => {
 });
 
 // Get all information about one logbook
-router.get('/logbook/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Logbook.findById(req.params.id)
         .then((response) => {
             res.status(200).send(response)
@@ -35,7 +35,7 @@ router.get('/logbook/:id', (req, res) => {
 });
 
 // Get the id, position, title and inputType for one column from a specific logbook
-router.get('/logbook/:id/column/:position', (req, res) => {
+router.get('/:id/column/:position', (req, res) => {
     Logbook.findById(req.params.id).lean()
         .then((response) => {
             const column = response.columns.find((object) => {
@@ -49,7 +49,7 @@ router.get('/logbook/:id/column/:position', (req, res) => {
 });
 
 // Get the id, position, title, description and imagelink for one goal for one logbook
-router.get('/logbook/:id/goal/:position', (req, res) => {
+router.get('/:id/goal/:position', (req, res) => {
     Logbook.findById(req.params.id).lean()
         .then((response) => {
             const goal = response.goals.find((object) => {

@@ -7,7 +7,7 @@ const router = express.Router();
 const StudentLogbook = mongoose.model("StudentLogbook");
 
 // Create a new studentlogbook
-router.post('/studentlogbook', (req, res) => {
+router.post('/', (req, res) => {
     StudentLogbook.create({
         logbookID: req.body.logbookID,
         student: req.body.student,
@@ -21,7 +21,7 @@ router.post('/studentlogbook', (req, res) => {
 });
 
 // Get all information about a specific studentlogbook
-router.get('/studentlogbook/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     StudentLogbook.findById(req.params.id)
         .then((response) => {
             res.status(200).send(response)
@@ -32,7 +32,7 @@ router.get('/studentlogbook/:id', (req, res) => {
 });
 
 // Get all answers given by the student
-router.get('/studentlogbook/:id/answers', (req, res) => {
+router.get('/:id/answers', (req, res) => {
     StudentLogbook.findById(req.params.id).lean()
         .then((response) => {
             res.status(200).send(response.answers)
@@ -43,7 +43,7 @@ router.get('/studentlogbook/:id/answers', (req, res) => {
 });
 
 // Get all answers from a student from one column
-router.get('/studentlogbook/:id/answers/column/:position', (req, res) => {
+router.get('/:id/answers/column/:position', (req, res) => {
     StudentLogbook.findById(req.params.id).lean()
         .then((response) => {
             const columnanswers = response.answers.filter((object) => {

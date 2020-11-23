@@ -3,7 +3,7 @@ require("./models/logbook")
 require("./models/studentlogbook")
 require("./models/templates")
 
-const dbName = 'testdbproject';
+const dbName = 'rekenlogboek';
 
 const db = mongoose.connection;
 
@@ -11,7 +11,7 @@ const Logbook = mongoose.model('Logbook');
 const StudentLogbook = mongoose.model('StudentLogbook');
 const Templates = mongoose.model('Templates');
 
-mongoose.connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true })
+mongoose.connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         return seedLogbook();
     })
@@ -138,7 +138,7 @@ async function seedStudentLogboek() {
     await StudentLogbook.deleteMany();
 
     const logbook = await Logbook.find({}).limit(1);
-    
+
     await StudentLogbook.insertMany([
         {
             logbookID: logbook[0]._id,

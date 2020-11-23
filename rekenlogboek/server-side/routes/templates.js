@@ -7,7 +7,7 @@ const router = express.Router();
 const Templates = mongoose.model("Templates");
 
 // Get all information about one template
-router.get('/templates/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Templates.findById(req.params.id)
         .then((response) => {
             res.status(200).send(response)
