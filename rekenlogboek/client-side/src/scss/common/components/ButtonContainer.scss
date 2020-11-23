@@ -1,0 +1,29 @@
+@import '../../Variables.scss';
+
+.ButtonContainer {
+	box-shadow: $shadow;
+	border-radius: 8px;
+	height: 40%;
+	margin: 5% auto;
+	padding: 2.5%;
+	width: 35%;
+
+	.iconContainer {
+		align-items: center;
+		display: flex;
+		height: 40%;
+
+		img {
+			margin: 0 auto;
+			height: 96px;
+			width: 96px;
+		}
+	}
+	p {
+		border-bottom: 1px solid $borderColor;
+		color: $fontColor;
+		font-size: 16px;
+		height: 25%;
+		text-align: center;
+	}
+}

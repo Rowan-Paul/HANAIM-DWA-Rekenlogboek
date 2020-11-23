@@ -1,9 +1,17 @@
-// Colors
-$fontColor: #3c4856;
-$formColor: #fbfbfb;
-$blue: #0047ff;
-$green: #00df76;
-$mint: #cbf0f3;
-$yellow: #ffd05b;
-$shadow: 0px 1px 12px 0px #00000004, 0px 4px 8px 0px #00000008,
-	0px 3px 6px 0px #00000010;
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+body {
+	font-family: Nunito, sans-serif;
+	margin: 0;
+}
+
+main {
+	align-items: center;
+	background-image: url('../img/backgrounds/wave.svg');
+	background-position: 100% bottom;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: flex;
+	height: 87.5vh;
+	width: 100%;
+}
