@@ -7,11 +7,16 @@
 	margin: 5% auto;
 	padding: 2.5%;
 	width: 35%;
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 
 	.iconContainer {
 		align-items: center;
 		display: flex;
 		height: 40%;
+		flex-grow: 2;
 
 		img {
 			margin: 0 auto;
@@ -25,5 +30,6 @@
 		font-size: 16px;
 		height: 25%;
 		text-align: center;
+		flex-grow: 2;
 	}
 }

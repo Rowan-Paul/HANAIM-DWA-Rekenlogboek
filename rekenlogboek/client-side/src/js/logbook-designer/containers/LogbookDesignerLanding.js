@@ -11,8 +11,16 @@ export default function LogbookDesigner() {
 				<h1>Welkom, (username)</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
-					<ButtonContainer />
-					<ButtonContainer />
+					<ButtonContainer
+						color="yellow"
+						description="Het overzicht van alle logoeken bekijken."
+						value="Bekijk overzicht"
+					/>
+					<ButtonContainer
+						color="green"
+						description="Een nieuw logboek aanmaken."
+						value="Nieuw logboek"
+					/>
 				</div>
 			</div>
 		</div>

@@ -13,7 +13,6 @@ export default function ButtonContainer(props) {
 			</div>
 			<p>{props.description}</p>
 
-			
 			<Button
 				color={props.color}
 				handler={props.handler}
