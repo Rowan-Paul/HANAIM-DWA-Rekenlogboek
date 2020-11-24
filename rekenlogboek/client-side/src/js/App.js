@@ -8,6 +8,8 @@ import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesigne
 import Page1 from './logbook-designer/containers/Page1'
 import Page2 from './logbook-designer/containers/Page1'
 
+import Page3 from '../js/logbook-designer/containers/Page3'
+
 import SignIn from '../js/sign-in/SignIn'
 
 import '../scss/App.scss'
@@ -20,14 +22,20 @@ function App() {
 				<Router>
 					<Switch>
 						<Route path="/logbook-designer/new-logbook/page-1">
-							<Page1></Page1>
+							<Page1>
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-2">
-							<Page2></Page2>
+							<Page2/>
 						</Route>
-						<Route path="/logbook-designer/new-logbook/page-3"></Route>
-						<Route path="/logbook-designer/new-logbook/page-4"></Route>
-						<Route path="/logbook-designer/new-logbook/page-5"></Route>
+						<Route path="/logbook-designer/new-logbook/page-3">
+							<Page3 />
+						</Route>
+						<Route path="/logbook-designer/new-logbook/page-4">
+						
+						</Route>
+						<Route path="/logbook-designer/new-logbook/page-5">
+
+						</Route>
 						<Route path="/logbook-designer/overview"></Route>
 						<Route path="/logbook-designer">
 							<LogbookDesigner>
