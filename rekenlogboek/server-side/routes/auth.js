@@ -4,6 +4,7 @@ const express = require('express')
 const auth = express.Router()
 const msal = require('@azure/msal-node')
 const fetch = require('node-fetch')
+const { response } = require('express')
 
 // config for msal
 const config = {
@@ -48,7 +49,7 @@ auth.get('/redirect', (req, res) => {
 		redirectUri: 'http://localhost:3000/auth/redirect'
 	}
 
-	let user
+	req.session.user = {}
 
 	pca
 		.acquireTokenByCode(tokenRequest)
@@ -66,7 +67,7 @@ auth.get('/redirect', (req, res) => {
 		})
 		.then(res => res.json())
 		.then(res => {
-			user = {
+			req.session.user = {
 				name: res.displayName,
 				jobTitle: res.jobTitle,
 				email: res.mail,
@@ -105,15 +106,14 @@ auth.get('/redirect', (req, res) => {
 			)
 		})
 		.then(groups => {
-			return {
-				...user,
+			req.session.user = {
+				...req.session.user,
 				groups: groups
 			}
 		})
 		// make cookie with user info
-		.then(user => {
-			req.session.user = user
-			console.log('User logged in: ', user)
+		.then(response => {
+			console.log('User logged in: ', req.session.user)
 			res.sendStatus(200)
 		})
 		.catch(error => {
