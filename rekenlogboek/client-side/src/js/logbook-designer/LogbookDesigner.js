@@ -1,10 +1,9 @@
-import '../../scss/logbook-developer/LogbookDesigner.scss'
-function LogbookDesigner() {
-	return (
-		<div className="logbook-developer">
-			<div> </div>
-		</div>
-	)
+import React from 'react'
+
+import '../../scss/logbook-designer/LogbookDesigner.scss'
+
+function LogbookDesigner(props) {
+	return <div className="logbook-developer">{props.children}</div>
 }
 
 export default LogbookDesigner

@@ -3,7 +3,7 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["prettier", "prettier/react"],
+	"extends": ["prettier", "prettier/react", "plugin:react/recommended"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
@@ -18,8 +18,8 @@
 		"linebreak-style": "off",
 		"semi": ["warn", "never"],
 		"no-tabs": "off",
-		"indent": ["warn", "tab"],
 		"no-trailing-spaces": "warn",
-		"no-extra-parens": "warn"
+		"no-extra-parens": "warn",
+		"react/prop-types": "off"
 	}
 }
