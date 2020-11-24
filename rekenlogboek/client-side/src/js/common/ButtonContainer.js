@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-import '../../../scss/common/components/ButtonContainer.scss'
+import '../../scss/common/ButtonContainer.scss'
 
 export default function ButtonContainer(props) {
 	return (

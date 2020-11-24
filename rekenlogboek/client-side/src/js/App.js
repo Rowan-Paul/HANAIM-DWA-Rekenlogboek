@@ -1,11 +1,12 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
-import Header from '../js/common/components/Header'
+import Header from '../js/common/Header'
 
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
 import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
-import NewLogbook from './logbook-designer/containers/NewLogbook'
+import Page1 from './logbook-designer/containers/Page1'
+import Page2 from './logbook-designer/containers/Page1'
 
 import Page3 from '../js/logbook-designer/containers/Page3'
 
@@ -20,24 +21,20 @@ function App() {
 			<main>
 				<Router>
 					<Switch>
-						<Route path="/logbook-designer/new-logbook/page-1"></Route>
+						<Route path="/logbook-designer/new-logbook/page-1">
+							<Page1>
+						</Route>
 						<Route path="/logbook-designer/new-logbook/page-2">
-							<LogbookDesigner>
-								<NewLogbook></NewLogbook>
-							</LogbookDesigner>
+							<Page2/>
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-3">
 							<Page3 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-4">
-							<LogbookDesigner>
-								<NewLogbook></NewLogbook>
-							</LogbookDesigner>
+						
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-5">
-							<LogbookDesigner>
-								<NewLogbook></NewLogbook>
-							</LogbookDesigner>
+
 						</Route>
 						<Route path="/logbook-designer/overview"></Route>
 						<Route path="/logbook-designer">

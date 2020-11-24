@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../scss/common/components/Button.scss'
+import '../../scss/common/Button.scss'
 
 export default function Button(props) {
 	return (
