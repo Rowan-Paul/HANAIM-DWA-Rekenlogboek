@@ -22,20 +22,16 @@ function App() {
 				<Router>
 					<Switch>
 						<Route path="/logbook-designer/new-logbook/page-1">
-							<Page1>
+							<Page1 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-2">
-							<Page2/>
+							<Page2 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-3">
 							<Page3 />
 						</Route>
-						<Route path="/logbook-designer/new-logbook/page-4">
-						
-						</Route>
-						<Route path="/logbook-designer/new-logbook/page-5">
-
-						</Route>
+						<Route path="/logbook-designer/new-logbook/page-4"></Route>
+						<Route path="/logbook-designer/new-logbook/page-5"></Route>
 						<Route path="/logbook-designer/overview"></Route>
 						<Route path="/logbook-designer">
 							<LogbookDesigner>

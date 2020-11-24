@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
 import AddLearnGoal from '../components/AddLearnGoal'
-import Jumbotron from '../../common/components/Jumbotron'
-import InfoContainer from '../../common/components/InfoContainer'
+import Jumbotron from '../../common/Jumbotron'
+import InfoContainer from '../../common/InfoContainer'
 import Illustration from '../components/Illustration'
 import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import LearnGoalList from '../components/LearnGoalList'
+
 import '../../../scss/logbook-designer/containers/Page3.scss'
 export default function Page3() {
 	const [learnGoals, setlearnGoals] = useState([])

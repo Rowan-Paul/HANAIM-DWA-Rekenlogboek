@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Button from '../../common/components/Button'
+import Button from '../../common/Button'
 import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
 
 export default function AddLearnGoal(props) {
