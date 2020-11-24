@@ -1,16 +1,40 @@
-import '../scss/App.scss'
+import React from 'react'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+
 import Header from '../js/common/components/Header'
+
+import LogbookDesigner from './logbook-designer/LogbookDesigner'
+import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
+
 import SignIn from '../js/sign-in/SignIn'
-import Demo from '../js/demo/Demo'
+
+import ReduxDemo from '../js/demo/Demo'
+
+import '../scss/App.scss'
 
 function App() {
-	const buttonHandler = e => alert('clickkkk.....')
 	return (
 		<div className="app">
 			<Header />
 			<main>
-				<Demo />
-				{/* Router here  */}
+				<Router>
+					<Switch>
+						<Route path="/" exact>
+							<SignIn />
+						</Route>
+
+						<Route path="/redux-demo" exact>
+							<ReduxDemo />
+						</Route>
+						<Route path="/logbook-designer/new-logbook"></Route>
+						<Route path="/logbook-designer/overview"></Route>
+						<Route path="/logbook-designer" exact>
+							<LogbookDesigner>
+								<LogbookDesignerLanding />
+							</LogbookDesigner>
+						</Route>
+					</Switch>
+				</Router>
 			</main>
 		</div>
 	)
