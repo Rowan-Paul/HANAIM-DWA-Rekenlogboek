@@ -8,6 +8,7 @@ import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import LearnGoalList from '../components/LearnGoalList'
 
 import '../../../scss/logbook-designer/containers/Page3.scss'
+import Button from '../../common/Button'
 export default function Page3() {
 	const [learnGoals, setlearnGoals] = useState([])
 
@@ -37,6 +38,10 @@ export default function Page3() {
 					)}
 				</InfoContainer>
 			</Jumbotron>
+
+			<div className="nextButton">
+				<Button color="blue" value="Volgende" />
+			</div>
 		</div>
 	)
 }
