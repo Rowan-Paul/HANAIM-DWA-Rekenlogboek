@@ -12,6 +12,8 @@ import Page3 from '../js/logbook-designer/containers/Page3'
 
 import SignIn from '../js/sign-in/SignIn'
 
+import ReduxDemo from '../js/demo/Demo'
+
 import '../scss/App.scss'
 
 function App() {
@@ -37,10 +39,6 @@ function App() {
 							<LogbookDesigner>
 								<LogbookDesignerLanding />
 							</LogbookDesigner>
-						</Route>
-
-						<Route path="/" exact>
-							<SignIn />
 						</Route>
 					</Switch>
 				</Router>
