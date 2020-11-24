@@ -2,15 +2,22 @@ import React, { useState } from 'react'
 import Button from '../../common/components/Button'
 import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
 
-export default function AddLearnGoal() {
+export default function AddLearnGoal(props) {
+	const [ID, setID] = useState(1)
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
 	const [image, setimage] = useState('')
 
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
-		console.log(image)
-		alert('klik')
+
+		props.handler({
+			ID,
+			title,
+			description,
+			image
+		})
+		setID(ID + 1)
 	}
 
 	return (

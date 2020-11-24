@@ -1,0 +1,18 @@
+@import '../../Variables.scss';
+.LearnGoalList {
+	height: 100%;
+	margin: 0 auto;
+	width: 90%;
+	text-align: left;
+
+	ul {
+		background: #fff;
+		box-shadow: $shadow;
+		border-radius: 8px;
+		height: 45vh;
+		margin: 2.5% auto;
+		overflow-y: scroll;
+		padding: 0;
+		width: 100%;
+	}
+}
