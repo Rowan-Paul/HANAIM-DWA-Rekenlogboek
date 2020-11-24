@@ -114,7 +114,16 @@ auth.get('/redirect', (req, res) => {
 		// make cookie with user info
 		.then(response => {
 			console.log('User logged in: ', req.session.user)
-			res.sendStatus(200)
+			res.redirect(
+				'http://localhost:3001/auth/succes?user=' +
+					req.session.user.name +
+					'&jobTitle=' +
+					req.session.user.jobTitle +
+					'&email=' +
+					req.session.user.email +
+					'&groups=' +
+					req.session.user.groups
+			)
 		})
 		.catch(error => {
 			console.log(error)

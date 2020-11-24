@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const cors = require('cors')
 
 const SERVER_PORT = process.env.PORT || 3000
 
@@ -21,8 +22,14 @@ const dbName = 'rekenlogboek'
 // Create Express App and Routes
 const app = express()
 
+app.use(cors({ origin: true, credentials: true }))
+app.options('*', cors({ origin: true, credentials: true }))
 app.use(
-	session({ resave: true, saveUninitialized: true, secret: 'randomString' })
+	session({
+		resave: true,
+		saveUninitialized: true,
+		secret: 'randomString'
+	})
 )
 app.use('/auth', authRouter)
 app.use('/logbook', logbookRouter)

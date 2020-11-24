@@ -8,7 +8,7 @@ export default function MicrosoftButton() {
 		<button className="MicrosoftButton">
 			<div>
 				<img src={MicrosoftLogo} alt="Microsoft Logo" />
-				<span>Login Met Microsoft</span>
+				<span>Login met Microsoft</span>
 			</div>
 		</button>
 	)
