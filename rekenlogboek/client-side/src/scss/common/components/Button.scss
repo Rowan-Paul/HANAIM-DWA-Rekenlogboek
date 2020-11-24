@@ -7,33 +7,37 @@
 	font-weight: 700;
 	padding: 1vh 0;
 	width: 100%;
+	transition: ease-in-out 0.5s;
 }
 .yellow {
 	box-shadow: $shadow;
 	background: $yellow;
 	border: 1px solid $yellow;
-}
-.hover-yellow:hover {
-	background: $hover-yellow;
-	cursor: pointer;
+
+	&:hover {
+		background: $hover-yellow;
+		cursor: pointer;
+	}
 }
 
 .blue {
 	box-shadow: $shadow;
 	background: $blue;
 	border: 1px solid $blue;
-}
-.hover-blue:hover {
-	background: $hover-blue;
-	cursor: pointer;
+
+	&:hover {
+		background: $hover-blue;
+		cursor: pointer;
+	}
 }
 
 .green {
 	box-shadow: $shadow;
 	background: $green;
 	border: 1px solid $green;
-}
-.hover-green:hover {
-	background: $hover-green;
-	cursor: pointer;
+
+	&:hover {
+		background: $hover-green;
+		cursor: pointer;
+	}
 }
