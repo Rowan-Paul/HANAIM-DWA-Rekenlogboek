@@ -31,7 +31,7 @@ export default function LogbookDesigner() {
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => changePage('new-logbook')}
+						handler={() => changePage('new-logbook/page-1')}
 					/>
 				</div>
 			</div>
