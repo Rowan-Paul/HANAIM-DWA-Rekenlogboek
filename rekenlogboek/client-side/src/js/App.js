@@ -9,6 +9,8 @@ import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesigne
 import SignIn from '../js/sign-in/SignIn'
 import Succes from '../js/sign-in/Succes'
 
+import ReduxDemo from '../js/demo/Demo'
+
 import '../scss/App.scss'
 
 function App() {
@@ -26,6 +28,10 @@ function App() {
 							</LogbookDesigner>
 						</Route>
 
+						<Route path="/redux-demo" exact>
+							<ReduxDemo />
+						</Route>
+						
 						<Route exact path="/" component={SignIn} />
 						<Route
 							exact
