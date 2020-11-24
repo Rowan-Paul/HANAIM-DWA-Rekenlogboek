@@ -1,20 +1,31 @@
-import '../scss/App.scss'
-
 import React from 'react'
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/components/Header'
+
+import LogbookDesigner from './logbook-designer/LogbookDesigner'
+import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
+
 import SignIn from '../js/sign-in/SignIn'
 import Succes from '../js/sign-in/Succes'
 
+import '../scss/App.scss'
+
 function App() {
 	return (
-		<Router>
-			<div className="app">
-				<Header />
-				<main>
+		<div className="app">
+			<Header />
+			<main>
+				<Router>
 					<Switch>
+						<Route path="/logbook-designer/new-logbook"></Route>
+						<Route path="/logbook-designer/overview"></Route>
+						<Route path="/logbook-designer" exact>
+							<LogbookDesigner>
+								<LogbookDesignerLanding />
+							</LogbookDesigner>
+						</Route>
+
 						<Route exact path="/" component={SignIn} />
 						<Route
 							exact
@@ -27,9 +38,9 @@ function App() {
 						<Route exact path="/auth/succes" component={Succes} />
 						{/* <Route component={NotFound} /> */}
 					</Switch>
-				</main>
-			</div>
-		</Router>
+				</Router>
+			</main>
+		</div>
 	)
 }
 
