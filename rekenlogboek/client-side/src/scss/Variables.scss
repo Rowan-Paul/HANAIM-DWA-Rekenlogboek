@@ -1,10 +1,16 @@
+//fonts
+$font-weight: 700;
+
 // Colors
 $fontColor: #3c4856;
 $formColor: #fbfbfb;
 $borderColor: #ccc;
 $blue: #0047ff;
+$hover-blue: darken($blue, 10%);
 $green: #00df76;
+$hover-green: darken($green, 10%);
 $mint: #cbf0f3;
 $yellow: #ffd05b;
+$hover-yellow: darken($yellow, 10%);
 $shadow: 0px 1px 12px 0px #00000010, 0px 4px 8px 0px #00000016,
 	0px 3px 6px 0px #00000020;
