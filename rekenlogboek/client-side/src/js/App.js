@@ -12,6 +12,8 @@ import Page3 from '../js/logbook-designer/containers/Page3'
 
 import SignIn from '../js/sign-in/SignIn'
 
+import ReduxDemo from '../js/demo/Demo'
+
 import '../scss/App.scss'
 
 function App() {
@@ -21,6 +23,21 @@ function App() {
 			<main>
 				<Router>
 					<Switch>
+						<Route path="/" exact>
+							<SignIn />
+						</Route>
+
+						<Route path="/redux-demo" exact>
+							<ReduxDemo />
+						</Route>
+						<Route path="/logbook-designer/new-logbook"></Route>
+						<Route path="/logbook-designer/overview"></Route>
+						<Route path="/logbook-designer">
+							<LogbookDesigner>
+								<LogbookDesignerLanding />
+							</LogbookDesigner>
+						</Route>
+
 						<Route path="/logbook-designer/new-logbook/page-1">
 							<Page1 />
 						</Route>
@@ -31,17 +48,6 @@ function App() {
 							<Page3 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-4"></Route>
-						<Route path="/logbook-designer/new-logbook/page-5"></Route>
-						<Route path="/logbook-designer/overview"></Route>
-						<Route path="/logbook-designer">
-							<LogbookDesigner>
-								<LogbookDesignerLanding />
-							</LogbookDesigner>
-						</Route>
-
-						<Route path="/" exact>
-							<SignIn />
-						</Route>
 					</Switch>
 				</Router>
 			</main>
