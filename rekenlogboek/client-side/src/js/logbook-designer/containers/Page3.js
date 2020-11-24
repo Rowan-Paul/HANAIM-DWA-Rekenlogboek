@@ -7,7 +7,7 @@ import Illustration from '../components/Illustration'
 import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import LearnGoalList from '../components/LearnGoalList'
 
-import '../../../scss/logbook-designer/containers/Page3.scss'
+import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 import Button from '../../common/Button'
 export default function Page3() {
 	const [learnGoals, setlearnGoals] = useState([])
@@ -21,7 +21,7 @@ export default function Page3() {
 	const learnGoalHandler = newGoal => setlearnGoals([...learnGoals, newGoal])
 
 	return (
-		<div className="Page3">
+		<div className="new-logbook">
 			<Jumbotron>
 				<AddLearnGoal handler={learnGoalHandler} />
 				<InfoContainer>

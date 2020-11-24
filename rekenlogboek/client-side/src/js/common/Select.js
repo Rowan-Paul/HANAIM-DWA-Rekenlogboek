@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import '../../scss/common/Select.scss'
 
 export default function Select(props) {
-	const [value, setValue] = useState(props.option)
 	console.log(props.options)
 
-	const changeValue = e => {}
+	const changeValue = e => {
+		props.changeHandler(e.target.value)
+	}
 
 	const getOptions = () =>
 		props.options.map(option => {
 			return (
-				<option value={option} key={option}>
+				<option
+					value={option}
+					key={option}
+					selected={props.selected === props.option ? true : null}
+				>
 					{option}
 				</option>
 			)
@@ -23,7 +28,7 @@ export default function Select(props) {
 			<select
 				className="select"
 				onChange={e => {
-					changeValue()
+					changeValue(e)
 				}}
 			>
 				{getOptions()}

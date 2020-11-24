@@ -1,4 +1,4 @@
-.Page3 {
+.new-logbook {
 	align-items: center;
 	display: flex;
 	height: 90%;
@@ -11,5 +11,11 @@
 		position: absolute;
 		right: 5%;
 		width: 12.5%;
+	}
+
+	.vertical-center {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 }
