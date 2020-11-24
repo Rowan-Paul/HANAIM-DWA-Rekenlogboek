@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import kaasReducer from './kaas/reducer'
+import demoReducer from './demo/reducer'
 
 const rootReducer = combineReducers({
-	kaas: kaasReducer
+	demo: demoReducer
 })
 
 export default rootReducer
