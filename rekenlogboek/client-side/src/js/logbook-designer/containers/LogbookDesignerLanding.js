@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-import ButtonContainer from '../../common/components/ButtonContainer'
+import ButtonContainer from '../../common/ButtonContainer'
 
 import '../../../scss/logbook-designer/containers/LogbookDesignerLanding.scss'
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
