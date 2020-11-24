@@ -1,4 +1,6 @@
 import React from 'react'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+
 import Header from '../js/common/components/Header'
 import LogbookDesigner from '../js/logbook-designer/LogbookDesigner'
 // import SignIn from '../js/sign-in/SignIn'
@@ -10,9 +12,13 @@ function App() {
 		<div className="app">
 			<Header />
 			<main>
-				{/* TODO: add router */}
-				{/* TODO: move component below in router component */}
-				<LogbookDesigner />
+				<Router>
+					<Switch>
+						<Route path="/logbook-designer" exact>
+							<LogbookDesigner />
+						</Route>
+					</Switch>
+				</Router>
 			</main>
 		</div>
 	)

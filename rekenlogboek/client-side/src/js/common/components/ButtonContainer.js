@@ -1,5 +1,4 @@
-// import SVG from 'react-inlinesvg'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from './Button'
 
 import '../../../scss/common/components/ButtonContainer.scss'

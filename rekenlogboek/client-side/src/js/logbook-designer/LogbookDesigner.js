@@ -1,19 +1,24 @@
-import { useState } from 'react'
+import React from 'react'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+
 import LogbookDesignerLanding from './containers/LogbookDesignerLanding'
 
-import React from 'react'
 import '../../scss/logbook-designer/LogbookDesigner.scss'
 
 function LogbookDesigner() {
-	const [page, setPage] = useState('landing')
-	const getLogbookDesignerPage = () => {
-		switch (page) {
-			case 'landing':
-				return <LogbookDesignerLanding />
-		}
-	}
-
-	return <div className="logbook-developer">{getLogbookDesignerPage()}</div>
+	return (
+		<div className="logbook-developer">
+			<Router>
+				<Switch>
+					<Route path="/logbook-designer/new-logbook"></Route>
+					<Route path="/logbook-designer/overview"></Route>
+					<Route path="/logbook-designer" exact>
+						<LogbookDesignerLanding />
+					</Route>
+				</Switch>
+			</Router>
+		</div>
+	)
 }
 
 export default LogbookDesigner
