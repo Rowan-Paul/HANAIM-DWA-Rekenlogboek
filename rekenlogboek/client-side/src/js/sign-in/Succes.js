@@ -15,13 +15,16 @@ export default function SuccesUI(props) {
 
 		// save to reducer
 		props.doSaveUser(decodeURI(props.location.search.removeCharAt(1)))
-	}, [])
+	}, []) // empty array to signal it only has to execute on mount
 
 	useEffect(() => {
 		// redirect to the correct page
 		if (props.user.groups !== undefined && props.user.groups !== null) {
-			if (props.user.groups.includes('Logboekontwerpers'))
-				props.history.push('/logbook-designer')
+			if (props.user.groups.includes('Logboekontwerpers')) {
+				// props.history.push('/logbook-designer')
+			} else {
+				props.history.push('/no-access')
+			}
 		}
 	})
 

@@ -8,6 +8,7 @@ import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesigne
 
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
+import NoAccess from '../js/no-access/NoAccess'
 
 import ReduxDemo from '../js/demo/Demo'
 
@@ -44,6 +45,7 @@ function App() {
 							}}
 						/>
 						<Route exact path="/auth/succes" component={Succes} />
+						<Route exact path="/no-access" component={NoAccess} />
 						{/* <Route component={NotFound} /> */}
 					</Switch>
 				</Router>
