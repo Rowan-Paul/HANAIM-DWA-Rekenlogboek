@@ -13,6 +13,8 @@ import ReduxDemo from '../js/demo/Demo'
 
 import '../scss/App.scss'
 
+require('dotenv').config()
+
 function App() {
 	return (
 		<div>

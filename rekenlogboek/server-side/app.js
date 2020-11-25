@@ -17,6 +17,8 @@ const logbookRouter = require('./routes/logbook')
 const studentlogbookRouter = require('./routes/studentlogbook')
 const templatesRouter = require('./routes/templates')
 
+require('dotenv').config()
+
 const dbName = 'rekenlogboek'
 
 // Create Express App and Routes

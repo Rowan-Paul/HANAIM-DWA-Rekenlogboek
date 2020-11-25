@@ -114,10 +114,10 @@ auth.get('/redirect', (req, res) => {
 		.then(response => {
 			console.log('User logged in: ', req.session.user)
 
-			var key = 'real secret keys should be long and random'
-
 			// Create an encryptor:
-			const encryptor = require('simple-encryptor')(key)
+			const encryptor = require('simple-encryptor')(
+				process.env.REACT_APP_SECRET_KEY
+			)
 
 			const objEnc = encryptor.encrypt(req.session.user)
 

@@ -1,8 +1,8 @@
 export function saveUserAction(objEnc) {
-	var key = 'real secret keys should be long and random'
-
 	// Create an encryptor:
-	const encryptor = require('simple-encryptor')(key)
+	const encryptor = require('simple-encryptor')(
+		process.env.REACT_APP_SECRET_KEY
+	)
 
 	// decrypt object
 	const payload = encryptor.decrypt(objEnc)
