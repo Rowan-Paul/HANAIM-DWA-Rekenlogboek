@@ -22,8 +22,8 @@ export default function AddLearnGoal(props) {
 
 	return (
 		<div className="AddLearnGoal">
-			<h1>Leerdoel toevoegen</h1>
 			<form onSubmit={e => addLearnGoalHandler(e)}>
+				<h1>Leerdoel toevoegen</h1>
 				<label>Titel</label>
 				<input
 					name="title"

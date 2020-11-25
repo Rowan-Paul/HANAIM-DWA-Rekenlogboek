@@ -5,14 +5,12 @@ import Header from '../js/common/Header'
 
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
 import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
-import Page1 from './logbook-designer/containers/Page1'
-import Page2 from './logbook-designer/containers/Page1'
 
+import Page1 from './logbook-designer/containers/Page1'
+import Page2 from './logbook-designer/containers/Page2'
 import Page3 from '../js/logbook-designer/containers/Page3'
 
 import SignIn from '../js/sign-in/SignIn'
-
-import ReduxDemo from '../js/demo/Demo'
 
 import '../scss/App.scss'
 
@@ -39,6 +37,9 @@ function App() {
 							<LogbookDesigner>
 								<LogbookDesignerLanding />
 							</LogbookDesigner>
+						</Route>
+						<Route path="/" exact>
+							<SignIn />
 						</Route>
 					</Switch>
 				</Router>

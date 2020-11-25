@@ -6,9 +6,10 @@ import InfoContainer from '../../common/InfoContainer'
 import Illustration from '../components/Illustration'
 import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import LearnGoalList from '../components/LearnGoalList'
+import Button from '../../common/Button'
 
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
-import Button from '../../common/Button'
+
 export default function Page3() {
 	const [learnGoals, setlearnGoals] = useState([])
 

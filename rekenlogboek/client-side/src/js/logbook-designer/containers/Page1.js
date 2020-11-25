@@ -20,32 +20,34 @@ export default function Page1() {
 		<div className="new-logbook">
 			<Jumbotron>
 				<div className="vertical-center">
-					{/* TODO: remove dummy options & replace with dynamic data*/}
-					<Select
-						title="Kies een groep:"
-						selected={group}
-						options={[
-							'Groep 5a',
-							'Groep 6a',
-							'Groep 6b',
-							'Groep 7a',
-							'Groep 8'
-						]}
-						changeHandler={() => changeGroupHandler()}
-					/>
-					<Select
-						title="Kies een blok:"
-						selected={period}
-						options={[
-							'Blok 1',
-							'Blok 2',
-							'Blok 3',
-							'Blok 4',
-							'Blok 5',
-							'Blok 6'
-						]}
-						changeHandler={() => changePeriodHandler()}
-					/>
+					<form>
+						{/* TODO: remove dummy options & replace with dynamic data*/}
+						<Select
+							title="Kies een groep:"
+							selected={group}
+							options={[
+								'Groep 5a',
+								'Groep 6a',
+								'Groep 6b',
+								'Groep 7a',
+								'Groep 8'
+							]}
+							changeHandler={() => changeGroupHandler()}
+						/>
+						<Select
+							title="Kies een blok:"
+							selected={period}
+							options={[
+								'Blok 1',
+								'Blok 2',
+								'Blok 3',
+								'Blok 4',
+								'Blok 5',
+								'Blok 6'
+							]}
+							changeHandler={() => changePeriodHandler()}
+						/>
+					</form>
 				</div>
 				<InfoContainer>
 					<Illustration
