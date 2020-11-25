@@ -21,7 +21,7 @@ export default function SuccesUI(props) {
 		// redirect to the correct page
 		if (props.user.groups !== undefined && props.user.groups !== null) {
 			if (props.user.groups.includes('Logboekontwerpers')) {
-				// props.history.push('/logbook-designer')
+				props.history.push('/logbook-designer')
 			} else {
 				props.history.push('/no-access')
 			}
