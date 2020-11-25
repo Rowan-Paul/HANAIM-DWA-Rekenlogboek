@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import * as actions from '../main/actions'
 import * as types from '../main/types'
 

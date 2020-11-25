@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import reducer from '../main/reducer'
 import * as types from '../main/types'
 

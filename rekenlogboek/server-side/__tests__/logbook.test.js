@@ -80,10 +80,6 @@ describe('Logbook route tests', () => {
 		})
 	})
 
-	beforeEach(async () => {})
-
-	afterEach(async () => {})
-
 	afterAll(async () => {
 		await Logbook.deleteMany({
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
