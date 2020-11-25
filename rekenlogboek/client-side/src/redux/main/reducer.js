@@ -4,7 +4,7 @@ const initialMainState = {
 	user: {}
 }
 
-export default function roomReducer(state = initialMainState, action) {
+export default function mainReducer(state = initialMainState, action) {
 	switch (action.type) {
 		case SAVE_USER:
 			return { ...state, user: action.payload }

@@ -3,7 +3,7 @@ import '../../scss/sigin-in/SignIn.scss'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { saveUserAction } from '../../redux/mainReducer'
+import { saveUserAction } from '../../redux/main/actions'
 
 export default function SuccesUI(props) {
 	useEffect(() => {
