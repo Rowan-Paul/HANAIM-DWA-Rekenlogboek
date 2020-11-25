@@ -150,6 +150,7 @@ In deze folder bevind zich ook een code example, deze is te starten als volgt:
 
 1. `npm install`
 2. `node index`
+3. Ga naar `localhost:3000/auth` om in te loggen
 
 ## Bronnen
 

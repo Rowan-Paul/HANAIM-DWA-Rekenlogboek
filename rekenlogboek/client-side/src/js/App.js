@@ -8,15 +8,20 @@ import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesigne
 
 import Page1 from './logbook-designer/containers/Page1'
 import Page2 from './logbook-designer/containers/Page2'
-import Page3 from '../js/logbook-designer/containers/Page3'
+import Page4 from './logbook-designer/containers/Page4'
+import Page3 from './logbook-designer/containers/Page3'
 
 import SignIn from '../js/sign-in/SignIn'
+import { Succes } from '../js/sign-in/Succes'
+import NoAccess from '../js/no-access/NoAccess'
 
 import '../scss/App.scss'
 
+require('dotenv').config()
+
 function App() {
 	return (
-		<div className="app">
+		<div>
 			<Header />
 			<main>
 				<Router>
@@ -30,17 +35,29 @@ function App() {
 						<Route path="/logbook-designer/new-logbook/page-3">
 							<Page3 />
 						</Route>
-						<Route path="/logbook-designer/new-logbook/page-4"></Route>
-						<Route path="/logbook-designer/new-logbook/page-5"></Route>
+						<Route path="/logbook-designer/new-logbook/page-4">
+							<Page4 />
+						</Route>
+						<Route path="/logbook-designer/new-logbook"></Route>
 						<Route path="/logbook-designer/overview"></Route>
 						<Route path="/logbook-designer">
 							<LogbookDesigner>
 								<LogbookDesignerLanding />
 							</LogbookDesigner>
 						</Route>
-						<Route path="/" exact>
-							<SignIn />
-						</Route>
+
+						<Route exact path="/" component={SignIn} />
+						<Route
+							exact
+							path="/auth"
+							component={() => {
+								window.location.href = 'http://localhost:3000/auth'
+								return null
+							}}
+						/>
+						<Route exact path="/auth/succes" component={Succes} />
+						<Route exact path="/no-access" component={NoAccess} />
+						{/* <Route component={NotFound} /> */}
 					</Switch>
 				</Router>
 			</main>
