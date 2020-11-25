@@ -12,14 +12,18 @@ import Page3 from './logbook-designer/containers/Page3'
 import Page4 from './logbook-designer/containers/Page4'
 
 import SignIn from '../js/sign-in/SignIn'
+import { Succes } from '../js/sign-in/Succes'
+import NoAccess from '../js/no-access/NoAccess'
 
 import ReduxDemo from '../js/demo/Demo'
 
 import '../scss/App.scss'
 
+require('dotenv').config()
+
 function App() {
 	return (
-		<div className="app">
+		<div>
 			<Header />
 			<main>
 				<Router>
@@ -51,6 +55,23 @@ function App() {
 								<LogbookDesignerLanding />
 							</LogbookDesigner>
 						</Route>
+
+						<Route path="/redux-demo" exact>
+							<ReduxDemo />
+						</Route>
+
+						<Route exact path="/" component={SignIn} />
+						<Route
+							exact
+							path="/auth"
+							component={() => {
+								window.location.href = 'http://localhost:3000/auth'
+								return null
+							}}
+						/>
+						<Route exact path="/auth/succes" component={Succes} />
+						<Route exact path="/no-access" component={NoAccess} />
+						{/* <Route component={NotFound} /> */}
 					</Switch>
 				</Router>
 			</main>

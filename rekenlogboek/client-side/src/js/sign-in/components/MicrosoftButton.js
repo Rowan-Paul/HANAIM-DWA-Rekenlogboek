@@ -1,15 +1,21 @@
-import React from 'react'
-import MicrosoftLogo from '../../../img/icons/microsoft.svg'
-
 import '../../../scss/sigin-in/components/MicrosoftButton.scss'
 
-export default function MicrosoftButton() {
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import MicrosoftLogo from '../../../img/icons/microsoft.svg'
+
+function MicrosoftButtonUI(props) {
 	return (
-		<button className="MicrosoftButton">
+		<button
+			className="MicrosoftButton"
+			onClick={() => props.history.push('/auth')}
+		>
 			<div>
 				<img src={MicrosoftLogo} alt="Microsoft Logo" />
-				<span>Login Met Microsoft</span>
+				<span>Login met Microsoft</span>
 			</div>
 		</button>
 	)
 }
+
+export const MicrosoftButton = withRouter(MicrosoftButtonUI)
