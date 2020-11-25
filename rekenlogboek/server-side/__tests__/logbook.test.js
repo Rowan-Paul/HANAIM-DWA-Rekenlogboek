@@ -4,7 +4,6 @@
 
 'use strict'
 
-const { json } = require('body-parser')
 const mongoose = require('mongoose')
 const { default: fetch } = require('node-fetch')
 require('../models/logbook')
