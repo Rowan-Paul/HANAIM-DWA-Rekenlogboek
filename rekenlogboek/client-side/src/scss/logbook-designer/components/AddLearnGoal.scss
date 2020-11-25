@@ -6,26 +6,4 @@
 	height: 90%;
 	position: relative;
 	width: 90%;
-
-	form {
-		position: absolute;
-		height: 80%;
-		margin: 5% 0;
-		input {
-			border: 1px solid $borderColor;
-			border-radius: 8px;
-			margin: 1vh 0;
-			padding: 1vh 0.5vw;
-			width: calc(100% - (1vw + 2px));
-		}
-		textarea {
-			border: 1px solid $borderColor;
-			border-radius: 8px;
-			height: 25%;
-			margin: 0.5vh 0;
-			padding: 1vh 0.5vw;
-			resize: none;
-			width: calc(100% - (1vw + 2px));
-		}
-	}
 }
