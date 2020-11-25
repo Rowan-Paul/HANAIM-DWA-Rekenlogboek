@@ -12,33 +12,11 @@ export default function SuccesUI(props) {
 		return tmp.join('') // reconstruct the string
 	}
 
-	// remove questionmark and split
-	// in different params
-	const removeChar = props.location.search.removeCharAt(1)
-	const splitParams = removeChar.split('&')
-	// remove %20, select the correct
-	// string from the array and convert it to a string
-	let user = {
-		name: decodeURIComponent(
-			splitParams[0].split('=').splice(0 - 1, 1)
-		).toString(),
-		jobTitle: decodeURIComponent(
-			splitParams[1].split('=').splice(0 - 1, 1)
-		).toString(),
-		email: decodeURIComponent(
-			splitParams[2].split('=').splice(0 - 1, 1)
-		).toString(),
-		groups: decodeURIComponent(splitParams[3])
-			.split('=')
-			.splice(0 - 1, 1)
-			.toString()
-			.split(',')
-	}
-
-	props.doSaveUser(user)
+	// save to reducer
+	props.doSaveUser(decodeURI(props.location.search.removeCharAt(1)))
 
 	// redirect to the correct page
-	if (user.groups.includes('Logboekontwerpers'))
+	if (props.user.groups.includes('Logboekontwerpers'))
 		props.history.push('/logbook-designer')
 
 	return (
@@ -48,8 +26,10 @@ export default function SuccesUI(props) {
 	)
 }
 
-function mapStateToProps() {
-	return {}
+function mapStateToProps(state) {
+	return {
+		user: state.main.user
+	}
 }
 
 function mapDispatchToProps(dispatch) {

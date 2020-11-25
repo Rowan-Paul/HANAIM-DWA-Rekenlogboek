@@ -4,7 +4,6 @@ const express = require('express')
 const auth = express.Router()
 const msal = require('@azure/msal-node')
 const fetch = require('node-fetch')
-const { response } = require('express')
 
 // config for msal
 const config = {
@@ -114,16 +113,15 @@ auth.get('/redirect', (req, res) => {
 		// make cookie with user info
 		.then(response => {
 			console.log('User logged in: ', req.session.user)
-			res.redirect(
-				'http://localhost:3001/auth/succes?user=' +
-					req.session.user.name +
-					'&jobTitle=' +
-					req.session.user.jobTitle +
-					'&email=' +
-					req.session.user.email +
-					'&groups=' +
-					req.session.user.groups
-			)
+
+			var key = 'real secret keys should be long and random'
+
+			// Create an encryptor:
+			const encryptor = require('simple-encryptor')(key)
+
+			const objEnc = encryptor.encrypt(req.session.user)
+
+			res.redirect('http://localhost:3001/auth/succes?' + encodeURI(objEnc))
 		})
 		.catch(error => {
 			console.log(error)
