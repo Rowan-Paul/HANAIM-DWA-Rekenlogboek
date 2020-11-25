@@ -8,6 +8,8 @@ Tijdens het ontwikkelen van de applicatie, wordt er gebruik gemaakt van een loka
 
 Het werken met Teams in een lokale ontwikkelomgeving is beschreven in het [Teams integratie onderzoek](../onderzoek-teams-integratie/readme.md).
 
+Testen zullen worden uitgevoerd voordat het gemerged wordt met de develop branch. Dit testen gebeurt met behulp van het test framework [Jest](https://jestjs.io/). De testen zijn vooral voor de backend, maar er zullen ook een aantal testen worden uitgevoerd op de Redux gedeelte van de front-end.
+
 ### 7.2 Deployed ontwikkelomgeving
 
 Het deployen van de site gebeurt op een Azure server die node kan draaien voor de server en react voor de front-end.
