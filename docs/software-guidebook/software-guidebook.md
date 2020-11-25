@@ -5,7 +5,7 @@ export_on_save:
 
 # Software guidebook
 
-Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd.
+Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd. Dit software guidebook is opgesteld aan de hand van de reader software guidebook (Tijsma et al., 2016).
 
 ## Inhoudsopgave
 
@@ -40,10 +40,16 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
     - [4.3 SCRUM](#43-scrum)
   - [5 Principes](#5-principes)
   - [6 Software architectuur](#6-software-architectuur)
+    - [6.1 Diagrammen](#61-diagrammen)
+      - [6.1.1 Container diagram](#611-container-diagram)
+      - [6.1.2 Component diagram: client-side](#612-component-diagram-client-side)
+      - [6.1.3 Component diagram: server-side](#613-component-diagram-server-side)
+    - [6.2 Bestandsstructuur](#62-bestandsstructuur)
   - [7 Infrastructuur architectuur](#7-infrastructuur-architectuur)
     - [7.1 Lokale ontwikkelomgeving](#71-lokale-ontwikkelomgeving)
     - [7.2 Deployed ontwikkelomgeving](#72-deployed-ontwikkelomgeving)
   - [8 Deployment](#8-deployment)
+    - [8.1 Deployment diagram](#81-deployment-diagram)
   - [9 Operatie en ondersteuning](#9-operatie-en-ondersteuning)
     - [9.1 Operatie](#91-operatie)
     - [9.2 Ondersteuning](#92-ondersteuning)
