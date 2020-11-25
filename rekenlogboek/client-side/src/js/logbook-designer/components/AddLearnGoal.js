@@ -1,23 +1,23 @@
+import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
 import React, { useState } from 'react'
 import Button from '../../common/Button'
-import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
+import shortid from 'shortid'
 
 export default function AddLearnGoal(props) {
-	const [ID, setID] = useState(1)
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
-	const [image, setimage] = useState('')
+	const [imageLink, setImageLink] = useState('')
 
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
 
 		props.handler({
-			ID,
+			ID: shortid.generate(),
 			title,
 			description,
-			image
+			// imageLink
+			imageLink: 'goal1.png'
 		})
-		setID(ID + 1)
 	}
 
 	return (
@@ -42,7 +42,7 @@ export default function AddLearnGoal(props) {
 				<label>Afbeelding:</label>
 				<input
 					name="image"
-					onChange={e => setimage(e.target.value)}
+					onChange={e => setImageLink(e.target.value)}
 					type="file"
 				/>
 

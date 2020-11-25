@@ -9,12 +9,12 @@ export default function LearnGoal(props) {
 			<div className="top-row">
 				<div className="title">
 					<span>
-						Leerdoel {props.index}: {props.learnGoal.title}
+						Leerdoel {props.index}: {props.goal.title}
 					</span>
 				</div>
 
 				<div className="image">
-					<span>{props.learnGoal.image}</span>
+					<span>{props.goal.imageLink}</span>
 				</div>
 
 				<div className="toggle-description">
@@ -27,14 +27,14 @@ export default function LearnGoal(props) {
 				<div className="delete">
 					<i
 						className="fa fa-trash"
-						onClick={() => props.removeHandler(props.learnGoal.ID)}
+						onClick={() => props.removeHandler(props.goal.ID)}
 					></i>
 				</div>
 			</div>
 
 			{view ? (
 				<div className="description">
-					<p>{props.learnGoal.description}</p>
+					<p>{props.goal.description}</p>
 				</div>
 			) : null}
 		</li>

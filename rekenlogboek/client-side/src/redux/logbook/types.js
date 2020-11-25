@@ -1,0 +1,3 @@
+export const ADD_LEARN_GOAL = 'ADD_LEARN_GOAL'
+export const REMOVE_LEARN_GOAL = 'REMOVE_LEARN_GOAL'
+export const SAVE_LOGBOOK = 'SAVE_LOGBOOK'

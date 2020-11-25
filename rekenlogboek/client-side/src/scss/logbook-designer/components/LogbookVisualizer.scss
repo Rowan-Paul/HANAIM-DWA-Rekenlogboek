@@ -1,0 +1,42 @@
+@import '../../Variables.scss';
+.LogbookVisualizer {
+	color: $fontColor;
+	height: 100%;
+	text-align: left;
+
+	div {
+		border: 1px solid $borderColor;
+		background: #fff;
+		border-radius: 8px;
+		height: 45vh;
+		margin: 2.5vh 0;
+		overflow-y: scroll;
+		table {
+			border: none;
+			border-color: $borderColor;
+			border-radius: 8px;
+			border-collapse: collapse;
+			max-height: 50vh;
+			overflow-y: scroll;
+			width: 100%;
+
+			th,
+			td {
+				padding: 1% 2%;
+
+				span {
+					font-size: 16px;
+					font-weight: 700;
+				}
+				p {
+					font-size: 14px;
+					margin: 0;
+				}
+				img {
+					margin: 0 auto;
+					width: 50%;
+				}
+			}
+		}
+	}
+}

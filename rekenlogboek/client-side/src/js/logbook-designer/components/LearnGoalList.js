@@ -7,11 +7,11 @@ export default function LearnGoalList(props) {
 		<div className="LearnGoalList">
 			<h1>Leerdoelen</h1>
 			<ul>
-				{props.learnGoals.map((learnGoal, i) => (
+				{props.goals.map((goal, i) => (
 					<LearnGoal
-						key={learnGoal.ID}
+						key={goal.ID}
 						index={++i}
-						learnGoal={learnGoal}
+						goal={goal}
 						removeHandler={props.removeHandler}
 					/>
 				))}

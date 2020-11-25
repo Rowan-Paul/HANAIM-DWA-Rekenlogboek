@@ -9,6 +9,16 @@
 	width: 100%;
 	transition: ease-in-out 0.5s;
 }
+.gray {
+	background: $gray;
+	box-shadow: $shadow;
+	border: 1px solid $gray;
+
+	&:hover {
+		background: $hover-gray;
+		cursor: pointer;
+	}
+}
 .yellow {
 	box-shadow: $shadow;
 	background: $yellow;

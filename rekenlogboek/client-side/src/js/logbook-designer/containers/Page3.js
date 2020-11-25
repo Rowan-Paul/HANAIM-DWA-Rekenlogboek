@@ -1,35 +1,34 @@
-import React, { useState } from 'react'
+import '../../../scss/logbook-designer/containers/Page3.scss'
 
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import AddLearnGoal from '../components/AddLearnGoal'
-import Jumbotron from '../../common/Jumbotron'
-import InfoContainer from '../../common/InfoContainer'
+import Button from '../../common/Button'
+import { connect } from 'react-redux'
 import Illustration from '../components/Illustration'
 import Image from '../../../img/illustrations/log_select_learning_goals.svg'
+import InfoContainer from '../../common/InfoContainer'
+import Jumbotron from '../../common/Jumbotron'
 import LearnGoalList from '../components/LearnGoalList'
 
-import '../../../scss/logbook-designer/containers/Page3.scss'
-import Button from '../../common/Button'
-export default function Page3() {
-	const [learnGoals, setlearnGoals] = useState([])
+import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
 
-	const removeHandler = ID => {
-		const newList = learnGoals.filter(goal => goal.ID !== ID)
+function Page3(props) {
+	const removeHandler = ID => props.removeLearnGoal(ID)
+	const learnGoalHandler = newGoal => props.addLearnGoal(newGoal)
 
-		console.log(newList)
-		setlearnGoals(newList)
+	let history = useHistory()
+	const changePage = page => {
+		history.push('/logbook-designer/' + page)
 	}
-	const learnGoalHandler = newGoal => setlearnGoals([...learnGoals, newGoal])
 
 	return (
 		<div className="Page3">
 			<Jumbotron>
 				<AddLearnGoal handler={learnGoalHandler} />
 				<InfoContainer>
-					{learnGoals.length > 0 ? (
-						<LearnGoalList
-							learnGoals={learnGoals}
-							removeHandler={removeHandler}
-						/>
+					{props.goals.length > 0 ? (
+						<LearnGoalList goals={props.goals} removeHandler={removeHandler} />
 					) : (
 						<Illustration
 							title="Maak een leerdoel aan om hem hieronder te laten weergeven."
@@ -39,9 +38,34 @@ export default function Page3() {
 				</InfoContainer>
 			</Jumbotron>
 
-			<div className="nextButton">
-				<Button color="blue" value="Volgende" />
+			<div className="prev button">
+				<Button
+					color="gray"
+					value="Vorige"
+					handler={() => changePage('new-logbook/page-2')}
+				/>
+			</div>
+			<div className="next button">
+				<Button
+					color="blue"
+					value="Volgende"
+					handler={() => changePage('new-logbook/page-4')}
+				/>
 			</div>
 		</div>
 	)
 }
+const mapStateToProps = state => {
+	return {
+		goals: state.logbook.goals
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		addLearnGoal: payload => dispatch(addLearnGoal(payload)),
+		removeLearnGoal: payload => dispatch(removeLearnGoal(payload))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page3)
