@@ -13,7 +13,9 @@ router.post('/', (req, res) => {
 		group: req.body.group,
 		year: req.body.year,
 		teacher: req.body.teacher,
-		isAvailable: req.body.isAvailable
+		isAvailable: req.body.isAvailable,
+		columns: req.body.columns,
+		goals: req.body.goals
 	})
 		.then(() => {
 			res.sendStatus(200)
