@@ -14,7 +14,7 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 4,
+	group: 5,
 	isAvailable: true,
 	period: 1,
 	teacher: 'Juf Henk',
@@ -26,7 +26,6 @@ const reducer = (state = INITIAL_STATE, action) => {
 		case ADD_LEARN_GOAL:
 			action.payload.position = state.goals.length + 1
 
-			console.log(action.payload)
 			return {
 				...state,
 				goals: [...state.goals, action.payload]
@@ -39,9 +38,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_LOGBOOK:
-			try {
-				postLogbook()
-			} catch (e) {}
+			postLogbook(state)
 
 			return state
 		default:

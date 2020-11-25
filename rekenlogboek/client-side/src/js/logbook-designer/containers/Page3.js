@@ -10,7 +10,6 @@ import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
 import LearnGoalList from '../components/LearnGoalList'
-import Button from '../../common/Button'
 
 import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
