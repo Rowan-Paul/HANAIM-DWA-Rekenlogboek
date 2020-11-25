@@ -10,6 +10,8 @@ const Logbook = mongoose.model('Logbook')
 router.post('/', (req, res) => {
 	Logbook.create({
 		period: req.body.period,
+		goals: req.body.goals,
+		columns: req.body.columns,
 		group: req.body.group,
 		year: req.body.year,
 		teacher: req.body.teacher,
