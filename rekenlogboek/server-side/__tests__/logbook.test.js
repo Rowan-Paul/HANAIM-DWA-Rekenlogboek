@@ -86,6 +86,9 @@ describe('Logbook route tests', () => {
 		await Logbook.deleteMany({
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
 		})
+		await Logbook.deleteMany({
+			teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com'
+		})
 		await mongoose.disconnect()
 	})
 
