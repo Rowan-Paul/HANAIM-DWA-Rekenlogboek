@@ -63,11 +63,11 @@ function Page1() {
 					/>
 				</InfoContainer>
 			</Jumbotron>
-			<div className="nextButton">
+			<div className="next button">
 				<Button
 					color="blue"
 					value="Volgende"
-					handler={() => changePage('new-logbook/page-4')}
+					handler={() => changePage('new-logbook/page-2')}
 				/>
 			</div>
 		</div>

@@ -30,11 +30,19 @@ export default function Page2() {
 					/>
 				</InfoContainer>
 			</Jumbotron>
-			<div className="nextButton">
+
+			<div className="prev button">
+				<Button
+					color="gray"
+					value="Vorige"
+					handler={() => changePage('new-logbook/page-1')}
+				/>
+			</div>
+			<div className="next button">
 				<Button
 					color="blue"
 					value="Volgende"
-					handler={() => changePage('new-logbook/page-4')}
+					handler={() => changePage('new-logbook/page-3')}
 				/>
 			</div>
 		</div>
