@@ -31,7 +31,7 @@ export const saveLogbook = () => (dispatch, getState) => {
 			type: SAVE_LOGBOOK,
 			response // Called it response (from API) to distinguish it from payloads (from app)
 		})
-	)
+	).catch(error => console.log(error))
 }
 
 export const resetLogbook = () => {
