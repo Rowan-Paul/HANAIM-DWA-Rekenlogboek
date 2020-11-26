@@ -48,10 +48,10 @@ router.get('/:id/answers/column/:position', (req, res) => {
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
-			const columnanswers = response.answers.filter(object => {
+			const columnAnswers = response.answers.filter(object => {
 				return object.columnPosition === Number(req.params.position)
 			})
-			res.status(200).send(columnanswers)
+			res.status(200).send(columnAnswers)
 		})
 		.catch(err => {
 			res.status(500).send(err)
@@ -63,10 +63,10 @@ router.get('/:id/answers/goal/:position', (req, res) => {
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
-			const columnanswers = response.answers.filter(object => {
+			const columnAnswers = response.answers.filter(object => {
 				return object.goalPosition === Number(req.params.position)
 			})
-			res.status(200).send(columnanswers)
+			res.status(200).send(columnAnswers)
 		})
 		.catch(err => {
 			res.status(500).send(err)

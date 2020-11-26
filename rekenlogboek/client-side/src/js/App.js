@@ -36,15 +36,8 @@ function App() {
 						</Route>
 
 						<Route exact path="/" component={SignIn} />
-						<Route
-							exact
-							path="/auth"
-							component={() => {
-								window.location.href = 'http://localhost:3000/auth'
-								return null
-							}}
-						/>
 						<Route exact path="/auth/succes" component={Succes} />
+
 						<Route exact path="/no-access" component={NoAccess} />
 						{/* <Route component={NotFound} /> */}
 					</Switch>
