@@ -1,16 +1,16 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
-// import Header from '../js/common/Header'
+import Header from '../js/common/Header'
 
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
 import { LogbookDesignerLanding } from './logbook-designer/containers/LogbookDesignerLanding'
 
-import NewLogbook1 from './logbook-designer/containers/NewLogbook1'
-import NewLogbook2 from './logbook-designer/containers/NewLogbook2'
-import NewLogbook3 from './logbook-designer/containers/NewLogbook3'
-import NewLogbook4 from './logbook-designer/containers/NewLogbook4'
-import NewLogbook5 from './logbook-designer/containers/NewLogbook5'
+import newLBGeneral from './logbook-designer/containers/General'
+import newLBColumns from './logbook-designer/containers/Columns'
+import newLBGoals from './logbook-designer/containers/Goals'
+import newLBOverview from './logbook-designer/containers/Overview'
+import newLBCompleted from './logbook-designer/containers/Completed'
 
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
@@ -23,30 +23,37 @@ require('dotenv').config()
 function App() {
 	return (
 		<div>
-			{/* <Header /> */}
+			<Header />
 			<main>
 				<Router>
 					<Switch>
-						{/* page 1: groep en blok kiezen
-						page 2: kolomtypes selecteren
-						page 3: leerdoel toevoegen
-						page 4: leerdoelen laten zien
-						page 5: logboek is succesvol opgeslagen */}
-						<Route path="/logbook-designer/new-logbook/page-1">
-							<NewLogbook1 />
-						</Route>
-						<Route path="/logbook-designer/new-logbook/page-2">
-							<NewLogbook2 />
-						</Route>
-						<Route path="/logbook-designer/new-logbook/page-3">
-							<NewLogbook3 />
-						</Route>
-						<Route path="/logbook-designer/new-logbook/page-4">
-							<NewLogbook4 />
-						</Route>
-						<Route path="/logbook-designer/new-logbook/page-5">
-							<NewLogbook5 />
-						</Route>
+						{/* LOGBOOK DESIGNER */}
+						<Route
+							exact
+							path="/logbook-designer/new-logbook/algemeen"
+							component={newLBGeneral}
+						/>
+						<Route
+							exact
+							path="/logbook-designer/new-logbook/kolommen"
+							component={newLBColumns}
+						/>
+						<Route
+							exact
+							path="/logbook-designer/new-logbook/leerdoelen"
+							component={newLBGoals}
+						/>
+						<Route
+							exact
+							path="/logbook-designer/new-logbook/leerdoelen-overzicht"
+							component={newLBOverview}
+						/>
+						<Route
+							exact
+							path="/logbook-designer/new-logbook/klaar"
+							component={newLBCompleted}
+						/>
+						{/* A few route so it gets the correct styling? */}
 						<Route path="/logbook-designer/new-logbook"></Route>
 						<Route path="/logbook-designer/overview"></Route>
 						<Route path="/logbook-designer">
@@ -55,9 +62,11 @@ function App() {
 							</LogbookDesigner>
 						</Route>
 
+						{/* SIGN-IN */}
 						<Route exact path="/" component={SignIn} />
 						<Route exact path="/auth/succes" component={Succes} />
 
+						{/* ERROR PAGES */}
 						<Route exact path="/no-access" component={NoAccess} />
 						{/* <Route component={NotFound} /> */}
 					</Switch>

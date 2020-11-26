@@ -38,7 +38,7 @@ function Page2(props) {
 
 		if (columnTitle1.trim().length > 0 && columnTitle2.trim().length > 0) {
 			props.addLogbookColumns(payload)
-			history.push('./page-3')
+			history.push('./leerdoelen')
 		} else {
 			//TODO: replace this by something less evil than a alert
 			alert('Vul a.u.b. alle velden in.')
@@ -70,7 +70,7 @@ function Page2(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./page-1')}
+					handler={() => history.push('./general')}
 				/>
 			</div>
 			<div className="next button">

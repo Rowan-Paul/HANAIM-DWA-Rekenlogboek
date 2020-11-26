@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
 import InfoContainer from '../../common/InfoContainer'
@@ -11,12 +11,10 @@ import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
 function Page4(props) {
-	let history = useHistory()
-
 	useEffect(() => {
 		if (props.isSaved) {
 			props.resetLogbook()
-			history.push('./page-5')
+			props.history.push('./klaar')
 		}
 	})
 
@@ -41,7 +39,7 @@ function Page4(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./page-3')}
+					handler={() => history.push('./leerdoelen')}
 				/>
 			</div>
 			<div className="next button">
@@ -70,4 +68,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page4)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Page4))

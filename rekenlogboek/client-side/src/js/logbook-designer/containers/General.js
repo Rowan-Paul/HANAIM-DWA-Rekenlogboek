@@ -22,7 +22,7 @@ function Page1(props) {
 	const username = props.user.name
 	const nextButtonHandler = () => {
 		props.addLogbookPeriod({ group, period, username })
-		props.history.push('./page-2')
+		props.history.push('./kolommen')
 	}
 
 	return (
