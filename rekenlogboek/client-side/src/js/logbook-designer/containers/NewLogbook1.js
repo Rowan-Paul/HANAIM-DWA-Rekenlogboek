@@ -47,7 +47,7 @@ function Page1(props) {
 				</div>
 				<InfoContainer>
 					<Illustration
-						title="Vul de velden links in voor een invulbare preview voor een doel van het logboek."
+						title="Kies de klas en het blok waarvoor u een logboek wilt maken."
 						image={Image}
 					/>
 				</InfoContainer>

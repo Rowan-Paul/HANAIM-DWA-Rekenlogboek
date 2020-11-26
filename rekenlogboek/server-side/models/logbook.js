@@ -17,10 +17,6 @@ const logbookSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	isAvailable: {
-		type: Boolean,
-		required: true
-	},
 	columns: [
 		{
 			position: {

@@ -8,7 +8,7 @@ import LogbookSaved from '../components/LogbookSaved'
 
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
-export default function Page5(props) {
+export default function Page5() {
 	return (
 		<div className="new-logbook">
 			<Jumbotron>

@@ -22,6 +22,7 @@ export const removeLearnGoal = payload => {
 }
 
 export const saveLogbook = () => (dispatch, getState) => {
+	console.log(getState().logbook)
 	fetch(`http://localhost:3000/logbook/`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },

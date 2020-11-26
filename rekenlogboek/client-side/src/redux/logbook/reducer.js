@@ -7,6 +7,8 @@ import {
 	ADD_LOGBOOK_COLUMNS
 } from './types'
 
+const date = new Date()
+const year = date.getFullYear()
 const INITIAL_STATE = {
 	columns: [
 		{
@@ -25,8 +27,8 @@ const INITIAL_STATE = {
 	isAvailable: true,
 	isSaved: false,
 	period: 1,
-	teacher: 'Juf Henk',
-	year: '2019 - 2020'
+	teacher: 'Juf Henk', //TODO: auto add teachers & years in components
+	year: `${year} - ${year + 1}`
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -46,6 +48,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_LOGBOOK:
+			console.log(state)
 			if (action.response.ok) {
 				return {
 					...state,

@@ -15,9 +15,6 @@ import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 function Page3(props) {
 	const history = useHistory()
 
-	const removeHandler = ID => props.removeLearnGoal(ID)
-	const learnGoalHandler = newGoal => props.addLearnGoal(newGoal)
-
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? history.push('./page-4')
@@ -26,10 +23,13 @@ function Page3(props) {
 	return (
 		<div className="new-logbook">
 			<Jumbotron>
-				<AddLearnGoal handler={learnGoalHandler} />
+				<AddLearnGoal handler={newGoal => props.addLearnGoal(newGoal)} />
 				<InfoContainer>
 					{props.goals.length > 0 ? (
-						<LearnGoalList goals={props.goals} removeHandler={removeHandler} />
+						<LearnGoalList
+							goals={props.goals}
+							removeHandler={ID => props.removeLearnGoal(ID)}
+						/>
 					) : (
 						<Illustration
 							title="Maak een leerdoel aan om hem hieronder te laten weergeven."

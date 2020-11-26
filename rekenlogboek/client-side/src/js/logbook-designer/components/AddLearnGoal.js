@@ -6,7 +6,7 @@ import shortid from 'shortid'
 export default function AddLearnGoal(props) {
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
-	const [imageLink, setImageLink] = useState('')
+	// const [imageLink, setImageLink] = useState('')
 
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
@@ -42,11 +42,11 @@ export default function AddLearnGoal(props) {
 				></textarea>
 
 				<label>Afbeelding:</label>
-				<input
+				{/* <input
 					name="image"
 					onChange={e => setImageLink(e.target.value)}
 					type="file"
-				/>
+				/> */}
 
 				<Button color="blue" value="Toevoegen" />
 			</form>
