@@ -5,7 +5,7 @@ import Button from '../../common/Button'
 
 import '../../../scss/logbook-designer/components/LogbookSaved.scss'
 
-export default function LogbookSaved(props) {
+export default function LogbookSaved() {
 	const history = useHistory()
 	return (
 		<div className="LogbookSaved">
