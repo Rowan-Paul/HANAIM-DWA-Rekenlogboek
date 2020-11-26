@@ -32,7 +32,7 @@ function LogbookDesignerLandingUI(props) {
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => changePage('new-logbook/algemeen')}
+						handler={() => changePage('new-logbook/general')}
 					/>
 				</div>
 			</div>

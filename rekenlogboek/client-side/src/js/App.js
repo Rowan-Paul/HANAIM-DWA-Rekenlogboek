@@ -46,27 +46,27 @@ function App() {
 								{/* LOGBOOK DESIGNER */}
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/algemeen"
+									path="/logbook-designer/new-logbook/general"
 									component={newLBGeneral}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/kolommen"
+									path="/logbook-designer/new-logbook/columns"
 									component={newLBColumns}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/leerdoelen"
+									path="/logbook-designer/new-logbook/goals"
 									component={newLBGoals}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/leerdoelen-overzicht"
+									path="/logbook-designer/new-logbook/overview"
 									component={newLBOverview}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/klaar"
+									path="/logbook-designer/new-logbook/done"
 									component={newLBCompleted}
 								/>
 								{/* A few route so it gets the correct styling? */}

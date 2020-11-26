@@ -38,7 +38,7 @@ function Page2(props) {
 
 		if (columnTitle1.trim().length > 0 && columnTitle2.trim().length > 0) {
 			props.addLogbookColumns(payload)
-			history.push('./leerdoelen')
+			history.push('./goals')
 		} else {
 			//TODO: replace this by something less evil than a alert
 			alert('Vul a.u.b. alle velden in.')

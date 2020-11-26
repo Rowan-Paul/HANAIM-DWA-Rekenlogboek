@@ -14,7 +14,7 @@ function Page4(props) {
 	useEffect(() => {
 		if (props.isSaved) {
 			props.resetLogbook()
-			props.history.push('./klaar')
+			props.history.push('./done')
 		}
 	})
 
@@ -39,7 +39,7 @@ function Page4(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./leerdoelen')}
+					handler={() => history.push('./goals')}
 				/>
 			</div>
 			<div className="next button">

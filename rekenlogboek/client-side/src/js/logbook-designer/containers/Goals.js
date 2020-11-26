@@ -17,7 +17,7 @@ import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 function Page3(props) {
 	const verifyGoals = () =>
 		props.goals.length > 0
-			? props.history.push('./leerdoelen-overzicht')
+			? props.history.push('./overview')
 			: //TODO: replace this by something less evil than a alert
 			  alert('Je moet eerst leerdoelen invoeren.')
 
@@ -44,7 +44,7 @@ function Page3(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => props.history.push('./kolommen')}
+					handler={() => props.history.push('./columns')}
 				/>
 			</div>
 			<div className="next button">
