@@ -6,11 +6,11 @@ import Header from '../js/common/Header'
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
 import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
 
-import Page1 from './logbook-designer/containers/Page1'
-import Page2 from './logbook-designer/containers/Page2'
-import Page3 from './logbook-designer/containers/Page3'
-import Page4 from './logbook-designer/containers/Page4'
-import Page5 from './logbook-designer/containers/Page5'
+import NewLogbook1 from './logbook-designer/containers/NewLogbook1'
+import NewLogbook2 from './logbook-designer/containers/NewLogbook2'
+import NewLogbook3 from './logbook-designer/containers/NewLogbook3'
+import NewLogbook4 from './logbook-designer/containers/NewLogbook4'
+import NewLogbook5 from './logbook-designer/containers/NewLogbook5'
 
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
@@ -28,19 +28,19 @@ function App() {
 				<Router>
 					<Switch>
 						<Route path="/logbook-designer/new-logbook/page-1">
-							<Page1 />
+							<NewLogbook1 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-2">
-							<Page2 />
+							<NewLogbook2 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-3">
-							<Page3 />
+							<NewLogbook3 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-4">
-							<Page4 />
+							<NewLogbook4 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-5">
-							<Page5 />
+							<NewLogbook5 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook"></Route>
 						<Route path="/logbook-designer/overview"></Route>

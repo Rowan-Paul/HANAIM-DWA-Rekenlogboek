@@ -3,10 +3,9 @@ import {
 	REMOVE_LEARN_GOAL,
 	SAVE_LOGBOOK,
 	ADD_LOGBOOK_PERIOD,
-    RESET_LOGBOOK,
+	RESET_LOGBOOK,
 	ADD_LOGBOOK_COLUMNS
 } from './types'
-	
 
 const INITIAL_STATE = {
 	columns: [
@@ -35,7 +34,6 @@ const reducer = (state = INITIAL_STATE, action) => {
 		case ADD_LEARN_GOAL:
 			action.payload.position = state.goals.length + 1
 
-			console.log(action.payload)
 			return {
 				...state,
 				goals: [...state.goals, action.payload]
@@ -62,7 +60,6 @@ const reducer = (state = INITIAL_STATE, action) => {
 				period: Number(action.payload.period)
 			}
 		case ADD_LOGBOOK_COLUMNS:
-			// console.log(action.payload)
 			return {
 				...state,
 				columns: action.payload.columns

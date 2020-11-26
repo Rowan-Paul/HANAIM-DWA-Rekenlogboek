@@ -20,13 +20,9 @@ function Page1(props) {
 	const changePeriodHandler = value => setPeriod(value)
 
 	let history = useHistory()
-	const changePage = page => {
-		history.push('/logbook-designer/' + page)
-	}
-
 	const nextButtonHandler = () => {
 		props.addLogbookPeriod({ group, period })
-		changePage('new-logbook/page-2')
+		history.push('./page-2')
 	}
 
 	return (

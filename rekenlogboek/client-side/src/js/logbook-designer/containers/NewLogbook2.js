@@ -13,7 +13,6 @@ import Image from '../../../img/illustrations/log_select_question_type.svg'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
 function Page2(props) {
-	// console.log(props.inputType2)
 	const [columnTitle1, setColumnTitle1] = useState(props.title1)
 	const [columnType1, setColumnType1] = useState(props.inputType1)
 
@@ -25,15 +24,10 @@ function Page2(props) {
 	}
 
 	const changeTypeHandler = (column, value) => {
-		console.log(column, value)
 		column === 1 ? setColumnType1(value) : setColumnType2(value)
 	}
 
 	let history = useHistory()
-	const changePage = page => {
-		history.push('/logbook-designer/' + page)
-	}
-
 	const nextButtonHandler = () => {
 		const payload = {
 			columns: [
@@ -42,9 +36,8 @@ function Page2(props) {
 			]
 		}
 
-		// console.log('pay', payload)
 		props.addLogbookColumns(payload)
-		changePage('new-logbook/page-3')
+		history.push('./page-3')
 	}
 
 	return (
@@ -72,7 +65,7 @@ function Page2(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => changePage('new-logbook/page-1')}
+					handler={() => history.push('./page-1')}
 				/>
 			</div>
 			<div className="next button">

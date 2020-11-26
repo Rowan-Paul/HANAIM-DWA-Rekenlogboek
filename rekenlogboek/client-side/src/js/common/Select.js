@@ -3,7 +3,6 @@ import React from 'react'
 import '../../scss/common/Select.scss'
 
 export default function Select(props) {
-	// console.log(props.selected, props.options)
 	const changeValue = e => {
 		props.changeHandler(e.target.value)
 	}
