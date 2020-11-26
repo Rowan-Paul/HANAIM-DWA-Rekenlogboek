@@ -10,6 +10,7 @@ require('../models/logbook')
 
 const Logbook = mongoose.model('Logbook')
 
+// Get logbookID from logbook created before all tests
 const getTestlogbookID = async () => {
 	const number = await Logbook.find({
 		teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
@@ -29,6 +30,7 @@ describe('Logbook route tests', () => {
 			useUnifiedTopology: true
 		})
 
+		// Create logbook for tests
 		await Logbook.create({
 			period: 3,
 			group: 7,
