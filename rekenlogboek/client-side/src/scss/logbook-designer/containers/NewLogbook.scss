@@ -8,11 +8,16 @@
 	position: relative;
 	width: 90%;
 
-	.nextButton {
+	.button {
 		bottom: 0;
 		position: absolute;
-		right: 5%;
 		width: 12.5%;
+	}
+	.prev {
+		left: 5%;
+	}
+	.next {
+		right: 5%;
 	}
 
 	.vertical-center {
