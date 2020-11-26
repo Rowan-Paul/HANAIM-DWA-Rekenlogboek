@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,21 +7,58 @@ import InfoContainer from '../../common/InfoContainer'
 import SelectColumnTypes from '../components/SelectColumnTypes'
 import Button from '../../common/Button'
 import Illustration from '../components/Illustration'
+import { addLogbookColumns } from '../../../redux/logbook/actions'
 
 import Image from '../../../img/illustrations/log_select_question_type.svg'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
-export default function Page2() {
+function Page2(props) {
+	// console.log(props.inputType2)
+	const [columnTitle1, setColumnTitle1] = useState(props.title1)
+	const [columnType1, setColumnType1] = useState(props.inputType1)
+
+	const [columnTitle2, setColumnTitle2] = useState(props.title2)
+	const [columnType2, setColumnType2] = useState(props.inputType2)
+
+	const changeTitleHandler = (column, value) => {
+		column === 1 ? setColumnTitle1(value) : setColumnTitle2(value)
+	}
+
+	const changeTypeHandler = (column, value) => {
+		console.log(column, value)
+		column === 1 ? setColumnType1(value) : setColumnType2(value)
+	}
+
 	let history = useHistory()
 	const changePage = page => {
 		history.push('/logbook-designer/' + page)
+	}
+
+	const nextButtonHandler = () => {
+		const payload = {
+			columns: [
+				{ position: 1, title: columnTitle1, inputType: columnType1 },
+				{ position: 2, title: columnTitle2, inputType: columnType2 }
+			]
+		}
+
+		// console.log('pay', payload)
+		props.addLogbookColumns(payload)
+		changePage('new-logbook/page-3')
 	}
 
 	return (
 		<div className="new-logbook">
 			<Jumbotron>
 				<div className="vertical-center">
-					<SelectColumnTypes />
+					<SelectColumnTypes
+						changeTypeHandler={changeTypeHandler}
+						changeTitleHandler={changeTitleHandler}
+						columnTitle1={columnTitle1}
+						columnTitle2={columnTitle2}
+						columnType1={columnType1}
+						columnType2={columnType2}
+					/>
 				</div>
 				<InfoContainer>
 					<Illustration
@@ -42,19 +79,26 @@ export default function Page2() {
 				<Button
 					color="blue"
 					value="Volgende"
-					handler={() => changePage('new-logbook/page-3')}
+					handler={() => nextButtonHandler()}
 				/>
 			</div>
 		</div>
 	)
 }
 
-// const mapStateToProps = state => {
-// 	return {}
-// }
+const mapStateToProps = state => {
+	return {
+		title1: state.logbook.columns[0].title,
+		inputType1: state.logbook.columns[0].inputType,
+		title2: state.logbook.columns[1].title,
+		inputType2: state.logbook.columns[1].inputType
+	}
+}
 
-// const mapDispatchToProps = dispatch => {
-// 	return {}
-// }
+const mapDispatchToProps = dispatch => {
+	return {
+		addLogbookColumns: payload => dispatch(addLogbookColumns(payload))
+	}
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Page2)
+export default connect(mapStateToProps, mapDispatchToProps)(Page2)
