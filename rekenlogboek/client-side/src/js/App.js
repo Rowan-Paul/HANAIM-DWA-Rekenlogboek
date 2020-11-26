@@ -8,8 +8,9 @@ import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesigne
 
 import Page1 from './logbook-designer/containers/Page1'
 import Page2 from './logbook-designer/containers/Page2'
-import Page4 from './logbook-designer/containers/Page4'
 import Page3 from './logbook-designer/containers/Page3'
+import Page4 from './logbook-designer/containers/Page4'
+import Page5 from './logbook-designer/containers/Page5'
 
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
@@ -37,6 +38,9 @@ function App() {
 						</Route>
 						<Route path="/logbook-designer/new-logbook/page-4">
 							<Page4 />
+						</Route>
+						<Route path="/logbook-designer/new-logbook/page-5">
+							<Page5 />
 						</Route>
 						<Route path="/logbook-designer/new-logbook"></Route>
 						<Route path="/logbook-designer/overview"></Route>
