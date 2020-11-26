@@ -59,7 +59,7 @@ router.get('/:id/answers/column/:position', (req, res) => {
 })
 
 // Get all answers from a student from one row which belongs to one goal
-router.get('/studentlogbook/:id/answers/goal/:position', (req, res) => {
+router.get('/:id/answers/goal/:position', (req, res) => {
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
