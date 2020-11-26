@@ -33,7 +33,6 @@ app.use(
 		secret: 'randomString'
 	})
 )
-app.use(bodyParser.json())
 
 app.use('/auth', authRouter)
 app.use('/logbook', logbookRouter)
