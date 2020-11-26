@@ -1,8 +1,25 @@
 .Illustration {
-	img {
-		margin: 4% auto;
-		width: 50%;
-		max-height: 450px;
-		margin-top: 1%;
+	position: relative;
+	height: 100%;
+
+	.title {
+		align-items: center;
+		display: flex;
+		height: 20%;
+	}
+	h1 {
+		margin: 0 auto;
+	}
+
+	.image {
+		height: 70%;
+		margin: 5%;
+		position: absolute;
+		width: 100%;
+
+		img {
+			height: 95%;
+			margin: 0 auto;
+		}
 	}
 }
