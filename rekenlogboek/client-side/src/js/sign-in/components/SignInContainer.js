@@ -1,6 +1,7 @@
-import React from 'react'
-import MicrosoftButton from './MicrosoftButton'
 import '../../../scss/sigin-in/components/SignInContainer.scss'
+
+import React from 'react'
+import { MicrosoftButton } from './MicrosoftButton'
 
 export default function SignInContainer() {
 	return (

@@ -2,13 +2,13 @@
 
 In dit hoofdstuk wordt de infrastructuur getoond van de applicatie. Bij het maken van dit project wordt gebruik gemaakt van Git, dus als er iets misgaat kan vanaf daar de data hersteld worden.
 
-<!-- wordt dit niet duidelijk in context diagram? -->
-
 ### 7.1 Lokale ontwikkelomgeving
 
 Tijdens het ontwikkelen van de applicatie, wordt er gebruik gemaakt van een lokale ontwikkelomgeving. De applicatie zal draaien op `localhost` en zal live updaten wanneer er veranderingen worden gemaakt. De front-end en server zullen gebruik maken van twee verschillende poorten. Het testen gebeurt ook binnen de lokale ontwikkelomgeving.
 
-Het werken met Teams in een lokale ontwikkelomgeving is beschreven in het [Teams integratie onderzoek](../onderzoek-teams-integratie/readme.md)
+Het werken met Teams in een lokale ontwikkelomgeving is beschreven in het [Teams integratie onderzoek](../onderzoek-teams-integratie/readme.md).
+
+Testen zullen worden uitgevoerd voordat het gemerged wordt met de develop branch. Dit testen gebeurt met behulp van het test framework [Jest](https://jestjs.io/). De testen zijn vooral voor de backend, maar er zullen ook een aantal testen worden uitgevoerd op de Redux gedeelte van de front-end.
 
 ### 7.2 Deployed ontwikkelomgeving
 
