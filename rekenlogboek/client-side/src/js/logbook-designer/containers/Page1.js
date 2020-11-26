@@ -63,7 +63,7 @@ function Page1() {
 					/>
 				</InfoContainer>
 			</Jumbotron>
-			<div className="nextButton">
+			<div className="next button">
 				<Button
 					color="blue"
 					value="Volgende"

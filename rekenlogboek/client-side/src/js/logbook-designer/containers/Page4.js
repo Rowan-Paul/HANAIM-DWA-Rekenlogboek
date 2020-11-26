@@ -1,6 +1,4 @@
-import '../../../scss/logbook-designer/containers/Page3.scss'
-
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
@@ -8,17 +6,22 @@ import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
 import LogbookOverview from '../components/LogbookOverview'
 import LogbookVisualizer from '../components/LogbookVisualizer'
-import { saveLogbook } from '../../../redux/logbook/actions'
+import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
+
+import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
 function Page4(props) {
 	let history = useHistory()
-	const changePage = page => {
-		history.push('/logbook-designer/' + page)
-	}
-	const saveLogbook = () => props.saveLogbook()
+
+	useEffect(() => {
+		if (props.isSaved) {
+			props.resetLogbook()
+			history.push('./page-5')
+		}
+	})
 
 	return (
-		<div className="Page3">
+		<div className="new-logbook">
 			<Jumbotron>
 				<LogbookOverview
 					columns={props.columns}
@@ -38,11 +41,15 @@ function Page4(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => changePage('new-logbook/page-3')}
+					handler={() => history.push('./page-3')}
 				/>
 			</div>
 			<div className="next button">
-				<Button color="blue" value="Opslaan" handler={() => saveLogbook()} />
+				<Button
+					color="blue"
+					value="Opslaan"
+					handler={() => props.saveLogbook()}
+				/>
 			</div>
 		</div>
 	)
@@ -52,12 +59,14 @@ const mapStateToProps = state => {
 	return {
 		columns: state.logbook.columns,
 		group: state.logbook.group,
-		goals: state.logbook.goals
+		goals: state.logbook.goals,
+		isSaved: state.logbook.isSaved
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		saveLogbook: () => dispatch(saveLogbook())
+		saveLogbook: () => dispatch(saveLogbook()),
+		resetLogbook: () => dispatch(resetLogbook())
 	}
 }
 

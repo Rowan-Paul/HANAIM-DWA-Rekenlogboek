@@ -1,5 +1,3 @@
-import '../../../scss/logbook-designer/containers/Page3.scss'
-
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import AddLearnGoal from '../components/AddLearnGoal'
@@ -15,13 +13,15 @@ import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
 function Page3(props) {
+	const history = useHistory()
+
 	const removeHandler = ID => props.removeLearnGoal(ID)
 	const learnGoalHandler = newGoal => props.addLearnGoal(newGoal)
 
-	let history = useHistory()
-	const changePage = page => {
-		history.push('/logbook-designer/' + page)
-	}
+	const verifyGoals = () =>
+		props.goals.length > 0
+			? history.push('./page-4')
+			: alert('Je moet eerst leerdoelen invoeren')
 
 	return (
 		<div className="new-logbook">
@@ -43,15 +43,11 @@ function Page3(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => changePage('new-logbook/page-2')}
+					handler={() => history.push('./page-2')}
 				/>
 			</div>
 			<div className="next button">
-				<Button
-					color="blue"
-					value="Volgende"
-					handler={() => changePage('new-logbook/page-4')}
-				/>
+				<Button color="blue" value="Volgende" handler={() => verifyGoals()} />
 			</div>
 		</div>
 	)
