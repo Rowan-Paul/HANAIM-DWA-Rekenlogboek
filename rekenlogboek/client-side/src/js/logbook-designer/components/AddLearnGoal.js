@@ -11,13 +11,15 @@ export default function AddLearnGoal(props) {
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
 
-		props.handler({
-			ID: shortid.generate(),
-			title,
-			description,
-			// imageLink
-			imageLink: 'goal1.png'
-		})
+		title.trim().length > 0 && description.trim().length > 0
+			? props.handler({
+					ID: shortid.generate(),
+					title,
+					description,
+					// imageLink
+					imageLink: 'goal1.png'
+			  })
+			: alert('Vul a.u.b. alle velden in.')
 	}
 
 	return (

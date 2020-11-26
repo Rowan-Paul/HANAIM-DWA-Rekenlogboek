@@ -36,8 +36,12 @@ function Page2(props) {
 			]
 		}
 
-		props.addLogbookColumns(payload)
-		history.push('./page-3')
+		if (columnTitle1.trim().length > 0 && columnTitle2.trim().length > 0) {
+			props.addLogbookColumns(payload)
+			history.push('./page-3')
+		} else {
+			alert('Vul a.u.b. alle velden in.')
+		}
 	}
 
 	return (

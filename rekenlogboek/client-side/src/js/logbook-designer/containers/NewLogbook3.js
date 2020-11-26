@@ -21,7 +21,7 @@ function Page3(props) {
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? history.push('./page-4')
-			: alert('Je moet eerst leerdoelen invoeren')
+			: alert('Je moet eerst leerdoelen invoeren.')
 
 	return (
 		<div className="new-logbook">
