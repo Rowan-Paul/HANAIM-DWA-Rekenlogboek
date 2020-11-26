@@ -24,6 +24,7 @@ const dbName = 'rekenlogboek'
 // Create Express App and Routes
 const app = express()
 
+app.use(bodyParser.json())
 app.use(cors({ origin: true, credentials: true }))
 app.options('*', cors({ origin: true, credentials: true }))
 app.use(

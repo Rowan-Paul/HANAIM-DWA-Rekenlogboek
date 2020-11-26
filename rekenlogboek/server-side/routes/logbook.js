@@ -12,7 +12,10 @@ router.post('/', (req, res) => {
 		period: req.body.period,
 		group: req.body.group,
 		year: req.body.year,
-		teacher: req.body.teacher
+		teacher: req.body.teacher,
+		isAvailable: req.body.isAvailable,
+		columns: req.body.columns,
+		goals: req.body.goals
 	})
 		.then(() => {
 			res.sendStatus(200)
@@ -41,6 +44,11 @@ router.get('/:id/column/:position', (req, res) => {
 			const column = response.columns.find(object => {
 				return object.position === Number(req.params.position)
 			})
+
+			if (column === undefined) {
+				throw new Error('column does not exist')
+			}
+
 			res.status(200).send(column)
 		})
 		.catch(err => {
@@ -56,6 +64,11 @@ router.get('/:id/goal/:position', (req, res) => {
 			const goal = response.goals.find(object => {
 				return object.position === Number(req.params.position)
 			})
+
+			if (goal === undefined) {
+				throw new Error('goal does not exist')
+			}
+
 			res.status(200).send(goal)
 		})
 		.catch(err => {

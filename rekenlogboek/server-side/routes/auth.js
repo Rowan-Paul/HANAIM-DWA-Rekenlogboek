@@ -84,7 +84,6 @@ auth.get('/redirect', (req, res) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Content-Length': 33,
 					Authorization: 'Bearer ' + req.session.token
 				},
 				body: body

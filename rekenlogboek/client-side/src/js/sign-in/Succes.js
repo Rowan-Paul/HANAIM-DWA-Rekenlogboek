@@ -7,6 +7,7 @@ import { saveUserAction } from '../../redux/main/actions'
 
 export default function SuccesUI(props) {
 	useEffect(() => {
+		// removes chararacter at place i in string
 		String.prototype.removeCharAt = function (i) {
 			var tmp = this.split('') // convert to an array
 			tmp.splice(i - 1, 1) // remove 1 element from the array (adjusting for non-zero-indexed counts)
@@ -21,7 +22,7 @@ export default function SuccesUI(props) {
 		// redirect to the correct page
 		if (props.user.groups !== undefined && props.user.groups !== null) {
 			if (props.user.groups.includes('Logboekontwerpers')) {
-				// props.history.push('/logbook-designer')
+				props.history.push('/logbook-designer')
 			} else {
 				props.history.push('/no-access')
 			}
