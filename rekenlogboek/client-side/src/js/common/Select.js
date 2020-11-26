@@ -3,6 +3,7 @@ import React from 'react'
 import '../../scss/common/Select.scss'
 
 export default function Select(props) {
+	// console.log(props.selected, props.options)
 	const changeValue = e => {
 		props.changeHandler(e.target.value)
 	}
@@ -11,11 +12,7 @@ export default function Select(props) {
 		props.options.map(option => {
 			const ucFirstOption = option.charAt(0).toUpperCase() + option.slice(1)
 			return (
-				<option
-					value={option}
-					key={option}
-					selected={props.selected === props.option ? true : null}
-				>
+				<option value={option} key={option}>
 					{ucFirstOption}
 				</option>
 			)
@@ -25,6 +22,7 @@ export default function Select(props) {
 		<div className="select-container">
 			<label className="select-label">{props.title}</label>
 			<select
+				defaultValue={props.selected}
 				className="select"
 				onChange={e => {
 					changeValue(e)

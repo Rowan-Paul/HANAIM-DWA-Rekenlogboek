@@ -1,4 +1,9 @@
-import { ADD_LEARN_GOAL, REMOVE_LEARN_GOAL, SAVE_LOGBOOK } from './types'
+import {
+	ADD_LEARN_GOAL,
+	REMOVE_LEARN_GOAL,
+	SAVE_LOGBOOK,
+	ADD_LOGBOOK_PERIOD
+} from './types'
 
 const INITIAL_STATE = {
 	columns: [
@@ -28,7 +33,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
-				goals: [...state.goals, action.payload]
+				goals: [...state.goals, acADD_LOGBOOK_PERIODtion.payload]
 			}
 
 		case REMOVE_LEARN_GOAL:
@@ -41,6 +46,13 @@ const reducer = (state = INITIAL_STATE, action) => {
 			postLogbook(state)
 
 			return state
+		case ADD_LOGBOOK_PERIOD:
+			console.log(action.payload)
+			return {
+				...state,
+				group: action.payload.group,
+				period: action.payload.period
+			}
 		default:
 			return state
 	}
