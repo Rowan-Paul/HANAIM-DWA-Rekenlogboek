@@ -120,7 +120,7 @@ auth.get('/redirect', (req, res) => {
 
 			const objEnc = encryptor.encrypt(req.session.user)
 
-			res.redirect('http://localhost:3001/auth/succes?' + encodeURI(objEnc))
+			res.redirect('https://localhost:3001/auth/succes?' + encodeURI(objEnc))
 		})
 		.catch(error => {
 			console.log(error)
