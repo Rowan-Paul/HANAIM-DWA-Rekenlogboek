@@ -42,9 +42,16 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case REMOVE_LEARN_GOAL:
+			const filterGoals = state.goals.filter(goal => goal.ID !== action.payload)
+
+			const updatePosition = filterGoals.map((goal, i) => {
+				goal.position = ++i
+				return goal
+			})
+
 			return {
 				...state,
-				goals: state.goals.filter(goal => goal.ID !== action.payload)
+				goals: updatePosition
 			}
 
 		case SAVE_LOGBOOK:
