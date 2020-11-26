@@ -6,18 +6,14 @@ import MicrosoftLogo from '../../../img/icons/microsoft.svg'
 
 function MicrosoftButtonUI() {
 	return (
-		<button
-			className="MicrosoftButton"
-			onClick={() => {
-				window.location.href = 'http://localhost:3000/auth'
-				return null
-			}}
-		>
-			<div>
-				<img src={MicrosoftLogo} alt="Microsoft Logo" />
-				<span>Login met Microsoft</span>
-			</div>
-		</button>
+		<a href="http://localhost:3000/auth">
+			<button className="MicrosoftButton">
+				<div>
+					<img src={MicrosoftLogo} alt="Microsoft Logo" />
+					<span>Login met Microsoft</span>
+				</div>
+			</button>
+		</a>
 	)
 }
 
