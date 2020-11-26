@@ -41,7 +41,6 @@ async function seedLogbook() {
 			group: 5,
 			year: '19/20',
 			teacher: 'xxx',
-			isAvailable: false,
 			columns: [
 				{
 					position: 0,
@@ -90,7 +89,6 @@ async function seedLogbook() {
 			group: 7,
 			year: '19/20',
 			teacher: 'yyyy',
-			isAvailable: false,
 			columns: [
 				{
 					position: 0,

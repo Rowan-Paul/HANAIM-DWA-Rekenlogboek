@@ -2,7 +2,7 @@ import React from 'react'
 import '../../scss/no-access/NoAccess.scss'
 export default function NoAccess() {
 	return (
-		<section>
+		<section className="NoAccess">
 			<h1>Oeps! Geen toegang...</h1>
 			<p>
 				Je hebt niet de juiste rechten voor deze applicatie. Neem contact op met

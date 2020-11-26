@@ -1,0 +1,57 @@
+@import '../../Variables.scss';
+.LearnGoal {
+	border-bottom: 1px solid $borderColor;
+	list-style: none;
+	padding: 0;
+	width: 100%;
+
+	.top-row {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, calc(100% / 12));
+		padding: 2vh 0 2vh 5%;
+		width: 95%;
+
+		div {
+			align-items: center;
+			display: flex;
+		}
+		.title {
+			grid-column: span 5;
+			span {
+				font-size: 18px;
+				font-weight: 700;
+			}
+		}
+		.image {
+			grid-column: span 5;
+		}
+		.toggle-description {
+			cursor: pointer;
+			transition: ease-in-out 0.5s;
+
+			&:hover {
+				color: lighten($fontColor, 30%);
+			}
+		}
+		.delete {
+			color: #ff8080;
+			cursor: pointer;
+			transition: ease-in-out 0.5s;
+
+			&:hover {
+				color: lighten(#ff8080, 12.5%);
+			}
+		}
+	}
+
+	.description {
+		border-top: 1px solid $borderColor;
+		padding: 0 5%;
+		width: 90%;
+
+		p {
+			font-weight: 100;
+			font-size: 18px;
+		}
+	}
+}

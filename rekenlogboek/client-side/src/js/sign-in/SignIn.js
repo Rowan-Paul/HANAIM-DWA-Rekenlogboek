@@ -5,7 +5,7 @@ import SignInContainer from './components/SignInContainer'
 
 export default function SignIn() {
 	return (
-		<section>
+		<section className="SignIn">
 			<SignInContainer />
 			<div className="illustration"></div>
 		</section>

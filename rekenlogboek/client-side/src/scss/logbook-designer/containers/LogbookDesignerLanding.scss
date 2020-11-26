@@ -1,8 +1,17 @@
 .logbook-designer-landing {
 	width: 100%;
-}
 
-p {
-	font-size: 24px;
-	font-weight: 700;
+	p {
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	.flex-center {
+		width: 100%;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
 }

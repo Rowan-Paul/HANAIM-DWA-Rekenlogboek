@@ -1,0 +1,11 @@
+@import '../../Variables.scss';
+
+.LogbookSaved {
+	color: $fontColor;
+	margin: 5%;
+	width: 90%;
+
+	p {
+		padding: 0 0 10%;
+	}
+}

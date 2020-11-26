@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-import ButtonContainer from '../../common/components/ButtonContainer'
+import ButtonContainer from '../../common/ButtonContainer'
 
 import '../../../scss/logbook-designer/containers/LogbookDesignerLanding.scss'
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
@@ -31,7 +31,7 @@ export default function LogbookDesigner() {
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => changePage('new-logbook')}
+						handler={() => changePage('new-logbook/page-1')}
 					/>
 				</div>
 			</div>

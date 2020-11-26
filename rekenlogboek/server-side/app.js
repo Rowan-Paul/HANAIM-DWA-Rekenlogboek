@@ -34,6 +34,7 @@ app.use(
 		secret: 'randomString'
 	})
 )
+
 app.use('/auth', authRouter)
 app.use('/logbook', logbookRouter)
 app.use('/studentlogbook', studentlogbookRouter)

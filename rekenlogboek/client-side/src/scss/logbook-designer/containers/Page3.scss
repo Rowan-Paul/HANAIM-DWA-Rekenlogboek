@@ -1,0 +1,20 @@
+.Page3 {
+	align-items: center;
+	display: flex;
+	height: 90%;
+	margin: 0 auto;
+	position: relative;
+	width: 90%;
+
+	.button {
+		bottom: 0;
+		position: absolute;
+		width: 12.5%;
+	}
+	.prev {
+		left: 5%;
+	}
+	.next {
+		right: 5%;
+	}
+}
