@@ -17,7 +17,7 @@ export default function LogbookOverview(props) {
 				<label>Kolom types:</label>
 				<ul>
 					{props.columns.map((column, i) => (
-						<li key={column.inputType}>
+						<li key={`${column.inputType}${i}`}>
 							Kolom {++i}: {column.inputType}
 						</li>
 					))}

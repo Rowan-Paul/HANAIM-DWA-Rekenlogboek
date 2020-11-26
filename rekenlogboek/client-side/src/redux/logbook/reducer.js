@@ -34,7 +34,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
-				goals: [...state.goals, acADD_LOGBOOK_PERIODtion.payload]
+				goals: [...state.goals, action.payload]
 			}
 
 		case REMOVE_LEARN_GOAL:
