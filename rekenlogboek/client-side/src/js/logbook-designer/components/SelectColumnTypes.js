@@ -1,54 +1,40 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import Select from '../../common/Select'
 
-export default function SelectColumnTypes() {
-	const [columnType1, setColumnType1] = useState('Checkboxes')
-	const [columnTitle1, setColumnTitle1] = useState('')
-
-	const [columnType2, setColumnType2] = useState('Checkboxes')
-	const [columnTitle2, setColumnTitle2] = useState('')
-
-	const changeTypeHandler = (column, value) => {
-		column === 1 ? setColumnType1(value) : setColumnType2(value)
-	}
-
-	const changeTitleHandler = (column, value) => {
-		column === 1 ? setColumnTitle1(value) : setColumnTitle2(value)
-	}
-
+export default function SelectColumnTypes(props) {
 	const types = ['checkboxes', 'keuzerondjes', 'invulvelden']
 
 	return (
 		<form>
 			<label>Kies kolom titel 1:</label>
 			<input
-				onChange={e => changeTitleHandler(1, e.target.value)}
+				onChange={e => props.changeTitleHandler(1, e.target.value)}
 				placeholder="Vul hier een titel in..."
 				type="text"
-				value={columnTitle1}
+				value={props.columnTitle1}
 			/>
 			{/* TODO: remove dummy options & replace with dynamic data*/}
 			<Select
 				title="Kies kolomtype 1:"
-				selected={columnType1}
+				selected={props.columnType1}
 				options={types}
-				changeHandler={() => changeTypeHandler(1)}
+				changeHandler={value => props.changeTypeHandler(1, value)}
 			/>
 			<br />
 			<label>Kies kolom titel 2:</label>
 			<input
-				onChange={e => changeTitleHandler(2, e.target.value)}
+				onChange={e => props.changeTitleHandler(2, e.target.value)}
 				placeholder="Vul hier een titel in..."
 				type="text"
-				value={columnTitle2}
+				value={props.columnTitle2}
 			/>
 			{/* TODO: remove dummy options & replace with dynamic data*/}
 			<Select
 				title="Kies kolomtype 2:"
-				selected={columnType2}
+				selected={props.columnType2}
 				options={types}
-				changeHandler={() => changeTypeHandler(2)}
+				changeHandler={value => props.changeTypeHandler(2, value)}
 			/>
 		</form>
 	)

@@ -1,21 +1,24 @@
 import {
 	ADD_LEARN_GOAL,
 	REMOVE_LEARN_GOAL,
-	RESET_LOGBOOK,
-	SAVE_LOGBOOK
+	SAVE_LOGBOOK,
+	ADD_LOGBOOK_PERIOD,
+    RESET_LOGBOOK,
+	ADD_LOGBOOK_COLUMNS
 } from './types'
+	
 
 const INITIAL_STATE = {
 	columns: [
 		{
 			position: 1,
-			title: 'Heb je volgende week instructie nodig?',
+			title: '',
 			inputType: 'Checkboxes'
 		},
 		{
 			position: 2,
-			title: 'Vind je kaas lekker?',
-			inputType: 'Invoervelden'
+			title: '',
+			inputType: 'Checkboxes'
 		}
 	],
 	goals: [],
@@ -52,6 +55,18 @@ const reducer = (state = INITIAL_STATE, action) => {
 				}
 			}
 			return state
+		case ADD_LOGBOOK_PERIOD:
+			return {
+				...state,
+				group: Number(action.payload.group),
+				period: Number(action.payload.period)
+			}
+		case ADD_LOGBOOK_COLUMNS:
+			// console.log(action.payload)
+			return {
+				...state,
+				columns: action.payload.columns
+			}
 
 		case RESET_LOGBOOK:
 			return (state = INITIAL_STATE)
