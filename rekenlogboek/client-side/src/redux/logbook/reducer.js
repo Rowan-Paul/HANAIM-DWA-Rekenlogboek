@@ -1,4 +1,9 @@
-import { ADD_LEARN_GOAL, REMOVE_LEARN_GOAL, SAVE_LOGBOOK } from './types'
+import {
+	ADD_LEARN_GOAL,
+	REMOVE_LEARN_GOAL,
+	RESET_LOGBOOK,
+	SAVE_LOGBOOK
+} from './types'
 
 const INITIAL_STATE = {
 	columns: [
@@ -14,8 +19,9 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 5,
+	group: 4,
 	isAvailable: true,
+	isSaved: false,
 	period: 1,
 	teacher: 'Juf Henk',
 	year: '2019 - 2020'
@@ -26,6 +32,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 		case ADD_LEARN_GOAL:
 			action.payload.position = state.goals.length + 1
 
+			console.log(action.payload)
 			return {
 				...state,
 				goals: [...state.goals, action.payload]
@@ -38,33 +45,18 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_LOGBOOK:
-			postLogbook(state)
-
+			if (action.response.ok) {
+				return {
+					...state,
+					isSaved: true
+				}
+			}
 			return state
+
+		case RESET_LOGBOOK:
+			return (state = INITIAL_STATE)
 		default:
 			return state
-	}
-}
-
-const postLogbook = logbook => {
-	try {
-		fetch(`http://localhost:3000/logbook/`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				columns: logbook.columns,
-				goals: logbook.goals,
-				group: logbook.group,
-				isAvailable: logbook.isAvailable,
-				period: logbook.period,
-				teacher: logbook.teacher,
-				year: logbook.year
-			})
-		})
-	} catch (e) {
-		console.log(e)
 	}
 }
 

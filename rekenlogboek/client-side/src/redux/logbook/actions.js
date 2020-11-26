@@ -3,7 +3,8 @@ import {
 	REMOVE_LEARN_GOAL,
 	SAVE_LOGBOOK,
 	ADD_LOGBOOK_PERIOD,
-	ADD_LOGBOOK_COLUMNS
+	ADD_LOGBOOK_COLUMNS,
+	RESET_LOGBOOK
 } from './types'
 
 export const addLearnGoal = payload => {
@@ -20,9 +21,22 @@ export const removeLearnGoal = payload => {
 	}
 }
 
-export const saveLogbook = () => {
+export const saveLogbook = () => (dispatch, getState) => {
+	fetch(`http://localhost:3000/logbook/`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(getState().logbook)
+	}).then(response =>
+		dispatch({
+			type: SAVE_LOGBOOK,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+}
+
+export const resetLogbook = () => {
 	return {
-		type: SAVE_LOGBOOK
+		type: RESET_LOGBOOK
 	}
 }
 
