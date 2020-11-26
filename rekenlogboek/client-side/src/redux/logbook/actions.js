@@ -22,17 +22,18 @@ export const removeLearnGoal = payload => {
 }
 
 export const saveLogbook = () => (dispatch, getState) => {
-	console.log(getState().logbook)
 	fetch(`http://localhost:3000/logbook/`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(getState().logbook)
-	}).then(response =>
-		dispatch({
-			type: SAVE_LOGBOOK,
-			response // Called it response (from API) to distinguish it from payloads (from app)
-		})
-	).catch(error => console.log(error))
+	})
+		.then(response =>
+			dispatch({
+				type: SAVE_LOGBOOK,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})
+		)
+		.catch(error => console.log(error))
 }
 
 export const resetLogbook = () => {

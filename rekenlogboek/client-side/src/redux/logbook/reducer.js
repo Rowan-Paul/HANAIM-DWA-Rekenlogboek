@@ -10,6 +10,7 @@ import {
 const date = new Date()
 const year = date.getFullYear()
 const INITIAL_STATE = {
+	//TODO: add checks to see if columns are filled in newlogbook2
 	columns: [
 		{
 			position: 1,
@@ -23,12 +24,12 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 4,
+	group: 0,
 	isAvailable: true,
 	isSaved: false,
-	period: 1,
-	teacher: 'Juf Henk', //TODO: auto add teachers & years in components
-	year: `${year} - ${year + 1}`
+	period: 0,
+	teacher: '', //TODO: auto add years in components
+	year: `${year} - ${year + 1}` // but what if you add a logboek in the second half of the year?
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -55,7 +56,6 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_LOGBOOK:
-			console.log(state)
 			if (action.response.ok) {
 				return {
 					...state,
@@ -67,7 +67,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				group: Number(action.payload.group),
-				period: Number(action.payload.period)
+				period: Number(action.payload.period),
+				teacher: action.payload.username
 			}
 		case ADD_LOGBOOK_COLUMNS:
 			return {

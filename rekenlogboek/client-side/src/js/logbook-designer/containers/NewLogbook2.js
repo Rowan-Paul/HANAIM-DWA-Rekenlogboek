@@ -40,6 +40,7 @@ function Page2(props) {
 			props.addLogbookColumns(payload)
 			history.push('./page-3')
 		} else {
+			//TODO: replace this by something less evil than a alert
 			alert('Vul a.u.b. alle velden in.')
 		}
 	}

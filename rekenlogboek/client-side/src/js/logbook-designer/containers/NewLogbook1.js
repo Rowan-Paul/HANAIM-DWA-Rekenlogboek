@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Jumbotron from '../../common/Jumbotron'
@@ -19,10 +19,10 @@ function Page1(props) {
 	const changeGroupHandler = value => setGroup(value)
 	const changePeriodHandler = value => setPeriod(value)
 
-	let history = useHistory()
+	const username = props.user.name
 	const nextButtonHandler = () => {
-		props.addLogbookPeriod({ group, period })
-		history.push('./page-2')
+		props.addLogbookPeriod({ group, period, username })
+		props.history.push('./page-2')
 	}
 
 	return (
@@ -65,6 +65,7 @@ function Page1(props) {
 
 const mapStateToProps = state => {
 	return {
+		user: state.main.user,
 		group: state.logbook.group,
 		period: state.logbook.period
 	}
@@ -76,4 +77,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page1)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Page1))

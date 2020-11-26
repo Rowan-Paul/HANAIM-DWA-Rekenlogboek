@@ -1,31 +1,32 @@
+import '../../../scss/logbook-designer/containers/LogbookDesignerLanding.scss'
+
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import ButtonContainer from '../../common/ButtonContainer'
 
-import '../../../scss/logbook-designer/containers/LogbookDesignerLanding.scss'
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
-import logbookSVG from '../../../img/icons/view_log_yellow.svg'
+// import logbookSVG from '../../../img/icons/view_log_yellow.svg'
 
-export default function LogbookDesigner() {
-	let history = useHistory()
+function LogbookDesignerLandingUI(props) {
 	const changePage = page => {
-		history.push('/logbook-designer/' + page)
+		props.history.push('/logbook-designer/' + page)
 	}
 
 	return (
 		<div className="logbook-designer-landing">
 			<div className="flex-center">
-				<h1>Welkom, (username)</h1>
+				<h1>Welkom, {props.user.name}</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
-					<ButtonContainer
+					{/* <ButtonContainer
 						icon={logbookSVG}
 						color="yellow"
 						description="Het overzicht van alle logoeken bekijken."
 						value="Bekijk overzicht"
 						handler={() => changePage('overview')}
-					/>
+					/> */}
 					<ButtonContainer
 						icon={createLogbookSVG}
 						color="green"
@@ -38,3 +39,13 @@ export default function LogbookDesigner() {
 		</div>
 	)
 }
+
+function mapStateToProps(state) {
+	return {
+		user: state.main.user
+	}
+}
+
+export const LogbookDesignerLanding = connect(mapStateToProps)(
+	withRouter(LogbookDesignerLandingUI)
+)

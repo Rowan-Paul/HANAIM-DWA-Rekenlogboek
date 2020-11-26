@@ -1,24 +1,25 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
 import AddLearnGoal from '../components/AddLearnGoal'
 import Button from '../../common/Button'
-import { connect } from 'react-redux'
 import Illustration from '../components/Illustration'
+import LearnGoalList from '../components/LearnGoalList'
+
 import Image from '../../../img/illustrations/log_select_learning_goals.svg'
 import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
-import LearnGoalList from '../components/LearnGoalList'
 
 import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
 function Page3(props) {
-	const history = useHistory()
-
 	const verifyGoals = () =>
 		props.goals.length > 0
-			? history.push('./page-4')
-			: alert('Je moet eerst leerdoelen invoeren.')
+			? props.history.push('./page-4')
+			: //TODO: replace this by something less evil than a alert
+			  alert('Je moet eerst leerdoelen invoeren.')
 
 	return (
 		<div className="new-logbook">
@@ -43,7 +44,7 @@ function Page3(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./page-2')}
+					handler={() => props.history.push('./page-2')}
 				/>
 			</div>
 			<div className="next button">
@@ -65,4 +66,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page3)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Page3))

@@ -41,13 +41,14 @@ export default function AddLearnGoal(props) {
 					value={description}
 				></textarea>
 
-				<label>Afbeelding:</label>
-				{/* <input
+				{/*<label>Afbeelding:</label>
+				/* <input
 					name="image"
 					onChange={e => setImageLink(e.target.value)}
 					type="file"
 				/> */}
 
+				{/* TODO: clear the input fields after pressing add */}
 				<Button color="blue" value="Toevoegen" />
 			</form>
 		</div>

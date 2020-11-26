@@ -1,10 +1,10 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
-import Header from '../js/common/Header'
+// import Header from '../js/common/Header'
 
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
-import LogbookDesignerLanding from './logbook-designer/containers/LogbookDesignerLanding'
+import { LogbookDesignerLanding } from './logbook-designer/containers/LogbookDesignerLanding'
 
 import NewLogbook1 from './logbook-designer/containers/NewLogbook1'
 import NewLogbook2 from './logbook-designer/containers/NewLogbook2'
@@ -23,10 +23,15 @@ require('dotenv').config()
 function App() {
 	return (
 		<div>
-			<Header />
+			{/* <Header /> */}
 			<main>
 				<Router>
 					<Switch>
+						{/* page 1: groep en blok kiezen
+						page 2: kolomtypes selecteren
+						page 3: leerdoel toevoegen
+						page 4: leerdoelen laten zien
+						page 5: logboek is succesvol opgeslagen */}
 						<Route path="/logbook-designer/new-logbook/page-1">
 							<NewLogbook1 />
 						</Route>
