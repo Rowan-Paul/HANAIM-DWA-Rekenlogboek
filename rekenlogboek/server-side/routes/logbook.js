@@ -44,6 +44,11 @@ router.get('/:id/column/:position', (req, res) => {
 			const column = response.columns.find(object => {
 				return object.position === Number(req.params.position)
 			})
+
+			if (column === undefined) {
+				throw new Error('column does not exist')
+			}
+
 			res.status(200).send(column)
 		})
 		.catch(err => {
@@ -59,6 +64,11 @@ router.get('/:id/goal/:position', (req, res) => {
 			const goal = response.goals.find(object => {
 				return object.position === Number(req.params.position)
 			})
+
+			if (goal === undefined) {
+				throw new Error('goal does not exist')
+			}
+
 			res.status(200).send(goal)
 		})
 		.catch(err => {

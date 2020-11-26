@@ -147,6 +147,65 @@ describe('Logbook route tests', () => {
 		expect(createResponse).toEqual(200)
 	})
 
+	test('Create logbook with missing variable returns error code', async () => {
+		const createResponse = await fetch('http://localhost:3000/logbook', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				group: 5,
+				year: '19/20',
+				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+				isAvailable: false,
+				columns: [
+					{
+						position: 0,
+						title: 'Doelen',
+						inputType: 'Invoervelden'
+					},
+					{
+						position: 1,
+						title: 'Hoe ging de les',
+						inputType: 'Invoervelden'
+					},
+					{
+						position: 2,
+						title: 'Instructie nodig',
+						inputType: 'Checkboxes'
+					},
+					{
+						position: 3,
+						title: 'Evaluatie',
+						inputType: 'Checkboxes'
+					}
+				],
+				goals: [
+					{
+						position: 0,
+						title: 'Les 1',
+						description: 'In deze les leer je 1+1',
+						imagelink: 'xxx'
+					},
+					{
+						position: 1,
+						title: 'Les 2',
+						description: 'In deze les leer je 2*2',
+						imagelink: 'xxx'
+					},
+					{
+						position: 2,
+						title: 'Les 3',
+						description: 'In deze les leer je 5*5',
+						imagelink: 'xxx'
+					}
+				]
+			})
+		}).then(response => response.status)
+
+		expect(createResponse).toEqual(500)
+	})
+
 	test('Get logbook from id', async () => {
 		const logbookID = await getTestlogbookID()
 		const test = await fetch('http://localhost:3000/logbook/' + logbookID, {
@@ -155,6 +214,15 @@ describe('Logbook route tests', () => {
 
 		expect(test.period).toEqual(3)
 		expect(test.group).toEqual(7)
+	})
+
+	test('Get logbook from with id not found gives error', async () => {
+		const test = await fetch('http://localhost:3000/logbook/' + 21321334333, {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test.period).toEqual(undefined)
+		expect(test.group).toEqual(undefined)
 	})
 
 	test('Get the id, position, title and inputType for one column from a specific logbook', async () => {
@@ -168,6 +236,16 @@ describe('Logbook route tests', () => {
 		expect(column.title).toEqual('Hoe ging de les')
 	})
 
+	test('Get the id, position, title and inputType for one column from a specific logbook with not existing columnid gives error', async () => {
+		const logbookID = await getTestlogbookID()
+		const column = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/column/13',
+			{ method: 'GET' }
+		).then(response => response.status)
+
+		expect(column).toEqual(500)
+	})
+
 	test('Get the id, position, title, description and imagelink for one goal for one logbook', async () => {
 		const logbookID = await getTestlogbookID()
 		const goal = await fetch(
@@ -177,5 +255,15 @@ describe('Logbook route tests', () => {
 
 		expect(goal.title).toEqual('Les 2')
 		expect(goal.description).toEqual('In deze les leer je 2*2')
+	})
+
+	test('Get the id, position, title, description and imagelink for one goal for one logbook gives error because not existing goalid', async () => {
+		const logbookID = await getTestlogbookID()
+		const goal = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/goal/10',
+			{ method: 'GET' }
+		).then(response => response.status)
+
+		expect(goal).toEqual(500)
 	})
 })
