@@ -11,7 +11,7 @@ import Illustration from '../components/Illustration'
 import Image from '../../../img/illustrations/log_select_question_type.svg'
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
-function Page2() {
+export default function Page2() {
 	let history = useHistory()
 	const changePage = page => {
 		history.push('/logbook-designer/' + page)
@@ -41,12 +41,12 @@ function Page2() {
 	)
 }
 
-const mapStateToProps = state => {
-	return {}
-}
+// const mapStateToProps = state => {
+// 	return {}
+// }
 
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+// const mapDispatchToProps = dispatch => {
+// 	return {}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page2)
+// export default connect(mapStateToProps, mapDispatchToProps)(Page2)
