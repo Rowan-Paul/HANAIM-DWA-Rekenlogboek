@@ -1,0 +1,19 @@
+.SignIn {
+	align-items: center;
+	display: flex;
+	height: 70%;
+	margin: 0 auto;
+	position: relative;
+	width: 80%;
+
+	.illustration {
+		background-image: url('../../img/illustrations/sign_in_page.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		height: 80%;
+		position: absolute;
+		right: 0;
+		width: 50%;
+	}
+}

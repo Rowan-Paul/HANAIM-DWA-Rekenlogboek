@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+@import './Variables.scss';
+
+body {
+	font-family: Nunito, sans-serif;
+	margin: 0;
+}
+
+main {
+	align-items: center;
+	background-image: url('../img/backgrounds/wave.svg');
+	background-position: 100% bottom;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: flex;
+	height: 87.5vh;
+	width: 100%;
+}
+
+h1 {
+	font-weight: 700;
+	margin-block-end: 0;
+}
+
+p {
+	color: $fontColor;
+}

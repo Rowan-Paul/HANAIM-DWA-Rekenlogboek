@@ -1,0 +1,30 @@
+@import '../Variables.scss';
+
+.NoAccess {
+	color: $fontColor;
+	height: 70%;
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
+	width: 40%;
+
+	h1 {
+		font-size: 28px;
+	}
+	p {
+		font-size: 18px;
+		margin: 0 auto;
+		width: 80%;
+	}
+
+	div {
+		background-image: url('../../img/illustrations/no_access.svg');
+		background-size: contain;
+		background-position: center right;
+		background-repeat: no-repeat;
+		bottom: 0;
+		height: 60%;
+		position: absolute;
+		width: 100%;
+	}
+}

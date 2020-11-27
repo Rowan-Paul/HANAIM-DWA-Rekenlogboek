@@ -1,0 +1,41 @@
+@import '../Variables.scss';
+
+header {
+	box-shadow: $shadow;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, calc(100% / 3));
+	height: 12.5vh;
+	width: 100%;
+
+	div {
+		align-items: center;
+		color: $blue;
+		display: flex;
+		font-weight: 700;
+		height: 100%;
+		margin: 0 auto;
+		width: 90%;
+
+		span {
+			font-size: 20px;
+		}
+		i {
+			padding-right: 0.5vw;
+		}
+	}
+	.title {
+		span {
+			color: $fontColor;
+			font-size: 30px;
+			margin: 0 auto;
+		}
+	}
+	.user {
+		position: relative;
+
+		span {
+			position: absolute;
+			right: 10%;
+		}
+	}
+}

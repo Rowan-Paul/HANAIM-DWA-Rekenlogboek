@@ -1,0 +1,35 @@
+@import '../Variables.scss';
+
+.ButtonContainer {
+	box-shadow: $shadow;
+	border-radius: 8px;
+	height: 50%;
+	margin: 5% 20px;
+	padding: 2.5%;
+	width: 35%;
+	min-height: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+
+	.iconContainer {
+		align-items: center;
+		display: flex;
+		height: 40%;
+		flex-grow: 2;
+
+		img {
+			margin: 0 auto;
+			height: 96px;
+			width: 96px;
+		}
+	}
+	p {
+		border-bottom: 1px solid $borderColor;
+		color: $fontColor;
+		font-size: 20px;
+		height: 25%;
+		text-align: center;
+		flex-grow: 2;
+	}
+}

@@ -1,0 +1,15 @@
+import React from 'react'
+import '../../scss/no-access/NoAccess.scss'
+export default function NoAccess() {
+	return (
+		<section className="NoAccess">
+			<h1>Oeps! Geen toegang...</h1>
+			<p>
+				Je hebt niet de juiste rechten voor deze applicatie. Neem contact op met
+				de beheerder, of niet...
+			</p>
+
+			<div className="illustration"></div>
+		</section>
+	)
+}
