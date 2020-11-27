@@ -2,7 +2,7 @@ import React from 'react'
 import * as microsoftTeams from '@microsoft/teams-js'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
-// import Header from '../js/common/Header'
+import Header from '../js/common/Header'
 
 import LogbookDesigner from './logbook-designer/LogbookDesigner'
 import { LogbookDesignerLanding } from './logbook-designer/containers/LogbookDesignerLanding'
@@ -39,7 +39,7 @@ function App() {
 		if (window.parent === window.self) {
 			return (
 				<div>
-					{/* <Header /> */}
+					<Header />
 					<main>
 						<Router>
 							<Switch>
