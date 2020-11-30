@@ -27,9 +27,21 @@ const logbookSchema = new mongoose.Schema({
 				type: String,
 				isRequired: true
 			},
-			inputType: {
-				type: String,
-				isRequired: true
+			input: {
+				type: {
+					type: String,
+					isRequired: true
+				},
+				options: [
+					{
+						type: String,
+						isRequired: false
+					}
+				],
+				placeholder: {
+					type: String,
+					isRequired: false
+				}
 			}
 		}
 	],
