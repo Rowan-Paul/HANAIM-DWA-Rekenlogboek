@@ -14,11 +14,11 @@ Code en documentatie moet worden gecontroleerd door minstens 1 teamlid voordat h
 6. Functies en variabelen namen worden in camelCase geschreven (gebruik goede/logische namen). Met uitzondering van React component file names en functional component names.
 8. Feedback van een reviewer wordt verwerkt en vervolgens nog een keer gecontroleerd.
 9. Documentatie van code in dezelfde pull request toevoegen.
-10. Boven elke methode staat een comment waarin vermeld is wat de methode doet. (/\*\* \*/)
-11. Code werkt voordat je pusht.
+10. Code werkt voordat je pusht.
 
 ## Documentatie
 
 1. Voldoet aan AIM controlekaart.
 2. Geschreven in markdown op basis van de software guidebook.
 3. C4 modellen in de documentatie zijn gereviewed volgens de [C4 model checklist](https://c4model.com/assets/software-architecture-diagram-review-checklist.pdf).
+4. Diagrammen zijn geupdate tot de nieuwe situatie
