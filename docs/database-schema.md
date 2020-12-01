@@ -23,7 +23,6 @@ Contains all general logbooks.
 |            input: {                                   |
 |                       type: String,                   |
 |                       options: [String],              |
-|                       placeholder: String             |
 |                   }                                   |
 |          }]                                           |
 | goals: [{                                             |

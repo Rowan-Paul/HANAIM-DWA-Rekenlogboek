@@ -37,11 +37,7 @@ const logbookSchema = new mongoose.Schema({
 						type: String,
 						isRequired: false
 					}
-				],
-				placeholder: {
-					type: String,
-					isRequired: false
-				}
+				]
 			}
 		}
 	],
