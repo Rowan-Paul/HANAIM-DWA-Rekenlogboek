@@ -14,8 +14,7 @@ export default function LearnGoal(props) {
 				</div>
 
 				<div className="image">
-					{/* //TODO: make a sensible name? or just show preview */}
-					<span>{props.goal.imageLink}</span>
+					<span>{props.goal.imageName}</span>
 				</div>
 
 				<div className="toggle-description">

@@ -7,6 +7,7 @@ export default function AddLearnGoal(props) {
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
 	const [imageLink, setImageLink] = useState('')
+	const [imageName, setImageName] = useState('')
 
 	const toBase64 = file =>
 		new Promise((resolve, reject) => {
@@ -24,7 +25,8 @@ export default function AddLearnGoal(props) {
 					ID: shortid.generate(),
 					title,
 					description,
-					imageLink
+					imageLink,
+					imageName
 			  })
 			: alert('Vul a.u.b. alle velden in.')
 	}
@@ -53,6 +55,7 @@ export default function AddLearnGoal(props) {
 					name="image"
 					onChange={async e => {
 						const file = e.target.files[0]
+						setImageName(file.name)
 						setImageLink(await toBase64(file))
 					}}
 					type="file"
