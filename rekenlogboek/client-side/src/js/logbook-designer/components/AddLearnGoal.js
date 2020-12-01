@@ -20,7 +20,9 @@ export default function AddLearnGoal(props) {
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
 
-		title.trim().length > 0 && description.trim().length > 0
+		title.trim().length > 0 &&
+		description.trim().length > 0 &&
+		imageLink.size < 3000000
 			? props.handler({
 					ID: shortid.generate(),
 					title,
@@ -28,7 +30,8 @@ export default function AddLearnGoal(props) {
 					imageLink,
 					imageName
 			  })
-			: alert('Vul a.u.b. alle velden in.')
+			: //TODO: use something less evil than alert
+			  alert('Niet alle velden zijn correct ingevuld')
 	}
 
 	return (
@@ -55,8 +58,14 @@ export default function AddLearnGoal(props) {
 					name="image"
 					onChange={async e => {
 						const file = e.target.files[0]
-						setImageName(file.name)
-						setImageLink(await toBase64(file))
+
+						if (file.size < 3000000) {
+							setImageName(file.name)
+							setImageLink(await toBase64(file))
+						} else {
+							console.log('Image too large')
+							e.target.value = null
+						}
 					}}
 					type="file"
 					accept=".jpeg, .jpg, .png"
