@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 		group: req.body.group,
 		year: req.body.year,
 		teacher: req.body.teacher,
-		visibility: req.body.visibility,
+currentPhase: req.body.currentPhase
 		columns: req.body.columns,
 		goals: req.body.goals
 	})
