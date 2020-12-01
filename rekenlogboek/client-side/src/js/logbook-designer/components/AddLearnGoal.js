@@ -6,7 +6,15 @@ import shortid from 'shortid'
 export default function AddLearnGoal(props) {
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
-	// const [imageLink, setImageLink] = useState('')
+	const [imageLink, setImageLink] = useState('')
+
+	const toBase64 = file =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onload = () => resolve(reader.result)
+			reader.onerror = error => reject(error)
+		})
 
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
@@ -16,8 +24,7 @@ export default function AddLearnGoal(props) {
 					ID: shortid.generate(),
 					title,
 					description,
-					// imageLink
-					imageLink: 'goal1.png'
+					imageLink
 			  })
 			: alert('Vul a.u.b. alle velden in.')
 	}
@@ -41,12 +48,16 @@ export default function AddLearnGoal(props) {
 					value={description}
 				></textarea>
 
-				{/*<label>Afbeelding:</label>
-				/* <input
+				<label>Afbeelding:</label>
+				<input
 					name="image"
-					onChange={e => setImageLink(e.target.value)}
+					onChange={async e => {
+						const file = e.target.files[0]
+						setImageLink(await toBase64(file))
+					}}
 					type="file"
-				/> */}
+					accept=".jpeg, .jpg, .png"
+				/>
 
 				{/* TODO: clear the input fields after pressing add */}
 				<Button color="blue" value="Toevoegen" />

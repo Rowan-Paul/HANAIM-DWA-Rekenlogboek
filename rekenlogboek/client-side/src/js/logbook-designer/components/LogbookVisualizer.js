@@ -1,6 +1,6 @@
 import '../../../scss/logbook-designer/components/LogbookVisualizer.scss'
 import React from 'react'
-import tempGoalThumb from '../../../img/temp/temp-goal-thumb.png'
+
 export default function LogbookVisualizer(props) {
 	return (
 		<div className="LogbookVisualizer">
@@ -30,7 +30,7 @@ export default function LogbookVisualizer(props) {
 
 									<p>{goal.description}</p>
 
-									<img src={tempGoalThumb} />
+									<img src={goal.imageLink} />
 								</td>
 
 								{/* Get inputtype for each column  */}
