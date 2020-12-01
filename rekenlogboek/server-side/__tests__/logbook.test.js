@@ -36,7 +36,7 @@ describe('Logbook route tests', () => {
 			group: 7,
 			year: '19/20',
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
-currentPhase: String
+			currentPhase: 'NOT_VISIBLE',
 			columns: [
 				{
 					position: 0,
@@ -110,7 +110,7 @@ currentPhase: String
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-currentPhase: 'NOT_VISIBLE'
+				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
@@ -176,7 +176,7 @@ currentPhase: 'NOT_VISIBLE'
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-currentPhase: 'NOT_VISIBLE'
+				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
