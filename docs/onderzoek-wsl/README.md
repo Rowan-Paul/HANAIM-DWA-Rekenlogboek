@@ -22,7 +22,7 @@ Het probleem kwam bij het installeren van certificaten. Het generen van de certi
 Tegen de volgende punten liepen wij aan:
 
 1. File I/O is erg sloom en onhandig. Het starten van de de client duurt 4 minuten, de server ongeveer de helft. Ook werken "live" update niet dus moet na elke verandering het opnieuw worden opgestart. En soms dan zijn de bestanden in VSC out-of-sync met de bestanden in de terminal (verwacht dat ook is omdat veranderingen niet worden doorgegeven)
-2. Certificaten werken, maar er is nog steeds een error. Het installeren van het certificaat werkt, maar hij geeft nog steeds een error over dat het niet kan bewijzen localhost zijn (dit kan worden opgelost door extra parameters aan openssl mee te geven, maar dit is niet gelukt
+2. Certificaten werken, maar er is nog steeds een error. Het installeren van het certificaat werkt, maar hij geeft nog steeds een error over dat het niet kan bewijzen localhost zijn (dit kan worden opgelost door extra parameters aan openssl mee te geven, maar dit is niet gelukt)
 3. De database is niet te bereiken via de WIndows instantie van Robo3T, dus het aanpassen van de DB zal veel lastiger gaan (WSL is alleen command line namelijk). Mongodb is ook niet officieel ondersteund voor WSL, maar voor nu lijkt het te werken. Ook kan mongo niet automatisch worden opgestart via WSL want die gebruikt niet systemcli (wel iets anders, wat niet werkend is gekregen)
 4. De gehele werkwijze van de mensen op Windows zal omgegooid worden. Alles moet opnieuw via WSL geïnstalleerd worden, wat samen met het installeren van WSL de zekere tijd in beslag zou nemen
 
