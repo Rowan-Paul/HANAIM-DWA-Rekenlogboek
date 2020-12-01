@@ -58,8 +58,7 @@ describe('Logbook route tests', () => {
 					position: 2,
 					title: 'Instructie nodig?',
 					input: {
-						type: 'Tekstveld',
-						placeholder: 'Vul hier een antwoord in'
+						type: 'Tekstveld'
 					}
 				},
 				{
@@ -133,8 +132,7 @@ describe('Logbook route tests', () => {
 						position: 2,
 						title: 'Instructie nodig',
 						input: {
-							type: 'Tekstveld',
-							placeholder: 'Vul hier een antwoord in'
+							type: 'Tekstveld'
 						}
 					},
 					{
@@ -200,8 +198,7 @@ describe('Logbook route tests', () => {
 						position: 2,
 						title: 'Instructie nodig',
 						input: {
-							type: 'Tekstveld',
-							placeholder: 'Vul hier een antwoord in'
+							type: 'Tekstveld'
 						}
 					},
 					{
