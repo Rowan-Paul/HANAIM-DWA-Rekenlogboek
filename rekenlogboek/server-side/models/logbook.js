@@ -17,7 +17,7 @@ const logbookSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	visibility: {
+currentPhase: {
 		type: String,
 		required: true
 	},
