@@ -36,7 +36,7 @@ describe('Logbook route tests', () => {
 			group: 7,
 			year: '19/20',
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
-			isAvailable: false,
+			visibility: 'PRE_TOETS',
 			columns: [
 				{
 					position: 0,
@@ -111,7 +111,7 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				isAvailable: false,
+				visibility: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
@@ -178,7 +178,7 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				isAvailable: false,
+				visibility: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
