@@ -40,23 +40,30 @@ describe('Logbook route tests', () => {
 			columns: [
 				{
 					position: 0,
-					title: 'Doelen',
-					inputType: 'Invoervelden'
+					title: 'Doelen'
 				},
 				{
 					position: 1,
 					title: 'Hoe ging de les',
-					inputType: 'Invoervelden'
+					input: {
+						type: 'Radiobuttons',
+						options: [
+							'Ik begrijp het goed',
+							'Ik begrijp het niet goed',
+							'Ik weet het nog niet'
+						]
+					}
 				},
 				{
 					position: 2,
 					title: 'Instructie nodig?',
-					inputType: 'Checkboxes'
+					input: {
+						type: 'Tekstveld'
+					}
 				},
 				{
 					position: 3,
-					title: 'Evaluatie',
-					inputType: 'Checkboxes'
+					title: 'Evaluatie'
 				}
 			],
 			goals: [
@@ -107,23 +114,30 @@ describe('Logbook route tests', () => {
 				columns: [
 					{
 						position: 0,
-						title: 'Doelen',
-						inputType: 'Invoervelden'
+						title: 'Doelen'
 					},
 					{
 						position: 1,
 						title: 'Hoe ging de les',
-						inputType: 'Invoervelden'
+						input: {
+							type: 'Radiobuttons',
+							options: [
+								'Ik begrijp het goed',
+								'Ik begrijp het niet goed',
+								'Ik weet het nog niet'
+							]
+						}
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
-						inputType: 'Checkboxes'
+						input: {
+							type: 'Tekstveld'
+						}
 					},
 					{
 						position: 3,
-						title: 'Evaluatie',
-						inputType: 'Checkboxes'
+						title: 'Evaluatie'
 					}
 				],
 				goals: [
@@ -166,23 +180,30 @@ describe('Logbook route tests', () => {
 				columns: [
 					{
 						position: 0,
-						title: 'Doelen',
-						inputType: 'Invoervelden'
+						title: 'Doelen'
 					},
 					{
 						position: 1,
 						title: 'Hoe ging de les',
-						inputType: 'Invoervelden'
+						input: {
+							type: 'Radiobuttons',
+							options: [
+								'Ik begrijp het goed',
+								'Ik begrijp het niet goed',
+								'Ik weet het nog niet'
+							]
+						}
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
-						inputType: 'Checkboxes'
+						input: {
+							type: 'Tekstveld'
+						}
 					},
 					{
 						position: 3,
-						title: 'Evaluatie',
-						inputType: 'Checkboxes'
+						title: 'Evaluatie'
 					}
 				],
 				goals: [
