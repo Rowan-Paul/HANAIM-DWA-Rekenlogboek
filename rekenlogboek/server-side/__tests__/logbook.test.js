@@ -110,7 +110,7 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				visibility: 'NOT_VISIBLE',
+currentPhase: 'NOT_VISIBLE'
 				columns: [
 					{
 						position: 0,
