@@ -8,17 +8,23 @@ export default function AddLearnGoal(props) {
 	const [description, setdescription] = useState('')
 	const [imageLink, setImageLink] = useState('')
 	const [imageName, setImageName] = useState('')
-
-	const toBase64 = file =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader()
-			reader.readAsDataURL(file)
-			reader.onload = () => resolve(reader.result)
-			reader.onerror = error => reject(error)
-		})
+	const [file, setFile] = useState('')
 
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
+
+		const formData = new FormData()
+		formData.append('file', file) // appending file
+
+		fetch('http://localhost:3000/upload', {
+			method: 'POST',
+			body: formData
+		})
+			.then(res => {
+				console.log(res)
+				setImageLink('http://localhost:3000/' + res.data.path)
+			})
+			.catch(err => console.log(err))
 
 		title.trim().length > 0 && description.trim().length > 0
 			? props.handler({
@@ -55,12 +61,10 @@ export default function AddLearnGoal(props) {
 				<input
 					name="image"
 					onChange={async e => {
-						const file = e.target.files[0]
-
 						// check max file size is under 1mb
-						if (file.size < 1000000) {
-							setImageName(file.name)
-							setImageLink(await toBase64(file))
+						if (e.target.files[0].size < 1000000) {
+							setImageName(e.target.files[0].name)
+							setFile(e.target.files[0])
 						} else {
 							console.log('Image too large')
 							e.target.value = null
