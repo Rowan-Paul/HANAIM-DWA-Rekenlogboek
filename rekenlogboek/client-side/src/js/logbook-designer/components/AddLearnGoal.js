@@ -20,9 +20,7 @@ export default function AddLearnGoal(props) {
 	const addLearnGoalHandler = e => {
 		e.preventDefault()
 
-		title.trim().length > 0 &&
-		description.trim().length > 0 &&
-		imageLink.size < 3000000
+		title.trim().length > 0 && description.trim().length > 0
 			? props.handler({
 					ID: shortid.generate(),
 					title,
@@ -59,7 +57,8 @@ export default function AddLearnGoal(props) {
 					onChange={async e => {
 						const file = e.target.files[0]
 
-						if (file.size < 3000000) {
+						// check max file size is under 1mb
+						if (file.size < 1000000) {
 							setImageName(file.name)
 							setImageLink(await toBase64(file))
 						} else {
