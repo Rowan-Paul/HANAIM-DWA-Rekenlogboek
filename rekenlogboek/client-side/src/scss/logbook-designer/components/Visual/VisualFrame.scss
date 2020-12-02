@@ -1,0 +1,54 @@
+@import '../../../Variables.scss';
+
+h4 {
+	color: $fontColor;
+	margin: 0 5%;
+	padding: 0;
+}
+
+.Visual {
+	background: #fff;
+	border: 1px solid $borderColor;
+	border-radius: 8px;
+	font-size: 14px;
+	grid-column: span 4;
+	width: calc(90% - 2px);
+	margin: 0 auto;
+	padding: 0;
+	height: 75%;
+
+	.Row {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, calc(100% / 4));
+
+		div {
+			align-items: center;
+			display: flex;
+			width: 95%;
+			margin: 0 auto;
+			height: 100%;
+			padding: 0 2.5%;
+			border-right: 1px solid $borderColor;
+
+			&:last-of-type {
+				border-right: none;
+			}
+		}
+	}
+	.Header {
+		height: 15%;
+		border-bottom: 1px solid $borderColor;
+		width: 100%;
+	}
+	.Body {
+		align-items: center;
+		display: flex;
+		height: 85%;
+		width: 100%;
+
+		p {
+			color: $fontLight;
+		}
+	}
+}
