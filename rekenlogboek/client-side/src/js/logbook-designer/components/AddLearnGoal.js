@@ -6,43 +6,38 @@ import shortid from 'shortid'
 export default function AddLearnGoal(props) {
 	const [title, setTitle] = useState('')
 	const [description, setdescription] = useState('')
-	const [imageLink, setImageLink] = useState('')
 	const [imageName, setImageName] = useState('')
 	const [file, setFile] = useState('')
 
-	const addLearnGoalHandler = e => {
+	const addLearnGoalHandler = async e => {
 		e.preventDefault()
 
-		const formData = new FormData()
-		formData.append('file', file) // appending file
+		async function postImage() {
+			const formData = new FormData()
+			formData.append('file', file) // appending file
 
-		// TODO: make this an async Redux thingy?
-		// then just put imagelink inside it
-		fetch('http://localhost:3000/files/upload/goals', {
-			method: 'POST',
-			body: formData
-		})
-			.then(response => {
-				return response.json()
+			let fetchPath = await fetch('http://localhost:3000/files/upload/goals', {
+				method: 'POST',
+				body: formData
 			})
-			.then(res => {
-				setImageLink('http://localhost:3000/uploads/goals/' + res.path)
-				console.log('http://localhost:3000/uploads/goals/' + res.path)
-				console.log(imageLink)
-			})
-			.then(() => {
-				title.trim().length > 0 && description.trim().length > 0
-					? props.handler({
-							ID: shortid.generate(),
-							title,
-							description,
-							imageLink,
-							imageName
-					  })
-					: //TODO: use something less evil than alert
-					  alert('Niet alle velden zijn correct ingevuld')
-			})
-			.catch(err => console.log(err))
+
+			return await fetchPath.json()
+		}
+
+		let response = await postImage()
+		let imagePath = await response.path
+
+		//TODO: reset form after submission
+		title.trim().length > 0 && description.trim().length > 0
+			? props.handler({
+					ID: shortid.generate(),
+					title,
+					description,
+					imageLink: await imagePath,
+					imageName
+			  })
+			: //TODO: use something less evil than alert
+			  alert('Niet alle velden zijn correct ingevuld')
 	}
 
 	return (
@@ -81,7 +76,6 @@ export default function AddLearnGoal(props) {
 					accept=".jpeg, .jpg, .png"
 				/>
 
-				{/* TODO: clear the input fields after pressing add */}
 				<Button color="blue" value="Toevoegen" />
 			</form>
 		</div>
