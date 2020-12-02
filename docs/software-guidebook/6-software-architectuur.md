@@ -37,3 +37,5 @@ Binnen in de map `rekenlogboek` staat de client-side en server-side app in twee 
 De client-side is opgedeeld in verschillende mappen voor verschillende onderdelen, met het mapje `src/js` de javascript code en de `src/redux` map alles voor de reducers bevattend. Afbeeldingen worden in het mapje `src/img` gestopt. Het hoofdbestand is het bestand [App.js](../../rekenlogboek/client-side/src/js/app.js) waarin de Router staat.
 
 De server-side is opgedeeld in een map voor mongoose models en express routes. Het hoofdbestand is het bestand [app.js](../../rekenlogboek/server-side/app.js).
+
+Afbeeldingen worden opgeslagen en geserved onder de `static` folder, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `htpp://localhost:3000`) ervoor te zetten
