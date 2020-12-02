@@ -16,26 +16,33 @@ export default function AddLearnGoal(props) {
 		const formData = new FormData()
 		formData.append('file', file) // appending file
 
-		fetch('http://localhost:3000/upload', {
+		// TODO: make this an async Redux thingy?
+		// then just put imagelink inside it
+		fetch('http://localhost:3000/files/upload/goals', {
 			method: 'POST',
 			body: formData
 		})
+			.then(response => {
+				return response.json()
+			})
 			.then(res => {
-				console.log(res)
-				setImageLink('http://localhost:3000/' + res.data.path)
+				setImageLink('http://localhost:3000/uploads/goals/' + res.path)
+				console.log('http://localhost:3000/uploads/goals/' + res.path)
+				console.log(imageLink)
+			})
+			.then(() => {
+				title.trim().length > 0 && description.trim().length > 0
+					? props.handler({
+							ID: shortid.generate(),
+							title,
+							description,
+							imageLink,
+							imageName
+					  })
+					: //TODO: use something less evil than alert
+					  alert('Niet alle velden zijn correct ingevuld')
 			})
 			.catch(err => console.log(err))
-
-		title.trim().length > 0 && description.trim().length > 0
-			? props.handler({
-					ID: shortid.generate(),
-					title,
-					description,
-					imageLink,
-					imageName
-			  })
-			: //TODO: use something less evil than alert
-			  alert('Niet alle velden zijn correct ingevuld')
 	}
 
 	return (

@@ -17,6 +17,7 @@ const authRouter = require('./routes/auth')
 const logbookRouter = require('./routes/logbook')
 const studentlogbookRouter = require('./routes/studentlogbook')
 const templatesRouter = require('./routes/templates')
+const filesRouter = require('./routes/files')
 
 require('dotenv').config()
 
@@ -39,28 +40,12 @@ app.use(
 )
 app.options('*', cors({ origin: true, credentials: true }))
 
-// file upload api
-app.post('/upload', (req, res) => {
-	if (!req.files) {
-		return res.status(500).send({ msg: 'file is not found' })
-	}
-	// accessing the file
-	const myFile = req.files.file
-	//  mv() method places the file inside public directory
-	myFile.mv(`${__dirname}/uploads/${myFile.name}`, function (err) {
-		if (err) {
-			console.log(err)
-			return res.status(500).send({ msg: 'Error occured' })
-		}
-		// returing the response with file path and name
-		return res.send({ name: myFile.name, path: `/${myFile.name}` })
-	})
-})
-
+// routes
 app.use('/auth', authRouter)
 app.use('/logbook', logbookRouter)
 app.use('/studentlogbook', studentlogbookRouter)
 app.use('/templates', templatesRouter)
+app.use('/files', filesRouter)
 
 app.listen(SERVER_PORT, () => {
 	mongoose.connect(
