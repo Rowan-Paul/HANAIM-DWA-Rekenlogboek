@@ -11,9 +11,10 @@ router.post('/upload/goals', (req, res) => {
 	}
 	// accessing the file
 	const myFile = req.files.file
+	const fileName = (Date.now() + '_' + myFile.name).toLowerCase()
 	//  mv() method places the file inside public directory
 	myFile.mv(
-		`${process.cwd()}/uploads/goals/${Date.now()}${myFile.name}`,
+		`${process.cwd()}/static/uploads/goals/${fileName}`,
 		function (err) {
 			if (err) {
 				console.log(err)
@@ -22,7 +23,7 @@ router.post('/upload/goals', (req, res) => {
 			// returing the response with file path and name
 			return res.send({
 				name: myFile.name,
-				path: `${Date.now()}${myFile.name}`
+				path: fileName
 			})
 		}
 	)

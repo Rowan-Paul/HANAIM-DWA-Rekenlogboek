@@ -25,7 +25,7 @@ export default function AddLearnGoal(props) {
 		}
 
 		let response = await postImage()
-		let imagePath = await response.path
+		let imagePath = '/uploads/goals/' + (await response.path)
 
 		//TODO: reset form after submission
 		title.trim().length > 0 && description.trim().length > 0

@@ -27,7 +27,7 @@ const dbName = 'rekenlogboek'
 const app = express()
 
 // middle ware
-app.use(express.static('uploads'))
+app.use(express.static('static'))
 app.use(fileupload())
 app.use(bodyParser.json())
 app.use(cors({ origin: true, credentials: true }))
