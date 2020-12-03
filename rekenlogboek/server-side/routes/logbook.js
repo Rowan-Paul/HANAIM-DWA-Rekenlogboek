@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 		group: req.body.group,
 		year: req.body.year,
 		teacher: req.body.teacher,
-		currentPhase: req.body.currentPhase,
+		currentPhase: 'notVisible',
 		columns: req.body.columns,
 		goals: req.body.goals
 	})
@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
 			res.sendStatus(200)
 		})
 		.catch(err => {
+			console.log(err)
 			res.sendStatus(500)
 		})
 })
@@ -32,6 +33,7 @@ router.get('/:id', (req, res) => {
 			res.status(200).send(response)
 		})
 		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })
@@ -52,6 +54,7 @@ router.get('/:id/column/:position', (req, res) => {
 			res.status(200).send(column)
 		})
 		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })
@@ -72,6 +75,7 @@ router.get('/:id/goal/:position', (req, res) => {
 			res.status(200).send(goal)
 		})
 		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })
