@@ -35,7 +35,7 @@ class TabConfig extends React.Component {
 				<h1>Rekenlogboek</h1>
 				<div>
 					Het rekenlogboek haalt de volgende gegevens op voor leerlingen:
-					jobTItle, groepen. naam en email.
+					jobTitle, groepen. naam en email.
 				</div>
 			</div>
 		)

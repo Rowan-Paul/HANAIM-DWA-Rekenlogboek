@@ -39,7 +39,7 @@ function Page4(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./goals')}
+					handler={() => props.history.push('./goals')}
 				/>
 			</div>
 			<div className="next button">

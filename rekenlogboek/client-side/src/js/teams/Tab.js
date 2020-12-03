@@ -8,6 +8,8 @@ import * as microsoftTeams from '@microsoft/teams-js'
  * The 'GroupTab' component renders the main tab content
  * of your app.
  */
+
+//TODO: Reduxify this class (put context into Redux state)
 class Tab extends React.Component {
 	constructor(props) {
 		super(props)
@@ -31,13 +33,42 @@ class Tab extends React.Component {
 		// Next steps: Error handling using the error object
 	}
 
+	componentDidUpdate() {
+		if (this.state.context['userTeamRole'] === 1) {
+			if (1) {
+				this.props.history.push('tab/pretoetstest')
+			} else if (Evaluatie) {
+			} else if (Instructie) {
+			}
+		}
+	}
+
 	render() {
-		return (
-			<div>
-				<h3>Rekenlogboek!</h3>
-				<p>De leerling omgeving wordt op dit moment gebouwd...</p>
-			</div>
-		)
+		if (this.state.context['userTeamRole'] === 0) {
+			return (
+				<div>
+					<p>
+						Klik{' '}
+						<a href="https://localhost:3001/" rel="noreferrer" target="_blank">
+							hier
+						</a>{' '}
+						om de browser te openen voor de leraaromgeving.
+					</p>
+				</div>
+			)
+		} else if (this.state.context['userTeamRole'] === 1) {
+			return (
+				<div>
+					<div>Je leraar heeft niks voor je open gezet.</div>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<p>Er is iets fout gegaan.</p>
+				</div>
+			)
+		}
 	}
 }
 export default Tab
