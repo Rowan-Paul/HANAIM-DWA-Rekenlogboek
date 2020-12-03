@@ -6,6 +6,11 @@ import Header from '../js/common/Header'
 
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
+// import Default from './student/containers/Default'
+import AfterPreTest from './student/containers/AfterPreTest'
+// import Instructions from './student/containers/Instructions'
+// import Evaluation from './student/containers/Evaluation'
+
 import newLBGeneral from './teacher/containers/General'
 import newLBColumns from './teacher/containers/Columns'
 import newLBGoals from './teacher/containers/Goals'
@@ -43,7 +48,26 @@ function App() {
 					<main>
 						<Router>
 							<Switch>
-								{/* LOGBOOK DESIGNER */}
+								{/* <Route
+									exact
+									path="/student/after-pre-test"
+									component={Default}
+								/> */}
+								<Route
+									exact
+									path="/student/after-pre-test"
+									component={AfterPreTest}
+								/>
+								{/* <Route
+									exact
+									path="/student/after-pre-test"
+									component={Instructions} />
+								<Route
+									exact
+									path="/student/after-pre-test"
+									component={Evaluation}
+								/> */}
+
 								<Route
 									exact
 									path="/teacher/new-logbook/general"
