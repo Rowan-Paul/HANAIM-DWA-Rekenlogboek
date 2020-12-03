@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addInputValue } from '../../../redux/visual/actions'
 
-import '../../../scss/logbook-designer/components/InputTypes/Textarea.scss'
+import '../../../scss/common/InputTypes.scss'
 
 function Textarea(props) {
 	return (
