@@ -1,4 +1,4 @@
-import '../../../scss/logbook-designer/components/LogbookVisualizer.scss'
+import '../../../scss/teacher/components/LogbookVisualizer.scss'
 import React from 'react'
 import tempGoalThumb from '../../../img/temp/temp-goal-thumb.png'
 export default function LogbookVisualizer(props) {

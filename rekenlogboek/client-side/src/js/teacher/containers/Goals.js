@@ -12,7 +12,7 @@ import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
 
 import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page3(props) {
 	const verifyGoals = () =>
@@ -22,7 +22,7 @@ function Page3(props) {
 			  alert('Je moet eerst leerdoelen invoeren.')
 
 	return (
-		<div className="new-logbook">
+		<div className="new-teacher">
 			<Jumbotron>
 				<AddLearnGoal handler={newGoal => props.addLearnGoal(newGoal)} />
 				<InfoContainer>
@@ -55,7 +55,7 @@ function Page3(props) {
 }
 const mapStateToProps = state => {
 	return {
-		goals: state.logbook.goals
+		goals: state.teacher.goals
 	}
 }
 

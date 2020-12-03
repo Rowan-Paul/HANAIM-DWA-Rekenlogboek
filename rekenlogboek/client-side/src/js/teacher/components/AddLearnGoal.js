@@ -1,4 +1,4 @@
-import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
+import '../../../scss/teacher/components/AddLearnGoal.scss'
 import React, { useState } from 'react'
 import Button from '../../common/Button'
 import shortid from 'shortid'

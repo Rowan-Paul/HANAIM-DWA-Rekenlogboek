@@ -10,7 +10,7 @@ import Illustration from '../components/Illustration'
 import { addLogbookColumns } from '../../../redux/logbook/actions'
 
 import Image from '../../../img/illustrations/log_select_question_type.svg'
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page2(props) {
 	const [columnTitle1, setColumnTitle1] = useState(props.title1)
@@ -46,7 +46,7 @@ function Page2(props) {
 	}
 
 	return (
-		<div className="new-logbook">
+		<div className="new-teacher">
 			<Jumbotron>
 				<div className="vertical-center">
 					<SelectColumnTypes
@@ -86,10 +86,10 @@ function Page2(props) {
 
 const mapStateToProps = state => {
 	return {
-		title1: state.logbook.columns[0].title,
-		inputType1: state.logbook.columns[0].inputType,
-		title2: state.logbook.columns[1].title,
-		inputType2: state.logbook.columns[1].inputType
+		title1: state.teacher.columns[0].title,
+		inputType1: state.teacher.columns[0].inputType,
+		title2: state.teacher.columns[1].title,
+		inputType2: state.teacher.columns[1].inputType
 	}
 }
 

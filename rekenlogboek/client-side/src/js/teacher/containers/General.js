@@ -10,7 +10,7 @@ import Illustration from '../components/Illustration'
 import { addLogbookPeriod } from '../../../redux/logbook/actions'
 
 import Image from '../../../img/illustrations/log_select_year.svg'
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page1(props) {
 	const [group, setGroup] = useState(props.group.toString())
@@ -26,7 +26,7 @@ function Page1(props) {
 	}
 
 	return (
-		<div className="new-logbook">
+		<div className="new-teacher">
 			<Jumbotron>
 				<div className="vertical-center">
 					<form>
@@ -66,8 +66,8 @@ function Page1(props) {
 const mapStateToProps = state => {
 	return {
 		user: state.main.user,
-		group: state.logbook.group,
-		period: state.logbook.period
+		group: state.teacher.group,
+		period: state.teacher.period
 	}
 }
 

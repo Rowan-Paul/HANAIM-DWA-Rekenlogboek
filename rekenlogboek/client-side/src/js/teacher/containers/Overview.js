@@ -8,7 +8,7 @@ import LogbookOverview from '../components/LogbookOverview'
 import LogbookVisualizer from '../components/LogbookVisualizer'
 import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page4(props) {
 	useEffect(() => {
@@ -19,7 +19,7 @@ function Page4(props) {
 	})
 
 	return (
-		<div className="new-logbook">
+		<div className="new-teacher">
 			<Jumbotron>
 				<LogbookOverview
 					columns={props.columns}
@@ -55,10 +55,10 @@ function Page4(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns,
-		group: state.logbook.group,
-		goals: state.logbook.goals,
-		isSaved: state.logbook.isSaved
+		columns: state.teacher.columns,
+		group: state.teacher.group,
+		goals: state.teacher.goals,
+		isSaved: state.teacher.isSaved
 	}
 }
 const mapDispatchToProps = dispatch => {

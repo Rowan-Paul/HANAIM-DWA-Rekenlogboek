@@ -1,4 +1,4 @@
-import '../../../scss/logbook-designer/components/LogbookOverview.scss'
+import '../../../scss/teacher/components/LogbookOverview.scss'
 import React from 'react'
 
 export default function LogbookOverview(props) {

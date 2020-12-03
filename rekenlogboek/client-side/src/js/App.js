@@ -4,14 +4,14 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-import LogbookDesigner from './logbook-designer/LogbookDesigner'
-import { LogbookDesignerLanding } from './logbook-designer/containers/LogbookDesignerLanding'
+import Teacher from './teacher/Teacher'
+import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
-import newLBGeneral from './logbook-designer/containers/General'
-import newLBColumns from './logbook-designer/containers/Columns'
-import newLBGoals from './logbook-designer/containers/Goals'
-import newLBOverview from './logbook-designer/containers/Overview'
-import newLBCompleted from './logbook-designer/containers/Completed'
+import newLBGeneral from './teacher/containers/General'
+import newLBColumns from './teacher/containers/Columns'
+import newLBGoals from './teacher/containers/Goals'
+import newLBOverview from './teacher/containers/Overview'
+import newLBCompleted from './teacher/containers/Completed'
 
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
@@ -46,36 +46,36 @@ function App() {
 								{/* LOGBOOK DESIGNER */}
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/general"
+									path="/teacher/new-logbook/general"
 									component={newLBGeneral}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/columns"
+									path="/teacher/new-logbook/columns"
 									component={newLBColumns}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/goals"
+									path="/teacher/new-logbook/goals"
 									component={newLBGoals}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/overview"
+									path="/teacher/new-logbook/overview"
 									component={newLBOverview}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/done"
+									path="/teacher/new-logbook/done"
 									component={newLBCompleted}
 								/>
 								{/* A few route so it gets the correct styling? */}
-								<Route path="/logbook-designer/new-logbook"></Route>
-								<Route path="/logbook-designer/overview"></Route>
-								<Route path="/logbook-designer">
-									<LogbookDesigner>
-										<LogbookDesignerLanding />
-									</LogbookDesigner>
+								<Route path="/teacher/new-logbook"></Route>
+								<Route path="/teacher/overview"></Route>
+								<Route path="/teacher">
+									<Teacher>
+										<TeacherLanding />
+									</Teacher>
 								</Route>
 
 								{/* SIGN-IN */}
