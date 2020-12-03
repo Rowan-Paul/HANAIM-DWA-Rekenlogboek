@@ -5,7 +5,7 @@ const router = express.Router()
 const fileUpload = require('express-fileupload')
 
 // file upload api
-router.post('/upload/goals', (req, res) => {
+router.post('/uploads/goals', (req, res) => {
 	if (!req.files) {
 		return res.status(500).send({ msg: 'file is not found' })
 	}
