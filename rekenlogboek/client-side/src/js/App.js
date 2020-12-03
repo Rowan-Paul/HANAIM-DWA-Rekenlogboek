@@ -4,7 +4,6 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-import Teacher from './teacher/Teacher'
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
 import newLBGeneral from './teacher/containers/General'
@@ -72,11 +71,7 @@ function App() {
 								{/* A few route so it gets the correct styling? */}
 								<Route path="/teacher/new-logbook"></Route>
 								<Route path="/teacher/overview"></Route>
-								<Route path="/teacher">
-									<Teacher>
-										<TeacherLanding />
-									</Teacher>
-								</Route>
+								<Route path="/teacher" component={TeacherLanding} />
 
 								{/* SIGN-IN */}
 								<Route exact path="/" component={SignIn} />
