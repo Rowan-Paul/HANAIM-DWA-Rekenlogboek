@@ -13,6 +13,8 @@ import newLBGoals from './logbook-designer/containers/Goals'
 import newLBOverview from './logbook-designer/containers/Overview'
 import newLBCompleted from './logbook-designer/containers/Completed'
 
+import StudentLogbooks from './teacher/containers/Studentlogbooks'
+
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
@@ -78,6 +80,11 @@ function App() {
 										<LogbookDesignerLanding />
 									</LogbookDesigner>
 								</Route>
+								<Route
+									exact
+									path="/teacher/logbooks"
+									component={StudentLogbooks}
+								></Route>
 
 								{/* SIGN-IN */}
 								<Route exact path="/" component={SignIn} />
