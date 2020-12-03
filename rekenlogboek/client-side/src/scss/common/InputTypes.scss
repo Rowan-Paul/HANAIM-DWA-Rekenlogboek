@@ -1,0 +1,100 @@
+@import '../Variables.scss';
+
+.Radiobuttons,
+.Checkboxes {
+	margin: 0;
+	padding: 0;
+
+	li {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, calc(100% / 6));
+		list-style-type: none;
+		position: relative;
+		width: 100%;
+
+		span {
+			align-items: center;
+			color: $fontColor;
+			display: flex;
+			font-size: 14px;
+			grid-column: span 3;
+		}
+		div {
+			align-items: center;
+			color: $fontLight;
+			display: flex;
+			font-size: 12px;
+			grid-column: span 2;
+			position: relative;
+
+			span {
+				color: $fontLight;
+				font-size: 12px;
+				position: absolute;
+				right: 5%;
+			}
+		}
+
+		i {
+			padding-right: 0.25vw;
+		}
+
+		// Input for explanation
+		.Explanation {
+			font-size: 12px;
+			grid-column: span 5;
+			margin: 0.5vh 0 2vh !important;
+			padding: 0.5vh !important;
+			width: 95%;
+		}
+	}
+}
+
+.Textarea {
+	width: 100%;
+
+	textarea {
+		border: 1px solid $borderColor;
+		border-radius: 8px;
+		min-height: 15vh;
+		margin: 0.5vh auto;
+		padding: 0.5vh 2.5%;
+		resize: none;
+		width: calc(100% - (2px + 5%));
+	}
+}
+
+.InputHandlers {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, calc(100% / 2));
+	padding: 0;
+	margin-left: 50%;
+	width: 50%;
+
+	li {
+		width: 80%;
+		margin: 0 auto;
+
+		button {
+			background: transparent;
+			border: none;
+			color: $fontColor;
+			cursor: pointer;
+			outline: none;
+			padding: 0;
+			transition: ease-in-out 0.5s;
+			width: 100%;
+
+			&:hover {
+				color: $fontLight;
+			}
+
+			i {
+				font-size: 12px;
+			}
+			.fa-trash {
+				color: #ff8080;
+			}
+		}
+	}
+}
