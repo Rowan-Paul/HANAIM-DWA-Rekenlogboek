@@ -1,0 +1,22 @@
+@import '../../Variables.scss';
+.progress-bar {
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+
+	.square {
+		background-color: $gray;
+		margin-left: 5px;
+		margin-right: 5px;
+		border-radius: $border-radius;
+
+		&.done {
+			background-color: $blue;
+		}
+
+		&.locked {
+			background-color: inherit;
+		}
+	}
+}
