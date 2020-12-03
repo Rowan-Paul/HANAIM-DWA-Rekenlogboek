@@ -16,6 +16,7 @@ import newLBCompleted from './logbook-designer/containers/Completed'
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
+import Pretoetstest from './teams/Pretoetstest'
 
 // TODO: make privacy and terms of use pages
 // those are required in order to add your app
@@ -98,8 +99,11 @@ function App() {
 		// Display the app home page hosted in Teams
 		return (
 			<Router>
-				<Route exact path="/tab" component={Tab} />
-				<Route exact path="/config" component={TabConfig} />
+				<Switch>
+					<Route exact path="/tab" component={Tab} />
+					<Route exact path="/config" component={TabConfig} />
+					<Route exact path="/tab/pretoetstest" component={Pretoetstest} />
+				</Switch>
 			</Router>
 		)
 	}
