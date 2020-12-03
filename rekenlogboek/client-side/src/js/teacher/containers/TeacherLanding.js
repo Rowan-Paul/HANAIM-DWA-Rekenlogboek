@@ -21,27 +21,27 @@ function TeacherLandingUI(props) {
 				<h1>Welkom, {props.user.name}</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
-					<ButtonContainer
+					{/* <ButtonContainer
 						icon={viewLogbookSVG}
 						color="yellow"
 						description="Bepaal wat de leerlingen in mogen vullen."
 						value="Bepaal toegang"
-						handler={() => changePage('overview')}
-					/>
+						handler={() => changePage('overview')} //TODO: add page
+					/> */}
 					<ButtonContainer
 						icon={createLogbookSVG}
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => changePage('new-teacher/general')}
+						handler={() => changePage('new-logbook/general')}
 					/>
-					<ButtonContainer
+					{/* <ButtonContainer
 						icon={archiveSVG}
 						color="blue"
 						description="Bekijk ingevulde logboeken."
 						value="Ingevulde logboeken"
-						handler={() => changePage('new-teacher/general')}
-					/>
+						handler={() => changePage('')} //TODO: add page
+					/> */}
 				</div>
 			</div>
 		</div>

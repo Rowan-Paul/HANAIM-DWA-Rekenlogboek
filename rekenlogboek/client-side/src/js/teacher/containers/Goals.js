@@ -22,7 +22,7 @@ function Page3(props) {
 			  alert('Je moet eerst leerdoelen invoeren.')
 
 	return (
-		<div className="new-teacher">
+		<div className="new-logbook">
 			<Jumbotron>
 				<AddLearnGoal handler={newGoal => props.addLearnGoal(newGoal)} />
 				<InfoContainer>
@@ -55,7 +55,7 @@ function Page3(props) {
 }
 const mapStateToProps = state => {
 	return {
-		goals: state.teacher.goals
+		goals: state.logbook.goals
 	}
 }
 

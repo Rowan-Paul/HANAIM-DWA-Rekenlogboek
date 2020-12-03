@@ -19,7 +19,7 @@ function Page4(props) {
 	})
 
 	return (
-		<div className="new-teacher">
+		<div className="new-logbook">
 			<Jumbotron>
 				<LogbookOverview
 					columns={props.columns}
@@ -55,10 +55,10 @@ function Page4(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.teacher.columns,
-		group: state.teacher.group,
-		goals: state.teacher.goals,
-		isSaved: state.teacher.isSaved
+		columns: state.logbook.columns,
+		group: state.logbook.group,
+		goals: state.logbook.goals,
+		isSaved: state.logbook.isSaved
 	}
 }
 const mapDispatchToProps = dispatch => {

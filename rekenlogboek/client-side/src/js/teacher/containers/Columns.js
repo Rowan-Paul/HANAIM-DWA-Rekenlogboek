@@ -46,7 +46,7 @@ function Page2(props) {
 	}
 
 	return (
-		<div className="new-teacher">
+		<div className="new-logbook">
 			<Jumbotron>
 				<div className="vertical-center">
 					<SelectColumnTypes
@@ -86,10 +86,10 @@ function Page2(props) {
 
 const mapStateToProps = state => {
 	return {
-		title1: state.teacher.columns[0].title,
-		inputType1: state.teacher.columns[0].inputType,
-		title2: state.teacher.columns[1].title,
-		inputType2: state.teacher.columns[1].inputType
+		title1: state.logbook.columns[0].title,
+		inputType1: state.logbook.columns[0].inputType,
+		title2: state.logbook.columns[1].title,
+		inputType2: state.logbook.columns[1].inputType
 	}
 }
 

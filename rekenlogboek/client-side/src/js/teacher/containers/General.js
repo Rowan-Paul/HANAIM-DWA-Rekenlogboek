@@ -26,7 +26,7 @@ function Page1(props) {
 	}
 
 	return (
-		<div className="new-teacher">
+		<div className="new-logbook">
 			<Jumbotron>
 				<div className="vertical-center">
 					<form>
@@ -66,8 +66,8 @@ function Page1(props) {
 const mapStateToProps = state => {
 	return {
 		user: state.main.user,
-		group: state.teacher.group,
-		period: state.teacher.period
+		group: state.logbook.group,
+		period: state.logbook.period
 	}
 }
 

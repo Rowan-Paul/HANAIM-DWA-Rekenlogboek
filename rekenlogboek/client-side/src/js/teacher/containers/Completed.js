@@ -10,7 +10,7 @@ import '../../../scss/teacher/containers/NewLogbook.scss'
 
 export default function Page5() {
 	return (
-		<div className="new-teacher">
+		<div className="new-logbook">
 			<Jumbotron>
 				<LogbookSaved />
 				<InfoContainer>
