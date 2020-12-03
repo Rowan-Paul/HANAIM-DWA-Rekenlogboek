@@ -6,7 +6,7 @@ import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
 import { LogbookSaved } from '../components/LogbookSaved'
 
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 export default function Page5() {
 	return (

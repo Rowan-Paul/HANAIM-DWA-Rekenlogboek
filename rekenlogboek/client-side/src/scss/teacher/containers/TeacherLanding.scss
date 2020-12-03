@@ -1,5 +1,6 @@
-.logbook-designer-landing {
+.teacher-landing {
 	width: 100%;
+	height: inherit;
 
 	p {
 		font-size: 24px;
@@ -13,5 +14,11 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+	}
+
+	.buttons-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
 	}
 }

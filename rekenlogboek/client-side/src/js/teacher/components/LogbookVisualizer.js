@@ -1,4 +1,4 @@
-import '../../../scss/logbook-designer/components/LogbookVisualizer.scss'
+import '../../../scss/teacher/components/LogbookVisualizer.scss'
 import React from 'react'
 
 export default function LogbookVisualizer(props) {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../../../scss/logbook-designer/components/LearnGoal.scss'
+import '../../../scss/teacher/components/LearnGoal.scss'
 
 export default function LearnGoal(props) {
 	const [view, setView] = useState(false)

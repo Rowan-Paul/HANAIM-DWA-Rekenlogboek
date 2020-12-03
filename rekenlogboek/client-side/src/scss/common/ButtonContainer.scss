@@ -1,18 +1,19 @@
 @import '../Variables.scss';
 
-.ButtonContainer {
+.button-container {
 	box-shadow: $shadow;
 	border-radius: 8px;
 	height: 50%;
 	margin: 5% 20px;
 	padding: 2.5%;
-	width: 35%;
+	width: 270px;
 	min-height: 350px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+	background-color: #fff;
 
-	.iconContainer {
+	.icon-container {
 		align-items: center;
 		display: flex;
 		height: 40%;
