@@ -7,11 +7,24 @@ export default function LogbookList(props) {
 		<div className="LogbookList">
 			<div>
 				<table border="1">
-					<p>Leerjaar: 2019-2020</p>
-					<p>Groep: 5</p>
-					<p>Blok: 5</p>
+					<p>Leerjaar: {props.year}</p>
+					<p>Groep: {props.group}</p>
+					<p>Blok: {props.period}</p>
 
 					<tbody>
+						{props.studentlogbooks.map(studentlogbook => (
+							<tr key={studentlogbook.student}>
+								<td>
+									<p>{studentlogbook.student}</p>
+								</td>
+								<td>
+									<p>ERROR</p>
+								</td>
+								<td>
+									<img src={Icon} />
+								</td>
+							</tr>
+						))}
 						<tr>
 							<td>
 								<p>Jan Peter </p>
