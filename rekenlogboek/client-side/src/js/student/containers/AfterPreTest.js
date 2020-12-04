@@ -6,7 +6,7 @@ import ProgressBar from '../components/ProgressBar'
 function AfterPreTest() {
 	return (
 		<div className="after-pre-test">
-			<ProgressBar itemCount={5} done={[0, 3]} />
+			<ProgressBar itemCount={5} done={[1, 3]} />
 			{/* <LearnGoal />
       <LearnGoalImage/>
       <Question/>

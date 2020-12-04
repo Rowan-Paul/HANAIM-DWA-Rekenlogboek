@@ -50,7 +50,7 @@ function App() {
 							<Switch>
 								{/* <Route
 									exact
-									path="/student/after-pre-test"
+									path="/student/default"
 									component={Default}
 								/> */}
 								<Route
@@ -60,11 +60,11 @@ function App() {
 								/>
 								{/* <Route
 									exact
-									path="/student/after-pre-test"
+									path="/student/instructions"
 									component={Instructions} />
 								<Route
 									exact
-									path="/student/after-pre-test"
+									path="/student/evaluation"
 									component={Evaluation}
 								/> */}
 
