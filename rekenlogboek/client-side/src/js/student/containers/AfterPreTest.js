@@ -16,6 +16,7 @@ function AfterPreTest() {
 			<Jumbotron>
 				<div className="learn-goal-container">
 					<div className="left-side">
+						{/* TODO: replace with data from database */}
 						<LearnGoal
 							goal="Doel 1:test"
 							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
@@ -23,7 +24,8 @@ function AfterPreTest() {
 						<Question />
 					</div>
 					<div className="right-side">
-						<LearnGoalImage />
+						{/* TODO: replace with src from database */}
+						<LearnGoalImage src="/uploads/goals/LearnGoalThumb.png" />
 					</div>
 				</div>
 			</Jumbotron>
