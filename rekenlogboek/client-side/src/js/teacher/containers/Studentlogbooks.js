@@ -9,9 +9,14 @@ function StudentLogbooks(props) {
 	const [studentlogbooks, setStudentlogbooks] = useState([])
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/logbook/year/19%2F20/group/5/period/1`, {
-			method: 'GET'
-		})
+		fetch(
+			`http://localhost:3000/logbook/year/` +
+				encodeURIComponent('19/20') +
+				`/group/5/period/1`,
+			{
+				method: 'GET'
+			}
+		)
 			.then(response => response.json())
 			.then(response => {
 				setLogbook(response)
