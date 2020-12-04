@@ -10,7 +10,7 @@ function Modal(props) {
 			<div className="Box">
 				<div className="Header">
 					<h2>{props.title}</h2>
-					<button onClick={e => props.modalHide()}>
+					<button onClick={() => props.modalHide()}>
 						<i className="fa fa-close"></i>
 					</button>
 				</div>
