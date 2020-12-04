@@ -3,7 +3,8 @@
 	grid-column: span 4;
 	grid-template-columns: repeat(auto-fit, calc(100% / 4));
 	height: 20%;
-	margin: 0;
+	grid-row: span 1;
+	margin: auto;
 	padding: 0;
 	position: relative;
 	width: 100%;

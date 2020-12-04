@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
 	deleteInputValue,
 	explanationFieldToggle
-} from '../../../../redux/visual/actions'
+} from '../../../../redux/logbook/actions'
 import '../../../../scss/common/InputTypes.scss'
 
 function InputHandlers(props) {

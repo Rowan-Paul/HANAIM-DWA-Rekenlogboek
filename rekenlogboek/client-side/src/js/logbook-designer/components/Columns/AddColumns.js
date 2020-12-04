@@ -5,14 +5,14 @@ import {
 	setInputType,
 	setColumnTitle,
 	addInputValue
-} from '../../../redux/visual/actions'
+} from '../../../../redux/logbook/actions'
 
-import '../../../scss/logbook-designer/components/AddColumn.scss'
-import AddInputValue from './Columns/AddInputValue'
-import Checkboxes from '../../common/InputTypes/Checkboxes'
-import Radiobuttons from '../../common/InputTypes/Radiobuttons'
-import Textarea from '../../common/InputTypes/Textarea'
+import AddInputValue from './AddInputValue'
+import Checkboxes from '../../../common/InputTypes/Checkboxes'
+import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
+import Textarea from '../../../common/InputTypes/Textarea'
 
+import '../../../../scss/logbook-designer/components/columns/AddColumns.scss'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
 	const [inputValues, setInputValues] = useState('')

@@ -1,8 +1,8 @@
 import React from 'react'
 import shortid from 'shortid'
 
+import InputHandlers from '../../logbook-designer/components/columns/InputHandlers'
 import '../../../scss/common/InputTypes.scss'
-import InputHandlers from '../../logbook-designer/components/Columns/InputHandlers'
 
 export default function RadioButtons(props) {
 	return (

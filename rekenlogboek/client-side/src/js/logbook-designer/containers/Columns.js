@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setColumn } from '../../../redux/visual/actions'
-import Jumbotron from '../../common/Jumbotron'
-import Button from '../../common/Button'
 
-import TopBar from '../components/Visual/TopBar'
+import Button from '../../common/Button'
+import AddColumns from '../components/columns/AddColumns'
+import ColumnPreview from '../components/columns/ColumnPreview'
 import Evaluation from '../../common/InputTypes/Evaluation'
-import VisualFrame from '../components/Visual/VisualFrame'
+import Jumbotron from '../../common/Jumbotron'
+import LogbookFrame from '../components/logbookTable/logbookFrame'
+import LogbookHeader from '../components/logbookTable/logbookHeader'
 import Modal from '../components/Modal'
-import AddColumn from '../components/AddColumn'
-import VisualHeader from '../components/Visual/VisualHeader'
-import ColumnPreview from '../components/Columns/ColumnPreview'
+import TopBar from '../components/logbookTable/TopBar'
 
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import { setColumn } from '../../../redux/logbook/actions'
 function Columns(props) {
 	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)
@@ -42,13 +42,13 @@ function Columns(props) {
 		<div className="new-logbook">
 			{modal && (
 				<Modal handler={props.setColumn}>
-					<AddColumn />
+					<AddColumns />
 				</Modal>
 			)}
 			<Jumbotron>
 				<TopBar title={'Kolommen toevoegen'} group={5} period={1} />
-				<VisualFrame>
-					<VisualHeader />
+				<LogbookFrame>
+					<LogbookHeader />
 					<li className="Row Body">
 						<div>
 							<p>
@@ -63,7 +63,7 @@ function Columns(props) {
 							<Evaluation />
 						</div>
 					</li>
-				</VisualFrame>
+				</LogbookFrame>
 			</Jumbotron>
 
 			<div className="prev button">

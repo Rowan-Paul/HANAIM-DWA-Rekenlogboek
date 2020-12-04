@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
 import InfoContainer from '../../common/InfoContainer'
@@ -10,7 +10,8 @@ import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
 import '../../../scss/logbook-designer/containers/NewLogbook.scss'
 
-function Page4(props) {
+function Overview(props) {
+	const history = useHistory()
 	useEffect(() => {
 		if (props.isSaved) {
 			props.resetLogbook()
@@ -68,4 +69,7 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Page4))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Overview))

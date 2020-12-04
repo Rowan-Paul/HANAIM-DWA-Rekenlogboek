@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addInputValue } from '../../../redux/visual/actions'
+import { addInputValue } from '../../../redux/logbook/actions'
 
 import '../../../scss/common/InputTypes.scss'
 

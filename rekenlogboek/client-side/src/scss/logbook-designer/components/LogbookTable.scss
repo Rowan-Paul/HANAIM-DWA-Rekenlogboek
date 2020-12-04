@@ -1,4 +1,4 @@
-@import '../../../Variables.scss';
+@import '../../Variables.scss';
 
 h4 {
 	color: $fontColor;
@@ -6,16 +6,17 @@ h4 {
 	padding: 0;
 }
 
-.Visual {
+.LogbookFrame {
 	background: #fff;
 	border: 1px solid $borderColor;
 	border-radius: 8px;
 	font-size: 14px;
 	grid-column: span 4;
+	grid-row: span 4;
 	width: calc(90% - 2px);
 	margin: 0 auto;
 	padding: 0;
-	height: 75%;
+	height: 90%;
 
 	.Row {
 		list-style: none;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../../../redux/visual/actions'
+import { modalShow } from '../../../../redux/logbook/actions'
 
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/logbook-designer/components/Columns/ColumnPreview.scss'
+import '../../../../scss/logbook-designer/components/columns/ColumnPreview.scss'
 function ColumnPreview(props) {
 	const [column, setColumn] = useState({})
 
