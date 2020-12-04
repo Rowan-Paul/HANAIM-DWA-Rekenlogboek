@@ -6,7 +6,7 @@ import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/columns/ColumnPreview.scss'
+import '../../../../scss/teacher/components/column/ColumnPreview.scss'
 function ColumnPreview(props) {
 	const [column, setColumn] = useState({})
 

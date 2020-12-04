@@ -12,7 +12,7 @@ import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/columns/AddColumns.scss'
+import '../../../../scss/teacher/components/column/AddColumn.scss'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
 	const [inputValues, setInputValues] = useState('')

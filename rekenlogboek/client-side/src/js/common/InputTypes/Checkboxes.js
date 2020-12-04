@@ -1,6 +1,6 @@
 import React from 'react'
 import shortid from 'shortid'
-import InputHandlers from '../../teacher/components/columns/InputHandlers'
+import InputHandlers from '../../teacher/components/column/InputHandlers'
 
 import '../../../scss/common/InputTypes.scss'
 

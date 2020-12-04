@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { setColumn } from '../../../redux/logbook/actions'
 
 import Button from '../../common/Button'
-import AddColumns from '../components/columns/AddColumns'
-import ColumnPreview from '../components/columns/ColumnPreview'
+import AddColumn from '../components/column/AddColumn'
+import ColumnPreview from '../components/column/ColumnPreview'
 import Evaluation from '../../common/InputTypes/Evaluation'
 import Jumbotron from '../../common/Jumbotron'
 import LogbookFrame from '../components/logbookTable/logbookFrame'
@@ -13,7 +14,6 @@ import Modal from '../components/Modal'
 import TopBar from '../components/logbookTable/TopBar'
 
 import '../../../scss/teacher/containers/NewLogbook.scss'
-import { setColumn } from '../../../redux/logbook/actions'
 function Columns(props) {
 	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)
@@ -42,7 +42,7 @@ function Columns(props) {
 		<div className="new-logbook">
 			{modal && (
 				<Modal handler={props.setColumn}>
-					<AddColumns />
+					<AddColumn />
 				</Modal>
 			)}
 			<Jumbotron>
