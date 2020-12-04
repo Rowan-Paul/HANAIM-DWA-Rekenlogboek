@@ -1,16 +1,33 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
+import '../../../scss/student/containers/AfterPreTest.scss'
+
 import ProgressBar from '../components/ProgressBar'
+import LearnGoal from '../components/LearnGoal'
+import Jumbotron from '../../common/Jumbotron'
+import LearnGoalImage from '../components/LearnGoalImage'
+import Question from '../components/Question'
 
 function AfterPreTest() {
 	return (
 		<div className="after-pre-test">
 			<ProgressBar itemCount={5} done={[1, 3]} />
-			{/* <LearnGoal />
-      <LearnGoalImage/>
-      <Question/>
-			<Button /> */}
+			<Jumbotron>
+				<div className="learn-goal-container">
+					<div className="left-side">
+						<LearnGoal
+							goal="Doel 1:test"
+							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
+						/>
+						<Question />
+					</div>
+					<div className="right-side">
+						<LearnGoalImage />
+					</div>
+				</div>
+			</Jumbotron>
+			{/* <Button /> */}
 		</div>
 	)
 }
