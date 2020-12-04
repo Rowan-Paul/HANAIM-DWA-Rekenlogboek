@@ -74,7 +74,7 @@ function ColumnPreview(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.visualState.columns
+		columns: state.logbook.columns
 	}
 }
 

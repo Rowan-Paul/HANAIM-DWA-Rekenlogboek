@@ -26,7 +26,7 @@ function Modal(props) {
 
 const mapStateToProps = state => {
 	return {
-		title: state.visualState.modal.title
+		title: state.logbook.modal.title
 	}
 }
 

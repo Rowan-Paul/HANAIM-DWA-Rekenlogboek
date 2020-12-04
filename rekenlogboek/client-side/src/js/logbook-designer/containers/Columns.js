@@ -86,8 +86,8 @@ function Columns(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.visualState.columns,
-		modalVisible: state.visualState.modal.visible
+		columns: state.logbook.columns,
+		modalVisible: state.logbook.modal.visible
 	}
 }
 

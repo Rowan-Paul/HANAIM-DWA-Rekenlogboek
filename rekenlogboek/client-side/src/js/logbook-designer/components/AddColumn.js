@@ -89,9 +89,9 @@ function AddColumn(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.visualState.columns,
-		inputTypes: state.visualState.inputTypes,
-		position: state.visualState.position
+		columns: state.logbook.columns,
+		inputTypes: state.logbook.inputTypes,
+		position: state.logbook.position
 	}
 }
 
