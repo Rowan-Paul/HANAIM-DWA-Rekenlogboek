@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import '../../../../scss/teacher/components/TopBar.scss'
-export default function TopBar(props) {
+
+function TopBar(props) {
 	return (
 		<ul className="TopBar">
 			<li>
@@ -17,3 +19,16 @@ export default function TopBar(props) {
 		</ul>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		group: state.logbook.group,
+		period: state.logbook.period
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

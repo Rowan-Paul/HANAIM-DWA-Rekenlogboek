@@ -46,7 +46,7 @@ function Columns(props) {
 				</Modal>
 			)}
 			<Jumbotron>
-				<TopBar title={'Kolommen toevoegen'} group={5} period={1} />
+				<TopBar title={'Kolommen toevoegen'} />
 				<LogbookFrame>
 					<LogbookHeader />
 					<li className="Row Body">
