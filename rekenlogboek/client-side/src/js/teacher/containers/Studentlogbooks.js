@@ -1,86 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LogbookList from '../components/LogbookList'
 import Jumbotron from '../../common/Jumbotron'
 
 function StudentLogbooks(props) {
-	useEffect(() => {}, [])
+	const [logbook, setLogbook] = useState('')
+	const [studentlogbooks, setStudentlogbooks] = useState([])
+
+	useEffect(() => {
+		fetch(`http://localhost:3000/logbook/year/19%2F20/group/5/period/1`, {
+			method: 'GET'
+		})
+			.then(response => response.json())
+			.then(response => {
+				setLogbook(response)
+				console.log(response._id)
+				return response
+			})
+			.then(response => {
+				fetch(`http://localhost:3000/studentlogbook/logbooks/` + response._id, {
+					method: 'GET'
+				})
+					.then(response => response.json())
+					.then(response => {
+						setStudentlogbooks(response)
+					})
+			})
+			.catch(error => console.log(error))
+	}, [])
 
 	return (
 		<Jumbotron>
 			<LogbookList
-				year="2019-2020"
-				group={5}
-				period={5}
-				studentlogbooks={[
-					{
-						logbookID: '5fbf66ca14b7c811a829fadf',
-						student: 'James',
-						answers: [
-							{
-								goalPosition: 1,
-								columnPosition: 1,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 1',
-									boolean: true
-								}
-							},
-							{
-								goalPosition: 1,
-								columnPosition: 2,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 2',
-									boolean: true
-								}
-							},
-							{
-								goalPosition: 2,
-								columnPosition: 1,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 3',
-									boolean: true
-								}
-							}
-						]
-					},
-					{
-						logbookID: '5fbf66ca14b7c811a829fadf',
-						student: 'James',
-						answers: [
-							{
-								goalPosition: 1,
-								columnPosition: 1,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 1',
-									boolean: true
-								}
-							},
-							{
-								goalPosition: 1,
-								columnPosition: 2,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 2',
-									boolean: true
-								}
-							},
-							{
-								goalPosition: 2,
-								columnPosition: 1,
-								answer: {
-									inputType: 'string',
-									value: 'This is an answer 3',
-									boolean: true
-								}
-							}
-						]
-					}
-				]}
+				logbook={logbook}
+				studentlogbooks={studentlogbooks}
 			></LogbookList>
 		</Jumbotron>
 	)
