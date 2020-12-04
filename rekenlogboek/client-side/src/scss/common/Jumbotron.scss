@@ -5,8 +5,19 @@
 	background: $formColor;
 	border-radius: 8px;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, calc(100% / 3));
 	margin: auto;
 	height: 80%;
 	width: 90%;
+
+	&.columns-1 {
+		grid-template-columns: repeat(auto-fit, 100%);
+	}
+
+	&.columns-2 {
+		grid-template-columns: repeat(auto-fit, calc(100% / 2));
+	}
+
+	&.columns-3 {
+		grid-template-columns: repeat(auto-fit, calc(100% / 3));
+	}
 }

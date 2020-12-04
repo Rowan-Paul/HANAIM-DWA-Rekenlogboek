@@ -20,7 +20,7 @@ function Page4(props) {
 
 	return (
 		<div className="new-logbook">
-			<Jumbotron>
+			<Jumbotron columns={3}>
 				<LogbookOverview
 					columns={props.columns}
 					group={props.group}

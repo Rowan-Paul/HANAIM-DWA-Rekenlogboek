@@ -13,7 +13,7 @@ function AfterPreTest() {
 	return (
 		<div className="after-pre-test">
 			<ProgressBar itemCount={5} done={[1, 3]} />
-			<Jumbotron>
+			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
 						{/* TODO: replace with data from database */}

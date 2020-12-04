@@ -3,7 +3,16 @@
 		margin: 16px;
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: space-between;
 		width: 100%;
+
+		.left-side,
+		.right-side {
+			width: 40%;
+
+			img {
+				width: 80%;
+			}
+		}
 	}
 }

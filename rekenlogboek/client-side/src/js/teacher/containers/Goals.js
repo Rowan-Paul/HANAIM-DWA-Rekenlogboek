@@ -23,7 +23,7 @@ function Page3(props) {
 
 	return (
 		<div className="new-logbook">
-			<Jumbotron>
+			<Jumbotron columns={3}>
 				<AddLearnGoal handler={newGoal => props.addLearnGoal(newGoal)} />
 				<InfoContainer>
 					{props.goals.length > 0 ? (

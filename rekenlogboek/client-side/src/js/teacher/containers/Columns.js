@@ -47,7 +47,7 @@ function Page2(props) {
 
 	return (
 		<div className="new-logbook">
-			<Jumbotron>
+			<Jumbotron columns={3}>
 				<div className="vertical-center">
 					<SelectColumnTypes
 						changeTypeHandler={changeTypeHandler}
