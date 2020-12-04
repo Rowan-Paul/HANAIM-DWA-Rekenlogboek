@@ -29,3 +29,17 @@ p {
 textarea {
 	font-family: Nunito, sans-serif;
 }
+
+.button {
+	bottom: 0;
+	position: absolute;
+	width: 12.5%;
+
+	&.prev {
+		left: 5%;
+	}
+
+	&.next {
+		right: 5%;
+	}
+}

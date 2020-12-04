@@ -8,18 +8,6 @@
 	position: relative;
 	width: 90%;
 
-	.button {
-		bottom: 0;
-		position: absolute;
-		width: 12.5%;
-	}
-	.prev {
-		left: 5%;
-	}
-	.next {
-		right: 5%;
-	}
-
 	.vertical-center {
 		display: flex;
 		flex-direction: column;
