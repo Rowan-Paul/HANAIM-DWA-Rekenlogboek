@@ -59,7 +59,7 @@ const logbookSchema = new mongoose.Schema({
 				type: String,
 				isRequired: true
 			},
-			imagelink: {
+			imageLink: {
 				type: String,
 				isRequired: false
 			}
