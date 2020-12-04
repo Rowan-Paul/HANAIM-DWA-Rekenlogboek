@@ -13,7 +13,6 @@ function ColumnPreview(props) {
 	useEffect(() => {
 		const column = props.columns.filter(c => c.position === props.position)[0]
 		setColumn(column)
-		console.log(column)
 	}, [props.columns])
 
 	if (column.added) {
