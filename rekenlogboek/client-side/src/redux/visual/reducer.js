@@ -1,5 +1,7 @@
 import {
 	ADD_INPUT_VALUE,
+	DELETE_INPUT_VALUE,
+	EXPLANATION_FIELD_TOGGLE,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
@@ -32,36 +34,50 @@ const initialState = {
 			}
 		}
 	],
+	inputTypes: {
+		checkboxes: 'checkboxes',
+		radiobuttons: 'radiobuttons',
+		textarea: 'textarea'
+	},
 	modal: {
 		title: '',
 		visible: false
 	},
+	// This property helps functions rembember which column or row is currently edited
 	position: 0
 }
 
 export default function visualReducer(state = initialState, action) {
 	switch (action.type) {
-		/* Add value to correct type */
 		case ADD_INPUT_VALUE:
-			// If payload isset
 			if (action.payload) {
 				return {
 					...state,
+					/** Adds value to checkbox or radiobutton group
+					 *
+					 * 1. Finds column where position is equal to state position
+					 * 2. case textarea : replace textarea value
+					 * 3  default: Add new inputvalue to inputType array
+					 *
+					 * example: values.checkboxes.push({
+					 * 	explanation: false,
+					 *  text: 'Ik begrijp het goed'
+					 * })
+					 */
 					columns: state.columns.filter(column => {
-						// If column positon matches state position
 						if (column.position === state.position) {
-							// Determ inputType
 							switch (column.inputType) {
-								// Update value for textarea
-								case 'textarea':
+								case state.inputTypes.textarea:
 									column.values[column.inputType] = action.payload
 									break
 
-								// Push payload (new value) to inputType that is currently active
 								default:
 									column.values[column.inputType] = [
 										...column.values[column.inputType],
-										action.payload
+										{
+											explanation: false,
+											text: action.payload
+										}
 									]
 							}
 						}
@@ -70,14 +86,52 @@ export default function visualReducer(state = initialState, action) {
 				}
 			}
 			return state
-
+		case DELETE_INPUT_VALUE: {
+			return {
+				...state,
+				/** Deletes value from checkbox or radiobutton group
+				 *
+				 * 1. Finds column where position is equal to state position
+				 * 2. Finds values where type is equal to state inputType
+				 * 3. Finds value inside array en removes where equal to position from payload
+				 *
+				 * example: values.checkboxes[1] deleted
+				 */
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.values[column.inputType] = column.values[
+							column.inputType
+						].filter((_, i) => i !== action.payload)
+					}
+					return column
+				})
+			}
+		}
+		case EXPLANATION_FIELD_TOGGLE: {
+			/** Toggles explanation field from checkbox or radiobutton value
+			 *
+			 * 1. Finds column where position is equal to state position
+			 * 2. Finds value inside array and toggles explanation boolean to opposite
+			 */
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.values[column.inputType][
+							action.payload
+						].explanation = !column.values[column.inputType][action.payload]
+							.explanation
+					}
+					return column
+				})
+			}
+		}
 		case MODAL_HIDE:
 			return {
 				...state,
 				modal: { visible: false }
 			}
 
-		/* Show modal, receives position and title from function*/
 		case MODAL_SHOW:
 			return {
 				...state,
@@ -91,41 +145,33 @@ export default function visualReducer(state = initialState, action) {
 			return {
 				...state,
 				columns: state.columns.filter(column => {
-					switch (column.position) {
-						case state.position:
-							column.added = true
-						default:
-							return column
+					if (column.position === state.position) {
+						column.added = true
 					}
+					return column
 				}),
 				modal: { visible: false }
 			}
 
-		/* Set title for column with current position */
 		case SET_COLUMN_TITLE:
 			return {
 				...state,
 				columns: state.columns.filter(column => {
-					switch (column.position) {
-						case state.position:
-							column.title = action.payload
-						default:
-							return column
+					if (column.position === state.position) {
+						column.title = action.payload
 					}
+					return column
 				})
 			}
 
-		/* Updates input type of current column */
 		case SET_INPUT_TYPE:
 			return {
 				...state,
 				columns: state.columns.filter(column => {
-					switch (column.position) {
-						case state.position:
-							column.inputType = action.payload
-						default:
-							return column
+					if (column.position === state.position) {
+						column.inputType = action.payload
 					}
+					return column
 				})
 			}
 		default:

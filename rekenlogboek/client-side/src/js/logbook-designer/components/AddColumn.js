@@ -17,6 +17,7 @@ function AddColumn(props) {
 	const [title, setTitle] = useState('')
 	const [inputValues, setInputValues] = useState('')
 	const [inputType, setInputType] = useState('')
+	const [selected, setSelected] = useState(props.inputTypes.radiobuttons)
 
 	useEffect(() => {
 		const column = props.columns.filter(
@@ -25,15 +26,16 @@ function AddColumn(props) {
 		setTitle(column.title)
 		setInputType(column.inputType)
 		setInputValues(column.values)
+		setSelected(column.inputType)
 	}, [props.columns])
 
 	const getInputType = () => {
 		switch (inputType) {
-			case 'checkboxes':
+			case props.inputTypes.checkboxes:
 				return <Checkboxes values={inputValues.checkboxes} />
-			case 'radiobuttons':
+			case props.inputTypes.radiobuttons:
 				return <Radiobuttons values={inputValues.radiobuttons} />
-			case 'textarea':
+			case props.inputTypes.textarea:
 				return <Textarea value={inputValues.textarea} />
 			default:
 				return null
@@ -58,10 +60,19 @@ function AddColumn(props) {
 			<div className="Block">
 				<h4>Selecteer input type:</h4>
 
-				<select onChange={e => props.setInputType(e.target.value)}>
-					<option value="radiobuttons">Radiobuttons</option>
-					<option value="checkboxes">Checkboxes</option>
-					<option value="textarea">Tekstveld</option>
+				<select
+					onChange={e => props.setInputType(e.target.value)}
+					value={selected}
+				>
+					<option value={props.inputTypes.radiobuttons}>
+						{props.inputTypes.radiobuttons}
+					</option>
+					<option value={props.inputTypes.checkboxes}>
+						{props.inputTypes.checkboxes}
+					</option>
+					<option value={props.inputTypes.textarea}>
+						{props.inputTypes.textarea}
+					</option>
 				</select>
 			</div>
 
@@ -79,6 +90,7 @@ function AddColumn(props) {
 const mapStateToProps = state => {
 	return {
 		columns: state.visualState.columns,
+		inputTypes: state.visualState.inputTypes,
 		position: state.visualState.position
 	}
 }

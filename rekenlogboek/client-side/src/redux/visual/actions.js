@@ -1,5 +1,7 @@
 import {
 	ADD_INPUT_VALUE,
+	DELETE_INPUT_VALUE,
+	EXPLANATION_FIELD_TOGGLE,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
@@ -10,6 +12,18 @@ import {
 export const addInputValue = payload => {
 	return {
 		type: ADD_INPUT_VALUE,
+		payload
+	}
+}
+export const deleteInputValue = payload => {
+	return {
+		type: DELETE_INPUT_VALUE,
+		payload
+	}
+}
+export const explanationFieldToggle = payload => {
+	return {
+		type: EXPLANATION_FIELD_TOGGLE,
 		payload
 	}
 }

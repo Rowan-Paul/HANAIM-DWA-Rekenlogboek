@@ -1,8 +1,8 @@
 import React from 'react'
 import shortid from 'shortid'
+import InputHandlers from '../../logbook-designer/components/Columns/InputHandlers'
 
 import '../../../scss/common/InputTypes.scss'
-import InputHandlers from './InputHandlers'
 
 export default function Checkboxes(props) {
 	return (
@@ -10,12 +10,15 @@ export default function Checkboxes(props) {
 			{props.values.map((value, i) => (
 				<li key={shortid.generate()}>
 					<input type="checkbox" name="checkboxes" value="default" />
-					<span>{value}</span>
+					<span>{value.text}</span>
 					<div>
-						<InputHandlers position={i} />
+						<InputHandlers explanation={value.explanation} position={i} />
 					</div>
+
 					<i></i>
-					<input className="Explanation" type="text" placeholder="Omdat..." />
+					{value.explanation && (
+						<input className="Explanation" type="text" placeholder="Omdat..." />
+					)}
 				</li>
 			))}
 			<li>
