@@ -6,7 +6,7 @@ import '../../scss/common/Header.scss'
 
 function Header(props) {
 	const navHandler = () => {
-		if (props.loggedIn) {
+		if (props.user) {
 			switch (props.user.jobTitle) {
 				case 'Leraar':
 					return (
@@ -29,7 +29,7 @@ function Header(props) {
 				<span>{props.title}</span>
 			</div>
 			<div className="user">
-				<span>{props.loggedIn && props.user.name}</span>
+				<span>{props.user && props.user.name}</span>
 			</div>
 		</header>
 	)
@@ -37,7 +37,6 @@ function Header(props) {
 
 const mapStateToProps = state => {
 	return {
-		loggedIn: state.main.loggedIn,
 		user: state.main.user
 	}
 }
