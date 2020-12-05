@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom'
 import ButtonContainer from '../../common/ButtonContainer'
 
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
-import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
-import archiveSVG from '../../../img/icons/archive.svg'
+// import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
+// import archiveSVG from '../../../img/icons/archive.svg'
 
 function TeacherLandingUI(props) {
 	const changePage = page => {
