@@ -29,7 +29,7 @@ const pca = new msal.ConfidentialClientApplication(config)
 auth.get('/', (req, res) => {
 	const authCodeUrlParameters = {
 		scopes: ['user.read'],
-		redirectUri: 'http://localhost:3000/auth/redirect'
+		redirectUri: process.env.SERVER_ADDRESS + '/auth/redirect'
 	}
 
 	// get url to sign user in and consent to scopes needed for application
@@ -45,7 +45,7 @@ auth.get('/redirect', (req, res) => {
 	const tokenRequest = {
 		code: req.query.code,
 		scopes: ['user.read'],
-		redirectUri: 'http://localhost:3000/auth/redirect'
+		redirectUri: process.env.SERVER_ADDRESS + '/auth/redirect'
 	}
 
 	req.session.user = {}
@@ -114,13 +114,13 @@ auth.get('/redirect', (req, res) => {
 			console.log('User logged in: ', req.session.user)
 
 			// Create an encryptor:
-			const encryptor = require('simple-encryptor')(
-				process.env.REACT_APP_SECRET_KEY
-			)
+			const encryptor = require('simple-encryptor')(process.env.SECRET_KEY)
 
 			const objEnc = encryptor.encrypt(req.session.user)
 
-			res.redirect('https://localhost:3001/auth/succes?' + encodeURI(objEnc))
+			res.redirect(
+				process.env.REACT_APP_ADDRESS + '/auth/succes?' + encodeURI(objEnc)
+			)
 		})
 		.catch(error => {
 			console.log(error)

@@ -100,152 +100,164 @@ describe('Logbook route tests', () => {
 	})
 
 	test('Create logbook', async () => {
-		const createResponse = await fetch('http://localhost:3000/logbook', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				period: 1,
-				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				currentPhase: 'NOT_VISIBLE',
-				columns: [
-					{
-						position: 0,
-						title: 'Doelen'
-					},
-					{
-						position: 1,
-						title: 'Hoe ging de les',
-						input: {
-							type: 'Radiobuttons',
-							options: [
-								'Ik begrijp het goed',
-								'Ik begrijp het niet goed',
-								'Ik weet het nog niet'
-							]
+		const createResponse = await fetch(
+			process.env.SERVER_ADDRESS + '/logbook',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					period: 1,
+					group: 5,
+					year: '19/20',
+					teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+					currentPhase: 'NOT_VISIBLE',
+					columns: [
+						{
+							position: 0,
+							title: 'Doelen'
+						},
+						{
+							position: 1,
+							title: 'Hoe ging de les',
+							input: {
+								type: 'Radiobuttons',
+								options: [
+									'Ik begrijp het goed',
+									'Ik begrijp het niet goed',
+									'Ik weet het nog niet'
+								]
+							}
+						},
+						{
+							position: 2,
+							title: 'Instructie nodig',
+							input: {
+								type: 'Tekstveld'
+							}
+						},
+						{
+							position: 3,
+							title: 'Evaluatie'
 						}
-					},
-					{
-						position: 2,
-						title: 'Instructie nodig',
-						input: {
-							type: 'Tekstveld'
+					],
+					goals: [
+						{
+							position: 0,
+							title: 'Les 1',
+							description: 'In deze les leer je 1+1',
+							imagelink: 'xxx'
+						},
+						{
+							position: 1,
+							title: 'Les 2',
+							description: 'In deze les leer je 2*2',
+							imagelink: 'xxx'
+						},
+						{
+							position: 2,
+							title: 'Les 3',
+							description: 'In deze les leer je 5*5',
+							imagelink: 'xxx'
 						}
-					},
-					{
-						position: 3,
-						title: 'Evaluatie'
-					}
-				],
-				goals: [
-					{
-						position: 0,
-						title: 'Les 1',
-						description: 'In deze les leer je 1+1',
-						imagelink: 'xxx'
-					},
-					{
-						position: 1,
-						title: 'Les 2',
-						description: 'In deze les leer je 2*2',
-						imagelink: 'xxx'
-					},
-					{
-						position: 2,
-						title: 'Les 3',
-						description: 'In deze les leer je 5*5',
-						imagelink: 'xxx'
-					}
-				]
-			})
-		}).then(response => response.status)
+					]
+				})
+			}
+		).then(response => response.status)
 
 		expect(createResponse).toEqual(200)
 	})
 
 	test('Create logbook with missing variable returns error code', async () => {
-		const createResponse = await fetch('http://localhost:3000/logbook', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				currentPhase: 'NOT_VISIBLE',
-				columns: [
-					{
-						position: 0,
-						title: 'Doelen'
-					},
-					{
-						position: 1,
-						title: 'Hoe ging de les',
-						input: {
-							type: 'Radiobuttons',
-							options: [
-								'Ik begrijp het goed',
-								'Ik begrijp het niet goed',
-								'Ik weet het nog niet'
-							]
+		const createResponse = await fetch(
+			process.env.SERVER_ADDRESS + '/logbook',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					group: 5,
+					year: '19/20',
+					teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+					currentPhase: 'NOT_VISIBLE',
+					columns: [
+						{
+							position: 0,
+							title: 'Doelen'
+						},
+						{
+							position: 1,
+							title: 'Hoe ging de les',
+							input: {
+								type: 'Radiobuttons',
+								options: [
+									'Ik begrijp het goed',
+									'Ik begrijp het niet goed',
+									'Ik weet het nog niet'
+								]
+							}
+						},
+						{
+							position: 2,
+							title: 'Instructie nodig',
+							input: {
+								type: 'Tekstveld'
+							}
+						},
+						{
+							position: 3,
+							title: 'Evaluatie'
 						}
-					},
-					{
-						position: 2,
-						title: 'Instructie nodig',
-						input: {
-							type: 'Tekstveld'
+					],
+					goals: [
+						{
+							position: 0,
+							title: 'Les 1',
+							description: 'In deze les leer je 1+1',
+							imagelink: 'xxx'
+						},
+						{
+							position: 1,
+							title: 'Les 2',
+							description: 'In deze les leer je 2*2',
+							imagelink: 'xxx'
+						},
+						{
+							position: 2,
+							title: 'Les 3',
+							description: 'In deze les leer je 5*5',
+							imagelink: 'xxx'
 						}
-					},
-					{
-						position: 3,
-						title: 'Evaluatie'
-					}
-				],
-				goals: [
-					{
-						position: 0,
-						title: 'Les 1',
-						description: 'In deze les leer je 1+1',
-						imagelink: 'xxx'
-					},
-					{
-						position: 1,
-						title: 'Les 2',
-						description: 'In deze les leer je 2*2',
-						imagelink: 'xxx'
-					},
-					{
-						position: 2,
-						title: 'Les 3',
-						description: 'In deze les leer je 5*5',
-						imagelink: 'xxx'
-					}
-				]
-			})
-		}).then(response => response.status)
+					]
+				})
+			}
+		).then(response => response.status)
 
 		expect(createResponse).toEqual(500)
 	})
 
 	test('Get logbook from id', async () => {
 		const logbookID = await getTestlogbookID()
-		const test = await fetch('http://localhost:3000/logbook/' + logbookID, {
-			method: 'GET'
-		}).then(response => response.json())
+		const test = await fetch(
+			process.env.SERVER_ADDRESS + '/logbook/' + logbookID,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
 		expect(test.period).toEqual(3)
 		expect(test.group).toEqual(7)
 	})
 
 	test('Get logbook from with id not found gives error', async () => {
-		const test = await fetch('http://localhost:3000/logbook/' + 21321334333, {
-			method: 'GET'
-		}).then(response => response.json())
+		const test = await fetch(
+			process.env.SERVER_ADDRESS + '/logbook/' + 21321334333,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
 		expect(test.period).toEqual(undefined)
 		expect(test.group).toEqual(undefined)
@@ -254,7 +266,7 @@ describe('Logbook route tests', () => {
 	test('Get the id, position, title and inputType for one column from a specific logbook', async () => {
 		const logbookID = await getTestlogbookID()
 		const column = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/column/1',
+			process.env.SERVER_ADDRESS + '/logbook/' + logbookID + '/column/1',
 			{ method: 'GET' }
 		).then(response => response.json())
 
@@ -265,7 +277,7 @@ describe('Logbook route tests', () => {
 	test('Get the id, position, title and inputType for one column from a specific logbook with not existing columnid gives error', async () => {
 		const logbookID = await getTestlogbookID()
 		const column = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/column/13',
+			process.env.SERVER_ADDRESS + '/logbook/' + logbookID + '/column/13',
 			{ method: 'GET' }
 		).then(response => response.status)
 
@@ -275,7 +287,7 @@ describe('Logbook route tests', () => {
 	test('Get the id, position, title, description and imagelink for one goal for one logbook', async () => {
 		const logbookID = await getTestlogbookID()
 		const goal = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/goal/1',
+			process.env.SERVER_ADDRESS + '/logbook/' + logbookID + '/goal/1',
 			{ method: 'GET' }
 		).then(response => response.json())
 
@@ -286,7 +298,7 @@ describe('Logbook route tests', () => {
 	test('Get the id, position, title, description and imagelink for one goal for one logbook gives error because not existing goalid', async () => {
 		const logbookID = await getTestlogbookID()
 		const goal = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/goal/10',
+			process.env.SERVER_ADDRESS + '/logbook/' + logbookID + '/goal/10',
 			{ method: 'GET' }
 		).then(response => response.status)
 

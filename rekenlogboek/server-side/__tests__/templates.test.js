@@ -92,7 +92,7 @@ describe('Template test routes', () => {
 
 	test('Get template', async () => {
 		const template = await fetch(
-			'http://localhost:3000/templates/' + (await getTemplateID()),
+			process.env.SERVER_ADDRESS + '/templates/' + (await getTemplateID()),
 			{
 				method: 'GET'
 			}
