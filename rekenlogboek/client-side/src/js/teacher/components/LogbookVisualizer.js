@@ -31,7 +31,7 @@ export default function LogbookVisualizer(props) {
 									<p>{goal.description}</p>
 
 									<img
-										src={process.env.REACT_SERVER_ADDRESS + goal.imageLink}
+										src={process.env.REACT_APP_SERVER_ADDRESS + goal.imageLink}
 									/>
 								</td>
 

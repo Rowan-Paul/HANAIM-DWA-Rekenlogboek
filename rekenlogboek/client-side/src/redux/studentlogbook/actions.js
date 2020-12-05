@@ -12,7 +12,7 @@ export const fetchCurrentPhase = payload => dispatch => {
 	}
 
 	fetch(
-		process.env.REACT_SERVER_ADDRESS +
+		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/group/${payload.substring(payload.indexOf(' ') + 1)}`,
 		{
 			method: 'GET'
@@ -30,7 +30,7 @@ export const fetchCurrentPhase = payload => dispatch => {
 
 export const fetchColumn = payload => (dispatch, getState) => {
 	fetch(
-		process.env.REACT_SERVER_ADDRESS +
+		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/${getState().studentLogbook.id}/column/${payload}`,
 		{
 			method: 'GET'
@@ -48,7 +48,7 @@ export const fetchColumn = payload => (dispatch, getState) => {
 
 export const fetchGoal = payload => (dispatch, getState) => {
 	fetch(
-		process.env.REACT_SERVER_ADDRESS +
+		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/${getState().studentLogbook.id}/goal/${payload}`,
 		{
 			method: 'GET'

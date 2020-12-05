@@ -7,7 +7,7 @@ export default function LearnGoalImage(props) {
 		<div className="learn-goal-image">
 			<h2>{props?.title}</h2>
 			<img
-				src={process.env.REACT_SERVER_ADDRESS + props.src}
+				src={process.env.REACT_APP_SERVER_ADDRESS + props.src}
 				alt="leerdoel afbeelding"
 			/>
 		</div>

@@ -16,7 +16,7 @@ export default function AddLearnGoal(props) {
 			const formData = new FormData()
 			formData.append('file', file) // appending file
 			let fetchPath = await fetch(
-				process.env.REACT_SERVER_ADDRESS + '/files/uploads/goals',
+				process.env.REACT_APP_SERVER_ADDRESS + '/files/uploads/goals',
 				{
 					method: 'POST',
 					body: formData

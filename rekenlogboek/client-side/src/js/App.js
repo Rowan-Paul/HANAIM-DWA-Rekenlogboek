@@ -37,6 +37,7 @@ import Evaluation from './student/containers/Evaluation'
 
 import '../scss/App.scss'
 
+// require env variables
 require('dotenv').config()
 
 function App() {
