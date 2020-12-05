@@ -6,18 +6,22 @@ import '../../../scss/student/components/ProgressBar.scss'
 export default function ProgressBar(props) {
 	const getItems = () => {
 		const items = []
-		for (let i = 0; i < props.itemCount; i++) {
+		// changed i to 1, so we don't have to i+1
+		// underneath here (and gave itemCount 1 so it
+		// does actually go long enough)
+		for (let i = 1; i < props.itemCount + 1; i++) {
 			items.push(
 				<div
 					//the ?. syntax prevents errors when the binding is undefined
 					className={classNames('square', {
+						// position is counted from one, so if you give done=1
+						// it doesn't actually highlight 1
+						// so fixed it by doing i+1
 						done: props.done.includes(i),
 						locked: props?.locked?.includes(i)
 					})}
 				>
-					{/* start from 1 */}
-					{/* ^that happens automagically */}
-					{i + 1}
+					{i}
 				</div>
 			)
 		}

@@ -24,7 +24,7 @@ function AfterPreTestUI(props) {
 
 	return (
 		<div className="after-pre-test student-container">
-			<ProgressBar itemCount={props.goalAmount} done={[]} />
+			<ProgressBar itemCount={props.goalAmount} done={[1]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
