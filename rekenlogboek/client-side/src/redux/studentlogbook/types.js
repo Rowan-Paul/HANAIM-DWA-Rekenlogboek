@@ -1,0 +1,3 @@
+export const SAVE_CURRENTPHASE = 'SAVE_CURRENTPHASE'
+export const SAVE_COLUMN = 'SAVE_COLUMN'
+export const SAVE_GOAL = 'SAVE_GOAL'

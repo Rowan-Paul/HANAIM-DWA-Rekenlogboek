@@ -26,6 +26,22 @@ router.post('/', (req, res) => {
 		})
 })
 
+// Get the active logbook for a certain group
+router.get('/group/:group', (req, res) => {
+	Logbook.findOne(
+		{
+			group: req.params.group,
+			currentPhase: { $ne: 'notVisible' }
+		},
+		'_id currentPhase'
+	)
+		.then(response => res.status(200).send(response))
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get all information about one logbook
 router.get('/:id', (req, res) => {
 	Logbook.findById(req.params.id)

@@ -2,11 +2,16 @@ import '../../scss/sigin-in/SignIn.scss'
 
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import * as microsoftTeams from '@microsoft/teams-js'
 
 import { saveUserAction } from '../../redux/main/actions'
 
 export default function SuccesUI(props) {
 	useEffect(() => {
+		// initialize teams on this page, cause it
+		// needs to tell teams it has logged in
+		microsoftTeams.initialize()
+
 		// removes chararacter at place i in string
 		String.prototype.removeCharAt = function (i) {
 			var tmp = this.split('') // convert to an array
@@ -23,6 +28,12 @@ export default function SuccesUI(props) {
 		if (props.user.groups !== undefined && props.user.groups !== null) {
 			if (props.user.groups.includes('Logboekontwerpers')) {
 				props.history.push('/teacher')
+			} else if (
+				props.user.jobTitle === 'Leerling' &&
+				window.opener &&
+				window.opener !== window
+			) {
+				microsoftTeams.authentication.notifySuccess(props.user)
 			} else {
 				props.history.push('/no-access')
 			}

@@ -9,6 +9,7 @@ import {
 
 const date = new Date()
 const year = date.getFullYear()
+
 const INITIAL_STATE = {
 	//TODO: add checks to see if columns are filled in newlogbook2
 	columns: [
@@ -63,6 +64,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				}
 			}
 			return state
+
 		case ADD_LOGBOOK_PERIOD:
 			return {
 				...state,
@@ -70,6 +72,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				period: Number(action.payload.period),
 				teacher: action.payload.username
 			}
+
 		case ADD_LOGBOOK_COLUMNS:
 			return {
 				...state,
@@ -78,6 +81,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 		case RESET_LOGBOOK:
 			return (state = INITIAL_STATE)
+
 		default:
 			return state
 	}
