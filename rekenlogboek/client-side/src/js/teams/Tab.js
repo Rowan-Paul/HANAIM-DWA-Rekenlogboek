@@ -65,7 +65,7 @@ function TabUI(props) {
 						className="MicrosoftButton"
 						onClick={() => {
 							microsoftTeams.authentication.authenticate({
-								url: 'http://localhost:3000/auth',
+								url: process.env.REACT_SERVER_ADDRESS + '/auth',
 								width: 600,
 								height: 535,
 								successCallback: user => {

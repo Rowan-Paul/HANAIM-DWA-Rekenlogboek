@@ -12,9 +12,8 @@ export const fetchCurrentPhase = payload => dispatch => {
 	}
 
 	fetch(
-		`http://localhost:3000/logbook/group/${payload.substring(
-			payload.indexOf(' ') + 1
-		)}`,
+		process.env.REACT_SERVER_ADDRESS +
+			`/logbook/group/${payload.substring(payload.indexOf(' ') + 1)}`,
 		{
 			method: 'GET'
 		}
@@ -31,9 +30,8 @@ export const fetchCurrentPhase = payload => dispatch => {
 
 export const fetchColumn = payload => (dispatch, getState) => {
 	fetch(
-		`http://localhost:3000/logbook/${
-			getState().studentLogbook.id
-		}/column/${payload}`,
+		process.env.REACT_SERVER_ADDRESS +
+			`/logbook/${getState().studentLogbook.id}/column/${payload}`,
 		{
 			method: 'GET'
 		}
@@ -50,9 +48,8 @@ export const fetchColumn = payload => (dispatch, getState) => {
 
 export const fetchGoal = payload => (dispatch, getState) => {
 	fetch(
-		`http://localhost:3000/logbook/${
-			getState().studentLogbook.id
-		}/goal/${payload}`,
+		process.env.REACT_SERVER_ADDRESS +
+			`/logbook/${getState().studentLogbook.id}/goal/${payload}`,
 		{
 			method: 'GET'
 		}

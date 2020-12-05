@@ -6,7 +6,7 @@ import MicrosoftLogo from '../../../img/icons/microsoft.svg'
 
 function MicrosoftButtonUI() {
 	return (
-		<a href="http://localhost:3000/auth">
+		<a href={process.env.REACT_SERVER_ADDRESS + 'auth'}>
 			<button className="MicrosoftButton">
 				<div>
 					<img src={MicrosoftLogo} alt="Microsoft Logo" />

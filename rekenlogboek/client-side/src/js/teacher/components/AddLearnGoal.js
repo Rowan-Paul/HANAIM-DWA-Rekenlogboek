@@ -15,10 +15,13 @@ export default function AddLearnGoal(props) {
 		async function postImage() {
 			const formData = new FormData()
 			formData.append('file', file) // appending file
-			let fetchPath = await fetch('http://localhost:3000/files/uploads/goals', {
-				method: 'POST',
-				body: formData
-			})
+			let fetchPath = await fetch(
+				process.env.REACT_SERVER_ADDRESS + '/files/uploads/goals',
+				{
+					method: 'POST',
+					body: formData
+				}
+			)
 
 			return await fetchPath.json()
 		}
