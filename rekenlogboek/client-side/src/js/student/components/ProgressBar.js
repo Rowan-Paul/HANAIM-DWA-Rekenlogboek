@@ -14,9 +14,6 @@ export default function ProgressBar(props) {
 				<div
 					//the ?. syntax prevents errors when the binding is undefined
 					className={classNames('square', {
-						// position is counted from one, so if you give done=1
-						// it doesn't actually highlight 1
-						// so fixed it by doing i+1
 						done: props.done.includes(i),
 						locked: props?.locked?.includes(i)
 					})}
