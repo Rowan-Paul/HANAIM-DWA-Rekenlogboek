@@ -13,16 +13,18 @@ import Button from '../../common/Button'
 
 import { fetchColumn } from '../../../redux/studentlogbook/actions'
 import { fetchGoal } from '../../../redux/studentlogbook/actions'
+import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 
 function AfterPreTestUI(props) {
 	useEffect(() => {
+		props.doFetchGoalAmount()
 		props.doFetchColumn(1)
-		props.doFetchGoal(1)
+		props.doFetchGoal(props.goal.position)
 	}, [])
 
 	return (
 		<div className="after-pre-test student-container">
-			<ProgressBar itemCount={5} done={[1, 3]} />
+			<ProgressBar itemCount={props.goalAmount} done={[]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
@@ -33,7 +35,6 @@ function AfterPreTestUI(props) {
 						<Question />
 					</div>
 					<div className="right-side">
-						{/* TODO: replace with src from database */}
 						<LearnGoalImage src={props.goal.imageLink} />
 					</div>
 				</div>
@@ -48,14 +49,16 @@ function AfterPreTestUI(props) {
 function mapStateToProps(state) {
 	return {
 		column: state.studentLogbook.column,
-		goal: state.studentLogbook.goal
+		goal: state.studentLogbook.currentGoal,
+		goalAmount: state.studentLogbook.goalAmount
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		doFetchColumn: payload => dispatch(fetchColumn(payload)),
-		doFetchGoal: payload => dispatch(fetchGoal(payload))
+		doFetchGoal: payload => dispatch(fetchGoal(payload)),
+		doFetchGoalAmount: () => dispatch(fetchGoalAmount())
 	}
 }
 

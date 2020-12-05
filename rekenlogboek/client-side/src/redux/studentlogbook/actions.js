@@ -1,6 +1,7 @@
 import { SAVE_CURRENTPHASE } from './types'
 import { SAVE_COLUMN } from './types'
 import { SAVE_GOAL } from './types'
+import { SAVE_GOAL_AMOUNT } from './types'
 
 export const fetchCurrentPhase = payload => dispatch => {
 	//TODO: place this somewhere to access it globally
@@ -58,6 +59,24 @@ export const fetchGoal = payload => (dispatch, getState) => {
 		.then(response =>
 			dispatch({
 				type: SAVE_GOAL,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})
+		)
+		.catch(error => console.log(error))
+}
+
+export const fetchGoalAmount = () => (dispatch, getState) => {
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS +
+			`/logbook/${getState().studentLogbook.id}/goals`,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response =>
+			dispatch({
+				type: SAVE_GOAL_AMOUNT,
 				response // Called it response (from API) to distinguish it from payloads (from app)
 			})
 		)

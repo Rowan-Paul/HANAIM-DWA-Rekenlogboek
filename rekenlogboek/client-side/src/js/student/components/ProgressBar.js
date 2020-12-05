@@ -16,6 +16,7 @@ export default function ProgressBar(props) {
 					})}
 				>
 					{/* start from 1 */}
+					{/* ^that happens automagically */}
 					{i + 1}
 				</div>
 			)

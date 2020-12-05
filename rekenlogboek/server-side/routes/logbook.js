@@ -75,6 +75,27 @@ router.get('/:id/column/:position', (req, res) => {
 		})
 })
 
+// Get the amount of goals
+router.get('/:id/goals', (req, res) => {
+	Logbook.findById(req.params.id)
+		.lean()
+		.then(response => {
+			if (response.goals.length === undefined) {
+				throw new Error('goal does not exist')
+			}
+
+			const obj = {
+				goalsAmount: response.goals.length
+			}
+
+			res.status(200).send(obj)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get the id, position, title, description and imagelink for one goal for one logbook
 router.get('/:id/goal/:position', (req, res) => {
 	Logbook.findById(req.params.id)
