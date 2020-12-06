@@ -10,19 +10,6 @@ function StudentUI(props) {
 	const [phaseFetched, setPhaseFetched] = useState(false)
 
 	useEffect(() => {
-		//TODO: place this somewhere to access it globally
-		// removes chararacter at place i in string
-		String.prototype.removeCharAt = function (i) {
-			var tmp = this.split('') // convert to an array
-			tmp.splice(i - 1, 1) // remove 1 element from the array (adjusting for non-zero-indexed counts)
-			return tmp.join('') // reconstruct the string
-		}
-
-		// save to reducer
-		props.doSaveUser(decodeURI(props.location.search.removeCharAt(1)))
-	}, [])
-
-	useEffect(() => {
 		microsoftTeams.getContext((context, error) => {
 			setContext(context)
 			if (error) {

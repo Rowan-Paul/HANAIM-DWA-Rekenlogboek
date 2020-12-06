@@ -52,26 +52,6 @@ function App() {
 					<main>
 						<Router>
 							<Switch>
-								{/* <Route
-									exact
-									path="/student/default"
-									component={Default}
-								/> */}
-								<Route
-									exact
-									path="/student/after-pre-test"
-									component={AfterPreTest}
-								/>
-								{/* <Route
-									exact
-									path="/student/instructions"
-									component={Instructions} />
-								<Route
-									exact
-									path="/student/evaluation"
-									component={Evaluation}
-								/> */}
-
 								<Route
 									exact
 									path="/teacher/new-logbook/general"
@@ -125,6 +105,7 @@ function App() {
 				<Switch>
 					<Route exact path="/tab" component={Tab} />
 					<Route exact path="/config" component={TabConfig} />
+					<Route exact path="/auth/succes" component={Succes} />
 
 					{/* STUDENT LOGBOEK */}
 					<Route exact path="/student" component={Default} />
