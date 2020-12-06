@@ -33,9 +33,10 @@ function MicrosoftButtonUI(props) {
 		try {
 			const user = await getUserProfile(userAgentApplication, config.scopes)
 
-			if (props.context.loginHint !== user.userPrincipalName) {
-				throw new Error('Logged in as two different users')
-			}
+			if (props.context.loginHint !== undefined)
+				if (props.context.loginHint !== user.userPrincipalName) {
+					throw new Error('Logged in as two different users')
+				}
 
 			setIsAuthenticated(true)
 			setUser({
