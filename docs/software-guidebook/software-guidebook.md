@@ -45,6 +45,7 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
       - [6.1.2 Component diagram: client-side](#612-component-diagram-client-side)
       - [6.1.3 Component diagram: server-side](#613-component-diagram-server-side)
     - [6.2 Bestandsstructuur](#62-bestandsstructuur)
+  - [6.3 Login](#63-login)
   - [7 Infrastructuur architectuur](#7-infrastructuur-architectuur)
     - [7.1 Lokale ontwikkelomgeving](#71-lokale-ontwikkelomgeving)
     - [7.2 Deployed ontwikkelomgeving](#72-deployed-ontwikkelomgeving)

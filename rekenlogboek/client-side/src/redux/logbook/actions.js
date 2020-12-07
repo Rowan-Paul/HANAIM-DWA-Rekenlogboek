@@ -22,7 +22,7 @@ export const removeLearnGoal = payload => {
 }
 
 export const saveLogbook = () => (dispatch, getState) => {
-	fetch(`http://localhost:3000/logbook/`, {
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(getState().logbook)

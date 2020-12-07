@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-
+// IMPORTANT: change the db name in app to testrekenlogboek
 'use strict'
 
 const mongoose = require('mongoose')
@@ -25,7 +25,7 @@ const getTestlogbookID = async () => {
 
 describe('Logbook route tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
+		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
@@ -36,9 +36,10 @@ describe('Logbook route tests', () => {
 			group: 7,
 			year: '19/20',
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
-			currentPhase: 'PRE_TOETS',
+			currentPhase: 'pretoets',
 			columns: [
 				{
+					// in production, position starts at 1
 					position: 0,
 					title: 'Doelen'
 				},
@@ -110,7 +111,7 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				currentPhase: 'NOT_VISIBLE',
+				currentPhase: 'notVisible',
 				columns: [
 					{
 						position: 0,
@@ -230,6 +231,15 @@ describe('Logbook route tests', () => {
 		}).then(response => response.status)
 
 		expect(createResponse).toEqual(500)
+	})
+
+	test('Get active logboek for a certain group', async () => {
+		const logbookID = await getTestlogbookID()
+		const test = await fetch('http://localhost:3000/logbook/groups/7', {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test.currentPhase).toEqual('pretoets')
 	})
 
 	test('Get logbook from id', async () => {

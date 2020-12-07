@@ -30,7 +30,9 @@ export default function LogbookVisualizer(props) {
 
 									<p>{goal.description}</p>
 
-									<img src={'http://localhost:3000' + goal.imageLink} />
+									<img
+										src={process.env.REACT_APP_SERVER_ADDRESS + goal.imageLink}
+									/>
 								</td>
 
 								{/* Get inputtype for each column  */}

@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom'
 import ButtonContainer from '../../common/ButtonContainer'
 
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
-import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
-import archiveSVG from '../../../img/icons/archive.svg'
+// import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
+// import archiveSVG from '../../../img/icons/archive.svg'
 
 function TeacherLandingUI(props) {
 	const changePage = page => {
@@ -18,7 +18,7 @@ function TeacherLandingUI(props) {
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
-				<h1>Welkom, {props.user.name}</h1>
+				<h1>Welkom {props.user.name},</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
 					{/* <ButtonContainer
