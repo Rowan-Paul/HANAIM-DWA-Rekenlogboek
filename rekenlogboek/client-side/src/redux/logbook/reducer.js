@@ -1,8 +1,7 @@
 import {
-	ADD_INPUT_VALUE,
+	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
-	DELETE_INPUT_VALUE,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
@@ -11,7 +10,8 @@ import {
 	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
 	SAVE_LOGBOOK,
-	SET_EXPLANATION
+	SET_EXPLANATION,
+	DELETE_INPUT_OPTION
 } from './types'
 
 const date = new Date()
@@ -21,18 +21,22 @@ const INITIAL_STATE = {
 		{
 			added: false,
 			explanation: false,
-			inputType: 'radiobuttons',
 			position: 1,
 			title: '',
-			values: []
+			input: {
+				type: 'radiobuttons',
+				options: []
+			}
 		},
 		{
 			added: false,
 			explanation: false,
-			inputType: 'radiobuttons',
 			position: 2,
 			title: '',
-			values: []
+			input: {
+				type: 'radiobuttons',
+				options: []
+			}
 		}
 	],
 	goals: [],
@@ -56,13 +60,13 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case ADD_INPUT_VALUE:
+		case ADD_INPUT_OPTION:
 			if (action.payload) {
 				return {
 					...state,
 					columns: state.columns.filter(column => {
 						if (column.position === state.position) {
-							column.values = [...column.values, action.payload]
+							column.input.options = [...column.input.options, action.payload]
 						}
 						return column
 					})
@@ -85,20 +89,14 @@ const reducer = (state = INITIAL_STATE, action) => {
 				period: Number(action.payload.period),
 				teacher: action.payload.username
 			}
-		case DELETE_INPUT_VALUE: {
+		case DELETE_INPUT_OPTION: {
 			return {
 				...state,
-				/** Deletes value from checkbox or radiobutton group
-				 *
-				 * 1. Finds column where position is equal to state position
-				 * 2. Finds values where type is equal to state inputType
-				 * 3. Finds value inside array en removes where equal to position from payload
-				 *
-				 * example: values.checkboxes[1] deleted
-				 */
 				columns: state.columns.filter(column => {
 					if (column.position === state.position) {
-						column.values = column.values.filter((_, i) => i !== action.payload)
+						column.input.options = column.input.options.filter(
+							(_, i) => i !== action.payload
+						)
 					}
 					return column
 				})
@@ -189,7 +187,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				columns: state.columns.filter(column => {
 					if (column.position === state.position) {
-						column.inputType = action.payload
+						column.input.type = action.payload
 					}
 					return column
 				})

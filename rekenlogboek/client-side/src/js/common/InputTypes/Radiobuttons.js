@@ -7,10 +7,10 @@ import '../../../scss/common/InputTypes.scss'
 export default function RadioButtons(props) {
 	return (
 		<ul className="Radiobuttons">
-			{props.values.map((value, i) => (
+			{props.options.map((option, i) => (
 				<li key={shortid.generate()}>
 					<input type="radio" name="radiobutton" value="default" />
-					<span>{value}</span>
+					<span>{option}</span>
 					<div>
 						<InputHandlers position={i} />
 					</div>

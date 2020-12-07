@@ -1,9 +1,6 @@
 import {
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
-	ADD_INPUT_VALUE,
-	DELETE_INPUT_VALUE,
-	EXPLANATION_FIELD_TOGGLE,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SAVE_LOGBOOK,
@@ -12,7 +9,8 @@ import {
 	SET_INPUT_TYPE,
 	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
-	SET_EXPLANATION
+	SET_EXPLANATION,
+	ADD_INPUT_OPTION
 } from './types'
 
 export const addLearnGoal = payload => {
@@ -29,15 +27,15 @@ export const addLogbookPeriod = payload => {
 	}
 }
 
-export const addInputValue = payload => {
+export const addInputOption = payload => {
 	return {
-		type: ADD_INPUT_VALUE,
+		type: ADD_INPUT_OPTION,
 		payload
 	}
 }
-export const deleteInputValue = payload => {
+export const deleteInputOption = payload => {
 	return {
-		type: DELETE_INPUT_VALUE,
+		type: DELETE_INPUT_OPTION,
 		payload
 	}
 }

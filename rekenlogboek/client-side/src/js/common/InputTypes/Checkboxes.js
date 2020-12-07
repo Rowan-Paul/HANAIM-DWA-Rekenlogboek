@@ -7,10 +7,10 @@ import '../../../scss/common/InputTypes.scss'
 export default function Checkboxes(props) {
 	return (
 		<ul className="Checkboxes">
-			{props.values.map((value, i) => (
+			{props.options.map((option, i) => (
 				<li key={shortid.generate()}>
 					<input type="checkbox" name="checkboxes" value="default" />
-					<span>{value}</span>
+					<span>{option}</span>
 					<div>
 						<InputHandlers position={i} />
 					</div>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
 	setInputType,
 	setColumnTitle,
-	addInputValue
+	addInputOption
 } from '../../../../redux/logbook/actions'
 
 import AddInputValue from './AddInputValue'
@@ -17,7 +17,7 @@ import AddExplanation from './Explanation'
 import Explanation from './Explanation'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
-	const [inputValues, setInputValues] = useState('')
+	const [options, setOptions] = useState('')
 	const [inputType, setInputType] = useState('')
 	const [selected, setSelected] = useState(props.inputTypes.radiobuttons)
 
@@ -26,17 +26,17 @@ function AddColumn(props) {
 			column => column.position === props.position
 		)[0]
 		setTitle(column.title)
-		setInputType(column.inputType)
-		setInputValues(column.values)
-		setSelected(column.inputType)
+		setInputType(column.input.type)
+		setOptions(column.input.options)
+		setSelected(column.input.type)
 	}, [props.columns])
 
 	const getInputType = () => {
 		switch (inputType) {
 			case props.inputTypes.checkboxes:
-				return <Checkboxes values={inputValues} />
+				return <Checkboxes options={options} />
 			case props.inputTypes.radiobuttons:
-				return <Radiobuttons values={inputValues} />
+				return <Radiobuttons options={options} />
 			case props.inputTypes.textarea:
 				return <Textarea />
 			default:
@@ -98,7 +98,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addInputValue: payload => dispatch(addInputValue(payload)),
+		addInputOption: payload => dispatch(addInputOption(payload)),
 		setColumnTitle: payload => dispatch(setColumnTitle(payload)),
 		setInputType: payload => dispatch(setInputType(payload))
 	}

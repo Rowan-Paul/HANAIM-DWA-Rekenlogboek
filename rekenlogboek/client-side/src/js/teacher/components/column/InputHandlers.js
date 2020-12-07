@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteInputValue } from '../../../../redux/logbook/actions'
+import { deleteInputOption } from '../../../../redux/logbook/actions'
 import '../../../../scss/common/InputTypes.scss'
 
 function InputHandlers(props) {
 	return (
 		<ul className="InputHandlers">
 			<li>
-				<button onClick={() => props.deleteInputValue(props.position)}>
+				<button onClick={() => props.deleteInputOption(props.position)}>
 					<span>
 						<i className="fa fa-trash"></i> verwijder
 					</span>
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		deleteInputValue: payload => dispatch(deleteInputValue(payload))
+		deleteInputOption: payload => dispatch(deleteInputOption(payload))
 	}
 }
 

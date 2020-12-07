@@ -17,16 +17,19 @@ function ColumnPreview(props) {
 
 	if (column.added) {
 		let inputType
-		switch (column.inputType) {
+		switch (column.input.type) {
 			case 'checkboxes':
 				inputType = (
-					<Checkboxes values={column.values} explanation={column.explanation} />
+					<Checkboxes
+						options={column.input.options}
+						explanation={column.explanation}
+					/>
 				)
 				break
 			case 'radiobuttons':
 				inputType = (
 					<RadioButtons
-						values={column.values}
+						options={column.input.options}
 						explanation={column.explanation}
 					/>
 				)
