@@ -23,7 +23,7 @@
 		color: #fff;
 
 		&:hover {
-			background: darken($gray, 5);
+			background: $hover-gray;
 			cursor: pointer;
 		}
 
@@ -31,7 +31,7 @@
 			background-color: $blue;
 
 			&:hover {
-				background: darken($blue, 5);
+				background: $hover-blue;
 			}
 		}
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-import '../../../scss/student/containers/AfterPreTest.scss'
+import '../../../scss/student/containers/AfterPreTestEnd.scss'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
@@ -23,12 +23,12 @@ function AfterPreTestEnd() {
 		{
 			goalCount: 'Doel 3',
 			goalName: 'Keersommen',
-			answer: 'Ik snap het goed'
+			answer: 'Ik snap het, maar vind het nog lastig'
 		}
 	]
 
 	return (
-		<div className="after-pre-test student-container">
+		<div className="after-pre-test-end student-container">
 			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">

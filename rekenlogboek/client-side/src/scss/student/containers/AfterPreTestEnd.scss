@@ -1,0 +1,23 @@
+.after-pre-test-end {
+	.learn-goal-container {
+		margin: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+
+		.left-side {
+			width: 40%;
+			img {
+				height: 60%;
+			}
+		}
+
+		.right-side {
+			width: 60%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+}

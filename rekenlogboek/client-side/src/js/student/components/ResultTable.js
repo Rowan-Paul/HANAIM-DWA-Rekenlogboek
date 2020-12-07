@@ -6,11 +6,11 @@ export default function ResultText(props) {
 	const getTableRows = () => {
 		return props.results.map(result => {
 			return (
-				<tr key={result.goalName}>
-					<td>{result.goalCount}</td>
-					<td>{result.goalName}</td>
-					<td>{result.answer}</td>
-				</tr>
+				<div key={result.goalName} className="row">
+					<div className="cell">{result.goalCount}</div>
+					<div className="cell">{result.goalName}</div>
+					<div className="cell">{result.answer}</div>
+				</div>
 			)
 		})
 	}
@@ -19,7 +19,7 @@ export default function ResultText(props) {
 		<div className="result-table">
 			<p>{props.description}</p>
 
-			<table>{getTableRows()}</table>
+			<div className="table">{getTableRows()}</div>
 		</div>
 	)
 }
