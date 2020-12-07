@@ -16,18 +16,6 @@
 			div {
 				display: none !important;
 			}
-
-			.Textarea {
-				display: inline !important;
-				margin: 0;
-				padding: 0;
-				width: 100% !important;
-
-				textarea {
-					color: $fontLight;
-					pointer-events: none;
-				}
-			}
 		}
 		.Header {
 			border-bottom: 1px solid $borderColor;

@@ -12,6 +12,9 @@
 		position: relative;
 		width: 100%;
 
+		input {
+			pointer-events: none;
+		}
 		span {
 			align-items: center;
 			color: $fontColor;
@@ -47,9 +50,10 @@
 	textarea {
 		border: 1px solid $borderColor;
 		border-radius: 8px;
-		min-height: 10vh;
+		min-height: 7.5vh;
 		margin: 0.5vh auto 0;
 		padding: 0.5vh 2.5%;
+		pointer-events: none;
 		resize: none;
 		width: calc(100% - (2px + 5%));
 	}
@@ -97,13 +101,14 @@
 	position: relative;
 	textarea {
 		border: 1px solid $borderColor;
-		border-radius: 8px;
+		color: $fontLight;
 		grid-column: span 6;
 		margin: 1vh 0;
 		padding: 2.5%;
+		pointer-events: none;
 		position: absolute;
 		resize: vertical;
 		right: 0;
-		width: 90%;
+		width: 95%;
 	}
 }

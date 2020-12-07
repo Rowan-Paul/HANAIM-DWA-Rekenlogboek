@@ -26,6 +26,12 @@ export default function Checkboxes(props) {
 					</span>
 				</div>
 			</li>
+
+			{props.explanation && (
+				<li className="Explanation">
+					<textarea type="text" name="explanation" placeholder="Omdat..." />
+				</li>
+			)}
 		</ul>
 	)
 }
