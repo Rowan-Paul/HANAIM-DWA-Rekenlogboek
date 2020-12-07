@@ -36,6 +36,7 @@
 			height: 35%;
 			margin: 0.5vh 0;
 			padding: 1vh 0.5vw;
+			pointer-events: unset;
 			resize: vertical;
 			width: calc(100% - (1vw + 2px));
 			box-shadow: $shadow;
