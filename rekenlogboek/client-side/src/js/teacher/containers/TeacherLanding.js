@@ -35,13 +35,13 @@ function TeacherLandingUI(props) {
 						value="Nieuw logboek"
 						handler={() => changePage('new-logbook/general')}
 					/>
-					{/* <ButtonContainer
+					<ButtonContainer
 						icon={archiveSVG}
 						color="blue"
 						description="Bekijk ingevulde logboeken."
 						value="Ingevulde logboeken"
-						handler={() => changePage('')} //TODO: add page
-					/> */}
+						handler={() => changePage('logbooks')}
+					/>
 				</div>
 			</div>
 		</div>

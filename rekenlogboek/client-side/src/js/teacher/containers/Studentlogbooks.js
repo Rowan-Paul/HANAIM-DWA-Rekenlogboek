@@ -1,56 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LogbookList from '../components/LogbookList'
 import Jumbotron from '../../common/Jumbotron'
+import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
 
 function StudentLogbooks(props) {
-	const [logbook, setLogbook] = useState('')
-	const [studentlogbooks, setStudentlogbooks] = useState([])
-
 	useEffect(() => {
-		fetch(
-			`http://localhost:3000/logbook/year/` +
-				encodeURIComponent('19/20') +
-				`/group/5/period/1`,
-			{
-				method: 'GET'
-			}
-		)
-			.then(response => response.json())
-			.then(response => {
-				setLogbook(response)
-				console.log(response._id)
-				return response
-			})
-			.then(response => {
-				fetch(`http://localhost:3000/studentlogbook/logbooks/` + response._id, {
-					method: 'GET'
-				})
-					.then(response => response.json())
-					.then(response => {
-						setStudentlogbooks(response)
-					})
-			})
-			.catch(error => console.log(error))
+		props.getPageInformation()
 	}, [])
 
 	return (
 		<Jumbotron>
 			<LogbookList
-				logbook={logbook}
-				studentlogbooks={studentlogbooks}
+				logbook={props.logbook}
+				studentlogbooks={props.studentlogbooks}
 			></LogbookList>
 		</Jumbotron>
 	)
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		logbook: state.logbookoverview.currentLogbook,
+		studentlogbooks: state.logbookoverview.studentlogbooks
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-	return {}
+	return {
+		getPageInformation: () => dispatch(fetchCurrentLogbook())
+	}
 }
 
 export default connect(
