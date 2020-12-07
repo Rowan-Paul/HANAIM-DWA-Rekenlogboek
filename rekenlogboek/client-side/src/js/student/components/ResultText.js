@@ -1,12 +1,12 @@
 import React from 'react'
 
-import '../../../scss/student/components/StudentDone.scss'
+import '../../../scss/student/components/ResultText.scss'
 
 import doneSVG from '../../../img/illustrations/after_pretest_done.svg'
 
-export default function StudentDone(props) {
+export default function ResultText(props) {
 	return (
-		<div className="end-text">
+		<div className="result-text">
 			<h1>{props.title}</h1>
 			<p>{props.description}</p>
 
