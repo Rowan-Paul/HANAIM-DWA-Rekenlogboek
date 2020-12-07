@@ -39,9 +39,9 @@ function App() {
 		if (window.parent === window.self) {
 			return (
 				<div>
-					<Header />
-					<main>
-						<Router>
+					<Router>
+						<Header />
+						<main>
 							<Switch>
 								{/* LOGBOOK DESIGNER */}
 								<Route
@@ -82,8 +82,8 @@ function App() {
 								<Route exact path="/no-access" component={NoAccess} />
 								{/* <Route component={NotFound} /> */}
 							</Switch>
-						</Router>
-					</main>
+						</main>
+					</Router>
 				</div>
 			)
 		}
