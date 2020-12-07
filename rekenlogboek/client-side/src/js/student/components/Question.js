@@ -1,5 +1,5 @@
 import React from 'react'
 
 export default function Question() {
-	return null
+	return <div className="question"></div>
 }
