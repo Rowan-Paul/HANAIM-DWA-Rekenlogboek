@@ -5,7 +5,10 @@ export default function SuccesUI(props) {
 	useEffect(() => {
 		// redirect to the correct page
 		if (props.user.groups !== undefined && props.user.groups !== null) {
-			if (props.user.groups.includes('Logboekontwerpers')) {
+			if (
+				props.user.groups.includes('Logboekontwerpers') &&
+				window.parent === window.self
+			) {
 				props.history.push('/teacher')
 			} else if (
 				props.user.jobTitle === 'Leerling' &&

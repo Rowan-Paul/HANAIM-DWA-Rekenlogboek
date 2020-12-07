@@ -29,7 +29,6 @@ import NoAccess from '../js/no-access/NoAccess'
 
 // import Privacy from './Privacy'
 // import TermsOfUse from './TermsOfUse'
-import { Tab } from './teams/Tab'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
@@ -106,19 +105,31 @@ function App() {
 
 		// Display the app home page hosted in Teams
 		return (
-			<Router>
-				<Switch>
-					<Route exact path="/tab" component={Tab} />
-					<Route exact path="/config" component={TabConfig} />
-					<Route exact path="/auth/succes" component={Succes} />
+			<main>
+				<Router>
+					<Switch>
+						<Route exact path="/config" component={TabConfig} />
 
-					{/* STUDENT LOGBOEK */}
-					<Route exact path="/student" component={Default} />
-					<Route exact path="/student/pretest" component={AfterPreTest} />
-					<Route exact path="/student/instructions" component={Instructions} />
-					<Route exact path="/student/evaluation" component={Evaluation} />
-				</Switch>
-			</Router>
+						{/* SIGN-IN */}
+						<Route exact path="/Tab" component={SignIn} />
+						<Route exact path="/auth/succes" component={Succes} />
+
+						{/* STUDENT LOGBOEK */}
+						<Route exact path="/student" component={Default} />
+						<Route exact path="/student/pretest" component={AfterPreTest} />
+						<Route
+							exact
+							path="/student/instructions"
+							component={Instructions}
+						/>
+						<Route exact path="/student/evaluation" component={Evaluation} />
+
+						{/* ERROR PAGES */}
+						<Route exact path="/no-access" component={NoAccess} />
+						{/* <Route component={NotFound} /> */}
+					</Switch>
+				</Router>
+			</main>
 		)
 	}
 

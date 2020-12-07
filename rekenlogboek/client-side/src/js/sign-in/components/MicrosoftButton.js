@@ -33,8 +33,11 @@ function MicrosoftButtonUI(props) {
 		try {
 			const user = await getUserProfile(userAgentApplication, config.scopes)
 
-			if (props.context.loginHint !== undefined)
+			// if in teams, check if the user logged in is the same
+			// as the user logged in teams
+			if (window.parent !== window.self)
 				if (props.context.loginHint !== user.userPrincipalName) {
+					// if (props.context.loginHint !== undefined)
 					throw new Error('Logged in as two different users')
 				}
 
