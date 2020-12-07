@@ -22,12 +22,25 @@
 		font-size: $label-font-size;
 		color: #fff;
 
+		&:hover {
+			background: darken($gray, 5);
+			cursor: pointer;
+		}
+
 		&.done {
 			background-color: $blue;
+
+			&:hover {
+				background: darken($blue, 5);
+			}
 		}
 
 		&.locked {
 			background-color: inherit;
+
+			&:hover {
+				background: $gray;
+			}
 		}
 	}
 }

@@ -7,7 +7,8 @@ import Header from '../js/common/Header'
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
 // import Default from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
+// import AfterPreTest from './student/containers/AfterPreTest'
+import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
 // import Instructions from './student/containers/Instructions'
 // import Evaluation from './student/containers/Evaluation'
 
@@ -53,10 +54,12 @@ function App() {
 									path="/student/default"
 									component={Default}
 								/> */}
+
+								{/*TODO: change back to AfterPreTest */}
 								<Route
 									exact
 									path="/student/after-pre-test"
-									component={AfterPreTest}
+									component={AfterPreTestEnd}
 								/>
 								{/* <Route
 									exact

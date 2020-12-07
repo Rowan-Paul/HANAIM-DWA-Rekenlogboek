@@ -31,6 +31,10 @@ function AfterPreTest() {
 					</div>
 				</div>
 			</Jumbotron>
+			{/* TODO: create handlers */}
+			<div className="prev button">
+				<Button color="gray" value="Vorige" handler={() => verifyGoals()} />
+			</div>
 			<div className="next button">
 				<Button color="blue" value="Volgende" handler={() => verifyGoals()} />
 			</div>
