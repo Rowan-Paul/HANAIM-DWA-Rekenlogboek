@@ -1,6 +1,5 @@
 export const MODAL_HIDE = `MODAL_HIDE`
 export const MODAL_SHOW = `MODAL_SHOW`
-export const REMOVE_LEARN_GOAL = `REMOVE_LEARN_GOAL`
 export const RESET_LOGBOOK = `RESET_LOGBOOK`
 export const SAVE_LOGBOOK = `SAVE_LOGBOOK`
 
@@ -18,6 +17,7 @@ export const SET_EXPLANATION = `SET_EXPLANATION`
 export const SET_INPUT_TYPE = `SET_INPUT_TYPE`
 
 // Goals page
+export const DELETE_GOAL = `DELETE_GOAL`
 export const POST_IMAGE = `POST_IMAGE`
 export const SET_GOAL = `SET_GOAL`
 export const SET_GOAL_DESCRIPTION = `SET_GOAL_DESCRIPTION`

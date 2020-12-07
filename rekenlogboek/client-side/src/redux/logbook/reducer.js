@@ -2,12 +2,12 @@ import {
 	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
+	DELETE_GOAL,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
 	SET_COLUMN_TITLE,
 	SET_INPUT_TYPE,
-	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
 	SAVE_LOGBOOK,
 	SET_GOAL_DESCRIPTION,
@@ -135,8 +135,10 @@ const reducer = (state = INITIAL_STATE, action) => {
 					return goal
 				})
 			}
-		case REMOVE_LEARN_GOAL:
-			const filterGoals = state.goals.filter(goal => goal.ID !== action.payload)
+		case DELETE_GOAL:
+			const filterGoals = state.goals.filter(
+				goal => goal.position !== action.payload
+			)
 
 			const updatePosition = filterGoals.map((goal, i) => {
 				goal.position = ++i

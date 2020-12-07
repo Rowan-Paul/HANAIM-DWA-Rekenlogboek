@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../../../redux/logbook/actions'
+import { deleteGoal, modalShow } from '../../../../redux/logbook/actions'
 
 import '../../../../scss/teacher/components/logbook/Goal.scss'
 function Goal(props) {
@@ -9,16 +9,23 @@ function Goal(props) {
 			<ul>
 				<li>
 					<h4>{props.goal.title}</h4>
-					<button
-						onClick={() =>
-							props.modalShow({
-								position: props.goal.position,
-								title: 'Leerdoel wijzigen'
-							})
-						}
-					>
-						<i className="fa fa-pencil"></i>
-					</button>
+
+					<div>
+						<button
+							onClick={() =>
+								props.modalShow({
+									position: props.goal.position,
+									title: 'Leerdoel wijzigen'
+								})
+							}
+						>
+							<i className="fa fa-pencil"></i>
+						</button>
+
+						<button onClick={() => props.deleteGoal(props.goal.position)}>
+							<i className="fa fa-trash"></i>
+						</button>
+					</div>
 				</li>
 				<li>
 					<p>{props.goal.description}</p>
@@ -44,6 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
+		deleteGoal: payload => dispatch(deleteGoal(payload)),
 		modalShow: payload => dispatch(modalShow(payload))
 	}
 }

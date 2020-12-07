@@ -2,11 +2,11 @@ import {
 	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
+	DELETE_GOAL,
 	DELETE_INPUT_OPTION,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SAVE_LOGBOOK,
-	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
 	SET_COLUMN,
 	SET_COLUMN_TITLE,
@@ -40,6 +40,13 @@ export const addInputOption = payload => {
 		payload
 	}
 }
+export const deleteGoal = payload => {
+	return {
+		type: DELETE_GOAL,
+		payload
+	}
+}
+
 export const deleteInputOption = payload => {
 	return {
 		type: DELETE_INPUT_OPTION,
@@ -86,12 +93,6 @@ export const postImage = () => (dispatch, getState) => {
 	}
 }
 
-export const removeLearnGoal = payload => {
-	return {
-		type: REMOVE_LEARN_GOAL,
-		payload
-	}
-}
 export const resetLogbook = () => {
 	return {
 		type: RESET_LOGBOOK

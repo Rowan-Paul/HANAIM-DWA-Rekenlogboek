@@ -22,17 +22,31 @@
 					padding: 0;
 				}
 
-				button {
-					background-color: transparent;
-					border: none;
-					color: $blue;
+				div {
 					position: absolute;
 					right: 0;
-					transition: ease-in-out 0.5s;
 
-					&:hover {
-						cursor: pointer;
-						color: $hover-blue;
+					button {
+						background-color: transparent;
+						border: none;
+						transition: ease-in-out 0.5s;
+
+						&:first-of-type {
+							color: $blue;
+
+							&:hover {
+								cursor: pointer;
+								color: $hover-blue;
+							}
+						}
+						&:last-of-type {
+							color: #ff8080;
+
+							&:hover {
+								cursor: pointer;
+								color: darken(#ff8080, 10%);
+							}
+						}
 					}
 				}
 			}
