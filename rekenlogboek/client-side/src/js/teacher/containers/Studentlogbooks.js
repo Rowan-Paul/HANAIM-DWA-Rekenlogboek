@@ -8,7 +8,7 @@ import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
 function StudentLogbooks(props) {
 	useEffect(() => {
 		props.getPageInformation()
-	}, [])
+	}, [props.period])
 
 	return (
 		<Jumbotron>
@@ -22,6 +22,7 @@ function StudentLogbooks(props) {
 
 const mapStateToProps = state => {
 	return {
+		period: state.logbookoverview.period,
 		logbook: state.logbookoverview.currentLogbook,
 		studentlogbooks: state.logbookoverview.studentlogbooks
 	}

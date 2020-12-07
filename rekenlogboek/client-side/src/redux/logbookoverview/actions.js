@@ -1,26 +1,33 @@
 import {
-	FETCH_CURRENT_LOGBOOK,
 	SAVE_CURRENT_LOGBOOK,
-	FETCH_STUDENT_LOGBOOKS,
 	SAVE_STUDENT_LOGBOOKS,
-	FETCH_CURRENT_STUDENTLOGBOOK,
-	SAVE_CURRENT_STUDENTLOGBOOK
+	SAVE_CURRENT_STUDENTLOGBOOK,
+	SET_CURRENT_LOGBOOK_PERIOD
 } from './types'
 
 export const fetchCurrentLogbook = () => {
-	return async dispatch => {
+	return async (dispatch, getState) => {
 		return await fetch(
 			`http://localhost:3000/logbook/year/` +
-				encodeURIComponent('2019 - 2020') +
-				`/group/5/period/1`,
+				encodeURIComponent(getState().logbookoverview.year) +
+				`/group/` +
+				getState().logbookoverview.group +
+				`/period/` +
+				getState().logbookoverview.period,
 			{
 				method: 'GET'
 			}
 		)
-			.then(response => response.json())
+			.then(response => {
+				return response.json()
+			})
 			.then(response => {
 				dispatch(saveCurrentLogbook(response))
-				dispatch(fetchStudentLogbooks(response))
+				if (response._id) {
+					dispatch(fetchStudentLogbooks(response._id))
+				} else {
+					dispatch(saveStudentLogbooks([]))
+				}
 			})
 			.catch(err => console.error('Error: ', err))
 	}
@@ -33,14 +40,11 @@ export const saveCurrentLogbook = payload => {
 	}
 }
 
-export const fetchStudentLogbooks = response => {
+export const fetchStudentLogbooks = id => {
 	return async dispatch => {
-		return await fetch(
-			`http://localhost:3000/studentlogbook/logbooks/` + response._id,
-			{
-				method: 'GET'
-			}
-		)
+		return await fetch(`http://localhost:3000/studentlogbook/logbooks/` + id, {
+			method: 'GET'
+		})
 			.then(response => response.json())
 			.then(response => {
 				dispatch(saveStudentLogbooks(response))
@@ -61,6 +65,13 @@ export const fetchCurrentStudentlogbook = () => {}
 export const saveCurrentStudentlogbook = payload => {
 	return {
 		type: SAVE_CURRENT_STUDENTLOGBOOK,
+		payload
+	}
+}
+
+export const setCurrentLogbookPeriod = payload => {
+	return {
+		type: SET_CURRENT_LOGBOOK_PERIOD,
 		payload
 	}
 }
