@@ -22,8 +22,14 @@ function Goals(props) {
 			  alert('Je moet eerst leerdoelen invoeren.')
 
 	const addGoal = () => {
-		props.postImage()
-		props.setGoal()
+		const goal = props.goals[props.goals.length - 1]
+
+		if (goal.title.length < 1) {
+			alert('Voer een titel in')
+		} else {
+			props.postImage()
+			props.setGoal()
+		}
 	}
 
 	// useEffect for model / overlay
