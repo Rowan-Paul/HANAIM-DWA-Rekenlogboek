@@ -2,6 +2,7 @@
 
 .new-logbook {
 	align-items: center;
+	color: $fontColor;
 	display: flex;
 	height: 90%;
 	margin: 0 auto;
@@ -23,47 +24,13 @@
 	.vertical-center {
 		display: flex;
 		flex-direction: column;
+		grid-row: span 6;
 		justify-content: center;
 		height: inherit;
 		color: $fontColor;
-		margin: 5%;
+		height: 100%;
+		margin: 0 5%;
 		position: relative;
 		width: 90%;
-	}
-
-	form {
-		position: absolute;
-		margin: 5% 0;
-		width: inherit;
-
-		h1 {
-			margin-bottom: 2%;
-		}
-
-		label {
-			font-size: $label-font-size;
-			font-weight: $bold;
-		}
-
-		input {
-			border: unset;
-			border-radius: $border-radius;
-			margin: 1vh 0;
-			padding: 1vh 0.5vw;
-			width: calc(100% - (1vw + 2px));
-			box-shadow: $shadow;
-			font-size: $input-font-size;
-		}
-		textarea {
-			border: unset;
-			border-radius: $border-radius;
-			height: 25%;
-			margin: 0.5vh 0;
-			padding: 1vh 0.5vw;
-			resize: none;
-			width: calc(100% - (1vw + 2px));
-			box-shadow: $shadow;
-			font-size: $input-font-size;
-		}
 	}
 }

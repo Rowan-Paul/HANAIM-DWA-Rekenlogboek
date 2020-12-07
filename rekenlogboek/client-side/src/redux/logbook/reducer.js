@@ -1,45 +1,122 @@
 import {
+	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
-	REMOVE_LEARN_GOAL,
-	SAVE_LOGBOOK,
 	ADD_LOGBOOK_PERIOD,
+	MODAL_HIDE,
+	MODAL_SHOW,
+	SET_COLUMN,
+	SET_COLUMN_TITLE,
+	SET_INPUT_TYPE,
+	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
-	ADD_LOGBOOK_COLUMNS
+	SAVE_LOGBOOK,
+	SET_EXPLANATION,
+	DELETE_INPUT_OPTION
 } from './types'
 
 const date = new Date()
 const year = date.getFullYear()
 const INITIAL_STATE = {
-	//TODO: add checks to see if columns are filled in newlogbook2
 	columns: [
 		{
+			added: false,
+			explanation: false,
 			position: 1,
 			title: '',
-			inputType: 'Checkboxes'
+			input: {
+				type: 'radiobuttons',
+				options: []
+			}
 		},
 		{
+			added: false,
+			explanation: false,
 			position: 2,
 			title: '',
-			inputType: 'Checkboxes'
+			input: {
+				type: 'radiobuttons',
+				options: []
+			}
 		}
 	],
 	goals: [],
 	group: 0,
+	inputTypes: {
+		checkboxes: 'checkboxes',
+		radiobuttons: 'radiobuttons',
+		textarea: 'textarea'
+	},
 	isAvailable: true,
 	isSaved: false,
+	modal: {
+		title: '',
+		visible: false
+	},
 	period: 0,
+	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '', //TODO: auto add years in components
 	year: `${year} - ${year + 1}` // but what if you add a logboek in the second half of the year?
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case ADD_INPUT_OPTION:
+			if (action.payload) {
+				return {
+					...state,
+					columns: state.columns.filter(column => {
+						if (column.position === state.position) {
+							column.input.options = [...column.input.options, action.payload]
+						}
+						return column
+					})
+				}
+			}
+			return state
+
 		case ADD_LEARN_GOAL:
 			action.payload.position = state.goals.length + 1
 
 			return {
 				...state,
 				goals: [...state.goals, action.payload]
+			}
+
+		case ADD_LOGBOOK_PERIOD:
+			return {
+				...state,
+				group: Number(action.payload.group),
+				period: Number(action.payload.period),
+				teacher: action.payload.username
+			}
+		case DELETE_INPUT_OPTION: {
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.input.options = column.input.options.filter(
+							(_, i) => i !== action.payload
+						)
+					}
+					return column
+				})
+			}
+		}
+
+		case MODAL_HIDE:
+			return {
+				...state,
+				modal: { visible: false }
+			}
+
+		case MODAL_SHOW:
+			return {
+				...state,
+				modal: {
+					title: action.payload.title,
+					visible: true
+				},
+				position: action.payload.position
 			}
 
 		case REMOVE_LEARN_GOAL:
@@ -55,6 +132,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 				goals: updatePosition
 			}
 
+		case RESET_LOGBOOK:
+			return (state = INITIAL_STATE)
 		case SAVE_LOGBOOK:
 			if (action.response.ok) {
 				return {
@@ -63,21 +142,56 @@ const reducer = (state = INITIAL_STATE, action) => {
 				}
 			}
 			return state
-		case ADD_LOGBOOK_PERIOD:
+
+		case SET_COLUMN:
 			return {
 				...state,
-				group: Number(action.payload.group),
-				period: Number(action.payload.period),
-				teacher: action.payload.username
-			}
-		case ADD_LOGBOOK_COLUMNS:
-			return {
-				...state,
-				columns: action.payload.columns
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.added = true
+					}
+					return column
+				}),
+				modal: { visible: false }
 			}
 
-		case RESET_LOGBOOK:
-			return (state = INITIAL_STATE)
+		case SET_COLUMN_TITLE:
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.title = action.payload
+					}
+					return column
+				})
+			}
+
+		case SET_EXPLANATION:
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						switch (action.payload) {
+							case 'true':
+								column.explanation = true
+								break
+							default:
+								column.explanation = false
+						}
+					}
+					return column
+				})
+			}
+		case SET_INPUT_TYPE:
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						column.input.type = action.payload
+					}
+					return column
+				})
+			}
 		default:
 			return state
 	}
