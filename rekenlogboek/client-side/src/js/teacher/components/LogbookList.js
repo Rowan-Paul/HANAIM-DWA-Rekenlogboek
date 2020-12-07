@@ -13,11 +13,32 @@ function LogbookList(props) {
 		props.setPeriod(event.target.value)
 	}
 
+	function makeRows() {
+		return props.studentlogbooks.map(studentlogbook => (
+			<tr key={studentlogbook.student}>
+				<td>
+					<p>{studentlogbook.student}</p>
+				</td>
+				<td>
+					<p>Status: </p>
+				</td>
+				<td>
+					<img
+						onClick={() => {
+							props.setActiveStudentLogbook(studentlogbook)
+						}}
+						src={Icon}
+					/>
+				</td>
+			</tr>
+		))
+	}
+
 	return (
 		<div className="LogbookList">
 			<div>
-				<p>Leerjaar: {props.logbook.year}</p>
-				<p>Groep: {props.logbook.group}</p>
+				<p>Leerjaar: {props.year}</p>
+				<p>Groep: {props.group}</p>
 				<p>Blok: {props.period}</p>{' '}
 				<select
 					value={props.period}
@@ -31,48 +52,7 @@ function LogbookList(props) {
 					<option value="4">4</option>
 				</select>
 				<table border="1">
-					<tbody>
-						{props.studentlogbooks.map(studentlogbook => (
-							<tr key={studentlogbook.student}>
-								<td>
-									<p>{studentlogbook.student}</p>
-								</td>
-								<td>
-									<p>ERROR</p>
-								</td>
-								<td>
-									<img
-										onClick={() => {
-											props.setActiveStudentLogbook(studentlogbook)
-										}}
-										src={Icon}
-									/>
-								</td>
-							</tr>
-						))}
-						<tr>
-							<td>
-								<p>Jan Peter </p>
-							</td>
-							<td>
-								<p>Status: Na pretoets ingevuld</p>
-							</td>
-							<td>
-								<img src={Icon} />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Emma </p>
-							</td>
-							<td>
-								<p>Status: Instructie ingevuld</p>
-							</td>
-							<td>
-								<img src={Icon} />
-							</td>
-						</tr>
-					</tbody>
+					<tbody>{makeRows()}</tbody>
 				</table>
 			</div>
 		</div>
@@ -81,6 +61,8 @@ function LogbookList(props) {
 
 const mapStateToProps = state => {
 	return {
+		year: state.logbookoverview.year,
+		group: state.logbookoverview.group,
 		period: state.logbookoverview.period
 	}
 }
