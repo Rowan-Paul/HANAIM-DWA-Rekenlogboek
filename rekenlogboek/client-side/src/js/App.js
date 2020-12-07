@@ -8,7 +8,8 @@ import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
 // import Default from './student/containers/Default'
 // import AfterPreTest from './student/containers/AfterPreTest'
-import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
+// import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
+import defaultStudentPage from './student/containers/Default'
 // import Instructions from './student/containers/Instructions'
 // import Evaluation from './student/containers/Evaluation'
 
@@ -59,7 +60,7 @@ function App() {
 								<Route
 									exact
 									path="/student/after-pre-test"
-									component={AfterPreTestEnd}
+									component={defaultStudentPage}
 								/>
 								{/* <Route
 									exact
