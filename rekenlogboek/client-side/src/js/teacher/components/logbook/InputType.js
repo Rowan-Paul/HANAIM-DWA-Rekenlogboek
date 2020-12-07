@@ -17,11 +17,12 @@ function InputType(props) {
 
 	if (column.added) {
 		let inputType
-		switch (column.inputType) {
+		switch (column.input.type) {
 			case 'checkboxes':
 				inputType = (
 					<Checkboxes
-						values={column.values.checkboxes}
+						explanation={column.explanation}
+						options={column.input.options}
 						readonly={props.readonly}
 					/>
 				)
@@ -29,15 +30,14 @@ function InputType(props) {
 			case 'radiobuttons':
 				inputType = (
 					<RadioButtons
-						values={column.values.radiobuttons}
+						explanation={column.explanation}
+						options={column.input.options}
 						readonly={props.readonly}
 					/>
 				)
 				break
 			case 'textarea':
-				inputType = (
-					<Textarea value={column.values.textarea} readonly={props.readonly} />
-				)
+				inputType = <Textarea readonly={props.readonly} />
 				break
 			default:
 				inputType = ''

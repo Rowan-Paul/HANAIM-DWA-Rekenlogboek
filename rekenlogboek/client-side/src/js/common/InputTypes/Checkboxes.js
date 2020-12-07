@@ -7,22 +7,17 @@ import '../../../scss/common/InputTypes.scss'
 export default function Checkboxes(props) {
 	return (
 		<ul className="Checkboxes">
-			{props.values.map((value, i) => (
+			{props.options.map((option, i) => (
 				<li
 					key={shortid.generate()}
 					className={props.readonly ? 'ReadOnly' : 'Edit'}
 				>
 					<input type="checkbox" name="checkboxes" value="default" />
-					<span>{value.text}</span>
+					<span>{option}</span>
 					{!props.readonly && (
 						<div>
-							<InputHandlers explanation={value.explanation} position={i} />
+							<InputHandlers position={i} />
 						</div>
-					)}
-
-					<i></i>
-					{value.explanation && (
-						<input className="Explanation" type="text" placeholder="Omdat..." />
 					)}
 				</li>
 			))}
@@ -38,6 +33,12 @@ export default function Checkboxes(props) {
 					</div>
 				)}
 			</li>
+
+			{props.explanation && (
+				<li className="Explanation">
+					<textarea type="text" name="explanation" placeholder="Omdat..." />
+				</li>
+			)}
 		</ul>
 	)
 }

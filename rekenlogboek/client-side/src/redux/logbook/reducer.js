@@ -1,9 +1,7 @@
 import {
-	ADD_INPUT_VALUE,
+	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
-	DELETE_INPUT_VALUE,
-	EXPLANATION_FIELD_TOGGLE,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
@@ -17,7 +15,9 @@ import {
 	SET_GOAL_TITLE,
 	SET_GOAL_POSITION,
 	POST_IMAGE,
-	SET_GOAL
+	SET_GOAL,
+	SET_EXPLANATION,
+	DELETE_INPUT_OPTION
 } from './types'
 
 const date = new Date()
@@ -26,24 +26,22 @@ const INITIAL_STATE = {
 	columns: [
 		{
 			added: false,
-			inputType: 'radiobuttons',
+			explanation: false,
 			position: 1,
 			title: '',
-			values: {
-				checkboxes: [],
-				radiobuttons: [],
-				textarea: ''
+			input: {
+				type: 'radiobuttons',
+				options: []
 			}
 		},
 		{
 			added: false,
-			inputType: 'radiobuttons',
+			explanation: false,
 			position: 2,
 			title: '',
-			values: {
-				checkboxes: [],
-				radiobuttons: [],
-				textarea: ''
+			input: {
+				type: 'radiobuttons',
+				options: []
 			}
 		}
 	],
@@ -68,37 +66,13 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case ADD_INPUT_VALUE:
+		case ADD_INPUT_OPTION:
 			if (action.payload) {
 				return {
 					...state,
-					/** Adds value to checkbox or radiobutton group
-					 *
-					 * 1. Finds column where position is equal to state position
-					 * 2. case textarea : replace textarea value
-					 * 3  default: Add new inputvalue to inputType array
-					 *
-					 * example: values.checkboxes.push({
-					 * 	explanation: false,
-					 *  text: 'Ik begrijp het goed'
-					 * })
-					 */
 					columns: state.columns.filter(column => {
 						if (column.position === state.position) {
-							switch (column.inputType) {
-								case state.inputTypes.textarea:
-									column.values[column.inputType] = action.payload
-									break
-
-								default:
-									column.values[column.inputType] = [
-										...column.values[column.inputType],
-										{
-											explanation: false,
-											text: action.payload
-										}
-									]
-							}
+							column.input.options = [...column.input.options, action.payload]
 						}
 						return column
 					})
@@ -121,42 +95,14 @@ const reducer = (state = INITIAL_STATE, action) => {
 				period: Number(action.payload.period),
 				teacher: action.payload.username
 			}
-		case DELETE_INPUT_VALUE: {
-			return {
-				...state,
-				/** Deletes value from checkbox or radiobutton group
-				 *
-				 * 1. Finds column where position is equal to state position
-				 * 2. Finds values where type is equal to state inputType
-				 * 3. Finds value inside array en removes where equal to position from payload
-				 *
-				 * example: values.checkboxes[1] deleted
-				 */
-				columns: state.columns.filter(column => {
-					if (column.position === state.position) {
-						column.values[column.inputType] = column.values[
-							column.inputType
-						].filter((_, i) => i !== action.payload)
-					}
-					return column
-				})
-			}
-		}
-
-		case EXPLANATION_FIELD_TOGGLE: {
-			/** Toggles explanation field from checkbox or radiobutton value
-			 *
-			 * 1. Finds column where position is equal to state position
-			 * 2. Finds value inside array and toggles explanation boolean to opposite
-			 */
+		case DELETE_INPUT_OPTION: {
 			return {
 				...state,
 				columns: state.columns.filter(column => {
 					if (column.position === state.position) {
-						column.values[column.inputType][
-							action.payload
-						].explanation = !column.values[column.inputType][action.payload]
-							.explanation
+						column.input.options = column.input.options.filter(
+							(_, i) => i !== action.payload
+						)
 					}
 					return column
 				})
@@ -236,12 +182,28 @@ const reducer = (state = INITIAL_STATE, action) => {
 				})
 			}
 
+		case SET_EXPLANATION:
+			return {
+				...state,
+				columns: state.columns.filter(column => {
+					if (column.position === state.position) {
+						switch (action.payload) {
+							case 'true':
+								column.explanation = true
+								break
+							default:
+								column.explanation = false
+						}
+					}
+					return column
+				})
+			}
 		case SET_INPUT_TYPE:
 			return {
 				...state,
 				columns: state.columns.filter(column => {
 					if (column.position === state.position) {
-						column.inputType = action.payload
+						column.input.type = action.payload
 					}
 					return column
 				})

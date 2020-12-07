@@ -4,18 +4,19 @@ import { connect } from 'react-redux'
 import {
 	setInputType,
 	setColumnTitle,
-	addInputValue
+	addInputOption
 } from '../../../../redux/logbook/actions'
 
 import AddInputValue from './AddInputValue'
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
+import Explanation from './Explanation'
 import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/AddColumn.scss'
+import '../../../../scss/teacher/components/column/AddColumn.scss'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
-	const [inputValues, setInputValues] = useState('')
+	const [options, setOptions] = useState('')
 	const [inputType, setInputType] = useState('')
 	const [selected, setSelected] = useState(props.inputTypes.radiobuttons)
 
@@ -24,25 +25,23 @@ function AddColumn(props) {
 			column => column.position === props.position
 		)[0]
 		setTitle(column.title)
-		setInputType(column.inputType)
-		setInputValues(column.values)
-		setSelected(column.inputType)
+		setInputType(column.input.type)
+		setOptions(column.input.options)
+		setSelected(column.input.type)
 	}, [props.columns])
 
 	const getInputType = () => {
 		switch (inputType) {
 			case props.inputTypes.checkboxes:
-				return <Checkboxes values={inputValues.checkboxes} />
+				return <Checkboxes options={options} />
 			case props.inputTypes.radiobuttons:
-				return <Radiobuttons values={inputValues.radiobuttons} />
+				return <Radiobuttons options={options} />
 			case props.inputTypes.textarea:
-				return <Textarea value={inputValues.textarea} />
+				return <Textarea />
 			default:
 				return null
 		}
 	}
-
-	const AddValues = () => (inputType === 'textarea' ? null : <AddInputValue />)
 
 	return (
 		<div className="AddColumns">
@@ -57,7 +56,7 @@ function AddColumn(props) {
 				/>
 			</div>
 
-			<div className="Block">
+			<div className="Block ">
 				<h4>Selecteer input type:</h4>
 
 				<select
@@ -76,13 +75,14 @@ function AddColumn(props) {
 				</select>
 			</div>
 
-			<div className="Block">
+			<div className="Block Values">
 				<h4>Overzicht waardes :</h4>
 
 				{getInputType()}
 			</div>
 
-			{AddValues()}
+			{inputType !== 'textarea' && <Explanation />}
+			{inputType !== 'textarea' && <AddInputValue />}
 		</div>
 	)
 }
@@ -97,7 +97,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addInputValue: payload => dispatch(addInputValue(payload)),
+		addInputOption: payload => dispatch(addInputOption(payload)),
 		setColumnTitle: payload => dispatch(setColumnTitle(payload)),
 		setInputType: payload => dispatch(setInputType(payload))
 	}

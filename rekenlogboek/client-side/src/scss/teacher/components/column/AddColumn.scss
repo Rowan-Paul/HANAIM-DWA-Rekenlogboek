@@ -1,7 +1,8 @@
-@import '../../Variables.scss';
+@import '../../../Variables.scss';
 
 .AddColumns {
 	padding: 5% 0;
+	height: 100%;
 	width: 100%;
 
 	h4 {
@@ -34,6 +35,11 @@
 			width: calc(100% - 2px);
 		}
 	}
+	.Values {
+		max-height: 17.5%;
+		overflow-y: scroll;
+	}
+
 	// ADD CONTAINER
 	.AddContainer {
 		box-sizing: border-box;

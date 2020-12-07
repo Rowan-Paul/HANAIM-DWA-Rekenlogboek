@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addInputValue } from '../../../../redux/logbook/actions'
+import { addInputOption } from '../../../../redux/logbook/actions'
 function addInputValueFunc(props) {
 	const [value, setValue] = useState('')
 
-	const addInputValue = e => {
+	const addInputOption = e => {
 		e.preventDefault()
-		props.addInputValue(value)
+		props.addInputOption(value)
 		setValue('')
 	}
 
@@ -15,7 +15,7 @@ function addInputValueFunc(props) {
 			<h4>Waarde toevoegen :</h4>
 
 			<div className="AddContainer">
-				<form onSubmit={e => addInputValue(e)}>
+				<form onSubmit={e => addInputOption(e)}>
 					<input
 						onChange={e => setValue(e.target.value)}
 						placeholder="Waardes toevoegen"
@@ -33,7 +33,7 @@ function addInputValueFunc(props) {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addInputValue: payload => dispatch(addInputValue(payload))
+		addInputOption: payload => dispatch(addInputOption(payload))
 	}
 }
 

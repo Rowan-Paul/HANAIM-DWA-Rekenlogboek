@@ -1,9 +1,7 @@
 import {
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
-	ADD_INPUT_VALUE,
-	DELETE_INPUT_VALUE,
-	EXPLANATION_FIELD_TOGGLE,
+	DELETE_INPUT_OPTION,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SAVE_LOGBOOK,
@@ -12,10 +10,12 @@ import {
 	SET_INPUT_TYPE,
 	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
+	ADD_INPUT_OPTION,
 	SET_GOAL_DESCRIPTION,
 	SET_GOAL_TITLE,
 	SET_GOAL_IMAGE,
 	SET_GOAL_POSITION,
+	SET_EXPLANATION,
 	POST_IMAGE,
 	SET_GOAL
 } from './types'
@@ -34,21 +34,15 @@ export const addLogbookPeriod = payload => {
 	}
 }
 
-export const addInputValue = payload => {
+export const addInputOption = payload => {
 	return {
-		type: ADD_INPUT_VALUE,
+		type: ADD_INPUT_OPTION,
 		payload
 	}
 }
-export const deleteInputValue = payload => {
+export const deleteInputOption = payload => {
 	return {
-		type: DELETE_INPUT_VALUE,
-		payload
-	}
-}
-export const explanationFieldToggle = payload => {
-	return {
-		type: EXPLANATION_FIELD_TOGGLE,
+		type: DELETE_INPUT_OPTION,
 		payload
 	}
 }
@@ -142,6 +136,13 @@ export const setGoal = () => {
 		type: SET_GOAL
 	}
 }
+export const setExplanation = payload => {
+	return {
+		type: SET_EXPLANATION,
+		payload
+	}
+}
+
 export const setGoalDescription = payload => {
 	return {
 		type: SET_GOAL_DESCRIPTION,
