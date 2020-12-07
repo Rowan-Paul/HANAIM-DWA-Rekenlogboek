@@ -3,8 +3,10 @@ import React from 'react'
 
 export default function Textarea() {
 	return (
-		<div className="Textarea">
-			<textarea placeholder="Omschrijving toevoegen" value=""></textarea>
-		</div>
+		<textarea
+			className="Textarea"
+			placeholder="Omschrijving toevoegen"
+			readOnly
+		></textarea>
 	)
 }

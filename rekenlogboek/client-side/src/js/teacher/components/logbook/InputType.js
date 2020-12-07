@@ -6,8 +6,8 @@ import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/column/ColumnPreview.scss'
-function ColumnPreview(props) {
+import '../../../../scss/teacher/components/logbook/InputType.scss'
+function InputType(props) {
 	const [column, setColumn] = useState({})
 
 	useEffect(() => {
@@ -21,42 +21,47 @@ function ColumnPreview(props) {
 			case 'checkboxes':
 				inputType = (
 					<Checkboxes
-						options={column.input.options}
 						explanation={column.explanation}
+						options={column.input.options}
+						readonly={props.readonly}
 					/>
 				)
 				break
 			case 'radiobuttons':
 				inputType = (
 					<RadioButtons
-						options={column.input.options}
 						explanation={column.explanation}
+						options={column.input.options}
+						readonly={props.readonly}
 					/>
 				)
 				break
 			case 'textarea':
-				inputType = <Textarea />
+				inputType = <Textarea readonly={props.readonly} />
 				break
 			default:
 				inputType = ''
 		}
 
 		return (
-			<div className="ColumnPreview">
+			<div className="InputType Cell">
 				<ul>
-					<li className="Header">
-						<h4>Voorbeeld invoerveld:</h4>
-						<button
-							onClick={() =>
-								props.modalShow({
-									position: props.position,
-									title: 'Kolom toevoegen'
-								})
-							}
-						>
-							<i className="fa fa-pencil"></i>
-						</button>
-					</li>
+					{!props.readonly && (
+						<li className="Header">
+							<h4>Invoertype:</h4>
+
+							<button
+								onClick={() =>
+									props.modalShow({
+										position: props.position,
+										title: 'Kolom toevoegen'
+									})
+								}
+							>
+								<i className="fa fa-pencil"></i>
+							</button>
+						</li>
+					)}
 
 					<li>{inputType}</li>
 				</ul>
@@ -65,18 +70,21 @@ function ColumnPreview(props) {
 	}
 
 	return (
-		<div>
-			<button
-				className="Plus"
-				onClick={() =>
-					props.modalShow({
-						position: props.position,
-						title: 'Kolom toevoegen'
-					})
-				}
-			>
-				<i className="fa fa-plus"></i>
-			</button>
+		<div className="Cell">
+			{!props.readonly && (
+				<div className="Plus">
+					<button
+						onClick={() =>
+							props.modalShow({
+								position: props.position,
+								title: 'Kolom toevoegen'
+							})
+						}
+					>
+						<i className="fa fa-plus"></i>
+					</button>
+				</div>
+			)}
 		</div>
 	)
 }
@@ -93,4 +101,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColumnPreview)
+export default connect(mapStateToProps, mapDispatchToProps)(InputType)
