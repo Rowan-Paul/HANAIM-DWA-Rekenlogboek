@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 })
 
 // Get the active logbook for a certain group
-router.get('/group/:group', (req, res) => {
+router.get('/groups/:group', (req, res) => {
 	Logbook.findOne(
 		{
 			group: req.params.group,

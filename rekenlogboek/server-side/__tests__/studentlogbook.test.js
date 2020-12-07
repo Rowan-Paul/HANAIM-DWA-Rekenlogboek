@@ -1,6 +1,7 @@
 /**
  * @jest-environment node
  */
+// IMPORTANT: change the db name in app to testrekenlogboek
 
 'use strict'
 
@@ -52,7 +53,7 @@ const getTestStudentlogbook = async () => {
 
 describe('Studentlogbook route tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
+		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
@@ -103,19 +104,16 @@ describe('Studentlogbook route tests', () => {
 	})
 
 	test('Create a new studentlogbook', async () => {
-		const createResponse = await fetch(
-			process.env.SERVER_ADDRESS + '/studentlogbook',
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					logbookID: '5fbf66ca14b7c811a829fada',
-					student: 'Piet'
-				})
-			}
-		).then(response => response.status)
+		const createResponse = await fetch('http://localhost:3000/studentlogbook', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				logbookID: '5fbf66ca14b7c811a829fada',
+				student: 'Piet'
+			})
+		}).then(response => response.status)
 
 		expect(createResponse).toEqual(200)
 	})
@@ -124,7 +122,7 @@ describe('Studentlogbook route tests', () => {
 		const studentlogbookID = await getTestStudentlogbook()
 
 		const response = await fetch(
-			process.env.SERVER_ADDRESS + '/studentlogbook/' + studentlogbookID,
+			'http://localhost:3000/studentlogbook/' + studentlogbookID,
 			{
 				method: 'GET'
 			}
@@ -137,10 +135,7 @@ describe('Studentlogbook route tests', () => {
 		const studentlogbookID = await getTestStudentlogbook()
 
 		const response = await fetch(
-			process.env.SERVER_ADDRESS +
-				'/studentlogbook/' +
-				studentlogbookID +
-				'/answers',
+			'http://localhost:3000/studentlogbook/' + studentlogbookID + '/answers',
 			{
 				method: 'GET'
 			}
@@ -155,8 +150,7 @@ describe('Studentlogbook route tests', () => {
 		const studentlogbookID = await getTestStudentlogbook()
 
 		const response = await fetch(
-			process.env.SERVER_ADDRESS +
-				'/studentlogbook/' +
+			'http://localhost:3000/studentlogbook/' +
 				studentlogbookID +
 				'/answers/column/' +
 				1,
@@ -173,8 +167,7 @@ describe('Studentlogbook route tests', () => {
 		const studentlogbookID = await getTestStudentlogbook()
 
 		const response = await fetch(
-			process.env.SERVER_ADDRESS +
-				'/studentlogbook/' +
+			'http://localhost:3000/studentlogbook/' +
 				studentlogbookID +
 				'/answers/goal/' +
 				1,

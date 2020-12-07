@@ -14,7 +14,7 @@ export const fetchCurrentPhase = payload => dispatch => {
 
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/group/${payload.substring(payload.indexOf(' ') + 1)}`,
+			`/logbook/groups/${payload.substring(payload.indexOf(' ') + 1)}`,
 		{
 			method: 'GET'
 		}
