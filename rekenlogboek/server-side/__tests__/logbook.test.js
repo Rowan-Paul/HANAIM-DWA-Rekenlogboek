@@ -233,6 +233,15 @@ describe('Logbook route tests', () => {
 		expect(createResponse).toEqual(500)
 	})
 
+	test('Get active logboek for a certain group', async () => {
+		const logbookID = await getTestlogbookID()
+		const test = await fetch('http://localhost:3000/logbook/groups/7', {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test.currentPhase).toEqual('pretoets')
+	})
+
 	test('Get logbook from id', async () => {
 		const logbookID = await getTestlogbookID()
 		const test = await fetch('http://localhost:3000/logbook/' + logbookID, {
