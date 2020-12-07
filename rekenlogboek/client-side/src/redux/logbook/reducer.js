@@ -11,7 +11,13 @@ import {
 	SET_INPUT_TYPE,
 	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
-	SAVE_LOGBOOK
+	SAVE_LOGBOOK,
+	SET_GOAL_DESCRIPTION,
+	SET_GOAL_IMAGE,
+	SET_GOAL_TITLE,
+	SET_GOAL_POSITION,
+	POST_IMAGE,
+	SET_GOAL
 } from './types'
 
 const date = new Date()
@@ -173,6 +179,16 @@ const reducer = (state = INITIAL_STATE, action) => {
 				position: action.payload.position
 			}
 
+		case POST_IMAGE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.imageLink = action.response.path
+					}
+					return goal
+				})
+			}
 		case REMOVE_LEARN_GOAL:
 			const filterGoals = state.goals.filter(goal => goal.ID !== action.payload)
 
@@ -228,6 +244,67 @@ const reducer = (state = INITIAL_STATE, action) => {
 						column.inputType = action.payload
 					}
 					return column
+				})
+			}
+
+		case SET_GOAL:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.added = true
+					}
+					return goal
+				}),
+				modal: { visible: false }
+			}
+
+		case SET_GOAL_DESCRIPTION:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.description = action.payload
+					}
+					return goal
+				})
+			}
+
+		case SET_GOAL_IMAGE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.imageBlob = action.payload.imageBlob
+						goal.imageName = action.payload.imageName
+					}
+					return goal
+				})
+			}
+		case SET_GOAL_POSITION:
+			return {
+				...state,
+				goals: [
+					...state.goals,
+					{
+						added: false,
+						description: '',
+						imageBlob: {},
+						imageLink: '',
+						imageName: '',
+						position: action.payload,
+						title: ''
+					}
+				]
+			}
+		case SET_GOAL_TITLE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.title = action.payload
+					}
+					return goal
 				})
 			}
 		default:

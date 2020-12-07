@@ -5,15 +5,15 @@ import { setColumn } from '../../../redux/logbook/actions'
 
 import Button from '../../common/Button'
 import AddColumn from '../components/column/AddColumn'
-import ColumnPreview from '../components/column/ColumnPreview'
 import Evaluation from '../../common/InputTypes/Evaluation'
 import Jumbotron from '../../common/Jumbotron'
-import LogbookFrame from '../components/logbookTable/logbookFrame'
-import LogbookHeader from '../components/logbookTable/logbookHeader'
-import Modal from '../components/Modal'
-import TopBar from '../components/logbookTable/TopBar'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+import LogbookHeader from '../components/logbook/LogbookHeader'
+import Modal from '../components/logbook/Modal'
+import TopBar from '../components/logbook/TopBar'
 
 import '../../../scss/teacher/containers/NewLogbook.scss'
+import InputType from '../components/logbook/InputType'
 function Columns(props) {
 	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)
@@ -50,15 +50,15 @@ function Columns(props) {
 				<LogbookFrame>
 					<LogbookHeader />
 					<li className="Row Body">
-						<div>
-							<p>
+						<div className="Cell">
+							<p className="Description">
 								Maak op de volgende pagina de doelen aan om ook hiervoor een
 								preview te krijgen.
 							</p>
 						</div>
 
-						<ColumnPreview position={1} />
-						<ColumnPreview position={2} />
+						<InputType position={1} />
+						<InputType position={2} />
 						<div>
 							<Evaluation />
 						</div>
