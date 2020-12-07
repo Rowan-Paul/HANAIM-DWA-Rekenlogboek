@@ -7,7 +7,7 @@ import {
 
 const INITIAL_STATE = {
 	year: '2019 - 2020',
-	group: 5,
+	group: 5, // Moet automatisch de groep worden van de docent
 	period: 1,
 	currentLogbook: {},
 	activeStudentlogbook: {},
