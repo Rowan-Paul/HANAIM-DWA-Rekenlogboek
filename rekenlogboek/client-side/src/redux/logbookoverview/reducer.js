@@ -5,8 +5,19 @@ import {
 	SET_CURRENT_LOGBOOK_PERIOD
 } from './types'
 
+let date1 = new Date()
+let month = date1.getMonth()
+let date2 = date1
+if (month < 8) {
+	date1 = date1.getFullYear() - 1
+	date2 = date2.getFullYear()
+} else {
+	date1 = date1.getFullYear()
+	date2 = date2.getFullYear() + 1
+}
+
 const INITIAL_STATE = {
-	year: '2019 - 2020',
+	year: `${date1} - ${date2}`,
 	group: 5, // Moet automatisch de groep worden van de docent
 	period: 1,
 	currentLogbook: {},
