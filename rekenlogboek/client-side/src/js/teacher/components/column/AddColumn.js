@@ -13,6 +13,8 @@ import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
 import '../../../../scss/teacher/components/column/AddColumn.scss'
+import AddExplanation from './Explanation'
+import Explanation from './Explanation'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
 	const [inputValues, setInputValues] = useState('')
@@ -32,17 +34,15 @@ function AddColumn(props) {
 	const getInputType = () => {
 		switch (inputType) {
 			case props.inputTypes.checkboxes:
-				return <Checkboxes values={inputValues.checkboxes} />
+				return <Checkboxes values={inputValues} />
 			case props.inputTypes.radiobuttons:
-				return <Radiobuttons values={inputValues.radiobuttons} />
+				return <Radiobuttons values={inputValues} />
 			case props.inputTypes.textarea:
-				return <Textarea value={inputValues.textarea} />
+				return <Textarea />
 			default:
 				return null
 		}
 	}
-
-	const AddValues = () => (inputType === 'textarea' ? null : <AddInputValue />)
 
 	return (
 		<div className="AddColumns">
@@ -82,7 +82,8 @@ function AddColumn(props) {
 				{getInputType()}
 			</div>
 
-			{AddValues()}
+			{inputType !== 'textarea' && <Explanation />}
+			{inputType !== 'textarea' && <AddInputValue />}
 		</div>
 	)
 }

@@ -10,15 +10,10 @@ export default function Checkboxes(props) {
 			{props.values.map((value, i) => (
 				<li key={shortid.generate()}>
 					<input type="checkbox" name="checkboxes" value="default" />
-					<span>{value.text}</span>
+					<span>{value}</span>
 					<div>
-						<InputHandlers explanation={value.explanation} position={i} />
+						<InputHandlers position={i} />
 					</div>
-
-					<i></i>
-					{value.explanation && (
-						<input className="Explanation" type="text" placeholder="Omdat..." />
-					)}
 				</li>
 			))}
 			<li>

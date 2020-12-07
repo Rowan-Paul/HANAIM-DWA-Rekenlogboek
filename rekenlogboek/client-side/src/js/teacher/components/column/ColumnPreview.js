@@ -19,13 +19,20 @@ function ColumnPreview(props) {
 		let inputType
 		switch (column.inputType) {
 			case 'checkboxes':
-				inputType = <Checkboxes values={column.values.checkboxes} />
+				inputType = (
+					<Checkboxes values={column.values} explanation={explanation.value} />
+				)
 				break
 			case 'radiobuttons':
-				inputType = <RadioButtons values={column.values.radiobuttons} />
+				inputType = (
+					<RadioButtons
+						values={column.values}
+						explanation={column.explanation}
+					/>
+				)
 				break
 			case 'textarea':
-				inputType = <Textarea value={column.values.textarea} />
+				inputType = <Textarea />
 				break
 			default:
 				inputType = ''

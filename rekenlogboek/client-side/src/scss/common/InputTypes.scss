@@ -38,15 +38,6 @@
 		i {
 			padding-right: 0.25vw;
 		}
-
-		// Input for explanation
-		.Explanation {
-			font-size: 12px;
-			grid-column: span 5;
-			margin: 0.5vh 0 2vh !important;
-			padding: 0.5vh !important;
-			width: 95%;
-		}
 	}
 }
 
@@ -56,8 +47,8 @@
 	textarea {
 		border: 1px solid $borderColor;
 		border-radius: 8px;
-		min-height: 15vh;
-		margin: 0.5vh auto;
+		min-height: 10vh;
+		margin: 0.5vh auto 0;
 		padding: 0.5vh 2.5%;
 		resize: none;
 		width: calc(100% - (2px + 5%));
@@ -65,36 +56,54 @@
 }
 
 .InputHandlers {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, calc(100% / 2));
 	padding: 0;
-	margin-left: 50%;
-	width: 50%;
+	width: 100%;
 
 	li {
-		width: 80%;
+		width: 100%;
 		margin: 0 auto;
 
 		button {
+			align-items: center;
 			background: transparent;
 			border: none;
 			color: $fontColor;
 			cursor: pointer;
+			display: flex;
 			outline: none;
 			padding: 0;
 			transition: ease-in-out 0.5s;
 			width: 100%;
 
-			&:hover {
-				color: $fontLight;
-			}
+			span {
+				transition: ease-in-out 0.5s;
 
+				&:hover {
+					color: #ff8080 !important;
+				}
+			}
 			i {
 				font-size: 12px;
+				padding-right: 0.5vw;
 			}
 			.fa-trash {
 				color: #ff8080;
 			}
 		}
+	}
+}
+
+.Explanation {
+	position: relative;
+	textarea {
+		border: 1px solid $borderColor;
+		border-radius: 8px;
+		grid-column: span 6;
+		margin: 1vh 0;
+		padding: 2.5%;
+		position: absolute;
+		resize: vertical;
+		right: 0;
+		width: 90%;
 	}
 }

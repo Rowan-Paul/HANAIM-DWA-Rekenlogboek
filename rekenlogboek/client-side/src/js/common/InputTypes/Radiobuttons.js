@@ -10,14 +10,10 @@ export default function RadioButtons(props) {
 			{props.values.map((value, i) => (
 				<li key={shortid.generate()}>
 					<input type="radio" name="radiobutton" value="default" />
-					<span>{value.text}</span>
+					<span>{value}</span>
 					<div>
-						<InputHandlers explanation={value.explanation} position={i} />
+						<InputHandlers position={i} />
 					</div>
-					<i></i>
-					{value.explanation && (
-						<input className="Explanation" type="text" placeholder="Omdat..." />
-					)}
 				</li>
 			))}
 			<li>
@@ -30,6 +26,12 @@ export default function RadioButtons(props) {
 					</span>
 				</div>
 			</li>
+
+			{props.explanation && (
+				<li className="Explanation">
+					<textarea type="text" name="explanation" placeholder="Omdat..." />
+				</li>
+			)}
 		</ul>
 	)
 }

@@ -11,7 +11,8 @@ import {
 	SET_COLUMN_TITLE,
 	SET_INPUT_TYPE,
 	REMOVE_LEARN_GOAL,
-	RESET_LOGBOOK
+	RESET_LOGBOOK,
+	SET_EXPLANATION
 } from './types'
 
 export const addLearnGoal = payload => {
@@ -37,12 +38,6 @@ export const addInputValue = payload => {
 export const deleteInputValue = payload => {
 	return {
 		type: DELETE_INPUT_VALUE,
-		payload
-	}
-}
-export const explanationFieldToggle = payload => {
-	return {
-		type: EXPLANATION_FIELD_TOGGLE,
 		payload
 	}
 }
@@ -97,6 +92,12 @@ export const setColumnTitle = payload => {
 	}
 }
 
+export const setExplanation = payload => {
+	return {
+		type: SET_EXPLANATION,
+		payload
+	}
+}
 export const resetLogbook = () => {
 	return {
 		type: RESET_LOGBOOK
