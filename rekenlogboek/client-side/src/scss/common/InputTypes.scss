@@ -55,19 +55,15 @@
 	}
 }
 
-.Textarea {
-	width: 100%;
-
-	textarea {
-		border: 1px solid $borderColor;
-		border-radius: 8px;
-		min-height: 7.5vh;
-		margin: 0.5vh auto 0;
-		padding: 0.5vh 2.5%;
-		pointer-events: none;
-		resize: none;
-		width: calc(100% - (2px + 5%));
-	}
+textarea {
+	border: 1px solid $borderColor;
+	border-radius: 8px;
+	min-height: 7.5vh;
+	margin: 0.5vh auto 0;
+	padding: 0.5vh 2.5%;
+	pointer-events: none;
+	resize: none;
+	width: calc(100% - (2px + 5%));
 }
 
 .InputHandlers {

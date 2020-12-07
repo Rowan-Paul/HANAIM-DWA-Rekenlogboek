@@ -7,7 +7,7 @@ import {
 	addInputOption
 } from '../../../../redux/logbook/actions'
 
-import AddInputValue from './AddInputValue'
+import AddInputOption from './AddInputOption'
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import Explanation from './Explanation'
 import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
@@ -76,13 +76,13 @@ function AddColumn(props) {
 			</div>
 
 			<div className="Block Values">
-				<h4>Overzicht waardes :</h4>
+				<h4>Overzicht opties :</h4>
 
 				{getInputType()}
 			</div>
 
+			{inputType !== 'textarea' && <AddInputOption />}
 			{inputType !== 'textarea' && <Explanation />}
-			{inputType !== 'textarea' && <AddInputValue />}
 		</div>
 	)
 }
