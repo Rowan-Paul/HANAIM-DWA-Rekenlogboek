@@ -20,7 +20,7 @@ function Columns(props) {
 	const [modal, setModal] = useState(props.modalVisible)
 
 	// Verify if all collumns set
-	const verifyCollumns = () => {
+	const verifyColumns = () => {
 		if (!columns.every(c => c.added)) {
 			alert('Vul eerst alle kolommen in')
 		} else {
