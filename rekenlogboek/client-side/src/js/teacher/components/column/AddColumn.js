@@ -57,7 +57,7 @@ function AddColumn(props) {
 				/>
 			</div>
 
-			<div className="Block">
+			<div className="Block ">
 				<h4>Selecteer input type:</h4>
 
 				<select
@@ -76,7 +76,7 @@ function AddColumn(props) {
 				</select>
 			</div>
 
-			<div className="Block">
+			<div className="Block Values">
 				<h4>Overzicht waardes :</h4>
 
 				{getInputType()}
