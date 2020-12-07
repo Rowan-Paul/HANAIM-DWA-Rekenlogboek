@@ -7,6 +7,7 @@ import '../../../scss/student/Student.scss'
 import ProgressBar from '../components/ProgressBar'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
+import StudentDone from '../components/StudentDone'
 
 function AfterPreTestEnd() {
 	const saveAnswers = () => {}
@@ -16,7 +17,13 @@ function AfterPreTestEnd() {
 			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
-					<div className="left-side"></div>
+					<div className="left-side">
+						<StudentDone
+							title="Je bent klaar!"
+							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							image=""
+						/>
+					</div>
 					<div className="right-side"></div>
 				</div>
 			</Jumbotron>
