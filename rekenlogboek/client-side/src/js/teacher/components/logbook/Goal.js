@@ -10,22 +10,24 @@ function Goal(props) {
 				<li>
 					<h4>{props.goal.title}</h4>
 
-					<div>
-						<button
-							onClick={() =>
-								props.modalShow({
-									position: props.goal.position,
-									title: 'Leerdoel wijzigen'
-								})
-							}
-						>
-							<i className="fa fa-pencil"></i>
-						</button>
+					{!props.readonly && (
+						<div>
+							<button
+								onClick={() =>
+									props.modalShow({
+										position: props.goal.position,
+										title: 'Leerdoel wijzigen'
+									})
+								}
+							>
+								<i className="fa fa-pencil"></i>
+							</button>
 
-						<button onClick={() => props.deleteGoal(props.goal.position)}>
-							<i className="fa fa-trash"></i>
-						</button>
-					</div>
+							<button onClick={() => props.deleteGoal(props.goal.position)}>
+								<i className="fa fa-trash"></i>
+							</button>
+						</div>
+					)}
 				</li>
 				<li>
 					<p>{props.goal.description}</p>

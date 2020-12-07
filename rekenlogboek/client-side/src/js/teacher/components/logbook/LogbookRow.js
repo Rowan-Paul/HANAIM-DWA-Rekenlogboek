@@ -6,9 +6,9 @@ import InputType from './InputType'
 export default function LogbookRow(props) {
 	return (
 		<div className="Row Body">
-			<Goal goal={props.goal} />
-			<InputType position={1} readonly />
-			<InputType position={2} readonly />
+			<Goal goal={props.goal} readonly={props.readonly} />
+			<InputType position={1} readonly={props.readonly} />
+			<InputType position={2} readonly={props.readonly} />
 			<Evaluation />
 		</div>
 	)

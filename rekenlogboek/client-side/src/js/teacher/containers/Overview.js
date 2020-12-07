@@ -2,38 +2,33 @@ import React, { useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
-import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
-import LogbookOverview from '../components/LogbookOverview'
-import LogbookVisualizer from '../components/LogbookVisualizer'
 import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
 import '../../../scss/teacher/containers/NewLogbook.scss'
+import TopBar from '../components/logbook/TopBar'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+import LogbookHeader from '../components/logbook/LogbookHeader'
+import LogbookRows from '../components/logbook/LogbookRows'
 
 function Overview(props) {
 	const history = useHistory()
 	useEffect(() => {
 		if (props.isSaved) {
 			props.resetLogbook()
-			props.history.push('./done')
+			history.push('./done')
 		}
 	})
 
 	return (
 		<div className="new-logbook">
 			<Jumbotron>
-				<LogbookOverview
-					columns={props.columns}
-					group={props.group}
-					goals={props.goals}
-				/>
-				<InfoContainer>
-					<LogbookVisualizer
-						columns={props.columns}
-						group={props.group}
-						goals={props.goals}
-					/>
-				</InfoContainer>
+				<TopBar title="Overzicht logbook" />
+
+				<LogbookFrame>
+					<LogbookHeader />
+					<LogbookRows readonly />
+				</LogbookFrame>
 			</Jumbotron>
 
 			<div className="prev button">
