@@ -16,10 +16,13 @@ header {
 		margin: 0 auto;
 		width: 90%;
 
-		span {
+		a {
+			color: $fontColor;
 			font-size: 20px;
+			text-decoration: none;
 		}
 		i {
+			font-size: 22px !important;
 			padding-right: 0.5vw;
 		}
 	}

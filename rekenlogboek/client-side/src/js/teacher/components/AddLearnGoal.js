@@ -1,4 +1,4 @@
-import '../../../scss/logbook-designer/components/AddLearnGoal.scss'
+import '../../../scss/teacher/components/AddLearnGoal.scss'
 import React, { useState } from 'react'
 import Button from '../../common/Button'
 import shortid from 'shortid'
@@ -15,7 +15,6 @@ export default function AddLearnGoal(props) {
 		async function postImage() {
 			const formData = new FormData()
 			formData.append('file', file) // appending file
-
 			let fetchPath = await fetch('http://localhost:3000/files/uploads/goals', {
 				method: 'POST',
 				body: formData
@@ -55,6 +54,7 @@ export default function AddLearnGoal(props) {
 				<label>Beschrijving</label>
 				<textarea
 					name="description"
+					placeholder="Vul hier een beschrijving in..."
 					onChange={e => setdescription(e.target.value)}
 					value={description}
 				></textarea>

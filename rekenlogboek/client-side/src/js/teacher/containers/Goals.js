@@ -12,7 +12,7 @@ import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
 
 import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page3(props) {
 	const verifyGoals = () =>

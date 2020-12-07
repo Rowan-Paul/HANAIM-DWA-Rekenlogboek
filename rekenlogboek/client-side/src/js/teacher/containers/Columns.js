@@ -10,7 +10,7 @@ import Illustration from '../components/Illustration'
 import { addLogbookColumns } from '../../../redux/logbook/actions'
 
 import Image from '../../../img/illustrations/log_select_question_type.svg'
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page2(props) {
 	const [columnTitle1, setColumnTitle1] = useState(props.title1)

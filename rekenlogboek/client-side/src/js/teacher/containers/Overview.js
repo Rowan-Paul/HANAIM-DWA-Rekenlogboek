@@ -8,7 +8,7 @@ import LogbookOverview from '../components/LogbookOverview'
 import LogbookVisualizer from '../components/LogbookVisualizer'
 import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
-import '../../../scss/logbook-designer/containers/NewLogbook.scss'
+import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Page4(props) {
 	useEffect(() => {

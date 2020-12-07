@@ -1,7 +1,7 @@
 import React from 'react'
 import LearnGoal from './LearnGoal'
 
-import '../../../scss/logbook-designer/components/LearnGoalList.scss'
+import '../../../scss/teacher/components/LearnGoalList.scss'
 export default function LearnGoalList(props) {
 	return (
 		<div className="LearnGoalList">
