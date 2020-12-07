@@ -77,7 +77,7 @@ function Columns(props) {
 				<Button
 					color="blue"
 					value="Volgende"
-					handler={() => verifyCollumns()}
+					handler={() => verifyColumns()}
 				/>
 			</div>
 		</div>
