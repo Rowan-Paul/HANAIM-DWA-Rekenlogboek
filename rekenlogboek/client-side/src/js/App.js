@@ -4,6 +4,9 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
+/* TEMP logout button */
+import { LogOutButton } from './LogOutButton'
+
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
 // LOGBOOK PAGES
@@ -51,6 +54,8 @@ function App() {
 					<Header />
 					<main>
 						<Router>
+							{/* TEMP logout button */}
+							<LogOutButton />
 							<Switch>
 								<Route
 									exact
