@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/containers/AfterPreTest.scss'
 import '../../../scss/student/Student.scss'
@@ -11,31 +11,23 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
-import { fetchColumn } from '../../../redux/studentlogbook/actions'
-import { fetchGoal } from '../../../redux/studentlogbook/actions'
-import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
-
-function AfterPreTestUI(props) {
-	useEffect(() => {
-		props.doFetchGoalAmount()
-		props.doFetchColumn(1)
-		props.doFetchGoal(props.goal.position)
-	}, [])
-
+function AfterPreTest() {
 	return (
 		<div className="after-pre-test student-container">
-			<ProgressBar itemCount={props.goalAmount} done={[1]} />
+			<ProgressBar itemCount={5} done={[1, 3]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
+						{/* TODO: replace with data from database */}
 						<LearnGoal
-							goal={'Doel 1: ' + props.goal.title}
-							description={props.goal.description}
+							goal="Doel 1:test"
+							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
 						/>
 						<Question />
 					</div>
 					<div className="right-side">
-						<LearnGoalImage src={props.goal.imageLink} />
+						{/* TODO: replace with src from database */}
+						<LearnGoalImage src="/uploads/goals/LearnGoalThumb.png" />
 					</div>
 				</div>
 			</Jumbotron>
@@ -50,23 +42,4 @@ function AfterPreTestUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		column: state.studentLogbook.column,
-		goal: state.studentLogbook.currentGoal,
-		goalAmount: state.studentLogbook.goalAmount
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		doFetchColumn: payload => dispatch(fetchColumn(payload)),
-		doFetchGoal: payload => dispatch(fetchGoal(payload)),
-		doFetchGoalAmount: () => dispatch(fetchGoalAmount())
-	}
-}
-
-export const AfterPreTest = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AfterPreTestUI)
+export default withRouter(AfterPreTest)

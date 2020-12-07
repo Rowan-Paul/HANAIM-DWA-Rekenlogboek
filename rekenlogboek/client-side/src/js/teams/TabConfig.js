@@ -19,7 +19,7 @@ class TabConfig extends React.Component {
 		 * the settings selected by the user.
 		 */
 		microsoftTeams.settings.setSettings({
-			contentUrl: process.env.REACT_APP_ADDRESS + '/tab'
+			contentUrl: 'https://localhost:3001/tab'
 		})
 
 		/**

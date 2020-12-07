@@ -4,24 +4,25 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-/* TEMP logout button */
-import { LogOutButton } from './LogOutButton'
-
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
-// LOGBOOK PAGES
+// import Default from './student/containers/Default'
+// import AfterPreTest from './student/containers/AfterPreTest'
+import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
+// import Instructions from './student/containers/Instructions'
+// import Evaluation from './student/containers/Evaluation'
+
 import newLBGeneral from './teacher/containers/General'
 import newLBColumns from './teacher/containers/Columns'
 import newLBGoals from './teacher/containers/Goals'
 import newLBOverview from './teacher/containers/Overview'
 import newLBCompleted from './teacher/containers/Completed'
 
-// SIGN IN
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
+import Pretoetstest from './teams/Pretoetstest'
 
-// TEAMS PAGES
 // TODO: make privacy and terms of use pages
 // those are required in order to add your app
 // to teams, though the pages aren't checked
@@ -29,17 +30,11 @@ import NoAccess from '../js/no-access/NoAccess'
 
 // import Privacy from './Privacy'
 // import TermsOfUse from './TermsOfUse'
+import Tab from './teams/Tab'
 import TabConfig from './teams/TabConfig'
-
-// STUDENT PAGES
-import { Default } from './student/containers/Default'
-import { AfterPreTest } from './student/containers/AfterPreTest'
-import Instructions from './student/containers/Instructions'
-import Evaluation from './student/containers/Evaluation'
 
 import '../scss/App.scss'
 
-// require env variables
 require('dotenv').config()
 
 function App() {
@@ -53,8 +48,6 @@ function App() {
 					<Header />
 					<main>
 						<Router>
-							{/* TEMP logout button */}
-							<LogOutButton />
 							<Switch>
 								{/* <Route
 									exact
@@ -77,6 +70,7 @@ function App() {
 									path="/student/evaluation"
 									component={Evaluation}
 								/> */}
+
 								<Route
 									exact
 									path="/teacher/new-logbook/general"
@@ -126,31 +120,13 @@ function App() {
 
 		// Display the app home page hosted in Teams
 		return (
-			<main>
-				<Router>
-					<Switch>
-						<Route exact path="/config" component={TabConfig} />
-
-						{/* SIGN-IN */}
-						<Route exact path="/Tab" component={SignIn} />
-						<Route exact path="/auth/succes" component={Succes} />
-
-						{/* STUDENT LOGBOEK */}
-						<Route exact path="/student" component={Default} />
-						<Route exact path="/student/pretest" component={AfterPreTest} />
-						<Route
-							exact
-							path="/student/instructions"
-							component={Instructions}
-						/>
-						<Route exact path="/student/evaluation" component={Evaluation} />
-
-						{/* ERROR PAGES */}
-						<Route exact path="/no-access" component={NoAccess} />
-						{/* <Route component={NotFound} /> */}
-					</Switch>
-				</Router>
-			</main>
+			<Router>
+				<Switch>
+					<Route exact path="/tab" component={Tab} />
+					<Route exact path="/config" component={TabConfig} />
+					<Route exact path="/tab/pretoetstest" component={Pretoetstest} />
+				</Switch>
+			</Router>
 		)
 	}
 

@@ -6,10 +6,7 @@ import '../../../scss/student/components/ProgressBar.scss'
 export default function ProgressBar(props) {
 	const getItems = () => {
 		const items = []
-		// changed i to 1, so we don't have to i+1
-		// underneath here (and gave itemCount 1 so it
-		// does actually go long enough)
-		for (let i = 1; i < props.itemCount + 1; i++) {
+		for (let i = 0; i < props.itemCount; i++) {
 			items.push(
 				<div
 					//the ?. syntax prevents errors when the binding is undefined
@@ -18,7 +15,8 @@ export default function ProgressBar(props) {
 						locked: props?.locked?.includes(i)
 					})}
 				>
-					{i}
+					{/* start from 1 */}
+					{i + 1}
 				</div>
 			)
 		}

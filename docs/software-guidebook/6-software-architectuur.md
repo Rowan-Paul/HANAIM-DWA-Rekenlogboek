@@ -39,11 +39,3 @@ De client-side is opgedeeld in verschillende mappen voor verschillende onderdele
 De server-side is opgedeeld in een map voor mongoose models en express routes. Het hoofdbestand is het bestand [app.js](../../rekenlogboek/server-side/app.js).
 
 Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `http://localhost:3000`) ervoor te zetten
-
-## 6.3 Login
-
-Inloggen op de applicatie gebeurt via Microsoft omdat de school daar al gebruik van maakt. De login wordt afgehandeld in het bestand MicrosoftButton in de SignIn map binnen de client. Er wordt gebruik gemaakt van MSAL en Microsoft Graph modules om in te loggen, de naam, email, jobtitle en groepen van een gebruiker op te halen.
-
-De informatie van MSAL wordt opgeslagen in de localstorage zodat de gebruiker maar 1 keer hoeft in te loggen binnen zowel de normale client als Teams.
-
-Aan de hand van de jobtitle en groepen wordt bepaald welke 'rol' de gebruiker heeft binnen het programma. Zo hoeven wij binnen de database helemaal geen gebruikersdata bij te houden en ook niet te letten op de beveiliging hiervan.

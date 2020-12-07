@@ -1,7 +1,6 @@
 /**
  * @jest-environment node
  */
-// IMPORTANT: change the db name in app to testrekenlogboek
 
 'use strict'
 
@@ -25,7 +24,7 @@ const getTemplateID = async () => {
 
 describe('Template test routes', () => {
 	beforeAll(async () => {
-		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
+		await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
