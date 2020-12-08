@@ -47,11 +47,9 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="checkboxes"
+							type="textarea"
 							inputAnswer={inputAnswer}
 							changeAnswer={changeAnswer}
-							options={inputOptions}
-							readonly={true}
 						/>
 					</div>
 					<div className="right-side">
