@@ -4,9 +4,8 @@ import React from 'react'
 export default function Textarea(props) {
 	return (
 		<textarea
-			className="Textarea"
+			className={`Textarea ${props.type} `}
 			placeholder="Omschrijf hier een antwoord."
-			className={props.type}
 		></textarea>
 	)
 }
