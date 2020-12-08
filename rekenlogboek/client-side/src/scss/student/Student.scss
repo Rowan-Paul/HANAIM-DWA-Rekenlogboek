@@ -32,8 +32,13 @@
 			}
 		}
 
-		.Explanation textarea {
+		.Explanation textarea,
+		.Textarea {
 			font-size: 18px;
+		}
+
+		.Evaluation li div img {
+			width: 60%;
 		}
 	}
 }
