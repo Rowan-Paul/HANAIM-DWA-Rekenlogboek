@@ -35,17 +35,15 @@ export const saveCurrentLogbook = payload => {
 	}
 }
 
-export const fetchStudentLogbooks = id => {
-	return async dispatch => {
-		return await fetch(`http://localhost:3000/studentlogbook/logbook/` + id, {
-			method: 'GET'
+export const fetchStudentLogbooks = id => dispatch => {
+	fetch(`http://localhost:3000/studentlogbook/logbook/` + id, {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(response => {
+			dispatch(saveStudentLogbooks(response))
 		})
-			.then(response => response.json())
-			.then(response => {
-				dispatch(saveStudentLogbooks(response))
-			})
-			.catch(err => console.error('Error: ', err))
-	}
+		.catch(err => console.error('Error: ', err))
 }
 
 export const saveStudentLogbooks = payload => {
