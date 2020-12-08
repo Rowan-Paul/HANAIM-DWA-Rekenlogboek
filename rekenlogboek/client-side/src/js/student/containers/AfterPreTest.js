@@ -19,12 +19,16 @@ function AfterPreTest() {
 		'Ik vind het nog erg moeilijk'
 	]
 
-	const [inputValue, setInputValue] = useState('')
-	const [inputMotivation, setInputMotivation] = useState('')
+	//TODO: save state to redux when leaving page
+	const [inputAnswer, setInputAnswer] = useState('')
+	const [inputExplanation, setInputExplanation] = useState('')
 
-	const inputHandler = (newInputValue, newInputMotivation) => {
-		setInputValue(newInputValue)
-		setInputMotivation(newInputMotivation)
+	const changeAnswer = value => {
+		setInputAnswer(value)
+	}
+
+	const changeExplanation = value => {
+		setInputExplanation(value)
 	}
 
 	const previousPage = () => {}
@@ -43,9 +47,12 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="evaluation"
+							type="radiobuttons"
+							explanation={true}
 							options={inputOptions}
-							inputHandler={inputHandler}
+							inputAnswer={inputAnswer}
+							changeAnswer={changeAnswer}
+							changeExplanation={changeExplanation}
 						/>
 					</div>
 					<div className="right-side">
