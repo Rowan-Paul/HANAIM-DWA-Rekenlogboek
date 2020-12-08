@@ -24,9 +24,6 @@
 		position: relative;
 		width: 100%;
 
-		input {
-			pointer-events: none;
-		}
 		span {
 			align-items: center;
 			display: flex;
@@ -61,7 +58,6 @@ textarea {
 	min-height: 7.5vh;
 	margin: 0.5vh auto 0;
 	padding: 0.5vh 2.5%;
-	pointer-events: none;
 	resize: none;
 	width: calc(100% - (2px + 5%));
 }
@@ -126,7 +122,6 @@ textarea {
 		grid-column: span 6;
 		margin: 1vh 0;
 		padding: 2.5%;
-		pointer-events: none;
 		resize: vertical;
 		width: 95%;
 	}

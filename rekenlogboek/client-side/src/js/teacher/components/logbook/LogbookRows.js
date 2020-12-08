@@ -13,7 +13,15 @@ function LogbookRows(props) {
 	return (
 		<div>
 			{goals.map(goal =>
-				goal.added ? <LogbookRow key={shortid.generate()} goal={goal} /> : ''
+				goal.added ? (
+					<LogbookRow
+						key={shortid.generate()}
+						goal={goal}
+						readonly={props.readonly}
+					/>
+				) : (
+					''
+				)
 			)}
 		</div>
 	)
