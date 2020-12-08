@@ -8,23 +8,30 @@ export default function Checkboxes(props) {
 	return (
 		<ul className="Checkboxes">
 			{props.options.map((option, i) => (
-				<li key={shortid.generate()}>
+				<li
+					key={shortid.generate()}
+					className={props.readonly ? 'ReadOnly' : 'Edit'}
+				>
 					<input type="checkbox" name="checkboxes" value="default" />
 					<span>{option}</span>
-					<div>
-						<InputHandlers position={i} />
-					</div>
+					{!props.readonly && (
+						<div>
+							<InputHandlers position={i} />
+						</div>
+					)}
 				</li>
 			))}
-			<li>
+			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
 				<input type="checkbox" name="checkboxes" value="default" />
 				<span>Ik weet het nog niet</span>
 
-				<div>
-					<span>
-						<i className="fa fa-lock"></i> (default)
-					</span>
-				</div>
+				{!props.readonly && (
+					<div>
+						<span>
+							<i className="fa fa-lock"></i> (default)
+						</span>
+					</div>
+				)}
 			</li>
 
 			{props.explanation && (

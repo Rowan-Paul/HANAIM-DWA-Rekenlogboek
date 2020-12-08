@@ -1,0 +1,48 @@
+@import '../../Variables.scss';
+
+.AddGoals {
+	padding: 5% 0;
+	width: 100%;
+
+	h4 {
+		color: $fontColor;
+		margin: 0;
+		padding: 0;
+	}
+
+	.Block {
+		border-bottom: 1px solid $borderColor;
+		margin: 1vh 0 2vh;
+		padding: 0 0 1vh;
+
+		&:last-of-type {
+			border: none;
+		}
+		input {
+			border: 1px solid $borderColor;
+			border-radius: 8px;
+			margin: 1vh 0;
+			padding: 1vh 2.5%;
+			width: calc(100% - (5% + 2px));
+		}
+
+		select {
+			border: 1px solid $borderColor;
+			border-radius: 8px;
+			margin: 1vh 0;
+			padding: 1vh 2.5%;
+			width: calc(100% - 2px);
+		}
+
+		textarea {
+			border: 1px solid $borderColor;
+			border-radius: 8px;
+			min-height: 15vh;
+			margin: 0.5vh auto;
+			padding: 0.5vh 2.5%;
+			pointer-events: unset;
+			resize: none;
+			width: calc(100% - (2px + 5%));
+		}
+	}
+}

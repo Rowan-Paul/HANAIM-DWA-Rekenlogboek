@@ -2,16 +2,22 @@ import {
 	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
+	DELETE_GOAL,
 	DELETE_INPUT_OPTION,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SAVE_LOGBOOK,
-	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
 	SET_COLUMN,
 	SET_COLUMN_TITLE,
 	SET_INPUT_TYPE,
-	SET_EXPLANATION
+	SET_GOAL_DESCRIPTION,
+	SET_GOAL_TITLE,
+	SET_GOAL_IMAGE,
+	SET_GOAL_POSITION,
+	SET_EXPLANATION,
+	POST_IMAGE,
+	SET_GOAL
 } from './types'
 
 export const addLearnGoal = payload => {
@@ -34,6 +40,13 @@ export const addInputOption = payload => {
 		payload
 	}
 }
+export const deleteGoal = payload => {
+	return {
+		type: DELETE_GOAL,
+		payload
+	}
+}
+
 export const deleteInputOption = payload => {
 	return {
 		type: DELETE_INPUT_OPTION,
@@ -51,13 +64,41 @@ export const modalShow = payload => {
 		payload
 	}
 }
+export const postImage = () => (dispatch, getState) => {
+	const logbook = getState().logbook // Get logbook state
+	const goal = logbook.goals.filter(
+		goal => goal.position === logbook.position
+	)[0] // Get current position
 
-export const removeLearnGoal = payload => {
-	return {
-		type: REMOVE_LEARN_GOAL,
-		payload
+	if (goal.imageName) {
+		// Fetch image from blob URL
+		fetch(goal.imageBlob)
+			.then(file => file.blob())
+			.then(file => {
+				// Parse to file
+				const formData = new FormData()
+				formData.append('file', file, goal.imageName)
+				fetch('http://localhost:3000/files/uploads/goals', {
+					method: 'POST',
+					body: formData
+				})
+					.then(response => response.json())
+					.then(response =>
+						dispatch({
+							type: POST_IMAGE,
+							response // Called it response (from API) to distinguish it from payloads (from app)
+						})
+					)
+			})
 	}
 }
+
+export const resetLogbook = () => {
+	return {
+		type: RESET_LOGBOOK
+	}
+}
+
 export const saveLogbook = () => (dispatch, getState) => {
 	fetch(`http://localhost:3000/logbook/`, {
 		method: 'POST',
@@ -91,14 +132,40 @@ export const setColumnTitle = payload => {
 	}
 }
 
+export const setGoal = () => {
+	return {
+		type: SET_GOAL
+	}
+}
 export const setExplanation = payload => {
 	return {
 		type: SET_EXPLANATION,
 		payload
 	}
 }
-export const resetLogbook = () => {
+
+export const setGoalDescription = payload => {
 	return {
-		type: RESET_LOGBOOK
+		type: SET_GOAL_DESCRIPTION,
+		payload
+	}
+}
+
+export const setGoalImage = payload => {
+	return {
+		type: SET_GOAL_IMAGE,
+		payload
+	}
+}
+export const setGoalPosition = payload => {
+	return {
+		type: SET_GOAL_POSITION,
+		payload
+	}
+}
+export const setGoalTitle = payload => {
+	return {
+		type: SET_GOAL_TITLE,
+		payload
 	}
 }

@@ -2,14 +2,20 @@ import {
 	ADD_INPUT_OPTION,
 	ADD_LEARN_GOAL,
 	ADD_LOGBOOK_PERIOD,
+	DELETE_GOAL,
 	MODAL_HIDE,
 	MODAL_SHOW,
 	SET_COLUMN,
 	SET_COLUMN_TITLE,
 	SET_INPUT_TYPE,
-	REMOVE_LEARN_GOAL,
 	RESET_LOGBOOK,
 	SAVE_LOGBOOK,
+	SET_GOAL_DESCRIPTION,
+	SET_GOAL_IMAGE,
+	SET_GOAL_TITLE,
+	SET_GOAL_POSITION,
+	POST_IMAGE,
+	SET_GOAL,
 	SET_EXPLANATION,
 	DELETE_INPUT_OPTION
 } from './types'
@@ -40,7 +46,7 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 0,
+	group: 5,
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
@@ -52,7 +58,7 @@ const INITIAL_STATE = {
 		title: '',
 		visible: false
 	},
-	period: 0,
+	period: 1,
 	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '', //TODO: auto add years in components
 	year: `${year} - ${year + 1}` // but what if you add a logboek in the second half of the year?
@@ -119,8 +125,20 @@ const reducer = (state = INITIAL_STATE, action) => {
 				position: action.payload.position
 			}
 
-		case REMOVE_LEARN_GOAL:
-			const filterGoals = state.goals.filter(goal => goal.ID !== action.payload)
+		case POST_IMAGE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.imageLink = action.response.path
+					}
+					return goal
+				})
+			}
+		case DELETE_GOAL:
+			const filterGoals = state.goals.filter(
+				goal => goal.position !== action.payload
+			)
 
 			const updatePosition = filterGoals.map((goal, i) => {
 				goal.position = ++i
@@ -190,6 +208,67 @@ const reducer = (state = INITIAL_STATE, action) => {
 						column.input.type = action.payload
 					}
 					return column
+				})
+			}
+
+		case SET_GOAL:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.added = true
+					}
+					return goal
+				}),
+				modal: { visible: false }
+			}
+
+		case SET_GOAL_DESCRIPTION:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.description = action.payload
+					}
+					return goal
+				})
+			}
+
+		case SET_GOAL_IMAGE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.imageBlob = action.payload.imageBlob
+						goal.imageName = action.payload.imageName
+					}
+					return goal
+				})
+			}
+		case SET_GOAL_POSITION:
+			return {
+				...state,
+				goals: [
+					...state.goals,
+					{
+						added: false,
+						description: '',
+						imageBlob: {},
+						imageLink: '',
+						imageName: '',
+						position: action.payload,
+						title: ''
+					}
+				]
+			}
+		case SET_GOAL_TITLE:
+			return {
+				...state,
+				goals: state.goals.filter(goal => {
+					if (goal.position === state.position) {
+						goal.title = action.payload
+					}
+					return goal
 				})
 			}
 		default:

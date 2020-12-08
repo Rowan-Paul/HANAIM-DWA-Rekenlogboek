@@ -10,12 +10,12 @@ function VisualHeader(props) {
 
 	return (
 		<li className="Row Header">
-			<div>
+			<div className="Cell">
 				<h4>Doelen</h4>
 			</div>
 
 			{colums.map(column => (
-				<div key={column.position}>
+				<div key={column.position} className="Cell">
 					<h4>{column.added ? column.title : ''}</h4>
 				</div>
 			))}
