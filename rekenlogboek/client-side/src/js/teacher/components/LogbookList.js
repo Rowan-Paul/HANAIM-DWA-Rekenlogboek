@@ -11,20 +11,22 @@ import {
 
 function LogbookList(props) {
 	const makeGroupOptions = () => {
-		return props.userGroups.map(group => {
-			const groupNumber = group.substr(6, 1)
-			if (group.substr(0, 5) === 'Groep') {
-				const groupNo = group.substr(6, 1)
-				if (typeof Number(groupNo) === 'number') {
-					props.setGroup(groupNo)
+		if (props.userGroups) {
+			return props.userGroups.map(group => {
+				const groupNumber = group.substr(6, 1)
+				if (group.substr(0, 5) === 'Groep') {
+					const groupNo = group.substr(6, 1)
+					if (typeof Number(groupNo) === 'number') {
+						props.setGroup(groupNo)
+					}
+					return (
+						<option key={group} value={groupNumber}>
+							{groupNo}
+						</option>
+					)
 				}
-				return (
-					<option key={group} value={groupNumber}>
-						{groupNo}
-					</option>
-				)
-			}
-		})
+			})
+		}
 	}
 
 	const makeRows = () => {
