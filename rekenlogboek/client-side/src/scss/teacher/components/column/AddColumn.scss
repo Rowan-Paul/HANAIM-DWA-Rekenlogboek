@@ -1,0 +1,75 @@
+@import '../../../Variables.scss';
+
+.AddColumns {
+	padding: 5% 0;
+	height: 100%;
+	width: 100%;
+
+	h4 {
+		color: $fontColor;
+		margin: 0;
+		padding: 0;
+	}
+
+	.Block {
+		border-bottom: 1px solid $borderColor;
+		margin: 1vh 0 2vh;
+		padding: 0 0 1vh;
+
+		&:last-of-type {
+			border: none;
+		}
+		input {
+			border: 1px solid $borderColor;
+			border-radius: 8px;
+			margin: 1vh 0;
+			padding: 1vh 2.5%;
+			width: calc(100% - (5% + 2px));
+		}
+
+		select {
+			border: 1px solid $borderColor;
+			border-radius: 8px;
+			margin: 1vh 0;
+			padding: 1vh 2.5%;
+			width: calc(100% - 2px);
+		}
+	}
+	.Values {
+		max-height: 17.5%;
+		overflow-y: scroll;
+	}
+
+	// ADD CONTAINER
+	.AddContainer {
+		box-sizing: border-box;
+		display: inline-block;
+		width: 100%;
+
+		form {
+			width: 100%;
+		}
+
+		input {
+			border-radius: 8px 0 0 8px;
+			padding: 1vh 2.5%;
+			width: calc(80% - (5% + 2px));
+		}
+		button {
+			background: $green;
+			border: 1px solid $borderColor;
+			border-radius: 0 8px 8px 0;
+			color: #fff;
+			margin-left: -1px;
+			outline: none;
+			padding: 1vh 0;
+			transition: ease-in-out 0.5s;
+			width: 20%;
+
+			&:hover {
+				background: $hover-green;
+				cursor: pointer;
+			}
+		}
+	}
+}

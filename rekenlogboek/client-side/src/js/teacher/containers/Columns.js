@@ -1,83 +1,83 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { setColumn } from '../../../redux/logbook/actions'
 
-import Jumbotron from '../../common/Jumbotron'
-import InfoContainer from '../../common/InfoContainer'
-import SelectColumnTypes from '../components/SelectColumnTypes'
 import Button from '../../common/Button'
-import Illustration from '../components/Illustration'
-import { addLogbookColumns } from '../../../redux/logbook/actions'
+import AddColumn from '../components/column/AddColumn'
+import Evaluation from '../../common/InputTypes/Evaluation'
+import Jumbotron from '../../common/Jumbotron'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+import LogbookHeader from '../components/logbook/LogbookHeader'
+import Modal from '../components/logbook/Modal'
+import TopBar from '../components/logbook/TopBar'
 
-import Image from '../../../img/illustrations/log_select_question_type.svg'
 import '../../../scss/teacher/containers/NewLogbook.scss'
+import InputType from '../components/logbook/InputType'
+function Columns(props) {
+	const history = useHistory()
+	const [columns, setColumns] = useState(props.columns)
+	const [modal, setModal] = useState(props.modalVisible)
 
-function Page2(props) {
-	const [columnTitle1, setColumnTitle1] = useState(props.title1)
-	const [columnType1, setColumnType1] = useState(props.inputType1)
-
-	const [columnTitle2, setColumnTitle2] = useState(props.title2)
-	const [columnType2, setColumnType2] = useState(props.inputType2)
-
-	const changeTitleHandler = (column, value) => {
-		column === 1 ? setColumnTitle1(value) : setColumnTitle2(value)
-	}
-
-	const changeTypeHandler = (column, value) => {
-		column === 1 ? setColumnType1(value) : setColumnType2(value)
-	}
-
-	let history = useHistory()
-	const nextButtonHandler = () => {
-		const payload = {
-			columns: [
-				{ position: 1, title: columnTitle1, inputType: columnType1 },
-				{ position: 2, title: columnTitle2, inputType: columnType2 }
-			]
-		}
-
-		if (columnTitle1.trim().length > 0 && columnTitle2.trim().length > 0) {
-			props.addLogbookColumns(payload)
-			history.push('./goals')
+	// Verify if all collumns set
+	const verifyColumns = () => {
+		if (!columns.every(c => c.added)) {
+			alert('Vul eerst alle kolommen in')
 		} else {
-			//TODO: replace this by something less evil than a alert
-			alert('Vul a.u.b. alle velden in.')
+			history.push('./goals')
 		}
 	}
+
+	// useEffect for model / overlay
+	useEffect(() => {
+		setModal(props.modalVisible)
+	}, [props.modalVisible])
+
+	// useEffect for verifying collums added
+	useEffect(() => {
+		setColumns(props.columns)
+	}, [props.columns])
 
 	return (
 		<div className="new-logbook">
-			<Jumbotron columns={3}>
-				<div className="vertical-center">
-					<SelectColumnTypes
-						changeTypeHandler={changeTypeHandler}
-						changeTitleHandler={changeTitleHandler}
-						columnTitle1={columnTitle1}
-						columnTitle2={columnTitle2}
-						columnType1={columnType1}
-						columnType2={columnType2}
-					/>
-				</div>
-				<InfoContainer>
-					<Illustration
-						title="Kies de 2 kolomtypes van een logboek."
-						image={Image}
-					/>
-				</InfoContainer>
+			{modal && (
+				<Modal handler={props.setColumn}>
+					<AddColumn />
+				</Modal>
+			)}
+			<Jumbotron>
+				<TopBar title={'Kolommen toevoegen'} />
+				<LogbookFrame>
+					<LogbookHeader />
+					<li className="Row Body">
+						<div className="Cell">
+							<p className="Description">
+								Maak op de volgende pagina de doelen aan om ook hiervoor een
+								preview te krijgen.
+							</p>
+						</div>
+
+						<InputType position={1} />
+						<InputType position={2} />
+						<div>
+							<Evaluation />
+						</div>
+					</li>
+				</LogbookFrame>
 			</Jumbotron>
 
 			<div className="prev button">
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => history.push('./general')}
+					handler={() => props.history.push('./general')}
 				/>
 			</div>
 			<div className="next button">
 				<Button
 					color="blue"
 					value="Volgende"
-					handler={() => nextButtonHandler()}
+					handler={() => verifyColumns()}
 				/>
 			</div>
 		</div>
@@ -86,17 +86,15 @@ function Page2(props) {
 
 const mapStateToProps = state => {
 	return {
-		title1: state.logbook.columns[0].title,
-		inputType1: state.logbook.columns[0].inputType,
-		title2: state.logbook.columns[1].title,
-		inputType2: state.logbook.columns[1].inputType
+		columns: state.logbook.columns,
+		modalVisible: state.logbook.modal.visible
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addLogbookColumns: payload => dispatch(addLogbookColumns(payload))
+		setColumn: () => dispatch(setColumn())
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page2)
+export default connect(mapStateToProps, mapDispatchToProps)(Columns)

@@ -1,43 +1,53 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { postImage, setGoal } from '../../../redux/logbook/actions'
 
-import AddLearnGoal from '../components/AddLearnGoal'
+import AddGoals from '../components/goals/AddGoals'
 import Button from '../../common/Button'
-import Illustration from '../components/Illustration'
-import LearnGoalList from '../components/LearnGoalList'
-
-import Image from '../../../img/illustrations/log_select_learning_goals.svg'
-import InfoContainer from '../../common/InfoContainer'
 import Jumbotron from '../../common/Jumbotron'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+import LogbookHeader from '../components/logbook/LogbookHeader'
+import LogbookRows from '../components/logbook/LogbookRows'
+import Modal from '../components/logbook/Modal'
+import TopBar from '../components/logbook/TopBar'
 
-import { addLearnGoal, removeLearnGoal } from '../../../redux/logbook/actions'
 import '../../../scss/teacher/containers/NewLogbook.scss'
 
-function Page3(props) {
+function Goals(props) {
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
 			: //TODO: replace this by something less evil than a alert
 			  alert('Je moet eerst leerdoelen invoeren.')
 
+	const addGoal = () => {
+		const goal = props.goals[props.goals.length - 1]
+
+		if (goal.title.length < 1) {
+			alert('Voer een titel in')
+		} else {
+			props.postImage()
+			props.setGoal()
+		}
+	}
+
+	// useEffect for model / overlay
+	useEffect(() => {}, [props.modalVisible])
 	return (
 		<div className="new-logbook">
-			<Jumbotron columns={3}>
-				<AddLearnGoal handler={newGoal => props.addLearnGoal(newGoal)} />
-				<InfoContainer>
-					{props.goals.length > 0 ? (
-						<LearnGoalList
-							goals={props.goals}
-							removeHandler={ID => props.removeLearnGoal(ID)}
-						/>
-					) : (
-						<Illustration
-							title="Maak een leerdoel aan om hem hieronder te laten weergeven."
-							image={Image}
-						/>
-					)}
-				</InfoContainer>
+			{props.modalVisible && (
+				<Modal handler={addGoal}>
+					<AddGoals />
+				</Modal>
+			)}
+			<Jumbotron>
+				<TopBar title="Leerdoelen toevoegen" button />
+
+				<LogbookFrame>
+					<LogbookHeader />
+					<LogbookRows />
+				</LogbookFrame>
 			</Jumbotron>
 
 			<div className="prev button">
@@ -55,15 +65,16 @@ function Page3(props) {
 }
 const mapStateToProps = state => {
 	return {
-		goals: state.logbook.goals
+		goals: state.logbook.goals,
+		modalVisible: state.logbook.modal.visible
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addLearnGoal: payload => dispatch(addLearnGoal(payload)),
-		removeLearnGoal: payload => dispatch(removeLearnGoal(payload))
+		postImage: () => dispatch(postImage()),
+		setGoal: () => dispatch(setGoal())
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Page3))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Goals))
