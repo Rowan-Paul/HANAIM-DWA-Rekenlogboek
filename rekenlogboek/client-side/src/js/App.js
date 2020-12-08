@@ -7,11 +7,11 @@ import Header from '../js/common/Header'
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
 // import Default from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
+// import AfterPreTest from './student/containers/AfterPreTest'
 // import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
 // import defaultStudentPage from './student/containers/Default'
 // import Instructions from './student/containers/Instructions'
-// import Evaluation from './student/containers/Evaluation'
+import Evaluations from './student/containers/Evaluations'
 
 import newLBGeneral from './teacher/containers/General'
 import newLBColumns from './teacher/containers/Columns'
@@ -60,7 +60,7 @@ function App() {
 								<Route
 									exact
 									path="/student/after-pre-test"
-									component={AfterPreTest}
+									component={Evaluations}
 								/>
 								{/* <Route
 									exact

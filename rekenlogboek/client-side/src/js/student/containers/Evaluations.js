@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import '../../../scss/student/containers/AfterPreTest.scss'
+import '../../../scss/student/containers/Evaluation.scss'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
@@ -11,7 +11,7 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
-function AfterPreTest() {
+function Evaluations() {
 	// TODO: remove dummy data
 	const inputOptions = [
 		'Ik snap het goed',
@@ -35,7 +35,7 @@ function AfterPreTest() {
 	const nextPage = () => {}
 
 	return (
-		<div className="after-pre-test student-container">
+		<div className="evaluation student-container">
 			<ProgressBar itemCount={5} done={[1, 3]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
@@ -47,7 +47,7 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="radiobuttons"
+							type="evaluation"
 							inputAnswer={inputAnswer}
 							changeAnswer={changeAnswer}
 						/>
@@ -69,4 +69,4 @@ function AfterPreTest() {
 	)
 }
 
-export default withRouter(AfterPreTest)
+export default withRouter(Evaluations)
