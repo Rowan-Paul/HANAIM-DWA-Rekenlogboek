@@ -27,7 +27,7 @@ function LogbookList(props) {
 						onClick={() => {
 							props.setActiveStudentLogbook(studentlogbook)
 						}}
-						src={Icon}
+						src={Icon} // TODO: Image moet nog vervangen worden
 					/>
 				</td>
 			</tr>

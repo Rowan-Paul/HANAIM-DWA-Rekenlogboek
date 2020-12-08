@@ -2,7 +2,8 @@ import {
 	SAVE_CURRENT_LOGBOOK,
 	SAVE_STUDENT_LOGBOOKS,
 	SAVE_CURRENT_STUDENTLOGBOOK,
-	SET_CURRENT_LOGBOOK_PERIOD
+	SET_CURRENT_LOGBOOK_PERIOD,
+	SET_GROUP
 } from './types'
 
 export const fetchCurrentLogbook = () => {
@@ -73,5 +74,23 @@ export const setCurrentLogbookPeriod = payload => {
 	return {
 		type: SET_CURRENT_LOGBOOK_PERIOD,
 		payload
+	}
+}
+
+export const setGroup = () => {
+	return (dispatch, getState) => {
+		const userGroups = getState().main.user.groups
+		const searchStr = 'Groep '
+
+		const correctGroup = userGroups.filter(group => {
+			console.log(group)
+			group.search(searchStr) > -1
+		})
+
+		console.log(correctGroup)
+		return {
+			type: SET_GROUP,
+			payload
+		}
 	}
 }

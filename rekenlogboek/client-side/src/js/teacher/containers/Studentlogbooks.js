@@ -3,12 +3,19 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LogbookList from '../components/LogbookList'
 import Jumbotron from '../../common/Jumbotron'
-import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
+import {
+	fetchCurrentLogbook,
+	setGroup
+} from '../../../redux/logbookoverview/actions'
 
 function StudentLogbooks(props) {
 	useEffect(() => {
 		props.getPageInformation()
 	}, [props.period])
+
+	useEffect(() => {
+		props.setGroup()
+	}, [])
 
 	return (
 		<Jumbotron>
@@ -30,7 +37,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getPageInformation: () => dispatch(fetchCurrentLogbook())
+		getPageInformation: () => dispatch(fetchCurrentLogbook()),
+		setGroup: () => dispatch(setGroup())
 	}
 }
 

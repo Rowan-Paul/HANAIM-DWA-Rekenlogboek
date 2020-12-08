@@ -2,7 +2,8 @@ import {
 	SAVE_CURRENT_LOGBOOK,
 	SAVE_STUDENT_LOGBOOKS,
 	SAVE_CURRENT_STUDENTLOGBOOK,
-	SET_CURRENT_LOGBOOK_PERIOD
+	SET_CURRENT_LOGBOOK_PERIOD,
+	SET_GROUP
 } from './types'
 
 let date1 = new Date()
@@ -48,6 +49,12 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				period: action.payload
+			}
+
+		case SET_GROUP:
+			return {
+				...state,
+				group: action.payload
 			}
 
 		default:
