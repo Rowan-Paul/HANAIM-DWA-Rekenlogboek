@@ -1,5 +1,5 @@
 import '../../../scss/teacher/components/LogbookList.scss'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Icon from '../../../img/temp/smallicon.png'
