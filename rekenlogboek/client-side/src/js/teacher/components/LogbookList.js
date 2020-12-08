@@ -10,21 +10,20 @@ import {
 } from '../../../redux/logbookoverview/actions'
 
 function LogbookList(props) {
-	useEffect(() => {
-		const correctGroup = props.userGroups.filter(group => {
-			return group.substr(0, 5) === 'Groep'
+	const makeGroupOptions = () => {
+		return props.userGroups.map(group => {
+			const groupNumber = group.substr(6, 1)
+			if (group.substr(0, 5) === 'Groep') {
+				return (
+					<option key={group} value={groupNumber}>
+						{group.substr(6, 1)}
+					</option>
+				)
+			}
 		})
-
-		const groupNumber = correctGroup[0].substr(6, 1)
-		const payload = Number(groupNumber)
-		props.setGroup(payload)
-	}, [])
-
-	function handleSelectChange(event) {
-		props.setPeriod(event.target.value)
 	}
 
-	function makeRows() {
+	const makeRows = () => {
 		return props.studentlogbooks.map(studentlogbook => (
 			<tr key={studentlogbook.student}>
 				<td>
@@ -49,13 +48,21 @@ function LogbookList(props) {
 		<div className="LogbookList">
 			<div>
 				<p>Leerjaar: {props.year}</p>
-				<p>Groep: {props.group}</p>
-				<p>Blok: {props.period}</p>{' '}
+				<p>Groep: </p>
+				<select
+					value={props.group}
+					name="group"
+					id="group"
+					onChange={e => props.setGroup(e.target.value)}
+				>
+					{makeGroupOptions()}
+				</select>
+				<p>Blok: </p>{' '}
 				<select
 					value={props.period}
 					name="period"
 					id="period"
-					onChange={handleSelectChange}
+					onChange={e => props.setPeriod(e.target.value)}
 				>
 					<option value="1">1</option>
 					<option value="2">2</option>
