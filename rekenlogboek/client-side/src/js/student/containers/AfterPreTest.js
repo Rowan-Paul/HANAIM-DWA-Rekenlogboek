@@ -20,7 +20,7 @@ function AfterPreTest() {
 	]
 
 	//TODO: save state to redux when leaving page
-	const [inputAnswer, setInputAnswer] = useState('')
+	const [inputAnswer, setInputAnswer] = useState('default')
 	const [inputExplanation, setInputExplanation] = useState('')
 
 	const changeAnswer = value => {
@@ -47,12 +47,9 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="radiobuttons"
-							explanation={true}
-							options={inputOptions}
+							type="evaluation"
 							inputAnswer={inputAnswer}
 							changeAnswer={changeAnswer}
-							changeExplanation={changeExplanation}
 						/>
 					</div>
 					<div className="right-side">

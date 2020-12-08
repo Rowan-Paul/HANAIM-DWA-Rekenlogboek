@@ -40,7 +40,7 @@ export default function RadioButtons(props) {
 			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
 				<input
 					onChange={e => newAnswer(e)}
-					checked={props.inputAnswer === '' || props.inputAnswer === 'default'}
+					checked={props.inputAnswer === 'default'}
 					type="radio"
 					name="radiobutton"
 					value="default"

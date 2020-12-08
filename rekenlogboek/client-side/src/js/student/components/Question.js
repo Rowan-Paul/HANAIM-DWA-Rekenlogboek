@@ -33,7 +33,12 @@ export default function Question(props) {
 				return <Textarea changeAnswer={props.changeAnswer} />
 				break
 			case 'evaluation':
-				return <Evaluation changeAnswer={props.changeAnswer} />
+				return (
+					<Evaluation
+						changeAnswer={props.changeAnswer}
+						inputAnswer={props.inputAnswer}
+					/>
+				)
 				break
 		}
 	}
