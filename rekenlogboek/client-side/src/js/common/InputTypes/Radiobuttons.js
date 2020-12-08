@@ -8,25 +8,22 @@ export default function RadioButtons(props) {
 	return (
 		<ul className="Radiobuttons">
 			{props.options.map((option, i) => (
-				<li
-					key={shortid.generate()}
-					className={props.readonly ? 'ReadOnly' : 'Edit'}
-				>
+				<li key={shortid.generate()} className={props.type}>
 					<input type="radio" name="radiobutton" value="default" />
 					<span>{option}</span>
 
-					{!props.readonly && (
+					{props.type === 'edit' && (
 						<div>
 							<InputHandlers position={i} />
 						</div>
 					)}
 				</li>
 			))}
-			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
+			<li className={props.type}>
 				<input type="radio" name="radiobutton" value="default" />
 				<span>Ik weet het nog niet</span>
 
-				{!props.readonly && (
+				{props.type === 'edit' && (
 					<div>
 						<span>
 							<i className="fa fa-lock"></i> (default)
@@ -36,7 +33,7 @@ export default function RadioButtons(props) {
 			</li>
 
 			{props.explanation && (
-				<li className="Explanation">
+				<li className={`${props.type} Explanation`}>
 					<textarea type="text" name="explanation" placeholder="Omdat..." />
 				</li>
 			)}

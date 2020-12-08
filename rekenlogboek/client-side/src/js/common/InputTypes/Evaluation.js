@@ -5,9 +5,9 @@ import Sad from '../../../img/icons/evaluation/sad.svg'
 import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 
 import '../../../scss/common/Evaluation.scss'
-export default function Evaluation() {
+export default function Evaluation(props) {
 	return (
-		<ul className="Evaluation">
+		<ul className={`Evaluation ${props.type}`}>
 			<li>
 				<label>
 					<input type="radio" name="evaluation" value="Happy" />
