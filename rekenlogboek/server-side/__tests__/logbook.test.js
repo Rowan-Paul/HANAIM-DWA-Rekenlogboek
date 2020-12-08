@@ -52,18 +52,21 @@ describe('Logbook route tests', () => {
 							'Ik begrijp het niet goed',
 							'Ik weet het nog niet'
 						]
-					}
+					},
+					explanation: true
 				},
 				{
 					position: 2,
 					title: 'Instructie nodig?',
 					input: {
 						type: 'Tekstveld'
-					}
+					},
+					explanation: true
 				},
 				{
 					position: 3,
-					title: 'Evaluatie'
+					title: 'Evaluatie',
+					explanation: false
 				}
 			],
 			goals: [
@@ -126,18 +129,21 @@ describe('Logbook route tests', () => {
 								'Ik begrijp het niet goed',
 								'Ik weet het nog niet'
 							]
-						}
+						},
+						explanation: true
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
 						input: {
 							type: 'Tekstveld'
-						}
+						},
+						explanation: false
 					},
 					{
 						position: 3,
-						title: 'Evaluatie'
+						title: 'Evaluatie',
+						explanation: false
 					}
 				],
 				goals: [
@@ -192,18 +198,21 @@ describe('Logbook route tests', () => {
 								'Ik begrijp het niet goed',
 								'Ik weet het nog niet'
 							]
-						}
+						},
+						explanation: true
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
 						input: {
 							type: 'Tekstveld'
-						}
+						},
+						explanation: true
 					},
 					{
 						position: 3,
-						title: 'Evaluatie'
+						title: 'Evaluatie',
+						explanation: false
 					}
 				],
 				goals: [

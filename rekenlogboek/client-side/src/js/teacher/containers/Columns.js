@@ -57,10 +57,10 @@ function Columns(props) {
 							</p>
 						</div>
 
-						<InputType position={1} />
-						<InputType position={2} />
+						<InputType position={1} type={'edit'} />
+						<InputType position={2} type={'edit'} />
 						<div>
-							<Evaluation />
+							<Evaluation type={'preview'} />
 						</div>
 					</li>
 				</LogbookFrame>
@@ -74,11 +74,7 @@ function Columns(props) {
 				/>
 			</div>
 			<div className="next button">
-				<Button
-					color="blue"
-					value="Volgende"
-					handler={() => verifyColumns()}
-				/>
+				<Button color="blue" value="Volgende" handler={() => verifyColumns()} />
 			</div>
 		</div>
 	)

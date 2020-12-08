@@ -23,7 +23,7 @@ function InputType(props) {
 					<Checkboxes
 						explanation={column.explanation}
 						options={column.input.options}
-						readonly={props.readonly}
+						type={props.type}
 					/>
 				)
 				break
@@ -32,12 +32,12 @@ function InputType(props) {
 					<RadioButtons
 						explanation={column.explanation}
 						options={column.input.options}
-						readonly={props.readonly}
+						type={props.type}
 					/>
 				)
 				break
 			case 'textarea':
-				inputType = <Textarea readonly={props.readonly} />
+				inputType = <Textarea type={props.type} />
 				break
 			default:
 				inputType = ''
@@ -46,7 +46,7 @@ function InputType(props) {
 		return (
 			<div className="InputType Cell">
 				<ul>
-					{!props.readonly && (
+					{props.type === 'edit' && (
 						<li className="Header">
 							<h4>Invoertype:</h4>
 
@@ -71,7 +71,7 @@ function InputType(props) {
 
 	return (
 		<div className="Cell">
-			{!props.readonly && (
+			{props.type === 'edit' && (
 				<div className="Plus">
 					<button
 						onClick={() =>

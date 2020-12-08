@@ -21,6 +21,10 @@ const logbookSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	activeGoal: {
+		type: Number,
+		required: false
+	},
 	columns: [
 		{
 			position: {
@@ -29,6 +33,10 @@ const logbookSchema = new mongoose.Schema({
 			},
 			title: {
 				type: String,
+				isRequired: true
+			},
+			explanation: {
+				type: Boolean,
 				isRequired: true
 			},
 			input: {

@@ -1,11 +1,6 @@
 @import '../../Variables.scss';
 
 .new-logbook {
-	.Radiobuttons,
-	.Checkboxes,
-	.Textarea {
-		pointer-events: none !important;
-	}
 	align-items: center;
 	color: $fontColor;
 	display: flex;

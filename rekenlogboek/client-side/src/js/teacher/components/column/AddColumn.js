@@ -33,11 +33,11 @@ function AddColumn(props) {
 	const getInputType = () => {
 		switch (inputType) {
 			case props.inputTypes.checkboxes:
-				return <Checkboxes options={options} />
+				return <Checkboxes options={options} type={'edit'} />
 			case props.inputTypes.radiobuttons:
-				return <Radiobuttons options={options} />
+				return <Radiobuttons options={options} type={'edit'} />
 			case props.inputTypes.textarea:
-				return <Textarea />
+				return <Textarea type={'preview'} />
 			default:
 				return null
 		}
