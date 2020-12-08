@@ -14,17 +14,24 @@ export default function Question(props) {
 						explanation={props.explanation}
 						options={props.options}
 						readonly={true}
+						inputHandler={props?.inputHandler}
 					/>
 				)
 				break
 			case 'checkboxes':
-				return <Checkboxes options={props.options} readonly={true} />
+				return (
+					<Checkboxes
+						options={props.options}
+						readonly={true}
+						inputHandler={props?.inputHandler}
+					/>
+				)
 				break
 			case 'textarea':
-				return <Textarea />
+				return <Textarea inputHandler={props?.inputHandler} />
 				break
 			case 'evaluation':
-				return <Evaluation />
+				return <Evaluation inputHandler={props?.inputHandler} />
 				break
 		}
 	}

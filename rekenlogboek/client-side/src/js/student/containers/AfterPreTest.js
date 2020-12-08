@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/containers/AfterPreTest.scss'
@@ -19,6 +19,17 @@ function AfterPreTest() {
 		'Ik vind het nog erg moeilijk'
 	]
 
+	const [inputValue, setInputValue] = useState('')
+	const [inputMotivation, setInputMotivation] = useState('')
+
+	const inputHandler = (newInputValue, newInputMotivation) => {
+		setInputValue(newInputValue)
+		setInputMotivation(newInputMotivation)
+	}
+
+	const previousPage = () => {}
+	const nextPage = () => {}
+
 	return (
 		<div className="after-pre-test student-container">
 			<ProgressBar itemCount={5} done={[1, 3]} />
@@ -32,9 +43,9 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="radiobuttons"
+							type="evaluation"
 							options={inputOptions}
-							explanation={true}
+							inputHandler={inputHandler}
 						/>
 					</div>
 					<div className="right-side">
@@ -45,10 +56,10 @@ function AfterPreTest() {
 			</Jumbotron>
 			{/* TODO: create handlers */}
 			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => verifyGoals()} />
+				<Button color="gray" value="Vorige" handler={() => previousPage()} />
 			</div>
 			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => verifyGoals()} />
+				<Button color="blue" value="Volgende" handler={() => nextPage()} />
 			</div>
 		</div>
 	)
