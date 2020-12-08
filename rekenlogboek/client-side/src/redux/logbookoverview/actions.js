@@ -6,32 +6,26 @@ import {
 	SET_GROUP
 } from './types'
 
-export const fetchCurrentLogbook = () => {
-	return async (dispatch, getState) => {
-		return await fetch(
-			`http://localhost:3000/logbook/year/` +
-				encodeURIComponent(getState().logbookoverview.year) +
-				`/group/` +
-				getState().logbookoverview.group +
-				`/period/` +
-				getState().logbookoverview.period,
-			{
-				method: 'GET'
+export const fetchCurrentLogbook = () => (dispatch, getState) => {
+	const year = getState().logbookoverview.year
+	const group = getState().logbookoverview.group
+	const period = getState().logbookoverview.period
+
+	const URI = `year/${year}/group/${group}/period/${period}`
+
+	fetch(`http://localhost:3000/logbook/${URI}`, {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(response => {
+			dispatch(saveCurrentLogbook(response))
+			if (response._id) {
+				dispatch(fetchStudentLogbooks(response._id))
+			} else {
+				dispatch(saveStudentLogbooks([]))
 			}
-		)
-			.then(response => {
-				return response.json()
-			})
-			.then(response => {
-				dispatch(saveCurrentLogbook(response))
-				if (response._id) {
-					dispatch(fetchStudentLogbooks(response._id))
-				} else {
-					dispatch(saveStudentLogbooks([]))
-				}
-			})
-			.catch(err => console.error('Error: ', err))
-	}
+		})
+		.catch(err => console.error('Error: ', err))
 }
 
 export const saveCurrentLogbook = payload => {
