@@ -8,7 +8,9 @@ import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 import '../../../scss/common/Evaluation.scss'
 export default function Evaluation(props) {
 	const newAnswer = value => {
-		props.changeAnswer(value)
+		if (props.readonly) {
+			props.changeAnswer(value)
+		}
 	}
 
 	return (

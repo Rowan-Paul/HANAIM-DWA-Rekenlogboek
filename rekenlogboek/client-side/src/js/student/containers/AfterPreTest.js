@@ -47,7 +47,7 @@ function AfterPreTest() {
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
-							type="textarea"
+							type="evaluation"
 							inputAnswer={inputAnswer}
 							changeAnswer={changeAnswer}
 						/>

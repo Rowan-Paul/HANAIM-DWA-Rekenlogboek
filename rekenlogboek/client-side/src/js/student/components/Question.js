@@ -23,10 +23,12 @@ export default function Question(props) {
 			case 'checkboxes':
 				return (
 					<Checkboxes
+						explanation={props.explanation}
 						options={props.options}
 						readonly={true}
 						inputAnswer={props.inputAnswer}
 						changeAnswer={props.changeAnswer}
+						changeExplanation={props.changeExplanation}
 					/>
 				)
 				break
@@ -43,6 +45,7 @@ export default function Question(props) {
 					<Evaluation
 						changeAnswer={props.changeAnswer}
 						inputAnswer={props.inputAnswer}
+						readonly={true}
 					/>
 				)
 				break

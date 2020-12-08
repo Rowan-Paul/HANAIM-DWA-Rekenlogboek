@@ -19,6 +19,12 @@ export default function Checkboxes(props) {
 		}
 	}
 
+	const newExplanation = e => {
+		if (props.readonly) {
+			props.changeExplanation(e.target.value)
+		}
+	}
+
 	return (
 		<ul className="Checkboxes">
 			{props.options.map((option, i) => (
@@ -31,7 +37,7 @@ export default function Checkboxes(props) {
 						name="checkboxes"
 						value={option}
 						onChange={e => newAnswer(e)}
-						checked={props.inputAnswer.includes(option)}
+						checked={props.inputAnswer?.includes(option)}
 					/>
 					<span>{option}</span>
 					{!props.readonly && (
@@ -44,7 +50,12 @@ export default function Checkboxes(props) {
 
 			{props.explanation && (
 				<li className="Explanation">
-					<textarea type="text" name="explanation" placeholder="Omdat..." />
+					<textarea
+						type="text"
+						name="explanation"
+						placeholder="Omdat..."
+						onChange={e => newExplanation(e)}
+					/>
 				</li>
 			)}
 		</ul>
