@@ -3,29 +3,36 @@ import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/Student.scss'
 
+import Happy from '../../../img/icons/evaluation/happy.svg'
+import Sad from '../../../img/icons/evaluation/sad.svg'
+import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
+
 import ProgressBar from '../components/ProgressBar'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function AfterPreTestEnd() {
+function EvaluationsEnd() {
 	const saveAnswers = () => {}
 
 	const results = [
-		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Ik snap het goed' },
+		{
+			goalCount: 'Doel 1',
+			goalName: 'Optellen',
+			answer: <img src={Sad} alt="sad" />
+		},
 		{
 			goalCount: 'Doel 2',
 			goalName: 'Breuken',
-			answer: 'Ik vind het nog erg moeilijk'
+			answer: <img src={Happy} alt="happy" />
 		},
 		{
 			goalCount: 'Doel 3',
 			goalName: 'Keersommen',
-			answer: 'Ik snap het, maar vind het nog lastig'
+			answer: <img src={Happy} alt="happy" />
 		}
 	]
-
 	return (
 		<div className="end-screen student-container">
 			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
@@ -41,7 +48,7 @@ function AfterPreTestEnd() {
 					<div className="right-side">
 						<ResultTable
 							results={results}
-							description="Dit heb je bij je leerdoelen beantwoord:"
+							description="Dit zijn de door jou ingevulde antwoorden:"
 						/>
 					</div>
 				</div>
@@ -53,4 +60,4 @@ function AfterPreTestEnd() {
 	)
 }
 
-export default withRouter(AfterPreTestEnd)
+export default withRouter(EvaluationsEnd)

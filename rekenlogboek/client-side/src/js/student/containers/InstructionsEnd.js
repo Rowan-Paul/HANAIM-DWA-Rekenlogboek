@@ -9,20 +9,20 @@ import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function AfterPreTestEnd() {
+function InstructionsEnd() {
 	const saveAnswers = () => {}
 
 	const results = [
-		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Ik snap het goed' },
+		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Geen instructie' },
 		{
 			goalCount: 'Doel 2',
 			goalName: 'Breuken',
-			answer: 'Ik vind het nog erg moeilijk'
+			answer: 'Geen instructie'
 		},
 		{
 			goalCount: 'Doel 3',
 			goalName: 'Keersommen',
-			answer: 'Ik snap het, maar vind het nog lastig'
+			answer: 'Geen instructie'
 		}
 	]
 
@@ -41,7 +41,7 @@ function AfterPreTestEnd() {
 					<div className="right-side">
 						<ResultTable
 							results={results}
-							description="Dit heb je bij je leerdoelen beantwoord:"
+							description="Dit zijn de door jou ingevulde antwoorden:"
 						/>
 					</div>
 				</div>
@@ -53,4 +53,4 @@ function AfterPreTestEnd() {
 	)
 }
 
-export default withRouter(AfterPreTestEnd)
+export default withRouter(InstructionsEnd)
