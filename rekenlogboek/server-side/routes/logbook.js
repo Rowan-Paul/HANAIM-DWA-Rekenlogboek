@@ -80,4 +80,24 @@ router.get('/:id/goal/:position', (req, res) => {
 		})
 })
 
+// Get all information about one logbook with specifications
+router.get('/year/:year/group/:group/period/:period', (req, res) => {
+	Logbook.find({
+		year: req.params.year,
+		group: req.params.group,
+		period: req.params.period
+	})
+		.then(response => {
+			if (response[0] === undefined) {
+				res.status(200).send({})
+			} else {
+				res.status(200).send(response[0])
+			}
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 module.exports = router

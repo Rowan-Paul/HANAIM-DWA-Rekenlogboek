@@ -12,6 +12,8 @@ import newLBGoals from './teacher/containers/Goals'
 import newLBOverview from './teacher/containers/Overview'
 import newLBCompleted from './teacher/containers/Completed'
 
+import StudentLogbooks from './teacher/containers/Studentlogbooks'
+
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
@@ -71,7 +73,11 @@ function App() {
 								/>
 								{/* A few route so it gets the correct styling? */}
 								<Route path="/teacher/new-logbook"></Route>
-								<Route path="/teacher/overview"></Route>
+								<Route
+									exact
+									path="/teacher/logbooks"
+									component={StudentLogbooks}
+								></Route>
 								<Route path="/teacher" component={TeacherLanding} />
 
 								{/* SIGN-IN */}
