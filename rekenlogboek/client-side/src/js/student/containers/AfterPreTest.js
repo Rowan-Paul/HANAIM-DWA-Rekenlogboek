@@ -23,7 +23,7 @@ function AfterPreTest() {
 							goal="Doel 1:test"
 							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
 						/>
-						<Question />
+						<Question type="radiobuttons" motivation={true} />
 					</div>
 					<div className="right-side">
 						{/* TODO: replace with src from database */}
