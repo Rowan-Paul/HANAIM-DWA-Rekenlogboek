@@ -19,7 +19,7 @@ if (month < 8) {
 
 const INITIAL_STATE = {
 	year: `${date1} - ${date2}`,
-	group: 5, // Moet automatisch de groep worden van de docent
+	group: 0, // Moet automatisch de groep worden van de docent
 	period: 1,
 	currentLogbook: {},
 	activeStudentlogbook: {},

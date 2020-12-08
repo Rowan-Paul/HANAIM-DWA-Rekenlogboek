@@ -14,9 +14,13 @@ function LogbookList(props) {
 		return props.userGroups.map(group => {
 			const groupNumber = group.substr(6, 1)
 			if (group.substr(0, 5) === 'Groep') {
+				const groupNo = group.substr(6, 1)
+				if (typeof Number(groupNo) === 'number') {
+					props.setGroup(groupNo)
+				}
 				return (
 					<option key={group} value={groupNumber}>
-						{group.substr(6, 1)}
+						{groupNo}
 					</option>
 				)
 			}
