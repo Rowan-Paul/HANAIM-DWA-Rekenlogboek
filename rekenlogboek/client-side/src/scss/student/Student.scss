@@ -7,6 +7,14 @@
 	width: 90%;
 	flex-direction: column;
 
+	.learn-goal-container {
+		margin: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+
 	.next.button {
 		margin-top: 10px;
 	}
