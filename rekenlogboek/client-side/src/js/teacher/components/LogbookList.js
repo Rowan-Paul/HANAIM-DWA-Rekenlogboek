@@ -42,6 +42,7 @@ function LogbookList(props) {
 					<img
 						onClick={() => {
 							props.setActiveStudentLogbook(studentlogbook)
+							props.history.push('/teacher/logbooks/studentlogbook')
 						}}
 						src={Icon} // TODO: Image moet nog vervangen worden
 					/>

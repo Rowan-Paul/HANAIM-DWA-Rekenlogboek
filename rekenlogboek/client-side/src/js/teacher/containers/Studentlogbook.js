@@ -1,38 +1,31 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import LogbookList from '../components/LogbookList'
 import Jumbotron from '../../common/Jumbotron'
-import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+import StudentLogbookHeader from '../components/logbook/StudentLogbookHeader'
+import StudentLogbookRows from '../components/logbook/StudentLogbookRows'
+import '../../../scss/teacher/containers/Studentlogbook.scss'
 
 function StudentLogbook(props) {
-	useEffect(() => {
-		props.getPageInformation()
-	}, [props.period, props.group])
-
 	return (
-		<Jumbotron>
-			<LogbookList
-				logbook={props.logbook}
-				studentlogbooks={props.studentlogbooks}
-			></LogbookList>
-		</Jumbotron>
+		<div className="studentlogbook">
+			<Jumbotron>
+				<LogbookFrame>
+					<StudentLogbookHeader />
+					<StudentLogbookRows />
+				</LogbookFrame>
+			</Jumbotron>
+		</div>
 	)
 }
 
 const mapStateToProps = state => {
-	return {
-		period: state.logbookoverview.period,
-		group: state.logbookoverview.group,
-		logbook: state.logbookoverview.currentLogbook,
-		studentlogbooks: state.logbookoverview.studentlogbooks
-	}
+	return {}
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		getPageInformation: () => dispatch(fetchCurrentLogbook())
-	}
+	return {}
 }
 
 export default connect(
