@@ -16,10 +16,12 @@ Contains all general logbooks.
 | year: String                                          |
 | teacher: String/Number (ligt miss aan Teams)          |
 | currentPhase: String                                  |
+| activeGoal: Number                                    |
 | columns: [{                                           |
 |            _id_: ObjectID (auto)                      |
 |            position: Number                           |
 |            title: String                              |
+|            explanation: Boolean                       |
 |            input: {                                   |
 |                       type: String,                   |
 |                       options: [String],              |
@@ -54,6 +56,7 @@ Contains all logbooks for students.
 |                       inputType: String               |
 |                       value: String                   |
 |                       boolean: Boolean                |
+|                       explanation: String             |
 |                     }                                 |
 |          }]                                           |
 +-------------------------------------------------------+
