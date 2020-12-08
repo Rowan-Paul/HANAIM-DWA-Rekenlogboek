@@ -43,7 +43,7 @@ export const saveCurrentLogbook = payload => {
 
 export const fetchStudentLogbooks = id => {
 	return async dispatch => {
-		return await fetch(`http://localhost:3000/studentlogbook/logbooks/` + id, {
+		return await fetch(`http://localhost:3000/studentlogbook/logbook/` + id, {
 			method: 'GET'
 		})
 			.then(response => response.json())
