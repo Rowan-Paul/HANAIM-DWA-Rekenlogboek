@@ -25,6 +25,7 @@ export default function Question(props) {
 					<Checkboxes
 						options={props.options}
 						readonly={true}
+						inputAnswer={props.inputAnswer}
 						changeAnswer={props.changeAnswer}
 					/>
 				)

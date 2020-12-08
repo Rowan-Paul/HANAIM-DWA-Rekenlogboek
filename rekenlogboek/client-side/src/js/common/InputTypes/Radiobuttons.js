@@ -6,11 +6,15 @@ import '../../../scss/common/InputTypes.scss'
 
 export default function RadioButtons(props) {
 	const newAnswer = e => {
-		props.changeAnswer(e.target.value)
+		if (props.readonly) {
+			props.changeAnswer(e.target.value)
+		}
 	}
 
 	const newExplanation = e => {
-		props.changeExplanation(e.target.value)
+		if (props.readonly) {
+			props.changeExplanation(e.target.value)
+		}
 	}
 
 	console.log(props.inputAnswer)
@@ -40,7 +44,7 @@ export default function RadioButtons(props) {
 			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
 				<input
 					onChange={e => newAnswer(e)}
-					checked={props.inputAnswer === 'default'}
+					checked={props.inputAnswer === ''}
 					type="radio"
 					name="radiobutton"
 					value="default"

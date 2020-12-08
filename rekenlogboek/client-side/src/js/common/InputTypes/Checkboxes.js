@@ -5,6 +5,20 @@ import InputHandlers from '../../teacher/components/column/InputHandlers'
 import '../../../scss/common/InputTypes.scss'
 
 export default function Checkboxes(props) {
+	const newAnswer = e => {
+		if (props.readonly) {
+			const answers = [...props.inputAnswer]
+			if (answers.includes(e.target.value)) {
+				const i = answers.indexOf(5)
+				answers.splice(i, 1)
+			} else {
+				answers.push(e.target.value)
+			}
+			console.log(answers)
+			props.changeAnswer(answers)
+		}
+	}
+
 	return (
 		<ul className="Checkboxes">
 			{props.options.map((option, i) => (
@@ -12,7 +26,13 @@ export default function Checkboxes(props) {
 					key={shortid.generate()}
 					className={props.readonly ? 'ReadOnly' : 'Edit'}
 				>
-					<input type="checkbox" name="checkboxes" value="default" />
+					<input
+						type="checkbox"
+						name="checkboxes"
+						value={option}
+						onChange={e => newAnswer(e)}
+						checked={props.inputAnswer.includes(option)}
+					/>
 					<span>{option}</span>
 					{!props.readonly && (
 						<div>
@@ -21,18 +41,6 @@ export default function Checkboxes(props) {
 					)}
 				</li>
 			))}
-			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
-				<input type="checkbox" name="checkboxes" value="default" />
-				<span>Ik weet het nog niet</span>
-
-				{!props.readonly && (
-					<div>
-						<span>
-							<i className="fa fa-lock"></i> (default)
-						</span>
-					</div>
-				)}
-			</li>
 
 			{props.explanation && (
 				<li className="Explanation">
