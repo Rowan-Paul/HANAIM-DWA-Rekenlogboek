@@ -3,10 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LogbookList from '../components/LogbookList'
 import Jumbotron from '../../common/Jumbotron'
-import {
-	fetchCurrentLogbook,
-	setGroup
-} from '../../../redux/logbookoverview/actions'
+import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
 
 function StudentLogbooks(props) {
 	useEffect(() => {
