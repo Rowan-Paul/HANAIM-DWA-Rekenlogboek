@@ -13,10 +13,6 @@ function StudentLogbooks(props) {
 		props.getPageInformation()
 	}, [props.period])
 
-	useEffect(() => {
-		props.setGroup()
-	}, [])
-
 	return (
 		<Jumbotron>
 			<LogbookList
@@ -37,8 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getPageInformation: () => dispatch(fetchCurrentLogbook()),
-		setGroup: () => dispatch(setGroup())
+		getPageInformation: () => dispatch(fetchCurrentLogbook())
 	}
 }
 

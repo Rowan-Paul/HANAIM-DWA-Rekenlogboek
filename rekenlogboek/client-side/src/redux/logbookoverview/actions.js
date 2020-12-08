@@ -77,20 +77,9 @@ export const setCurrentLogbookPeriod = payload => {
 	}
 }
 
-export const setGroup = () => {
-	return (dispatch, getState) => {
-		const userGroups = getState().main.user.groups
-		const searchStr = 'Groep '
-
-		const correctGroup = userGroups.filter(group => {
-			console.log(group)
-			group.search(searchStr) > -1
-		})
-
-		console.log(correctGroup)
-		return {
-			type: SET_GROUP,
-			payload
-		}
+export const setGroup = payload => {
+	return {
+		type: SET_GROUP,
+		payload
 	}
 }

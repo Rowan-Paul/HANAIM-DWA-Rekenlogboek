@@ -1,14 +1,25 @@
 import '../../../scss/teacher/components/LogbookList.scss'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Icon from '../../../img/temp/smallicon.png'
 import {
 	saveCurrentStudentlogbook,
-	setCurrentLogbookPeriod
+	setCurrentLogbookPeriod,
+	setGroup
 } from '../../../redux/logbookoverview/actions'
 
 function LogbookList(props) {
+	useEffect(() => {
+		const correctGroup = props.userGroups.filter(group => {
+			return group.substr(0, 5) === 'Groep'
+		})
+
+		const groupNumber = correctGroup[0].substr(6, 1)
+		const payload = Number(groupNumber)
+		props.setGroup(payload)
+	}, [])
+
 	function handleSelectChange(event) {
 		props.setPeriod(event.target.value)
 	}
@@ -61,6 +72,7 @@ function LogbookList(props) {
 
 const mapStateToProps = state => {
 	return {
+		userGroups: state.main.user.groups,
 		year: state.logbookoverview.year,
 		group: state.logbookoverview.group,
 		period: state.logbookoverview.period
@@ -71,7 +83,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		setActiveStudentLogbook: logbook =>
 			dispatch(saveCurrentStudentlogbook(logbook)),
-		setPeriod: period => dispatch(setCurrentLogbookPeriod(period))
+		setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
+		setGroup: group => dispatch(setGroup(group))
 	}
 }
 
