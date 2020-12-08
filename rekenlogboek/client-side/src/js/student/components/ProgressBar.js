@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import shortid from 'shortid'
 
 import '../../../scss/student/components/ProgressBar.scss'
 
@@ -14,6 +15,7 @@ export default function ProgressBar(props) {
 						done: props.done.includes(i),
 						locked: props?.locked?.includes(i)
 					})}
+					key={shortid.generate()}
 				>
 					{/* start from 1 */}
 					{i + 1}

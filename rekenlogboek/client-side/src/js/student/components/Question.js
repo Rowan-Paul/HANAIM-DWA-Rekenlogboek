@@ -11,26 +11,27 @@ export default function Question(props) {
 			case 'radiobuttons':
 				return (
 					<Radiobuttons
-						explanation={props.motivation}
+						explanation={props.explanation}
 						options={props.options}
+						readonly={true}
 					/>
 				)
 				break
 			case 'checkboxes':
-				return <Checkboxes options={props.options} />
+				return <Checkboxes options={props.options} readonly={true} />
 				break
 			case 'textarea':
 				return <Textarea />
 				break
 			case 'evaluation':
-				return <Evaluation options={props.options} />
+				return <Evaluation />
 				break
 		}
 	}
 
 	return (
 		<div className="question">
-			<div>{props.title}</div>
+			<h2>{props.title}</h2>
 			{getInputTypes()}
 		</div>
 	)

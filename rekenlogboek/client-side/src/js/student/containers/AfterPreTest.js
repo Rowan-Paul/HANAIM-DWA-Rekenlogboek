@@ -12,6 +12,13 @@ import Question from '../components/Question'
 import Button from '../../common/Button'
 
 function AfterPreTest() {
+	// TODO: remove dummy data
+	const inputOptions = [
+		'Ik snap het goed',
+		'Ik snap het, maar vind het nog lastig',
+		'Ik vind het nog erg moeilijk'
+	]
+
 	return (
 		<div className="after-pre-test student-container">
 			<ProgressBar itemCount={5} done={[1, 3]} />
@@ -23,7 +30,12 @@ function AfterPreTest() {
 							goal="Doel 1:test"
 							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
 						/>
-						<Question type="radiobuttons" motivation={true} />
+						<Question
+							title="Hoe heb ik de les gemaakt?"
+							type="radiobuttons"
+							options={inputOptions}
+							explanation={true}
+						/>
 					</div>
 					<div className="right-side">
 						{/* TODO: replace with src from database */}
