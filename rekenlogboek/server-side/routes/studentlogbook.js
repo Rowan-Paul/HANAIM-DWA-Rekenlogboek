@@ -48,7 +48,7 @@ router.put('/', (req, res) => {
 	)
 		.then(response => {
 			app.io.to('Bram Konijn').emit('NEW_ANSWER', req.body.student)
-			res.status(200).send(req.body)
+			res.status(200).send(response.answers)
 		})
 		.catch(err => {
 			console.log(err)

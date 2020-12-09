@@ -11,40 +11,46 @@ export const newAnswer = payload => (dispatch, getState) => {
 	}
 
 	let body = []
-	let answers = [
-		{
-			goalPosition: getState().studentLogbook.currentGoal.position,
-			columnPosition: getState().studentLogbook.column.position,
-			answer: {
-				inputType: getState().studentLogbook.column.input.type,
-				value: payload
-			}
-		}
-	]
+	let answers = []
 
 	// check if it's a new logbnook without answers
 	if (getState().studentLogbook.answers.length > 0) {
 		answers = getState().studentLogbook.answers
 	}
 
+	let addedAnswer = null
+
 	answers.forEach((answer, i) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position) {
-			body = {
-				student: getState().main.user.name,
-				logbookID: getState().studentLogbook.logbookID,
-				answers: [
-					{
-						goalPosition: answer.goalPosition,
-						columnPosition: answer.columnPosition,
-						answer: {
-							inputType: getState().studentLogbook.column.input.type,
-							value: payload
-						}
-					}
-				]
+			answers[i] = {
+				goalPosition: answer.goalPosition,
+				columnPosition: answer.columnPosition,
+				answer: {
+					inputType: getState().studentLogbook.column.input.type,
+					value: payload
+				}
 			}
+
+			addedAnswer = true
 		}
 	})
+
+	if (!addedAnswer) {
+		answers.push({
+			goalPosition: getState().studentLogbook.currentGoal.position,
+			columnPosition: getState().studentLogbook.column.position,
+			answer: {
+				inputType: getState().studentLogbook.column.input.type,
+				value: payload
+			}
+		})
+	}
+
+	body = {
+		student: getState().main.user.name,
+		logbookID: getState().studentLogbook.logbookID,
+		answers: answers
+	}
 
 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
 		method: 'PUT',
