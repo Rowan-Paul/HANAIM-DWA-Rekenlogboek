@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer')
 jest.setTimeout(30000)
 
 describe(`Rekenlogboek`, () => {
-	let browserA, pageA
+	// let browserA, pageA
 	let browserB, pageB
 
 	const user = {
@@ -13,21 +13,21 @@ describe(`Rekenlogboek`, () => {
 
 	beforeAll(async () => {
 		// create two browsers
-		browserA = await puppeteer.launch({
-			headless: false,
-			slowMo: 200,
-			ignoreHTTPSErrors: true,
-			args: [`--window-size=700,800`, `--window-position=0,0`]
-		})
-		pageA = await browserA.newPage()
-
-		// browserB = await puppeteer.launch({
-		//   headless: false,
-		//   slowMo: 20,
-		//   args: [`--window-size=1100,800`,`--window-position=350,0`],
-		//   defaultViewport: null
+		// browserA = await puppeteer.launch({
+		// 	headless: false,
+		// 	slowMo: 200,
+		// 	ignoreHTTPSErrors: true,
+		// 	args: [`--window-size=700,800`, `--window-position=0,0`]
 		// })
-		// pageB = await browserB.newPage()
+		// pageA = await browserA.newPage()
+
+		browserB = await puppeteer.launch({
+			headless: false,
+			slowMo: 400,
+			ignoreHTTPSErrors: true,
+			args: [`--window-size=700,800`, `--window-position=250,0`]
+		})
+		pageB = await browserB.newPage()
 	})
 
 	afterAll(async () => {
@@ -35,144 +35,75 @@ describe(`Rekenlogboek`, () => {
 		// await browserB.close()
 	})
 
-	//////////// the tests /////////////////////////////////////
-
-	// test(`login page loads in browser A`, async () => {
-	// 	await pageA.goto(`http://localhost:3001/`)
-	// 	await pageA.waitFor(`title`)
-	// 	const theTitle = await pageA.title()
-	// 	expect(theTitle).toBe(`Suffragium`)
-	// })
-
-	// The next tests assume that users "qq@qq.qq" and "ww@ww.ww"
-	// are already in the database. Also, a question with "Star Wars"
-	// in the title must have been created by user "qq@qq.qq".
-	// A professional E2E-test should create these users, either
-	// through:
-	// * the UI (in that case, it becomes another E2E-test, for
-	//          registering users), or
-	// * creating the users in the DB itself through the MongoDB-
-	//          driver or Mongoose.
-
-	test(`Go to main page and login with microsoft`, async () => {
-		await pageA.goto(`https://localhost:3001/`)
+	xtest(`Go to main page and login with microsoft`, async () => {
+		await pageA.goto(`https://localhost:3001`)
 		const MicrosoftButton = await pageA.$(`.MicrosoftButton`)
 		expect(MicrosoftButton).toBeDefined()
 		await MicrosoftButton.click()
 	})
 
-	// test(`Login on Microsoft identity`, async () => {
-		// const newPagePromise = getNewPageWhenLoaded()
-		// await page.click('my-link') //Opens pop-up window
-		// const newPage = await newPagePromise
-		// newPage = newPage.mainFrame()
-		// const element = await newPage.waitForSelector('img')
-		// newPage.click(element)
-		// function getNewPageWhenLoaded() {
-		// 	return new Promise(x =>
-		// 		browser.once('targetcreated', async target => {
-		// 			const newPage = await target.page()
-		// 			const newPagePromise = new Promise(() =>
-		// 				newPage.once('domcontentloaded', () => x(newPage))
-		// 			)
-		// 			const isPageLoaded = await newPage.evaluate(() => document.readyState)
-		// 			return isPageLoaded.match('complete|interactive')
-		// 				? x(newPage)
-		// 				: newPagePromise
-		// 		})
-		// 	)
-		// }
+	xtest(`Login on Microsoft identity`, async () => {
+		const newPagePromise = getNewPageWhenLoaded()
+		await page.click('my-link') //Opens pop-up window
+		const newPage = await newPagePromise
+		newPage = newPage.mainFrame()
+		const element = await newPage.waitForSelector('img')
+		newPage.click(element)
+		function getNewPageWhenLoaded() {
+			return new Promise(x =>
+				browser.once('targetcreated', async target => {
+					const newPage = await target.page()
+					const newPagePromise = new Promise(() =>
+						newPage.once('domcontentloaded', () => x(newPage))
+					)
+					const isPageLoaded = await newPage.evaluate(() => document.readyState)
+					return isPageLoaded.match('complete|interactive')
+						? x(newPage)
+						: newPagePromise
+				})
+			)
+		}
 		// const newPagePromise = new Promise(x =>
 		// 	browser.once('targetcreated', target => x(target.page()))
 		// )
-		// // await page.click('#abtn')
-		// const popup = await newPagePromise
-		// console.log(popup.url())
-		// await pageA.waitFor(2000)
-		// await pageA.type('input[name=loginfmt]', user.email, {
-		// 	delay: 50
-		// })
-		// await pageA.waitFor(500)
-		// await pageA.click('input[type=submit]')
-		// await pageA.waitFor(500)
-		// await pageA.click('input[name=passwd]')
-		// await pageA.waitFor(500)
-		// await pageA.type('input[name=passwd]', user.pass, {
-		// 	delay: 50
-		// })
-		// await pageA.waitFor(500)
-		// await pageA.click('input[type=submit]')
+		// await page.click('#abtn')
+		const popup = await newPagePromise
+		console.log(popup.url())
+		await pageA.waitFor(2000)
+		await pageA.type('input[name=loginfmt]', user.email, {
+			delay: 50
+		})
+		await pageA.waitFor(500)
+		await pageA.click('input[type=submit]')
+		await pageA.waitFor(500)
+		await pageA.click('input[name=passwd]')
+		await pageA.waitFor(500)
+		await pageA.type('input[name=passwd]', user.pass, {
+			delay: 50
+		})
+		await pageA.waitFor(500)
+		await pageA.click('input[type=submit]')
 	})
 
-	// loginfmt
+	test(`Create logbook - Happy path`, async () => {
+		await pageB.goto(`https://localhost:3001/teacher/new-logbook/general`)
 
-	// test(`login page loads in browser B`, async ()=>{
-	//   await pageB.goto('http://localhost:3002/#!/login')
-	// 	await pageB.waitFor(`title`)
-	//   const theTitle = await pageB.title()
-	// 	expect(theTitle).toBe(`Suffragium`)
-	// })
-	//
-	// test(`can login at B`, async ()=>{
-	//   await pageB.type(`input#email`,`ww@ww.ww`)
-	//   await pageB.type(`input#password`,`wwwwww`)
-	//   const loginButton = await pageB.$(`form[name="register"] button`)
-	//   expect(loginButton).toBeDefined()
-	//   await loginButton.click()
-	//   const theDiv = await pageB.waitFor(`p.owned-polls`)
-	//   expect(theDiv).toBeDefined();
-	// })
+		// let group, period
 
-	// let pollLink  // the link will be found in browserA, and used to navigate in
-	//               // broswerB
-	//
-	// test(`pageA can navigate to own poll`, async ()=> {
-	//   await pageA.$$eval(`p.question-own-poll`, arr => {
-	//     starWarsLink = arr.filter(p => p.textContent.includes(`Star Wars`))[0]
-	//     starWarsLink.click() // this click is triggered in the browser!
-	//   })
-	//   await pageA.waitFor(`button.voted`)
-	//   pollLink = await pageA.evaluate( () => {
-	//     return window.location.href
-	//   })
-	//   expect(pollLink).toBeDefined()
-	// })
-	//
-	// test(`pageB navigates to poll url`, async () => {
-	//   await pageB.goto(pollLink)  // use the URL found in the other browser (previous test)
-	//   await pageB.waitFor(`button.voted`, {timeout: 2000})
-	//   // No expect-assertion! The previous line will throw an exception
-	//   // if the button does not appear in two seconds. That will make
-	//   // this test fail.
-	// })
+		const selectInputs = await pageB.$$eval(`select`, async arr => {
+			return arr.map(item => item.value)
+		})
+		expect(selectInputs).toStrictEqual(['5', '1'])
 
-	// async function getFirstOptionVotes(page) {
-	//   // Get the value in the second table cell in first row of the results
-	//   // table. Note the conversion to an integer.
-	//   return parseInt(await page.$eval(
-	//     `div.container-graph table tr:nth-child(1) > td:nth-child(2)`,
-	//     (el) => el.textContent
-	//   ))
-	// }
-	//
-	// test(`poll scores are equal in both browsers`, async () => {
-	//   const firstOptionVotesA = await getFirstOptionVotes(pageA)
-	//   const firstOptionVotesB = await getFirstOptionVotes(pageB)
-	//   expect(firstOptionVotesA).toEqual(firstOptionVotesB)
-	// })
-	//
-	// test(`votes are updated in both browsers`, async ()=>{
-	//   const firstOptionVotesA_before = await getFirstOptionVotes(pageA)
-	//   // Clicking on the radio-button itself did not work. There is a label that
-	//   // seems to overlap the radio-button. Luckily, if we simply click the label,
-	//   // the radio-button will also be checked.
-	//   await pageA.click(`div.container-question label[for="option0"]`)
-	//   await pageA.click(`div.container-question button.voted`)
-	//   const firstOptionVotesA_after = await getFirstOptionVotes(pageA)
-	//   expect(firstOptionVotesA_after).toBe(firstOptionVotesA_before+1) // was the score increased?
-	//
-	//   pageB.waitFor(200)  // Allow 200 ms for update to arrive at other browser.
-	//   const firstOptionVotesB_after = await getFirstOptionVotes(pageB)
-	//   expect(firstOptionVotesB_after).toBe(firstOptionVotesA_before+1) // was the score also updated in other browser?
-	// })
+		// group = await arr[0]
+		// await group.select('7')
+		// period = await arr[1]
+		// await period.select('3')
+
+		// const groupValue = await group.getProperty('textContent')
+		// expect(groupValue).toBe('7')
+
+		// const periodValue = await period.getProperty('textContent')
+		// expect(periodValue).toBe('3')
+	})
 })
