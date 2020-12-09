@@ -5,7 +5,69 @@ import { SAVE_GOAL_AMOUNT } from './types'
 import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
 
+export const newExplanation = payload => (dispatch, getState) => {
+	let body = []
+	let answers = []
+
+	// check if it's a new logbnook without answers
+	if (getState().studentLogbook.answers.length > 0) {
+		answers = getState().studentLogbook.answers
+	}
+
+	// let addedAnswer = null
+
+	answers.forEach((answer, i) => {
+		if (answer.columnPosition === getState().studentLogbook.column.position) {
+			answers[i] = {
+				goalPosition: answer.goalPosition,
+				columnPosition: answer.columnPosition,
+				answer: {
+					inputType: getState().studentLogbook.column.input.type,
+					value: getState().studentLogbook.answers[i].answer.value,
+					explanation: payload
+				}
+			}
+
+			// addedAnswer = true
+		}
+	})
+
+	//TODO: check if answer is filled in
+	// we're gonna assume that the user always fills out the answer and then the explanation
+	// if (!addedAnswer) {
+	// 	answers.push({
+	// 		goalPosition: getState().studentLogbook.currentGoal.position,
+	// 		columnPosition: getState().studentLogbook.column.position,
+	// 		answer: {
+	// 			inputType: getState().studentLogbook.column.input.type,
+	// 			value: getState().studentLogbook.answers[].answer.
+	// 		}
+	// 	})
+	// }
+
+	body = {
+		student: getState().main.user.name,
+		logbookID: getState().studentLogbook.logbookID,
+		answers: answers
+	}
+
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(body)
+	})
+		.then(res => res.json())
+		.then(response =>
+			dispatch({
+				type: SAVE_ANSWERS,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})
+		)
+		.catch(error => console.log(error))
+}
+
 export const newAnswer = payload => (dispatch, getState) => {
+	console.log(payload)
 	if (typeof payload === 'object') {
 		payload = payload.toString()
 	}

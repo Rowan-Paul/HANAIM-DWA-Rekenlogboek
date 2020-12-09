@@ -65,7 +65,7 @@ export default function RadioButtons(props) {
 						type="text"
 						name="explanation"
 						placeholder="Omdat..."
-						onChange={e => newExplanation(e)}
+						onBlur={e => newExplanation(e)}
 					/>
 				</li>
 			)}

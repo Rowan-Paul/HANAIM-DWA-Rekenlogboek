@@ -12,6 +12,7 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
+import { newExplanation } from '../../../redux/studentlogbook/actions'
 import { newAnswer } from '../../../redux/studentlogbook/actions'
 import { fetchAnswers } from '../../../redux/studentlogbook/actions'
 import { fetchColumn } from '../../../redux/studentlogbook/actions'
@@ -29,7 +30,6 @@ function AfterPreTestUI(props) {
 		}
 	}, [])
 
-	//TODO: save state to redux when leaving page
 	const [inputAnswer, setInputAnswer] = useState('')
 	const [inputExplanation, setInputExplanation] = useState('')
 
@@ -39,6 +39,7 @@ function AfterPreTestUI(props) {
 	}
 
 	const changeExplanation = value => {
+		props.doNewExplanation(value)
 		setInputExplanation(value)
 	}
 
@@ -62,6 +63,8 @@ function AfterPreTestUI(props) {
 								inputAnswer={inputAnswer}
 								changeAnswer={changeAnswer}
 								options={props.column.input.options}
+								explanation={props.column.explanation}
+								changeExplanation={changeExplanation}
 							/>
 						</div>
 						<div className="right-side">
@@ -98,7 +101,8 @@ function mapDispatchToProps(dispatch) {
 		doFetchGoal: payload => dispatch(fetchGoal(payload)),
 		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
 		doFetchAnswers: () => dispatch(fetchAnswers()),
-		doNewAnswer: payload => dispatch(newAnswer(payload))
+		doNewAnswer: payload => dispatch(newAnswer(payload)),
+		doNewExplanation: payload => dispatch(newExplanation(payload))
 	}
 }
 
