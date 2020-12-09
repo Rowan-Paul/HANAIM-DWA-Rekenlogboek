@@ -6,15 +6,7 @@ import Header from '../js/common/Header'
 
 import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
-import Default from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
-import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
-import InstructionsEnd from './student/containers/InstructionsEnd'
-import EvaluationsEnd from './student/containers/EvaluationsEnd'
-import defaultStudentPage from './student/containers/Default'
-import Instructions from './student/containers/Instructions'
-import Evaluations from './student/containers/Evaluations'
-
+// LOGBOOK PAGES
 import newLBGeneral from './teacher/containers/General'
 import newLBColumns from './teacher/containers/Columns'
 import newLBGoals from './teacher/containers/Goals'
@@ -23,10 +15,10 @@ import newLBCompleted from './teacher/containers/Completed'
 
 import StudentLogbooks from './teacher/containers/Studentlogbooks'
 
+// SIGN IN PAGES
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
-import Pretoetstest from './teams/Pretoetstest'
 
 // TODO: make privacy and terms of use pages
 // those are required in order to add your app
@@ -38,9 +30,17 @@ import Pretoetstest from './teams/Pretoetstest'
 import Tab from './teams/Tab'
 import TabConfig from './teams/TabConfig'
 
-import '../scss/App.scss'
+// STUDENT PAGES
+import Default from './student/containers/Default'
+import defaultStudentPage from './student/containers/Default'
+import AfterPreTest from './student/containers/AfterPreTest'
+import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
+import InstructionsEnd from './student/containers/InstructionsEnd'
+import EvaluationsEnd from './student/containers/EvaluationsEnd'
+import Instructions from './student/containers/Instructions'
+import Evaluations from './student/containers/Evaluations'
 
-require('dotenv').config()
+import '../scss/App.scss'
 
 function App() {
 	// Check for the Microsoft Teams SDK object.
@@ -54,28 +54,6 @@ function App() {
 						<Header />
 						<main>
 							<Switch>
-								{/* <Route
-									exact
-									path="/student/default"
-									component={Default}
-								/> */}
-
-								{/*TODO: change back to AfterPreTest */}
-								<Route
-									exact
-									path="/student/after-pre-test"
-									component={InstructionsEnd}
-								/>
-								{/* <Route
-									exact
-									path="/student/instructions"
-									component={Instructions} />
-								<Route
-									exact
-									path="/student/evaluation"
-									component={Evaluation}
-								/> */}
-
 								<Route
 									exact
 									path="/teacher/new-logbook/general"
@@ -131,9 +109,35 @@ function App() {
 		return (
 			<Router>
 				<Switch>
-					<Route exact path="/tab" component={Tab} />
 					<Route exact path="/config" component={TabConfig} />
-					<Route exact path="/tab/pretoetstest" component={Pretoetstest} />
+
+					{/* SIGN-IN */}
+					<Route exact path="/Tab" component={SignIn} />
+					<Route exact path="/auth/succes" component={Succes} />
+
+					{/* STUDENT LOGBOEK */}
+					<Route exact path="/student" component={Default} />
+					<Route exact path="/student/pretest" component={AfterPreTest} />
+					<Route
+						exact
+						path="/student/pretest/done"
+						component={AfterPreTestEnd}
+					/>
+					<Route exact path="/student/instructions" component={Instructions} />
+					<Route
+						exact
+						path="/student/instructions/done"
+						component={InstructionsEnd}
+					/>
+					<Route exact path="/student/evaluation" component={Evaluations} />
+					<Route
+						exact
+						path="/student/evaluation/end"
+						component={EvaluationsEnd}
+					/>
+					{/* ERROR PAGES */}
+					<Route exact path="/no-access" component={NoAccess} />
+					{/* <Route component={NotFound} /> */}
 				</Switch>
 			</Router>
 		)
