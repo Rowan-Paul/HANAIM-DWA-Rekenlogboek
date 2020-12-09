@@ -23,6 +23,7 @@ function AfterPreTestEndUI(props) {
 		}
 	}, [])
 
+	//TODO: fix it going back and actually loading the page
 	const previousPage = () => {
 		if (props.goal.position > 1) {
 			props.doPreviousGoal()
@@ -31,19 +32,6 @@ function AfterPreTestEndUI(props) {
 		}
 	}
 
-	const results = [
-		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Ik snap het goed' },
-		{
-			goalCount: 'Doel 2',
-			goalName: 'Breuken',
-			answer: 'Ik vind het nog erg moeilijk'
-		},
-		{
-			goalCount: 'Doel 3',
-			goalName: 'Keersommen',
-			answer: 'Ik snap het, maar vind het nog lastig'
-		}
-	]
 	return (
 		<div className="end-screen student-container">
 			<ProgressBar itemCount={props.goalAmount} done={[0, 1, 2, 3, 4]} />
