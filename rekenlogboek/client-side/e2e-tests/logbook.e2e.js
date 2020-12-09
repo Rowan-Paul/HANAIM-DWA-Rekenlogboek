@@ -23,9 +23,9 @@ describe(`Rekenlogboek`, () => {
 
 		browserB = await puppeteer.launch({
 			headless: false,
-			slowMo: 400,
+			slowMo: 1000,
 			ignoreHTTPSErrors: true,
-			args: [`--window-size=700,800`, `--window-position=250,0`]
+			args: [`--window-size=700,800`, `--window-position=0,0`]
 		})
 		pageB = await browserB.newPage()
 	})
@@ -90,10 +90,20 @@ describe(`Rekenlogboek`, () => {
 
 		// let group, period
 
+		// const selectInputs = await pageB.$$eval(`select`, async arr => {
+		// 	return arr.map(item => item.value)
+		// })
+		// expect(selectInputs).toStrictEqual(['5', '1'])
+
 		const selectInputs = await pageB.$$eval(`select`, async arr => {
+			arr[0].value = '8'
+			arr[1].value = '3'
 			return arr.map(item => item.value)
 		})
-		expect(selectInputs).toStrictEqual(['5', '1'])
+		expect(selectInputs).toStrictEqual(['8', '3'])
+
+		await pageB.click(`.next button`)
+		await pageB.waitForTimeout(3000)
 
 		// group = await arr[0]
 		// await group.select('7')
