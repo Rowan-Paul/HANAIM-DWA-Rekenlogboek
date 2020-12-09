@@ -4,6 +4,7 @@ import { SAVE_GOAL } from './types'
 import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
 import { NEXT_GOAL } from './types'
+import { PREVIOUS_GOAL } from './types'
 
 const INITIAL_STATE = {
 	logbookID: null,
@@ -19,6 +20,14 @@ const INITIAL_STATE = {
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case PREVIOUS_GOAL:
+			return {
+				...state,
+				currentGoal: {
+					position: state.currentGoal.position--
+				}
+			}
+
 		case NEXT_GOAL:
 			return {
 				...state,

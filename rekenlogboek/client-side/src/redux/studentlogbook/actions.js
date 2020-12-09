@@ -5,6 +5,11 @@ import { SAVE_GOAL_AMOUNT } from './types'
 import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
 import { NEXT_GOAL } from './types'
+import { PREVIOUS_GOAL } from './types'
+
+export const previousGoal = () => {
+	return { type: PREVIOUS_GOAL }
+}
 
 export const nextGoal = () => {
 	return { type: NEXT_GOAL }

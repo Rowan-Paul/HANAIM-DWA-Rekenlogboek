@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import '../../../scss/student/Student.scss'
@@ -10,13 +9,9 @@ import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
+import { previousGoal } from '../../../redux/studentlogbook/actions'
 import { nextGoal } from '../../../redux/studentlogbook/actions'
-import { newExplanation } from '../../../redux/studentlogbook/actions'
-import { newAnswer } from '../../../redux/studentlogbook/actions'
 import { fetchAnswers } from '../../../redux/studentlogbook/actions'
-import { fetchColumn } from '../../../redux/studentlogbook/actions'
-import { fetchGoal } from '../../../redux/studentlogbook/actions'
-import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 
 function AfterPreTestEndUI(props) {
 	useEffect(() => {
@@ -25,7 +20,22 @@ function AfterPreTestEndUI(props) {
 		}
 	}, [])
 
-	const saveAnswers = () => {}
+	const previousPage = () => {
+		if (props.goal.position > 1) {
+			props.doPreviousGoal()
+
+			props.doFetchGoalAmount()
+			props.doFetchColumn(1)
+			props.doFetchGoal(props.goal.position)
+
+			if (props.goal.position !== undefined) {
+				props.doFetchAnswers()
+			}
+
+			setInputAnswer('')
+			setInputExplanation('')
+		}
+	}
 
 	const results = [
 		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Ik snap het goed' },
@@ -61,8 +71,8 @@ function AfterPreTestEndUI(props) {
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="next button">
-				<Button color="blue" value="Afsluiten" handler={() => saveAnswers()} />
+			<div className="prev button">
+				<Button color="gray" value="Vorige" handler={() => previousPage()} />
 			</div>
 		</div>
 	)
@@ -80,13 +90,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		doFetchColumn: payload => dispatch(fetchColumn(payload)),
-		doFetchGoal: payload => dispatch(fetchGoal(payload)),
-		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
 		doFetchAnswers: () => dispatch(fetchAnswers()),
-		doNewAnswer: payload => dispatch(newAnswer(payload)),
-		doNewExplanation: payload => dispatch(newExplanation(payload)),
-		doNextGoal: () => dispatch(nextGoal())
+		doNextGoal: () => dispatch(nextGoal()),
+		doPreviousGoal: () => dispatch(previousGoal())
 	}
 }
 
