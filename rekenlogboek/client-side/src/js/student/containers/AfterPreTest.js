@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/AfterPreTest.scss'
 import '../../../scss/student/Student.scss'
@@ -11,8 +12,23 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
-function AfterPreTest() {
-	// TODO: remove dummy data
+import { newAnswer } from '../../../redux/studentlogbook/actions'
+import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import { fetchColumn } from '../../../redux/studentlogbook/actions'
+import { fetchGoal } from '../../../redux/studentlogbook/actions'
+import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
+
+function AfterPreTestUI(props) {
+	useEffect(() => {
+		props.doFetchGoalAmount()
+		props.doFetchColumn(1)
+		props.doFetchGoal(props.goal.position)
+
+		if (props.goal.position !== undefined) {
+			props.doFetchAnswers()
+		}
+	}, [])
+
 	const inputOptions = [
 		'Ik snap het goed',
 		'Ik snap het, maar vind het nog lastig',
@@ -24,6 +40,7 @@ function AfterPreTest() {
 	const [inputExplanation, setInputExplanation] = useState('')
 
 	const changeAnswer = value => {
+		props.doNewAnswer(value)
 		setInputAnswer(value)
 	}
 
@@ -34,39 +51,64 @@ function AfterPreTest() {
 	const previousPage = () => {}
 	const nextPage = () => {}
 
-	return (
-		<div className="after-pre-test student-container">
-			<ProgressBar itemCount={5} done={[1, 3]} />
-			<Jumbotron columns={1}>
-				<div className="learn-goal-container">
-					<div className="left-side">
-						{/* TODO: replace with data from database */}
-						<LearnGoal
-							goal="Doel 1:test"
-							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
-						/>
-						<Question
-							title="Hoe heb ik de les gemaakt?"
-							type="radiobuttons"
-							inputAnswer={inputAnswer}
-							changeAnswer={changeAnswer}
-						/>
+	if (props.column.input !== undefined) {
+		return (
+			<div className="after-pre-test student-container">
+				<ProgressBar itemCount={props.goalAmount} done={[1, 3]} />
+				<Jumbotron columns={1}>
+					<div className="learn-goal-container">
+						<div className="left-side">
+							<LearnGoal
+								goal={props.goal.title}
+								description={props.goal.description}
+							/>
+							<Question
+								title={props.column.title}
+								type={props.column.input.type}
+								inputAnswer={inputAnswer}
+								changeAnswer={changeAnswer}
+								options={props.column.input.options}
+							/>
+						</div>
+						<div className="right-side">
+							<LearnGoalImage src={props.goal.imageLink} />
+						</div>
 					</div>
-					<div className="right-side">
-						{/* TODO: replace with src from database */}
-						<LearnGoalImage src="/uploads/goals/LearnGoalThumb.png" />
-					</div>
+				</Jumbotron>
+				{/* TODO: create handlers */}
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
 				</div>
-			</Jumbotron>
-			{/* TODO: create handlers */}
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				<div className="next button">
+					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+				</div>
 			</div>
-			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => nextPage()} />
-			</div>
-		</div>
-	)
+		)
+	} else {
+		return <p>Loading</p>
+	}
 }
 
-export default withRouter(AfterPreTest)
+function mapStateToProps(state) {
+	return {
+		column: state.studentLogbook.column,
+		goal: state.studentLogbook.currentGoal,
+		goalAmount: state.studentLogbook.goalAmount,
+		answers: state.studentLogbook.answers
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		doFetchColumn: payload => dispatch(fetchColumn(payload)),
+		doFetchGoal: payload => dispatch(fetchGoal(payload)),
+		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
+		doFetchAnswers: () => dispatch(fetchAnswers()),
+		doNewAnswer: payload => dispatch(newAnswer(payload))
+	}
+}
+
+export const AfterPreTest = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(AfterPreTestUI)

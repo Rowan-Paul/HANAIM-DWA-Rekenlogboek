@@ -26,6 +26,43 @@ router.post('/', (req, res) => {
 		})
 })
 
+// Get the active logbook for a certain group
+router.get('/groups/:group', (req, res) => {
+	Logbook.findOne(
+		{
+			group: req.params.group,
+			currentPhase: { $ne: 'notVisible' }
+		},
+		'_id currentPhase'
+	)
+		.then(response => res.status(200).send(response))
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get the amount of goals
+router.get('/:id/goals', (req, res) => {
+	Logbook.findById(req.params.id)
+		.lean()
+		.then(response => {
+			if (response.goals.length === undefined) {
+				throw new Error('goal does not exist')
+			}
+
+			const obj = {
+				goalsAmount: response.goals.length
+			}
+
+			res.status(200).send(obj)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get all information about one logbook
 router.get('/:id', (req, res) => {
 	Logbook.findById(req.params.id)

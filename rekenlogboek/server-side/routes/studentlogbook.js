@@ -4,7 +4,52 @@ const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
 
+const app = require('../app')
+
 const StudentLogbook = mongoose.model('StudentLogbook')
+
+// Check if a logbook exists for a student in a group
+router.get('/:student/:logbookID', (req, res) => {
+	StudentLogbook.findOne({
+		$and: [
+			{ logbookID: { $eq: req.params.logbookID } },
+			{ student: { $eq: req.params.student } }
+		]
+	})
+		.then(response => {
+			if (response === null) {
+				res.sendStatus(404)
+			} else {
+				const obj = {
+					studentlogbookID: response._id
+				}
+				res.status(200).send(obj)
+			}
+		})
+		.catch(err => {
+			res.status(500).send(err)
+		})
+})
+
+// Update a studentlogbook
+router.put('/', (req, res) => {
+	StudentLogbook.findOneAndUpdate(
+		{
+			$and: [
+				{ logbookID: { $eq: req.body.logbookID } },
+				{ student: { $eq: req.body.student } }
+			]
+		},
+		{
+			answers: req.body.answers
+		}
+	)
+		.then(response => {
+			app.io.to('Bram Konijn').emit('NEW_ANSWER', req.body.student)
+			res.status(200).send(req.body)
+		})
+		.catch(err => res.status(500).send(err))
+})
 
 // Create a new studentlogbook
 router.post('/', (req, res) => {
@@ -12,11 +57,14 @@ router.post('/', (req, res) => {
 		logbookID: req.body.logbookID,
 		student: req.body.student
 	})
-		.then(() => {
-			res.sendStatus(200)
+		.then(response => {
+			const obj = {
+				studentlogbookID: response._id
+			}
+			res.status(200).send(obj)
 		})
 		.catch(err => {
-			res.sendStatus(500)
+			res.status(500).send(err)
 		})
 })
 
@@ -67,44 +115,6 @@ router.get('/:id/answers/goal/:position', (req, res) => {
 				return object.goalPosition === Number(req.params.position)
 			})
 			res.status(200).send(columnAnswers)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all studentlogbooks from one student
-router.get('/student/:student', (req, res) => {
-	StudentLogbook.find({ student: req.params.student })
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all studentlogbooks related to one logbook (not related to studentlogbook)
-router.get('/logbook/:logbookid', (req, res) => {
-	StudentLogbook.find({
-		logbookID: req.params.logbookid
-	})
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get the logbook from one student based on the logbookid (not based on the id of studentlogbook)
-router.get('/logbook/:logbookid/student/:student', (req, res) => {
-	StudentLogbook.find({
-		logbookID: req.params.logbookid,
-		student: req.params.student
-	})
-		.then(response => {
-			res.status(200).send(response)
 		})
 		.catch(err => {
 			res.status(500).send(err)
