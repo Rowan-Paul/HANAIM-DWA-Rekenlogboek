@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
 import LogbookFrame from '../components/logbook/LogbookFrame'
 import StudentLogbookHeader from '../components/logbook/StudentLogbookHeader'
@@ -16,6 +17,14 @@ function StudentLogbook(props) {
 					<StudentLogbookRows />
 				</LogbookFrame>
 			</Jumbotron>
+
+			<div className="prev button">
+				<Button
+					color="gray"
+					value="Vorige"
+					handler={() => props.history.push('./')}
+				/>
+			</div>
 		</div>
 	)
 }
