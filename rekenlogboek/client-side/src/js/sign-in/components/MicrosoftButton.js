@@ -49,6 +49,7 @@ function MicrosoftButtonUI(props) {
 			// as the user logged in teams
 			if (window.parent !== window.self) {
 				if (props.context.loginHint !== user.userPrincipalName) {
+					window.localStorage.clear()
 					throw new Error('Logged in as two different users')
 				} else {
 					setIsAuthenticated(true)
@@ -67,8 +68,8 @@ function MicrosoftButtonUI(props) {
 					jobTitle: user.jobTitle,
 					groups: user.groups
 				})
+				setError(null)
 			}
-			setError(null)
 		} catch (err) {
 			setIsAuthenticated(false)
 			setUser({})
