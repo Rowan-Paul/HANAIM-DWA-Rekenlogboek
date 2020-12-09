@@ -11,7 +11,7 @@ import '../../../scss/teacher/containers/NewLogbook.scss'
 export default function Page5() {
 	return (
 		<div className="new-logbook">
-			<Jumbotron>
+			<Jumbotron columns={3}>
 				<LogbookSaved />
 				<InfoContainer>
 					<Illustration image={Image} title="Opgeslagen..." />

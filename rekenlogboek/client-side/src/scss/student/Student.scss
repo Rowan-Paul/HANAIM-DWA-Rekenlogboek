@@ -1,0 +1,53 @@
+.student-container {
+	align-items: center;
+	display: flex;
+	height: 90%;
+	margin: 0 auto;
+	position: relative;
+	width: 90%;
+	flex-direction: column;
+
+	.learn-goal-container {
+		margin: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.next.button {
+		margin-top: 10px;
+	}
+
+	.question {
+		.Radiobuttons li,
+		.Checkboxes li {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			grid-template-columns: unset;
+			span {
+				font-size: 20px;
+			}
+		}
+
+		.Explanation textarea,
+		.Textarea {
+			font-size: 18px;
+		}
+
+		.Evaluation li div img {
+			width: 60%;
+		}
+	}
+
+	&.end-screen {
+		.left-side {
+			width: 40%;
+		}
+		.right-side {
+			width: 60%;
+		}
+	}
+}

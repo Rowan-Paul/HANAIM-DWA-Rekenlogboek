@@ -2,10 +2,18 @@ import '../../../scss/common/InputTypes.scss'
 import React from 'react'
 
 export default function Textarea(props) {
+	const newAnswer = e => {
+		if (props.readonly) {
+			props.changeAnswer(e.target.value)
+		}
+	}
+
 	return (
 		<textarea
-			className={`Textarea ${props.type} `}
-			placeholder="Omschrijf hier een antwoord."
+			className="Textarea"
+			placeholder="Omschrijving toevoegen"
+			onChange={e => newAnswer(e)}
+			value={props.inputValue}
 		></textarea>
 	)
 }

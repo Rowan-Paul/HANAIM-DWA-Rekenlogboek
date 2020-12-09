@@ -27,7 +27,7 @@ function General(props) {
 
 	return (
 		<div className="new-logbook">
-			<Jumbotron>
+			<Jumbotron columns={3}>
 				<div className="vertical-center">
 					<form>
 						{/* TODO: remove dummy options & replace with dynamic data*/}
