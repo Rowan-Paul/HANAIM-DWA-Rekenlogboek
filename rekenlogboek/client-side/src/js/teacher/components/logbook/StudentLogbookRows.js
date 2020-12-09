@@ -12,17 +12,9 @@ function StudentLogbookRows(props) {
 
 	return (
 		<div>
-			{goals.map(goal =>
-				goal.added ? (
-					<StudentLogbookRow
-						key={shortid.generate()}
-						goal={goal}
-						readonly={props.readonly}
-					/>
-				) : (
-					''
-				)
-			)}
+			{goals.map((goal, id) => (
+				<StudentLogbookRow key={shortid.generate()} goal={goal} goalid={id} />
+			))}
 		</div>
 	)
 }
