@@ -6,14 +6,18 @@ import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
 
 export const newAnswer = payload => (dispatch, getState) => {
+	if (typeof payload === 'object') {
+		payload = payload.toString()
+	}
+
 	let body = []
 	let answers = [
 		{
 			goalPosition: getState().studentLogbook.currentGoal.position,
-			columnPosition: payload.columnPosition,
+			columnPosition: getState().studentLogbook.column.position,
 			answer: {
 				inputType: getState().studentLogbook.column.input.type,
-				value: payload.value
+				value: payload
 			}
 		}
 	]
@@ -24,7 +28,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 	}
 
 	answers.forEach((answer, i) => {
-		if (answer.columnPosition === getState().studentLogbook.position) {
+		if (answer.columnPosition === getState().studentLogbook.column.position) {
 			body = {
 				student: getState().main.user.name,
 				logbookID: getState().studentLogbook.logbookID,
@@ -142,7 +146,7 @@ export const fetchCurrentPhase = payload => dispatch => {
 export const fetchColumn = payload => (dispatch, getState) => {
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/${getState().studentLogbook.logbookID}/column/${payload}`,
+			`/logbook/${getState().studentLogbook.logbookID}/column`,
 		{
 			method: 'GET'
 		}

@@ -41,6 +41,8 @@ router.put('/', (req, res) => {
 			]
 		},
 		{
+			student: req.body.student,
+			logbookID: req.body.logbookID,
 			answers: req.body.answers
 		}
 	)
@@ -48,7 +50,10 @@ router.put('/', (req, res) => {
 			app.io.to('Bram Konijn').emit('NEW_ANSWER', req.body.student)
 			res.status(200).send(req.body)
 		})
-		.catch(err => res.status(500).send(err))
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
 })
 
 // Create a new studentlogbook

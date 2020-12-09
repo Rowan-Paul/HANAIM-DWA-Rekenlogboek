@@ -21,7 +21,7 @@ import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 function AfterPreTestUI(props) {
 	useEffect(() => {
 		props.doFetchGoalAmount()
-		props.doFetchColumn(1)
+		props.doFetchColumn()
 		props.doFetchGoal(props.goal.position)
 
 		if (props.goal.position !== undefined) {
