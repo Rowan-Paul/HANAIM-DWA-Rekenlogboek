@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import '../../../scss/student/Student.scss'
 
@@ -9,8 +10,21 @@ import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function AfterPreTestEnd() {
-	console.log('hey there')
+import { nextGoal } from '../../../redux/studentlogbook/actions'
+import { newExplanation } from '../../../redux/studentlogbook/actions'
+import { newAnswer } from '../../../redux/studentlogbook/actions'
+import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import { fetchColumn } from '../../../redux/studentlogbook/actions'
+import { fetchGoal } from '../../../redux/studentlogbook/actions'
+import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
+
+function AfterPreTestEndUI(props) {
+	useEffect(() => {
+		if (props.goal.position !== undefined) {
+			props.doFetchAnswers()
+		}
+	}, [])
+
 	const saveAnswers = () => {}
 
 	const results = [
@@ -26,22 +40,22 @@ function AfterPreTestEnd() {
 			answer: 'Ik snap het, maar vind het nog lastig'
 		}
 	]
-
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={2} done={[0, 1, 2, 3, 4]} />
+			<ProgressBar itemCount={props.goalAmount} done={[0, 1, 2, 3, 4]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
 						<ResultText
 							title="Je bent klaar!"
-							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							description="De door jou ingevoerde antwoorden zijn naar jouw leraar verstuurd."
 							image=""
 						/>
 					</div>
 					<div className="right-side">
 						<ResultTable
-							results={results}
+							results={props.allGoals}
+							answers={props.answers}
 							description="Dit heb je bij je leerdoelen beantwoord:"
 						/>
 					</div>
@@ -54,4 +68,29 @@ function AfterPreTestEnd() {
 	)
 }
 
-export default withRouter(AfterPreTestEnd)
+function mapStateToProps(state) {
+	return {
+		column: state.studentLogbook.column,
+		goal: state.studentLogbook.currentGoal,
+		goalAmount: state.studentLogbook.goalAmount,
+		answers: state.studentLogbook.answers,
+		allGoals: state.studentLogbook.allGoals
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		doFetchColumn: payload => dispatch(fetchColumn(payload)),
+		doFetchGoal: payload => dispatch(fetchGoal(payload)),
+		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
+		doFetchAnswers: () => dispatch(fetchAnswers()),
+		doNewAnswer: payload => dispatch(newAnswer(payload)),
+		doNewExplanation: payload => dispatch(newExplanation(payload)),
+		doNextGoal: () => dispatch(nextGoal())
+	}
+}
+
+export const AfterPreTestEnd = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(AfterPreTestEndUI)

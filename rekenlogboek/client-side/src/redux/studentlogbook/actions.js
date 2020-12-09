@@ -87,7 +87,10 @@ export const newAnswer = payload => (dispatch, getState) => {
 	let addedAnswer = null
 
 	answers.forEach((answer, i) => {
-		if (answer.columnPosition === getState().studentLogbook.column.position) {
+		if (
+			answer.columnPosition === getState().studentLogbook.column.position &&
+			getState().studentLogbook.currentGoal.position === answer.goalPosition
+		) {
 			answers[i] = {
 				goalPosition: answer.goalPosition,
 				columnPosition: answer.columnPosition,
@@ -149,8 +152,8 @@ export const fetchAnswers = () => (dispatch, getState) => {
 			// fetch the already given answers
 			fetch(
 				process.env.REACT_APP_SERVER_ADDRESS +
-					`/studentlogbook/${response.studentlogbookID}/answers/goal/${
-						getState().studentLogbook.currentGoal.position
+					`/studentlogbook/${response.studentlogbookID}/answers/column/${
+						getState().studentLogbook.column.position
 					}`,
 
 				{

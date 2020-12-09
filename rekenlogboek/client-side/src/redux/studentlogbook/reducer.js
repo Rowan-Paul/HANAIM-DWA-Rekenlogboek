@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 	currentPhase: null,
 	column: {},
 	goalAmount: null,
+	allGoals: [],
 	currentGoal: {
 		position: 1 // set default to 1 so it can fetch the first goal
 	},
@@ -21,11 +22,11 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 		case NEXT_GOAL:
 			return {
 				...state,
-				// INITIAL_STATE,
 				currentGoal: {
 					position: state.currentGoal.position++
 				}
 			}
+
 		case SAVE_ANSWERS:
 			return {
 				...state,
@@ -52,8 +53,10 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_GOAL:
+			console.log(action.response)
 			return {
 				...state,
+				allGoals: [...state.allGoals, action.response],
 				currentGoal: action.response
 			}
 
