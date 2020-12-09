@@ -37,7 +37,9 @@ function Goal(props) {
 					<li>
 						<img
 							src={
-								'http://localhost:3000/uploads/goals/' + props.goal.imageLink
+								process.env.REACT_APP_SERVER_ADDRESS +
+								'/uploads/goals/' +
+								props.goal.imageLink
 							}
 						/>
 					</li>
