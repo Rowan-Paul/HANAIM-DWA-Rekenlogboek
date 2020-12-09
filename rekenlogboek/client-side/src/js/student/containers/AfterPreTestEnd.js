@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/Student.scss'
 
@@ -9,12 +10,14 @@ import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
+import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
 import { previousGoal } from '../../../redux/studentlogbook/actions'
 import { nextGoal } from '../../../redux/studentlogbook/actions'
 import { fetchAnswers } from '../../../redux/studentlogbook/actions'
 
 function AfterPreTestEndUI(props) {
 	useEffect(() => {
+		props.doFetchAllGoals()
 		if (props.goal.position !== undefined) {
 			props.doFetchAnswers()
 		}
@@ -24,16 +27,7 @@ function AfterPreTestEndUI(props) {
 		if (props.goal.position > 1) {
 			props.doPreviousGoal()
 
-			props.doFetchGoalAmount()
-			props.doFetchColumn(1)
-			props.doFetchGoal(props.goal.position)
-
-			if (props.goal.position !== undefined) {
-				props.doFetchAnswers()
-			}
-
-			setInputAnswer('')
-			setInputExplanation('')
+			props.history.push('/student/pretoets')
 		}
 	}
 
@@ -92,11 +86,12 @@ function mapDispatchToProps(dispatch) {
 	return {
 		doFetchAnswers: () => dispatch(fetchAnswers()),
 		doNextGoal: () => dispatch(nextGoal()),
-		doPreviousGoal: () => dispatch(previousGoal())
+		doPreviousGoal: () => dispatch(previousGoal()),
+		doFetchAllGoals: () => dispatch(fetchAllGoals())
 	}
 }
 
 export const AfterPreTestEnd = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(AfterPreTestEndUI)
+)(withRouter(AfterPreTestEndUI))

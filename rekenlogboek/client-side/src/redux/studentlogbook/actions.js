@@ -6,6 +6,25 @@ import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
 import { NEXT_GOAL } from './types'
 import { PREVIOUS_GOAL } from './types'
+import { SAVE_ALL_GOALS } from './types'
+
+export const fetchAllGoals = () => (dispatch, getState) => {
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS +
+			`/logbook/${getState().studentLogbook.logbookID}/goals/all`,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response =>
+			dispatch({
+				type: SAVE_ALL_GOALS,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})
+		)
+		.catch(error => console.log(error))
+}
 
 export const previousGoal = () => {
 	return { type: PREVIOUS_GOAL }
