@@ -65,6 +65,7 @@ export default function RadioButtons(props) {
 					<textarea
 						type="text"
 						name="explanation"
+						value={props.studentExplanation}
 						placeholder="Omdat..."
 						onChange={e => newExplanation(e)}
 					/>
