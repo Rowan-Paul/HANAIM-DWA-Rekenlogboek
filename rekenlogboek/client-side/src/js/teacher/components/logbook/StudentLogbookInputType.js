@@ -39,6 +39,8 @@ function InputType(props) {
 					options={column.input.options}
 					type={props.type}
 					inputAnswer={props.inputAnswer}
+					row={props.row}
+					position={props.position}
 					readonly
 				/>
 			)
