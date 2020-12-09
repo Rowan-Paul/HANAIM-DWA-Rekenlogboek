@@ -1,41 +1,73 @@
 @import '../../Variables.scss';
+
 .LogbookList {
 	color: $fontColor;
-	height: 100%;
-	text-align: left;
+	margin: 0;
+	padding: 0;
+	width: 100%;
 
-	div {
-		border: 1px solid $borderColor;
-		background: #fff;
-		border-radius: 8px;
-		height: 45vh;
-		margin: 2.5vh 0;
-		overflow-y: scroll;
+	li {
+		border-bottom: 1px solid $borderColor;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, calc(100% / 3));
+		list-style: none;
 
-		table {
-			border: none;
-			border-color: $borderColor;
-			border-radius: 8px;
-			border-collapse: collapse;
-			max-height: 50vh;
-			overflow-y: scroll;
-			width: 100%;
+		div {
+			padding: 1vh 2.5%;
+			width: calc(95% - 1px);
 
-			th,
-			td {
-				padding: 1% 2%;
+			&:last-of-type {
+				border-color: #fff;
+			}
+		}
+	}
+	.Header {
+		div {
+			border-right: 1px solid $borderColor;
+			padding: 2.5vh 0;
+			width: calc(100% - 1px);
+		}
+		.Select {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, calc(100% / 4));
 
-				span {
-					font-size: 16px;
-					font-weight: 700;
+			h4 {
+				padding-left: 2.5vw;
+			}
+			select {
+				border: 1px solid $borderColor;
+				border-radius: 8px;
+				grid-column: span 3;
+				margin: 0 auto;
+				padding: 0.5vh 0;
+				width: 80%;
+			}
+		}
+	}
+	.Student {
+		padding: 1% 2.5% 1% 1.25%;
+
+		div {
+			position: relative;
+
+			button {
+				align-items: center;
+				background: $blue;
+				border: 1px solid $blue;
+				border-radius: 8px;
+				color: #fff;
+				display: flex;
+				padding: 0.5vh 1vw;
+				position: absolute;
+				right: 0;
+				transition: ease-in-out 0.5s;
+
+				&:hover {
+					color: $fontLight;
+					cursor: pointer;
 				}
-				p {
-					font-size: 14px;
-					margin: 0;
-				}
-				img {
-					margin: 0 auto;
-					width: 2rem;
+				i {
+					padding-left: 0.5vw;
 				}
 			}
 		}

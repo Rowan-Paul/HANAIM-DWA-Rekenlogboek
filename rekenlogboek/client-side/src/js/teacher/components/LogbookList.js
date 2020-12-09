@@ -2,7 +2,6 @@ import '../../../scss/teacher/components/LogbookList.scss'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Icon from '../../../img/temp/smallicon.png'
 import {
 	saveCurrentStudentlogbook,
 	setCurrentLogbookPeriod,
@@ -31,55 +30,65 @@ function LogbookList(props) {
 
 	const makeRows = () => {
 		return props.studentlogbooks.map(studentlogbook => (
-			<tr key={studentlogbook.student}>
-				<td>
-					<p>{studentlogbook.student}</p>
-				</td>
-				<td>
-					<p>Status: </p>
-				</td>
-				<td>
-					<img
+			<li className="Student" key={studentlogbook.student}>
+				<div>
+					<span>{studentlogbook.student}</span>
+				</div>
+
+				<div>
+					<span>Status: </span>
+				</div>
+				<div>
+					<button
 						onClick={() => {
 							props.setActiveStudentLogbook(studentlogbook)
 						}}
-						src={Icon} // TODO: Image moet nog vervangen worden
-					/>
-				</td>
-			</tr>
+					>
+						<span>Openen </span>
+						<i className="fa fa-arrow-right"></i>
+					</button>
+				</div>
+			</li>
 		))
 	}
 
 	return (
-		<div className="LogbookList">
-			<div>
-				<p>Leerjaar: {props.year}</p>
-				<p>Groep: </p>
-				<select
-					value={props.group}
-					name="group"
-					id="group"
-					onChange={e => props.setGroup(e.target.value)}
-				>
-					{makeGroupOptions()}
-				</select>
-				<p>Blok: </p>{' '}
-				<select
-					value={props.period}
-					name="period"
-					id="period"
-					onChange={e => props.setPeriod(e.target.value)}
-				>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-				</select>
-				<table border="1">
-					<tbody>{makeRows()}</tbody>
-				</table>
-			</div>
-		</div>
+		<ul className="LogbookList">
+			<li className="Header">
+				<div>
+					<h4>Leerjaar: {props.year}</h4>
+				</div>
+
+				<div className="Select">
+					<h4>Groep: </h4>
+					<select
+						value={props.group}
+						name="group"
+						id="group"
+						onChange={e => props.setGroup(e.target.value)}
+					>
+						{makeGroupOptions()}
+					</select>
+				</div>
+
+				<div className="Select">
+					<h4>Blok: </h4>
+					<select
+						value={props.period}
+						name="period"
+						id="period"
+						onChange={e => props.setPeriod(e.target.value)}
+					>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+					</select>
+				</div>
+			</li>
+
+			{makeRows()}
+		</ul>
 	)
 }
 
