@@ -12,6 +12,7 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
+import { nextGoal } from '../../../redux/studentlogbook/actions'
 import { newExplanation } from '../../../redux/studentlogbook/actions'
 import { newAnswer } from '../../../redux/studentlogbook/actions'
 import { fetchAnswers } from '../../../redux/studentlogbook/actions'
@@ -22,7 +23,7 @@ import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 function AfterPreTestUI(props) {
 	useEffect(() => {
 		props.doFetchGoalAmount()
-		props.doFetchColumn()
+		props.doFetchColumn(1)
 		props.doFetchGoal(props.goal.position)
 
 		if (props.goal.position !== undefined) {
@@ -44,7 +45,24 @@ function AfterPreTestUI(props) {
 	}
 
 	const previousPage = () => {}
-	const nextPage = () => {}
+	const nextPage = () => {
+		if (props.goal.position < props.goalAmount) {
+			props.doNextGoal()
+
+			props.doFetchGoalAmount()
+			props.doFetchColumn(1)
+			props.doFetchGoal(props.goal.position)
+
+			if (props.goal.position !== undefined) {
+				props.doFetchAnswers()
+			}
+
+			setInputAnswer('')
+			setInputExplanation('')
+		} else {
+			props.history.push('/student/pretest/done')
+		}
+	}
 
 	if (props.column.input !== undefined) {
 		return (
@@ -102,7 +120,8 @@ function mapDispatchToProps(dispatch) {
 		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
 		doFetchAnswers: () => dispatch(fetchAnswers()),
 		doNewAnswer: payload => dispatch(newAnswer(payload)),
-		doNewExplanation: payload => dispatch(newExplanation(payload))
+		doNewExplanation: payload => dispatch(newExplanation(payload)),
+		doNextGoal: () => dispatch(nextGoal())
 	}
 }
 

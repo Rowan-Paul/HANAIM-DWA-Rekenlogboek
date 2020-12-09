@@ -26,11 +26,6 @@ const logbookSchema = new mongoose.Schema({
 		required: true,
 		default: 0
 	},
-	activeColumn: {
-		type: Number,
-		required: false,
-		default: 0
-	},
 	columns: [
 		{
 			position: {

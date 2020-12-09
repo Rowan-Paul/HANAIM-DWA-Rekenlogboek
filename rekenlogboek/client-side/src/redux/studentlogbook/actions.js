@@ -4,6 +4,11 @@ import { SAVE_GOAL } from './types'
 import { SAVE_GOAL_AMOUNT } from './types'
 import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
+import { NEXT_GOAL } from './types'
+
+export const nextGoal = () => {
+	return { type: NEXT_GOAL }
+}
 
 export const newExplanation = payload => (dispatch, getState) => {
 	let body = []
@@ -67,7 +72,6 @@ export const newExplanation = payload => (dispatch, getState) => {
 }
 
 export const newAnswer = payload => (dispatch, getState) => {
-	console.log(payload)
 	if (typeof payload === 'object') {
 		payload = payload.toString()
 	}
@@ -214,7 +218,7 @@ export const fetchCurrentPhase = payload => dispatch => {
 export const fetchColumn = payload => (dispatch, getState) => {
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/${getState().studentLogbook.logbookID}/column`,
+			`/logbook/${getState().studentLogbook.logbookID}/column/${payload}`,
 		{
 			method: 'GET'
 		}

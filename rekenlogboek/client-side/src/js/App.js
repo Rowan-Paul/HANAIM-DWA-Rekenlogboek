@@ -52,6 +52,7 @@ function App() {
 						<Header />
 						<main>
 							<Switch>
+								{/* LOGBOOK MAKER */}
 								<Route
 									exact
 									path="/teacher/new-logbook/general"

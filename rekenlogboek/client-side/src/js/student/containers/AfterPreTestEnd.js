@@ -10,6 +10,7 @@ import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
 function AfterPreTestEnd() {
+	console.log('hey there')
 	const saveAnswers = () => {}
 
 	const results = [
@@ -28,7 +29,7 @@ function AfterPreTestEnd() {
 
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
+			<ProgressBar itemCount={2} done={[0, 1, 2, 3, 4]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">

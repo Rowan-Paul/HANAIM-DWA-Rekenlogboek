@@ -75,27 +75,6 @@ router.get('/:id', (req, res) => {
 		})
 })
 
-// Get the id, position, title and inputType for the active column from a specific logbook
-router.get('/:id/column', (req, res) => {
-	Logbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			const column = response.columns.find(object => {
-				return object.position === Number(response.activeColumn)
-			})
-
-			if (column === undefined) {
-				throw new Error('column does not exist')
-			}
-
-			res.status(200).send(column)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
 // Get the id, position, title and inputType for one column from a specific logbook
 router.get('/:id/column/:position', (req, res) => {
 	Logbook.findById(req.params.id)

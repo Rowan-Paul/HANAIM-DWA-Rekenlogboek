@@ -3,6 +3,7 @@ import { SAVE_COLUMN } from './types'
 import { SAVE_GOAL } from './types'
 import { SAVE_ANSWERS } from './types'
 import { FETCH_ANSWERS } from './types'
+import { NEXT_GOAL } from './types'
 
 const INITIAL_STATE = {
 	logbookID: null,
@@ -17,6 +18,14 @@ const INITIAL_STATE = {
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case NEXT_GOAL:
+			return {
+				...state,
+				// INITIAL_STATE,
+				currentGoal: {
+					position: state.currentGoal.position++
+				}
+			}
 		case SAVE_ANSWERS:
 			return {
 				...state,

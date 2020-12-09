@@ -17,7 +17,6 @@ Contains all general logbooks.
 | teacher: String/Number (ligt miss aan Teams)          |
 | currentPhase: String                                  |
 | activeGoal: Number                                    |
-| activeColumn: Number                                  |
 | columns: [{                                           |
 |            _id_: ObjectID (auto)                      |
 |            position: Number                           |
