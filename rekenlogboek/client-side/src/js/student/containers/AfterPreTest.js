@@ -29,12 +29,6 @@ function AfterPreTestUI(props) {
 		}
 	}, [])
 
-	const inputOptions = [
-		'Ik snap het goed',
-		'Ik snap het, maar vind het nog lastig',
-		'Ik vind het nog erg moeilijk'
-	]
-
 	//TODO: save state to redux when leaving page
 	const [inputAnswer, setInputAnswer] = useState('')
 	const [inputExplanation, setInputExplanation] = useState('')

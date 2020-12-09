@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Textarea(props) {
 	const newAnswer = e => {
-		if (props.readonly) {
+		if (!props.readonly) {
 			props.changeAnswer(e.target.value)
 		}
 	}
@@ -12,7 +12,7 @@ export default function Textarea(props) {
 		<textarea
 			className="Textarea"
 			placeholder="Omschrijving toevoegen"
-			onChange={e => newAnswer(e)}
+			onBlur={e => newAnswer(e)}
 			value={props.inputValue}
 		></textarea>
 	)
