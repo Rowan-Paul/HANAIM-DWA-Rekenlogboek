@@ -1,5 +1,11 @@
 import React from 'react'
 import '../../scss/common/Jumbotron.scss'
+import classNames from 'classnames'
 export default function Jumbotron(props) {
-	return <section className="Jumbotron">{props.children}</section>
+	const colCount = `columns-${props.columns}`
+	return (
+		<section className={classNames('Jumbotron', { [colCount]: true })}>
+			{props.children}
+		</section>
+	)
 }

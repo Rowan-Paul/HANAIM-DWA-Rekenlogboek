@@ -24,12 +24,15 @@ function TopBar(props) {
 					</button>
 				)}
 			</li>
-			<li>
-				<h3>
-					Groep {props.group} <i className="fa fa-angle-right"></i> Blok{' '}
-					{props.period}
-				</h3>
-			</li>
+
+			{!props.noBreadcrumbs && (
+				<li>
+					<h3>
+						Groep {props.group} <i className="fa fa-angle-right"></i> Blok{' '}
+						{props.period}
+					</h3>
+				</li>
+			)}
 		</ul>
 	)
 }

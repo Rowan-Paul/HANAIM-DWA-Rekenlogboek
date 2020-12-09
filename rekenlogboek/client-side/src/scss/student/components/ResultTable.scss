@@ -1,0 +1,42 @@
+@import '../../Variables.scss';
+.result-table {
+	margin-right: 3%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	p {
+		text-align: center;
+	}
+
+	.table {
+		background: #fff;
+		font-size: $label-font-size;
+		padding: 10px;
+		border-radius: 15px;
+		border: 1px solid $gray;
+		display: flex;
+		flex-direction: column;
+
+		.row {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			&:not(:last-child) {
+				border-bottom: solid thin $gray;
+			}
+
+			.cell {
+				padding: 20px;
+				width: 100px;
+				text-align: center;
+
+				&:last-child {
+					width: auto;
+					text-align: left;
+				}
+			}
+		}
+	}
+}

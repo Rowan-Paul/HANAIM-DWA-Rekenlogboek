@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import LogbookList from '../components/LogbookList'
-import Jumbotron from '../../common/Jumbotron'
 import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
 
-function StudentLogbooks(props) {
+import Jumbotron from '../../common/Jumbotron'
+import LogbookList from '../components/LogbookList'
+import TopBar from '../components/logbook/TopBar'
+import LogbookFrame from '../components/logbook/LogbookFrame'
+
+function Logbooks(props) {
 	useEffect(() => {
 		props.getPageInformation()
 	}, [props.period, props.group])
 
 	return (
 		<Jumbotron>
-			<LogbookList
-				logbook={props.logbook}
-				studentlogbooks={props.studentlogbooks}
-			></LogbookList>
+			<TopBar title={'Overzicht logboeken'} noBreadcrumbs />
+			<LogbookFrame>
+				<LogbookList
+					logbook={props.logbook}
+					studentlogbooks={props.studentlogbooks}
+				></LogbookList>
+			</LogbookFrame>
 		</Jumbotron>
 	)
 }
@@ -38,4 +44,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(withRouter(StudentLogbooks))
+)(withRouter(Logbooks))
