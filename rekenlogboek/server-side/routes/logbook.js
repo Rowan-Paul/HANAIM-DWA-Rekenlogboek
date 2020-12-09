@@ -63,6 +63,19 @@ router.get('/:id/goals', (req, res) => {
 		})
 })
 
+// Get the amount of goals
+router.get('/:id/teacher', (req, res) => {
+	Logbook.findById(req.params.id, 'teacher')
+		.lean()
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get all information about one logbook
 router.get('/:id', (req, res) => {
 	Logbook.findById(req.params.id)

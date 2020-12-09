@@ -3,6 +3,7 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
+const fetch = require('node-fetch')
 
 const app = require('../app')
 
@@ -47,8 +48,21 @@ router.put('/', (req, res) => {
 		}
 	)
 		.then(response => {
-			app.io.to('Bram Konijn').emit('NEW_ANSWER', req.body.student)
-			res.status(200).send(response.answers)
+			fetch(
+				process.env.SERVER_ADDRESS +
+					'/logbook/' +
+					req.body.logbookID +
+					'/teacher',
+				{
+					method: 'GET'
+				}
+			)
+				.then(response => response.json())
+				.then(json => {
+					console.log(json.teacher)
+					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+					res.status(200).send(response.answers)
+				})
 		})
 		.catch(err => {
 			console.log(err)
