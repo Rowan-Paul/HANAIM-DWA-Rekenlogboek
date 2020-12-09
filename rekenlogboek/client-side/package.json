@@ -11,6 +11,7 @@
 		"classnames": "^2.2.6",
 		"dotenv": "^8.2.0",
 		"msal": "^1.4.4",
+		"puppeteer": "^5.5.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-redux": "^7.2.2",
@@ -27,7 +28,8 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"e2e": "jest --testMatch=\"**/*.e2e.js\""
 	},
 	"eslintConfig": {
 		"extends": [
