@@ -13,7 +13,7 @@ import newLBGoals from './teacher/containers/Goals'
 import newLBOverview from './teacher/containers/Overview'
 import newLBCompleted from './teacher/containers/Completed'
 
-import StudentLogbooks from './teacher/containers/Studentlogbooks'
+import Logbooks from './teacher/containers/Logbooks'
 
 // SIGN IN PAGES
 import SignIn from '../js/sign-in/SignIn'
@@ -84,7 +84,7 @@ function App() {
 								<Route
 									exact
 									path="/teacher/logbooks"
-									component={StudentLogbooks}
+									component={Logbooks}
 								></Route>
 								<Route path="/teacher" component={TeacherLanding} />
 
