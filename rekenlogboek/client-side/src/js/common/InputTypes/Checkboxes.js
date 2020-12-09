@@ -14,7 +14,6 @@ export default function Checkboxes(props) {
 			} else {
 				answers.push(e.target.value)
 			}
-			console.log(answers)
 			props.changeAnswer(answers)
 		}
 	}

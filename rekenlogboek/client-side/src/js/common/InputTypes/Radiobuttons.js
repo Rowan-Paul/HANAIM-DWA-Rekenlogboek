@@ -17,7 +17,6 @@ export default function RadioButtons(props) {
 		}
 	}
 
-	console.log(props.inputAnswer)
 	return (
 		<ul className="Radiobuttons">
 			{props.options.map((option, i) => (
@@ -44,7 +43,7 @@ export default function RadioButtons(props) {
 			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
 				<input
 					onChange={e => newAnswer(e)}
-					checked={props.inputAnswer === ''}
+					checked={props.inputAnswer === '' || props.inputAnswer === 'default'}
 					type="radio"
 					name="radiobutton"
 					value="default"
