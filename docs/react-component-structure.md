@@ -16,12 +16,8 @@
 ## Sign-in
 
 ```jsx
-<GraphService>
-<MSUtils />
 <SignIn/>
 <Succes />
-// <SignInContainer/>
-//<MicrosoftButton/>
 ```
 
 ---
@@ -36,11 +32,6 @@
 <EvaluationsEnd />
 <Instructions />
 <InstructionsEnd />
-
-// <LearnGoal title description/>
-// <LearnGoalImage imageLink/>
-// <Question type title description />
-// <StudentEndScreen />
 ```
 
 ---
@@ -58,20 +49,6 @@
 <TeacherLanding />
 
 ```
-<!-- 
-## LogbookDesigner
-
-```jsx
-<Select title options />
-<AddLearnGoal />
-<LearnGoalList />
-<LearnGoal />
-<LogbookOverview />
-<LogBookTable />
-<LogBookTableItem />
-<LogBookTableFilter />
-
-``` -->
 
 ---
 

@@ -38,12 +38,19 @@ De client-side is opgedeeld in verschillende mappen voor verschillende onderdele
 
 ```text
 /src
-    /img    -> Bevat foto's voor de styling van de paginas.
-    /js     -> Bevat de containers en componenten.
+    /img    -> Bevat afbeeldingen voor de paginas.
+    /js     -> Bevat de containers en componenten voor de pagina's.
     /redux  -> Bevat de redux store, reducers en action creators.
     /scss   -> Bevat de styling voor de paginas.
 ```
 
 De server-side is opgedeeld in een map voor mongoose models en express routes. Het hoofdbestand is het bestand [app.js](../../rekenlogboek/server-side/app.js).
+
+```text
+/models                 ->Hier staan de database models
+/routes                 ->Hier worden de endpoints beschreven
+/static/uploads/goals   ->Hier worden afbeeldingen voor de goals naar toe geüpload
+app.js                  ->Hoofdbestand waarmee de server gestart kan worden
+```
 
 Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `http://localhost:3000`) ervoor te zetten
