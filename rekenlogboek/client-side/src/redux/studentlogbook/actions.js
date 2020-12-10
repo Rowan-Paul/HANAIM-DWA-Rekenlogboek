@@ -81,7 +81,7 @@ export const newExplanation = payload => (dispatch, getState) => {
 export const newAnswer = payload => (dispatch, getState) => {
 	if (typeof payload === 'object') {
 		payload = payload.toString()
-	} else if (payload === '') {
+	} else if (payload === '' || payload === null) {
 		payload = 'default'
 	}
 

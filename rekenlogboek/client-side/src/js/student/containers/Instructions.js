@@ -66,9 +66,9 @@ function InstructionsUI(props) {
 	}
 
 	const nextPage = () => {
+		props.doNewAnswer(inputAnswer)
 		if (props.goal.position < props.goalAmount) {
 			props.doNextGoal()
-			props.doNewAnswer(inputAnswer)
 
 			props.doFetchGoalAmount()
 			props.doFetchColumn(2)
