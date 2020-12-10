@@ -6,7 +6,6 @@ Here you can find an overview of the different things inside the database.
 
 Contains all general logbooks.
 
-<!-- 
 ```text
 +-------------------------------------------------------+
 | Logbooks                                              |
@@ -33,9 +32,9 @@ Contains all general logbooks.
 |            description: String                        |
 |            imagelink: String                          |
 |        }]                                             |
-+-------------------------------------------------------+ 
++-------------------------------------------------------+
 ```
--->
+
 ```text
 +-------------------------------------------------------+
 |columns: [                                             |
@@ -105,6 +104,7 @@ Contains all logbooks for students.
 +-------------------------------------------------------+
 ```
 -->
+
 ```text
 +-------------------------------------------------------+
 | Studentlogbook                                        |
@@ -120,8 +120,8 @@ Contains all logbooks for students.
 +-------------------------------------------------------+
 ```
 
-
 ## Main
+
 ```text
 +-------------------------------------------------------+
 | Main                                                  |
@@ -131,7 +131,7 @@ Contains all logbooks for students.
 +-------------------------------------------------------+
 ```
 
-<!-- 
+<!--
 ## Templates
 
 Contains templates for logbooks

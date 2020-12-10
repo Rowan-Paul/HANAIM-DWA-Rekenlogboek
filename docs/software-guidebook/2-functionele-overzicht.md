@@ -34,7 +34,6 @@ Hieronder staan de user stories met betrekking tot de leraar. Niet alle user sto
 - Als leerkracht wil ik kunnen kiezen voor een donker thema zodat ik ook in donkere omgevingen kan werken.
 - Als leerkracht wil ik notities bij een leerling kunnen bijhouden zodat ik belangrijke info niet vergeet.
 
-
 ### 2.3 Leerling
 
 Een leerling moet via het team van zijn groep op een tab kunnen drukken en automatisch terechtkomen op de juiste pagina om het logboek in te vullen. Alleen leerdoelen die op dat moment van toepassing zijn worden op dat moment getoond aan de leerling.
