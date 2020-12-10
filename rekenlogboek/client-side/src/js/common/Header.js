@@ -10,7 +10,7 @@ function Header(props) {
 			switch (props.user.jobTitle) {
 				case 'Leraar':
 					return (
-						<Link to="./overview">
+						<Link to="../teacher">
 							<i className="fa fa-home"></i>
 							<span>Overzicht</span>
 						</Link>
