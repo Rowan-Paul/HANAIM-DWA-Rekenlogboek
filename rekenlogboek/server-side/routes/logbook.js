@@ -105,8 +105,15 @@ router.get('/:id/goal/:position', (req, res) => {
 	Logbook.findById(req.params.id)
 		.lean()
 		.then(response => {
+			let position
+			if (req.params.position === 'null') {
+				position = response.activeGoal
+			} else {
+				position = req.params.position
+			}
+
 			const goal = response.goals.find(object => {
-				return object.position === Number(req.params.position)
+				return object.position === Number(position)
 			})
 
 			if (goal === undefined) {

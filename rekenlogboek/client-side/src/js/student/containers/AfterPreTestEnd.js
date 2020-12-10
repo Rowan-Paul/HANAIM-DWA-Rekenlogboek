@@ -48,6 +48,7 @@ function AfterPreTestEndUI(props) {
 						<ResultTable
 							results={props.allGoals}
 							answers={props.answers}
+							columnPosition={props.column.position}
 							description="Dit heb je bij je leerdoelen beantwoord:"
 						/>
 					</div>

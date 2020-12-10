@@ -98,6 +98,8 @@ export const newExplanation = payload => (dispatch, getState) => {
 export const newAnswer = payload => (dispatch, getState) => {
 	if (typeof payload === 'object') {
 		payload = payload.toString()
+	} else if (payload === '') {
+		payload = 'default'
 	}
 
 	let body = []
@@ -176,21 +178,19 @@ export const fetchAnswers = () => (dispatch, getState) => {
 			// fetch the already given answers
 			fetch(
 				process.env.REACT_APP_SERVER_ADDRESS +
-					`/studentlogbook/${response.studentlogbookID}/answers/column/${
-						getState().studentLogbook.column.position
-					}`,
+					`/studentlogbook/${response.studentlogbookID}/answers/`,
 
 				{
 					method: 'GET'
 				}
 			)
 				.then(res => res.json())
-				.then(response =>
+				.then(response => {
 					dispatch({
 						type: FETCH_ANSWERS,
 						response // Called it response (from API) to distinguish it from payloads (from app)
 					})
-				)
+				})
 		})
 		.catch(error => {
 			// create a new studentlogbook
@@ -261,6 +261,10 @@ export const fetchColumn = payload => (dispatch, getState) => {
 }
 
 export const fetchGoal = payload => (dispatch, getState) => {
+	console.log(
+		process.env.REACT_APP_SERVER_ADDRESS +
+			`/logbook/${getState().studentLogbook.logbookID}/goal/${payload}`
+	)
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/${getState().studentLogbook.logbookID}/goal/${payload}`,

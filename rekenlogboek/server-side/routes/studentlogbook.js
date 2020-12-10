@@ -59,7 +59,6 @@ router.put('/', (req, res) => {
 			)
 				.then(response => response.json())
 				.then(json => {
-					console.log(json.teacher)
 					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
 					res.status(200).send(response.answers)
 				})

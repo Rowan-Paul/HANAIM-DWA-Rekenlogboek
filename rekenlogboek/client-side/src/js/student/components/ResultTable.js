@@ -5,19 +5,31 @@ import '../../../scss/student/components/ResultTable.scss'
 export default function ResultText(props) {
 	const getTableRows = () => {
 		{
-			return props.results.map((result, i) => {
-				if (props.answers[i].goalPosition === result.position) {
-					result.answer = props.answers[i].answer.value
+			let columnAnswers = []
+			props.answers.forEach(answer => {
+				if (answer.columnPosition === props.columnPosition) {
+					columnAnswers.push(answer)
 				}
-
-				return (
-					<div key={result.title} className="row">
-						<div className="cell">{result.title}</div>
-						<div className="cell">{result.description}</div>
-						<div className="cell">{result.answer}</div>
-					</div>
-				)
 			})
+
+			if (columnAnswers.length > 0)
+				return props.results.map((result, i) => {
+					if (columnAnswers[i].goalPosition === result.position) {
+						if (columnAnswers[i].answer.value === 'default') {
+							result.answer = 'Ik weet het nog niet'
+						} else {
+							result.answer = columnAnswers[i].answer.value
+						}
+					}
+
+					return (
+						<div key={result.title} className="row">
+							<div className="cell">{result.title}</div>
+							<div className="cell">{result.description}</div>
+							<div className="cell">{result.answer}</div>
+						</div>
+					)
+				})
 		}
 	}
 

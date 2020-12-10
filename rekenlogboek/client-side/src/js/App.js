@@ -33,9 +33,9 @@ import TabConfig from './teams/TabConfig'
 import { Default } from './student/containers/Default'
 import { AfterPreTest } from './student/containers/AfterPreTest'
 import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
-import InstructionsEnd from './student/containers/InstructionsEnd'
+import { InstructionsEnd } from './student/containers/InstructionsEnd'
 import EvaluationsEnd from './student/containers/EvaluationsEnd'
-import Instructions from './student/containers/Instructions'
+import { Instructions } from './student/containers/Instructions'
 import Evaluations from './student/containers/Evaluations'
 
 import '../scss/App.scss'
@@ -123,14 +123,10 @@ function App() {
 							path="/student/pretest/done"
 							component={AfterPreTestEnd}
 						/>
+						<Route exact path="/student/instruction" component={Instructions} />
 						<Route
 							exact
-							path="/student/instructions"
-							component={Instructions}
-						/>
-						<Route
-							exact
-							path="/student/instructions/done"
+							path="/student/instruction/done"
 							component={InstructionsEnd}
 						/>
 						<Route exact path="/student/evaluation" component={Evaluations} />
