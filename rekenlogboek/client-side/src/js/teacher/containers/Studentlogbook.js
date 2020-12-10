@@ -8,8 +8,8 @@ import { io } from 'socket.io-client'
 import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
 import LogbookFrame from '../components/logbook/LogbookFrame'
-import StudentLogbookHeader from '../components/logbook/StudentLogbookHeader'
-import StudentLogbookRows from '../components/logbook/StudentLogbookRows'
+import StudentLogbookHeader from '../components/studentlogbook/StudentLogbookHeader'
+import StudentLogbookRows from '../components/studentlogbook/StudentLogbookRows'
 import { fetchActiveStudentlogbook } from '../../../redux/logbookoverview/actions'
 
 function StudentLogbook(props) {
