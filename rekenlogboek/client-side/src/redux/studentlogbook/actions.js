@@ -11,7 +11,7 @@ import { SAVE_ALL_GOALS } from './types'
 export const fetchAllGoals = () => (dispatch, getState) => {
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/${getState().studentLogbook.logbookID}/goals/all`,
+			`/logbook/${getState().studentLogbook.logbookID}/goals`,
 		{
 			method: 'GET'
 		}

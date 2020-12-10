@@ -75,9 +75,10 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case SAVE_GOAL_AMOUNT:
+			console.log(action.response)
 			return {
 				...state,
-				goalAmount: action.response.goalsAmount
+				goalAmount: action.response.goals.length
 			}
 
 		default:
