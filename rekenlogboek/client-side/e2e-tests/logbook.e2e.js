@@ -3,8 +3,7 @@ const puppeteer = require('puppeteer')
 jest.setTimeout(30000)
 
 describe(`Rekenlogboek`, () => {
-	// let browserA, pageA
-	let browserB, pageB
+	let browserA, pageA
 
 	const user = {
 		email: `BKonijn@teamjaguarundi.onmicrosoft.com`,
@@ -12,27 +11,17 @@ describe(`Rekenlogboek`, () => {
 	}
 
 	beforeAll(async () => {
-		// create two browsers
-		// browserA = await puppeteer.launch({
-		// 	headless: false,
-		// 	slowMo: 200,
-		// 	ignoreHTTPSErrors: true,
-		// 	args: [`--window-size=700,800`, `--window-position=0,0`]
-		// })
-		// pageA = await browserA.newPage()
-
-		browserB = await puppeteer.launch({
+		browserA = await puppeteer.launch({
 			headless: false,
 			slowMo: 1000,
 			ignoreHTTPSErrors: true,
 			args: [`--window-size=700,800`, `--window-position=0,0`]
 		})
-		pageB = await browserB.newPage()
+		pageA = await browserA.newPage()
 	})
 
 	afterAll(async () => {
 		// await browserA.close()
-		// await browserB.close()
 	})
 
 	xtest(`Go to main page and login with microsoft`, async () => {
@@ -86,34 +75,16 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	test(`Create logbook - Happy path`, async () => {
-		await pageB.goto(`https://localhost:3001/teacher/new-logbook/general`)
+		await pageA.goto(`https://localhost:3001/teacher/new-logbook/general`)
 
-		// let group, period
-
-		// const selectInputs = await pageB.$$eval(`select`, async arr => {
-		// 	return arr.map(item => item.value)
-		// })
-		// expect(selectInputs).toStrictEqual(['5', '1'])
-
-		const selectInputs = await pageB.$$eval(`select`, async arr => {
+		const selectInputs = await pageA.$$eval(`select`, async arr => {
 			arr[0].value = '8'
 			arr[1].value = '3'
 			return arr.map(item => item.value)
 		})
 		expect(selectInputs).toStrictEqual(['8', '3'])
 
-		await pageB.click(`.next button`)
-		await pageB.waitForTimeout(3000)
-
-		// group = await arr[0]
-		// await group.select('7')
-		// period = await arr[1]
-		// await period.select('3')
-
-		// const groupValue = await group.getProperty('textContent')
-		// expect(groupValue).toBe('7')
-
-		// const periodValue = await period.getProperty('textContent')
-		// expect(periodValue).toBe('3')
+		await pageA.click(`.next button`)
+		await pageA.waitForTimeout(3000)
 	})
 })
