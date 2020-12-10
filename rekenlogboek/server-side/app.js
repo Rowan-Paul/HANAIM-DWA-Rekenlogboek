@@ -13,7 +13,6 @@ require('./models/logbook')
 require('./models/studentlogbook')
 require('./models/templates')
 
-const authRouter = require('./routes/auth')
 const logbookRouter = require('./routes/logbook')
 const studentlogbookRouter = require('./routes/studentlogbook')
 const templatesRouter = require('./routes/templates')
@@ -41,7 +40,6 @@ app.use(
 app.options('*', cors({ origin: true, credentials: true }))
 
 // routes
-app.use('/auth', authRouter)
 app.use('/logbook', logbookRouter)
 app.use('/studentlogbook', studentlogbookRouter)
 app.use('/templates', templatesRouter)
