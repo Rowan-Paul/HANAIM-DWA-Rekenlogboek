@@ -1,0 +1,16 @@
+@import '../../Variables.scss';
+.default {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-self: center;
+	width: 80vw;
+	margin: 0 auto;
+	.text-field {
+		max-width: 550px;
+	}
+
+	img {
+		width: 25%;
+	}
+}

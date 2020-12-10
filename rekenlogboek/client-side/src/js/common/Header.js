@@ -1,14 +1,44 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import '../../scss/common/Header.scss'
-export default function Header() {
+
+function Header(props) {
+	const navHandler = () => {
+		if (props.user) {
+			switch (props.user.jobTitle) {
+				case 'Leraar':
+					return (
+						<Link to="../teacher">
+							<i className="fa fa-home"></i>
+							<span>Overzicht</span>
+						</Link>
+					)
+				case 'Leerling':
+				default:
+					return ''
+			}
+		}
+	}
+
 	return (
 		<header>
-			<div className="return">
-				{/* <i className="fa fa-chevron-left"></i> */}
-				{/* <span>Vorige</span> */}
+			<div className="return">{navHandler()}</div>
+			<div className="title">
+				<span>{props.title}</span>
 			</div>
-			<div className="title">{/* <span>Title</span> */}</div>
-			<div className="user">{/* <span>John doe</span> */}</div>
+			<div className="user">
+				<span>{props.user && props.user.name}</span>
+			</div>
 		</header>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		user: state.main.user
+	}
+}
+
+export default connect(mapStateToProps)(Header)

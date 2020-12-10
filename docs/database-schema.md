@@ -1,7 +1,9 @@
 # Database schema
+
 Here you can find an overview of the different things inside the database.
 
 ## Logbooks
+
 Contains all general logbooks.
 
 ```text
@@ -13,12 +15,17 @@ Contains all general logbooks.
 | group: Number                                         |
 | year: String                                          |
 | teacher: String/Number (ligt miss aan Teams)          |
-| isAvailable: Boolean                                  |
+| currentPhase: String                                  |
+| activeGoal: Number                                    |
 | columns: [{                                           |
 |            _id_: ObjectID (auto)                      |
 |            position: Number                           |
 |            title: String                              |
-|            inputType: String                          |
+|            explanation: Boolean                       |
+|            input: {                                   |
+|                       type: String,                   |
+|                       options: [String],              |
+|                   }                                   |
 |          }]                                           |
 | goals: [{                                             |
 |            _id_: ObjectID (auto)                      |
@@ -31,6 +38,7 @@ Contains all general logbooks.
 ```
 
 ## Studentlogbooks
+
 Contains all logbooks for students.
 
 ```text
@@ -48,12 +56,14 @@ Contains all logbooks for students.
 |                       inputType: String               |
 |                       value: String                   |
 |                       boolean: Boolean                |
+|                       explanation: String             |
 |                     }                                 |
 |          }]                                           |
 +-------------------------------------------------------+
 ```
 
 ## Templates
+
 Contains templates for logbooks
 
 ```text

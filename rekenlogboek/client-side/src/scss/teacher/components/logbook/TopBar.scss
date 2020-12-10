@@ -1,0 +1,62 @@
+@import '../../../variables';
+
+.TopBar {
+	display: grid;
+	grid-column: span 4;
+	grid-template-columns: repeat(auto-fit, calc(100% / 4));
+	height: 20%;
+	grid-row: span 1;
+	margin: auto;
+	padding: 0;
+	position: relative;
+	width: 100%;
+
+	h1,
+	h3 {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		margin: auto;
+		list-style-type: none;
+		position: relative;
+		width: 80%;
+
+		&:first-of-type {
+			grid-column: span 2;
+		}
+		&:last-of-type {
+			h3 {
+				position: absolute;
+				right: 15%;
+			}
+		}
+
+		button {
+			background: $green;
+			border: 1px solid $green;
+			border-radius: 8px;
+			color: #fff;
+			font-size: 15px;
+			font-weight: 700;
+			outline: none;
+			padding: 1vh 10%;
+			position: absolute;
+			right: 0;
+			transition: ease-in-out 0.5s;
+
+			&:hover {
+				border-color: $hover-green;
+				background: $hover-green;
+				cursor: pointer;
+			}
+
+			i {
+				padding-right: 0.5vw;
+			}
+		}
+	}
+}

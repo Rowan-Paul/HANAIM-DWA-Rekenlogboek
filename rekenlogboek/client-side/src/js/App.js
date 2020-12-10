@@ -4,15 +4,19 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-import LogbookDesigner from './logbook-designer/LogbookDesigner'
-import { LogbookDesignerLanding } from './logbook-designer/containers/LogbookDesignerLanding'
+import { TeacherLanding } from './teacher/containers/TeacherLanding'
 
-import newLBGeneral from './logbook-designer/containers/General'
-import newLBColumns from './logbook-designer/containers/Columns'
-import newLBGoals from './logbook-designer/containers/Goals'
-import newLBOverview from './logbook-designer/containers/Overview'
-import newLBCompleted from './logbook-designer/containers/Completed'
+// LOGBOOK PAGES
+import newLBGeneral from './teacher/containers/General'
+import newLBColumns from './teacher/containers/Columns'
+import newLBGoals from './teacher/containers/Goals'
+import newLBOverview from './teacher/containers/Overview'
+import newLBCompleted from './teacher/containers/Completed'
 
+import Logbooks from './teacher/containers/Logbooks'
+import StudentLogbook from './teacher/containers/Studentlogbook'
+
+// SIGN IN PAGES
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
@@ -24,12 +28,19 @@ import NoAccess from '../js/no-access/NoAccess'
 
 // import Privacy from './Privacy'
 // import TermsOfUse from './TermsOfUse'
-import Tab from './teams/Tab'
 import TabConfig from './teams/TabConfig'
 
-import '../scss/App.scss'
+// STUDENT PAGES
+import Default from './student/containers/Default'
+import defaultStudentPage from './student/containers/Default'
+import AfterPreTest from './student/containers/AfterPreTest'
+import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
+import InstructionsEnd from './student/containers/InstructionsEnd'
+import EvaluationsEnd from './student/containers/EvaluationsEnd'
+import Instructions from './student/containers/Instructions'
+import Evaluations from './student/containers/Evaluations'
 
-require('dotenv').config()
+import '../scss/App.scss'
 
 function App() {
 	// Check for the Microsoft Teams SDK object.
@@ -39,44 +50,48 @@ function App() {
 		if (window.parent === window.self) {
 			return (
 				<div>
-					<Header />
-					<main>
-						<Router>
+					<Router>
+						<Header />
+						<main>
 							<Switch>
-								{/* LOGBOOK DESIGNER */}
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/general"
+									path="/teacher/new-logbook/general"
 									component={newLBGeneral}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/columns"
+									path="/teacher/new-logbook/columns"
 									component={newLBColumns}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/goals"
+									path="/teacher/new-logbook/goals"
 									component={newLBGoals}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/overview"
+									path="/teacher/new-logbook/overview"
 									component={newLBOverview}
 								/>
 								<Route
 									exact
-									path="/logbook-designer/new-logbook/done"
+									path="/teacher/new-logbook/done"
 									component={newLBCompleted}
 								/>
 								{/* A few route so it gets the correct styling? */}
-								<Route path="/logbook-designer/new-logbook"></Route>
-								<Route path="/logbook-designer/overview"></Route>
-								<Route path="/logbook-designer">
-									<LogbookDesigner>
-										<LogbookDesignerLanding />
-									</LogbookDesigner>
-								</Route>
+								<Route path="/teacher/new-logbook"></Route>
+								<Route
+									exact
+									path="/teacher/logbooks"
+									component={Logbooks}
+								></Route>
+								<Route
+									exact
+									path="/teacher/logbooks/studentlogbook"
+									component={StudentLogbook}
+								></Route>
+								<Route path="/teacher" component={TeacherLanding} />
 
 								{/* SIGN-IN */}
 								<Route exact path="/" component={SignIn} />
@@ -86,8 +101,8 @@ function App() {
 								<Route exact path="/no-access" component={NoAccess} />
 								{/* <Route component={NotFound} /> */}
 							</Switch>
-						</Router>
-					</main>
+						</main>
+					</Router>
 				</div>
 			)
 		}
@@ -98,8 +113,43 @@ function App() {
 		// Display the app home page hosted in Teams
 		return (
 			<Router>
-				<Route exact path="/tab" component={Tab} />
-				<Route exact path="/config" component={TabConfig} />
+				<main>
+					<Switch>
+						<Route exact path="/config" component={TabConfig} />
+
+						{/* SIGN-IN */}
+						<Route exact path="/Tab" component={SignIn} />
+						<Route exact path="/auth/succes" component={Succes} />
+
+						{/* STUDENT LOGBOEK */}
+						<Route exact path="/student" component={Default} />
+						<Route exact path="/student/pretest" component={AfterPreTest} />
+						<Route
+							exact
+							path="/student/pretest/done"
+							component={AfterPreTestEnd}
+						/>
+						<Route
+							exact
+							path="/student/instructions"
+							component={Instructions}
+						/>
+						<Route
+							exact
+							path="/student/instructions/done"
+							component={InstructionsEnd}
+						/>
+						<Route exact path="/student/evaluation" component={Evaluations} />
+						<Route
+							exact
+							path="/student/evaluation/end"
+							component={EvaluationsEnd}
+						/>
+						{/* ERROR PAGES */}
+						<Route exact path="/no-access" component={NoAccess} />
+						{/* <Route component={NotFound} /> */}
+					</Switch>
+				</main>
 			</Router>
 		)
 	}

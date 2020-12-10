@@ -36,27 +36,37 @@ describe('Logbook route tests', () => {
 			group: 7,
 			year: '19/20',
 			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
-			isAvailable: false,
+			currentPhase: 'PRE_TOETS',
 			columns: [
 				{
 					position: 0,
-					title: 'Doelen',
-					inputType: 'Invoervelden'
+					title: 'Doelen'
 				},
 				{
 					position: 1,
 					title: 'Hoe ging de les',
-					inputType: 'Invoervelden'
+					input: {
+						type: 'Radiobuttons',
+						options: [
+							'Ik begrijp het goed',
+							'Ik begrijp het niet goed',
+							'Ik weet het nog niet'
+						]
+					},
+					explanation: true
 				},
 				{
 					position: 2,
 					title: 'Instructie nodig?',
-					inputType: 'Checkboxes'
+					input: {
+						type: 'Tekstveld'
+					},
+					explanation: true
 				},
 				{
 					position: 3,
 					title: 'Evaluatie',
-					inputType: 'Checkboxes'
+					explanation: false
 				}
 			],
 			goals: [
@@ -103,27 +113,37 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				isAvailable: false,
+				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
-						title: 'Doelen',
-						inputType: 'Invoervelden'
+						title: 'Doelen'
 					},
 					{
 						position: 1,
 						title: 'Hoe ging de les',
-						inputType: 'Invoervelden'
+						input: {
+							type: 'Radiobuttons',
+							options: [
+								'Ik begrijp het goed',
+								'Ik begrijp het niet goed',
+								'Ik weet het nog niet'
+							]
+						},
+						explanation: true
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
-						inputType: 'Checkboxes'
+						input: {
+							type: 'Tekstveld'
+						},
+						explanation: false
 					},
 					{
 						position: 3,
 						title: 'Evaluatie',
-						inputType: 'Checkboxes'
+						explanation: false
 					}
 				],
 				goals: [
@@ -162,27 +182,37 @@ describe('Logbook route tests', () => {
 				group: 5,
 				year: '19/20',
 				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
-				isAvailable: false,
+				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
 						position: 0,
-						title: 'Doelen',
-						inputType: 'Invoervelden'
+						title: 'Doelen'
 					},
 					{
 						position: 1,
 						title: 'Hoe ging de les',
-						inputType: 'Invoervelden'
+						input: {
+							type: 'Radiobuttons',
+							options: [
+								'Ik begrijp het goed',
+								'Ik begrijp het niet goed',
+								'Ik weet het nog niet'
+							]
+						},
+						explanation: true
 					},
 					{
 						position: 2,
 						title: 'Instructie nodig',
-						inputType: 'Checkboxes'
+						input: {
+							type: 'Tekstveld'
+						},
+						explanation: true
 					},
 					{
 						position: 3,
 						title: 'Evaluatie',
-						inputType: 'Checkboxes'
+						explanation: false
 					}
 				],
 				goals: [

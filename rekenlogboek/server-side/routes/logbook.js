@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 		group: req.body.group,
 		year: req.body.year,
 		teacher: req.body.teacher,
-		isAvailable: req.body.isAvailable,
+		currentPhase: 'notVisible',
 		columns: req.body.columns,
 		goals: req.body.goals
 	})
@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
 			res.sendStatus(200)
 		})
 		.catch(err => {
+			console.log(err)
 			res.sendStatus(500)
 		})
 })
@@ -32,6 +33,20 @@ router.get('/:id', (req, res) => {
 			res.status(200).send(response)
 		})
 		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get the teacher for a logbook
+router.get('/:id/teacher', (req, res) => {
+	Logbook.findById(req.params.id, 'teacher')
+		.lean()
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })
@@ -52,6 +67,7 @@ router.get('/:id/column/:position', (req, res) => {
 			res.status(200).send(column)
 		})
 		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })
@@ -72,6 +88,27 @@ router.get('/:id/goal/:position', (req, res) => {
 			res.status(200).send(goal)
 		})
 		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get all information about one logbook with specifications
+router.get('/year/:year/group/:group/period/:period', (req, res) => {
+	Logbook.find({
+		year: req.params.year,
+		group: req.params.group,
+		period: req.params.period
+	})
+		.then(response => {
+			if (response[0] === undefined) {
+				res.status(200).send({})
+			} else {
+				res.status(200).send(response[0])
+			}
+		})
+		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })

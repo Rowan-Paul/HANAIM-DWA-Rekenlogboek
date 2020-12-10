@@ -24,6 +24,7 @@ export default function Select(props) {
 		<div className="select-container">
 			<label className="select-label">{props.title}</label>
 			<select
+				id={props.id}
 				//the selected state is saved by each parent component and will be passed in here
 				defaultValue={props.selected}
 				className="select"

@@ -1,0 +1,73 @@
+@import '../Variables.scss';
+
+.edit,
+.preview {
+	label {
+		div {
+			cursor: unset !important;
+		}
+	}
+	input {
+		pointer-events: none !important;
+
+		&:checked + div {
+			background: transparent !important;
+		}
+	}
+}
+
+.Evaluation {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, calc(100% / 3));
+	margin: 1vh auto;
+	height: 20%;
+	padding: 0;
+	width: 70%;
+	li {
+		list-style-type: none;
+		text-align: center;
+		margin: 0 auto;
+		width: 90%;
+		position: relative;
+		border-radius: 15px;
+
+		&.happy {
+			background: #c2f0c2;
+		}
+
+		&.sceptic {
+			background: #f0efc2;
+		}
+
+		&.sad {
+			background: #f0c2c2;
+		}
+
+		label {
+			background: green;
+			width: 100%;
+			position: relative;
+		}
+		input {
+			height: 100%;
+			left: 0;
+			position: absolute;
+			visibility: hidden;
+			width: 100%;
+		}
+		div {
+			border-radius: 8px;
+			cursor: pointer;
+
+			img {
+				margin: 5% auto;
+				width: 90%;
+			}
+		}
+	}
+
+	span {
+		color: $fontLight;
+		font-size: 14px;
+	}
+}

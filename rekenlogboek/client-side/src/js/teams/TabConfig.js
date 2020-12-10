@@ -19,7 +19,7 @@ class TabConfig extends React.Component {
 		 * the settings selected by the user.
 		 */
 		microsoftTeams.settings.setSettings({
-			contentUrl: 'https://localhost:3001/tab'
+			contentUrl: process.env.REACT_APP_ADDRESS + '/tab'
 		})
 
 		/**
@@ -35,7 +35,7 @@ class TabConfig extends React.Component {
 				<h1>Rekenlogboek</h1>
 				<div>
 					Het rekenlogboek haalt de volgende gegevens op voor leerlingen:
-					jobTItle, groepen. naam en email.
+					jobTitle, groepen. naam en email.
 				</div>
 			</div>
 		)

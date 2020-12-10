@@ -116,3 +116,8 @@ dist
 
 # VSCODE folder
 .vscode
+
+# User image uploads
+**/uploads/**/*.jpg
+**/uploads/**/*.jpeg
+**/uploads/**/*.png

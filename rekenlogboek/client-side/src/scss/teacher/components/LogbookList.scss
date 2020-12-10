@@ -1,0 +1,75 @@
+@import '../../Variables.scss';
+
+.LogbookList {
+	color: $fontColor;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+
+	li {
+		border-bottom: 1px solid $borderColor;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, calc(100% / 3));
+		list-style: none;
+
+		div {
+			padding: 1vh 2.5%;
+			width: calc(95% - 1px);
+
+			&:last-of-type {
+				border-color: #fff;
+			}
+		}
+	}
+	.Header {
+		div {
+			border-right: 1px solid $borderColor;
+			padding: 2.5vh 0;
+			width: calc(100% - 1px);
+		}
+		.Select {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, calc(100% / 4));
+
+			h4 {
+				padding-left: 2.5vw;
+			}
+			select {
+				border: 1px solid $borderColor;
+				border-radius: 8px;
+				grid-column: span 3;
+				margin: 0 auto;
+				padding: 0.5vh 0;
+				width: 80%;
+			}
+		}
+	}
+	.Student {
+		padding: 1% 2.5% 1% 1.25%;
+
+		div {
+			position: relative;
+
+			button {
+				align-items: center;
+				background: $blue;
+				border: 1px solid $blue;
+				border-radius: 8px;
+				color: #fff;
+				display: flex;
+				padding: 0.5vh 1vw;
+				position: absolute;
+				right: 0;
+				transition: ease-in-out 0.5s;
+
+				&:hover {
+					color: $fontLight;
+					cursor: pointer;
+				}
+				i {
+					padding-left: 0.5vw;
+				}
+			}
+		}
+	}
+}

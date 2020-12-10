@@ -17,11 +17,35 @@ main {
 	width: 100%;
 }
 
+h2 {
+	font-size: 26px;
+}
+
 h1 {
+	font-size: 30px;
 	font-weight: 700;
 	margin-block-end: 0;
 }
 
 p {
+	font-size: 22px;
 	color: $fontColor;
+}
+
+textarea {
+	font-family: Nunito, sans-serif;
+}
+
+.button {
+	bottom: 0;
+	position: absolute;
+	width: 12.5%;
+
+	&.prev {
+		left: 5%;
+	}
+
+	&.next {
+		right: 5%;
+	}
 }

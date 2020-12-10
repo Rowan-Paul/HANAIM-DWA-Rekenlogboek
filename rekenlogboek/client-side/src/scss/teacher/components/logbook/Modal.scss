@@ -1,0 +1,61 @@
+@import '../../../Variables.scss';
+.Modal {
+	align-items: center;
+	background: rgba(0, 0, 0, 0.25);
+	color: $fontColor;
+	display: flex;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 5;
+
+	.Box {
+		box-shadow: $shadow;
+		border-radius: 8px;
+		background: #fff;
+		width: 22.5%;
+		height: 87.5%;
+		margin: auto;
+		padding: 0 1.25%;
+
+		.Header {
+			align-items: center;
+			border-bottom: 1px solid $borderColor;
+			display: flex;
+			height: 12.5%;
+			position: relative;
+			width: 100%;
+
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			button {
+				background: transparent;
+				border: none;
+				color: $fontLight;
+				font-size: 20px;
+				position: absolute;
+				right: 0;
+				transition: ease-in-out 0.5s;
+
+				&:hover {
+					color: $fontColor;
+					cursor: pointer;
+				}
+			}
+		}
+		.Body {
+			height: 75%;
+		}
+		.Footer {
+			align-items: center;
+			border-top: 1px solid $borderColor;
+			display: flex;
+			padding: 1.25% 0;
+			height: 10%;
+		}
+	}
+}

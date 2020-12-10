@@ -17,6 +17,14 @@ const logbookSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	currentPhase: {
+		type: String,
+		required: true
+	},
+	activeGoal: {
+		type: Number,
+		required: false
+	},
 	columns: [
 		{
 			position: {
@@ -27,9 +35,21 @@ const logbookSchema = new mongoose.Schema({
 				type: String,
 				isRequired: true
 			},
-			inputType: {
-				type: String,
-				isRequired: true
+			explanation: {
+				type: Boolean,
+				isRequired: false
+			},
+			input: {
+				type: {
+					type: String,
+					isRequired: true
+				},
+				options: [
+					{
+						type: String,
+						isRequired: false
+					}
+				]
 			}
 		}
 	],
@@ -47,7 +67,7 @@ const logbookSchema = new mongoose.Schema({
 				type: String,
 				isRequired: true
 			},
-			imagelink: {
+			imageLink: {
 				type: String,
 				isRequired: false
 			}

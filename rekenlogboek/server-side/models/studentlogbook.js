@@ -31,6 +31,10 @@ const studentLogbookSchema = new mongoose.Schema({
 				boolean: {
 					type: Boolean,
 					isRequired: false
+				},
+				explanation: {
+					type: String,
+					isRequired: false
 				}
 			}
 		}
