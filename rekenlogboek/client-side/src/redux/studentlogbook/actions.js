@@ -79,6 +79,7 @@ export const newExplanation = payload => (dispatch, getState) => {
 }
 
 export const newAnswer = payload => (dispatch, getState) => {
+	console.log(payload)
 	if (typeof payload === 'object') {
 		payload = payload.toString()
 	} else if (payload === '' || payload === null) {
@@ -94,6 +95,16 @@ export const newAnswer = payload => (dispatch, getState) => {
 	}
 
 	let addedAnswer = null
+	let inputType
+
+	if (
+		Object.keys(getState().studentLogbook.column).length === 0 &&
+		getState().studentLogbook.column.constructor === Object
+	) {
+		inputType = 'smileys'
+	} else {
+		inputType = getState().studentLogbook.column.input.type
+	}
 
 	answers.forEach((answer, i) => {
 		if (
@@ -104,7 +115,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 				goalPosition: answer.goalPosition,
 				columnPosition: answer.columnPosition,
 				answer: {
-					inputType: getState().studentLogbook.column.input.type,
+					inputType: inputType,
 					value: payload
 				}
 			}
@@ -118,7 +129,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 			goalPosition: getState().studentLogbook.currentGoal.position,
 			columnPosition: getState().studentLogbook.column.position,
 			answer: {
-				inputType: getState().studentLogbook.column.input.type,
+				inputType: inputType,
 				value: payload
 			}
 		})

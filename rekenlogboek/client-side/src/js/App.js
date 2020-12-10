@@ -36,7 +36,7 @@ import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
 import { InstructionsEnd } from './student/containers/InstructionsEnd'
 import EvaluationsEnd from './student/containers/EvaluationsEnd'
 import { Instructions } from './student/containers/Instructions'
-import Evaluations from './student/containers/Evaluations'
+import { Evaluations } from './student/containers/Evaluations'
 
 import '../scss/App.scss'
 
@@ -132,7 +132,7 @@ function App() {
 						<Route exact path="/student/evaluation" component={Evaluations} />
 						<Route
 							exact
-							path="/student/evaluation/end"
+							path="/student/evaluation/done"
 							component={EvaluationsEnd}
 						/>
 						{/* ERROR PAGES */}

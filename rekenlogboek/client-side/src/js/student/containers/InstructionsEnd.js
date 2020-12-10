@@ -40,7 +40,7 @@ function InstructionsEndUI(props) {
 					<div className="left-side">
 						<ResultText
 							title="Je bent klaar!"
-							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd."
 							image=""
 						/>
 					</div>

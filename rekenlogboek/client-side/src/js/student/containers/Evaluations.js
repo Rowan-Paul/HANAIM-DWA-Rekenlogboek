@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Evaluation.scss'
 import '../../../scss/student/Student.scss'
@@ -11,28 +12,41 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
-function Evaluations() {
-	// TODO: remove dummy data
-	const inputOptions = [
-		'Ik snap het goed',
-		'Ik snap het, maar vind het nog lastig',
-		'Ik vind het nog erg moeilijk'
-	]
+import { newExplanation } from '../../../redux/studentlogbook/actions'
+import { newAnswer } from '../../../redux/studentlogbook/actions'
+import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import { fetchColumn } from '../../../redux/studentlogbook/actions'
+import { fetchGoal } from '../../../redux/studentlogbook/actions'
 
-	//TODO: save state to redux when leaving page
+function EvaluationsUI(props) {
+	useEffect(() => {
+		// null will automatically choose the activeGoal
+		props.doFetchGoal(null)
+
+		if (props.goal.position !== undefined) {
+			props.doFetchAnswers()
+		}
+	}, [])
+
 	const [inputAnswer, setInputAnswer] = useState('')
 	const [inputExplanation, setInputExplanation] = useState('')
+	const [givenAnswers, setGivenAnswers] = useState('')
 
 	const changeAnswer = value => {
+		props.doNewAnswer(value)
 		setInputAnswer(value)
 	}
 
 	const changeExplanation = value => {
+		props.doNewAnswer(inputAnswer)
+		props.doNewExplanation(value)
 		setInputExplanation(value)
 	}
 
-	const previousPage = () => {}
-	const nextPage = () => {}
+	const nextPage = () => {
+		props.doNewAnswer(inputAnswer)
+		props.history.push('/student/evaluation/done')
+	}
 
 	return (
 		<div className="evaluation student-container">
@@ -40,10 +54,9 @@ function Evaluations() {
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
-						{/* TODO: replace with data from database */}
 						<LearnGoal
-							goal="Doel 1:test"
-							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
+							goal={props.goal.title}
+							description={props.goal.description}
 						/>
 						<Question
 							title="Hoe heb ik de les gemaakt?"
@@ -53,15 +66,10 @@ function Evaluations() {
 						/>
 					</div>
 					<div className="right-side">
-						{/* TODO: replace with src from database */}
-						<LearnGoalImage src="/uploads/goals/LearnGoalThumb.png" />
+						<LearnGoalImage src={props.goal.imageLink} />
 					</div>
 				</div>
 			</Jumbotron>
-			{/* TODO: create handlers */}
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
-			</div>
 			<div className="next button">
 				<Button color="blue" value="Volgende" handler={() => nextPage()} />
 			</div>
@@ -69,4 +77,25 @@ function Evaluations() {
 	)
 }
 
-export default withRouter(Evaluations)
+function mapStateToProps(state) {
+	return {
+		column: state.studentLogbook.column,
+		goal: state.studentLogbook.currentGoal,
+		answers: state.studentLogbook.answers
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		doFetchColumn: payload => dispatch(fetchColumn(payload)),
+		doFetchGoal: payload => dispatch(fetchGoal(payload)),
+		doFetchAnswers: () => dispatch(fetchAnswers()),
+		doNewAnswer: payload => dispatch(newAnswer(payload)),
+		doNewExplanation: payload => dispatch(newExplanation(payload))
+	}
+}
+
+export const Evaluations = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(EvaluationsUI)
