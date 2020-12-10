@@ -37,7 +37,7 @@ const logbookSchema = new mongoose.Schema({
 			},
 			explanation: {
 				type: Boolean,
-				isRequired: true
+				isRequired: false
 			},
 			input: {
 				type: {

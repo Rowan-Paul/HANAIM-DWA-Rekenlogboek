@@ -38,14 +38,14 @@ function StudentLogbookRow(props) {
 			<Goal goal={props.goal} />
 			<StudentLogbookInputType
 				position={1}
-				type={'edit'}
+				type={'preview'}
 				inputAnswer={inputAnswer1}
 				studentExplanation={studentExplanation1}
 				row={props.goalid}
 			/>
 			<StudentLogbookInputType
 				position={2}
-				type={'edit'}
+				type={'preview'}
 				inputAnswer={inputAnswer2}
 				studentExplanation={studentExplanation2}
 				row={props.goalid}
