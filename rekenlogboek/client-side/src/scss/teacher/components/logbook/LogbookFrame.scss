@@ -6,9 +6,6 @@ h4 {
 	padding: 0;
 }
 
-p {
-	font-size: 14px !important;
-}
 .LogbookFrame {
 	background: #fff;
 	border: 1px solid $borderColor;
@@ -37,6 +34,7 @@ p {
 		border-right: 1px solid $borderColor;
 
 		.Description {
+			font-size: 14px !important;
 			line-height: 150%;
 			margin: 1vh auto;
 			width: 90%;
