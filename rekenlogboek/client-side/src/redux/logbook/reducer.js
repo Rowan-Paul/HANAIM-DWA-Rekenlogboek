@@ -20,8 +20,17 @@ import {
 	DELETE_INPUT_OPTION
 } from './types'
 
-const date = new Date()
-const year = date.getFullYear()
+let date = new Date()
+let month = date.getMonth()
+let year1
+let year2
+if (month < 8) {
+	year1 = date.getFullYear() - 1
+	year2 = date.getFullYear()
+} else {
+	year1 = date.getFullYear()
+	year2 = date.getFullYear() + 1
+}
 const INITIAL_STATE = {
 	columns: [
 		{
@@ -61,7 +70,7 @@ const INITIAL_STATE = {
 	period: 1,
 	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '', //TODO: auto add years in components
-	year: `${year} - ${year + 1}` // but what if you add a logboek in the second half of the year?
+	year: `${year1} - ${year2}`
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
