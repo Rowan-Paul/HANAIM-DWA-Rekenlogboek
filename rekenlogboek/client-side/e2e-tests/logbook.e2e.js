@@ -33,6 +33,10 @@ describe(`Rekenlogboek`, () => {
 			selectInputs[1].value = '3'
 			return selectInputs.map(item => item.value)
 		})
+
+		// await page.select(`form:first-child .select`, '8')
+		// await page.select(`form:last-child .select`, '3')
+
 		expect(selectInputs).toStrictEqual(['8', '3'])
 
 		await page.click(`.next button`)
