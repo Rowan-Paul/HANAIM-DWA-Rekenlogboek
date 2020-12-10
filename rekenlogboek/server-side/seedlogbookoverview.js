@@ -93,6 +93,13 @@ async function seedLogbook() {
 					title: 'Leer 1*1',
 					description: 'test2222',
 					imagelink: 'aaaaaaa'
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb7d',
+					position: 3,
+					title: 'Les 5',
+					description: 'test333333',
+					imagelink: 'aaaaaaa'
 				}
 			],
 			__v: 0

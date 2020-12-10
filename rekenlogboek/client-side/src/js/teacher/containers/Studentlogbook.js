@@ -12,7 +12,7 @@ function StudentLogbook(props) {
 	return (
 		<div className="studentlogbook">
 			<Jumbotron>
-				<h1>Logboek van: {props.student}</h1>
+				<h1>Logboek - {props.student}</h1>
 				<LogbookFrame>
 					<StudentLogbookHeader />
 					<StudentLogbookRows />

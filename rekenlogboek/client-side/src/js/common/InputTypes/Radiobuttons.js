@@ -46,7 +46,9 @@ export default function RadioButtons(props) {
 					onChange={e => newAnswer(e)}
 					checked={props.inputAnswer === ''}
 					type="radio"
-					name="radiobutton"
+					name={
+						props.position ? `${props.row + props.position}` : 'radiobutton'
+					}
 					value="default"
 				/>
 				<span>Ik weet het nog niet</span>
