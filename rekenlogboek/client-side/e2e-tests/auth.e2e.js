@@ -16,7 +16,6 @@ describe(`Rekenlogboek`, () => {
 			headless: false,
 			slowMo: 60,
 			ignoreHTTPSErrors: true,
-			// args: [`--window-size=700,800`, `--window-position=0,0`],
 			args: ['--start-maximized'],
 			defaultViewport: null
 		})
