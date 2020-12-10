@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 jest.setTimeout(30000)
 
-xdescribe(`Rekenlogboek`, () => {
+describe(`Rekenlogboek`, () => {
 	let browser, page
 	let newWindow
 
@@ -14,9 +14,11 @@ xdescribe(`Rekenlogboek`, () => {
 		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 50,
+			slowMo: 60,
 			ignoreHTTPSErrors: true,
-			args: [`--window-size=700,800`, `--window-position=0,0`]
+			// args: [`--window-size=700,800`, `--window-position=0,0`],
+			args: ['--start-maximized'],
+			defaultViewport: null
 		})
 		page = await browser.newPage()
 	})
@@ -25,7 +27,7 @@ xdescribe(`Rekenlogboek`, () => {
 		// await browser.close()
 	})
 
-	xtest(`Go to main page and login`, async () => {
+	test(`Go to main page and login`, async () => {
 		await page.goto(`https://localhost:3001/`)
 
 		// MS button onClick
@@ -40,7 +42,7 @@ xdescribe(`Rekenlogboek`, () => {
 		expect(MicrosoftButton).toBeDefined()
 	})
 
-	xtest(`Login on Microsoft identity`, async () => {
+	test(`Login on Microsoft identity`, async () => {
 		// Microsoft identity tab
 		const oAuth = await newWindow
 
@@ -57,5 +59,113 @@ xdescribe(`Rekenlogboek`, () => {
 		// Check if MS is closing
 		await oAuth.waitForTimeout(3000)
 		expect(oAuth.isClosed()).toBe(true)
+	})
+
+	test(`Teacher overview`, async () => {
+		await page.click(`.bttn.green`)
+		expect(page.url()).toBe(
+			'https://localhost:3001/teacher/new-logbook/general'
+		)
+	})
+
+	test(`Create logbook: Happy path - general`, async () => {
+		const selectInputs = await page.$$eval(`select`, async selectInputs => {
+			selectInputs[0].value = '8'
+			selectInputs[1].value = '3'
+			return selectInputs.map(item => item.value)
+		})
+
+		// await page.select(`form:first-child .select`, '8')
+		// await page.select(`form:last-child .select`, '3')
+
+		expect(selectInputs).toStrictEqual(['8', '3'])
+
+		await page.click(`.next button`)
+		expect(page.url()).toBe(
+			'https://localhost:3001/teacher/new-logbook/columns'
+		)
+	})
+
+	test(`Create logbook: Happy path - columns`, async () => {
+		const addColumn = async (title, options) => {
+			await page.$$eval(`.Plus button`, async plusButtons => {
+				plusButtons[0].click()
+			})
+
+			expect(`.Modal`).toBeDefined()
+			await page.type(`#title`, title)
+			// await page.select(`#inputType`, `checkboxes`)
+
+			for (option of options) {
+				await page.type(`#addOption`, option)
+				await page.click(`#addBtn`)
+			}
+
+			await page.click(`.bttn.blue`)
+		}
+
+		await addColumn(`Hoe heb je de toets gemaakt?`, [
+			'Ik snap het goed',
+			'Ik snap het niet'
+		])
+
+		await addColumn(`Heb je instructie nodig?`, [
+			'Ik heb instructie nodig',
+			'Ik heb geen instructie nodig'
+		])
+
+		await page.click(`.next button`)
+		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/goals')
+	})
+
+	test(`Create logbook: Happy path - goals`, async () => {
+		// Data
+		const goals = [
+			{
+				title: 'Doel 1',
+				description: 'Omschrijving.',
+				image: 'temp-goal-thumb.png'
+			},
+			{
+				title: 'Doel 2',
+				description: 'Omschrijving.',
+				image: 'LearnGoalThumb.png'
+			}
+		]
+
+		for (let goal of goals) {
+			// Wait for 'ADD goal' button and click
+			await page.waitForSelector('.fa-plus', { visible: true })
+			await page.click('.fa-plus')
+
+			// Fill in title
+			await page.waitForSelector('input[name=title]')
+			await page.type('input[name=title]', goal.title)
+
+			// Fill in description
+			await page.waitForSelector('textarea[name=description]')
+			await page.type('textarea[name=description]', goal.description)
+
+			// Add image
+			const fileHandle = await page.$('input[name=image]')
+			await fileHandle.uploadFile('./src/img/temp/' + goal.image)
+
+			// Click add bttn
+			await page.waitForSelector('.blue')
+			await page.click('.blue')
+		}
+
+		// Expect Goal to be added
+		expect(page.$('.Goal')).toBeDefined()
+
+		await page.click(`.next button`)
+		expect(page.url()).toBe(
+			'https://localhost:3001/teacher/new-logbook/overview'
+		)
+	})
+
+	test(`Create logbook: Happy path - overview`, async () => {
+		await page.click(`.next button`)
+		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/done')
 	})
 })
