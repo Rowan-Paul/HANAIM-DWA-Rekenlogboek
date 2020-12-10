@@ -10,7 +10,7 @@ const app = require('../app')
 const StudentLogbook = mongoose.model('StudentLogbook')
 
 // Check if a logbook exists for a student in a group
-router.get('/:student/:logbookID', (req, res) => {
+router.get('/:student/logbooks/:logbookID', (req, res) => {
 	StudentLogbook.findOne({
 		$and: [
 			{ logbookID: { $eq: req.params.logbookID } },

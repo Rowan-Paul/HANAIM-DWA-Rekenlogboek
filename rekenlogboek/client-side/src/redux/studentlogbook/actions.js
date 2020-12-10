@@ -164,7 +164,7 @@ export const fetchAnswers = () => (dispatch, getState) => {
 	// check if the studentlogbook exists
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/studentlogbook/${encodeURI(getState().main.user.name)}/${
+			`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
 				getState().studentLogbook.logbookID
 			}`,
 		{
