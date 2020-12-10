@@ -16,10 +16,12 @@ Contains all general logbooks.
 | year: String                                          |
 | teacher: String/Number (ligt miss aan Teams)          |
 | currentPhase: String                                  |
+| activeGoal: Number                                    |
 | columns: [{                                           |
 |            _id_: ObjectID (auto)                      |
 |            position: Number                           |
 |            title: String                              |
+|            explanation: Boolean                       |
 |            input: {                                   |
 |                       type: String,                   |
 |                       options: [String],              |
@@ -35,55 +37,10 @@ Contains all general logbooks.
 +-------------------------------------------------------+
 ```
 
-```text
-+-------------------------------------------------------+
-|columns: [                                             |
-|	{                                                   |
-|		added: Boolean,                                 |
-|		explanation: Boolean,                           |
-|		position: Number,                               |
-|		title: String,                                  |
-|		input: {                                        |
-|			type: String,                               |
-|			options: Array of [String]                  |
-|		}                                               |
-|	},                                                  |
-|	{                                                   |
-|		added: Boolean,                                 |
-|		explanation: Boolean,                           |
-|		position: Number,                               |
-|		title: String,                                  |
-|		input: {                                        |
-|			type: String,                               |
-|			options: Array of [String]                  |
-|		}                                               |
-|	}                                                   |
-|],                                                     |
-|goals: [],                                             |
-|group: Number,                                         |
-|inputTypes: {                                          |
-|	checkboxes: String,                                 |
-|	radiobuttons: String,                               |
-|	textarea: String                                    |
-|},                                                     |
-|isAvailable: Boolean,                                  |
-|isSaved: Boolean,                                      |
-|modal: {                                               |
-|	title: String,                                      |
-|	visible: Boolean                                    |
-|},                                                     |
-|period: Number,                                        |
-|position: Number,                                      |
-|teacher: String,                                       |
-|year:                                                  |
-+-------------------------------------------------------+
-```
-
 ## Studentlogbooks
 
 Contains all logbooks for students.
 
-<!--
 ```text
 +-------------------------------------------------------+
 | Studentlogbooks                                       |
@@ -99,39 +56,12 @@ Contains all logbooks for students.
 |                       inputType: String               |
 |                       value: String                   |
 |                       boolean: Boolean                |
+|                       explanation: String             |
 |                     }                                 |
 |          }]                                           |
 +-------------------------------------------------------+
 ```
--->
 
-```text
-+-------------------------------------------------------+
-| Studentlogbook                                        |
-+-------------------------------------------------------+
-|logbookID: null,                                       |
-|currentPhase: null,                                    |
-|column: {},                                            |
-|goalAmount: null,                                      |
-|currentGoal: {                                         |
-|	position: Number                                    |
-|},                                                     |
-|answers: {}                                            |
-+-------------------------------------------------------+
-```
-
-## Main
-
-```text
-+-------------------------------------------------------+
-| Main                                                  |
-+-------------------------------------------------------+
-|user: Object of ,                                      |
-|context: Object of                                     |
-+-------------------------------------------------------+
-```
-
-<!--
 ## Templates
 
 Contains templates for logbooks
@@ -149,4 +79,4 @@ Contains templates for logbooks
 |            inputType: String                          |
 |          }]                                           |
 +-------------------------------------------------------+
-``` -->
+```
