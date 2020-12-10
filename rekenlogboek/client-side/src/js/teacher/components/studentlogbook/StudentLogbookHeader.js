@@ -24,12 +24,4 @@ const mapStateToProps = state => {
 		columns: state.logbookoverview.currentLogbook.columns
 	}
 }
-
-const mapDispatchToProps = dispatch => {
-	return {}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(StudentLogbookHeader)
+export default connect(mapStateToProps, null)(StudentLogbookHeader)

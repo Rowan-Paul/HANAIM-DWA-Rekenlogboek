@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import '../../../../scss/teacher/components/logbook/Goal.scss'
-function Goal(props) {
+export default function Goal(props) {
 	return (
 		<div className="Goal Cell">
 			<ul>
@@ -25,11 +24,3 @@ function Goal(props) {
 		</div>
 	)
 }
-
-const mapStateToProps = state => {
-	return {}
-}
-
-const mapDispatchToProps = dispatch => {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Goal)
