@@ -22,8 +22,7 @@ describe(`Rekenlogboek`, () => {
 		page = await browser.newPage()
 	})
 
-	afterAll(async () => {
-	})
+	afterAll(async () => {})
 
 	test(`Go to main page and login`, async () => {
 		await page.goto('https://localhost:3001/')
@@ -160,7 +159,9 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	test(`Create logbook: Happy path - overview`, async () => {
-		await page.click(`.next button`)
+		await page.click(`.next`)
+		await page.waitForTimeout(500)
+
 		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/done')
 	})
 })
