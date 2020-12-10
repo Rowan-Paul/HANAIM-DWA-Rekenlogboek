@@ -12,7 +12,7 @@ describe(`Rekenlogboek`, () => {
 	beforeAll(async () => {
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 80,
+			slowMo: 10,
 			ignoreHTTPSErrors: true,
 			// args: [`--window-size=800,800`, `--window-position=0,0`]
 			args: ['--start-maximized'],
@@ -51,7 +51,7 @@ describe(`Rekenlogboek`, () => {
 				plusButtons[0].click()
 			})
 
-			expect(`Modal`).toBeDefined()
+			expect(`.Modal`).toBeDefined()
 			await page.type(`#title`, `Hoe heb je de toets gemaakt?`)
 			// await page.select(`#inputType`, `checkboxes`)
 
@@ -69,11 +69,60 @@ describe(`Rekenlogboek`, () => {
 		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/goals')
 	})
 
-	test(`Create logbook: Happy path - overview`, async () => {
-		// Temporary (will removed after merge with Michaels class)
-		await page.goto('https://localhost:3001/teacher/new-logbook/overview')
-		await page.click(`.next button`)
+	test(`Create logbook: Happy path - goals`, async () => {
+		// Data
+		const goals = [
+			{
+				title: 'Doel 1',
+				description: 'Omschrijving.',
+				image: 'temp-goal-thumb.png'
+			},
+			{
+				title: 'Doel 2',
+				description: 'Omschrijving.',
+				image: 'LearnGoalThumb.png'
+			}
+		]
 
-		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/done')
+		for (let goal of goals) {
+			// Wait for 'ADD goal' button and click
+			await page.waitForSelector('.fa-plus', { visible: true })
+			await page.click('.fa-plus')
+
+			// Fill in title
+			await page.waitForSelector('input[name=title]')
+			await page.type('input[name=title]', goal.title)
+
+			// Fill in description
+			await page.waitForSelector('textarea[name=description]')
+			await page.type('textarea[name=description]', goal.description)
+
+			// Add image
+			const fileHandle = await page.$('input[name=image]')
+			await fileHandle.uploadFile('./src/img/temp/' + goal.image)
+
+			// Click add bttn
+			await page.waitForSelector('.blue')
+			await page.click('.blue')
+		}
+
+		// Expect Goal to be added
+		expect(page.$('.Goal')).toBeDefined()
+
+		// Click next button
+		await page.waitForSelector('.blue')
+		await page.click('.blue')
+
+		await page.waitForTimeout(2000)
+
+		await page.click(`.next button`)
+		expect(page.url()).toBe(
+			'https://localhost:3001/teacher/new-logbook/overview'
+		)
+	})
+
+	xtest(`Create logbook: Happy path - overview`, async () => {
+		// await page.click(`.next button`)
+		// expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/done')
 	})
 })
