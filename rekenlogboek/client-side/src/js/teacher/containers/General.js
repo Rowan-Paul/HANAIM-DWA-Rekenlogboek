@@ -35,12 +35,14 @@ function General(props) {
 							title="Kies een groep:"
 							selected={group}
 							options={['5', '6', '7', '8']}
+							id={'group'}
 							changeHandler={value => changeGroupHandler(value)}
 						/>
 						<Select
 							title="Kies een blok:"
 							selected={period}
 							options={['1', '2', '3', '4', '5', '6']}
+							id={'period'}
 							changeHandler={value => changePeriodHandler(value)}
 						/>
 					</form>
