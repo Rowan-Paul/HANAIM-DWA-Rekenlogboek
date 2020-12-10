@@ -146,7 +146,7 @@ describe(`Rekenlogboek`, () => {
 			const fileHandle = await page.$('input[name=image]')
 			await fileHandle.uploadFile('./src/img/temp/' + goal.image)
 
-			// Click add bttn
+			// Click add btn
 			await page.waitForSelector('.blue')
 			await page.click('.blue')
 		}
