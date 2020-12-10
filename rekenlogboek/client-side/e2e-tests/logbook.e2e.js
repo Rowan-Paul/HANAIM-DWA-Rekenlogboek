@@ -29,16 +29,15 @@ describe(`Rekenlogboek`, () => {
 	test(`Create logbook: Happy path - general`, async () => {
 		await page.goto(`https://localhost:3001/teacher/new-logbook/general`)
 
-		const selectInputs = await page.$$eval(`select`, async selectInputs => {
-			selectInputs[0].value = '8'
-			selectInputs[1].value = '3'
-			return selectInputs.map(item => item.value)
-		})
+		// Set group
+		await page.select('#group', '8')
+		const group = await page.$eval('#group', node => node.value)
+		expect(group).toStrictEqual('8')
 
-		// await page.select(`form:first-child .select`, '8')
-		// await page.select(`form:last-child .select`, '3')
-
-		expect(selectInputs).toStrictEqual(['8', '3'])
+		// Set period
+		await page.select('#period', '3')
+		const period = await page.$eval('#period', node => node.value)
+		expect(period).toStrictEqual('3')
 
 		await page.click(`.next button`)
 		expect(page.url()).toBe(
@@ -46,7 +45,7 @@ describe(`Rekenlogboek`, () => {
 		)
 	})
 
-	test(`Create logbook: Happy path - columns`, async () => {
+	xtest(`Create logbook: Happy path - columns`, async () => {
 		const addColumn = async () => {
 			await page.$$eval(`.Plus button`, async plusButtons => {
 				plusButtons[0].click()
