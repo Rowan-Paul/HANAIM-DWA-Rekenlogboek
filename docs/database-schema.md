@@ -6,6 +6,7 @@ Here you can find an overview of the different things inside the database.
 
 Contains all general logbooks.
 
+<!-- 
 ```text
 +-------------------------------------------------------+
 | Logbooks                                              |
@@ -32,6 +33,50 @@ Contains all general logbooks.
 |            description: String                        |
 |            imagelink: String                          |
 |        }]                                             |
++-------------------------------------------------------+ 
+```
+-->
+```text
++-------------------------------------------------------+
+|columns: [                                             |
+|	{                                                   |
+|		added: Boolean,                                 |
+|		explanation: Boolean,                           |
+|		position: Number,                               |
+|		title: String,                                  |
+|		input: {                                        |
+|			type: String,                               |
+|			options: Array of [String]                  |
+|		}                                               |
+|	},                                                  |
+|	{                                                   |
+|		added: Boolean,                                 |
+|		explanation: Boolean,                           |
+|		position: Number,                               |
+|		title: String,                                  |
+|		input: {                                        |
+|			type: String,                               |
+|			options: Array of [String]                  |
+|		}                                               |
+|	}                                                   |
+|],                                                     |
+|goals: [],                                             |
+|group: Number,                                         |
+|inputTypes: {                                          |
+|	checkboxes: String,                                 |
+|	radiobuttons: String,                               |
+|	textarea: String                                    |
+|},                                                     |
+|isAvailable: Boolean,                                  |
+|isSaved: Boolean,                                      |
+|modal: {                                               |
+|	title: String,                                      |
+|	visible: Boolean                                    |
+|},                                                     |
+|period: Number,                                        |
+|position: Number,                                      |
+|teacher: String,                                       |
+|year:                                                  |
 +-------------------------------------------------------+
 ```
 
@@ -39,6 +84,7 @@ Contains all general logbooks.
 
 Contains all logbooks for students.
 
+<!--
 ```text
 +-------------------------------------------------------+
 | Studentlogbooks                                       |
@@ -58,7 +104,34 @@ Contains all logbooks for students.
 |          }]                                           |
 +-------------------------------------------------------+
 ```
+-->
+```text
++-------------------------------------------------------+
+| Studentlogbook                                        |
++-------------------------------------------------------+
+|logbookID: null,                                       |
+|currentPhase: null,                                    |
+|column: {},                                            |
+|goalAmount: null,                                      |
+|currentGoal: {                                         |
+|	position: Number                                    |
+|},                                                     |
+|answers: {}                                            |
++-------------------------------------------------------+
+```
 
+
+## Main
+```text
++-------------------------------------------------------+
+| Main                                                  |
++-------------------------------------------------------+
+|user: Object of ,                                      |
+|context: Object of                                     |
++-------------------------------------------------------+
+```
+
+<!-- 
 ## Templates
 
 Contains templates for logbooks
@@ -76,4 +149,4 @@ Contains templates for logbooks
 |            inputType: String                          |
 |          }]                                           |
 +-------------------------------------------------------+
-```
+``` -->
