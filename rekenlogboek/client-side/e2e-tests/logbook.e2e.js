@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 jest.setTimeout(30000)
 
 describe(`Rekenlogboek`, () => {
-	let browserA, pageA
+	let browser, page
 
 	const user = {
 		email: `BKonijn@teamjaguarundi.onmicrosoft.com`,
@@ -10,54 +10,66 @@ describe(`Rekenlogboek`, () => {
 	}
 
 	beforeAll(async () => {
-		browserA = await puppeteer.launch({
+		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 30,
+			slowMo: 80,
 			ignoreHTTPSErrors: true,
 			// args: [`--window-size=800,800`, `--window-position=0,0`]
 			args: ['--start-maximized'],
 			defaultViewport: null
 		})
-		pageA = await browserA.newPage()
+		page = await browser.newPage()
 	})
 
 	afterAll(async () => {
-		// await browserA.close()
+		// await browser.close()
 	})
 
 	test(`Create logbook: Happy path - general`, async () => {
-		await pageA.goto(`https://localhost:3001/teacher/new-logbook/general`)
+		await page.goto(`https://localhost:3001/teacher/new-logbook/general`)
 
-		const selectInputs = await pageA.$$eval(`select`, async selectInputs => {
+		const selectInputs = await page.$$eval(`select`, async selectInputs => {
 			selectInputs[0].value = '8'
 			selectInputs[1].value = '3'
 			return selectInputs.map(item => item.value)
 		})
 		expect(selectInputs).toStrictEqual(['8', '3'])
 
-		await pageA.click(`.next button`)
+		await page.click(`.next button`)
+		expect(page.url()).toBe(
+			'https://localhost:3001/teacher/new-logbook/columns'
+		)
 	})
 
-	test(`Create logbook: Happy path - columns (1)`, async () => {
+	test(`Create logbook: Happy path - columns`, async () => {
 		const addColumn = async () => {
-			await pageA.$$eval(`.Plus button`, async plusButtons => {
+			await page.$$eval(`.Plus button`, async plusButtons => {
 				plusButtons[0].click()
 			})
 
 			expect(`Modal`).toBeDefined()
-			await pageA.type(`#title`, `Hoe heb je de toets gemaakt?`)
-			// await pageA.select(`#inputType`, `checkboxes`)
+			await page.type(`#title`, `Hoe heb je de toets gemaakt?`)
+			// await page.select(`#inputType`, `checkboxes`)
 
-			await pageA.type(`#addOption`, `Ik snap het goed`)
-			await pageA.click(`#addBtn`)
-			await pageA.type(`#addOption`, `Ik snap het niet`)
-			await pageA.click(`#addBtn`)
-			await pageA.click(`.bttn.blue`)
+			await page.type(`#addOption`, `Ik snap het goed`)
+			await page.click(`#addBtn`)
+			await page.type(`#addOption`, `Ik snap het niet`)
+			await page.click(`#addBtn`)
+			await page.click(`.bttn.blue`)
 		}
 
 		await addColumn()
 		await addColumn()
 
-		await pageA.click(`.next button`)
+		await page.click(`.next button`)
+		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/goals')
+	})
+
+	test(`Create logbook: Happy path - overview`, async () => {
+		// Temporary (will removed after merge with Michaels class)
+		await page.goto('https://localhost:3001/teacher/new-logbook/overview')
+		await page.click(`.next button`)
+
+		expect(page.url()).toBe('https://localhost:3001/teacher/new-logbook/done')
 	})
 })
