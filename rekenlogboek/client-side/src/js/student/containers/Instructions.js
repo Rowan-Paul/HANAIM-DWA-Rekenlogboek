@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Instructions.scss'
 import '../../../scss/student/Student.scss'
@@ -11,42 +12,156 @@ import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
 import Button from '../../common/Button'
 
-function Instructions() {
-	const previousPage = () => {}
-	const nextPage = () => {}
+import { previousGoal } from '../../../redux/studentlogbook/actions'
+import { nextGoal } from '../../../redux/studentlogbook/actions'
+import { newExplanation } from '../../../redux/studentlogbook/actions'
+import { newAnswer } from '../../../redux/studentlogbook/actions'
+import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import { fetchColumn } from '../../../redux/studentlogbook/actions'
+import { fetchGoal } from '../../../redux/studentlogbook/actions'
+import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 
-	return (
-		<div className="instructions student-container">
-			<ProgressBar itemCount={5} done={[1, 3]} />
-			<Jumbotron columns={1}>
-				<div className="learn-goal-container">
-					<div className="left-side">
-						{/* TODO: replace with data from database */}
-						<LearnGoal
-							goal="Doel 1:test"
-							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
-						/>
-						<Question />
+function InstructionsUI(props) {
+	useEffect(() => {
+		props.doFetchGoalAmount()
+		props.doFetchColumn(2)
+		props.doFetchGoal(props.goal.position)
+
+		if (props.goal.position !== undefined) {
+			props.doFetchAnswers()
+		}
+	}, [])
+
+	const [inputAnswer, setInputAnswer] = useState('')
+	const [inputExplanation, setInputExplanation] = useState('')
+	const [givenAnswers, setGivenAnswers] = useState('')
+
+	const changeAnswer = value => {
+		props.doNewAnswer(value)
+		setInputAnswer(value)
+	}
+
+	const changeExplanation = value => {
+		props.doNewExplanation(value)
+		setInputExplanation(value)
+	}
+
+	const previousPage = () => {
+		if (props.goal.position > 1) {
+			props.doPreviousGoal()
+
+			props.doFetchGoalAmount()
+			props.doFetchColumn(2)
+			props.doFetchGoal(props.goal.position)
+
+			if (props.goal.position !== undefined) {
+				props.doFetchAnswers()
+			}
+
+			setInputAnswer('')
+			setInputExplanation('')
+			setGivenAnswers('')
+		}
+	}
+
+	const nextPage = () => {
+		if (props.goal.position < props.goalAmount) {
+			props.doNextGoal()
+			props.doNewAnswer(inputAnswer)
+
+			props.doFetchGoalAmount()
+			props.doFetchColumn(2)
+			props.doFetchGoal(props.goal.position)
+
+			if (props.goal.position !== undefined) {
+				props.doFetchAnswers()
+			}
+
+			setInputAnswer('')
+			setInputExplanation('')
+			setGivenAnswers('')
+		} else {
+			props.history.push('/student/instruction/done')
+		}
+	}
+
+	if (props.answers.length > 0 && givenAnswers.length < 1)
+		props.answers.forEach(answer => {
+			if (
+				answer.goalPosition === props.column.position &&
+				answer.columnPosition === 1
+			) {
+				setGivenAnswers(answer.answer.value)
+			}
+		})
+
+	if (props.column.input !== undefined) {
+		return (
+			<div className="instructions student-container">
+				<ProgressBar itemCount={1} done={[1, 3]} />
+				<Jumbotron columns={1}>
+					<div className="learn-goal-container">
+						<div className="left-side">
+							<LearnGoal
+								goal={props.goal.title}
+								description={props.goal.description}
+							/>
+							<Question
+								title={props.column.title}
+								type={props.column.input.type}
+								inputAnswer={inputAnswer}
+								changeAnswer={changeAnswer}
+								options={props.column.input.options}
+								explanation={props.column.explanation}
+								changeExplanation={changeExplanation}
+							/>
+						</div>
+						<div className="right-side">
+							<LearnGoalImage
+								src={props.goal.imageLink}
+								title="Dit gaf je aan na de pre-toets:"
+								description={givenAnswers}
+							/>
+						</div>
 					</div>
-					<div className="right-side">
-						{/* TODO: replace with src from database */}
-						<LearnGoalImage
-							src="/uploads/goals/LearnGoalThumb.png"
-							title="Dit gaf je aan na de pre-toets:"
-							description="“Ik snap het, maar vind het nog lastig.”"
-						/>
-					</div>
+				</Jumbotron>
+				{/* TODO: create handlers */}
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
 				</div>
-			</Jumbotron>
-			{/* TODO: create handlers */}
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				<div className="next button">
+					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+				</div>
 			</div>
-			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => nextPage()} />
-			</div>
-		</div>
-	)
+		)
+	} else {
+		return <p>Loading</p>
+	}
 }
 
-export default withRouter(Instructions)
+function mapStateToProps(state) {
+	return {
+		column: state.studentLogbook.column,
+		goal: state.studentLogbook.currentGoal,
+		goalAmount: state.studentLogbook.goalAmount,
+		answers: state.studentLogbook.answers
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		doFetchColumn: payload => dispatch(fetchColumn(payload)),
+		doFetchGoal: payload => dispatch(fetchGoal(payload)),
+		doFetchGoalAmount: () => dispatch(fetchGoalAmount()),
+		doFetchAnswers: () => dispatch(fetchAnswers()),
+		doNewAnswer: payload => dispatch(newAnswer(payload)),
+		doNewExplanation: payload => dispatch(newExplanation(payload)),
+		doNextGoal: () => dispatch(nextGoal()),
+		doPreviousGoal: () => dispatch(previousGoal())
+	}
+}
+
+export const Instructions = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(InstructionsUI)

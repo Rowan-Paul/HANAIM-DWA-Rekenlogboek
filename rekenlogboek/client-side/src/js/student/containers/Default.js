@@ -12,20 +12,29 @@ import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 function StudentUI(props) {
 	const [phaseFetched, setPhaseFetched] = useState(false)
 
-	useEffect(() => {
-		// fetch the current phase
-		if (!phaseFetched && props.context.teamName !== undefined) {
-			setPhaseFetched(true)
-			props.doFetchCurrentPhase(props.context.teamName)
-		}
-	})
+	// fetch the current phase
+	if (!phaseFetched && props.context.teamName !== undefined) {
+		setPhaseFetched(true)
+		props.doFetchCurrentPhase(props.context.teamName)
+	}
 
 	// When the user object exists, check which page
 	// the user should be redirected to
 	if (props.user !== undefined && props.user !== null) {
-		if (props.currentPhase !== null) {
-			props.history.push('/student/pretest')
-		}
+		if (props.currentPhase !== null)
+			switch (props.currentPhase) {
+				case 'pretest':
+					props.history.push('/student/pretest')
+					break
+
+				case 'instruction':
+					props.history.push('/student/instruction')
+					break
+
+				case 'evaluation':
+					props.history.push('/student/evaluation')
+					break
+			}
 
 		return (
 			<div className="default">
