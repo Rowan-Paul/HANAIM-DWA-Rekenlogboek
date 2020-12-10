@@ -42,7 +42,7 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	test(`Login on Microsoft identity`, async () => {
-		// Microsoft identity tab
+		// Microsoft identity pop-up
 		const oAuth = await newWindow
 
 		// Enter email
