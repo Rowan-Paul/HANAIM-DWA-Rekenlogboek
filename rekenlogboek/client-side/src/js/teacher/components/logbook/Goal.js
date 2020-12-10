@@ -10,7 +10,7 @@ function Goal(props) {
 				<li>
 					<h4>{props.goal.title}</h4>
 
-					{!props.type === 'edit' && (
+					{props.type === 'edit' && (
 						<div>
 							<button
 								onClick={() =>
