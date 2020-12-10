@@ -12,6 +12,7 @@ function StudentLogbook(props) {
 	return (
 		<div className="studentlogbook">
 			<Jumbotron>
+				<h1>Logboek van: {props.student}</h1>
 				<LogbookFrame>
 					<StudentLogbookHeader />
 					<StudentLogbookRows />
@@ -30,7 +31,9 @@ function StudentLogbook(props) {
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		student: state.logbookoverview.activeStudentlogbook.student
+	}
 }
 
 const mapDispatchToProps = dispatch => {

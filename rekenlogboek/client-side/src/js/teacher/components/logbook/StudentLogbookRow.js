@@ -33,7 +33,6 @@ function StudentLogbookRow(props) {
 			setEvaluation(answer3.answer.value)
 		}
 	})
-	console.log('goalid:' + props.goalid)
 	return (
 		<div className="Row Body">
 			<StudentLogbookGoal goal={props.goal} type={'edit'} />
