@@ -24,20 +24,21 @@ Het bestaat uit een omgeving voor de logboekontwerper om logboeken te maken/klaa
 
 ### 1.4 Rollen
 
-Leraren, logboekontwerpers en leerlingen zijn de gebruikers van de applicatie. Leraren zijn ook altijd logboekontwerper. Hieronder een tabel met taken per rol.
+Leraren en leerlingen zijn de gebruikers van de applicatie.
+Hieronder een tabel met taken per rol.
 
-| Rol          | Taken                                                          |
-| ------------ | -------------------------------------------------------------- |
-| Logboekmaker | Maakt logboeken aan voor de verschillende leerjaren en blokken |
-|              | Voegt leerdoelen toe aan logboeken                             |
-|              | Voorbereiden logboeken voor leerkrachten                       |
-|              | Wijzigt/verwijdert logboeken indien nodig                      |
-| Leerkracht   | Evalueert de logboeken van leerlingen                          |
-|              | Bekijken van (oude) logboekresultaten                          |
-| Leerling     | Logboek invullen                                               |
+| Rol        | Taken                                                          |
+| ---------- | -------------------------------------------------------------- |
+| Leerkracht | Maakt logboeken aan voor de verschillende leerjaren en blokken |
+|            | Voegt leerdoelen toe aan logboeken                             |
+|            | Voorbereiden logboeken voor leerkrachten                       |
+|            | Wijzigt/verwijdert logboeken indien nodig                      |
+|            | Evalueert de logboeken van leerlingen                          |
+|            | Bekijken van (oude) logboekresultaten                          |
+| Leerling   | Logboek invullen                                               |
 
 ### 1.4 Context diagram
 
 Op de afbeelding hieronder is het context diagram te zien, gebaseerd op het C4 model.
 
-@import "./c4-model/context.svg"
+@import "./c4-model/systeem-context.svg"
