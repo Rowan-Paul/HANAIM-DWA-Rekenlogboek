@@ -3,7 +3,8 @@ import React from 'react'
 
 export default function Textarea(props) {
 	const newAnswer = e => {
-		if (!props.readonly) {
+		if (props.readonly) {
+		} else {
 			props.changeAnswer(e.target.value)
 		}
 	}
