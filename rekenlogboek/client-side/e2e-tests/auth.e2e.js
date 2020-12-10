@@ -28,8 +28,7 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	test(`Go to main page and login`, async () => {
-		await page.goto(`https://localhost:3001/`)
-
+		await page.goto('https://localhost:3001/')
 		// MS button onClick
 		const MicrosoftButton = await page.$(`.MicrosoftButton`)
 		await MicrosoftButton.click()
@@ -69,8 +68,6 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	test(`Create logbook: Happy path - general`, async () => {
-		await page.goto(`https://localhost:3001/teacher/new-logbook/general`)
-
 		// Set group
 		await page.select('#group', '8')
 		const group = await page.$eval('#group', node => node.value)
