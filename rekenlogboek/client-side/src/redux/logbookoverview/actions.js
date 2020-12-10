@@ -1,7 +1,7 @@
 import {
 	SAVE_CURRENT_LOGBOOK,
 	SAVE_STUDENT_LOGBOOKS,
-	SAVE_CURRENT_STUDENTLOGBOOK,
+	SAVE_ACTIVE_STUDENTLOGBOOK,
 	SET_CURRENT_LOGBOOK_PERIOD,
 	SET_GROUP
 } from './types'
@@ -53,11 +53,20 @@ export const saveStudentLogbooks = payload => {
 	}
 }
 
-export const fetchCurrentStudentlogbook = () => {}
+export const fetchActiveStudentlogbook = id => dispatch => {
+	fetch(`http://localhost:3000/studentlogbook/` + id, {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(response => {
+			dispatch(saveActiveStudentlogbook(response))
+		})
+		.catch(err => console.error('Error: ', err))
+}
 
-export const saveCurrentStudentlogbook = payload => {
+export const saveActiveStudentlogbook = payload => {
 	return {
-		type: SAVE_CURRENT_STUDENTLOGBOOK,
+		type: SAVE_ACTIVE_STUDENTLOGBOOK,
 		payload
 	}
 }
