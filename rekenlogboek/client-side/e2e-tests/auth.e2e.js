@@ -23,7 +23,6 @@ describe(`Rekenlogboek`, () => {
 	})
 
 	afterAll(async () => {
-		// await browser.close()
 	})
 
 	test(`Go to main page and login`, async () => {
