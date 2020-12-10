@@ -3,7 +3,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
-	saveCurrentStudentlogbook,
+	saveActiveStudentlogbook,
 	setCurrentLogbookPeriod,
 	setGroup
 } from '../../../redux/logbookoverview/actions'
@@ -105,7 +105,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		setActiveStudentLogbook: logbook =>
-			dispatch(saveCurrentStudentlogbook(logbook)),
+			dispatch(saveActiveStudentlogbook(logbook)),
 		setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
 		setGroup: group => dispatch(setGroup(group))
 	}

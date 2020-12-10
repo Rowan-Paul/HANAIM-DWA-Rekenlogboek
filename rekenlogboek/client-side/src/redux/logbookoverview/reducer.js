@@ -1,7 +1,7 @@
 import {
 	SAVE_CURRENT_LOGBOOK,
 	SAVE_STUDENT_LOGBOOKS,
-	SAVE_CURRENT_STUDENTLOGBOOK,
+	SAVE_ACTIVE_STUDENTLOGBOOK,
 	SET_CURRENT_LOGBOOK_PERIOD,
 	SET_GROUP
 } from './types'
@@ -40,7 +40,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				studentlogbooks: action.payload
 			}
 
-		case SAVE_CURRENT_STUDENTLOGBOOK:
+		case SAVE_ACTIVE_STUDENTLOGBOOK:
 			return {
 				...state,
 				activeStudentlogbook: action.payload
