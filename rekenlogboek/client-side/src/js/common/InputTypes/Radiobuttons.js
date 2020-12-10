@@ -17,7 +17,6 @@ export default function RadioButtons(props) {
 		}
 	}
 
-	console.log(props.inputAnswer)
 	return (
 		<ul className="Radiobuttons">
 			{props.options.map((option, i) => (

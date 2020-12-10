@@ -15,7 +15,6 @@ export default function Evaluation(props) {
 
 	return (
 		<ul className="Evaluation">
-			{console.log('rendaa')}
 			<li
 				className={ClassNames({
 					happy: props.inputAnswer === 'Happy'
