@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import Evaluation from '../../../common/InputTypes/Evaluation'
-import StudentLogbookGoal from './StudentLogbookGoal'
+import Goal from '../logbook/Goal'
 import StudentLogbookInputType from './StudentLogbookInputType'
 
 function StudentLogbookRow(props) {
@@ -35,7 +35,7 @@ function StudentLogbookRow(props) {
 	})
 	return (
 		<div className="Row Body">
-			<StudentLogbookGoal goal={props.goal} type={'edit'} />
+			<Goal goal={props.goal} />
 			<StudentLogbookInputType
 				position={1}
 				type={'edit'}

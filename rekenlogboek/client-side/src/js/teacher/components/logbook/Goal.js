@@ -33,7 +33,7 @@ function Goal(props) {
 					<p>{props.goal.description}</p>
 				</li>
 
-				{props.goal.imageLink.length > 0 && (
+				{props.goal.imageLink && (
 					<li>
 						<img
 							src={
