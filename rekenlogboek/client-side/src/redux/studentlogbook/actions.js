@@ -79,7 +79,6 @@ export const newExplanation = payload => (dispatch, getState) => {
 }
 
 export const newAnswer = payload => (dispatch, getState) => {
-	console.log(payload)
 	if (typeof payload === 'object') {
 		payload = payload.toString()
 	} else if (payload === '' || payload === null) {
@@ -96,13 +95,16 @@ export const newAnswer = payload => (dispatch, getState) => {
 
 	let addedAnswer = null
 	let inputType
+	let columnPosition
 
 	if (
 		Object.keys(getState().studentLogbook.column).length === 0 &&
 		getState().studentLogbook.column.constructor === Object
 	) {
+		columnPosition = 3
 		inputType = 'smileys'
 	} else {
+		columnPosition = getState().studentLogbook.column.position
 		inputType = getState().studentLogbook.column.input.type
 	}
 
@@ -127,7 +129,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 	if (!addedAnswer) {
 		answers.push({
 			goalPosition: getState().studentLogbook.currentGoal.position,
-			columnPosition: getState().studentLogbook.column.position,
+			columnPosition: columnPosition,
 			answer: {
 				inputType: inputType,
 				value: payload
@@ -255,10 +257,6 @@ export const fetchColumn = payload => (dispatch, getState) => {
 }
 
 export const fetchGoal = payload => (dispatch, getState) => {
-	console.log(
-		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/${getState().studentLogbook.logbookID}/goal/${payload}`
-	)
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/${getState().studentLogbook.logbookID}/goal/${payload}`,

@@ -34,7 +34,7 @@ import { Default } from './student/containers/Default'
 import { AfterPreTest } from './student/containers/AfterPreTest'
 import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
 import { InstructionsEnd } from './student/containers/InstructionsEnd'
-import EvaluationsEnd from './student/containers/EvaluationsEnd'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 import { Instructions } from './student/containers/Instructions'
 import { Evaluations } from './student/containers/Evaluations'
 

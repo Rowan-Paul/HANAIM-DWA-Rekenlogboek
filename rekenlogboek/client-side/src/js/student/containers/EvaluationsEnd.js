@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/Student.scss'
@@ -7,57 +8,75 @@ import Happy from '../../../img/icons/evaluation/happy.svg'
 import Sad from '../../../img/icons/evaluation/sad.svg'
 import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 
-import ProgressBar from '../components/ProgressBar'
 import Jumbotron from '../../common/Jumbotron'
-import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function EvaluationsEnd() {
-	const saveAnswers = () => {}
+import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
+import { previousGoal } from '../../../redux/studentlogbook/actions'
+import { nextGoal } from '../../../redux/studentlogbook/actions'
+import { fetchAnswers } from '../../../redux/studentlogbook/actions'
 
-	const results = [
-		{
-			goalCount: 'Doel 1',
-			goalName: 'Optellen',
-			answer: <img src={Sad} alt="sad" />
-		},
-		{
-			goalCount: 'Doel 2',
-			goalName: 'Breuken',
-			answer: <img src={Happy} alt="happy" />
-		},
-		{
-			goalCount: 'Doel 3',
-			goalName: 'Keersommen',
-			answer: <img src={Happy} alt="happy" />
+function EvaluationsEndUI(props) {
+	useEffect(() => {
+		props.doFetchAllGoals()
+		if (props.goal.position !== undefined) {
+			props.doFetchAnswers()
 		}
-	]
+	}, [])
+
+	//TODO: fix it going back and actually loading the page
+	const previousPage = () => {
+		props.history.push('/student/evaluation')
+	}
+
+	let currentGoal = [props.currentGoal]
+
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
 						<ResultText
 							title="Je bent klaar!"
-							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd."
 							image=""
 						/>
 					</div>
 					<div className="right-side">
 						<ResultTable
-							results={results}
+							results={currentGoal}
+							answers={props.answers}
+							columnPosition={3}
 							description="Dit zijn de door jou ingevulde antwoorden:"
 						/>
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="next button">
-				<Button color="blue" value="Afsluiten" handler={() => saveAnswers()} />
-			</div>
 		</div>
 	)
 }
 
-export default withRouter(EvaluationsEnd)
+function mapStateToProps(state) {
+	return {
+		column: state.studentLogbook.column,
+		goal: state.studentLogbook.currentGoal,
+		answers: state.studentLogbook.answers,
+		allGoals: state.studentLogbook.allGoals,
+		currentGoal: state.studentLogbook.currentGoal
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		doFetchAnswers: () => dispatch(fetchAnswers()),
+		doNextGoal: () => dispatch(nextGoal()),
+		doPreviousGoal: () => dispatch(previousGoal()),
+		doFetchAllGoals: () => dispatch(fetchAllGoals())
+	}
+}
+
+export const EvaluationsEnd = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(EvaluationsEndUI))

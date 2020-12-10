@@ -50,7 +50,6 @@ function EvaluationsUI(props) {
 
 	return (
 		<div className="evaluation student-container">
-			<ProgressBar itemCount={5} done={[1, 3]} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
