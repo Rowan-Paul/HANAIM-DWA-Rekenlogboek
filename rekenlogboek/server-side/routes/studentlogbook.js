@@ -3,6 +3,9 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
+const fetch = require('node-fetch')
+
+const app = require('../app')
 
 const StudentLogbook = mongoose.model('StudentLogbook')
 
@@ -17,6 +20,43 @@ router.post('/', (req, res) => {
 		})
 		.catch(err => {
 			res.sendStatus(500)
+		})
+})
+
+// Update a studentlogbook
+router.put('/', (req, res) => {
+	StudentLogbook.findOneAndUpdate(
+		{
+			$and: [
+				{ logbookID: { $eq: req.body.logbookID } },
+				{ student: { $eq: req.body.student } }
+			]
+		},
+		{
+			student: req.body.student,
+			logbookID: req.body.logbookID,
+			answers: req.body.answers
+		}
+	)
+		.then(response => {
+			fetch(
+				process.env.SERVER_ADDRESS +
+					'/logbook/' +
+					req.body.logbookID +
+					'/teacher',
+				{
+					method: 'GET'
+				}
+			)
+				.then(response => response.json())
+				.then(json => {
+					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+					res.status(200).send(response.answers)
+				})
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
 		})
 })
 

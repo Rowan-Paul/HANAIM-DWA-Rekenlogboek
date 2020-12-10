@@ -16,7 +16,6 @@ export default function RadioButtons(props) {
 			props.changeExplanation(e.target.value)
 		}
 	}
-
 	return (
 		<ul className="Radiobuttons">
 			{props.options.map((option, i) => (
@@ -26,7 +25,9 @@ export default function RadioButtons(props) {
 				>
 					<input
 						type="radio"
-						name="radiobutton"
+						name={
+							props.position ? `${props.row + props.position}` : 'radiobutton'
+						}
 						value={option}
 						checked={props.inputAnswer === option}
 						onChange={e => newAnswer(e)}
@@ -45,7 +46,9 @@ export default function RadioButtons(props) {
 					onChange={e => newAnswer(e)}
 					checked={props.inputAnswer === ''}
 					type="radio"
-					name="radiobutton"
+					name={
+						props.position ? `${props.row + props.position}` : 'radiobutton'
+					}
 					value="default"
 				/>
 				<span>Ik weet het nog niet</span>
@@ -64,6 +67,7 @@ export default function RadioButtons(props) {
 					<textarea
 						type="text"
 						name="explanation"
+						value={props.studentExplanation}
 						placeholder="Omdat..."
 						onChange={e => newExplanation(e)}
 					/>

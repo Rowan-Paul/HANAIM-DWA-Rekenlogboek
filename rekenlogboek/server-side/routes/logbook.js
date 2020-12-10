@@ -38,6 +38,19 @@ router.get('/:id', (req, res) => {
 		})
 })
 
+// Get the teacher for a logbook
+router.get('/:id/teacher', (req, res) => {
+	Logbook.findById(req.params.id, 'teacher')
+		.lean()
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get the id, position, title and inputType for one column from a specific logbook
 router.get('/:id/column/:position', (req, res) => {
 	Logbook.findById(req.params.id)

@@ -45,12 +45,38 @@ app.use('/studentlogbook', studentlogbookRouter)
 app.use('/templates', templatesRouter)
 app.use('/files', filesRouter)
 
-app.listen(SERVER_PORT, () => {
+const server = app.listen(SERVER_PORT, () => {
 	mongoose.connect(
 		`mongodb://localhost:27017/${dbName}`,
-		{ useNewUrlParser: true, useUnifiedTopology: true },
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useFindAndModify: false
+		},
 		() => {
 			console.log(`Rekenlogboek server listening on port ${SERVER_PORT}!`)
 		}
 	)
 })
+
+// Socket.io
+const io = require('socket.io')(server, {
+	cors: {
+		origin: process.env.REACT_APP_ADDRESS,
+		credentials: true
+	}
+})
+io.on('connection', function (socket) {
+	console.log('User connected: ', socket.id)
+
+	socket.on('join', function (room) {
+		console.log('Joining room ', room)
+		socket.join(room)
+	})
+
+	socket.on('disconnect', function () {
+		console.log('User Disconnected')
+	})
+})
+
+exports.io = io
