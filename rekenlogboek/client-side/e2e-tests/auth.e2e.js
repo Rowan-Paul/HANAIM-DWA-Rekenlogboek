@@ -91,7 +91,6 @@ describe(`Rekenlogboek`, () => {
 
 			expect(`.Modal`).toBeDefined()
 			await page.type(`#title`, title)
-			// await page.select(`#inputType`, `checkboxes`)
 
 			for (option of options) {
 				await page.type(`#addOption`, option)
