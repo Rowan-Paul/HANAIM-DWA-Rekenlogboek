@@ -41,6 +41,7 @@ function AfterPreTestUI(props) {
 	}
 
 	const changeExplanation = value => {
+		props.doNewAnswer(inputAnswer)
 		props.doNewExplanation(value)
 		setInputExplanation(value)
 	}

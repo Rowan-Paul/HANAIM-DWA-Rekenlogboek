@@ -42,6 +42,7 @@ function InstructionsUI(props) {
 	}
 
 	const changeExplanation = value => {
+		props.doNewAnswer(inputAnswer)
 		props.doNewExplanation(value)
 		setInputExplanation(value)
 	}
@@ -125,7 +126,6 @@ function InstructionsUI(props) {
 						</div>
 					</div>
 				</Jumbotron>
-				{/* TODO: create handlers */}
 				<div className="prev button">
 					<Button color="gray" value="Vorige" handler={() => previousPage()} />
 				</div>

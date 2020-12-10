@@ -43,8 +43,6 @@ export const newExplanation = payload => (dispatch, getState) => {
 		answers = getState().studentLogbook.answers
 	}
 
-	// let addedAnswer = null
-
 	answers.forEach((answer, i) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position) {
 			answers[i] = {
@@ -56,23 +54,8 @@ export const newExplanation = payload => (dispatch, getState) => {
 					explanation: payload
 				}
 			}
-
-			// addedAnswer = true
 		}
 	})
-
-	//TODO: check if answer is filled in
-	// we're gonna assume that the user always fills out the answer and then the explanation
-	// if (!addedAnswer) {
-	// 	answers.push({
-	// 		goalPosition: getState().studentLogbook.currentGoal.position,
-	// 		columnPosition: getState().studentLogbook.column.position,
-	// 		answer: {
-	// 			inputType: getState().studentLogbook.column.input.type,
-	// 			value: getState().studentLogbook.answers[].answer.
-	// 		}
-	// 	})
-	// }
 
 	body = {
 		student: getState().main.user.name,
