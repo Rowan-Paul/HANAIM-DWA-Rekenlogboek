@@ -13,8 +13,7 @@ export const fetchCurrentLogbook = () => (dispatch, getState) => {
 
 	const URI = `year/${year}/group/${group}/period/${period}`
 
-	fetch(process.env.REACT_APP_SERVER_ADDRESS +
-		'/logbook/${URI}`, {
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/${URI}', {
 		method: 'GET'
 	})
 		.then(response => response.json())
@@ -37,10 +36,12 @@ export const saveCurrentLogbook = payload => {
 }
 
 export const fetchStudentLogbooks = id => dispatch => {
-	fetch(process.env.REACT_APP_SERVER_ADDRESS +
-		'/studentlogbook/logbook/` + id, {
-		method: 'GET'
-	})
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS + '/studentlogbook/logbook/' + id,
+		{
+			method: 'GET'
+		}
+	)
 		.then(response => response.json())
 		.then(response => {
 			dispatch(saveStudentLogbooks(response))
