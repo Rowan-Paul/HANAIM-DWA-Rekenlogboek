@@ -18,7 +18,7 @@ function TeacherLandingUI(props) {
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
-				<h1>Welkom, {props.user.name}</h1>
+				<h1>Welkom {props.user.name},</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
 					{/* <ButtonContainer
