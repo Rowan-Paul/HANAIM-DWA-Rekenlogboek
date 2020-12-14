@@ -3,7 +3,7 @@ import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
-import { saveLogbook, resetLogbook } from '../../redux/logbook/actions'
+import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
 import '../../../scss/teacher/containers/NewLogbook.scss'
 import TopBar from '../components/logbook/TopBar'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addInputOption } from '../../../redux/logbook/actions'
+import { addInputOption } from '../../../../redux/logbook/actions'
 function addInputValueFunc(props) {
 	const [option, setOption] = useState('')
 

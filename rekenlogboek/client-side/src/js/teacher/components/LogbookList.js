@@ -6,7 +6,7 @@ import {
 	saveActiveStudentlogbook,
 	setCurrentLogbookPeriod,
 	setGroup
-} from '../../redux/logbookoverview/actions'
+} from '../../../redux/logbookoverview/actions'
 
 function LogbookList(props) {
 	const makeGroupOptions = () => {

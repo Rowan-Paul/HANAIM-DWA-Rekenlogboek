@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../../redux/logbook/actions'
+import { modalShow } from '../../../../redux/logbook/actions'
 
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../../common/InputTypes/Radiobuttons'

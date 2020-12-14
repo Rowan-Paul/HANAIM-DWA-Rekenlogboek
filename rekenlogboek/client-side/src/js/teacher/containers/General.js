@@ -7,7 +7,7 @@ import InfoContainer from '../../common/InfoContainer'
 import Select from '../../common/Select'
 import Button from '../../common/Button'
 import Illustration from '../components/Illustration'
-import { addLogbookPeriod } from '../../redux/logbook/actions'
+import { addLogbookPeriod } from '../../../redux/logbook/actions'
 
 import Image from '../../../img/illustrations/log_select_year.svg'
 import '../../../scss/teacher/containers/NewLogbook.scss'

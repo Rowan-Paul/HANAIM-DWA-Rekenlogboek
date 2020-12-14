@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteInputOption } from '../../../redux/logbook/actions'
+import { deleteInputOption } from '../../../../redux/logbook/actions'
 import '../../../../scss/common/InputTypes.scss'
 
 function InputHandlers(props) {

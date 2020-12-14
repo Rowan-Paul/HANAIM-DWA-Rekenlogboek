@@ -5,7 +5,7 @@ import {
 	setInputType,
 	setColumnTitle,
 	addInputOption
-} from '../../../redux/logbook/actions'
+} from '../../../../redux/logbook/actions'
 
 import AddInputOption from './AddInputOption'
 import Checkboxes from '../../../common/InputTypes/Checkboxes'

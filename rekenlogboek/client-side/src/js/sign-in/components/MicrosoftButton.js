@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import * as microsoftTeams from '@microsoft/teams-js'
 
-import { saveUserAction, setContext } from '../../redux/main/actions'
+import { saveUserAction, setContext } from '../../../redux/main/actions'
 
 import { config } from '../Config'
 import { normalizeError, getUserProfile } from '../MSUtils'
