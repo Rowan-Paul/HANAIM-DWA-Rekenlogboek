@@ -42,7 +42,9 @@ function Header(props) {
 				<span>{props.title}</span>
 			</div>
 			<div className="user" onClick={logOut}>
-				<span>{props.user && props.user.name}</span>
+				<span>
+					{props.user && props.user.name} <br></br> Log uit
+				</span>
 			</div>
 		</header>
 	)
