@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { modalShow, setGoalPosition } from '../../../../redux/logbook/actions'
+import { modalShow, setGoalPosition } from '../../../redux/logbook/actions'
 import '../../../../scss/teacher/components/logbook/TopBar.scss'
 
 function TopBar(props) {

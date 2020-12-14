@@ -10,7 +10,7 @@ import Jumbotron from '../../common/Jumbotron'
 import LogbookFrame from '../components/logbook/LogbookFrame'
 import StudentLogbookHeader from '../components/studentlogbook/StudentLogbookHeader'
 import StudentLogbookRows from '../components/studentlogbook/StudentLogbookRows'
-import { fetchActiveStudentlogbook } from '../../../redux/logbookoverview/actions'
+import { fetchActiveStudentlogbook } from '../../redux/logbookoverview/actions'
 
 function StudentLogbook(props) {
 	const socket = io('ws://localhost:3000')

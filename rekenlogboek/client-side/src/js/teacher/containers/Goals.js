@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { postImage, setGoal } from '../../../redux/logbook/actions'
+import { postImage, setGoal } from '../../redux/logbook/actions'
 
 import AddGoals from '../components/goals/AddGoals'
 import Button from '../../common/Button'
