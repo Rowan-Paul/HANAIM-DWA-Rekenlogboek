@@ -35,6 +35,12 @@ function Header(props) {
 		props.history.push('/')
 	}
 
+	let logoutButton = ''
+
+	if (props.user.name !== undefined) {
+		logoutButton = 'Log uit'
+	}
+
 	return (
 		<header>
 			<div className="return">{navHandler()}</div>
@@ -43,7 +49,7 @@ function Header(props) {
 			</div>
 			<div className="user" onClick={logOut}>
 				<span>
-					{props.user && props.user.name} <br></br> Log uit
+					{props.user && props.user.name} <br></br> {logoutButton}
 				</span>
 			</div>
 		</header>
