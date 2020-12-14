@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setColumn } from '../../../redux/logbook/actions'
+import { setColumn } from '../../redux/logbook/actions'
 
 import Button from '../../common/Button'
 import AddColumn from '../components/column/AddColumn'

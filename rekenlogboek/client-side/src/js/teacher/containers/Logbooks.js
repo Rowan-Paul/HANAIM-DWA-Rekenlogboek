@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchCurrentLogbook } from '../../../redux/logbookoverview/actions'
+import { fetchCurrentLogbook } from '../../redux/logbookoverview/actions'
 
 import Jumbotron from '../../common/Jumbotron'
 import LogbookList from '../components/LogbookList'
