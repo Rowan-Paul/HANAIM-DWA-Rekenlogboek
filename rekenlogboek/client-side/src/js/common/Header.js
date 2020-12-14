@@ -35,21 +35,16 @@ function Header(props) {
 		props.history.push('/')
 	}
 
-	let logoutButton = ''
-
-	if (props.user.name !== undefined) {
-		logoutButton = 'Log uit'
-	}
-
 	return (
 		<header>
 			<div className="return">{navHandler()}</div>
 			<div className="title">
 				<span>{props.title}</span>
 			</div>
-			<div className="user" onClick={logOut}>
+			<div className="user">
 				<span>
-					{props.user && props.user.name} <br></br> {logoutButton}
+					{props.user && props.user.name}
+					<p onClick={logOut}>{props.user.name && 'Uitloggen'}</p>
 				</span>
 			</div>
 		</header>
