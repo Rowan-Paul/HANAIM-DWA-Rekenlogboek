@@ -4,10 +4,11 @@
 
 ```jsx
 <Button color value handler />
-<Header />
-<Jumbotron />
-<InfoContainer title>
 <ButtonContainer icon description color btnText/>
+<Header />
+<InfoContainer title>
+<Jumbotron />
+<Select />
 ```
 
 ---
@@ -15,8 +16,8 @@
 ## Sign-in
 
 ```jsx
-<SignInContainer/>
-<MicrosoftButton/>
+<SignIn/>
+<Succes />
 ```
 
 ---
@@ -24,10 +25,13 @@
 ## Students
 
 ```jsx
-<LearnGoal title description/>
-<LearnGoalImage imageLink/>
-<Question type title description />
-<StudentEndScreen />
+<AfterPreTest />
+<AfterPreTestEnd />
+<Default />
+<Evaluations />
+<EvaluationsEnd />
+<Instructions />
+<InstructionsEnd />
 ```
 
 ---
@@ -35,21 +39,14 @@
 ## Teacher
 
 ```jsx
-//will be added next sprint
-//Shared components only for now
-```
-
-## LogbookDesigner
-
-```jsx
-<Select title options />
-<AddLearnGoal />
-<LearnGoalList />
-<LearnGoal />
-<LogbookOverview />
-<LogBookTable />
-<LogBookTableItem />
-<LogBookTableFilter />
+<Columns />
+<Completed />
+<General />
+<Goals />
+<Logbooks />
+<Overview />
+<Studentlogbook />
+<TeacherLanding />
 
 ```
 
@@ -60,7 +57,6 @@
 ```jsx
 <Teacher />
 <Student />
-<LogbookDesigner />
 <SignIn />
 <NoAccess />
 ```

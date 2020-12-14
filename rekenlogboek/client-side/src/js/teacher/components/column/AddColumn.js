@@ -49,6 +49,7 @@ function AddColumn(props) {
 				<h4>Titel kolom:</h4>
 
 				<input
+					id="title"
 					type="text"
 					placeholder="Titel kolom"
 					onChange={e => props.setColumnTitle(e.target.value)}
@@ -56,12 +57,13 @@ function AddColumn(props) {
 				/>
 			</div>
 
-			<div className="Block ">
+			<div className="Block">
 				<h4>Selecteer input type:</h4>
 
 				<select
 					onChange={e => props.setInputType(e.target.value)}
 					value={selected}
+					id="inputType"
 				>
 					<option value={props.inputTypes.radiobuttons}>
 						{props.inputTypes.radiobuttons}

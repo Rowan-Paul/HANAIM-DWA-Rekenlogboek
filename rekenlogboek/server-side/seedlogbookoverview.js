@@ -39,30 +39,37 @@ async function seedLogbook() {
 			year: '2020 - 2021',
 			teacher: 'xxx',
 			currentPhase: 'test',
+			activeGoal: 1,
 			columns: [
 				{
 					_id: '5fbbcad37f53f84d0c6fbb76',
 					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
+					title: 'Doelen'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb77',
 					position: 1,
 					title: 'Lesofzo',
-					inputType: 'xx'
+					explanation: true,
+					input: {
+						type: 'radiobuttons',
+						options: ['sdsadasd', 'sadasdasdasd']
+					}
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb78',
 					position: 2,
 					title: 'Instructie nodig?',
-					inputType: 'xx'
+					explanation: false,
+					input: {
+						type: 'checkboxes',
+						options: ['sdsadasd', 'sadasdasdasd']
+					}
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb79',
 					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
+					title: 'Evaluatie'
 				}
 			],
 			goals: [
@@ -86,6 +93,13 @@ async function seedLogbook() {
 					title: 'Leer 1*1',
 					description: 'test2222',
 					imagelink: 'aaaaaaa'
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb7d',
+					position: 3,
+					title: 'Les 5',
+					description: 'test333333',
+					imagelink: 'aaaaaaa'
 				}
 			],
 			__v: 0
@@ -105,11 +119,11 @@ async function seedStudentLogboek() {
 				{
 					_id: '5fbbcad37f53f84d0c6fbb86',
 					goalPosition: 0,
-					columnPosition: 3,
+					columnPosition: 1,
 					answer: {
-						inputType: 'Evaluatie',
-						value: 'Happy',
-						boolean: false
+						inputType: 'radiobuttons',
+						value: 'sdsadasd',
+						explanation: 'sdsadasddsdsdsdsd'
 					}
 				},
 				{
@@ -117,9 +131,35 @@ async function seedStudentLogboek() {
 					goalPosition: 0,
 					columnPosition: 2,
 					answer: {
-						inputType: 'Instruction',
-						value: "I'm bad at this",
-						boolean: true
+						inputType: 'checkboxes',
+						value: 'sdsadasd'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb87',
+					goalPosition: 0,
+					columnPosition: 3,
+					answer: {
+						value: 'Happy'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb89',
+					goalPosition: 1,
+					columnPosition: 1,
+					answer: {
+						inputType: 'radiobuttons',
+						value: 'sdsadasd',
+						explanation: 'sdsadasddsdsdsdsd'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb90',
+					goalPosition: 1,
+					columnPosition: 2,
+					answer: {
+						inputType: 'checkboxes',
+						value: 'sdsadasd'
 					}
 				}
 			],
@@ -129,7 +169,7 @@ async function seedStudentLogboek() {
 			_id: '5fc9fab35b86f4c0d8d5eaed',
 			logbookID: '5fbbcad37f53f84d0c6fbb75',
 			student: 'klaas',
-			answers: [],
+			answer: {},
 			__v: 0
 		}
 	])

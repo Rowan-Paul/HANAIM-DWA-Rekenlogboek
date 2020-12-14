@@ -67,9 +67,10 @@ router.get('/:id', (req, res) => {
 		})
 })
 
-// Get all information about one logbook
-router.get('/:id/goals', (req, res) => {
-	Logbook.findById(req.params.id, 'goals')
+// Get the teacher for a logbook
+router.get('/:id/teacher', (req, res) => {
+	Logbook.findById(req.params.id, 'teacher')
+		.lean()
 		.then(response => {
 			res.status(200).send(response)
 		})

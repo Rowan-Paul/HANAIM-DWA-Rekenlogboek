@@ -53,6 +53,7 @@ export default function Checkboxes(props) {
 						type="text"
 						name="explanation"
 						placeholder="Omdat..."
+						value={props.studentExplanation}
 						onChange={e => newExplanation(e)}
 					/>
 				</li>

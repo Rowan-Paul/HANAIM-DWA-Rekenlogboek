@@ -21,8 +21,9 @@ function addInputValueFunc(props) {
 						placeholder="Optie toevoegen"
 						type="text"
 						value={option}
+						id="addOption"
 					/>
-					<button>
+					<button id="addBtn">
 						<i className="fa fa-plus"></i>
 					</button>
 				</form>

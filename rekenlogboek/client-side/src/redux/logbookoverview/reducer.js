@@ -1,24 +1,25 @@
 import {
 	SAVE_CURRENT_LOGBOOK,
 	SAVE_STUDENT_LOGBOOKS,
-	SAVE_CURRENT_STUDENTLOGBOOK,
+	SAVE_ACTIVE_STUDENTLOGBOOK,
 	SET_CURRENT_LOGBOOK_PERIOD,
 	SET_GROUP
 } from './types'
 
-let date1 = new Date()
-let month = date1.getMonth()
-let date2 = date1
+let date = new Date()
+let month = date.getMonth()
+let year1
+let year2
 if (month < 8) {
-	date1 = date1.getFullYear() - 1
-	date2 = date2.getFullYear()
+	year1 = date.getFullYear() - 1
+	year2 = date.getFullYear()
 } else {
-	date1 = date1.getFullYear()
-	date2 = date2.getFullYear() + 1
+	year1 = date.getFullYear()
+	year2 = date.getFullYear() + 1
 }
 
 const INITIAL_STATE = {
-	year: `${date1} - ${date2}`,
+	year: `${year1} - ${year2}`,
 	group: 0, // Moet automatisch de groep worden van de docent
 	period: 1,
 	currentLogbook: {},
@@ -40,7 +41,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				studentlogbooks: action.payload
 			}
 
-		case SAVE_CURRENT_STUDENTLOGBOOK:
+		case SAVE_ACTIVE_STUDENTLOGBOOK:
 			return {
 				...state,
 				activeStudentlogbook: action.payload

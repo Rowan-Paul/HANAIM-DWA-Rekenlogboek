@@ -86,6 +86,43 @@ router.post('/', (req, res) => {
 		})
 })
 
+// Update a studentlogbook
+router.put('/', (req, res) => {
+	StudentLogbook.findOneAndUpdate(
+		{
+			$and: [
+				{ logbookID: { $eq: req.body.logbookID } },
+				{ student: { $eq: req.body.student } }
+			]
+		},
+		{
+			student: req.body.student,
+			logbookID: req.body.logbookID,
+			answers: req.body.answers
+		}
+	)
+		.then(response => {
+			fetch(
+				process.env.SERVER_ADDRESS +
+					'/logbook/' +
+					req.body.logbookID +
+					'/teacher',
+				{
+					method: 'GET'
+				}
+			)
+				.then(response => response.json())
+				.then(json => {
+					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+					res.status(200).send(response.answers)
+				})
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get all information about a specific studentlogbook
 router.get('/:id', (req, res) => {
 	StudentLogbook.findById(req.params.id)
