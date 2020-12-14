@@ -101,7 +101,7 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 		period: req.params.period
 	})
 		.then(response => {
-			if (response[0] === undefined) {
+			if (response.length < 1) {
 				res.status(200).send({})
 			} else {
 				res.status(200).send(response[0])

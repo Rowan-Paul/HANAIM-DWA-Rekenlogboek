@@ -3,10 +3,10 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
-const fetch = require('node-fetch')
 
 const app = require('../app')
 
+const Logbook = mongoose.model('Logbook')
 const StudentLogbook = mongoose.model('StudentLogbook')
 
 // Create a new studentlogbook
@@ -39,19 +39,14 @@ router.put('/', (req, res) => {
 		}
 	)
 		.then(response => {
-			fetch(
-				process.env.SERVER_ADDRESS +
-					'/logbook/' +
-					req.body.logbookID +
-					'/teacher',
-				{
-					method: 'GET'
-				}
-			)
-				.then(response => response.json())
-				.then(json => {
-					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+			Logbook.findById(response.logbookID, 'teacher')
+				.then(logbookResponse => {
+					app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
 					res.status(200).send(response.answers)
+				})
+				.catch(err => {
+					console.log(err)
+					res.status(500).send(err)
 				})
 		})
 		.catch(err => {

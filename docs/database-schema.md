@@ -61,22 +61,3 @@ Contains all logbooks for students.
 |          }]                                           |
 +-------------------------------------------------------+
 ```
-
-## Templates
-
-Contains templates for logbooks
-
-```text
-+-------------------------------------------------------+
-| Templates                                             |
-+-------------------------------------------------------+
-| _id: ObjectID (auto)                                  |
-| group: Number                                         |
-| columns: [{                                           |
-|            _id: ObjectID (auto)                       |
-|            position: Number                           |
-|            title: String                              |
-|            inputType: String                          |
-|          }]                                           |
-+-------------------------------------------------------+
-```

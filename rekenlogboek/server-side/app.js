@@ -11,11 +11,9 @@ const SERVER_PORT = process.env.PORT || 3000
 
 require('./models/logbook')
 require('./models/studentlogbook')
-require('./models/templates')
 
 const logbookRouter = require('./routes/logbook')
 const studentlogbookRouter = require('./routes/studentlogbook')
-const templatesRouter = require('./routes/templates')
 const filesRouter = require('./routes/files')
 
 require('dotenv').config()
@@ -42,7 +40,6 @@ app.options('*', cors({ origin: true, credentials: true }))
 // routes
 app.use('/logbook', logbookRouter)
 app.use('/studentlogbook', studentlogbookRouter)
-app.use('/templates', templatesRouter)
 app.use('/files', filesRouter)
 
 const server = app.listen(SERVER_PORT, () => {
