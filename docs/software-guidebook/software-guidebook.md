@@ -53,6 +53,7 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
       - [8.2.2 Teams instellen](#822-teams-instellen)
       - [8.2.3 App toevoegen aan organisatie](#823-app-toevoegen-aan-organisatie)
       - [8.2.4 App toevoegen aan team](#824-app-toevoegen-aan-team)
+    - [8.3 SSL](#83-ssl)
   - [9 Operatie en ondersteuning](#9-operatie-en-ondersteuning)
     - [9.1 Operatie](#91-operatie)
     - [9.2 Ondersteuning](#92-ondersteuning)

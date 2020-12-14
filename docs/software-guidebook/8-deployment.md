@@ -1,6 +1,6 @@
 ## 8 Deployment
 
-In dit hoofdstuk wordt besproken hoe de applicatie precies wordt gedeployed.
+In dit hoofdstuk wordt besproken hoe de applicatie precies wordt gedeployed. De applicatie bestaat eigenlijk uit 2 delen die apart zouden moeten worden gedeployed: de client-side en de server-side.
 
 ### 8.1 Deployment diagram
 
@@ -47,3 +47,7 @@ Het kan enkele uren duren voordat deze veranderen worden toegepast en leraren da
 Als leraar, navigeer naar je team en druk op het plusje. Zoek naar de naam van je app en klik erop. Je komt nu op de config pagina, druk op op opslaan om de app toe te voegen aan je team.
 
 Nu kunnen alle leden van het team de app zien in hun bovenbalk en ook gebruiken. Als je een foutmelding krijgt, kan het zijn dat je permissies niet goed ingesteld zijn of je enkele uren moet wachten totdat de veranderen in permissies zijn toegepast.
+
+### 8.3 SSL
+
+Tijdens het ontwikkelen van de app is er vanuit gegaan dat de client-side HTTPS zou gebruiken, omdat dit een vereiste is voor het gebruik van Teams. Alle site addressen staan in een env variabel, dit betekent dat je ze maar op één plek hoeft aan te passen (het `.env` bestand in de root van de client en server.
