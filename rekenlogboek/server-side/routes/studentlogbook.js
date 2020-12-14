@@ -40,8 +40,8 @@ router.put('/', (req, res) => {
 	)
 		.then(response => {
 			Logbook.findById(response.logbookID, 'teacher')
-				.then(response => {
-					app.io.to(response.teacher).emit('NEW_ANSWER', req.body.student)
+				.then(logbookResponse => {
+					app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
 					res.status(200).send(response.answers)
 				})
 				.catch(err => {
