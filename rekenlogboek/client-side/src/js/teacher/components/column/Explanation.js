@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { setExplanation } from '../../../../redux/logbook/actions'
+import { setExplanation } from '../../../redux/logbook/actions'
 import { connect } from 'react-redux'
 
 import '../../../../scss/teacher/components/column/Explanation.scss'

@@ -8,7 +8,7 @@ import {
 	setGoalDescription,
 	setGoalImage,
 	setGoalTitle
-} from '../../../../redux/logbook/actions'
+} from '../../../redux/logbook/actions'
 
 function AddGoals(props) {
 	const [title, setTitle] = useState('')
