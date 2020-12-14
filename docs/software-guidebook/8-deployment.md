@@ -10,7 +10,7 @@ Hieronder staat het deployment diagram waarin weergeven wordt hoe het project ka
 
 ### 8.2 Deployen van de Microsoft Teams app
 
-Microsoft Teams is een dominante speler binnnen educatie en ook onze opdrachtgever maakt gebruik van Teams. De applicatie meot dan ook (gedeeltelijk) beschikbaar zijn op Microsoft Teams. Dit kan gedaan worden door de volgende stappen te volgen.
+Microsoft Teams is een dominante speler binnnen educatie en ook onze opdrachtgever maakt gebruik van Teams. De applicatie moet dan ook (gedeeltelijk) beschikbaar zijn op Microsoft Teams. Dit kan gedaan worden door de volgende stappen te volgen.
 
 #### 8.2.1 Microsoft 365 Developer
 
