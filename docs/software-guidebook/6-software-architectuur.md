@@ -40,7 +40,7 @@ De client-side is opgedeeld in verschillende mappen voor verschillende onderdele
 /src
     /img    -> Bevat afbeeldingen voor de paginas.
     /js     -> Bevat de containers en componenten voor de pagina's.
-    /redux  -> Bevat de redux store, reducers en action creators.
+        /redux  -> Bevat de redux store, reducers en action creators.
     /scss   -> Bevat de styling voor de paginas.
 ```
 
@@ -54,3 +54,7 @@ app.js                  ->Hoofdbestand waarmee de server gestart kan worden
 ```
 
 Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `http://localhost:3000`) ervoor te zetten
+
+### 6.3 Real-time
+
+In onze applicatie wordt gebruik gemaakt van real-time updates in het logboekoverzicht van de leraar. Wanneer een leerling een antwoord veranderd of toevoegt wordt er een WebSocket bericht gestuurd naar de leraar via `Socket.io`. Dit is de enigste plek in de applicatie waar real-time wordt gebruikt.
