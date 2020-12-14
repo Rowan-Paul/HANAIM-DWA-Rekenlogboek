@@ -40,7 +40,7 @@ De client-side is opgedeeld in verschillende mappen voor verschillende onderdele
 /src
     /img    -> Bevat afbeeldingen voor de paginas.
     /js     -> Bevat de containers en componenten voor de pagina's.
-    /redux  -> Bevat de redux store, reducers en action creators.
+        /redux  -> Bevat de redux store, reducers en action creators.
     /scss   -> Bevat de styling voor de paginas.
 ```
 
