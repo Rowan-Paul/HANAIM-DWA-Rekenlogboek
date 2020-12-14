@@ -41,6 +41,8 @@ async function seedLogbook() {
 			group: 5,
 			year: '19/20',
 			teacher: 'xxx',
+			currentPhase: 'test', //pretest - instruction - evaluation
+			activeGoal: 0,
 			columns: [
 				{
 					position: 0,
@@ -89,6 +91,8 @@ async function seedLogbook() {
 			group: 7,
 			year: '19/20',
 			teacher: 'yyyy',
+			currentPhase: 'test', //pretest - instruction - evaluation
+			activeGoal: 0,
 			columns: [
 				{
 					position: 0,

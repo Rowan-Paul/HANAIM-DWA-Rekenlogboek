@@ -14,8 +14,8 @@ function StudentUI(props) {
 
 	// fetch the current phase
 	if (!phaseFetched && props.context.teamName !== undefined) {
-		setPhaseFetched(true)
 		props.doFetchCurrentPhase(props.context.teamName)
+		setPhaseFetched(true)
 	}
 
 	// When the user object exists, check which page
@@ -34,12 +34,15 @@ function StudentUI(props) {
 				case 'evaluation':
 					props.history.push('/student/evaluation')
 					break
+
+				default: 
+					break
 			}
 
 		return (
 			<div className="default">
 				<div className="text-field">
-					<h1>Niks te zien hier!</h1>
+					<h1>Nog geen logboeken die ingevuld moeten worden!</h1>
 					<p>
 						Je meester/jufvrouw heeft nog geen taken voor je open gezet. Klopt
 						dit niet? Laat het dan even weten, dan zorgt hij/zij ervoor dat je
@@ -50,7 +53,9 @@ function StudentUI(props) {
 			</div>
 		)
 	} else {
-		return <p>Loading...</p>
+		return (
+			<p>Loading...</p>
+		)
 	}
 }
 
