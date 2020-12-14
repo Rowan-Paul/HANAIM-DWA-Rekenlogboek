@@ -5,7 +5,7 @@ export_on_save:
 
 # Software guidebook
 
-Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd. Dit software guidebook is opgesteld aan de hand van de reader software guidebook (Tijsma et al., 2016).
+Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd. Zo kan elke developer verder met dit project ongeacht uitleg van projectleden. Dit software guidebook is opgesteld aan de hand van de reader software guidebook (Tijsma et al., 2016).
 
 ## Inhoudsopgave
 
