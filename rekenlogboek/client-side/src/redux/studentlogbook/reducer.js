@@ -1,14 +1,16 @@
-import { SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT } from './types'
-import { SAVE_COLUMN } from './types'
-import { SAVE_GOAL } from './types'
-import { SAVE_ANSWERS } from './types'
-import { FETCH_ANSWERS } from './types'
-import { NEXT_GOAL } from './types'
-import { PREVIOUS_GOAL } from './types'
-import { SAVE_ALL_GOALS } from './types'
+// import { SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT } from './types'
+// import { SAVE_COLUMN } from './types'
+// import { SAVE_GOAL } from './types'
+// import { SAVE_ANSWERS } from './types'
+// import { NEXT_GOAL } from './types'
+// import { PREVIOUS_GOAL } from './types'
+// import { SAVE_ALL_GOALS } from './types'
+
+import {SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT, SAVE_COLUMN, SAVE_GOAL, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS, LOAD_STUDENTLOGBOOK} from './types'
 
 const INITIAL_STATE = {
 	logbookID: null,
+	studentLogbookID: null,
 	currentPhase: null,
 	column: {},
 	goalAmount: null,
@@ -49,12 +51,6 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 				answers: action.response
 			}
 
-		case FETCH_ANSWERS:
-			return {
-				...state,
-				answers: action.response
-			}
-
 		case SAVE_CURRENTPHASE:
 			return {
 				...state,
@@ -78,6 +74,13 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				goalAmount: action.response.goals.length
+			}
+
+		case LOAD_STUDENTLOGBOOK:
+			return {
+				...state,
+				studentLogbookID: action.reponse._id,
+				answers: action.response.answers
 			}
 
 		default:

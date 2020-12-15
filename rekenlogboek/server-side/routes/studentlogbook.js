@@ -96,31 +96,31 @@ router.put('/', (req, res) => {
 			]
 		},
 		{
-			student: req.body.student,
-			logbookID: req.body.logbookID,
+			// student: req.body.student,
+			// logbookID: req.body.logbookID,
 			answers: req.body.answers
 		}
 	)
-		.then(response => {
-			fetch(
-				process.env.SERVER_ADDRESS +
-					'/logbook/' +
-					req.body.logbookID +
-					'/teacher',
-				{
-					method: 'GET'
-				}
-			)
-				.then(response => response.json())
-				.then(json => {
-					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
-					res.status(200).send(response.answers)
-				})
+	.then(response => {
+		fetch(
+			process.env.SERVER_ADDRESS +
+				'/logbook/' +
+				req.body.logbookID +
+				'/teacher',
+			{
+				method: 'GET'
+			}
+		)
+		.then(response => response.json())
+		.then(json => {
+			app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+			res.status(200).send(response.answers)
 		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(500).send(err)
+	})
 })
 
 // Get all information about a specific studentlogbook
@@ -136,12 +136,15 @@ router.get('/:id', (req, res) => {
 
 // Get all answers given by the student
 router.get('/:id/answers', (req, res) => {
+	console.log(req.params.id)
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
+			console.log(response);
 			res.status(200).send(response.answers)
 		})
 		.catch(err => {
+			console.log(err)
 			res.status(500).send(err)
 		})
 })

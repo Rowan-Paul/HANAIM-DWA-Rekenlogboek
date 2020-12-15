@@ -1,12 +1,13 @@
-import { SAVE_CURRENTPHASE } from './types'
-import { SAVE_COLUMN } from './types'
-import { SAVE_GOAL } from './types'
-import { SAVE_GOAL_AMOUNT } from './types'
-import { SAVE_ANSWERS } from './types'
-import { FETCH_ANSWERS } from './types'
-import { NEXT_GOAL } from './types'
-import { PREVIOUS_GOAL } from './types'
-import { SAVE_ALL_GOALS } from './types'
+// import { SAVE_CURRENTPHASE } from './types'
+// import { SAVE_COLUMN } from './types'
+// import { SAVE_GOAL } from './types'
+// import { SAVE_GOAL_AMOUNT } from './types'
+// import { SAVE_ANSWERS } from './types'
+// import { NEXT_GOAL } from './types'
+// import { PREVIOUS_GOAL } from './types'
+// import { SAVE_ALL_GOALS } from './types'
+
+import { SAVE_CURRENTPHASE, SAVE_COLUMN, SAVE_GOAL, SAVE_GOAL_AMOUNT, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS} from './types'
 
 export const fetchAllGoals = () => (dispatch, getState) => {
 	fetch(
@@ -16,14 +17,14 @@ export const fetchAllGoals = () => (dispatch, getState) => {
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_ALL_GOALS,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_ALL_GOALS,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
 
 export const previousGoal = () => {
@@ -46,7 +47,8 @@ export const newExplanation = payload => (dispatch, getState) => {
 
 	answers.forEach((answer, i) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position &&
-			answer.goalPosition === getState().studentLogbook.currentGoal.position) {
+			answer.goalPosition === getState().studentLogbook.currentGoal.position) 
+		{
 			// answers[i] = {
 			// 	goalPosition: answer.goalPosition,
 			// 	columnPosition: answer.columnPosition,
@@ -161,99 +163,120 @@ export const newAnswer = payload => (dispatch, getState) => {
 		answers: answers
 	}
 
+	//Save answers
 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(body)
 	})
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_ANSWERS,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_ANSWERS,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
 
 export const fetchAnswers = () => (dispatch, getState) => {
-	// check if the studentlogbook exists
+	// // check if the studentlogbook exists
+	// fetch(
+	// 	process.env.REACT_APP_SERVER_ADDRESS +
+	// 		`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
+	// 			getState().studentLogbook.logbookID
+	// 		}`,
+	// 	{
+	// 		method: 'GET'
+	// 	}
+	// )
+	// .then(res => res.json())
+	// .then(response => {
+	// 	// fetch the already given answers
+	// 	fetch(
+	// 		process.env.REACT_APP_SERVER_ADDRESS +
+	// 			`/studentlogbook/${response.studentlogbookID}/answers/`,
+	// 			{
+	// 			method: 'GET'
+	// 		}
+	// 	)
+	// 	.then(res => res.json())
+	// 	.then(response => {
+	// 		dispatch({
+	// 			type: FETCH_ANSWERS,
+	// 			response // Called it response (from API) to distinguish it from payloads (from app)
+	// 		})
+	// 	})
+	// })
+	// .catch(error => {
+	// 	// create a new studentlogbook
+	// 	// kinda a bad solution but idk
+	// 	const body = {
+	// 	logbookID: getState().studentLogbook.logbookID,
+	// 	student: getState().main.user.name
+	// 	}
+	// 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
+	// 		method: 'POST',
+	// 		headers: { 'Content-Type': 'application/json' },
+	// 		body: JSON.stringify(body)
+	// 	})
+	// 	.then(res => res.json())
+	// 	.then(response => {
+	// 		dispatch({
+	// 			type: FETCH_ANSWERS,
+	// 			response // Called it response (from API) to distinguish it from payloads (from app)
+	// 		})
+	// 	})
+	// 	console.log(error)
+	// })
+
+
+
+	//Studentlogboek exists, get all answers from it.
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
-				getState().studentLogbook.logbookID
-			}`,
-		{
+			`/studentlogbook/${getState().studentLogbook.logbookID}/answers/`,
+			{
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response => {
-			// fetch the already given answers
-			fetch(
-				process.env.REACT_APP_SERVER_ADDRESS +
-					`/studentlogbook/${response.studentlogbookID}/answers/`,
-
-				{
-					method: 'GET'
-				}
-			)
-				.then(res => res.json())
-				.then(response => {
-					dispatch({
-						type: FETCH_ANSWERS,
-						response // Called it response (from API) to distinguish it from payloads (from app)
-					})
-				})
+	.then(res => res.json())
+	.then(response => {
+		dispatch({
+			type: SAVE_ANSWERS,
+			response // Called it response (from API) to distinguish it from payloads (from app)
 		})
-		.catch(error => {
-			// create a new studentlogbook
-			// kinda a bad solution but idk
-			const body = {
-				logbookID: getState().studentLogbook.logbookID,
-				student: getState().main.user.name
-			}
-			fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body)
-			})
-				.then(res => res.json())
-				.then(response => {
-					dispatch({
-						type: FETCH_ANSWERS,
-						response // Called it response (from API) to distinguish it from payloads (from app)
-					})
-				})
-
-			console.log(error)
-		})
+	})
 }
 
 export const fetchCurrentPhase = payload => dispatch => {
 	//TODO: place this somewhere to access it globally
 	// removes chararacter at place i in string
-	String.prototype.removeCharAt = function (i) {
-		var tmp = this.split('') // convert to an array
-		tmp.splice(i - 1, 1) // remove 1 element from the array (adjusting for non-zero-indexed counts)
-		return tmp.join('') // reconstruct the string
-	}
+	// String.prototype.removeCharAt = function (i) {
+	// 	var tmp = this.split('') // convert to an array
+	// 	tmp.splice(i - 1, 1) // remove 1 element from the array (adjusting for non-zero-indexed counts)
+	// 	return tmp.join('') // reconstruct the string
+	// }
+
+	//Groep 7 -> select everything after the space -> 7
+	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
 
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/groups/${payload.substring(payload.indexOf(' ') + 1)}`,
+			`/logbook/groups/${groupNumber}`,
 		{
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_CURRENTPHASE,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response => {
+		console.log(response)
+		dispatch({
+			type: SAVE_CURRENTPHASE,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})}
+	)
+	.catch(error => console.log(error))
 }
 
 export const fetchColumn = payload => (dispatch, getState) => {
@@ -264,14 +287,14 @@ export const fetchColumn = payload => (dispatch, getState) => {
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_COLUMN,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_COLUMN,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
 
 export const fetchGoal = payload => (dispatch, getState) => {
@@ -282,14 +305,14 @@ export const fetchGoal = payload => (dispatch, getState) => {
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_GOAL,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_GOAL,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
 
 export const fetchGoalAmount = () => (dispatch, getState) => {
@@ -300,12 +323,12 @@ export const fetchGoalAmount = () => (dispatch, getState) => {
 			method: 'GET'
 		}
 	)
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_GOAL_AMOUNT,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_GOAL_AMOUNT,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
