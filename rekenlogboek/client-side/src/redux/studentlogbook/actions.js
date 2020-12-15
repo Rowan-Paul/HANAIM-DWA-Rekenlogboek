@@ -45,7 +45,8 @@ export const newExplanation = payload => (dispatch, getState) => {
 	// }
 
 	answers.forEach((answer, i) => {
-		if (answer.columnPosition === getState().studentLogbook.column.position) {
+		if (answer.columnPosition === getState().studentLogbook.column.position &&
+			answer.goalPosition === getState().studentLogbook.currentGoal.position) {
 			// answers[i] = {
 			// 	goalPosition: answer.goalPosition,
 			// 	columnPosition: answer.columnPosition,
@@ -60,19 +61,19 @@ export const newExplanation = payload => (dispatch, getState) => {
 		}
 	})
 
-	let body = {
-		student: getState().main.user.name,
-		logbookID: getState().studentLogbook.logbookID,
-		goalPosition: getState().studentLogbook.currentGoal.position,
-		columnPostion: getState().studentLogbook.column.position,
-		explanation: payload
-	}
-
 	// let body = {
 	// 	student: getState().main.user.name,
 	// 	logbookID: getState().studentLogbook.logbookID,
-	// 	answers: answers
+	// 	goalPosition: getState().studentLogbook.currentGoal.position,
+	// 	columnPostion: getState().studentLogbook.column.position,
+	// 	explanation: payload
 	// }
+
+	let body = {
+		student: getState().main.user.name,
+		logbookID: getState().studentLogbook.logbookID,
+		answers: answers
+	}
 
 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
 		method: 'PUT',
@@ -96,15 +97,16 @@ export const newAnswer = payload => (dispatch, getState) => {
 		payload = 'default'
 	}
 
-	let body = []
-	let answers = []
+	let answers = getState().studentLogbook.answers.length > 0 ? getState().studentLogbook.answers : [];
 
-	// check if it's a new logbnook without answers
-	if (getState().studentLogbook.answers.length > 0) {
-		answers = getState().studentLogbook.answers
-	}
+	// let answers = []
 
-	let addedAnswer = null
+	// // check if it's a new logbnook without answers
+	// if (getState().studentLogbook.answers.length > 0) {
+	// 	answers = getState().studentLogbook.answers
+	// }
+
+	let addedAnswer = false
 	let inputType
 	let columnPosition
 
@@ -112,6 +114,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 		Object.keys(getState().studentLogbook.column).length === 0 &&
 		getState().studentLogbook.column.constructor === Object
 	) {
+		//Last column for the evaluation (Smiley's don't get saved)
 		columnPosition = 3
 		inputType = 'smileys'
 	} else {
@@ -119,24 +122,28 @@ export const newAnswer = payload => (dispatch, getState) => {
 		inputType = getState().studentLogbook.column.input.type
 	}
 
+	//Edit existing answer
 	answers.forEach((answer, i) => {
-		if (
-			answer.columnPosition === getState().studentLogbook.column.position &&
-			getState().studentLogbook.currentGoal.position === answer.goalPosition
-		) {
-			answers[i] = {
-				goalPosition: answer.goalPosition,
-				columnPosition: answer.columnPosition,
-				answer: {
-					inputType: inputType,
-					value: payload
-				}
-			}
+		if (answer.columnPosition === getState().studentLogbook.column.position &&
+			answer.goalPosition === getState().studentLogbook.currentGoal.position) 
+		{
+			// answers[i] = {
+			// 	goalPosition: answer.goalPosition,
+			// 	columnPosition: answer.columnPosition,
+			// 	answer: {
+			// 		inputType: inputType,
+			// 		value: payload
+			// 	}
+			// }
+
+			answers[i].inputType = inputType
+			answers[i].value = payload
 
 			addedAnswer = true
 		}
 	})
 
+	//Add new answer
 	if (!addedAnswer) {
 		answers.push({
 			goalPosition: getState().studentLogbook.currentGoal.position,
@@ -148,7 +155,7 @@ export const newAnswer = payload => (dispatch, getState) => {
 		})
 	}
 
-	body = {
+	let body = {
 		student: getState().main.user.name,
 		logbookID: getState().studentLogbook.logbookID,
 		answers: answers
