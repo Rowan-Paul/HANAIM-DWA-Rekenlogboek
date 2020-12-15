@@ -17,7 +17,7 @@ import '../../../scss/teacher/containers/NewLogbook.scss'
 function Goals(props) {
 	const [nextButtonColor, setNextButtonColor] = useState('gray')
 	const history = useHistory()
-    
+
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
@@ -35,7 +35,7 @@ function Goals(props) {
 		}
 	}
 
-    const checkNextButtonColor = () => {
+	const checkNextButtonColor = () => {
 		if (!props.goals.length > 0) {
 			setNextButtonColor('gray')
 		} else {

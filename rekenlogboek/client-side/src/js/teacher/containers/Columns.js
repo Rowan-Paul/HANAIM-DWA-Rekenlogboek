@@ -37,7 +37,6 @@ function Columns(props) {
 		}
 	}
 
-	// useEffect for model / overlay
 	useEffect(() => {
 		// Prevent skipping general page
 		if (props.group < 1 && props.period < 1) {
