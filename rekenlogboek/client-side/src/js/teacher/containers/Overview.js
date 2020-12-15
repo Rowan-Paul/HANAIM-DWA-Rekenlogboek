@@ -14,6 +14,9 @@ import LogbookRows from '../components/logbook/LogbookRows'
 function Overview(props) {
 	const history = useHistory()
 	useEffect(() => {
+		// Prevent skipping goals page
+		props.columns.map(c => !c.added && history.push('./goals'))
+
 		if (props.isSaved) {
 			props.resetLogbook()
 			history.push('./done')
