@@ -28,15 +28,14 @@ function Columns(props) {
 		}
 	}
 
-	// useEffect for model / overlay
-	useEffect(() => {
-		setModal(props.modalVisible)
-	}, [props.modalVisible])
-
-	// useEffect for verifying collums added
-	useEffect(() => {
-		setColumns(props.columns)
-	}, [props.columns])
+	useEffect(
+		() => {
+			setColumns(props.columns)
+			setModal(props.modalVisible)
+		},
+		[props.columns],
+		[props.modalVisible]
+	)
 
 	return (
 		<div className="new-logbook">
