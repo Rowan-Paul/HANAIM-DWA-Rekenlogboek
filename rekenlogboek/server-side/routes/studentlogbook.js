@@ -101,16 +101,11 @@ router.put('/', (req, res) => {
 			answers: req.body.answers
 		}
 	)
-		.then(response => {
-			Logbook.findById(response.logbookID, 'teacher')
-				.then(logbookResponse => {
-					app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
-					res.status(200).send(response.answers)
-				})
-				.catch(err => {
-					console.log(err)
-					res.status(500).send(err)
-				})
+	.then(response => {
+		Logbook.findById(response.logbookID, 'teacher')
+		.then(logbookResponse => {
+			app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
+			res.status(200).send(response.answers)
 		})
 		.catch(err => {
 			console.log(err)
