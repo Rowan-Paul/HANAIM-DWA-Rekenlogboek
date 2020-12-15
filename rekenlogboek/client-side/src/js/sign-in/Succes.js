@@ -3,25 +3,24 @@ import { connect } from 'react-redux'
 
 export default function SuccesUI(props) {
 	useEffect(() => {
-		const teamsEnvironment = () => window.parent !== window.self
+		function teamsEnvironment() {
+			if (window.parent !== window.self) {
+				return true
+			} else {
+				return false
+			}
+		}
 
 		if (props.user.groups) {
-			if (props.user.jobTitle === null) {
-				// Check if logboekontwerper
-				if (props.user.groups.includes('Logboekontwerpers')) {
-					props.history.push('/teacher')
-				}
-			}
-
 			switch (props.user.jobTitle) {
 				case 'Leerling':
-					if (teamsEnvironment === true) {
+					if (teamsEnvironment() === true) {
 						props.history.push('/student')
 					}
 					break
 
 				case 'Leraar':
-					if (teamsEnvironment === true) {
+					if (teamsEnvironment() === true) {
 						props.history.push('/teacher/logbooks')
 					} else {
 						// Check if logboekontwerper
