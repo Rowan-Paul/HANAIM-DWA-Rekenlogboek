@@ -160,7 +160,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case RESET_LOGBOOK:
-			return {
+			return { //TODO: figure out why just putting INITIAL_STATE here doesn't work
 				...state,
 				columns: [
 					{
