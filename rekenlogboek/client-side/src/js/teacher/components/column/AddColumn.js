@@ -58,7 +58,7 @@ function AddColumn(props) {
 			</div>
 
 			<div className="Block">
-				<h4>Selecteer invoermethode:</h4>
+				<h4>Selecteer input type:</h4>
 
 				<select
 					onChange={e => props.setInputType(e.target.value)}
