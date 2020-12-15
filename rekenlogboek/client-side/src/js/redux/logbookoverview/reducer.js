@@ -3,7 +3,8 @@ import {
 	SAVE_STUDENT_LOGBOOKS,
 	SAVE_ACTIVE_STUDENTLOGBOOK,
 	SET_CURRENT_LOGBOOK_PERIOD,
-	SET_GROUP
+	SET_GROUP,
+	RESET_LOGBOOK_OVERVIEW
 } from './types'
 
 let date = new Date()
@@ -29,6 +30,9 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case RESET_LOGBOOK_OVERVIEW:
+			return (state = INITIAL_STATE)
+
 		case SAVE_CURRENT_LOGBOOK:
 			return {
 				...state,

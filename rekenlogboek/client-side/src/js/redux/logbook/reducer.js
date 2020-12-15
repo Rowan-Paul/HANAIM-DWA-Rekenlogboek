@@ -161,6 +161,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 		case RESET_LOGBOOK:
 			return (state = INITIAL_STATE)
+
 		case SAVE_LOGBOOK:
 			if (action.response.ok) {
 				return {
