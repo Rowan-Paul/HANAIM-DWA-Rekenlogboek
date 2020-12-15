@@ -54,6 +54,7 @@ function App() {
 						<Header />
 						<main>
 							<Switch>
+								{/* LOGBOOK MAKER */}
 								<Route
 									exact
 									path="/teacher/new-logbook/general"
@@ -81,6 +82,8 @@ function App() {
 								/>
 								{/* A few route so it gets the correct styling? */}
 								<Route path="/teacher/new-logbook"></Route>
+
+								{/* LOGBOOK VIEWER */}
 								<Route
 									exact
 									path="/teacher/logbooks"
@@ -91,6 +94,8 @@ function App() {
 									path="/teacher/logbooks/studentlogbook"
 									component={StudentLogbook}
 								></Route>
+
+								{/* LANDING PAGE */}
 								<Route path="/teacher" component={TeacherLanding} />
 
 								{/* SIGN-IN */}
@@ -145,6 +150,15 @@ function App() {
 							path="/student/evaluation/end"
 							component={EvaluationsEnd}
 						/>
+
+						{/* TEACHER */}
+						<Route exact path="/teacher/logbooks" component={Logbooks}></Route>
+						<Route
+							exact
+							path="/teacher/logbooks/studentlogbook"
+							component={StudentLogbook}
+						></Route>
+
 						{/* ERROR PAGES */}
 						<Route exact path="/no-access" component={NoAccess} />
 						{/* <Route component={NotFound} /> */}
