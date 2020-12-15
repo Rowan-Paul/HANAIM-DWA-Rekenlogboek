@@ -69,7 +69,7 @@ const INITIAL_STATE = {
 	},
 	period: 0,
 	position: 0, // This property helps functions rembember which column or row is currently edited
-	teacher: '', //TODO: auto add years in components
+	teacher: '',
 	year: `${year1} - ${year2}`
 }
 
@@ -160,7 +160,48 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case RESET_LOGBOOK:
-			return { state: INITIAL_STATE }
+			return { //TODO: figure out why just putting INITIAL_STATE here doesn't work
+				...state,
+				columns: [
+					{
+						added: false,
+						explanation: false,
+						position: 1,
+						title: '',
+						input: {
+							type: 'radiobuttons',
+							options: []
+						}
+					},
+					{
+						added: false,
+						explanation: false,
+						position: 2,
+						title: '',
+						input: {
+							type: 'radiobuttons',
+							options: []
+						}
+					}
+				],
+				goals: [],
+				group: 0,
+				inputTypes: {
+					checkboxes: 'checkboxes',
+					radiobuttons: 'radiobuttons',
+					textarea: 'textarea'
+				},
+				isAvailable: true,
+				isSaved: false,
+				modal: {
+					title: '',
+					visible: false
+				},
+				period: 0,
+				position: 0, // This property helps functions rembember which column or row is currently edited
+				teacher: '',
+				year: `${year1} - ${year2}`
+			}
 
 		case SAVE_LOGBOOK:
 			if (action.response.ok) {
