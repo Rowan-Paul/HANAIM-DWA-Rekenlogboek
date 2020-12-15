@@ -23,12 +23,12 @@ export default function SuccesUI(props) {
 					if (teamsEnvironment() === true) {
 						props.history.push('/teacher/logbooks')
 					} else {
-						// Check if logboekontwerper
-						if (props.user.groups.includes('Logboekontwerpers')) {
-							props.history.push('/teacher')
-						}
+						props.history.push('/teacher')
 					}
 					break
+
+				case 'Logboekontwerper':
+					props.history.push('/teacher')
 
 				default:
 					props.history.push('/no-access')
