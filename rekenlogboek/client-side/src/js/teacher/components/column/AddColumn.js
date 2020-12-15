@@ -68,11 +68,6 @@ function AddColumn(props) {
 					<option value={props.inputTypes.radiobuttons}>Keuzeveld</option>
 					<option value={props.inputTypes.checkboxes}>Meerkeuzeveld</option>
 					<option value={props.inputTypes.textarea}>Open antwoord</option>
-					{/* <option value={props.inputTypes.radiobuttons}>Kies er één</option>
-					<option value={props.inputTypes.checkboxes}>Kies er meerdere</option>
-					<option value={props.inputTypes.textarea}>
-						Schrijf zelf een antwoord op
-					</option> */}
 				</select>
 			</div>
 
