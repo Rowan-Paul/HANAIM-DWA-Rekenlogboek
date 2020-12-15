@@ -39,13 +39,14 @@ function Columns(props) {
 
 	// useEffect for model / overlay
 	useEffect(() => {
-		setModal(props.modalVisible)
-	}, [props.modalVisible])
+		// Prevent skipping general page
+		if (props.group < 1 && props.period < 1) {
+			history.push('./general')
+		}
 
-	// useEffect for verifying collums added
-	useEffect(() => {
 		setColumns(props.columns)
-	}, [props.columns])
+		setModal(props.modalVisible)
+	}, [props.columns, props.modalVisible])
 
 	useEffect(() => {
 		checkNextButtonColor()
@@ -100,7 +101,9 @@ function Columns(props) {
 const mapStateToProps = state => {
 	return {
 		columns: state.logbook.columns,
-		modalVisible: state.logbook.modal.visible
+		group: state.logbook.group,
+		modalVisible: state.logbook.modal.visible,
+		period: state.logbook.period
 	}
 }
 
