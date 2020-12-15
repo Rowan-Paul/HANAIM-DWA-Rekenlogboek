@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { postImage, setGoal } from '../../redux/logbook/actions'
@@ -15,6 +15,8 @@ import TopBar from '../components/logbook/TopBar'
 import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Goals(props) {
+	const [nextButtonColor, setNextButtonColor] = useState('gray')
+
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
@@ -32,8 +34,21 @@ function Goals(props) {
 		}
 	}
 
+	const checkNextButtonColor = () => {
+		if (!props.goals.length > 0) {
+			setNextButtonColor('gray')
+		} else {
+			setNextButtonColor('blue')
+		}
+	}
+
 	// useEffect for model / overlay
 	useEffect(() => {}, [props.modalVisible])
+
+	useEffect(() => {
+		checkNextButtonColor()
+	}, [props.goals])
+
 	return (
 		<div className="new-logbook">
 			{props.modalVisible && (
@@ -58,7 +73,11 @@ function Goals(props) {
 				/>
 			</div>
 			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => verifyGoals()} />
+				<Button
+					color={nextButtonColor}
+					value="Volgende"
+					handler={() => verifyGoals()}
+				/>
 			</div>
 		</div>
 	)
