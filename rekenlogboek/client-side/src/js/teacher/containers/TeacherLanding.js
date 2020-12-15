@@ -54,6 +54,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export const TeacherLanding = connect(mapStateToProps)(
-	withRouter(TeacherLandingUI)
-)
+export default connect(mapStateToProps)(withRouter(TeacherLandingUI))
