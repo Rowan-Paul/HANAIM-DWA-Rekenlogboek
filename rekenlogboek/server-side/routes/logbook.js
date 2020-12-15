@@ -12,7 +12,6 @@ router.post('/', (req, res) => {
 		period: req.body.period,
 		group: req.body.group,
 		year: req.body.year,
-		teacher: req.body.teacher,
 		currentPhase: 'notVisible',
 		columns: req.body.columns,
 		goals: req.body.goals
@@ -29,19 +28,6 @@ router.post('/', (req, res) => {
 // Get all information about one logbook
 router.get('/:id', (req, res) => {
 	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the teacher for a logbook
-router.get('/:id/teacher', (req, res) => {
-	Logbook.findById(req.params.id, 'teacher')
-		.lean()
 		.then(response => {
 			res.status(200).send(response)
 		})
