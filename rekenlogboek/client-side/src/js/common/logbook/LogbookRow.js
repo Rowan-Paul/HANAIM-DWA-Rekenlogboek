@@ -1,5 +1,5 @@
 import React from 'react'
-import Evaluation from '../../../common/InputTypes/Evaluation'
+import Evaluation from '../InputTypes/Evaluation'
 import Goal from './Goal'
 import InputType from './InputType'
 

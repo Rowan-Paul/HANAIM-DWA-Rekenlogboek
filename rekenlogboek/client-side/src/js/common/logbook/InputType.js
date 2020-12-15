@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../../redux/logbook/actions'
+import { modalShow } from '../../redux/logbook/actions'
 
-import Checkboxes from '../../../common/InputTypes/Checkboxes'
-import RadioButtons from '../../../common/InputTypes/Radiobuttons'
-import Textarea from '../../../common/InputTypes/Textarea'
+import Checkboxes from '../InputTypes/Checkboxes'
+import RadioButtons from '../InputTypes/Radiobuttons'
+import Textarea from '../InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/logbook/InputType.scss'
+import '../../../scss/teacher/components/logbook/InputType.scss'
 function InputType(props) {
 	const [column, setColumn] = useState({})
 

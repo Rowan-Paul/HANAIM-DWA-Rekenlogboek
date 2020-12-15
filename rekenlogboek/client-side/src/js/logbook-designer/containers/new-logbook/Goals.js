@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom'
-import { postImage, setGoal } from '../../redux/logbook/actions'
+import { postImage, setGoal } from '../../../redux/logbook/actions'
 
-import AddGoals from '../components/goals/AddGoals'
-import Button from '../../common/Button'
-import Jumbotron from '../../common/Jumbotron'
-import LogbookFrame from '../components/logbook/LogbookFrame'
-import LogbookHeader from '../components/logbook/LogbookHeader'
-import LogbookRows from '../components/logbook/LogbookRows'
-import Modal from '../components/logbook/Modal'
-import TopBar from '../components/logbook/TopBar'
+import AddGoals from '../../components/goals/AddGoals'
+import Button from '../../../common/Button'
+import Jumbotron from '../../../common/Jumbotron'
+import LogbookFrame from '../../../common/logbook/LogbookFrame'
+import LogbookHeader from '../../../common/logbook/LogbookHeader'
+import LogbookRows from '../../../common/logbook/LogbookRows'
+import Modal from '../../../common/logbook/Modal'
+import TopBar from '../../../common/logbook/TopBar'
 
-import '../../../scss/teacher/containers/NewLogbook.scss'
+import '../../../../scss/logbook-designer/NewLogbook.scss'
 
 function Goals(props) {
 	const history = useHistory()

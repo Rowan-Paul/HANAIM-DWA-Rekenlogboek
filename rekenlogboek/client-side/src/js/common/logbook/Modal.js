@@ -1,8 +1,9 @@
 import React from 'react'
-import '../../../../scss/teacher/components/logbook/Modal.scss'
-import Button from '../../../common/Button'
+import Button from '../Button'
 import { connect } from 'react-redux'
-import { modalHide } from '../../../redux/logbook/actions'
+import { modalHide } from '../../redux/logbook/actions'
+
+import '../../../scss/teacher/components/logbook/Modal.scss'
 
 function Modal(props) {
 	return (

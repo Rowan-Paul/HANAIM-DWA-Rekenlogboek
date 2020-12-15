@@ -7,7 +7,6 @@ import { useHistory, withRouter } from 'react-router-dom'
 import ButtonContainer from '../../common/ButtonContainer'
 
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
-import archiveSVG from '../../../img/icons/archive.svg'
 
 function Index(props) {
 	const history = useHistory()
@@ -23,7 +22,9 @@ function Index(props) {
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => history.push('../new-logbook/general')}
+						handler={() =>
+							history.push('../../logbook-designer/new-logbook/general')
+						}
 					/>
 				</div>
 			</div>

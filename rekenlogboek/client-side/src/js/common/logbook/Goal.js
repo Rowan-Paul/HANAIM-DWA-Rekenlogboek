@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteGoal, modalShow } from '../../../redux/logbook/actions'
+import { deleteGoal, modalShow } from '../../redux/logbook/actions'
 
-import '../../../../scss/teacher/components/logbook/Goal.scss'
+import '../../../scss/teacher/components/logbook/Goal.scss'
 function Goal(props) {
 	return (
 		<div className="Goal Cell">

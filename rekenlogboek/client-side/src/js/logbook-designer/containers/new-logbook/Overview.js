@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Button from '../../common/Button'
-import Jumbotron from '../../common/Jumbotron'
-import { saveLogbook, resetLogbook } from '../../redux/logbook/actions'
+import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
-import '../../../scss/teacher/containers/NewLogbook.scss'
-import TopBar from '../components/logbook/TopBar'
-import LogbookFrame from '../components/logbook/LogbookFrame'
-import LogbookHeader from '../components/logbook/LogbookHeader'
-import LogbookRows from '../components/logbook/LogbookRows'
+import Button from '../../../common/Button'
+import Jumbotron from '../../../common/Jumbotron'
+import LogbookFrame from '../../../common/logbook/LogbookFrame'
+import LogbookHeader from '../../../common/logbook/LogbookHeader'
+import LogbookRows from '../../../common/logbook/LogbookRows'
+import TopBar from '../../../common/logbook/TopBar'
 
+import '../../../../scss/logbook-designer/NewLogbook.scss'
 function Overview(props) {
 	const history = useHistory()
 	useEffect(() => {

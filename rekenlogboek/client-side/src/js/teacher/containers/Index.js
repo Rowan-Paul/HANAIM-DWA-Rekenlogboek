@@ -2,19 +2,16 @@ import '../../../scss/teacher/containers/TeacherLanding.scss'
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 
 import ButtonContainer from '../../common/ButtonContainer'
 
+import archiveSVG from '../../../img/icons/archive.svg'
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
-import archiveSVG from '../../../img/icons/archive.svg'
 
-function TeacherLandingUI(props) {
-	const changePage = page => {
-		props.history.push('/teacher/' + page)
-	}
-
+function Index(props) {
+	const history = useHistory()
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
@@ -28,19 +25,13 @@ function TeacherLandingUI(props) {
 						value="Bepaal toegang"
 						handler={() => changePage('overview')} //TODO: add page
 					/> */}
-					<ButtonContainer
-						icon={createLogbookSVG}
-						color="green"
-						description="Een nieuw logboek aanmaken."
-						value="Nieuw logboek"
-						handler={() => changePage('new-logbook/general')}
-					/>
+
 					<ButtonContainer
 						icon={archiveSVG}
 						color="blue"
 						description="Bekijk ingevulde logboeken."
 						value="Ingevulde logboeken"
-						handler={() => changePage('logbooks')}
+						handler={() => history.push('../teacher/logbooks')}
 					/>
 				</div>
 			</div>
@@ -54,4 +45,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(withRouter(TeacherLandingUI))
+export default connect(mapStateToProps)(withRouter(Index))

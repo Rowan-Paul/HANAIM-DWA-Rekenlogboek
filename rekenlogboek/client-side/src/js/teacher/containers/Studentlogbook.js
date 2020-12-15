@@ -4,13 +4,13 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { io } from 'socket.io-client'
+import { fetchActiveStudentlogbook } from '../../redux/logbookoverview/actions'
 
 import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
-import LogbookFrame from '../components/logbook/LogbookFrame'
-import StudentLogbookHeader from '../components/studentlogbook/StudentLogbookHeader'
-import StudentLogbookRows from '../components/studentlogbook/StudentLogbookRows'
-import { fetchActiveStudentlogbook } from '../../redux/logbookoverview/actions'
+import LogbookFrame from '../../common/logbook/LogbookFrame'
+import LogbookHeader from '../../common/logbook/LogbookHeader'
+import LogbookRows from '../../common/logbook/LogbookRows'
 
 function StudentLogbook(props) {
 	const socket = io('ws://localhost:3000')
@@ -32,8 +32,8 @@ function StudentLogbook(props) {
 			<Jumbotron>
 				<h1>Logboek - {props.student}</h1>
 				<LogbookFrame>
-					<StudentLogbookHeader />
-					<StudentLogbookRows />
+					<LogbookHeader columns={props.columns} />
+					<LogbookRows goals={props.goals} type={'studentLogbooks'} />
 				</LogbookFrame>
 			</Jumbotron>
 
@@ -50,6 +50,8 @@ function StudentLogbook(props) {
 
 const mapStateToProps = state => {
 	return {
+		columns: state.logbookoverview.currentLogbook.columns,
+		goals: state.logbookoverview.currentLogbook.goals,
 		logbookid: state.logbookoverview.activeStudentlogbook._id,
 		student: state.logbookoverview.activeStudentlogbook.student,
 		teacher: state.main.user.name

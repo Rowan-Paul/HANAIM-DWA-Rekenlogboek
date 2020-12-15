@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Evaluation from '../../../common/InputTypes/Evaluation'
-import Goal from '../logbook/Goal'
+
+import Evaluation from '../../InputTypes/Evaluation'
+import Goal from '../Goal'
 import StudentLogbookInputType from './StudentLogbookInputType'
 
 function StudentLogbookRow(props) {
@@ -38,19 +39,17 @@ function StudentLogbookRow(props) {
 			<Goal goal={props.goal} />
 			<StudentLogbookInputType
 				position={1}
-				type={'preview'}
 				inputAnswer={inputAnswer1}
 				studentExplanation={studentExplanation1}
 				row={props.goalid}
 			/>
 			<StudentLogbookInputType
 				position={2}
-				type={'preview'}
 				inputAnswer={inputAnswer2}
 				studentExplanation={studentExplanation2}
 				row={props.goalid}
 			/>
-			<Evaluation type={'edit'} inputAnswer={studentEvaluation} />
+			<Evaluation inputAnswer={studentEvaluation} />
 		</div>
 	)
 }

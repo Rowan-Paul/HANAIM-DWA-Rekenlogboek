@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setColumn } from '../../redux/logbook/actions'
+import { setColumn } from '../../../redux/logbook/actions'
 
-import Button from '../../common/Button'
-import AddColumn from '../components/column/AddColumn'
-import Evaluation from '../../common/InputTypes/Evaluation'
-import Jumbotron from '../../common/Jumbotron'
-import LogbookFrame from '../components/logbook/LogbookFrame'
-import LogbookHeader from '../components/logbook/LogbookHeader'
-import Modal from '../components/logbook/Modal'
-import TopBar from '../components/logbook/TopBar'
+import AddColumn from '../../components/column/AddColumn'
+import Button from '../../../common/Button'
+import Evaluation from '../../../common/InputTypes/Evaluation'
+import InputType from '../../../common/logbook/InputType'
+import Jumbotron from '../../../common/Jumbotron'
+import LogbookFrame from '../../../common/logbook/LogbookFrame'
+import LogbookHeader from '../../../common/logbook/LogbookHeader'
+import Modal from '../../../common/logbook/Modal'
+import TopBar from '../../../common/logbook/TopBar'
 
-import '../../../scss/teacher/containers/NewLogbook.scss'
-import InputType from '../components/logbook/InputType'
+import '../../../../scss/logbook-designer/NewLogbook.scss'
 function Columns(props) {
 	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)

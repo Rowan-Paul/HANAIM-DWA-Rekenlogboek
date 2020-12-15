@@ -21,4 +21,4 @@ function LogbookSavedUI() {
 	)
 }
 
-export const LogbookSaved = withRouter(LogbookSavedUI)
+export default withRouter(LogbookSavedUI)

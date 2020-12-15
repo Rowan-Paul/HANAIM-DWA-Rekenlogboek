@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { addLogbookPeriod } from '../../../redux/logbook/actions'
 
-import Jumbotron from '../../common/Jumbotron'
-import InfoContainer from '../../common/InfoContainer'
-import Select from '../../common/Select'
-import Button from '../../common/Button'
-import Illustration from '../components/Illustration'
-import { addLogbookPeriod } from '../../redux/logbook/actions'
+import Button from '../../../common/Button'
+import Illustration from '../../components/Illustration'
+import Image from '../../../../img/illustrations/log_select_year.svg'
+import InfoContainer from '../../../common/InfoContainer'
+import Jumbotron from '../../../common/Jumbotron'
+import Select from '../../../common/Select'
 
-import Image from '../../../img/illustrations/log_select_year.svg'
-import '../../../scss/teacher/containers/NewLogbook.scss'
+import '../../../../scss/logbook-designer/NewLogbook.scss'
 
 function General(props) {
 	const [group, setGroup] = useState(props.group)
