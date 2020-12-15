@@ -37,7 +37,6 @@ async function seedLogbook() {
 			period: 1,
 			group: 6,
 			year: '2020 - 2021',
-			teacher: 'xxx',
 			currentPhase: 'test',
 			activeGoal: 1,
 			columns: [

@@ -13,7 +13,7 @@ const Logbook = mongoose.model('Logbook')
 // Get logbookID from logbook created before all tests
 const getTestlogbookID = async () => {
 	const number = await Logbook.find({
-		teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
+		group: 7
 	})
 		.lean()
 		.then(response => {
@@ -34,8 +34,7 @@ describe('Logbook route tests', () => {
 		await Logbook.create({
 			period: 3,
 			group: 7,
-			year: '19/20',
-			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
+			year: '2019 - 2020',
 			currentPhase: 'PRE_TOETS',
 			columns: [
 				{
@@ -94,10 +93,10 @@ describe('Logbook route tests', () => {
 
 	afterAll(async () => {
 		await Logbook.deleteMany({
-			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
+			group: 7
 		})
 		await Logbook.deleteMany({
-			teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com'
+			group: 5
 		})
 		await mongoose.disconnect()
 	})
@@ -111,8 +110,7 @@ describe('Logbook route tests', () => {
 			body: JSON.stringify({
 				period: 1,
 				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+				year: '2019 - 2020',
 				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
@@ -180,8 +178,7 @@ describe('Logbook route tests', () => {
 			},
 			body: JSON.stringify({
 				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+				year: '2019 - 2020',
 				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
