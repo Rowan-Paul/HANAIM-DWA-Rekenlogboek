@@ -32,7 +32,7 @@ router.get('/:student/logbooks/:logbookID', (req, res) => {
 		})
 })
 
-// Update a studentlogbook
+// Update alle answers from one studentlogbook
 router.put('/', (req, res) => {
 	StudentLogbook.findOneAndUpdate(
 		{
@@ -42,31 +42,31 @@ router.put('/', (req, res) => {
 			]
 		},
 		{
-			student: req.body.student,
-			logbookID: req.body.logbookID,
+			// student: req.body.student,
+			// logbookID: req.body.logbookID,
 			answers: req.body.answers
 		}
 	)
-		.then(response => {
-			fetch(
-				process.env.SERVER_ADDRESS +
-					'/logbook/' +
-					req.body.logbookID +
-					'/teacher',
-				{
-					method: 'GET'
-				}
-			)
-				.then(response => response.json())
-				.then(json => {
-					app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
-					res.status(200).send(response.answers)
-				})
+	.then(response => {
+		fetch(
+			process.env.SERVER_ADDRESS +
+				'/logbook/' +
+				req.body.logbookID +
+				'/teacher',
+			{
+				method: 'GET'
+			}
+		)
+		.then(response => response.json())
+		.then(json => {
+			app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+			res.status(200).send(response.answers)
 		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(500).send(err)
+	})
 })
 
 // Create a new studentlogbook

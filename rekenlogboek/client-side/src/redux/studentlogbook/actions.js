@@ -35,47 +35,58 @@ export const nextGoal = () => {
 }
 
 export const newExplanation = payload => (dispatch, getState) => {
-	let body = []
-	let answers = []
+	// let answers = []
 
-	// check if it's a new logbnook without answers
-	if (getState().studentLogbook.answers.length > 0) {
-		answers = getState().studentLogbook.answers
-	}
+	// Set answers if the logbook has any.
+	let answers = getState().studentLogbook.answers.length > 0 ? getState().studentLogbook.answers : [];
+
+	// if (getState().studentLogbook.answers.length > 0) {
+	// 	answers = getState().studentLogbook.answers
+	// }
 
 	answers.forEach((answer, i) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position) {
-			answers[i] = {
-				goalPosition: answer.goalPosition,
-				columnPosition: answer.columnPosition,
-				answer: {
-					inputType: getState().studentLogbook.column.input.type,
-					value: getState().studentLogbook.answers[i].answer.value,
-					explanation: payload
-				}
-			}
+			// answers[i] = {
+			// 	goalPosition: answer.goalPosition,
+			// 	columnPosition: answer.columnPosition,
+			// 	answer: {
+			// 		inputType: getState().studentLogbook.column.input.type,
+			// 		value: getState().studentLogbook.answers[i].answer.value,
+			// 		explanation: payload
+			// 	}
+			// }
+
+			answer[i].explanation = payload;
 		}
 	})
 
-	body = {
+	let body = {
 		student: getState().main.user.name,
 		logbookID: getState().studentLogbook.logbookID,
-		answers: answers
+		goalPosition: getState().studentLogbook.currentGoal.position,
+		columnPostion: getState().studentLogbook.column.position,
+		explanation: payload
 	}
+
+	// let body = {
+	// 	student: getState().main.user.name,
+	// 	logbookID: getState().studentLogbook.logbookID,
+	// 	answers: answers
+	// }
 
 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(body)
 	})
-		.then(res => res.json())
-		.then(response =>
-			dispatch({
-				type: SAVE_ANSWERS,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		)
-		.catch(error => console.log(error))
+	.then(res => res.json())
+	.then(response =>
+		dispatch({
+			type: SAVE_ANSWERS,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	)
+	.catch(error => console.log(error))
 }
 
 export const newAnswer = payload => (dispatch, getState) => {

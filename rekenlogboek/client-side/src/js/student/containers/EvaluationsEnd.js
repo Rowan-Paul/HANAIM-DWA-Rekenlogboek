@@ -8,14 +8,17 @@ import Happy from '../../../img/icons/evaluation/happy.svg'
 import Sad from '../../../img/icons/evaluation/sad.svg'
 import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 
-import Jumbotron from '../../common/Jumbotron'
-import ResultText from '../components/ResultText'
+import ResultText from 	'../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
-import { previousGoal } from '../../../redux/studentlogbook/actions'
-import { nextGoal } from '../../../redux/studentlogbook/actions'
-import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import Jumbotron from 	'../../common/Jumbotron'
+
+// import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
+// import { previousGoal } from '../../../redux/studentlogbook/actions'
+// import { nextGoal } from '../../../redux/studentlogbook/actions'
+// import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+
+import { fetchAllGoals, previousGoal, nextGoal, fetchAnswers } from '../../../redux/studentlogbook/actions'
 
 function EvaluationsEndUI(props) {
 	useEffect(() => {

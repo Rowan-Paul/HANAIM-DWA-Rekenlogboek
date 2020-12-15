@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Default.scss'
 
-import { fetchCurrentPhase } from '../../../redux/studentlogbook/actions'
-import { saveUserAction } from '../../../redux/main/actions'
+import { fetchCurrentPhase } from 	'../../../redux/studentlogbook/actions'
+import { saveUserAction } from 		'../../../redux/main/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 
@@ -21,6 +21,7 @@ function StudentUI(props) {
 	// When the user object exists, check which page
 	// the user should be redirected to
 	if (props.user !== undefined && props.user !== null) {
+		console.log(props.currentPhase)
 		if (props.currentPhase !== null)
 			switch (props.currentPhase) {
 				case 'pretest':

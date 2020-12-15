@@ -5,15 +5,18 @@ import { withRouter } from 'react-router-dom'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
-import Jumbotron from '../../common/Jumbotron'
-import Button from '../../common/Button'
-import ResultText from '../components/ResultText'
+import ResultText from 	'../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
-import { previousGoal } from '../../../redux/studentlogbook/actions'
-import { nextGoal } from '../../../redux/studentlogbook/actions'
-import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+import Jumbotron from 	'../../common/Jumbotron'
+import Button from 		'../../common/Button'
+
+// import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
+// import { previousGoal } from '../../../redux/studentlogbook/actions'
+// import { nextGoal } from '../../../redux/studentlogbook/actions'
+// import { fetchAnswers } from '../../../redux/studentlogbook/actions'
+
+import { fetchAllGoals, previousGoal, nextGoal, fetchAnswers } from '../../../redux/studentlogbook/actions'
 
 function InstructionsEndUI(props) {
 	useEffect(() => {
