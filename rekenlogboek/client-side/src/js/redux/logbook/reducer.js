@@ -55,7 +55,7 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 5,
+	group: 0,
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
@@ -67,7 +67,7 @@ const INITIAL_STATE = {
 		title: '',
 		visible: false
 	},
-	period: 1,
+	period: 0,
 	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '', //TODO: auto add years in components
 	year: `${year1} - ${year2}`
