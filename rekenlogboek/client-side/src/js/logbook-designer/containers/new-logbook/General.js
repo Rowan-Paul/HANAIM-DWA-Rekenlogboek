@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addLogbookPeriod } from '../../../redux/logbook/actions'
@@ -15,11 +15,13 @@ import '../../../../scss/logbook-designer/NewLogbook.scss'
 function General(props) {
 	const [group, setGroup] = useState(props.group)
 	const [period, setPeriod] = useState(props.period)
+	const [nextButtonColor, setNextButtonColor] = useState('gray')
 
 	const changeGroupHandler = value => setGroup(value)
 	const changePeriodHandler = value => setPeriod(value)
 
 	const username = props.user.name
+
 	const nextButtonHandler = () => {
 		if (group === 0 || period === 0) {
 			alert('Selecteer eerst een groep en periode')
@@ -28,6 +30,18 @@ function General(props) {
 			props.history.push('./columns')
 		}
 	}
+
+	const checkNextButtonColor = () => {
+		if (group === 0 || period === 0) {
+			setNextButtonColor('gray')
+		} else {
+			setNextButtonColor('blue')
+		}
+	}
+
+	useEffect(() => {
+		checkNextButtonColor()
+	}, [group, period])
 
 	return (
 		<div className="new-logbook">
@@ -60,7 +74,7 @@ function General(props) {
 			</Jumbotron>
 			<div className="next button">
 				<Button
-					color="blue"
+					color={nextButtonColor}
 					value="Volgende"
 					handler={() => nextButtonHandler()}
 				/>

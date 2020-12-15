@@ -22,7 +22,7 @@ Om apps te kunnen uploaden naar Teams moet een account een Microsoft 365 Develop
 
 Microsoft beveelt aan om ook nog een voorbeeld populatie toe te voegen via het [Microsoft 365 Dev Center](https://developer.microsoft.com/en-us/microsoft-365/profile/). Hier log je in met je Microsoft account. Dit kan best lang duren (voor ons duurde het 30+ minuten).
 
-Via het administrator account kan je accounts aanmaken in het [Office365 admin center](https://portal.office.com/adminportal/). Voor onze applicatie zijn wij ervan uitgegaan dat leerlingen en leraren een _jobTitle_ krijgen met of leraar of leerling en logboekontwerpers in een groep zitten genaamd Logboekontwerpers.
+Via het administrator account kan je accounts aanmaken in het [Office365 admin center](https://portal.office.com/adminportal/). Voor onze applicatie zijn wij ervan uitgegaan dat leerlingen, logboekontwerper en leraren een _jobTitle_ krijgen met of `Leraar`, `Logboekontwerper` of `Leerling`. Omdat alle leraren automatisch logboekontwerper zijn checken we of ze logboekontwerper of leraar zijn om te bepalen of ze logboeken mogen maken en bewerken.
 
 #### 8.2.2 Teams instellen
 
