@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 import { postImage, setGoal } from '../../redux/logbook/actions'
 
 import AddGoals from '../components/goals/AddGoals'
@@ -15,6 +15,7 @@ import TopBar from '../components/logbook/TopBar'
 import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function Goals(props) {
+	const history = useHistory()
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
@@ -32,8 +33,10 @@ function Goals(props) {
 		}
 	}
 
-	// useEffect for model / overlay
-	useEffect(() => {}, [props.modalVisible])
+	useEffect(() => {
+		// Prevent skipping columns page
+		props.columns.map(c => !c.added && history.push('./columns'))
+	})
 	return (
 		<div className="new-logbook">
 			{props.modalVisible && (
@@ -65,6 +68,7 @@ function Goals(props) {
 }
 const mapStateToProps = state => {
 	return {
+		columns: state.logbook.columns,
 		goals: state.logbook.goals,
 		modalVisible: state.logbook.modal.visible
 	}
