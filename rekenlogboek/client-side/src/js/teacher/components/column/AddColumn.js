@@ -58,22 +58,16 @@ function AddColumn(props) {
 			</div>
 
 			<div className="Block">
-				<h4>Selecteer input type:</h4>
+				<h4>Selecteer invoermethode:</h4>
 
 				<select
 					onChange={e => props.setInputType(e.target.value)}
 					value={selected}
 					id="inputType"
 				>
-					<option value={props.inputTypes.radiobuttons}>
-						{props.inputTypes.radiobuttons}
-					</option>
-					<option value={props.inputTypes.checkboxes}>
-						{props.inputTypes.checkboxes}
-					</option>
-					<option value={props.inputTypes.textarea}>
-						{props.inputTypes.textarea}
-					</option>
+					<option value={props.inputTypes.radiobuttons}>Keuzeveld</option>
+					<option value={props.inputTypes.checkboxes}>Meerkeuzeveld</option>
+					<option value={props.inputTypes.textarea}>Open antwoord</option>
 				</select>
 			</div>
 
