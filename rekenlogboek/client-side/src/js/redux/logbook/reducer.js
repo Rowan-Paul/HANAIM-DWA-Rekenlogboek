@@ -55,7 +55,7 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 5,
+	group: 0,
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
@@ -67,7 +67,7 @@ const INITIAL_STATE = {
 		title: '',
 		visible: false
 	},
-	period: 1,
+	period: 0,
 	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '', //TODO: auto add years in components
 	year: `${year1} - ${year2}`
@@ -249,7 +249,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				goals: state.goals.filter(goal => {
 					if (goal.position === state.position) {
-						goal.imageBlob = action.payload.imageBlob
+						goal.imageBlobURL = action.payload.imageBlobURL
 						goal.imageName = action.payload.imageName
 					}
 					return goal
@@ -263,7 +263,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 					{
 						added: false,
 						description: '',
-						imageBlob: {},
+						imageBlobURL: {},
 						imageLink: '',
 						imageName: '',
 						position: action.payload,

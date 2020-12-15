@@ -53,7 +53,7 @@ function AddGoals(props) {
 						// check max file size is under 1mb
 						if (e.target.files[0].size < 1000000) {
 							props.setGoalImage({
-								imageBlob: window.URL.createObjectURL(e.target.files[0]),
+								imageBlobURL: window.URL.createObjectURL(e.target.files[0]),
 								imageName: e.target.files[0].name
 							})
 						} else {

@@ -13,16 +13,20 @@ import Image from '../../../img/illustrations/log_select_year.svg'
 import '../../../scss/teacher/containers/NewLogbook.scss'
 
 function General(props) {
-	const [group, setGroup] = useState(props.group.toString())
-	const [period, setPeriod] = useState(props.period.toString())
+	const [group, setGroup] = useState(props.group)
+	const [period, setPeriod] = useState(props.period)
 
 	const changeGroupHandler = value => setGroup(value)
 	const changePeriodHandler = value => setPeriod(value)
 
 	const username = props.user.name
 	const nextButtonHandler = () => {
-		props.addLogbookPeriod({ group, period, username })
-		props.history.push('./columns')
+		if (group === 0 || period === 0) {
+			alert('Selecteer eerst een groep en periode')
+		} else {
+			props.addLogbookPeriod({ group, period, username })
+			props.history.push('./columns')
+		}
 	}
 
 	return (
