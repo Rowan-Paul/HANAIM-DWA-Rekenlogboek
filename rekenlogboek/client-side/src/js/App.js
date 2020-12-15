@@ -4,9 +4,11 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-import { TeacherLanding } from './teacher/containers/TeacherLanding'
+// TEACHER PAGES
+import TeacherLanding from './teacher/containers/TeacherLanding'
 
-// LOGBOOK PAGES
+// LOGBOOK DESIGNER PAGES
+import LBDesignerIndex from './logbook-designer/containers/Index'
 import newLBGeneral from './teacher/containers/General'
 import newLBColumns from './teacher/containers/Columns'
 import newLBGoals from './teacher/containers/Goals'
@@ -97,6 +99,9 @@ function App() {
 
 								{/* LANDING PAGE */}
 								<Route path="/teacher" component={TeacherLanding} />
+
+								{/* LOGBOOK DESIGNER INDEX  */}
+								<Route path="/logbook-designer" component={LBDesignerIndex} />
 
 								{/* SIGN-IN */}
 								<Route exact path="/" component={SignIn} />
