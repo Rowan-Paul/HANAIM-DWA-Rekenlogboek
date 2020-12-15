@@ -249,7 +249,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				goals: state.goals.filter(goal => {
 					if (goal.position === state.position) {
-						goal.imageBlob = action.payload.imageBlob
+						goal.imageBlobURL = action.payload.imageBlobURL
 						goal.imageName = action.payload.imageName
 					}
 					return goal
@@ -263,7 +263,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 					{
 						added: false,
 						description: '',
-						imageBlob: {},
+						imageBlobURL: {},
 						imageLink: '',
 						imageName: '',
 						position: action.payload,
