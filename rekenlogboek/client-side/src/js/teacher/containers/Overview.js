@@ -3,7 +3,7 @@ import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
-import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
+import { saveLogbook, resetLogbook } from '../../redux/logbook/actions'
 
 import '../../../scss/teacher/containers/NewLogbook.scss'
 import TopBar from '../components/logbook/TopBar'
@@ -14,6 +14,9 @@ import LogbookRows from '../components/logbook/LogbookRows'
 function Overview(props) {
 	const history = useHistory()
 	useEffect(() => {
+		// Prevent skipping goals page
+		props.columns.map(c => !c.added && history.push('./goals'))
+
 		if (props.isSaved) {
 			props.resetLogbook()
 			history.push('./done')

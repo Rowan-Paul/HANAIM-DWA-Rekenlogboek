@@ -9,7 +9,6 @@ const db = mongoose.connection
 
 const Logbook = mongoose.model('Logbook')
 const StudentLogbook = mongoose.model('StudentLogbook')
-const Templates = mongoose.model('Templates')
 
 mongoose
 	.connect(`mongodb://localhost:27017/${dbName}`, {
@@ -21,9 +20,6 @@ mongoose
 	})
 	.then(() => {
 		return seedStudentLogboek()
-	})
-	.then(() => {
-		return seedTemplates()
 	})
 	.catch(err => {
 		console.log(err)
@@ -166,65 +162,6 @@ async function seedStudentLogboek() {
 						value: "I'm bad at this",
 						boolean: true
 					}
-				}
-			]
-		}
-	])
-}
-
-async function seedTemplates() {
-	await Templates.deleteMany()
-
-	await Templates.insertMany([
-		{
-			name: 'groep 5 template',
-			group: 5,
-			columns: [
-				{
-					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
-				},
-				{
-					position: 1,
-					title: 'Lesofzo',
-					inputType: 'xx'
-				},
-				{
-					position: 2,
-					title: 'Instructie nodig?',
-					inputType: 'xx'
-				},
-				{
-					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
-				}
-			]
-		},
-		{
-			name: 'groep 7 18/19 template',
-			group: 7,
-			columns: [
-				{
-					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
-				},
-				{
-					position: 1,
-					title: 'Lesofzo',
-					inputType: 'xx'
-				},
-				{
-					position: 2,
-					title: 'Instructie nodig?',
-					inputType: 'xx'
-				},
-				{
-					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
 				}
 			]
 		}

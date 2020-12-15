@@ -72,7 +72,7 @@ export const postImage = () => (dispatch, getState) => {
 
 	if (goal.imageName) {
 		// Fetch image from blob URL
-		fetch(goal.imageBlob)
+		fetch(goal.imageBlobURL)
 			.then(file => file.blob())
 			.then(file => {
 				// Parse to file

@@ -5,7 +5,7 @@ export_on_save:
 
 # Software guidebook
 
-Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd. Dit software guidebook is opgesteld aan de hand van de reader software guidebook (Tijsma et al., 2016).
+Het software guidebook is bedoeld als een handleiding voor developers die duidelijk maakt hoe het project is opgebouwd. Zo kan elke developer verder met dit project ongeacht uitleg van projectleden. Dit software guidebook is opgesteld aan de hand van de reader software guidebook (Tijsma et al., 2016).
 
 ## Inhoudsopgave
 
@@ -29,11 +29,9 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
     - [2.3 Leerling](#23-leerling)
       - [2.3.1 User stories](#231-user-stories)
   - [3 Kwaliteitsattributen](#3-kwaliteitsattributen)
-    - [3.1 Tijdsduur](#31-tijdsduur)
-    - [3.2 Browser ondersteuning](#32-browser-ondersteuning)
-    - [3.3 Data voor de applicatie](#33-data-voor-de-applicatie)
-    - [3.4 Documentatie](#34-documentatie)
-    - [3.5 Talen en wetgeving](#35-talen-en-wetgeving)
+    - [3.1 Data voor de applicatie](#31-data-voor-de-applicatie)
+    - [3.2 Documentatie](#32-documentatie)
+    - [3.3 Talen en wetgeving](#33-talen-en-wetgeving)
   - [4. Beperkingen](#4-beperkingen)
     - [4.1 Tijd en budget](#41-tijd-en-budget)
     - [4.2 Technologieën](#42-technologieën)
@@ -45,11 +43,18 @@ Het software guidebook is bedoeld als een handleiding voor developers die duidel
       - [6.1.2 Component diagram: client-side](#612-component-diagram-client-side)
       - [6.1.3 Component diagram: server-side](#613-component-diagram-server-side)
     - [6.2 Bestandsstructuur](#62-bestandsstructuur)
+    - [6.3 Real-time](#63-real-time)
   - [7 Infrastructuur architectuur](#7-infrastructuur-architectuur)
     - [7.1 Lokale ontwikkelomgeving](#71-lokale-ontwikkelomgeving)
     - [7.2 Deployed ontwikkelomgeving](#72-deployed-ontwikkelomgeving)
   - [8 Deployment](#8-deployment)
     - [8.1 Deployment diagram](#81-deployment-diagram)
+    - [8.2 Deployen van de Microsoft Teams app](#82-deployen-van-de-microsoft-teams-app)
+      - [8.2.1 Microsoft 365 Developer](#821-microsoft-365-developer)
+      - [8.2.2 Teams instellen](#822-teams-instellen)
+      - [8.2.3 App toevoegen aan organisatie](#823-app-toevoegen-aan-organisatie)
+      - [8.2.4 App toevoegen aan team](#824-app-toevoegen-aan-team)
+    - [8.3 SSL](#83-ssl)
   - [9 Operatie en ondersteuning](#9-operatie-en-ondersteuning)
     - [9.1 Operatie](#91-operatie)
     - [9.2 Ondersteuning](#92-ondersteuning)

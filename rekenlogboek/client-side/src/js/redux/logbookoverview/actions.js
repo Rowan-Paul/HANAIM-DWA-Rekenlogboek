@@ -3,8 +3,15 @@ import {
 	SAVE_STUDENT_LOGBOOKS,
 	SAVE_ACTIVE_STUDENTLOGBOOK,
 	SET_CURRENT_LOGBOOK_PERIOD,
-	SET_GROUP
+	SET_GROUP,
+	RESET_LOGBOOK_OVERVIEW
 } from './types'
+
+export const resetLogbookOverview = () => {
+	return {
+		type: RESET_LOGBOOK_OVERVIEW
+	}
+}
 
 export const fetchCurrentLogbook = () => (dispatch, getState) => {
 	const year = getState().logbookoverview.year
