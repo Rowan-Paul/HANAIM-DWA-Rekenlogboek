@@ -10,6 +10,7 @@ const initialMainState = {
 		Leraar: 'Leraar',
 		Logboekontwerper: 'Logboekontwerper'
 	},
+	// For later use
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
