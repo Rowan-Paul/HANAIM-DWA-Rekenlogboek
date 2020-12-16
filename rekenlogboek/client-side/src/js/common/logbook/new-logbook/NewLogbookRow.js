@@ -7,8 +7,8 @@ export default function LogbookRow(props) {
 	return (
 		<div className="Row Body">
 			<Goal goal={props.goal} type={'edit'} />
-			<InputType position={1} type={'preview'} />
-			<InputType position={2} type={'preview'} />
+			<InputType position={1} />
+			<InputType position={2} />
 			<Evaluation type={'preview'} />
 		</div>
 	)
