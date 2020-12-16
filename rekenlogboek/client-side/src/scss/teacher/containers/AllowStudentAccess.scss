@@ -60,7 +60,11 @@
 			padding: 8px 20px;
 
 			&:hover {
-				background-color: lighten($gray, 10%);
+				background-color: lighten($blue, 40%);
+			}
+
+			&.selected {
+				background-color: lighten($blue, 30%);
 			}
 		}
 	}

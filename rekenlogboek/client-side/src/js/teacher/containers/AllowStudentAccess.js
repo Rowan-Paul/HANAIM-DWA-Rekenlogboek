@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import { modalShow, modalHide } from '../../redux/logbook/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
@@ -19,6 +20,10 @@ function AllowStudentAccess(props) {
 	const UnlockEvaluation = goal => {
 		setSelectedLearnGoal(goal)
 		props.modalHide()
+	}
+
+	const selectGoal = nr => {
+		setSelectedLearnGoal(nr)
 	}
 
 	const learnGoals = [
@@ -55,7 +60,13 @@ function AllowStudentAccess(props) {
 	const getLearnGoals = () =>
 		learnGoals.map(goal => {
 			return (
-				<div className="goal" key={goal.goalNumber}>
+				<div
+					className={classNames('goal', {
+						selected: goal.goalNumber === selectedLearnGoal
+					})}
+					onClick={() => selectGoal(goal.goalNumber)}
+					key={goal.goalNumber}
+				>
 					{goal.name}
 				</div>
 			)
