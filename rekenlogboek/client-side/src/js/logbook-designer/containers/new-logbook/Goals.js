@@ -55,7 +55,7 @@ function Goals(props) {
 	return (
 		<div className="new-logbook">
 			{props.modalVisible && (
-				<Modal handler={addGoal}>
+				<Modal handler={addGoal} btnValue="Toevoegen">
 					<AddGoals />
 				</Modal>
 			)}

@@ -18,7 +18,7 @@ function Modal(props) {
 
 				<div className="Body">{props.children}</div>
 				<div className="Footer">
-					<Button color="blue" value="Toevoegen" handler={props.handler} />
+					<Button color="blue" value={props.btnValue} handler={props.handler} />
 				</div>
 			</div>
 		</div>

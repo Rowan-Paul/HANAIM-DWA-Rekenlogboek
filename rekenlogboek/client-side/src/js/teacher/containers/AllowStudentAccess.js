@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { modalShow, modalHide } from '../../redux/logbook/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
 
@@ -10,8 +11,16 @@ import Lock from '../../../img/icons/lock_blue.svg'
 import Jumbotron from '../../common/Jumbotron'
 import ButtonContainer from '../../common/ButtonContainer'
 import Button from '../../common/Button'
+import Modal from '../../common/logbook/Modal'
 
-function AllowStudentAccess() {
+function AllowStudentAccess(props) {
+	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
+
+	const UnlockEvaluation = goal => {
+		setSelectedLearnGoal(goal)
+		props.modalHide()
+	}
+
 	return (
 		<div className="allow-student-access">
 			<div className="period-filter">
@@ -26,8 +35,14 @@ function AllowStudentAccess() {
 						<p>
 							Kies welk deel van het logboek u wilt ontgrendelen. Er kan maar
 							een deel tegelijkertijd open staan. Bij het kiezen van de
-							evaluaties pagina kunt u zelf bepalen welke leerdoelen geëvalueerd
-							mogen worden.
+							evaluaties pagina kunt u zelf bepalen welk leerdoel geëvalueerd
+							mag worden.
+						</p>
+						<p>
+							Wilt u een ander blok openen, dan kan dat rechtsbovenin. Zodra u
+							een deel van een ander blok ontgrendeld zullen alle andere blokken
+							van de klas vergrendeld worden. Op die manier is er altijd maar
+							een blok in beeld voor de leerlingen
 						</p>
 					</div>
 					<ButtonContainer
@@ -51,20 +66,36 @@ function AllowStudentAccess() {
 						color="green"
 						description="Open na pre-toets pagina."
 						value="Ontgrendel"
-						// handler={() => history.push('../teacher/logbooks')}
+						handler={() =>
+							props.modalShow({
+								title: 'Bepaal toegang'
+							})
+						}
 					/>
 				</div>
 			</Jumbotron>
+
+			{props.modalVisible && (
+				<Modal
+					btnValue="Bevestig"
+					handler={learnGoal => UnlockEvaluation(learnGoal)}
+				></Modal>
+			)}
 		</div>
 	)
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		modalVisible: state.logbook.modal.visible
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-	return {}
+	return {
+		modalShow: payload => dispatch(modalShow(payload)),
+		modalHide: () => dispatch(modalHide())
+	}
 }
 
 export default connect(
