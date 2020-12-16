@@ -276,6 +276,24 @@ describe('Logbook route tests', () => {
 		expect(test).toEqual(200)
 	})
 
+	test('Update activeGoal with a String', async () => {
+		const body = {
+			activeGoal: 'a string'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
+
 	test('Get logbook from id', async () => {
 		const logbookID = await getTestlogbookID()
 		const test = await fetch('http://localhost:3000/logbook/' + logbookID, {
