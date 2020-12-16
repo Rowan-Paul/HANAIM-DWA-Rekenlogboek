@@ -22,7 +22,8 @@ h4 {
 	margin: 0 auto;
 	padding: 0;
 	overflow-y: scroll;
-	height: 90%;
+	height: 45vh;
+	max-height: 45vh;
 
 	.Row {
 		border-bottom: 1px solid $borderColor;
