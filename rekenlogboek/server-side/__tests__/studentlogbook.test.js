@@ -2,6 +2,8 @@
  * @jest-environment node
  */
 
+//  CHANGE DB NAME IN app.js TO testrekenlogboek
+
 'use strict'
 
 //Database mocking for later?!

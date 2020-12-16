@@ -45,6 +45,23 @@ router.put('/:id/currentPhase', (req, res) => {
 })
 
 // Update a logbook's currentGoal
+router.put('/:id/activeGoal', (req, res) => {
+	Logbook.findOneAndUpdate(
+		{
+			_id: req.params.id
+		},
+		{
+			activeGoal: req.body.activeGoal
+		}
+	)
+		.then(() => {
+			res.sendStatus(200)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
 
 // Get all information about one logbook
 router.get('/:id', (req, res) => {
