@@ -13,7 +13,7 @@ import Explanation from './Explanation'
 import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
-import '../../../../scss/teacher/components/column/AddColumn.scss'
+import '../../../../scss/logbook-designer/components/column/AddColumn.scss'
 function AddColumn(props) {
 	const [title, setTitle] = useState('')
 	const [options, setOptions] = useState('')

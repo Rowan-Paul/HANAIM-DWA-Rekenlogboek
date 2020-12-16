@@ -4,7 +4,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { io } from 'socket.io-client'
-import { fetchActiveStudentlogbook } from '../../redux/logbookStudent/actions'
+import { fetchActiveStudentlogbook } from '../../redux/logbookoverview/actions'
 
 import Button from '../../common/Button'
 import Jumbotron from '../../common/Jumbotron'
@@ -56,11 +56,11 @@ function StudentLogbook(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbookStudent.currentLogbook.columns,
-		goals: state.logbookStudent.currentLogbook.goals,
-		logbookid: state.logbookStudent.activeStudentlogbook._id,
-		logbookType: state.logbookNew.type,
-		student: state.logbookStudent.activeStudentlogbook.student,
+		columns: state.logbookoverview.currentLogbook.columns,
+		goals: state.logbookoverview.currentLogbook.goals,
+		logbookid: state.logbookoverview.activeStudentlogbook._id,
+		logbookTypes: state.main.logbookTypes,
+		student: state.logbookoverview.activeStudentlogbook.student,
 		teacher: state.main.user.name
 	}
 }

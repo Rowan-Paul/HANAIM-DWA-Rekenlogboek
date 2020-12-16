@@ -1,15 +1,12 @@
-import '../../../../scss/teacher/components/AddGoals.scss'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import shortid from 'shortid'
 import {
-	postImage,
-	setGoal,
 	setGoalDescription,
 	setGoalImage,
 	setGoalTitle
 } from '../../../redux/logbook/actions'
 
+import '../../../../scss/logbook-designer/components/AddGoals.scss'
 function AddGoals(props) {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')

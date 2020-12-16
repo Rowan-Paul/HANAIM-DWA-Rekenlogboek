@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { setExplanation } from '../../../redux/logbook/actions'
 import { connect } from 'react-redux'
 
-import '../../../../scss/teacher/components/column/Explanation.scss'
+import '../../../../scss/logbook-designer/components/AddGoals.scss'
 
 function Explanation(props) {
 	const [explanation, setExplanation] = useState(true)

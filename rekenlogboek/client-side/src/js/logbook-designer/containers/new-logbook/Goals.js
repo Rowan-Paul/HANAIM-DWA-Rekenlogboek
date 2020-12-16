@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom'
-import { postImage, setGoal } from '../../../redux/logbookNew/actions'
+import { postImage, setGoal } from '../../../redux/logbook/actions'
 
 import AddGoals from '../../components/goals/AddGoals'
 import Button from '../../../common/Button'
@@ -93,10 +93,10 @@ function Goals(props) {
 }
 const mapStateToProps = state => {
 	return {
-		columns: state.logbookNew.columns,
-		goals: state.logbookNew.goals,
-		logbookType: state.logbookNew.type,
-		modalVisible: state.logbookNew.modal.visible
+		columns: state.logbook.columns,
+		goals: state.logbook.goals,
+		logbookTypes: state.main.logbookTypes,
+		modalVisible: state.logbook.modal.visible
 	}
 }
 

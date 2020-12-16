@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setColumn } from '../../../redux/logbookNew/actions'
+import { setColumn } from '../../../redux/logbook/actions'
 
 import AddColumn from '../../components/column/AddColumn'
 import Button from '../../../common/Button'
@@ -102,11 +102,11 @@ function Columns(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbookNew.columns,
-		group: state.logbookNew.group,
-		logbookType: state.logbookNew.type,
-		modalVisible: state.logbookNew.modal.visible,
-		period: state.logbookNew.period
+		columns: state.logbook.columns,
+		group: state.logbook.group,
+		logbookTypes: state.main.logbookTypes,
+		modalVisible: state.logbook.modal.visible,
+		period: state.logbook.period
 	}
 }
 

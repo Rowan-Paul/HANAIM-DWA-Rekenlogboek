@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { modalShow, setGoalPosition } from '../../redux/logbook/actions'
-import '../../../scss/teacher/components/logbook/TopBar.scss'
+
+import '../../../scss/common/logbook/TopBar.scss'
 
 function TopBar(props) {
 	const position = props.goals.length + 1

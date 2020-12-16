@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 // import Button from '../../common/Button'
 
-import '../../../scss/teacher/components/LogbookSaved.scss'
+import '../../../scss/logbook-designer/components/LogbookSaved.scss'
 
 function LogbookSavedUI() {
 	return (

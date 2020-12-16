@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../scss/teacher/components/Illustration.scss'
+import '../../../scss/logbook-designer/components/Illustration.scss'
 export default function Illustration(props) {
 	return (
 		<div className="Illustration">

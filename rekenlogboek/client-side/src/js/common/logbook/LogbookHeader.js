@@ -12,7 +12,6 @@ function LogbookHeader(props) {
 
 	const columnPropHandler = () => {
 		if (colums) {
-			console.log(colums)
 			switch (props.type) {
 				// NEW LOGBOOK HEADER
 				case props.logbookTypes.newLogbook:
@@ -46,7 +45,7 @@ function LogbookHeader(props) {
 					return (
 						<p className="ErrorMessage">
 							LogbookHeader: props.type not set or empty! (see
-							state.logbookNew.type)
+							state.logbook.type)
 						</p>
 					)
 			}

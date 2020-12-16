@@ -37,8 +37,7 @@ export function LogbookRows(props) {
 				default:
 					return (
 						<p className="ErrorMessage">
-							LogbookRows: props.type not set or empty! (See
-							state.logbookNew.type)
+							LogbookRows: props.type not set or empty! (See state.logbook.type)
 						</p>
 					)
 			}
