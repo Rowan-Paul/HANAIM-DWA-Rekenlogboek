@@ -13,10 +13,6 @@ const logbookSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	teacher: {
-		type: String,
-		required: true
-	},
 	currentPhase: {
 		type: String,
 		required: true

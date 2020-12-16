@@ -18,6 +18,7 @@ function Columns(props) {
 	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)
 	const [modal, setModal] = useState(props.modalVisible)
+	const [nextButtonColor, setNextButtonColor] = useState('gray')
 
 	// Verify if all collumns set
 	const verifyColumns = () => {
@@ -25,6 +26,14 @@ function Columns(props) {
 			alert('Vul eerst alle kolommen in')
 		} else {
 			history.push('./goals')
+		}
+	}
+
+	const checkNextButtonColor = () => {
+		if (!columns.every(c => c.added)) {
+			setNextButtonColor('gray')
+		} else {
+			setNextButtonColor('blue')
 		}
 	}
 
@@ -37,6 +46,10 @@ function Columns(props) {
 		setColumns(props.columns)
 		setModal(props.modalVisible)
 	}, [props.columns, props.modalVisible])
+
+	useEffect(() => {
+		checkNextButtonColor()
+	}, [props.columns])
 
 	return (
 		<div className="new-logbook">
@@ -74,7 +87,11 @@ function Columns(props) {
 				/>
 			</div>
 			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => verifyColumns()} />
+				<Button
+					color={nextButtonColor}
+					value="Volgende"
+					handler={() => verifyColumns()}
+				/>
 			</div>
 		</div>
 	)

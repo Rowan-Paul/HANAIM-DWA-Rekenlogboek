@@ -2,6 +2,8 @@
  * @jest-environment node
  */
 
+//  CHANGE DB NAME IN app.js TO testrekenlogboek
+
 'use strict'
 
 const mongoose = require('mongoose')
@@ -13,7 +15,7 @@ const Logbook = mongoose.model('Logbook')
 // Get logbookID from logbook created before all tests
 const getTestlogbookID = async () => {
 	const number = await Logbook.find({
-		teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
+		group: 7
 	})
 		.lean()
 		.then(response => {
@@ -25,7 +27,7 @@ const getTestlogbookID = async () => {
 
 describe('Logbook route tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
+		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
@@ -34,8 +36,7 @@ describe('Logbook route tests', () => {
 		await Logbook.create({
 			period: 3,
 			group: 7,
-			year: '19/20',
-			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com',
+			year: '2019 - 2020',
 			currentPhase: 'PRE_TOETS',
 			columns: [
 				{
@@ -94,10 +95,10 @@ describe('Logbook route tests', () => {
 
 	afterAll(async () => {
 		await Logbook.deleteMany({
-			teacher: 'JanVisser@teamjaguarundi.onmicrosoft.com'
+			group: 7
 		})
 		await Logbook.deleteMany({
-			teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com'
+			group: 5
 		})
 		await mongoose.disconnect()
 	})
@@ -111,8 +112,7 @@ describe('Logbook route tests', () => {
 			body: JSON.stringify({
 				period: 1,
 				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+				year: '2019 - 2020',
 				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
@@ -180,8 +180,7 @@ describe('Logbook route tests', () => {
 			},
 			body: JSON.stringify({
 				group: 5,
-				year: '19/20',
-				teacher: 'Eenleraar@teamjaguarundi.onmicrosoft.com',
+				year: '2019 - 2020',
 				currentPhase: 'NOT_VISIBLE',
 				columns: [
 					{
@@ -239,6 +238,60 @@ describe('Logbook route tests', () => {
 		}).then(response => response.status)
 
 		expect(createResponse).toEqual(500)
+	})
+
+	test('Update currentPhase', async () => {
+		const body = {
+			currentPhase: 'evaluation'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/currentPhase',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	test('Update activeGoal', async () => {
+		const body = {
+			activeGoal: 69
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	test('Update activeGoal with a String', async () => {
+		const body = {
+			activeGoal: 'a string'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
 	})
 
 	test('Get logbook from id', async () => {
