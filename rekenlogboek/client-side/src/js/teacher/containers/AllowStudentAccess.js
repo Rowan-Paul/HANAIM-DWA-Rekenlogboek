@@ -93,7 +93,7 @@ function AllowStudentAccess(props) {
 							Wilt u een ander blok openen, dan kan dat rechtsbovenin. Zodra u
 							een deel van een ander blok ontgrendeld zullen alle andere blokken
 							van de klas vergrendeld worden. Op die manier is er altijd maar
-							een blok in beeld voor de leerlingen
+							een blok in beeld voor de leerlingen.
 						</p>
 					</div>
 					<ButtonContainer
