@@ -1,7 +1,7 @@
 import React from 'react'
 import shortid from 'shortid'
 
-import InputHandlers from '../../teacher/components/column/InputHandlers'
+import InputHandlers from '../../logbook-designer/components/column/InputHandlers'
 import '../../../scss/common/InputTypes.scss'
 
 export default function RadioButtons(props) {

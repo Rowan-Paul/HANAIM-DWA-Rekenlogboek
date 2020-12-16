@@ -5,8 +5,8 @@ import { fetchCurrentLogbook } from '../../redux/logbookoverview/actions'
 
 import Jumbotron from '../../common/Jumbotron'
 import LogbookList from '../components/LogbookList'
-import TopBar from '../components/logbook/TopBar'
-import LogbookFrame from '../components/logbook/LogbookFrame'
+import TopBar from '../../common/logbook/TopBar'
+import LogbookFrame from '../../common/logbook/LogbookFrame'
 
 function Logbooks(props) {
 	useEffect(() => {

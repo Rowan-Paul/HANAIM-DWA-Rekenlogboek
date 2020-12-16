@@ -1,0 +1,65 @@
+@import '../../Variables.scss';
+.Goal {
+	ul {
+		margin: 1vh auto;
+		padding: 0;
+		height: 100%;
+		width: 90%;
+
+		li {
+			list-style-type: none;
+
+			// Header
+			&:first-of-type {
+				align-items: center;
+				display: flex;
+				border-bottom: 1px solid $borderColor;
+				height: 4vh;
+				position: relative;
+
+				h4 {
+					margin: 0;
+					padding: 0;
+				}
+
+				div {
+					position: absolute;
+					right: 0;
+
+					button {
+						background-color: transparent;
+						border: none;
+						transition: ease-in-out 0.5s;
+
+						&:first-of-type {
+							color: $blue;
+
+							&:hover {
+								cursor: pointer;
+								color: $hover-blue;
+							}
+						}
+						&:last-of-type {
+							color: #ff8080;
+
+							&:hover {
+								cursor: pointer;
+								color: darken(#ff8080, 10%);
+							}
+						}
+					}
+				}
+			}
+
+			p {
+				color: $fontLight;
+				font-size: 14px;
+			}
+
+			img {
+				max-height: 200px;
+				max-width: 100%;
+			}
+		}
+	}
+}

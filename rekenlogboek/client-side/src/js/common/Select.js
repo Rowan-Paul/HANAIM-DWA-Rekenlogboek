@@ -33,7 +33,6 @@ export default function Select(props) {
 				}}
 			>
 				<option defaultValue>Selecteer...</option>
-
 				{getOptions()}
 			</select>
 		</div>
