@@ -13,15 +13,6 @@ import Question from 		'../components/Question'
 import Jumbotron from 		'../../common/Jumbotron'
 import Button from 			'../../common/Button'
 
-// import { previousGoal } from '../../../redux/studentlogbook/actions'
-// import { nextGoal } from '../../../redux/studentlogbook/actions'
-// import { newExplanation } from '../../../redux/studentlogbook/actions'
-// import { newAnswer } from '../../../redux/studentlogbook/actions'
-// import { fetchAnswers } from '../../../redux/studentlogbook/actions'
-// import { fetchColumn } from '../../../redux/studentlogbook/actions'
-// import { fetchGoal } from '../../../redux/studentlogbook/actions'
-// import { fetchGoalAmount } from '../../../redux/studentlogbook/actions'
-
 import { previousGoal, nextGoal, newExplanation, newAnswer, fetchAnswers, fetchColumn, fetchGoal, fetchGoalAmount } from '../../../redux/studentlogbook/actions'
 
 function InstructionsUI(props) {

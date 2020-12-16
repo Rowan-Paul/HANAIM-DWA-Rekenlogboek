@@ -1,12 +1,3 @@
-// import { SAVE_CURRENTPHASE } from './types'
-// import { SAVE_COLUMN } from './types'
-// import { SAVE_GOAL } from './types'
-// import { SAVE_GOAL_AMOUNT } from './types'
-// import { SAVE_ANSWERS } from './types'
-// import { NEXT_GOAL } from './types'
-// import { PREVIOUS_GOAL } from './types'
-// import { SAVE_ALL_GOALS } from './types'
-
 import { SAVE_CURRENTPHASE, SAVE_COLUMN, SAVE_GOAL, SAVE_GOAL_AMOUNT, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS, LOAD_STUDENTLOGBOOK} from './types'
 
 export const fetchAllGoals = () => (dispatch, getState) => {
@@ -36,40 +27,17 @@ export const nextGoal = () => {
 }
 
 export const newExplanation = payload => (dispatch, getState) => {
-	// let answers = []
-
 	// Set answers if the logbook has any.
 	let answers = getState().studentLogbook.answers.length > 0 ? getState().studentLogbook.answers : [];
 
-	// if (getState().studentLogbook.answers.length > 0) {
-	// 	answers = getState().studentLogbook.answers
-	// }
-
+	//Change the explanation for one answer
 	answers.forEach((answer, i) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position &&
 			answer.goalPosition === getState().studentLogbook.currentGoal.position) 
 		{
-			// answers[i] = {
-			// 	goalPosition: answer.goalPosition,
-			// 	columnPosition: answer.columnPosition,
-			// 	answer: {
-			// 		inputType: getState().studentLogbook.column.input.type,
-			// 		value: getState().studentLogbook.answers[i].answer.value,
-			// 		explanation: payload
-			// 	}
-			// }
-
 			answer[i].explanation = payload;
 		}
 	})
-
-	// let body = {
-	// 	student: getState().main.user.name,
-	// 	logbookID: getState().studentLogbook.logbookID,
-	// 	goalPosition: getState().studentLogbook.currentGoal.position,
-	// 	columnPostion: getState().studentLogbook.column.position,
-	// 	explanation: payload
-	// }
 
 	let body = {
 		student: getState().main.user.name,
@@ -101,13 +69,6 @@ export const newAnswer = payload => (dispatch, getState) => {
 
 	let answers = getState().studentLogbook.answers.length > 0 ? getState().studentLogbook.answers : [];
 
-	// let answers = []
-
-	// // check if it's a new logbnook without answers
-	// if (getState().studentLogbook.answers.length > 0) {
-	// 	answers = getState().studentLogbook.answers
-	// }
-
 	let addedAnswer = false
 	let inputType
 	let columnPosition
@@ -129,15 +90,6 @@ export const newAnswer = payload => (dispatch, getState) => {
 		if (answer.columnPosition === getState().studentLogbook.column.position &&
 			answer.goalPosition === getState().studentLogbook.currentGoal.position) 
 		{
-			// answers[i] = {
-			// 	goalPosition: answer.goalPosition,
-			// 	columnPosition: answer.columnPosition,
-			// 	answer: {
-			// 		inputType: inputType,
-			// 		value: payload
-			// 	}
-			// }
-
 			answers[i].inputType = inputType
 			answers[i].value = payload
 
@@ -180,59 +132,6 @@ export const newAnswer = payload => (dispatch, getState) => {
 }
 
 export const fetchAnswers = () => (dispatch, getState) => {
-	// // check if the studentlogbook exists
-	// fetch(
-	// 	process.env.REACT_APP_SERVER_ADDRESS +
-	// 		`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
-	// 			getState().studentLogbook.logbookID
-	// 		}`,
-	// 	{
-	// 		method: 'GET'
-	// 	}
-	// )
-	// .then(res => res.json())
-	// .then(response => {
-	// 	// fetch the already given answers
-	// 	fetch(
-	// 		process.env.REACT_APP_SERVER_ADDRESS +
-	// 			`/studentlogbook/${response.studentlogbookID}/answers/`,
-	// 			{
-	// 			method: 'GET'
-	// 		}
-	// 	)
-	// 	.then(res => res.json())
-	// 	.then(response => {
-	// 		dispatch({
-	// 			type: FETCH_ANSWERS,
-	// 			response // Called it response (from API) to distinguish it from payloads (from app)
-	// 		})
-	// 	})
-	// })
-	// .catch(error => {
-	// 	// create a new studentlogbook
-	// 	// kinda a bad solution but idk
-	// 	const body = {
-	// 	logbookID: getState().studentLogbook.logbookID,
-	// 	student: getState().main.user.name
-	// 	}
-	// 	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
-	// 		method: 'POST',
-	// 		headers: { 'Content-Type': 'application/json' },
-	// 		body: JSON.stringify(body)
-	// 	})
-	// 	.then(res => res.json())
-	// 	.then(response => {
-	// 		dispatch({
-	// 			type: FETCH_ANSWERS,
-	// 			response // Called it response (from API) to distinguish it from payloads (from app)
-	// 		})
-	// 	})
-	// 	console.log(error)
-	// })
-
-
-
-	//Studentlogboek exists, get all answers from it.
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
 			`/studentlogbook/${getState().studentLogbook.studentLogbookID}/answers/`,
@@ -247,35 +146,6 @@ export const fetchAnswers = () => (dispatch, getState) => {
 			response // Called it response (from API) to distinguish it from payloads (from app)
 		})
 	})
-}
-
-export const fetchCurrentPhase = payload => dispatch => {
-	//TODO: place this somewhere to access it globally
-	// removes chararacter at place i in string
-	// String.prototype.removeCharAt = function (i) {
-	// 	var tmp = this.split('') // convert to an array
-	// 	tmp.splice(i - 1, 1) // remove 1 element from the array (adjusting for non-zero-indexed counts)
-	// 	return tmp.join('') // reconstruct the string
-	// }
-
-	//Groep 7 -> select everything after the space -> 7
-	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
-
-	fetch(
-		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/groups/${groupNumber}`,
-		{
-			method: 'GET'
-		}
-	)
-	.then(res => res.json())
-	.then(response => {
-		dispatch({
-			type: SAVE_CURRENTPHASE,
-			response // Called it response (from API) to distinguish it from payloads (from app)
-		})}
-	)
-	.catch(error => console.log(error))
 }
 
 export const fetchColumn = payload => (dispatch, getState) => {
@@ -332,13 +202,13 @@ export const fetchGoalAmount = () => (dispatch, getState) => {
 	.catch(error => console.log(error))
 }
 
-export const loadStudentLogbook = payload => (dispatch, getState) => {
+export const loadStudentLogbook = payload => async (dispatch, getState) => {
 	//Groep 7 -> select everything after the space -> 7
 	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
 
 	//First fetch get's the phase of the logbook & LogbookID
 	//Second fetch get's the studentlogbookID and it's answers
-	fetch(
+	await fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/groups/${groupNumber}`,
 		{
@@ -346,9 +216,11 @@ export const loadStudentLogbook = payload => (dispatch, getState) => {
 		}
 	)
 	.then(res => res.json())
-	.then(response => {
-		
-		fetch(
+	.then(async response => {
+
+		//Ugly but it works
+		//----------------------
+		await fetch( //Await this fetch so it's finished before dispatching the currentphase
 			process.env.REACT_APP_SERVER_ADDRESS +
 			`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${response._id}`,
 			{
@@ -357,19 +229,20 @@ export const loadStudentLogbook = payload => (dispatch, getState) => {
 		)
 		.then(res => res.json())
 		.then(response => {
-			console.log("This isthe respoienadf: " + response._id)
 			dispatch({
 				type: LOAD_STUDENTLOGBOOK,
 				response // Called it response (from API) to distinguish it from payloads (from app)
 			})}
 		)
 		.catch(error => console.log(error))
-		
+		//----------------------
+
 		//Dispatch later so we don't have troubles later on.
 		dispatch({
 			type: SAVE_CURRENTPHASE,
 			response // Called it response (from API) to distinguish it from payloads (from app)
 		})
+
 	})
 	.catch(error => console.log(error))
 }

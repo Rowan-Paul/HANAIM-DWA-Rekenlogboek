@@ -10,7 +10,6 @@ export default function ResultText(props) {
 	const getTableRows = () => {
 		{
 			let columnAnswers = []
-			console.log(props.answers)
 			props.answers.forEach(answer => {
 				if (answer.columnPosition === props.columnPosition) {
 					columnAnswers.push(answer)

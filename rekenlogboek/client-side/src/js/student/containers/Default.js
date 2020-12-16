@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Default.scss'
 
-import { fetchCurrentPhase, loadStudentLogbook } from 	'../../../redux/studentlogbook/actions'
+import { loadStudentLogbook } from 	'../../../redux/studentlogbook/actions'
 import { saveUserAction } from 		'../../redux/main/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
@@ -16,16 +16,6 @@ function StudentUI(props) {
 			props.doLoadStudentLogbook(props.context.teamName)
 		}
 	}, [])
-
-	// const [dataFetched, setDataFetched] = useState(false)
-
-	// fetch the current phase
-	// if (!props.dataFetched && props.context.teamName !== undefined) {
-		// props.doFetchCurrentPhase(props.context.teamName)
-		// props.doLoadStudentLogbook(props.context.teamName)
-		// setDataFetched(true)
-		// console.log('Default component: ' + props.logbookId)
-	// }
 
 	// When the user object exists, check which page
 	// the user should be redirected to
@@ -73,15 +63,12 @@ function mapStateToProps(state) {
 		user: state.main.user,
 		currentPhase: state.studentLogbook.currentPhase,
 		context: state.main.context,
-		logbookId: state.studentLogbook.logbookId,
-		dataFetched: state.studentLogbook.dataFetched
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		doSaveUser: payload => dispatch(saveUserAction(payload)),
-		doFetchCurrentPhase: payload => dispatch(fetchCurrentPhase(payload)),
 		doLoadStudentLogbook: payload => dispatch(loadStudentLogbook(payload))
 	}
 }

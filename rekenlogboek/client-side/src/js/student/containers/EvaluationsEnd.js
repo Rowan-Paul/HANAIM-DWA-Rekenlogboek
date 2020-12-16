@@ -13,11 +13,6 @@ import ResultTable from '../components/ResultTable'
 
 import Jumbotron from 	'../../common/Jumbotron'
 
-// import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
-// import { previousGoal } from '../../../redux/studentlogbook/actions'
-// import { nextGoal } from '../../../redux/studentlogbook/actions'
-// import { fetchAnswers } from '../../../redux/studentlogbook/actions'
-
 import { fetchAllGoals, previousGoal, nextGoal, fetchAnswers } from '../../../redux/studentlogbook/actions'
 
 function EvaluationsEndUI(props) {

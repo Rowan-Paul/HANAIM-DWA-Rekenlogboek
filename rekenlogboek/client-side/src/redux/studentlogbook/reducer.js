@@ -1,11 +1,3 @@
-// import { SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT } from './types'
-// import { SAVE_COLUMN } from './types'
-// import { SAVE_GOAL } from './types'
-// import { SAVE_ANSWERS } from './types'
-// import { NEXT_GOAL } from './types'
-// import { PREVIOUS_GOAL } from './types'
-// import { SAVE_ALL_GOALS } from './types'
-
 import {SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT, SAVE_COLUMN, SAVE_GOAL, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS, LOAD_STUDENTLOGBOOK} from './types'
 
 const INITIAL_STATE = {
@@ -19,8 +11,6 @@ const INITIAL_STATE = {
 		position: 1 // set default to 1 so it can fetch the first goal
 	},
 	answers: {},
-
-	dataFetched: false
 }
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {

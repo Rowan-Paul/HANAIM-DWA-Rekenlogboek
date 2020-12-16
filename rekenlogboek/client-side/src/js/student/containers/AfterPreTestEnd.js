@@ -11,11 +11,6 @@ import ResultTable from '../components/ResultTable'
 import Jumbotron from 	'../../common/Jumbotron'
 import Button from 		'../../common/Button'
 
-// import { fetchAllGoals } from '../../../redux/studentlogbook/actions'
-// import { previousGoal } from '../../../redux/studentlogbook/actions'
-// import { nextGoal } from '../../../redux/studentlogbook/actions'
-// import { fetchAnswers } from '../../../redux/studentlogbook/actions'
-
 import { fetchAllGoals, previousGoal, nextGoal, fetchAnswers} from '../../../redux/studentlogbook/actions'
 
 function AfterPreTestEndUI(props) {
