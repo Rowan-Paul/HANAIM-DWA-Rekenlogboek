@@ -6,7 +6,7 @@ In dit hoofdstuk wordt besproken hoe de applicatie precies wordt gedeployed. De 
 
 Hieronder staat het deployment diagram waarin weergeven wordt hoe het project kan worden gebruikt.
 
-@import "./c4-model/Deployment diagram.svg"
+@import "./c4-model/deployment.svg"
 
 ### 8.2 Deployen van de Microsoft Teams app
 

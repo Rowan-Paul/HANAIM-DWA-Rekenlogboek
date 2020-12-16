@@ -8,7 +8,7 @@ Hieronder staan 3 verschillende diagrammen die de software architectuur duidelij
 
 #### 6.1.1 Container diagram
 
-In het container diagram hieronder is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 2 containers: de client-side en de server-side.
+In het container diagram hieronder is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 2 containers: de Single Page Application en de Server.
 
 @import "./c4-model/containers.svg"
 
@@ -16,7 +16,7 @@ In het container diagram hieronder is te zien hoe de verschillende systemen en g
 
 Hieronder staat het component diagram van de Single Page Application, ook wel de client-side genoemd, die tracht in 1 oogopslag een overzicht te geven over de gehele client-side applicatie.
 
-@import "./c4-model/components-client.svg"
+@import "./c4-model/components-SPA.svg"
 
 #### 6.1.3 Component diagram: Server
 
