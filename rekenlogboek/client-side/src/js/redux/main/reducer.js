@@ -16,6 +16,11 @@ const initialMainState = {
 		radiobuttons: 'radiobuttons',
 		textarea: 'textarea'
 	},
+	inputStates: {
+		inUse: 'inUse',
+		onEdit: 'onEdit',
+		inPreview: 'inPreview'
+	},
 	logbookTypes: {
 		newLogbook: 'newLogbook',
 		studentLogbook: 'studentLogbook'
