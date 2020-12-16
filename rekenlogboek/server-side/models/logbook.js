@@ -19,7 +19,8 @@ const logbookSchema = new mongoose.Schema({
 	},
 	activeGoal: {
 		type: Number,
-		required: false
+		required: true,
+		default: 0
 	},
 	columns: [
 		{

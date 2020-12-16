@@ -2,6 +2,8 @@
  * @jest-environment node
  */
 
+//  CHANGE DB NAME IN app.js TO testrekenlogboek
+
 'use strict'
 
 const mongoose = require('mongoose')
@@ -25,7 +27,7 @@ const getTestlogbookID = async () => {
 
 describe('Logbook route tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
+		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
@@ -236,6 +238,60 @@ describe('Logbook route tests', () => {
 		}).then(response => response.status)
 
 		expect(createResponse).toEqual(500)
+	})
+
+	test('Update currentPhase', async () => {
+		const body = {
+			currentPhase: 'evaluation'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/currentPhase',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	test('Update activeGoal', async () => {
+		const body = {
+			activeGoal: 69
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	test('Update activeGoal with a String', async () => {
+		const body = {
+			activeGoal: 'a string'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
 	})
 
 	test('Get logbook from id', async () => {
