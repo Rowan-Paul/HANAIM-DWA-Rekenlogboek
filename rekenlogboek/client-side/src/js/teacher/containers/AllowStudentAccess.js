@@ -2,6 +2,8 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import '../../../scss/teacher/containers/AllowStudentAccess.scss'
+
 import Check from '../../../img/icons/check_green.svg'
 import Lock from '../../../img/icons/lock_blue.svg'
 
@@ -9,15 +11,13 @@ import Jumbotron from '../../common/Jumbotron'
 import ButtonContainer from '../../common/ButtonContainer'
 import Button from '../../common/Button'
 
-function AllowStudentAccess(props) {
+function AllowStudentAccess() {
 	return (
 		<div className="allow-student-access">
 			<div className="period-filter">
 				<div>Blok:</div>
-				<input type="number" value="1" min="1" max="100" />
-				<Button color="blue" handler={() => {}}>
-					Kies blok
-				</Button>
+				<input type="number" defaultValue="1" min="1" max="99" />
+				<Button color="blue" handler={() => {}} value="Kies blok" />
 			</div>
 			<Jumbotron>
 				<div className="content-container">
@@ -25,7 +25,7 @@ function AllowStudentAccess(props) {
 						<h1>Bepaal wat uw leerlingen zien.</h1>
 						<p>
 							Kies welk deel van het logboek u wilt ontgrendelen. Er kan maar
-							een gedeelte tegelijkertijd open staan. Bij het kiezen van de
+							een deel tegelijkertijd open staan. Bij het kiezen van de
 							evaluaties pagina kunt u zelf bepalen welke leerdoelen geëvalueerd
 							mogen worden.
 						</p>
