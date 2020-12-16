@@ -11,6 +11,9 @@ const StudentLogbook = mongoose.model('StudentLogbook')
 
 // Check if a logbook exists for a student in a group
 router.get('/:student/logbooks/:logbookID', (req, res) => {
+
+	console.log(req.params.logbookID)
+	console.log(req.params.student)
 	StudentLogbook.findOne({
 		$and: [
 			{ logbookID: { $eq: req.params.logbookID } },
@@ -21,10 +24,12 @@ router.get('/:student/logbooks/:logbookID', (req, res) => {
 			if (response === null) {
 				res.sendStatus(404)
 			} else {
-				const obj = {
-					studentlogbookID: response._id
-				}
-				res.status(200).send(obj)
+				// const obj = {
+				// 	studentlogbookID: response._id
+				// }
+				// res.status(200).send(obj)
+				console.log("Logging the reponse on studentlogbook: " + response)
+				res.status(200).send(response);
 			}
 		})
 		.catch(err => {
@@ -33,6 +38,42 @@ router.get('/:student/logbooks/:logbookID', (req, res) => {
 })
 
 // Update alle answers from one studentlogbook
+// router.put('/', (req, res) => {
+// 	StudentLogbook.findOneAndUpdate(
+// 		{
+// 			$and: [
+// 				{ logbookID: { $eq: req.body.logbookID } },
+// 				{ student: { $eq: req.body.student } }
+// 			]
+// 		},
+// 		{
+// 			// student: req.body.student,
+// 			// logbookID: req.body.logbookID,
+// 			answers: req.body.answers
+// 		}
+// 	)
+// 	.then(response => {
+// 		fetch(
+// 			process.env.SERVER_ADDRESS +
+// 				'/logbook/' +
+// 				req.body.logbookID +
+// 				'/teacher',
+// 			{
+// 				method: 'GET'
+// 			}
+// 		)
+// 		.then(response => response.json())
+// 		.then(json => {
+// 			app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
+// 			res.status(200).send(response.answers)
+// 		})
+// 	})
+// 	.catch(err => {
+// 		console.log(err)
+// 		res.status(500).send(err)
+// 	})
+// })
+
 router.put('/', (req, res) => {
 	StudentLogbook.findOneAndUpdate(
 		{
@@ -42,29 +83,24 @@ router.put('/', (req, res) => {
 			]
 		},
 		{
-			// student: req.body.student,
-			// logbookID: req.body.logbookID,
+			student: req.body.student,
+			logbookID: req.body.logbookID,
 			answers: req.body.answers
 		}
 	)
 	.then(response => {
-		fetch(
-			process.env.SERVER_ADDRESS +
-				'/logbook/' +
-				req.body.logbookID +
-				'/teacher',
-			{
-				method: 'GET'
-			}
-		)
-		.then(response => response.json())
-		.then(json => {
-			app.io.to(json.teacher).emit('NEW_ANSWER', req.body.student)
-			res.status(200).send(response.answers)
-		})
+		Logbook.findById(response.logbookID, 'teacher')
+			.then(logbookResponse => {
+				app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
+				res.status(200).send(response.answers)
+			})
+			.catch(err => {
+				console.log("error 1: " + err)
+				res.status(500).send(err)
+			})
 	})
 	.catch(err => {
-		console.log(err)
+		console.log("error 2: " + err)
 		res.status(500).send(err)
 	})
 })
@@ -108,12 +144,12 @@ router.put('/', (req, res) => {
 			res.status(200).send(response.answers)
 		})
 		.catch(err => {
-			console.log(err)
+			console.log("error 3: " + err)
 			res.status(500).send(err)
 		})
 	})
 	.catch(err => {
-		console.log(err)
+		console.log("error 4: " + err)
 		res.status(500).send(err)
 	})
 })
@@ -131,15 +167,15 @@ router.get('/:id', (req, res) => {
 
 // Get all answers given by the student
 router.get('/:id/answers', (req, res) => {
-	console.log(req.params.id)
+	console.log("logging all ansers from student: " + req.params.id)
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
-			console.log(response);
+			console.log("Logging all answers from a student reponse: " + response);
 			res.status(200).send(response.answers)
 		})
 		.catch(err => {
-			console.log(err)
+			console.log("error 5: " + err)
 			res.status(500).send(err)
 		})
 })

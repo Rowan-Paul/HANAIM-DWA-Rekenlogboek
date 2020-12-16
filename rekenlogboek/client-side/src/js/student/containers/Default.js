@@ -4,24 +4,32 @@ import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Default.scss'
 
-import { fetchCurrentPhase } from 	'../../../redux/studentlogbook/actions'
-import { saveUserAction } from 		'../../../redux/main/actions'
+import { fetchCurrentPhase, loadStudentLogbook } from 	'../../../redux/studentlogbook/actions'
+import { saveUserAction } from 		'../../redux/main/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 
 function StudentUI(props) {
-	const [phaseFetched, setPhaseFetched] = useState(false)
+
+	useEffect(() => {
+		if (props.context.teamName !== undefined) {
+			props.doLoadStudentLogbook(props.context.teamName)
+		}
+	}, [])
+
+	// const [dataFetched, setDataFetched] = useState(false)
 
 	// fetch the current phase
-	if (!phaseFetched && props.context.teamName !== undefined) {
-		props.doFetchCurrentPhase(props.context.teamName)
-		setPhaseFetched(true)
-	}
+	// if (!props.dataFetched && props.context.teamName !== undefined) {
+		// props.doFetchCurrentPhase(props.context.teamName)
+		// props.doLoadStudentLogbook(props.context.teamName)
+		// setDataFetched(true)
+		// console.log('Default component: ' + props.logbookId)
+	// }
 
 	// When the user object exists, check which page
 	// the user should be redirected to
 	if (props.user !== undefined && props.user !== null) {
-		console.log(props.currentPhase)
 		if (props.currentPhase !== null)
 			switch (props.currentPhase) {
 				case 'pretest':
@@ -64,14 +72,17 @@ function mapStateToProps(state) {
 	return {
 		user: state.main.user,
 		currentPhase: state.studentLogbook.currentPhase,
-		context: state.main.context
+		context: state.main.context,
+		logbookId: state.studentLogbook.logbookId,
+		dataFetched: state.studentLogbook.dataFetched
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		doSaveUser: payload => dispatch(saveUserAction(payload)),
-		doFetchCurrentPhase: payload => dispatch(fetchCurrentPhase(payload))
+		doFetchCurrentPhase: payload => dispatch(fetchCurrentPhase(payload)),
+		doLoadStudentLogbook: payload => dispatch(loadStudentLogbook(payload))
 	}
 }
 

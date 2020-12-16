@@ -80,6 +80,30 @@ router.get('/:id/teacher', (req, res) => {
 		})
 })
 
+// Get all information about one logbook
+router.get('/:id', (req, res) => {
+	Logbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get all information about one logbook
+router.get('/:id/goals', (req, res) => {
+	Logbook.findById(req.params.id, 'goals')
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get the id, position, title and inputType for one column from a specific logbook
 router.get('/:id/column/:position', (req, res) => {
 	Logbook.findById(req.params.id)

@@ -7,7 +7,7 @@
 // import { PREVIOUS_GOAL } from './types'
 // import { SAVE_ALL_GOALS } from './types'
 
-import { SAVE_CURRENTPHASE, SAVE_COLUMN, SAVE_GOAL, SAVE_GOAL_AMOUNT, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS} from './types'
+import { SAVE_CURRENTPHASE, SAVE_COLUMN, SAVE_GOAL, SAVE_GOAL_AMOUNT, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS, LOAD_STUDENTLOGBOOK} from './types'
 
 export const fetchAllGoals = () => (dispatch, getState) => {
 	fetch(
@@ -235,7 +235,7 @@ export const fetchAnswers = () => (dispatch, getState) => {
 	//Studentlogboek exists, get all answers from it.
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
-			`/studentlogbook/${getState().studentLogbook.logbookID}/answers/`,
+			`/studentlogbook/${getState().studentLogbook.studentLogbookID}/answers/`,
 			{
 			method: 'GET'
 		}
@@ -270,7 +270,6 @@ export const fetchCurrentPhase = payload => dispatch => {
 	)
 	.then(res => res.json())
 	.then(response => {
-		console.log(response)
 		dispatch({
 			type: SAVE_CURRENTPHASE,
 			response // Called it response (from API) to distinguish it from payloads (from app)
@@ -330,5 +329,47 @@ export const fetchGoalAmount = () => (dispatch, getState) => {
 			response // Called it response (from API) to distinguish it from payloads (from app)
 		})
 	)
+	.catch(error => console.log(error))
+}
+
+export const loadStudentLogbook = payload => (dispatch, getState) => {
+	//Groep 7 -> select everything after the space -> 7
+	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
+
+	//First fetch get's the phase of the logbook & LogbookID
+	//Second fetch get's the studentlogbookID and it's answers
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS +
+			`/logbook/groups/${groupNumber}`,
+		{
+			method: 'GET'
+		}
+	)
+	.then(res => res.json())
+	.then(response => {
+		
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS +
+			`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${response._id}`,
+			{
+				method: 'GET'
+			}
+		)
+		.then(res => res.json())
+		.then(response => {
+			console.log("This isthe respoienadf: " + response._id)
+			dispatch({
+				type: LOAD_STUDENTLOGBOOK,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})}
+		)
+		.catch(error => console.log(error))
+		
+		//Dispatch later so we don't have troubles later on.
+		dispatch({
+			type: SAVE_CURRENTPHASE,
+			response // Called it response (from API) to distinguish it from payloads (from app)
+		})
+	})
 	.catch(error => console.log(error))
 }

@@ -18,7 +18,9 @@ const INITIAL_STATE = {
 	currentGoal: {
 		position: 1 // set default to 1 so it can fetch the first goal
 	},
-	answers: {}
+	answers: {},
+
+	dataFetched: false
 }
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {
@@ -79,7 +81,7 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 		case LOAD_STUDENTLOGBOOK:
 			return {
 				...state,
-				studentLogbookID: action.reponse._id,
+				studentLogbookID: action.response._id,
 				answers: action.response.answers
 			}
 
