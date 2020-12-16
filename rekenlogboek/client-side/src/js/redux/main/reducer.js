@@ -5,6 +5,11 @@ import { RESET_MAIN } from './types'
 const initialMainState = {
 	user: {},
 	context: {},
+	roles: {
+		Leerling: 'Leerling',
+		Leraar: 'Leraar',
+		Logboekontwerper: 'Logboekontwerper'
+	},
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
