@@ -21,6 +21,46 @@ function AllowStudentAccess(props) {
 		props.modalHide()
 	}
 
+	const learnGoals = [
+		{
+			goalNumber: 1,
+			name: 'doel 1: Procenten'
+		},
+		{
+			goalNumber: 2,
+			name: 'doel 3: Afmetingen'
+		},
+		{
+			goalNumber: 3,
+			name: 'doel 4: Schattingen'
+		},
+		{
+			goalNumber: 4,
+			name: 'doel 5: Plus sommen'
+		},
+		{
+			goalNumber: 5,
+			name: 'doel 6: Keer sommen'
+		},
+		{
+			goalNumber: 6,
+			name: 'doel 7: Afstanden'
+		},
+		{
+			goalNumber: 7,
+			name: 'doel 8: Snelheden'
+		}
+	]
+
+	const getLearnGoals = () =>
+		learnGoals.map(goal => {
+			return (
+				<div className="goal" key={goal.goalNumber}>
+					{goal.name}
+				</div>
+			)
+		})
+
 	return (
 		<div className="allow-student-access">
 			<div className="period-filter">
@@ -79,7 +119,13 @@ function AllowStudentAccess(props) {
 				<Modal
 					btnValue="Bevestig"
 					handler={learnGoal => UnlockEvaluation(learnGoal)}
-				></Modal>
+				>
+					<p>
+						Selecteer een leerdoel waar de leerlingen hun evaluatie op kunnen
+						geven.
+					</p>
+					<div className="learn-goal-list">{getLearnGoals()}</div>
+				</Modal>
 			)}
 		</div>
 	)

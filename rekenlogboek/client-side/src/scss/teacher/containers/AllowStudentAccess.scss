@@ -1,3 +1,4 @@
+@import '../../Variables.scss';
 .allow-student-access {
 	display: flex;
 	flex-direction: column;
@@ -45,6 +46,22 @@
 			flex-direction: column;
 			justify-content: center;
 			height: 100%;
+		}
+	}
+
+	.learn-goal-list {
+		border: 1px solid $gray;
+		border-radius: $border-radius;
+		padding: 20px 0;
+		font-size: $label-font-size;
+		max-height: 550px;
+
+		& > div {
+			padding: 8px 20px;
+
+			&:hover {
+				background-color: lighten($gray, 10%);
+			}
 		}
 	}
 }
