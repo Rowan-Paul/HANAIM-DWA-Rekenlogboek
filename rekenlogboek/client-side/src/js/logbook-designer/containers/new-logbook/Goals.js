@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom'
-import { postImage, setGoal } from '../../../redux/logbook/actions'
+import { postImage, setGoal } from '../../../redux/logbookNew/actions'
 
 import AddGoals from '../../components/goals/AddGoals'
 import Button from '../../../common/Button'
@@ -15,9 +15,10 @@ import TopBar from '../../../common/logbook/TopBar'
 import '../../../../scss/logbook-designer/NewLogbook.scss'
 
 function Goals(props) {
-	const [nextButtonColor, setNextButtonColor] = useState('gray')
 	const history = useHistory()
 
+	const [nextButtonColor, setNextButtonColor] = useState('gray')
+	const [goals, setGoals] = useState(props.goals)
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
@@ -44,12 +45,11 @@ function Goals(props) {
 	}
 
 	useEffect(() => {
+		checkNextButtonColor()
+		setGoals(goals)
+
 		// Prevent skipping columns page
 		props.columns.map(c => !c.added && history.push('./columns'))
-	})
-
-	useEffect(() => {
-		checkNextButtonColor()
 	}, [props.goals])
 
 	return (
@@ -63,8 +63,14 @@ function Goals(props) {
 				<TopBar title="Leerdoelen toevoegen" button />
 
 				<LogbookFrame>
-					<LogbookHeader />
-					<LogbookRows />
+					<LogbookHeader
+						columns={props.columns}
+						type={props.logbookTypes.newLogbook}
+					/>
+					<LogbookRows
+						goals={props.goals}
+						type={props.logbookTypes.newLogbook}
+					/>
 				</LogbookFrame>
 			</Jumbotron>
 
@@ -87,9 +93,10 @@ function Goals(props) {
 }
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns,
-		goals: state.logbook.goals,
-		modalVisible: state.logbook.modal.visible
+		columns: state.logbookNew.columns,
+		goals: state.logbookNew.goals,
+		logbookType: state.logbookNew.type,
+		modalVisible: state.logbookNew.modal.visible
 	}
 }
 

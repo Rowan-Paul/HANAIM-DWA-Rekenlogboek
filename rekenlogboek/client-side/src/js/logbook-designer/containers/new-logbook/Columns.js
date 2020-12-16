@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setColumn } from '../../../redux/logbook/actions'
+import { setColumn } from '../../../redux/logbookNew/actions'
 
 import AddColumn from '../../components/column/AddColumn'
 import Button from '../../../common/Button'
 import Evaluation from '../../../common/InputTypes/Evaluation'
-import InputType from '../../../common/logbook/InputType'
+import InputType from '../../../common/logbook/new-logbook/NewLogbookInputType'
 import Jumbotron from '../../../common/Jumbotron'
 import LogbookFrame from '../../../common/logbook/LogbookFrame'
 import LogbookHeader from '../../../common/logbook/LogbookHeader'
@@ -61,7 +61,10 @@ function Columns(props) {
 			<Jumbotron>
 				<TopBar title={'Kolommen toevoegen'} />
 				<LogbookFrame>
-					<LogbookHeader />
+					<LogbookHeader
+						columns={props.columns}
+						type={props.logbookTypes.newLogbook}
+					/>
 					<li className="Row Body">
 						<div className="Cell">
 							<p className="Description">
@@ -99,10 +102,11 @@ function Columns(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns,
-		group: state.logbook.group,
-		modalVisible: state.logbook.modal.visible,
-		period: state.logbook.period
+		columns: state.logbookNew.columns,
+		group: state.logbookNew.group,
+		logbookType: state.logbookNew.type,
+		modalVisible: state.logbookNew.modal.visible,
+		period: state.logbookNew.period
 	}
 }
 

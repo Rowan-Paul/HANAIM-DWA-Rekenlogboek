@@ -28,8 +28,8 @@ export default function SuccesUI(props) {
 					break
 
 				case 'Logboekontwerper':
-					props.history.push('/teacher')
-
+					props.history.push('/logbook-designer')
+					break
 				default:
 					props.history.push('/no-access')
 			}

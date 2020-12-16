@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../redux/logbook/actions'
+import { modalShow } from '../../../redux/logbookNew/actions'
 
-import Checkboxes from '../InputTypes/Checkboxes'
-import RadioButtons from '../InputTypes/Radiobuttons'
-import Textarea from '../InputTypes/Textarea'
+import Checkboxes from '../../InputTypes/Checkboxes'
+import RadioButtons from '../../InputTypes/Radiobuttons'
+import Textarea from '../../InputTypes/Textarea'
 
-import '../../../scss/teacher/components/logbook/InputType.scss'
+import '../../../../scss/teacher/components/logbook/InputType.scss'
 function InputType(props) {
 	const [column, setColumn] = useState({})
 
@@ -91,7 +91,7 @@ function InputType(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns
+		columns: state.logbookNew.columns
 	}
 }
 

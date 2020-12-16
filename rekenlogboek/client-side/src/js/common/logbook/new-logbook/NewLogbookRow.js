@@ -1,7 +1,7 @@
 import React from 'react'
-import Evaluation from '../InputTypes/Evaluation'
-import Goal from './Goal'
-import InputType from './InputType'
+import Evaluation from '../../InputTypes/Evaluation'
+import Goal from '../Goal'
+import InputType from './NewLogbookInputType'
 
 export default function LogbookRow(props) {
 	return (

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
+import { saveLogbook, resetLogbook } from '../../../redux/logbookNew/actions'
 
 import Button from '../../../common/Button'
 import Jumbotron from '../../../common/Jumbotron'
@@ -29,8 +29,14 @@ function Overview(props) {
 				<TopBar title="Overzicht logbook" />
 
 				<LogbookFrame>
-					<LogbookHeader />
-					<LogbookRows readonly />
+					<LogbookHeader
+						columns={props.columns}
+						type={props.logbookTypes.newLogbook}
+					/>
+					<LogbookRows
+						goals={props.goals}
+						type={props.logbookTypes.newLogbook}
+					/>
 				</LogbookFrame>
 			</Jumbotron>
 
@@ -54,10 +60,11 @@ function Overview(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns,
-		group: state.logbook.group,
-		goals: state.logbook.goals,
-		isSaved: state.logbook.isSaved
+		columns: state.logbookNew.columns,
+		logbookType: state.logbookNew.type,
+		group: state.logbookNew.group,
+		goals: state.logbookNew.goals,
+		isSaved: state.logbookNew.isSaved
 	}
 }
 const mapDispatchToProps = dispatch => {
