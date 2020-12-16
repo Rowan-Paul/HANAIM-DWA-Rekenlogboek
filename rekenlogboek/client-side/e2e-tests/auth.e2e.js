@@ -6,7 +6,7 @@ describe(`Rekenlogboek`, () => {
 	let newWindow
 
 	const user = {
-		email: `BKonijn@teamjaguarundi.onmicrosoft.com`,
+		email: `logboek-ontwerper@teamjaguarundi.onmicrosoft.com`,
 		pass: '+h2Mc3N*&$^m7%nB'
 	}
 
