@@ -1,6 +1,8 @@
 import * as types from './types'
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+	schoolYears: []
+}
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
@@ -14,11 +16,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 		case types.GET_YEARS:
 			return {
-				...state
-			}
-		case types.GET_YEARS_SUCCESS:
-			return {
-				...state
+				...state,
+				schoolYears: action.payload
 			}
 		case types.UPDATE_LOGBOOK:
 			return {
@@ -28,6 +27,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state
 			}
+		default:
+			return state
 	}
 }
 export default reducer

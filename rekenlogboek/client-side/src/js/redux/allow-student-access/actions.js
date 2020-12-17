@@ -1,15 +1,16 @@
 import * as types from './types'
 
 export const getYears = () => {
-	return {
-		type: types.GET_YEARS
-	}
+	fetch('localhost:3000/logbook/years')
+		.then(response => response.json())
+		.then(data => {
+			dispatch({
+				type: types.GET_YEARS,
+				data
+			})
+		})
 }
-export const getYearsSuccess = () => {
-	return {
-		type: types.GET_YEARS_SUCCESS
-	}
-}
+
 export const getActiveLogbook = () => {
 	return {
 		type: types.GET_ACTIVE_LOGBOOK

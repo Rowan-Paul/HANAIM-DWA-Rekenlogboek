@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
 
+import { getYears } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
+	useEffect(() => {
+		props.getSchoolYears()
+	}, [])
+
+	const getSchoolYearOptions = () =>
+		props.schoolYears.map(year => {
+			return (
+				<option value={year} key={year}>
+					{year}
+				</option>
+			)
+		})
+
 	return (
 		<div className="period-filter">
 			<div>Leerjaar:</div>
-			<select>
-				<option value="19/20">19/20</option>
-				<option value="20/21">20/21</option>
-			</select>
+			<select>{getSchoolYearOptions()}</select>
 			<div>Blok:</div>
 			<input type="number" defaultValue="1" min="1" max="99" />
 			<Button color="blue" handler={() => {}} value="Kies blok" />
@@ -20,13 +31,14 @@ function PeriodFilter(props) {
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		schoolYears: state.allowStudentAccess.schoolYears
+	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		modalShow: payload => dispatch(modalShow(payload)),
-		modalHide: () => dispatch(modalHide())
+		getSchoolYears: () => dispatch(getYears)
 	}
 }
 
