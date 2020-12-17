@@ -7,23 +7,8 @@
 	padding: 0;
 	width: 100%;
 
-	.Preview,
-	.preview {
-		grid-template-columns: repeat(auto-fit, calc(100% / 4));
-
-		input,
-		textarea {
-			pointer-events: none !important;
-		}
-	}
-	.Edit,
-	.edit {
+	.onEdit {
 		grid-template-columns: repeat(auto-fit, calc(100% / 6));
-
-		input,
-		textarea {
-			pointer-events: none !important;
-		}
 	}
 
 	li {
@@ -118,7 +103,7 @@ textarea {
 	button {
 		background: transparent;
 		border: none;
-		color: $borderColor;
+		color: $blue;
 		font-size: 64px;
 		margin: 0 auto;
 	}

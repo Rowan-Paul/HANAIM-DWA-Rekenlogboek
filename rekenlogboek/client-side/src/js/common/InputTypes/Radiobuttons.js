@@ -1,79 +1,131 @@
 import React from 'react'
 import shortid from 'shortid'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import InputHandlers from '../../teacher/components/column/InputHandlers'
+import Explanation from './Explanation'
+import InputHandlers from '../../logbook-designer/components/column/InputHandlers'
+
 import '../../../scss/common/InputTypes.scss'
 
-export default function RadioButtons(props) {
-	const newAnswer = e => {
-		if (props.readonly) {
-			props.changeAnswer(e.target.value)
+function RadioButtons(props) {
+	const stateHandler = () => {
+		switch (props.state) {
+			// If active
+			case props.inputStates.inUse:
+				return (
+					<ul className="Radiobuttons">
+						{props.options.map((option, i) => (
+							<li className={props.inputStates.inUse} key={shortid.generate()}>
+								<input
+									onChange={() => alert('Gebruik hier AUB een redux functie!')}
+									type="radio"
+									value={option}
+								/>
+								<span>{option}</span>
+							</li>
+						))}
+
+						<li className={props.inputStates.inUse}>
+							<input type="radio" value="default" />
+							<span>Ik weet het nog niet</span>
+						</li>
+						{explanationHandler()}
+					</ul>
+				)
+
+			// If editable
+			case props.inputStates.onEdit:
+				return (
+					<ul className="Radiobuttons">
+						{props.options.map((option, i) => (
+							<li className={props.inputStates.onEdit} key={shortid.generate()}>
+								<input type="radio" value={option} disabled />
+								<span>{option}</span>
+
+								<div>
+									<InputHandlers position={i} />
+								</div>
+							</li>
+						))}
+
+						<li className={props.inputStates.onEdit}>
+							<input type="radio" value="default" disabled />
+							<span>Ik weet het nog niet</span>
+							<div>
+								<span>
+									<i className="fa fa-lock"></i> (default)
+								</span>
+							</div>
+						</li>
+						{explanationHandler()}
+					</ul>
+				)
+
+			// If only preview
+			case props.inputStates.inPreview:
+				return (
+					<ul className="Radiobuttons">
+						{props.options.map((option, i) => (
+							<li
+								className={props.inputStates.inPreview}
+								key={shortid.generate()}
+							>
+								<input
+									checked={props.answer?.answer.value === option}
+									type="radio"
+									value={option}
+									disabled
+								/>
+								<span>{option}</span>
+							</li>
+						))}
+
+						<li className={props.inputStates.inPreview}>
+							<input
+								checked={!props.answer?.answer.value} // Suggestion
+								type="radio"
+								value="default"
+								disabled
+							/>
+							<span>Ik weet het nog niet</span>
+						</li>
+						{explanationHandler()}
+					</ul>
+				)
+
+			default:
+				return (
+					<p className="ErrorMessage">
+						Radiobuttons: props.state not set! (see state.main.inputStates)
+					</p>
+				)
 		}
 	}
 
-	const newExplanation = e => {
-		if (props.readonly) {
-			props.changeExplanation(e.target.value)
-		}
-	}
-	
-	return (
-		<ul className="Radiobuttons">
-			{props.options.map((option, i) => (
-				<li
-					key={shortid.generate()}
-					className={props.readonly ? 'ReadOnly' : 'Edit'}
-				>
-					<input
-						type="radio"
-						name={
-							props.position ? `${props.row + props.position}` : 'radiobutton'
-						}
-						value={option}
-						checked={props.inputAnswer === option}
-						onChange={e => newAnswer(e)}
-					/>
-					<span>{option}</span>
-
-					{!props.readonly && (
-						<div>
-							<InputHandlers position={i} />
-						</div>
-					)}
-				</li>
-			))}
-			<li className={props.readonly ? 'ReadOnly' : 'Edit'}>
-				<input
-					onChange={e => newAnswer(e)}
-					checked={props.inputAnswer === '' || props.inputAnswer === 'default'}
-					type="radio"
-					name={
-						props.position ? `${props.row + props.position}` : 'radiobutton'
-					}
-					value="default"
+	const explanationHandler = () => {
+		if (props.answer?.answer.explanation || props.explanation) {
+			return (
+				<Explanation
+					state={props.state}
+					text={props.answer?.answer.explanation}
 				/>
-				<span>Ik weet het nog niet</span>
-
-				{!props.readonly && (
-					<div>
-						<span>
-							<i className="fa fa-lock"></i> (default)
-						</span>
-					</div>
-				)}
-			</li>
-
-			{props.explanation && (
-				<li className="Explanation">
-					<textarea
-						type="text"
-						name="explanation"
-						value={props.studentExplanation}
-						placeholder="Omdat..."
-						onBlur={e => newExplanation(e)}
-					/>
-				</li>
-			)}
-		</ul>
-	)
+			)
+		}
+	}
+	return stateHandler()
 }
+
+const mapStateToProps = state => {
+	return {
+		inputStates: state.main.inputStates
+	}
+}
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(RadioButtons))

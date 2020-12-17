@@ -119,6 +119,17 @@ describe('Studentlogbook route tests', () => {
 		expect(createResponse).toEqual(200)
 	})
 
+	test('Get all answers from all students for a logbook', async () => {
+		const createResponse = await fetch(
+			'http://localhost:3000/studentlogbook/logbooks/5fbf66ca14b7c811a829fadf/answers',
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
+		expect(createResponse).toEqual(200)
+	})
+
 	test('Get information about studentlogbook by ID', async () => {
 		const studentlogbookID = await getTestStudentlogbook()
 

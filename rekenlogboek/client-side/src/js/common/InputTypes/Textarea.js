@@ -1,20 +1,63 @@
-import '../../../scss/common/InputTypes.scss'
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-export default function Textarea(props) {
-	const newAnswer = e => {
-		if (props.readonly) {
-		} else {
-			props.changeAnswer(e.target.value)
+import '../../../scss/common/InputTypes.scss'
+
+function Textarea(props) {
+	const handler = () => {
+		switch (props.state) {
+			// IN USE
+			case props.inputStates.inUse:
+				return (
+					<textarea
+						className="Textarea"
+						placeholder="Omschrijving toevoegen"
+						onChange={() => alert('Redux functie AUB')}
+					></textarea>
+				)
+
+			// ON EDIT
+			case props.inputStates.onEdit:
+				return (
+					<textarea
+						className="Textarea"
+						placeholder="Omschrijving toevoegen"
+						readOnly
+					></textarea>
+				)
+
+			// IN PREVIEW
+			case props.inputStates.inPreview:
+				return (
+					<textarea
+						className="Textarea"
+						placeholder="Omschrijving toevoegen"
+						readOnly
+					></textarea>
+				)
+			default:
+				return (
+					<p className="ErrorMessage">
+						TextArea: props.state not set! (see state.main.inputStates)
+					</p>
+				)
 		}
 	}
 
-	return (
-		<textarea
-			className="Textarea"
-			placeholder="Omschrijving toevoegen"
-			onBlur={e => newAnswer(e)}
-			value={props.inputValue}
-		></textarea>
-	)
+	return handler()
 }
+
+const mapStateToProps = state => {
+	return {
+		inputStates: state.main.inputStates
+	}
+}
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Textarea))
