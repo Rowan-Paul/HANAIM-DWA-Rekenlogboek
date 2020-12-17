@@ -15,6 +15,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state
 			}
 		case types.GET_YEARS:
+			console.log(action.payload)
 			return {
 				...state,
 				schoolYears: action.payload

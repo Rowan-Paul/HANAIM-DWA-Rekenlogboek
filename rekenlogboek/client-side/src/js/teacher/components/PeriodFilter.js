@@ -11,7 +11,7 @@ function PeriodFilter(props) {
 	}, [])
 
 	const getSchoolYearOptions = () =>
-		props.schoolYears.map(year => {
+		props.schoolYears?.map(year => {
 			return (
 				<option value={year} key={year}>
 					{year}

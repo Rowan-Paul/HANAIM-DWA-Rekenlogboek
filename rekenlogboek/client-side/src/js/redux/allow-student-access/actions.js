@@ -1,12 +1,13 @@
 import * as types from './types'
 
-export const getYears = () => {
-	fetch('localhost:3000/logbook/years')
+export const getYears = dispatch => {
+	fetch('http://localhost:3000/logbook/years')
 		.then(response => response.json())
 		.then(data => {
-			dispatch({
+			console.log(data)
+			return dispatch({
 				type: types.GET_YEARS,
-				data
+				payload: data
 			})
 		})
 }
