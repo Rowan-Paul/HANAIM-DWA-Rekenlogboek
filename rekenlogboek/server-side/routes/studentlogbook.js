@@ -41,7 +41,9 @@ router.put('/', (req, res) => {
 		.then(response => {
 			Logbook.findById(response.logbookID, 'teacher')
 				.then(logbookResponse => {
-					app.io.to(logbookResponse.teacher).emit('NEW_ANSWER', req.body.student)
+					app.io
+						.to(logbookResponse.teacher)
+						.emit('NEW_ANSWER', req.body.student)
 					res.status(200).send(response.answers)
 				})
 				.catch(err => {
@@ -58,6 +60,19 @@ router.put('/', (req, res) => {
 // Get all information about a specific studentlogbook
 router.get('/:id', (req, res) => {
 	StudentLogbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			res.status(500).send(err)
+		})
+})
+
+// Get all answers (from all students) for a logbook
+// Returns only the id, student and answers
+router.get('/logbooks/:logbookID/answers', (req, res) => {
+	StudentLogbook.find({ logbookID: req.params.logbookID })
+		.select('student answers')
 		.then(response => {
 			res.status(200).send(response)
 		})
