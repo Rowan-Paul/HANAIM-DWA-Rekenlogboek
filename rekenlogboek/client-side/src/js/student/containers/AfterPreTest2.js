@@ -21,11 +21,15 @@ function AfterPreTestUI(props) {
 	useEffect(() => {}, [])
 
 	const previousPage = () => {
-		props.decrementCurrentGoal()
+		if (props.currentGoal > 0) {
+			props.decrementCurrentGoal()
+		}
 	}
 
 	const nextPage = () => {
-		props.incrementCurrentGoal()
+		if (props.currentGoal < props.goals.length - 1) {
+			props.incrementCurrentGoal()
+		}
 	}
 
 	if (props.column.input !== undefined) {
