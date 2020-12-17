@@ -76,7 +76,7 @@ function Columns(props) {
 						<InputType position={1} state={props.inputStates.onEdit} />
 						<InputType position={2} state={props.inputStates.onEdit} />
 						<div>
-							<Evaluation type={'preview'} />
+							<Evaluation state={props.inputStates.onEdit} />
 						</div>
 					</li>
 				</LogbookFrame>

@@ -39,7 +39,7 @@ function AddColumn(props) {
 					<Radiobuttons options={options} state={props.inputStates.onEdit} />
 				)
 			case props.inputTypes.textarea:
-				return <Textarea />
+				return <Textarea state={props.inputStates.onEdit} />
 			default:
 				return null
 		}

@@ -7,45 +7,67 @@ import Goal from '../Goal'
 import StudentLogbookInputType from './StudentLogbookInputType'
 
 function StudentLogbookRow(props) {
-	const [goalAnswers, setGoalAnswers] = useState()
+	const [answers, setAnswers] = useState(props.answers)
+	const [columns, setColumns] = useState(props.columns)
+	const [goal, setGoal] = useState(props.goal)
 
 	useEffect(() => {
-		const goalAnswers = props.answers.filter(
-			answer => answer.goalPosition === props.goal.position
-		)
-		setGoalAnswers(goalAnswers)
-	}, [props.answers])
+		setAnswers(props.answers)
+		setColumns(props.columns)
+		setGoal(props.goal)
+	}, [props.answers, props.columns, props.goal])
+
+	const findAnswer = column =>
+		answers.filter(
+			a =>
+				a.goalPosition === goal.position && a.columnPosition == column.position
+		)[0]
 
 	const handler = () => {
-		if (goalAnswers) {
-			return goalAnswers.map(goalAnswer => {
-				if (goalAnswer.columnPosition === 3) {
-					return <Evaluation key={shortid.generate()} />
+		if (answers) {
+			return columns.map(column => {
+				switch (column.position) {
+					case 0:
+						return (
+							<Goal
+								goal={props.goal}
+								key={shortid.generate()}
+								state={props.inputStates.inPreview}
+							/>
+						)
+					case 3:
+						return (
+							<Evaluation
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								state={props.inputStates.inPreview}
+							/>
+						)
+
+					default:
+						return (
+							<StudentLogbookInputType
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								position={column.columnPosition}
+								state={props.inputStates.inPreview}
+							/>
+						)
 				}
-				return (
-					<StudentLogbookInputType
-						answer={goalAnswer.answer}
-						key={shortid.generate()}
-						position={goalAnswer.columnPosition}
-						state={props.inputStates.inPreview}
-					/>
-				)
 			})
 		}
 	}
 
-	return (
-		<div className="Row Body">
-			<Goal goal={props.goal} state={props.inputStates.inPreview} />
-			{handler()}
-		</div>
-	)
+	return <div className="Row Body">{handler()}</div>
 }
 
 const mapStateToProps = state => {
 	return {
+		inputStates: state.main.inputStates,
 		answers: state.logbookoverview.activeStudentlogbook.answers,
-		inputStates: state.main.inputStates
+		columns: state.logbookoverview.currentLogbook.columns
 	}
 }
 

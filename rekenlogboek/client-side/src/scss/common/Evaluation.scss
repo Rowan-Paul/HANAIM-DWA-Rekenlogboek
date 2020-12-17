@@ -15,16 +15,25 @@
 		position: relative;
 		border-radius: 15px;
 
-		&.happy {
-			background: #c2f0c2;
+		&.Happy {
+			input:checked + div {
+				background: #c2f0c2;
+				font-weight: 700;
+			}
 		}
 
-		&.sceptic {
-			background: #f0efc2;
+		&.Sceptic {
+			input:checked + div {
+				background: #f0efc2;
+				font-weight: 700;
+			}
 		}
 
-		&.sad {
-			background: #f0c2c2;
+		&.Sad {
+			input:checked {
+				background: #f0c2c2;
+				font-weight: 700;
+			}
 		}
 
 		label {

@@ -11,7 +11,7 @@ function LogbookRow(props) {
 			<Goal goal={props.goal} state={props.inputStates.onEdit} />
 			<InputType position={1} state={props.inputStates.inPreview} />
 			<InputType position={2} state={props.inputStates.inPreview} />
-			<Evaluation />
+			<Evaluation state={props.inputStates.onEdit} />
 		</div>
 	)
 }

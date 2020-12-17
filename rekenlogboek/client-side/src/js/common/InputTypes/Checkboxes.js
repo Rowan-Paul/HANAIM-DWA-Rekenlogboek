@@ -15,7 +15,7 @@ function Checkboxes(props) {
 				return props.options.map((option, i) => (
 					<li className="inUse" key={shortid.generate()}>
 						<input
-							checked={option === props.answer.value}
+							checked={props.answer?.answer.value === option}
 							onChange={() => alert('Gebruik hier AUB een redux functie!')}
 							value={option}
 							type="checkbox"
@@ -41,7 +41,7 @@ function Checkboxes(props) {
 				return props.options.map((option, i) => (
 					<li className="inPreview" key={shortid.generate()}>
 						<input
-							checked={option === props.answer.value}
+							checked={props.answer?.answer.value === option}
 							value={option}
 							type="checkbox"
 							disabled
@@ -59,8 +59,13 @@ function Checkboxes(props) {
 	}
 
 	const explanationHandler = () => {
-		if (props.explanation) {
-			return <Explanation />
+		if (props.answer?.answer.explanation || props.explanation) {
+			return (
+				<Explanation
+					state={props.state}
+					text={props.answer?.answer.explanation}
+				/>
+			)
 		}
 	}
 	return (

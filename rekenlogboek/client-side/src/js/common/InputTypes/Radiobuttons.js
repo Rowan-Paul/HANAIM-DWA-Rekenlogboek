@@ -72,7 +72,7 @@ function RadioButtons(props) {
 								key={shortid.generate()}
 							>
 								<input
-									checked={option === props.answer.value}
+									checked={props.answer?.answer.value === option}
 									type="radio"
 									value={option}
 									disabled
@@ -83,7 +83,7 @@ function RadioButtons(props) {
 
 						<li className={props.inputStates.inPreview}>
 							<input
-								checked={'default' === props.answer.value}
+								checked={!props.answer?.answer.value} // Suggestion
 								type="radio"
 								value="default"
 								disabled
@@ -104,8 +104,13 @@ function RadioButtons(props) {
 	}
 
 	const explanationHandler = () => {
-		if (props.explanation) {
-			return <Explanation />
+		if (props.answer?.answer.explanation || props.explanation) {
+			return (
+				<Explanation
+					state={props.state}
+					text={props.answer?.answer.explanation}
+				/>
+			)
 		}
 	}
 	return stateHandler()

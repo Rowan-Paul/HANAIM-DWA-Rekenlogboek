@@ -6,21 +6,21 @@ import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
 function InputType(props) {
-	const [column, setColumn] = useState()
+	// const [column, setColumn] = useState()
 
-	useEffect(() => {
-		const column = props.columns[props.position]
-		setColumn(column)
-	}, [props.columns])
+	// useEffect(() => {
+	// 	const column = props.columns[props.position]
+	// 	setColumn(column)
+	// }, [props.columns])
 
 	const handler = () => {
-		switch (column.input.type) {
+		switch (props.input.type) {
 			// CHECKBOXES
 			case props.inputTypes.checkboxes:
 				return (
 					<Checkboxes
 						answer={props.answer}
-						options={column.input.options}
+						options={props.input.options}
 						state={props.state}
 					/>
 				)
@@ -30,7 +30,7 @@ function InputType(props) {
 				return (
 					<RadioButtons
 						answer={props.answer}
-						options={column.input.options}
+						options={props.input.options}
 						state={props.state}
 					/>
 				)
@@ -46,7 +46,7 @@ function InputType(props) {
 	return (
 		<div className="InputType Cell">
 			<ul>
-				<li>{column && handler()}</li>
+				<li>{handler()}</li>
 			</ul>
 		</div>
 	)
@@ -54,7 +54,6 @@ function InputType(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbookoverview.currentLogbook.columns,
 		inputTypes: state.main.inputTypes,
 		inputStates: state.main.inputStates
 	}
