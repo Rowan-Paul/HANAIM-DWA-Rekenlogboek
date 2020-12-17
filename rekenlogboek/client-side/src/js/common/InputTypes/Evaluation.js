@@ -85,7 +85,7 @@ function Evaluation(props) {
 			default:
 				return (
 					<p className="ErrorMessage">
-						Explanation: props.state not set! (see state.main.inputStates)
+						Evaluation: props.state not set! (see state.main.inputStates)
 					</p>
 				)
 		}
