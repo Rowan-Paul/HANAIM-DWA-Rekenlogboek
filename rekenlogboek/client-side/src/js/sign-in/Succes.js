@@ -13,13 +13,15 @@ export default function SuccesUI(props) {
 
 		if (props.user.groups) {
 			switch (props.user.jobTitle) {
-				case 'Leerling':
+				case props.roles.Leerling:
 					if (teamsEnvironment() === true) {
 						props.history.push('/student')
+					} else {
+						props.history.push('/no-access')
 					}
 					break
 
-				case 'Leraar':
+				case props.roles.Leraar:
 					if (teamsEnvironment() === true) {
 						props.history.push('/teacher/logbooks')
 					} else {
@@ -27,9 +29,9 @@ export default function SuccesUI(props) {
 					}
 					break
 
-				case 'Logboekontwerper':
-					props.history.push('/teacher')
-
+				case props.roles.Logboekontwerper:
+					props.history.push('/logbook-designer')
+					break
 				default:
 					props.history.push('/no-access')
 			}
@@ -45,6 +47,7 @@ export default function SuccesUI(props) {
 
 function mapStateToProps(state) {
 	return {
+		roles: state.main.roles,
 		user: state.main.user
 	}
 }

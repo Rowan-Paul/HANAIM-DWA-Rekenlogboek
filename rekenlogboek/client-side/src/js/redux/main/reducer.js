@@ -4,7 +4,27 @@ import { RESET_MAIN } from './types'
 
 const initialMainState = {
 	user: {},
-	context: {}
+	context: {},
+	roles: {
+		Leerling: 'Leerling',
+		Leraar: 'Leraar',
+		Logboekontwerper: 'Logboekontwerper'
+	},
+	// For later use
+	inputTypes: {
+		checkboxes: 'checkboxes',
+		radiobuttons: 'radiobuttons',
+		textarea: 'textarea'
+	},
+	inputStates: {
+		inUse: 'inUse',
+		onEdit: 'onEdit',
+		inPreview: 'inPreview'
+	},
+	logbookTypes: {
+		newLogbook: 'newLogbook',
+		studentLogbook: 'studentLogbook'
+	}
 }
 
 export default function mainReducer(state = initialMainState, action) {
