@@ -1,4 +1,14 @@
-import {SAVE_CURRENTPHASE, SAVE_GOAL_AMOUNT, SAVE_COLUMN, SAVE_GOAL, SAVE_ANSWERS, NEXT_GOAL, PREVIOUS_GOAL, SAVE_ALL_GOALS, LOAD_STUDENTLOGBOOK} from './types'
+import {
+	SAVE_CURRENTPHASE,
+	SAVE_GOAL_AMOUNT,
+	SAVE_COLUMN,
+	SAVE_GOAL,
+	SAVE_ANSWERS,
+	NEXT_GOAL,
+	PREVIOUS_GOAL,
+	SAVE_ALL_GOALS,
+	LOAD_STUDENTLOGBOOK
+} from './types'
 
 const INITIAL_STATE = {
 	logbookID: null,
@@ -10,7 +20,7 @@ const INITIAL_STATE = {
 	currentGoal: {
 		position: 1 // set default to 1 so it can fetch the first goal
 	},
-	answers: {},
+	answers: {}
 }
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {

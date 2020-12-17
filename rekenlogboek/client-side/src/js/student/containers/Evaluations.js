@@ -5,15 +5,21 @@ import { connect } from 'react-redux'
 import '../../../scss/student/containers/Evaluation.scss'
 import '../../../scss/student/Student.scss'
 
-import ProgressBar from 	'../components/ProgressBar'
-import LearnGoal from 		'../components/LearnGoal'
-import LearnGoalImage from 	'../components/LearnGoalImage'
-import Question from 		'../components/Question'
+import ProgressBar from '../components/ProgressBar'
+import LearnGoal from '../components/LearnGoal'
+import LearnGoalImage from '../components/LearnGoalImage'
+import Question from '../components/Question'
 
-import Jumbotron from 		'../../common/Jumbotron'
-import Button from 			'../../common/Button'
+import Jumbotron from '../../common/Jumbotron'
+import Button from '../../common/Button'
 
-import { newExplanation, newAnswer, fetchAnswers, fetchColumn, fetchGoal } from '../../../redux/studentlogbook/actions'
+import {
+	newExplanation,
+	newAnswer,
+	fetchAnswers,
+	fetchColumn,
+	fetchGoal
+} from '../../redux/studentlogbook/actions'
 
 function EvaluationsUI(props) {
 	useEffect(() => {

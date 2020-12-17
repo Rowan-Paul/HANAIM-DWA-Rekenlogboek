@@ -5,13 +5,18 @@ import { withRouter } from 'react-router-dom'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
-import ResultText from 	'../components/ResultText'
+import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-import Jumbotron from 	'../../common/Jumbotron'
-import Button from 		'../../common/Button'
+import Jumbotron from '../../common/Jumbotron'
+import Button from '../../common/Button'
 
-import { fetchAllGoals, previousGoal, nextGoal, fetchAnswers} from '../../../redux/studentlogbook/actions'
+import {
+	fetchAllGoals,
+	previousGoal,
+	nextGoal,
+	fetchAnswers
+} from '../../redux/studentlogbook/actions'
 
 function AfterPreTestEndUI(props) {
 	useEffect(() => {

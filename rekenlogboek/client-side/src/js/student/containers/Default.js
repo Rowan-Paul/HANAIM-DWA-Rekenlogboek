@@ -4,13 +4,12 @@ import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Default.scss'
 
-import { loadStudentLogbook } from 	'../../../redux/studentlogbook/actions'
-import { saveUserAction } from 		'../../redux/main/actions'
+import { loadStudentLogbook } from '../../redux/studentlogbook/actions'
+import { saveUserAction } from '../../redux/main/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 
 function StudentUI(props) {
-
 	useEffect(() => {
 		if (props.context.teamName !== undefined) {
 			props.doLoadStudentLogbook(props.context.teamName)
@@ -34,7 +33,7 @@ function StudentUI(props) {
 					props.history.push('/student/evaluation')
 					break
 
-				default: 
+				default:
 					break
 			}
 
@@ -52,9 +51,7 @@ function StudentUI(props) {
 			</div>
 		)
 	} else {
-		return (
-			<p>Loading...</p>
-		)
+		return <p>Loading...</p>
 	}
 }
 
@@ -62,7 +59,7 @@ function mapStateToProps(state) {
 	return {
 		user: state.main.user,
 		currentPhase: state.studentLogbook.currentPhase,
-		context: state.main.context,
+		context: state.main.context
 	}
 }
 
