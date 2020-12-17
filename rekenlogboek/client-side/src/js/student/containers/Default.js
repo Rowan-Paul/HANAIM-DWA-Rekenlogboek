@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import '../../../scss/student/containers/Default.scss'
 
 import { loadStudentLogbook } from '../../redux/studentlogbook/actions'
-import { saveUserAction } from '../../redux/main/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 
@@ -65,7 +64,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		doSaveUser: payload => dispatch(saveUserAction(payload)),
 		doLoadStudentLogbook: payload => dispatch(loadStudentLogbook(payload))
 	}
 }
