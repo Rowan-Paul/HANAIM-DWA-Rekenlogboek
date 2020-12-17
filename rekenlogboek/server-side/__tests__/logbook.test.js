@@ -276,6 +276,15 @@ describe('Logbook route tests', () => {
 		expect(test).toEqual(200)
 	})
 
+	test('Get all years', async () => {
+		const logbookID = await getTestlogbookID()
+		const test = await fetch('http://localhost:3000/logbook/years', {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test).toEqual(['2019 - 2020'])
+	})
+
 	test('Update activeGoal with a String', async () => {
 		const body = {
 			activeGoal: 'a string'

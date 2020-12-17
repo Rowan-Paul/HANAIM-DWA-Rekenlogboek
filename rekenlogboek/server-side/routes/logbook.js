@@ -44,6 +44,17 @@ router.put('/:id/currentPhase', (req, res) => {
 		})
 })
 
+// Get all years
+router.get('/years', (req, res) => {
+	Logbook.find()
+		.distinct('year')
+		.then(response => res.status(200).send(response))
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get the active logbook for a certain group
 router.get('/groups/:group', (req, res) => {
 	Logbook.findOne(
