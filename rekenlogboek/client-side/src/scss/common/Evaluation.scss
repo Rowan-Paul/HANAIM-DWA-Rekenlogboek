@@ -1,21 +1,5 @@
 @import '../Variables.scss';
 
-.edit,
-.preview {
-	label {
-		div {
-			cursor: unset !important;
-		}
-	}
-	input {
-		pointer-events: none !important;
-
-		&:checked + div {
-			background: transparent !important;
-		}
-	}
-}
-
 .Evaluation {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, calc(100% / 3));
