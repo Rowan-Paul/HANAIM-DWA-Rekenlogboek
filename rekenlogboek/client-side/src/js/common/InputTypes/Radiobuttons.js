@@ -21,6 +21,7 @@ function RadioButtons(props) {
 									onChange={() => alert('Gebruik hier AUB een redux functie!')}
 									type="radio"
 									value={option}
+									// checked={props.answer?.value === option}
 								/>
 								<span>{option}</span>
 							</li>

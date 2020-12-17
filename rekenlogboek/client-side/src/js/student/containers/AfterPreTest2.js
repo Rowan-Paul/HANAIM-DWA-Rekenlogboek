@@ -21,7 +21,15 @@ import {
 function AfterPreTestUI(props) {
 	useEffect(() => {
 		props.loadStudentLogbook()
-	}, [props.answers])
+	}, [props.currentGoal])
+
+	const getAnswer = () => {
+		if (props.answers) {
+			return props.answers.find(answer => {
+				answer.columnPosition === 1 && answer.goalPosition === props.currentGoal
+			})
+		}
+	}
 
 	const previousPage = () => {
 		if (props.currentGoal > 0) {
@@ -35,7 +43,7 @@ function AfterPreTestUI(props) {
 		}
 	}
 
-	console.log(props.answers)
+	console.log(getAnswer())
 
 	if (props.column.input !== undefined) {
 		return (
@@ -48,15 +56,13 @@ function AfterPreTestUI(props) {
 								goal={props.goals[props.currentGoal].title}
 								description={props.goals[props.currentGoal].description}
 							/>
-							{/* <Question
-								title={props.column.title}
-								type={props.column.input.type}
-								inputAnswer={inputAnswer}
-								changeAnswer={changeAnswer}
-								options={props.column.input.options}
-								explanation={props.column.explanation}
-								changeExplanation={changeExplanation}
-							/> */}
+							<Question
+								answer={{
+									value: 'sdsadasd'
+								}}
+								input={props.column.input}
+								state={props.inputStates.inUse}
+							/>
 						</div>
 						<div className="right-side">
 							<LearnGoalImage src={props.goals[props.currentGoal].imageLink} />
@@ -78,6 +84,7 @@ function AfterPreTestUI(props) {
 
 function mapStateToProps(state) {
 	return {
+		inputStates: state.main.inputStates,
 		answers: state.studentLogbook.studentlogbook.answers,
 		column: state.studentLogbook.logbook.columns[1],
 		currentGoal: state.studentLogbook.currentGoal,

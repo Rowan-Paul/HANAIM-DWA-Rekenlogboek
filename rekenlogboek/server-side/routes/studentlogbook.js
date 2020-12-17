@@ -64,8 +64,7 @@ router.put('/', (req, res) => {
 		},
 		{
 			logbookID: req.body.logbookID,
-			student: req.body.student,
-			answers: req.body.answers
+			student: req.body.student
 		},
 		{
 			new: true,

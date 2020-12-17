@@ -1,61 +1,55 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import Radiobuttons from '../../common/InputTypes/Radiobuttons'
 import Checkboxes from '../../common/InputTypes/Checkboxes'
+import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
-import Evaluation from '../../common/InputTypes/Evaluation'
 
-export default function Question(props) {
-	const getInputTypes = () => {
-		switch (props.type) {
-			case 'radiobuttons':
-				return (
-					<Radiobuttons
-						explanation={props.explanation}
-						options={props.options}
-						readonly={true}
-						inputAnswer={props.inputAnswer}
-						changeAnswer={props.changeAnswer}
-						changeExplanation={props.changeExplanation}
-					/>
-				)
-				break
-			case 'checkboxes':
+function Question(props) {
+	const handler = () => {
+		switch (props.input.type) {
+			// CHECKBOXES
+			case props.inputTypes.checkboxes:
 				return (
 					<Checkboxes
-						explanation={props.explanation}
-						options={props.options}
-						readonly={true}
-						inputAnswer={props.inputAnswer}
-						changeAnswer={props.changeAnswer}
-						changeExplanation={props.changeExplanation}
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
 					/>
 				)
-				break
-			case 'textarea':
+
+			// RADIOBUTTONS
+			case props.inputTypes.radiobuttons:
 				return (
-					<Textarea
-						changeAnswer={props.changeAnswer}
-						inputAnswer={props.inputAnswer}
+					<RadioButtons
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
 					/>
 				)
-				break
-			case 'evaluation':
-				return (
-					<Evaluation
-						changeAnswer={props.changeAnswer}
-						inputAnswer={props.inputAnswer}
-						readonly={true}
-					/>
-				)
-				break
+
+			// TEXTAREA
+			case props.inputTypes.textarea:
+				return <Textarea state={props.state} />
+			default:
+				return ''
 		}
 	}
 
 	return (
-		<div className="question">
-			<h2>{props.title}</h2>
-			{getInputTypes()}
+		<div className="InputType Cell">
+			<ul>
+				<li>{handler()}</li>
+			</ul>
 		</div>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		inputTypes: state.main.inputTypes,
+		inputStates: state.main.inputStates
+	}
+}
+
+export default connect(mapStateToProps, null)(Question)
