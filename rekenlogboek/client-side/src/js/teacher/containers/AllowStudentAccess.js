@@ -74,7 +74,12 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<div className="period-filter">
+			<div className="filter">
+				<div>Leerjaar:</div>
+				<select>
+					<option value="19/20">19/20</option>
+					<option value="20/21">20/21</option>
+				</select>
 				<div>Blok:</div>
 				<input type="number" defaultValue="1" min="1" max="99" />
 				<Button color="blue" handler={() => {}} value="Kies blok" />
