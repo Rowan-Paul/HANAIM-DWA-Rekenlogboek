@@ -223,50 +223,50 @@ export const fetchGoalAmount = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
-export const loadStudentLogbook = payload => async (dispatch, getState) => {
-	//Groep 7 -> select everything after the space -> 7
-	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
+// export const loadStudentLogbook = payload => async (dispatch, getState) => {
+// 	//Groep 7 -> select everything after the space -> 7
+// 	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
 
-	//First fetch get's the phase of the logbook & LogbookID
-	//Second fetch get's the studentlogbookID and it's answers
-	await fetch(
-		process.env.REACT_APP_SERVER_ADDRESS + `/logbook/groups/${groupNumber}`,
-		{
-			method: 'GET'
-		}
-	)
-		.then(res => res.json())
-		.then(async response => {
-			//Ugly but it works
-			//----------------------
-			await fetch(
-				//Await this fetch so it's finished before dispatching the currentphase
-				process.env.REACT_APP_SERVER_ADDRESS +
-					`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
-						response._id
-					}`,
-				{
-					method: 'GET'
-				}
-			)
-				.then(res => res.json())
-				.then(response => {
-					dispatch({
-						type: LOAD_STUDENTLOGBOOK,
-						response // Called it response (from API) to distinguish it from payloads (from app)
-					})
-				})
-				.catch(error => console.log(error))
-			//----------------------
+// 	//First fetch get's the phase of the logbook & LogbookID
+// 	//Second fetch get's the studentlogbookID and it's answers
+// 	await fetch(
+// 		process.env.REACT_APP_SERVER_ADDRESS + `/logbook/groups/${groupNumber}`,
+// 		{
+// 			method: 'GET'
+// 		}
+// 	)
+// 		.then(res => res.json())
+// 		.then(async response => {
+// 			//Ugly but it works
+// 			//----------------------
+// 			await fetch(
+// 				//Await this fetch so it's finished before dispatching the currentphase
+// 				process.env.REACT_APP_SERVER_ADDRESS +
+// 					`/studentlogbook/${encodeURI(getState().main.user.name)}/logbooks/${
+// 						response._id
+// 					}`,
+// 				{
+// 					method: 'GET'
+// 				}
+// 			)
+// 				.then(res => res.json())
+// 				.then(response => {
+// 					dispatch({
+// 						type: LOAD_STUDENTLOGBOOK,
+// 						response // Called it response (from API) to distinguish it from payloads (from app)
+// 					})
+// 				})
+// 				.catch(error => console.log(error))
+// 			//----------------------
 
-			//Dispatch later so we don't have troubles later on.
-			dispatch({
-				type: SAVE_CURRENTPHASE,
-				response // Called it response (from API) to distinguish it from payloads (from app)
-			})
-		})
-		.catch(error => console.log(error))
-}
+// 			//Dispatch later so we don't have troubles later on.
+// 			dispatch({
+// 				type: SAVE_CURRENTPHASE,
+// 				response // Called it response (from API) to distinguish it from payloads (from app)
+// 			})
+// 		})
+// 		.catch(error => console.log(error))
+// }
 
 //REAL SHIT //TODO: TODO: TODO: // mooi fel
 
@@ -300,4 +300,25 @@ export const decrementCurrentGoal = () => {
 	return {
 		type: DECREMENT_CURRENT_GOAL
 	}
+}
+
+export const loadStudentLogbook = () => (dispatch, getState) => {
+	const body = {
+		logbookID: getState().studentLogbook.logbook._id,
+		student: getState().main.user.name
+	}
+
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(body)
+	})
+		.then(res => res.json())
+		.then(response => {
+			dispatch({
+				type: LOAD_STUDENTLOGBOOK,
+				response
+			})
+		})
+		.catch(error => console.log(error))
 }

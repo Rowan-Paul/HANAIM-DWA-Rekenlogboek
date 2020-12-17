@@ -63,23 +63,28 @@ router.put('/', (req, res) => {
 			]
 		},
 		{
-			// student: req.body.student,
-			// logbookID: req.body.logbookID,
+			logbookID: req.body.logbookID,
+			student: req.body.student,
 			answers: req.body.answers
+		},
+		{
+			new: true,
+			upsert: true // Make this update into an upsert
 		}
 	)
 		.then(response => {
-			Logbook.findById(response.logbookID, 'teacher')
-				.then(logbookResponse => {
-					app.io
-						.to(logbookResponse.teacher)
-						.emit('NEW_ANSWER', req.body.student)
-					res.status(200).send(response.answers)
-				})
-				.catch(err => {
-					console.log('error 3: ' + err)
-					res.status(500).send(err)
-				})
+			res.status(200).send(response)
+			// Logbook.findById(response.logbookID, 'teacher')
+			// 	.then(logbookResponse => {
+			// 		app.io
+			// 			.to(logbookResponse.teacher)
+			// 			.emit('NEW_ANSWER', req.body.student)
+			// 		res.status(200).send(response.answers)
+			// 	})
+			// 	.catch(err => {
+			// 		console.log('error 3: ' + err)
+			// 		res.status(500).send(err)
+			// })
 		})
 		.catch(err => {
 			console.log('error 4: ' + err)

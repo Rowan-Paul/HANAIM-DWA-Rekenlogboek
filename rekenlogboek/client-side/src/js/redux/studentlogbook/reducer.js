@@ -15,6 +15,7 @@ import {
 
 const INITIAL_STATE = {
 	currentGoal: 0,
+	studentlogbook: {},
 	logbook: {}
 }
 
@@ -23,8 +24,7 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 		case LOAD_STUDENTLOGBOOK:
 			return {
 				...state,
-				studentLogbookID: action.response._id,
-				answers: action.response.answers
+				studentlogbook: action.response
 			}
 		case LOAD_LOGBOOK:
 			return {

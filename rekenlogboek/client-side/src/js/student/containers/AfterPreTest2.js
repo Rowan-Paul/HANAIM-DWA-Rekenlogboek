@@ -14,11 +14,14 @@ import Button from '../../common/Button'
 
 import {
 	decrementCurrentGoal,
-	incrementCurrentGoal
+	incrementCurrentGoal,
+	loadStudentLogbook
 } from '../../redux/studentlogbook/actions'
 
 function AfterPreTestUI(props) {
-	useEffect(() => {}, [])
+	useEffect(() => {
+		props.loadStudentLogbook()
+	}, [props.answers])
 
 	const previousPage = () => {
 		if (props.currentGoal > 0) {
@@ -31,6 +34,8 @@ function AfterPreTestUI(props) {
 			props.incrementCurrentGoal()
 		}
 	}
+
+	console.log(props.answers)
 
 	if (props.column.input !== undefined) {
 		return (
@@ -73,6 +78,7 @@ function AfterPreTestUI(props) {
 
 function mapStateToProps(state) {
 	return {
+		answers: state.studentLogbook.studentlogbook.answers,
 		column: state.studentLogbook.logbook.columns[1],
 		currentGoal: state.studentLogbook.currentGoal,
 		goals: state.studentLogbook.logbook.goals
@@ -82,7 +88,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		incrementCurrentGoal: () => dispatch(incrementCurrentGoal()),
-		decrementCurrentGoal: () => dispatch(decrementCurrentGoal())
+		decrementCurrentGoal: () => dispatch(decrementCurrentGoal()),
+		loadStudentLogbook: () => dispatch(loadStudentLogbook())
 	}
 }
 
