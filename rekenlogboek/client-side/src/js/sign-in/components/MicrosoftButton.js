@@ -16,6 +16,7 @@ function MicrosoftButtonUI(props) {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [user, setUser] = useState({})
 	const [error, setError] = useState(null)
+	const [silentloginAttemptPerformed, silentLoginIsPerformed] = useState(false)
 	const [userAgentApplication] = useState(
 		() =>
 			new UserAgentApplication({
@@ -30,6 +31,7 @@ function MicrosoftButtonUI(props) {
 			})
 	)
 
+	//Actions performed once
 	useEffect(() => {
 		microsoftTeams.initialize()
 
@@ -41,9 +43,27 @@ function MicrosoftButtonUI(props) {
 		})
 	}, [])
 
+	//Actions performed before each render
+	useEffect(() => {
+		if (error) {
+			console.log(error)
+		}
+
+		if (isAuthenticated) {
+			props.doSaveUser(user)
+			if (props.user.name !== undefined) props.history.push('/auth/succes')
+		}
+	})
+
 	const silentLogin = async () => {
 		try {
 			const user = await getUserProfile(userAgentApplication, config.scopes)
+
+			//Failed silent login
+			if(user == null) {
+				silentLoginIsPerformed(true)
+				return
+			}
 
 			// if in teams, check if the user logged in is the same
 			// as the user logged in teams
@@ -68,6 +88,7 @@ function MicrosoftButtonUI(props) {
 					groups: user.groups
 				})
 			}
+			silentLoginIsPerformed(true)
 			setError(null)
 		} catch (err) {
 			setIsAuthenticated(false)
@@ -100,28 +121,22 @@ function MicrosoftButtonUI(props) {
 		}
 	}
 
-	useEffect(() => {
-		if (error) {
-			console.log(error)
-		}
-
-		if (isAuthenticated) {
-			props.doSaveUser(user)
-			if (props.user.name !== undefined) props.history.push('/auth/succes')
-		}
-	})
-
-	if (window.parent === window.self || props.context.loginHint !== undefined) {
+	if(!silentloginAttemptPerformed) {
+		silentLogin()
+		return <p>Auto login wordt geprobeerd...</p>
+	}
+	else if (window.parent === window.self || props.context.loginHint !== undefined) {
 		return (
-			<button className="MicrosoftButton" onLoad={silentLogin} onClick={login}>
+			<button className="MicrosoftButton" onClick={login}>
 				<div>
 					<img src={MicrosoftLogo} alt="Microsoft Logo" />
 					<span>Login met Microsoft</span>
 				</div>
 			</button>
 		)
-	} else {
-		return <p>Proberen je in te loggen...</p>
+	}
+	else {
+		return <p>Er is iets mis gegaan...</p>
 	}
 }
 
