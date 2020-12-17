@@ -13,6 +13,7 @@ import Jumbotron from '../../common/Jumbotron'
 import ButtonContainer from '../../common/ButtonContainer'
 import Button from '../../common/Button'
 import Modal from '../../common/logbook/Modal'
+import PeriodFilter from '../components/PeriodFilter'
 
 function AllowStudentAccess(props) {
 	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
@@ -74,16 +75,7 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<div className="filter">
-				<div>Leerjaar:</div>
-				<select>
-					<option value="19/20">19/20</option>
-					<option value="20/21">20/21</option>
-				</select>
-				<div>Blok:</div>
-				<input type="number" defaultValue="1" min="1" max="99" />
-				<Button color="blue" handler={() => {}} value="Kies blok" />
-			</div>
+			<PeriodFilter />
 			<Jumbotron>
 				<div className="content-container">
 					<div className="explanation-container">
