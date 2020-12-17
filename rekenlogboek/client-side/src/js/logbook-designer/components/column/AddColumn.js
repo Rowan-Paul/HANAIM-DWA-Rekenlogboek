@@ -33,11 +33,13 @@ function AddColumn(props) {
 	const getInputType = () => {
 		switch (inputType) {
 			case props.inputTypes.checkboxes:
-				return <Checkboxes options={options} type={'edit'} />
+				return <Checkboxes options={options} state={props.inputStates.onEdit} />
 			case props.inputTypes.radiobuttons:
-				return <Radiobuttons options={options} type={'edit'} />
+				return (
+					<Radiobuttons options={options} state={props.inputStates.onEdit} />
+				)
 			case props.inputTypes.textarea:
-				return <Textarea type={'preview'} />
+				return <Textarea />
 			default:
 				return null
 		}
@@ -77,8 +79,8 @@ function AddColumn(props) {
 				{getInputType()}
 			</div>
 
-			{inputType !== 'textarea' && <AddInputOption />}
-			{inputType !== 'textarea' && <Explanation />}
+			{inputType !== props.inputTypes.textarea && <AddInputOption />}
+			{inputType !== props.inputTypes.textarea && <Explanation />}
 		</div>
 	)
 }
@@ -86,7 +88,8 @@ function AddColumn(props) {
 const mapStateToProps = state => {
 	return {
 		columns: state.logbook.columns,
-		inputTypes: state.logbook.inputTypes,
+		inputStates: state.main.inputStates,
+		inputTypes: state.main.inputTypes,
 		position: state.logbook.position
 	}
 }

@@ -1,15 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import Evaluation from '../../InputTypes/Evaluation'
 import Goal from '../Goal'
 import InputType from './NewLogbookInputType'
 
-export default function LogbookRow(props) {
+function LogbookRow(props) {
 	return (
 		<div className="Row Body">
-			<Goal goal={props.goal} type={'edit'} />
-			<InputType position={1} />
-			<InputType position={2} />
-			<Evaluation type={'preview'} />
+			<Goal goal={props.goal} state={props.inputStates.onEdit} />
+			<InputType position={1} state={props.inputStates.inPreview} />
+			<InputType position={2} state={props.inputStates.inPreview} />
+			<Evaluation />
 		</div>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		inputStates: state.main.inputStates
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogbookRow)
