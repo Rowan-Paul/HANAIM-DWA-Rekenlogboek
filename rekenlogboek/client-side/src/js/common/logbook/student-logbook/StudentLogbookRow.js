@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import shortid from 'shortid'
 import { connect } from 'react-redux'
 
 import Evaluation from '../../InputTypes/Evaluation'
@@ -6,50 +7,37 @@ import Goal from '../Goal'
 import StudentLogbookInputType from './StudentLogbookInputType'
 
 function StudentLogbookRow(props) {
-	const [inputAnswer1, setAnswer1] = useState('')
-	const [inputAnswer2, setAnswer2] = useState('')
-	const [studentExplanation1, setExplanation1] = useState('')
-	const [studentExplanation2, setExplanation2] = useState('')
-	const [studentEvaluation, setEvaluation] = useState('')
+	const [goalAnswers, setGoalAnswers] = useState()
 
 	useEffect(() => {
-		const answersGoal = props.answers.filter(
-			answer => answer.goalPosition === props.goalid
+		const goalAnswers = props.answers.filter(
+			answer => answer.goalPosition === props.goal.position
 		)
+		setGoalAnswers(goalAnswers)
+	}, [props.answers])
 
-		const answer1 = answersGoal.filter(answer => answer.columnPosition === 1)[0]
+	const handler = () => {
+		if (goalAnswers) {
+			return goalAnswers.map(goalAnswer => {
+				if (goalAnswer.columnPosition === 3) {
+					return <Evaluation key={shortid.generate()} />
+				}
+				return (
+					<StudentLogbookInputType
+						answer={goalAnswer.answer}
+						key={shortid.generate()}
+						position={goalAnswer.columnPosition}
+						state={props.inputStates.inPreview}
+					/>
+				)
+			})
+		}
+	}
 
-		const answer2 = answersGoal.filter(answer => answer.columnPosition === 2)[0]
-		const answer3 = answersGoal.filter(answer => answer.columnPosition === 3)[0]
-
-		if (answer1 !== undefined) {
-			setAnswer1(answer1.answer.value)
-			setExplanation1(answer1.answer.explanation)
-		}
-		if (answer2 !== undefined) {
-			setAnswer2(answer2.answer.value)
-			setExplanation2(answer2.answer.explanation)
-		}
-		if (answer3 !== undefined) {
-			setEvaluation(answer3.answer.value)
-		}
-	})
 	return (
 		<div className="Row Body">
-			<Goal goal={props.goal} state={props.inputStates.inUse} />
-			<StudentLogbookInputType
-				position={1}
-				inputAnswer={inputAnswer1}
-				studentExplanation={studentExplanation1}
-				row={props.goalid}
-			/>
-			<StudentLogbookInputType
-				position={2}
-				inputAnswer={inputAnswer2}
-				studentExplanation={studentExplanation2}
-				row={props.goalid}
-			/>
-			<Evaluation inputAnswer={studentEvaluation} />
+			<Goal goal={props.goal} state={props.inputStates.inPreview} />
+			{handler()}
 		</div>
 	)
 }

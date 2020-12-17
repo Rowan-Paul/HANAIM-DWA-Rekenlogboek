@@ -19,8 +19,9 @@ function InputType(props) {
 			case props.inputTypes.checkboxes:
 				return (
 					<Checkboxes
+						answer={props.answer}
 						options={column.input.options}
-						state={props.inputStates.inPreview}
+						state={props.state}
 					/>
 				)
 
@@ -28,14 +29,15 @@ function InputType(props) {
 			case props.inputTypes.radiobuttons:
 				return (
 					<RadioButtons
+						answer={props.answer}
 						options={column.input.options}
-						state={props.inputStates.inPreview}
+						state={props.state}
 					/>
 				)
 
 			// TEXTAREA
 			case props.inputTypes.textarea:
-				return <Textarea state={props.inputStates.inPreview} />
+				return <Textarea state={props.state} />
 			default:
 				return ''
 		}

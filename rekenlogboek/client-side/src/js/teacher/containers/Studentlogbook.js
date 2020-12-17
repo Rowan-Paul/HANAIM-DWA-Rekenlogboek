@@ -23,7 +23,7 @@ function StudentLogbook(props) {
 
 	socket.on('NEW_ANSWER', data => {
 		if (data === props.student) {
-			props.fetchStudentlogbook(props.logbookid)
+			props.fetchStudentlogbook(props.logbookID)
 		}
 	})
 
@@ -58,7 +58,7 @@ const mapStateToProps = state => {
 	return {
 		columns: state.logbookoverview.currentLogbook.columns,
 		goals: state.logbookoverview.currentLogbook.goals,
-		logbookid: state.logbookoverview.activeStudentlogbook._id,
+		logbookID: state.logbookoverview.activeStudentlogbook._id,
 		logbookTypes: state.main.logbookTypes,
 		student: state.logbookoverview.activeStudentlogbook.student,
 		teacher: state.main.user.name
@@ -67,8 +67,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchStudentlogbook: logbookid =>
-			dispatch(fetchActiveStudentlogbook(logbookid))
+		fetchStudentlogbook: logbookID =>
+			dispatch(fetchActiveStudentlogbook(logbookID))
 	}
 }
 

@@ -8,33 +8,18 @@ import '../../../scss/common/InputTypes.scss'
 import Explanation from './Explanation'
 
 function Checkboxes(props) {
-	const newAnswer = e => {
-		if (props.readonly) {
-			const answers = [...props.inputAnswer]
-			if (answers.includes(e.target.value)) {
-				const i = answers.indexOf(5)
-				answers.splice(i, 1)
-			} else {
-				answers.push(e.target.value)
-			}
-			console.log(answers)
-			props.changeAnswer(answers)
-		}
-	}
-
-	const newExplanation = e => {
-		if (props.readonly) {
-			props.changeExplanation(e.target.value)
-		}
-	}
-
 	const stateHandler = () => {
 		switch (props.state) {
 			// If active
 			case props.inputStates.inUse:
 				return props.options.map((option, i) => (
 					<li className="inUse" key={shortid.generate()}>
-						<input type="checkbox" value={option} />
+						<input
+							checked={option === props.answer.value}
+							onChange={() => alert('Gebruik hier AUB een redux functie!')}
+							value={option}
+							type="checkbox"
+						/>
 						<span>{option}</span>
 					</li>
 				))
@@ -55,7 +40,12 @@ function Checkboxes(props) {
 			case props.inputStates.inPreview:
 				return props.options.map((option, i) => (
 					<li className="inPreview" key={shortid.generate()}>
-						<input type="checkbox" value={option} disabled />
+						<input
+							checked={option === props.answer.value}
+							value={option}
+							type="checkbox"
+							disabled
+						/>
 						<span>{option}</span>
 					</li>
 				))

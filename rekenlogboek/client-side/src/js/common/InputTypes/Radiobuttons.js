@@ -17,7 +17,11 @@ function RadioButtons(props) {
 					<ul className="Radiobuttons">
 						{props.options.map((option, i) => (
 							<li className={props.inputStates.inUse} key={shortid.generate()}>
-								<input type="radio" value={option} />
+								<input
+									onChange={() => alert('Gebruik hier AUB een redux functie!')}
+									type="radio"
+									value={option}
+								/>
 								<span>{option}</span>
 							</li>
 						))}
@@ -67,13 +71,23 @@ function RadioButtons(props) {
 								className={props.inputStates.inPreview}
 								key={shortid.generate()}
 							>
-								<input type="radio" value={option} disabled />
+								<input
+									checked={option === props.answer.value}
+									type="radio"
+									value={option}
+									disabled
+								/>
 								<span>{option}</span>
 							</li>
 						))}
 
 						<li className={props.inputStates.inPreview}>
-							<input type="radio" value="default" disabled />
+							<input
+								checked={'default' === props.answer.value}
+								type="radio"
+								value="default"
+								disabled
+							/>
 							<span>Ik weet het nog niet</span>
 						</li>
 						{explanationHandler()}

@@ -24,8 +24,8 @@ export function LogbookRows(props) {
 					})
 
 				case props.logbookTypes.studentLogbook:
-					return goals.map((goal, i) => (
-						<StudentLogbookRow key={shortid.generate()} goal={goal} id={i} />
+					return goals.map(goal => (
+						<StudentLogbookRow key={shortid.generate()} goal={goal} />
 					))
 
 				default:
