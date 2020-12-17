@@ -31,8 +31,8 @@ import NoAccess from '../js/no-access/NoAccess'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
-import { Default } from './student/containers/Default'
-import { AfterPreTest } from './student/containers/AfterPreTest'
+import { Default } from './student/containers/Default2'
+import { AfterPreTest } from './student/containers/AfterPreTest2'
 import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
 import { InstructionsEnd } from './student/containers/InstructionsEnd'
 import { EvaluationsEnd } from './student/containers/EvaluationsEnd'

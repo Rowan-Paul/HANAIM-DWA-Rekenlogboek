@@ -7,84 +7,40 @@ import {
 	NEXT_GOAL,
 	PREVIOUS_GOAL,
 	SAVE_ALL_GOALS,
-	LOAD_STUDENTLOGBOOK
+	LOAD_STUDENTLOGBOOK,
+	LOAD_LOGBOOK,
+	INCREMENT_CURRENT_GOAL,
+	DECREMENT_CURRENT_GOAL
 } from './types'
 
 const INITIAL_STATE = {
-	logbookID: null,
-	studentLogbookID: null,
-	currentPhase: null,
-	column: {},
-	goalAmount: null,
-	allGoals: [],
-	currentGoal: {
-		position: 1 // set default to 1 so it can fetch the first goal
-	},
-	answers: {}
+	currentGoal: 0,
+	logbook: {}
 }
 
 const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case SAVE_ALL_GOALS:
-			return {
-				...state,
-				allGoals: action.response.goals
-			}
-
-		case PREVIOUS_GOAL:
-			return {
-				...state,
-				currentGoal: {
-					position: state.currentGoal.position--
-				}
-			}
-
-		case NEXT_GOAL:
-			return {
-				...state,
-				currentGoal: {
-					position: state.currentGoal.position++
-				}
-			}
-
-		case SAVE_ANSWERS:
-			return {
-				...state,
-				answers: action.response
-			}
-
-		case SAVE_CURRENTPHASE:
-			return {
-				...state,
-				currentPhase: action.response.currentPhase,
-				logbookID: action.response._id
-			}
-
-		case SAVE_COLUMN:
-			return {
-				...state,
-				column: action.response
-			}
-
-		case SAVE_GOAL:
-			return {
-				...state,
-				currentGoal: action.response
-			}
-
-		case SAVE_GOAL_AMOUNT:
-			return {
-				...state,
-				goalAmount: action.response.goals.length
-			}
-
 		case LOAD_STUDENTLOGBOOK:
 			return {
 				...state,
 				studentLogbookID: action.response._id,
 				answers: action.response.answers
 			}
-
+		case LOAD_LOGBOOK:
+			return {
+				...state,
+				logbook: action.response
+			}
+		case INCREMENT_CURRENT_GOAL:
+			return {
+				...state,
+				currentGoal: state.currentGoal + 1
+			}
+		case DECREMENT_CURRENT_GOAL:
+			return {
+				...state,
+				currentGoal: state.currentGoal - 1
+			}
 		default:
 			return state
 	}

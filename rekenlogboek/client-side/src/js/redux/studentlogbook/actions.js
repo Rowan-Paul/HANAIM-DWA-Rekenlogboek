@@ -7,7 +7,10 @@ import {
 	NEXT_GOAL,
 	PREVIOUS_GOAL,
 	SAVE_ALL_GOALS,
-	LOAD_STUDENTLOGBOOK
+	LOAD_STUDENTLOGBOOK,
+	LOAD_LOGBOOK,
+	INCREMENT_CURRENT_GOAL,
+	DECREMENT_CURRENT_GOAL
 } from './types'
 
 export const fetchAllGoals = () => (dispatch, getState) => {
@@ -263,4 +266,38 @@ export const loadStudentLogbook = payload => async (dispatch, getState) => {
 			})
 		})
 		.catch(error => console.log(error))
+}
+
+//REAL SHIT //TODO: TODO: TODO: // mooi fel
+
+export const loadLogbook = payload => dispatch => {
+	//Groep 7 -> select everything after the space -> 7
+	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
+
+	//First fetch get's the phase of the logbook & LogbookID
+	//Second fetch get's the studentlogbookID and it's answers
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS + `/logbook/groups/${groupNumber}`,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response => {
+			dispatch({
+				type: LOAD_LOGBOOK,
+				response // Called it response (from API) to distinguish it from payloads (from app)
+			})
+		})
+		.catch(error => console.log(error))
+}
+
+export const incrementCurrentGoal = () => {
+	return { type: INCREMENT_CURRENT_GOAL }
+}
+
+export const decrementCurrentGoal = () => {
+	return {
+		type: DECREMENT_CURRENT_GOAL
+	}
 }
