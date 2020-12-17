@@ -58,7 +58,9 @@ function AfterPreTestUI(props) {
 							/>
 							<Question
 								answer={{
-									value: 'sdsadasd'
+									answer: {
+										value: 'sdsadasd'
+									}
 								}}
 								input={props.column.input}
 								state={props.inputStates.inUse}
