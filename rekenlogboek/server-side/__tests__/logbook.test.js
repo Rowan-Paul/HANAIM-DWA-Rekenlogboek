@@ -37,7 +37,7 @@ describe('Logbook route tests', () => {
 			period: 3,
 			group: 7,
 			year: '2019 - 2020',
-			currentPhase: 'PRE_TOETS',
+			currentPhase: 'pretest',
 			columns: [
 				{
 					position: 0,
