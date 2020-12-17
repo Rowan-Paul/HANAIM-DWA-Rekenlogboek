@@ -19,13 +19,7 @@ export function LogbookRows(props) {
 				case props.logbookTypes.newLogbook:
 					return goals.map(goal => {
 						if (goal.added) {
-							return (
-								<LogbookRow
-									key={shortid.generate()}
-									goal={goal}
-									readonly={props.readonly}
-								/>
-							)
+							return <LogbookRow key={shortid.generate()} goal={goal} />
 						}
 					})
 

@@ -36,7 +36,7 @@ function StudentLogbookRow(props) {
 	})
 	return (
 		<div className="Row Body">
-			<Goal goal={props.goal} />
+			<Goal goal={props.goal} state={props.inputStates.inUse} />
 			<StudentLogbookInputType
 				position={1}
 				inputAnswer={inputAnswer1}
@@ -56,7 +56,8 @@ function StudentLogbookRow(props) {
 
 const mapStateToProps = state => {
 	return {
-		answers: state.logbookoverview.activeStudentlogbook.answers
+		answers: state.logbookoverview.activeStudentlogbook.answers,
+		inputStates: state.main.inputStates
 	}
 }
 

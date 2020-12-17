@@ -73,8 +73,8 @@ function Columns(props) {
 							</p>
 						</div>
 
-						<InputType position={1} type={'edit'} />
-						<InputType position={2} type={'edit'} />
+						<InputType position={1} state={props.inputStates.onEdit} />
+						<InputType position={2} state={props.inputStates.onEdit} />
 						<div>
 							<Evaluation type={'preview'} />
 						</div>
@@ -104,6 +104,7 @@ const mapStateToProps = state => {
 	return {
 		columns: state.logbook.columns,
 		group: state.logbook.group,
+		inputStates: state.main.inputStates,
 		logbookTypes: state.main.logbookTypes,
 		modalVisible: state.logbook.modal.visible,
 		period: state.logbook.period
