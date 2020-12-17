@@ -1,10 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import shortid from 'shortid'
 import InputHandlers from '../../logbook-designer/components/column/InputHandlers'
 
 import '../../../scss/common/InputTypes.scss'
+import Explanation from './Explanation'
 
-export default function Checkboxes(props) {
+function Checkboxes(props) {
 	const newAnswer = e => {
 		if (props.readonly) {
 			const answers = [...props.inputAnswer]
@@ -25,40 +28,68 @@ export default function Checkboxes(props) {
 		}
 	}
 
-	return (
-		<ul className="Checkboxes">
-			{props.options.map((option, i) => (
-				<li
-					key={shortid.generate()}
-					className={props.readonly ? 'ReadOnly' : 'Edit'}
-				>
-					<input
-						type="checkbox"
-						name="checkboxes"
-						value={option}
-						onChange={e => newAnswer(e)}
-						checked={props.inputAnswer?.includes(option)}
-					/>
-					<span>{option}</span>
-					{!props.readonly && (
+	const stateHandler = () => {
+		switch (props.state) {
+			// If active
+			case props.inputStates.inUse:
+				return props.options.map((option, i) => (
+					<li className="inUse" key={shortid.generate()}>
+						<input type="checkbox" value={option} />
+						<span>{option}</span>
+					</li>
+				))
+
+			// If editable
+			case props.inputStates.onEdit:
+				return props.options.map((option, i) => (
+					<li className="onEdit" key={shortid.generate()}>
+						<input type="checkbox" value={option} disabled />
+						<span>{option}</span>
 						<div>
 							<InputHandlers position={i} />
 						</div>
-					)}
-				</li>
-			))}
+					</li>
+				))
 
-			{props.explanation && (
-				<li className="Explanation">
-					<textarea
-						type="text"
-						name="explanation"
-						placeholder="Omdat..."
-						value={props.studentExplanation}
-						onChange={e => newExplanation(e)}
-					/>
-				</li>
-			)}
+			// If only preview
+			case props.inputStates.inPreview:
+				return props.options.map((option, i) => (
+					<li className="inPreview" key={shortid.generate()}>
+						<input type="checkbox" value={option} disabled />
+						<span>{option}</span>
+					</li>
+				))
+			default:
+				return (
+					<p className="ErrorMessage">
+						Checkboxes: props.state not set! (see state.main.inputStates)
+					</p>
+				)
+		}
+	}
+
+	const explanationHandler = () => {
+		if (props.explanation) {
+			return <Explanation />
+		}
+	}
+	return (
+		<ul className="Checkboxes">
+			{stateHandler()}
+			{explanationHandler()}
 		</ul>
 	)
 }
+const mapStateToProps = state => {
+	return {
+		inputStates: state.main.inputStates
+	}
+}
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Checkboxes))
