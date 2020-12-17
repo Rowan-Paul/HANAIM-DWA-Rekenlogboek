@@ -35,7 +35,7 @@ async function seedLogbook() {
 			_id: '5fbbcad37f53f84d0c6fbb75',
 			period: 1,
 			group: 6,
-			year: '2020 - 2021',
+			year: '2020-2021',
 			currentPhase: 'test',
 			activeGoal: 1,
 			columns: [

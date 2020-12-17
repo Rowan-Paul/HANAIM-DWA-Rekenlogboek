@@ -1,21 +1,18 @@
 import * as types from './types'
 
 const INITIAL_STATE = {
-	schoolYears: []
+	schoolYears: [],
+	currentLogbook: {}
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case types.GET_ACTIVE_LOGBOOK:
 			return {
-				...state
-			}
-		case types.GET_ACTIVE_LOGBOOK_SUCCESS:
-			return {
-				...state
+				...state,
+				currentLogbook: action.payload
 			}
 		case types.GET_YEARS:
-			console.log(action.payload)
 			return {
 				...state,
 				schoolYears: action.payload

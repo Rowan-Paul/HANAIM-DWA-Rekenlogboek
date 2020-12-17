@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
 
@@ -6,6 +6,9 @@ import { getYears } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
+	const [selectedSchoolYear, setSelectedSchoolYear] = useState()
+	const [selectedPeriod, setSelectedPeriod] = useState(1)
+
 	useEffect(() => {
 		props.getSchoolYears()
 	}, [])
@@ -25,7 +28,11 @@ function PeriodFilter(props) {
 			<select>{getSchoolYearOptions()}</select>
 			<div>Blok:</div>
 			<input type="number" defaultValue="1" min="1" max="99" />
-			<Button color="blue" handler={() => {}} value="Kies blok" />
+			<Button
+				color="blue"
+				handler={() => props.filterClick(selectedSchoolYear, selectedPeriod)}
+				value="Kies blok"
+			/>
 		</div>
 	)
 }

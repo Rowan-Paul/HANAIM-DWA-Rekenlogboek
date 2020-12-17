@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { modalShow, modalHide } from '../../redux/logbook/actions'
+import { getActiveLogbook } from '../../redux/allow-student-access/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
 
@@ -25,6 +26,10 @@ function AllowStudentAccess(props) {
 
 	const selectGoal = nr => {
 		setSelectedLearnGoal(nr)
+	}
+
+	const filterClick = (schoolYear, period) => {
+		props.getLogbookData({ schoolYear, period })
 	}
 
 	const learnGoals = [
@@ -148,7 +153,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		modalShow: payload => dispatch(modalShow(payload)),
-		modalHide: () => dispatch(modalHide())
+		modalHide: () => dispatch(modalHide()),
+		getLogbookData: payload => dispatch(getActiveLogbook(payload))
 	}
 }
 

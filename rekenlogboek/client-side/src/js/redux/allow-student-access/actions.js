@@ -3,24 +3,23 @@ import * as types from './types'
 export const getYears = dispatch => {
 	fetch('http://localhost:3000/logbook/years')
 		.then(response => response.json())
-		.then(data => {
-			console.log(data)
+		.then(payload => {
 			return dispatch({
 				type: types.GET_YEARS,
-				payload: data
+				payload
 			})
 		})
 }
 
-export const getActiveLogbook = () => {
-	return {
-		type: types.GET_ACTIVE_LOGBOOK
-	}
-}
-export const getActiveLogbookSuccess = () => {
-	return {
-		type: types.GET_ACTIVE_LOGBOOK_SUCCESS
-	}
+export const getActiveLogbook = payload => {
+	fetch('http://localhost:3000/logbook/year/:year/group/:group/period/:period')
+		.then(response => response.json())
+		.then(payload => {
+			return dispatch({
+				type: types.GET_ACTIVE_LOGBOOK,
+				payload
+			})
+		})
 }
 export const updateLogbook = () => {
 	return {
