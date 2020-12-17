@@ -11,7 +11,6 @@ import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
 
 function Index(props) {
-	const history = useHistory()
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
@@ -31,7 +30,7 @@ function Index(props) {
 						color="blue"
 						description="Bekijk ingevulde logboeken."
 						value="Ingevulde logboeken"
-						handler={() => history.push('../teacher/logbooks')}
+						handler={() => props.history.push('/teacher/logbooks')}
 					/>
 				</div>
 			</div>

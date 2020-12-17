@@ -20,7 +20,9 @@ function Index(props) {
 						color="green"
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
-						handler={() => props.push('/logbook-designer/new-logbook/general')}
+						handler={() =>
+							props.history.push('/logbook-designer/new-logbook/general')
+						}
 					/>
 				</div>
 			</div>
