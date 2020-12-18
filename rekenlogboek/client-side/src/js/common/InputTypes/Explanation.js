@@ -14,7 +14,7 @@ function Explanation(props) {
 							name="explanation"
 							placeholder="Omdat..."
 							value={props.text}
-							onChange={() => alert('Gebruik hier AUB redux')}
+							onBlur={() => alert('Gebruik hier AUB redux')}
 						/>
 					</li>
 				)

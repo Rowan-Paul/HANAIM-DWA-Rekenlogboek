@@ -13,7 +13,7 @@ function Textarea(props) {
 					<textarea
 						className="Textarea"
 						placeholder="Omschrijving toevoegen"
-						onChange={() => alert('Redux functie AUB')}
+						onBlur={() => alert('Redux functie AUB')}
 					></textarea>
 				)
 
