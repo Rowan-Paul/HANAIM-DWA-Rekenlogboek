@@ -91,6 +91,39 @@ router.put('/', (req, res) => {
 		})
 })
 
+// Update a studentlogbook based on id
+router.put('/:id', (req, res) => {
+	StudentLogbook.findOneAndUpdate(
+		{
+			$and: [{ _id: { $eq: req.params.id } }]
+		},
+		{
+			answers: req.body.answers
+		},
+		{
+			new: true
+		}
+	)
+		.then(response => {
+			res.status(200).send(response)
+			// Logbook.findById(response.logbookID, 'teacher')
+			// 	.then(logbookResponse => {
+			// 		app.io
+			// 			.to(logbookResponse.teacher)
+			// 			.emit('NEW_ANSWER', req.body.student)
+			// 		res.status(200).send(response.answers)
+			// 	})
+			// 	.catch(err => {
+			// 		console.log('error 3: ' + err)
+			// 		res.status(500).send(err)
+			// })
+		})
+		.catch(err => {
+			console.log('error: ' + err)
+			res.status(500).send(err)
+		})
+})
+
 // Get all information about a specific studentlogbook
 router.get('/:id', (req, res) => {
 	StudentLogbook.findById(req.params.id)
