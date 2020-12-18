@@ -13,13 +13,13 @@ import Question from '../components/Question'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
-import {
-	newExplanation,
-	newAnswer,
-	fetchAnswers,
-	fetchColumn,
-	fetchGoal
-} from '../../redux/studentlogbook/actions'
+// import {
+// 	newExplanation,
+// 	newAnswer,
+// 	fetchAnswers,
+// 	fetchColumn,
+// 	fetchGoal
+// } from '../../redux/studentlogbook/actions'
 
 function EvaluationsUI(props) {
 	useEffect(() => {

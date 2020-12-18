@@ -13,16 +13,16 @@ import Question from '../components/Question'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
-import {
-	previousGoal,
-	nextGoal,
-	newExplanation,
-	newAnswer,
-	fetchAnswers,
-	fetchColumn,
-	fetchGoal,
-	fetchGoalAmount
-} from '../../redux/studentlogbook/actions'
+// import {
+// 	previousGoal,
+// 	nextGoal,
+// 	newExplanation,
+// 	newAnswer,
+// 	fetchAnswers,
+// 	fetchColumn,
+// 	fetchGoal,
+// 	fetchGoalAmount
+// } from '../../redux/studentlogbook/actions'
 
 function InstructionsUI(props) {
 	useEffect(() => {

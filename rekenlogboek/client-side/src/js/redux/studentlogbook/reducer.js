@@ -41,6 +41,11 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 				...state,
 				currentGoal: state.currentGoal - 1
 			}
+		case SAVE_ANSWERS:
+			return {
+				...state,
+				studentlogbook: action.response
+			}
 		default:
 			return state
 	}

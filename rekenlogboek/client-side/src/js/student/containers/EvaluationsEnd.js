@@ -13,12 +13,12 @@ import ResultTable from '../components/ResultTable'
 
 import Jumbotron from '../../common/Jumbotron'
 
-import {
-	fetchAllGoals,
-	previousGoal,
-	nextGoal,
-	fetchAnswers
-} from '../../redux/studentlogbook/actions'
+// import {
+// 	fetchAllGoals,
+// 	previousGoal,
+// 	nextGoal,
+// 	fetchAnswers
+// } from '../../redux/studentlogbook/actions'
 
 function EvaluationsEndUI(props) {
 	useEffect(() => {
