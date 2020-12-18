@@ -15,33 +15,32 @@ function PeriodFilter(props) {
 		props.getSchoolYears()
 	}, [])
 
-	const getSchoolYearOptions = () =>
-		props.schoolYears?.map(year => {
+	const getSchoolYearOptions = () => {
+		console.log('years', props.schoolYears)
+		return props.schoolYears?.map(year => {
 			return (
 				<option value={year} key={year}>
 					{year}
 				</option>
 			)
 		})
+	}
 
 	const updateSelectValue = value => {
-		console.log(value)
 		setSelectedSchoolYear(value)
 	}
 
 	const updatePeriodValue = value => {
-		console.log(value)
 		setSelectedPeriod(value)
 	}
 
 	return (
 		<div className="period-filter">
+			{console.log(props.currentSchoolYear, selectedSchoolYear)}
 			<div>Leerjaar:</div>
-
 			<select
 				id="select-school-year"
-				defaultValue={props.currentSchoolYear}
-				selected={selectedSchoolYear}
+				value={selectedSchoolYear}
 				onChange={e => {
 					updateSelectValue(e.target.value)
 				}}
