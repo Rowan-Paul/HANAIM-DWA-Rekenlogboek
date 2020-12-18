@@ -7,6 +7,7 @@ import {
 	NEXT_GOAL,
 	PREVIOUS_GOAL,
 	SAVE_ALL_GOALS,
+	STORE_ANSWER,
 	LOAD_STUDENTLOGBOOK,
 	LOAD_LOGBOOK,
 	INCREMENT_CURRENT_GOAL,
@@ -45,6 +46,11 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				studentlogbook: action.response
+			}
+		case STORE_ANSWER:
+			console.log('store die shit')
+			return {
+				...state
 			}
 		default:
 			return state

@@ -7,6 +7,7 @@ import {
 	NEXT_GOAL,
 	PREVIOUS_GOAL,
 	SAVE_ALL_GOALS,
+	STORE_ANSWER,
 	LOAD_STUDENTLOGBOOK,
 	LOAD_LOGBOOK,
 	INCREMENT_CURRENT_GOAL,
@@ -321,6 +322,14 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 			})
 		})
 		.catch(error => console.log(error))
+}
+
+export const storeAnswer = payload => async dispatch => {
+	await dispatch({
+		type: STORE_ANSWER,
+		payload
+	})
+	dispatch(saveAnswers())
 }
 
 export const saveAnswers = () => (dispatch, getState) => {
