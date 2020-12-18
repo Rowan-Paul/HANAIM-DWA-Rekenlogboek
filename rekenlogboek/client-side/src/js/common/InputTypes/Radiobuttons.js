@@ -28,7 +28,11 @@ function RadioButtons(props) {
 						))}
 
 						<li className={props.inputStates.inUse}>
-							<input type="radio" value="default" />
+							<input
+								type="radio"
+								value="default"
+								checked={!props.answer?.answer.value}
+							/>
 							<span>Ik weet het nog niet</span>
 						</li>
 						{explanationHandler()}
