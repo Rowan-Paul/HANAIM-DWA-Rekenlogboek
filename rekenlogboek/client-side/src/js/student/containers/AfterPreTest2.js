@@ -23,13 +23,11 @@ function AfterPreTestUI(props) {
 		props.loadStudentLogbook()
 	}, [props.currentGoal])
 
-	const getAnswer = () => {
-		if (props.answers) {
-			return props.answers.find(answer => {
-				answer.columnPosition === 1 && answer.goalPosition === props.currentGoal
-			})
-		}
-	}
+	const getAnswer = () =>
+		props.answers.filter(
+			answer =>
+				answer.goalPosition === props.currentGoal && answer.columnPosition === 1
+		)[0]
 
 	const previousPage = () => {
 		if (props.currentGoal > 0) {
@@ -57,11 +55,7 @@ function AfterPreTestUI(props) {
 								description={props.goals[props.currentGoal].description}
 							/>
 							<Question
-								answer={{
-									answer: {
-										value: 'sdsadasd'
-									}
-								}}
+								answer={getAnswer()}
 								input={props.column.input}
 								state={props.inputStates.inUse}
 							/>
