@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Default.scss'
 
-import { loadLogbook } from '../../redux/studentlogbook/actions'
+import {
+	loadLogbook,
+	loadStudentLogbook
+} from '../../redux/studentlogbook/actions'
 
 import defaultSVG from '../../../img/illustrations/nothing_to_see.svg'
 
@@ -14,10 +17,16 @@ function StudentUI(props) {
 		}
 	}, [])
 
+	useEffect(() => {
+		if (props.context.teamName !== undefined && props.logbookid) {
+			props.loadStudentLogbook()
+		}
+	}, [props.logbookid])
+
 	// When the user object exists, check which page
 	// the user should be redirected to
 	if (props.user !== undefined && props.user !== null) {
-		if (props.currentPhase !== null)
+		if (props.currentPhase !== null && props.studentlogbookid)
 			switch (props.currentPhase) {
 				case 'pretest':
 					props.history.push('/student/pretest')
@@ -56,14 +65,17 @@ function StudentUI(props) {
 function mapStateToProps(state) {
 	return {
 		user: state.main.user,
+		logbookid: state.studentLogbook.logbook._id,
 		currentPhase: state.studentLogbook.logbook.currentPhase,
+		studentlogbookid: state.studentLogbook.studentlogbook._id,
 		context: state.main.context
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		loadLogbook: payload => dispatch(loadLogbook(payload))
+		loadLogbook: payload => dispatch(loadLogbook(payload)),
+		loadStudentLogbook: () => dispatch(loadStudentLogbook())
 	}
 }
 
