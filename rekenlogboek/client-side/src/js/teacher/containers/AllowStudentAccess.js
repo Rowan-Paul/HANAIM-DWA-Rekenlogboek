@@ -12,7 +12,6 @@ import Lock from '../../../img/icons/lock_blue.svg'
 
 import Jumbotron from '../../common/Jumbotron'
 import ButtonContainer from '../../common/ButtonContainer'
-import Button from '../../common/Button'
 import Modal from '../../common/logbook/Modal'
 import PeriodFilter from '../components/PeriodFilter'
 
@@ -80,7 +79,7 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<PeriodFilter />
+			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
 				<div className="content-container">
 					<div className="explanation-container">

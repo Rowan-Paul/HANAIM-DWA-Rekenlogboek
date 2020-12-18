@@ -1,6 +1,23 @@
 import * as types from './types'
 
+const getCurrentSchoolYear = () => {
+	const date = new Date()
+	const month = date.getMonth()
+	let year1
+	let year2
+	if (month < 8) {
+		year1 = date.getFullYear() - 1
+		year2 = date.getFullYear()
+	} else {
+		year1 = date.getFullYear()
+		year2 = date.getFullYear() + 1
+	}
+
+	return `${year1} - ${year2}`
+}
+
 const INITIAL_STATE = {
+	currentSchoolYear: getCurrentSchoolYear(),
 	schoolYears: [],
 	currentLogbook: {}
 }

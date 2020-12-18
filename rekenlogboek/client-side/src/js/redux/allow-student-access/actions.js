@@ -1,7 +1,7 @@
 import * as types from './types'
 
 export const getYears = dispatch => {
-	fetch('http://localhost:3000/logbook/years')
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/years')
 		.then(response => response.json())
 		.then(payload => {
 			return dispatch({
@@ -11,15 +11,19 @@ export const getYears = dispatch => {
 		})
 }
 
-export const getActiveLogbook = payload => {
-	fetch('http://localhost:3000/logbook/year/:year/group/:group/period/:period')
-		.then(response => response.json())
-		.then(payload => {
-			return dispatch({
-				type: types.GET_ACTIVE_LOGBOOK,
-				payload
-			})
-		})
+export const getActiveLogbook = payload => (dispatch, getState) => {
+	const group = getState().main.user.groups
+	// const groupNumber = group.substring(group.indexOf(' ') + 1)
+	// console.log(groupNumber)
+	console.log(payload)
+	// fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/year/:year/group/:group/period/:period')
+	// 	.then(response => response.json())
+	// 	.then(payload => {
+	// 		return dispatch({
+	// 			type: types.GET_ACTIVE_LOGBOOK,
+	// 			payload
+	// 		})
+	// })
 }
 export const updateLogbook = () => {
 	return {

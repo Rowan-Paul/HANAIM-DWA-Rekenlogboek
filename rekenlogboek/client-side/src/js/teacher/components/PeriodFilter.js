@@ -6,7 +6,9 @@ import { getYears } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
-	const [selectedSchoolYear, setSelectedSchoolYear] = useState()
+	const [selectedSchoolYear, setSelectedSchoolYear] = useState(
+		props.currentSchoolYear
+	)
 	const [selectedPeriod, setSelectedPeriod] = useState(1)
 
 	useEffect(() => {
@@ -22,12 +24,38 @@ function PeriodFilter(props) {
 			)
 		})
 
+	const updateSelectValue = value => {
+		console.log(value)
+		setSelectedSchoolYear(value)
+	}
+
+	const updatePeriodValue = value => {
+		console.log(value)
+		setSelectedPeriod(value)
+	}
+
 	return (
 		<div className="period-filter">
 			<div>Leerjaar:</div>
-			<select>{getSchoolYearOptions()}</select>
+
+			<select
+				id="select-school-year"
+				defaultValue={props.currentSchoolYear}
+				selected={selectedSchoolYear}
+				onChange={e => {
+					updateSelectValue(e.target.value)
+				}}
+			>
+				{getSchoolYearOptions()}
+			</select>
 			<div>Blok:</div>
-			<input type="number" defaultValue="1" min="1" max="99" />
+			<input
+				type="number"
+				defaultValue="1"
+				min="1"
+				max="99"
+				onChange={e => updatePeriodValue(e.target.value)}
+			/>
 			<Button
 				color="blue"
 				handler={() => props.filterClick(selectedSchoolYear, selectedPeriod)}
@@ -39,7 +67,8 @@ function PeriodFilter(props) {
 
 const mapStateToProps = state => {
 	return {
-		schoolYears: state.allowStudentAccess.schoolYears
+		schoolYears: state.allowStudentAccess.schoolYears,
+		currentSchoolYear: state.allowStudentAccess.currentSchoolYear
 	}
 }
 
