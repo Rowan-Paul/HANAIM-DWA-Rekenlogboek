@@ -3,6 +3,12 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	width: 100vw;
+	min-height: 5vh;
+
+	.no-logbook-found > * {
+		text-align: center;
+	}
 
 	.bttn {
 		font-size: 22px;

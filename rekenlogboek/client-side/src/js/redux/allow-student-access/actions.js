@@ -12,19 +12,28 @@ export const getYears = dispatch => {
 }
 
 export const getActiveLogbook = payload => (dispatch, getState) => {
-	const group = getState().main.user.groups
-	// const groupNumber = group.substring(group.indexOf(' ') + 1)
-	// console.log(groupNumber)
-	console.log(payload)
-	// fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/year/:year/group/:group/period/:period')
-	// 	.then(response => response.json())
-	// 	.then(payload => {
-	// 		return dispatch({
-	// 			type: types.GET_ACTIVE_LOGBOOK,
-	// 			payload
-	// 		})
-	// })
+	try {
+		const group = getState().main.user.groups[1]
+		payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+		console.log(payload.groupNumber)
+		fetch(
+			`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
+		)
+			.then(response => response.json())
+			.then(payload => {
+				console.log(payload)
+				return dispatch({
+					type: types.GET_ACTIVE_LOGBOOK,
+					payload
+				})
+			})
+	} catch {
+		console.log(
+			'Het ophalen van een logboek is mislukt. Probeer opnieuw in te loggen.'
+		)
+	}
 }
+
 export const updateLogbook = () => {
 	return {
 		type: types.UPDATE_LOGBOOK
