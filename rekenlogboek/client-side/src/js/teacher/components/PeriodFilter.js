@@ -16,7 +16,6 @@ function PeriodFilter(props) {
 	}, [])
 
 	const getSchoolYearOptions = () => {
-		console.log('years', props.schoolYears)
 		return props.schoolYears?.map(year => {
 			return (
 				<option value={year} key={year}>
@@ -36,7 +35,6 @@ function PeriodFilter(props) {
 
 	return (
 		<div className="period-filter">
-			{console.log(props.currentSchoolYear, selectedSchoolYear)}
 			<div>Leerjaar:</div>
 			<select
 				id="select-school-year"

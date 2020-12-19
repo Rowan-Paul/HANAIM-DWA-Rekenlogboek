@@ -19,26 +19,31 @@ const getCurrentSchoolYear = () => {
 const INITIAL_STATE = {
 	currentSchoolYear: getCurrentSchoolYear(),
 	schoolYears: [],
-	currentLogbook: {}
+	currentLogbook: {},
+	currentPhase: undefined
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case types.GET_ACTIVE_LOGBOOK:
+			console.log(action.payload)
 			return {
 				...state,
-				currentLogbook: action.payload
+				currentLogbook: action.payload,
+				currentPhase: action.payload.currentPhase
 			}
 		case types.GET_YEARS:
 			return {
 				...state,
 				schoolYears: action.payload
 			}
-		case types.UPDATE_LOGBOOK:
+		case types.UPDATE_CURRENT_PHASE:
+			console.log(action.payload)
 			return {
-				...state
+				...state,
+				currentPhase: action.payload
 			}
-		case types.UPDATE_LOGBOOK_SUCCESS:
+		case types.UPDATE_ACTIVE_GOAL:
 			return {
 				...state
 			}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { modalShow, modalHide } from '../../redux/logbook/actions'
+import { modalHide } from '../../redux/logbook/actions'
 import { getActiveLogbook } from '../../redux/allow-student-access/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
@@ -78,9 +78,8 @@ function AllowStudentAccess(props) {
 		<div className="allow-student-access">
 			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
-				{console.log(props.currentLogbook)}
 				{Object.keys(props.currentLogbook).length !== 0 ? (
-					<StudentAccessSelector modalShow={props.modalShow} />
+					<StudentAccessSelector />
 				) : (
 					<div className="no-logbook-found">
 						<h1>Geen logboek gevonden</h1>
@@ -117,7 +116,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		modalShow: payload => dispatch(modalShow(payload)),
 		modalHide: () => dispatch(modalHide()),
 		getLogbookData: payload => dispatch(getActiveLogbook(payload))
 	}

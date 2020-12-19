@@ -15,13 +15,11 @@ export const getActiveLogbook = payload => (dispatch, getState) => {
 	try {
 		const group = getState().main.user.groups[1]
 		payload.groupNumber = group.substring(group.indexOf(' ') + 1)
-		console.log(payload.groupNumber)
 		fetch(
 			`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
 		)
 			.then(response => response.json())
 			.then(payload => {
-				console.log(payload)
 				return dispatch({
 					type: types.GET_ACTIVE_LOGBOOK,
 					payload
@@ -34,13 +32,30 @@ export const getActiveLogbook = payload => (dispatch, getState) => {
 	}
 }
 
-export const updateLogbook = () => {
-	return {
-		type: types.UPDATE_LOGBOOK
+export const updateCurrentPhase = payload => dispatch => {
+	console.log('p', payload)
+	const body = {
+		currentPhase: payload.currentPhase
 	}
+
+	fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/${payload.logbookID}/currentPhase`,
+		{
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		}
+	).then(() => {
+		console.log('succes')
+		return dispatch({
+			type: types.UPDATE_CURRENT_PHASE,
+			payload: body.currentPhase
+		})
+	})
 }
-export const updateLogbookSuccess = () => {
+
+export const updateActiveGoal = () => {
 	return {
-		type: types.UPDATE_LOGBOOK_SUCCESS
+		type: types.UPDATE_ACTIVE_GOAL
 	}
 }

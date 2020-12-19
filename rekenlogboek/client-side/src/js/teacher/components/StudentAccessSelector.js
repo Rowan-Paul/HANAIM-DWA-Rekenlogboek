@@ -1,10 +1,26 @@
 import React from 'react'
 import ButtonContainer from '../../common/ButtonContainer'
+import { connect } from 'react-redux'
+import { modalShow } from '../../redux/logbook/actions'
+import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
 import Check from '../../../img/icons/check_green.svg'
 import Lock from '../../../img/icons/lock_blue.svg'
 
-export default function StudentAccessSelector() {
+function StudentAccessSelector(props) {
+	const updatePhase = newPhase => {
+		props.updateCurrentPhase({
+			currentPhase: newPhase,
+			logbookID: props.currentLogbook._id
+		})
+	}
+
+	const openLearnGoalModal = () => {
+		props.modalShow({
+			title: 'Bepaal toegang'
+		})
+	}
+
 	return (
 		<div className="content-container">
 			<div className="explanation-container">
@@ -26,7 +42,7 @@ export default function StudentAccessSelector() {
 				color="green"
 				description="Open na pre-toets pagina."
 				value="Ontgrendel"
-				// handler={() => history.push('../teacher/logbooks')}
+				handler={() => updatePhase('pretest')}
 			/>
 
 			<ButtonContainer
@@ -34,7 +50,7 @@ export default function StudentAccessSelector() {
 				color="blue"
 				description="Sluit instructie pagina."
 				value="Vergrendel"
-				// handler={() => history.push('../teacher/logbooks')}
+				handler={() => updatePhase('instructions')}
 			/>
 
 			<ButtonContainer
@@ -42,12 +58,27 @@ export default function StudentAccessSelector() {
 				color="green"
 				description="Open na pre-toets pagina."
 				value="Ontgrendel"
-				handler={() =>
-					props.modalShow({
-						title: 'Bepaal toegang'
-					})
-				}
+				handler={() => openLearnGoalModal()}
 			/>
 		</div>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		modalVisible: state.logbook.modal.visible,
+		currentLogbook: state.allowStudentAccess.currentLogbook
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		modalShow: payload => dispatch(modalShow(payload)),
+		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload))
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(StudentAccessSelector)
