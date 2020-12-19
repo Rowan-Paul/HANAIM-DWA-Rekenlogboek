@@ -8,6 +8,13 @@ import Check from '../../../img/icons/check_green.svg'
 import Lock from '../../../img/icons/lock_blue.svg'
 
 function StudentAccessSelector(props) {
+	const phases = {
+		NOT_VISIBLE: 'notVisible',
+		PRE_TEST: 'pretest',
+		INSTRUCTIONS: 'instructions',
+		EVALUATION: 'evaluation'
+	}
+
 	const updatePhase = newPhase => {
 		props.updateCurrentPhase({
 			currentPhase: newPhase,
@@ -20,6 +27,22 @@ function StudentAccessSelector(props) {
 			title: 'Bepaal toegang'
 		})
 	}
+
+	const lockContainer = {
+		icon: Lock,
+		color: 'blue',
+		value: 'Ontgrendel'
+	}
+
+	const checkContainer = {
+		icon: Check,
+		color: 'green',
+		value: 'Vergrendel'
+	}
+
+	const openPage = phase => `Open ${phase} pagina.`
+	const closePage = phase => `Sluit ${phase} pagina.`
+	const equalsPhase = phase => props.currentLogbook.currentPhase === phase
 
 	return (
 		<div className="content-container">
@@ -38,26 +61,41 @@ function StudentAccessSelector(props) {
 				</p>
 			</div>
 			<ButtonContainer
-				icon={Check}
-				color="green"
-				description="Open na pre-toets pagina."
-				value="Ontgrendel"
-				handler={() => updatePhase('pretest')}
+				{...(equalsPhase(phases.PRE_TEST)
+					? {
+							description: openPage('pre-toets'),
+							...lockContainer
+					  }
+					: {
+							description: closePage('pre-toets'),
+							...checkContainer
+					  })}
+				handler={() => updatePhase(phases.PRE_TEST)}
 			/>
 
 			<ButtonContainer
-				icon={Lock}
-				color="blue"
-				description="Sluit instructie pagina."
-				value="Vergrendel"
-				handler={() => updatePhase('instructions')}
+				{...(equalsPhase(phases.INSTRUCTIONS)
+					? {
+							description: openPage('instructies'),
+							...lockContainer
+					  }
+					: {
+							description: closePage('instructies'),
+							...checkContainer
+					  })}
+				handler={() => updatePhase(phases.INSTRUCTIONS)}
 			/>
 
 			<ButtonContainer
-				icon={Check}
-				color="green"
-				description="Open na pre-toets pagina."
-				value="Ontgrendel"
+				{...(equalsPhase(phases.EVALUATION)
+					? {
+							description: openPage('evaluatie'),
+							...lockContainer
+					  }
+					: {
+							description: closePage('evaluatie'),
+							...checkContainer
+					  })}
 				handler={() => openLearnGoalModal()}
 			/>
 		</div>
