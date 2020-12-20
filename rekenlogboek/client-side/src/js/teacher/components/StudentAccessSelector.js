@@ -2,7 +2,6 @@ import React from 'react'
 import ButtonContainer from '../../common/ButtonContainer'
 import { connect } from 'react-redux'
 import { modalShow } from '../../redux/logbook/actions'
-import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
 import Check from '../../../img/icons/check_green.svg'
 import Lock from '../../../img/icons/lock_blue.svg'
@@ -13,13 +12,6 @@ function StudentAccessSelector(props) {
 		PRE_TEST: 'pretest',
 		INSTRUCTIONS: 'instructions',
 		EVALUATION: 'evaluation'
-	}
-
-	const updatePhase = newPhase => {
-		props.updateCurrentPhase({
-			currentPhase: newPhase,
-			logbookID: props.currentLogbook._id
-		})
 	}
 
 	const openLearnGoalModal = () => {
@@ -70,7 +62,7 @@ function StudentAccessSelector(props) {
 							description: closePage('pre-toets'),
 							...checkContainer
 					  })}
-				handler={() => updatePhase(phases.PRE_TEST)}
+				handler={() => props.updatePhase(phases.PRE_TEST)}
 			/>
 
 			<ButtonContainer
@@ -83,7 +75,7 @@ function StudentAccessSelector(props) {
 							description: closePage('instructies'),
 							...checkContainer
 					  })}
-				handler={() => updatePhase(phases.INSTRUCTIONS)}
+				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
 			/>
 
 			<ButtonContainer
@@ -111,8 +103,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		modalShow: payload => dispatch(modalShow(payload)),
-		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload))
+		modalShow: payload => dispatch(modalShow(payload))
 	}
 }
 

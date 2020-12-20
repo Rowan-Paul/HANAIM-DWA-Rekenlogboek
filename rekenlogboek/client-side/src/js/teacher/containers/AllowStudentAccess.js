@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
 import { getActiveLogbook } from '../../redux/allow-student-access/actions'
+import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
 
@@ -15,8 +16,16 @@ import StudentAccessSelector from '../components/StudentAccessSelector'
 function AllowStudentAccess(props) {
 	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
 
+	const updatePhase = newPhase => {
+		props.updateCurrentPhase({
+			currentPhase: newPhase,
+			logbookID: props.currentLogbook._id
+		})
+	}
+
 	const UnlockEvaluation = goal => {
 		setSelectedLearnGoal(goal)
+		updatePhase('evaluation')
 		props.modalHide()
 	}
 
@@ -79,7 +88,7 @@ function AllowStudentAccess(props) {
 			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
 				{Object.keys(props.currentLogbook).length !== 0 ? (
-					<StudentAccessSelector />
+					<StudentAccessSelector updatePhase={updatePhase} />
 				) : (
 					<div className="no-logbook-found">
 						<h1>Geen logboek gevonden</h1>
@@ -117,7 +126,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		modalHide: () => dispatch(modalHide()),
-		getLogbookData: payload => dispatch(getActiveLogbook(payload))
+		getLogbookData: payload => dispatch(getActiveLogbook(payload)),
+		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload))
 	}
 }
 
