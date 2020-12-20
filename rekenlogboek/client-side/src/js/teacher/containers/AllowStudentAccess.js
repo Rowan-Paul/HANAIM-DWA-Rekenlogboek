@@ -3,7 +3,10 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
-import { getActiveLogbook } from '../../redux/allow-student-access/actions'
+import {
+	getActiveLogbook,
+	updateActiveGoal
+} from '../../redux/allow-student-access/actions'
 import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
 import '../../../scss/teacher/containers/AllowStudentAccess.scss'
@@ -14,7 +17,10 @@ import PeriodFilter from '../components/PeriodFilter'
 import StudentAccessSelector from '../components/StudentAccessSelector'
 
 function AllowStudentAccess(props) {
-	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
+	console.log(props.currentLogbook)
+	const activeGoal = parseInt(props.currentLogbook?.activeGoal, 16)
+	console.log(activeGoal)
+	const [selectedLearnGoal, setSelectedLearnGoal] = useState(activeGoal)
 
 	const updatePhase = newPhase => {
 		props.updateCurrentPhase({
@@ -23,13 +29,13 @@ function AllowStudentAccess(props) {
 		})
 	}
 
-	const UnlockEvaluation = goal => {
-		setSelectedLearnGoal(goal)
+	const UnlockEvaluation = () => {
 		updatePhase('evaluation')
 		props.modalHide()
 	}
 
 	const selectGoal = nr => {
+		console.log(nr)
 		setSelectedLearnGoal(nr)
 	}
 
@@ -37,48 +43,22 @@ function AllowStudentAccess(props) {
 		props.getLogbookData({ schoolYear, period })
 	}
 
-	const learnGoals = [
-		{
-			goalNumber: 1,
-			name: 'doel 1: Procenten'
-		},
-		{
-			goalNumber: 2,
-			name: 'doel 3: Afmetingen'
-		},
-		{
-			goalNumber: 3,
-			name: 'doel 4: Schattingen'
-		},
-		{
-			goalNumber: 4,
-			name: 'doel 5: Plus sommen'
-		},
-		{
-			goalNumber: 5,
-			name: 'doel 6: Keer sommen'
-		},
-		{
-			goalNumber: 6,
-			name: 'doel 7: Afstanden'
-		},
-		{
-			goalNumber: 7,
-			name: 'doel 8: Snelheden'
-		}
-	]
-
 	const getLearnGoals = () =>
-		learnGoals.map(goal => {
+		props.currentLogbook.goals.map(goal => {
+			console.log(goal, selectedLearnGoal, props.currentLogbook)
+			const currentGoal =
+				typeof selectedLearnGoal === Number
+					? selectedLearnGoal
+					: props.currentLogbook.activeGoal
 			return (
 				<div
 					className={classNames('goal', {
-						selected: goal.goalNumber === selectedLearnGoal
+						selected: goal.position === currentGoal
 					})}
-					onClick={() => selectGoal(goal.goalNumber)}
-					key={goal.goalNumber}
+					onClick={() => selectGoal(goal.position)}
+					key={goal.position}
 				>
-					{goal.name}
+					{goal.title}
 				</div>
 			)
 		})
@@ -101,10 +81,7 @@ function AllowStudentAccess(props) {
 			</Jumbotron>
 
 			{props.modalVisible && (
-				<Modal
-					btnValue="Bevestig"
-					handler={learnGoal => UnlockEvaluation(learnGoal)}
-				>
+				<Modal btnValue="Bevestig" handler={() => UnlockEvaluation()}>
 					<p>
 						Selecteer een leerdoel waar de leerlingen hun evaluatie op kunnen
 						geven.
@@ -127,7 +104,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		modalHide: () => dispatch(modalHide()),
 		getLogbookData: payload => dispatch(getActiveLogbook(payload)),
-		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload))
+		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
+		updateActiveGoal: payload => dispatch(updateActiveGoal(payload))
 	}
 }
 

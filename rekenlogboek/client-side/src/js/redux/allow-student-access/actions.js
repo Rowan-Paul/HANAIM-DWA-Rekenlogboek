@@ -33,7 +33,6 @@ export const getActiveLogbook = payload => (dispatch, getState) => {
 }
 
 export const updateCurrentPhase = payload => dispatch => {
-	console.log('p', payload)
 	const body = {
 		currentPhase: payload.currentPhase
 	}
@@ -46,7 +45,6 @@ export const updateCurrentPhase = payload => dispatch => {
 			body: JSON.stringify(body)
 		}
 	).then(() => {
-		console.log('succes')
 		return dispatch({
 			type: types.UPDATE_CURRENT_PHASE,
 			payload: body.currentPhase

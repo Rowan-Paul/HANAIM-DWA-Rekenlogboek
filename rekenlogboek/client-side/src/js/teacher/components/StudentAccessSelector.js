@@ -56,11 +56,11 @@ function StudentAccessSelector(props) {
 				{...(equalsPhase(phases.PRE_TEST)
 					? {
 							description: openPage('pre-toets'),
-							...lockContainer
+							...checkContainer
 					  }
 					: {
 							description: closePage('pre-toets'),
-							...checkContainer
+							...lockContainer
 					  })}
 				handler={() => props.updatePhase(phases.PRE_TEST)}
 			/>
@@ -69,11 +69,11 @@ function StudentAccessSelector(props) {
 				{...(equalsPhase(phases.INSTRUCTIONS)
 					? {
 							description: openPage('instructies'),
-							...lockContainer
+							...checkContainer
 					  }
 					: {
 							description: closePage('instructies'),
-							...checkContainer
+							...lockContainer
 					  })}
 				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
 			/>
@@ -82,11 +82,11 @@ function StudentAccessSelector(props) {
 				{...(equalsPhase(phases.EVALUATION)
 					? {
 							description: openPage('evaluatie'),
-							...lockContainer
+							...checkContainer
 					  }
 					: {
 							description: closePage('evaluatie'),
-							...checkContainer
+							...lockContainer
 					  })}
 				handler={() => openLearnGoalModal()}
 			/>
