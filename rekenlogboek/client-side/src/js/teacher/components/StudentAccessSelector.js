@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ButtonContainer from '../../common/ButtonContainer'
 import { connect } from 'react-redux'
 import { modalShow } from '../../redux/logbook/actions'
@@ -13,6 +13,12 @@ function StudentAccessSelector(props) {
 		INSTRUCTIONS: 'instructions',
 		EVALUATION: 'evaluation'
 	}
+
+	useEffect(() => {
+		if (props.currentLogbook.currentPhase === phases.EVALUATION) {
+			props.selectGoal(props.currentLogbook.activeGoal)
+		}
+	}, [])
 
 	const openLearnGoalModal = () => {
 		props.modalShow({

@@ -17,12 +17,10 @@ import PeriodFilter from '../components/PeriodFilter'
 import StudentAccessSelector from '../components/StudentAccessSelector'
 
 function AllowStudentAccess(props) {
-	console.log(props.currentLogbook)
-	const activeGoal = parseInt(props.currentLogbook?.activeGoal, 16)
-	console.log(activeGoal)
-	const [selectedLearnGoal, setSelectedLearnGoal] = useState(activeGoal)
+	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
 
 	const updatePhase = newPhase => {
+		selectGoal() //make sure no goal is selected when switching phase
 		props.updateCurrentPhase({
 			currentPhase: newPhase,
 			logbookID: props.currentLogbook._id
@@ -45,15 +43,16 @@ function AllowStudentAccess(props) {
 
 	const getLearnGoals = () =>
 		props.currentLogbook.goals.map(goal => {
-			console.log(goal, selectedLearnGoal, props.currentLogbook)
-			const currentGoal =
-				typeof selectedLearnGoal === Number
-					? selectedLearnGoal
-					: props.currentLogbook.activeGoal
+			console.log(
+				`pos ${goal.position} selected ${selectedLearnGoal} active ${props.currentLogbook.activeGoal}`
+			)
+
 			return (
 				<div
 					className={classNames('goal', {
-						selected: goal.position === currentGoal
+						selected:
+							selectedLearnGoal !== undefined &&
+							selectedLearnGoal == goal.position
 					})}
 					onClick={() => selectGoal(goal.position)}
 					key={goal.position}
@@ -68,7 +67,10 @@ function AllowStudentAccess(props) {
 			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
 				{Object.keys(props.currentLogbook).length !== 0 ? (
-					<StudentAccessSelector updatePhase={updatePhase} />
+					<StudentAccessSelector
+						updatePhase={updatePhase}
+						selectGoal={selectGoal}
+					/>
 				) : (
 					<div className="no-logbook-found">
 						<h1>Geen logboek gevonden</h1>
