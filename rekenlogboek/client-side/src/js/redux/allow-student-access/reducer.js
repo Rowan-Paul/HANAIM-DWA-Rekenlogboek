@@ -46,7 +46,11 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 		case types.UPDATE_ACTIVE_GOAL:
 			return {
-				...state
+				...state,
+				currentLogbook: {
+					...state.currentLogbook,
+					activeGoal: action.payload
+				}
 			}
 		default:
 			return state

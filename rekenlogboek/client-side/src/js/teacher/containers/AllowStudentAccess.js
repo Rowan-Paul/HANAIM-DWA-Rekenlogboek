@@ -20,15 +20,21 @@ function AllowStudentAccess(props) {
 	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
 
 	const updatePhase = newPhase => {
-		selectGoal() //make sure no goal is selected when switching phase
+		//make sure no goal is selected when switching phase
+		newPhase !== 'evaluation' && selectGoal()
 		props.updateCurrentPhase({
 			currentPhase: newPhase,
 			logbookID: props.currentLogbook._id
 		})
 	}
 
-	const UnlockEvaluation = () => {
+	const openEvaluationPhase = () => {
+		console.log(selectedLearnGoal)
 		updatePhase('evaluation')
+		props.updateActiveGoal({
+			activeGoal: selectedLearnGoal,
+			logbookID: props.currentLogbook._id
+		})
 		props.modalHide()
 	}
 
@@ -50,9 +56,7 @@ function AllowStudentAccess(props) {
 			return (
 				<div
 					className={classNames('goal', {
-						selected:
-							selectedLearnGoal !== undefined &&
-							selectedLearnGoal == goal.position
+						selected: selectedLearnGoal == goal.position
 					})}
 					onClick={() => selectGoal(goal.position)}
 					key={goal.position}
@@ -83,7 +87,7 @@ function AllowStudentAccess(props) {
 			</Jumbotron>
 
 			{props.modalVisible && (
-				<Modal btnValue="Bevestig" handler={() => UnlockEvaluation()}>
+				<Modal btnValue="Bevestig" handler={() => openEvaluationPhase()}>
 					<p>
 						Selecteer een leerdoel waar de leerlingen hun evaluatie op kunnen
 						geven.

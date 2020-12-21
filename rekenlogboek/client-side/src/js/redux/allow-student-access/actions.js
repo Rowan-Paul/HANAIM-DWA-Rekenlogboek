@@ -52,8 +52,23 @@ export const updateCurrentPhase = payload => dispatch => {
 	})
 }
 
-export const updateActiveGoal = () => {
-	return {
-		type: types.UPDATE_ACTIVE_GOAL
+export const updateActiveGoal = payload => dispatch => {
+	console.log(payload)
+	const body = {
+		activeGoal: payload.activeGoal
 	}
+
+	fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/${payload.logbookID}/activeGoal`,
+		{
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		}
+	).then(() => {
+		return dispatch({
+			type: types.UPDATE_ACTIVE_GOAL,
+			payload: body.activeGoal
+		})
+	})
 }
