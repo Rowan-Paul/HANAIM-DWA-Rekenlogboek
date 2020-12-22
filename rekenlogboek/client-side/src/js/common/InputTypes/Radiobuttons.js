@@ -34,6 +34,9 @@ function RadioButtons(props) {
 							<input
 								type="radio"
 								value="default"
+								onChange={() => {
+									alert('yoghurt!')
+								}}
 								checked={!props.answer?.answer.value}
 							/>
 							<span>Ik weet het nog niet</span>
@@ -116,7 +119,11 @@ function RadioButtons(props) {
 			return (
 				<Explanation
 					state={props.state}
-					text={props.answer?.answer.explanation}
+					text={
+						props.answer?.answer.explanation
+							? props.answer?.answer.explanation
+							: 'Omdat...'
+					}
 				/>
 			)
 		}

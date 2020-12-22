@@ -15,6 +15,7 @@ function Question(props) {
 						answer={props.answer}
 						options={props.input.options}
 						state={props.state}
+						explanation={props.explanation}
 					/>
 				)
 
@@ -25,6 +26,7 @@ function Question(props) {
 						answer={props.answer}
 						options={props.input.options}
 						state={props.state}
+						explanation={props.explanation}
 					/>
 				)
 

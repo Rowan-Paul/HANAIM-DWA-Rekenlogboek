@@ -41,8 +41,6 @@ function AfterPreTestUI(props) {
 		}
 	}
 
-	console.log(getAnswer())
-
 	if (props.column.input !== undefined) {
 		return (
 			<div className="after-pre-test student-container">
@@ -58,6 +56,7 @@ function AfterPreTestUI(props) {
 								answer={getAnswer()}
 								input={props.column.input}
 								state={props.inputStates.inUse}
+								explanation={props.explanation}
 							/>
 						</div>
 						<div className="right-side">
@@ -80,6 +79,7 @@ function AfterPreTestUI(props) {
 
 function mapStateToProps(state) {
 	return {
+		explanation: state.studentLogbook.logbook.columns[1].explanation,
 		inputStates: state.main.inputStates,
 		answers: state.studentLogbook.studentlogbook.answers,
 		column: state.studentLogbook.logbook.columns[1],
