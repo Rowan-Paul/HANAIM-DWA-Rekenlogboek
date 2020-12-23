@@ -324,32 +324,27 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
-export const storeAnswer = payload => async dispatch => {
-	await dispatch({
-		type: STORE_ANSWER,
-		payload
-	})
-	dispatch(saveAnswers())
-}
-
-export const saveAnswers = () => (dispatch, getState) => {
+export const saveAnswers = (answerValue, answer) => (dispatch, getState) => {
 	const body = {
 		answers: getState().studentLogbook.answers
 	}
 
 	const logbookid = getState().studentLogbook.studentlogbook._id
 
-	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid, {
-		method: 'PUT',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(body)
-	})
-		.then(res => res.json())
-		.then(response => {
-			dispatch({
-				type: SAVE_ANSWERS,
-				response
-			})
-		})
-		.catch(error => console.log(error))
+	console.log(answerValue)
+	console.log(answer)
+
+	// fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid, {
+	// 	method: 'PUT',
+	// 	headers: { 'Content-Type': 'application/json' },
+	// 	body: JSON.stringify(body)
+	// })
+	// 	.then(res => res.json())
+	// 	.then(response => {
+	// 		dispatch({
+	// 			type: SAVE_ANSWERS,
+	// 			response
+	// 		})
+	// 	})
+	// 	.catch(error => console.log(error))
 }

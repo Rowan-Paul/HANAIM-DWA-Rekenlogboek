@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Checkboxes from '../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
+import { saveAnswers } from '../../redux/studentlogbook/actions'
 
 function Question(props) {
 	const handler = () => {
@@ -27,6 +28,9 @@ function Question(props) {
 						options={props.input.options}
 						state={props.state}
 						explanation={props.explanation}
+						changeHandler={(newAnswerValue, answer) => {
+							props.saveAnswers(newAnswerValue, answer)
+						}}
 					/>
 				)
 
@@ -54,4 +58,11 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, null)(Question)
+const mapDispatchToProps = dispatch => {
+	return {
+		saveAnswers: (answerValue, answer) =>
+			dispatch(saveAnswers(answerValue, answer))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question)

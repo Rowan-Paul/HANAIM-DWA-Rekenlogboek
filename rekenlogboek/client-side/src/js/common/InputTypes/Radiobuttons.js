@@ -18,9 +18,9 @@ function RadioButtons(props) {
 						{props.options.map((option, i) => (
 							<li className={props.inputStates.inUse} key={shortid.generate()}>
 								<input
-									onChange={() => {
-										console.log(props.answer?.goalPosition)
-										alert('Gebruik hier AUB een redux functie!')
+									onChange={e => {
+										const newAnswerValue = e.target.value
+										props.changeHandler(newAnswerValue, props.answer)
 									}}
 									type="radio"
 									value={option}
@@ -34,9 +34,7 @@ function RadioButtons(props) {
 							<input
 								type="radio"
 								value="default"
-								onChange={() => {
-									alert('yoghurt!')
-								}}
+								onChange={props.changeHandler}
 								checked={!props.answer?.answer.value}
 							/>
 							<span>Ik weet het nog niet</span>

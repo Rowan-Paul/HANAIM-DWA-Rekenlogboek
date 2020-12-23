@@ -47,11 +47,6 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 				...state,
 				studentlogbook: action.response
 			}
-		case STORE_ANSWER:
-			console.log('store die shit')
-			return {
-				...state
-			}
 		default:
 			return state
 	}
