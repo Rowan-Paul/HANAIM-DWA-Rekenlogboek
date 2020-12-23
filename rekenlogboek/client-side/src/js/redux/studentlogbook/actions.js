@@ -325,14 +325,41 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 }
 
 export const saveAnswers = (answerValue, answer) => (dispatch, getState) => {
-	const body = {
-		answers: getState().studentLogbook.answers
-	}
-
-	const logbookid = getState().studentLogbook.studentlogbook._id
-
 	console.log(answerValue)
 	console.log(answer)
+
+	const currentAnswers = [...getState().studentLogbook.studentlogbook.answers]
+
+	console.log(currentAnswers)
+	console.log(getState().studentLogbook.studentlogbook.answers)
+
+	currentAnswers.push('hoi')
+
+	console.log(currentAnswers)
+	console.log(getState().studentLogbook.studentlogbook.answers)
+
+	// const newAnswers = currentAnswers.map(a => {
+	// 	if (
+	// 		a.columnPosition === answer.columnPosition &&
+	// 		a.goalPosition === answer.goalPosition
+	// 	) {
+	// 		// a.answer = { ...a.answer, value: answerValue }
+	// 		// console.log(a)
+	// 		return a
+	// 	}
+
+	// 	return a
+	// })
+
+	// console.log(newAnswers)
+
+	// console.log(getState().studentLogbook.studentlogbook.answers)
+
+	// const logbookid = getState().studentLogbook.studentlogbook._id
+
+	// const body = {
+	// 	answers: getState().studentLogbook.studentlogbook.answers
+	// }
 
 	// fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid, {
 	// 	method: 'PUT',
