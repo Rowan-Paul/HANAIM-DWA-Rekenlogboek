@@ -161,4 +161,42 @@ router.get('/logbook/:logbookid/student/:student', (req, res) => {
 		})
 })
 
+/**
+ * Shows an group overview including all answers sorted by row, column
+ */
+router.get('/:id/group-overview', async (req, res) => {
+	/** Init object property if not exist */
+	Object.prototype.initProperty = function (name, defaultValue) {
+		if (!(name in this)) this[name] = defaultValue
+	}
+
+	const students = await StudentLogbook.find({ logbookID: req.params.id })
+	const answers = {
+		rows: {}
+	}
+
+	// Code for creating overview
+	students.map(student => {
+		student.answers.map(answer => {
+			// Create row prop if not exist (example)
+			answers.rows.initProperty(answer.goalPosition, {})
+
+			// Create column within row if not exist
+			answers.rows[answer.goalPosition].initProperty(answer.columnPosition, {})
+
+			// Create prop for answer if not exist
+			answers.rows[answer.goalPosition][answer.columnPosition].initProperty(
+				answer.answer.value,
+				0
+			)
+			// Increment answer if available
+			answers.rows[answer.goalPosition][answer.columnPosition][
+				answer.answer.value
+			]++
+		})
+	})
+
+	res.status(200).send(answers)
+})
+
 module.exports = router
