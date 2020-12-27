@@ -4,6 +4,7 @@ import shortid from 'shortid'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import GroupLogbookRow from '../../teacher/components/group-overview/GroupLogbookRow'
 import LogbookRow from './new-logbook/NewLogbookRow'
 import StudentLogbookRow from './student-logbook/StudentLogbookRow'
 
@@ -16,6 +17,17 @@ export function LogbookRows(props) {
 	const rowTypeHandler = () => {
 		if (goals) {
 			switch (props.type) {
+				// GROUP LOGBOOK
+				case props.logbookTypes.groupOverview:
+					return goals.map((goal, i) => (
+						<GroupLogbookRow
+							key={shortid.generate()}
+							goal={goal}
+							rowPosition={i}
+						/>
+					))
+
+				// NEW LOGBOOK
 				case props.logbookTypes.newLogbook:
 					return goals.map(goal => {
 						if (goal.added) {
@@ -23,6 +35,7 @@ export function LogbookRows(props) {
 						}
 					})
 
+				// STUDENT LOGBOOK
 				case props.logbookTypes.studentLogbook:
 					return goals.map(goal => (
 						<StudentLogbookRow key={shortid.generate()} goal={goal} />
@@ -31,7 +44,8 @@ export function LogbookRows(props) {
 				default:
 					return (
 						<p className="ErrorMessage">
-							LogbookRows: props.type not set or empty! (See state.logbook.type)
+							LogbookRows: props.type not set or empty! (See
+							state.main.logbookTypes)
 						</p>
 					)
 			}
