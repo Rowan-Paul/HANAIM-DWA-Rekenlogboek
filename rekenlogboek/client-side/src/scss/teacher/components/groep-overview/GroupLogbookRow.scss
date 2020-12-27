@@ -28,10 +28,40 @@
 		}
 
 		button {
+			background: $blue;
+			border: 1px solid $blue;
+			border-radius: 8px;
+			color: #fff;
+			cursor: pointer;
 			font-size: 12px;
 			padding: 0.5vh 0;
 			margin: 0 0 1vh;
+			transition: ease-in-out 0.5s;
 			width: 60%;
+
+			&:hover {
+				background: $hover-blue;
+			}
+		}
+	}
+	.List {
+		margin: 1vh auto;
+		padding: 0;
+		width: 90%;
+
+		li {
+			list-style: none;
+			margin: 1vh 0;
+
+			i {
+				cursor: pointer;
+				padding-left: 0.5vw;
+				transition: ease-in-out 0.5s;
+
+				&:hover {
+					color: $fontLight;
+				}
+			}
 		}
 	}
 }

@@ -5,16 +5,50 @@ import { withRouter } from 'react-router-dom'
 import Button from '../../../common/Button'
 
 import '../../../../scss/teacher/components/groep-overview/GroupLogbookRow.scss'
+import { getLogbookGroupOverview } from '../../../redux/group-overview/actions'
+import shortid from 'shortid'
 
 function GroupLogbookRow(props) {
+	const [answers, setAnswers] = useState(props.answers)
 	const [columns, setColumns] = useState(props.columns)
 	const [goal, setGoal] = useState(props.goal)
+
+	useEffect(() => {
+		setAnswers(props.answers)
+		setColumns(props.columns)
+		setGoal(props.goal)
+	}, [props])
+
+	const redirect = (goal = '', column = '', answer = '') =>
+		props.history.push(
+			`/teacher/group-overview/answers?goal=${goal}&column=${column}&answer=${answer}`
+		)
+
+	const listAnswers = (row, column) => {
+		if (answers) {
+			if (answers.rows[row]) {
+				if (answers.rows[row][column]) {
+					return answers.rows[row][column].map(answer => (
+						<li key={shortid.generate()}>
+							<span>
+								{answer.count} x {answer.value}
+							</span>
+
+							<i
+								className="fa fa-info-circle"
+								onClick={() => redirect(row, column, answer.value)}
+							/>
+						</li>
+					))
+				}
+			}
+		}
+	}
 
 	const handler = () => {
 		return (
 			<li className="Row group_logbook_row">
 				{columns.map(column => {
-					console.log(column)
 					switch (column.position) {
 						case 0:
 							return (
@@ -28,7 +62,9 @@ function GroupLogbookRow(props) {
 									<div className="Main">
 										<p>{goal.description}</p>
 
-										<Button color="blue" value="Antwoorden bekijken" />
+										<button onClick={() => redirect(goal.position)}>
+											Antwoorden bekijken
+										</button>
 									</div>
 								</div>
 							)
@@ -40,6 +76,10 @@ function GroupLogbookRow(props) {
 										<h4>{column.title}</h4>
 										<span>{column.input.type}</span>
 									</div>
+
+									<ul className="List">
+										{listAnswers(goal.position, column.position)}
+									</ul>
 								</div>
 							)
 					}
@@ -48,21 +88,19 @@ function GroupLogbookRow(props) {
 		)
 	}
 
-	useEffect(() => {
-		setColumns(props.columns)
-		setGoal(props.goal)
-	}, [props.columns, props.goal])
-
 	return handler()
 }
 
 const mapStateToProps = state => {
 	return {
+		answers: state.groupOverview.answers,
 		columns: state.groupOverview.logbook.columns
 	}
 }
 const mapDispatchToProps = dispatch => {
-	return {}
+	return {
+		getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
+	}
 }
 
 export default connect(
