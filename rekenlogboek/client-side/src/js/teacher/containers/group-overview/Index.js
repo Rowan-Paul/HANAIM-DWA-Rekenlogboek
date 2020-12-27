@@ -6,7 +6,10 @@ import TopBar from '../../../common/logbook/TopBar'
 import LogbookFrame from '../../../common/logbook/LogbookFrame'
 import LogbookRows from '../../../common/logbook/LogbookRows'
 
-import { getLogbook } from '../../../redux/group-overview/actions'
+import {
+	getLogbook,
+	getLogbookGroupOverview
+} from '../../../redux/group-overview/actions'
 import '../../../../scss/teacher/containers/group-overview/Index.scss'
 export const Index = props => {
 	const [logbook, setLogbook] = useState(props.logbook)
@@ -14,6 +17,7 @@ export const Index = props => {
 	const logbookHandler = () => {
 		if (!logbook) {
 			props.getLogbook()
+			props.getLogbookGroupOverview()
 			return ''
 		} else {
 			return (
@@ -45,7 +49,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	getLogbook: () => dispatch(getLogbook())
+	getLogbook: () => dispatch(getLogbook()),
+	getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
