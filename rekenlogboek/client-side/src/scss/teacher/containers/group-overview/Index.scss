@@ -1,2 +1,24 @@
+@import '../../../Variables.scss';
+
 .GroupOverview {
+	align-items: center;
+	color: $fontColor;
+	display: flex;
+	height: 90%;
+	margin: 0 auto;
+	position: relative;
+	width: 90%;
+
+	.vertical-center {
+		display: flex;
+		flex-direction: column;
+		grid-row: span 6;
+		justify-content: center;
+		height: inherit;
+		color: $fontColor;
+		height: 100%;
+		margin: 0 5%;
+		position: relative;
+		width: 90%;
+	}
 }
