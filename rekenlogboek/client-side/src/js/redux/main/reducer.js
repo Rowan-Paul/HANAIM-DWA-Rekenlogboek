@@ -22,6 +22,7 @@ const initialMainState = {
 		inPreview: 'inPreview'
 	},
 	logbookTypes: {
+		groupOverview: 'groupOverview',
 		newLogbook: 'newLogbook',
 		studentLogbook: 'studentLogbook'
 	}
