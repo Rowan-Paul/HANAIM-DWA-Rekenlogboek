@@ -19,8 +19,7 @@ function RadioButtons(props) {
 							<li className={props.inputStates.inUse} key={shortid.generate()}>
 								<input
 									onChange={e => {
-										const newAnswerValue = e.target.value
-										props.changeHandler(newAnswerValue, props.answer)
+										props.changeHandler(e.target.value, { ...props.answer })
 									}}
 									type="radio"
 									value={option}
@@ -34,7 +33,11 @@ function RadioButtons(props) {
 							<input
 								type="radio"
 								value="default"
-								onChange={props.changeHandler}
+								onChange={e =>
+									props.changeHandler(e.target.value, {
+										...props.answer
+									})
+								}
 								checked={!props.answer?.answer.value}
 							/>
 							<span>Ik weet het nog niet</span>
