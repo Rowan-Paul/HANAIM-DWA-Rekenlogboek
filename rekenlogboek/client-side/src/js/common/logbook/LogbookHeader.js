@@ -13,6 +13,28 @@ function LogbookHeader(props) {
 	const columnPropHandler = () => {
 		if (colums) {
 			switch (props.type) {
+				// LOGBOOK GROUP ANSWER
+				case props.logbookTypes.groupAnswer:
+					return (
+						<li className="Row Header">
+							{colums.map(column => {
+								switch (column.position) {
+									case 0:
+										return (
+											<div key={column.position} className="Cell">
+												<h4>Naam leerling</h4>
+											</div>
+										)
+									default:
+										return (
+											<div key={column.position} className="Cell">
+												<h4>{column.title}</h4>
+											</div>
+										)
+								}
+							})}
+						</li>
+					)
 				// NEW LOGBOOK HEADER
 				case props.logbookTypes.newLogbook:
 					return (
