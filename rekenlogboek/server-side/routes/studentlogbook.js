@@ -72,7 +72,7 @@ router.get('/:id', (req, res) => {
 // Returns only the id, student and answers
 router.get('/:logbookID/group-answers', (req, res) => {
 	// Query Paramaters
-	const row = req.query.row
+	const goal = req.query.goal
 	const column = req.query.column
 	const answer = req.query.answer
 
@@ -87,7 +87,7 @@ router.get('/:logbookID/group-answers', (req, res) => {
 			students.map(student => {
 				student.answers = student.answers.filter(
 					a =>
-						(!row || a.goalPosition == row) &&
+						(!goal || a.goalPosition == goal) &&
 						(!column || a.columnPosition == column) &&
 						(!answer || a.answer.value == answer)
 				)

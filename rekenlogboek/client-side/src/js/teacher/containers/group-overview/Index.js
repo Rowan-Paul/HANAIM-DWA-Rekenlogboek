@@ -6,19 +6,19 @@ import TopBar from '../../../common/logbook/TopBar'
 import LogbookFrame from '../../../common/logbook/LogbookFrame'
 import LogbookRows from '../../../common/logbook/LogbookRows'
 
-import {
-	getLogbook,
-	getLogbookGroupOverview
-} from '../../../redux/group-overview/actions'
+import * as actions from '../../../redux/group-overview/actions'
 import '../../../../scss/teacher/containers/group-overview/Index.scss'
+import Button from '../../../common/Button'
 export const Index = props => {
 	const [logbook, setLogbook] = useState(props.logbook)
+	const [overview, setOverview] = useState(props.overview)
 
 	const logbookHandler = () => {
 		if (!logbook) {
 			props.getLogbook()
-			props.getLogbookGroupOverview()
 			return ''
+		} else if (!overview) {
+			props.getLogbookGroupOverview()
 		} else {
 			return (
 				<LogbookRows
@@ -31,7 +31,8 @@ export const Index = props => {
 
 	useEffect(() => {
 		setLogbook(props.logbook)
-	}, [props.logbook])
+		setOverview(props.overview)
+	}, [props])
 
 	return (
 		<div className="GroupOverview">
@@ -39,18 +40,27 @@ export const Index = props => {
 				<TopBar title="Groepsoverzicht logboek" noBreadcrumbs />
 				<LogbookFrame>{logbookHandler()}</LogbookFrame>
 			</Jumbotron>
+
+			<div className="prev button">
+				<Button
+					color="gray"
+					value="Vorige"
+					handler={() => props.history.push('../')}
+				/>
+			</div>
 		</div>
 	)
 }
 
 const mapStateToProps = state => ({
 	logbookTypes: state.main.logbookTypes,
-	logbook: state.groupOverview.logbook
+	logbook: state.groupOverview.logbook,
+	overview: state.groupOverview.overview
 })
 
 const mapDispatchToProps = dispatch => ({
-	getLogbook: () => dispatch(getLogbook()),
-	getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
+	getLogbook: () => dispatch(actions.getLogbook()),
+	getLogbookGroupOverview: () => dispatch(actions.getLogbookGroupOverview())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

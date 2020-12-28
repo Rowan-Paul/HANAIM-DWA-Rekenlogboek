@@ -10,7 +10,6 @@ const initialMainState = {
 		Leraar: 'Leraar',
 		Logboekontwerper: 'Logboekontwerper'
 	},
-	// For later use
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
@@ -22,6 +21,7 @@ const initialMainState = {
 		inPreview: 'inPreview'
 	},
 	logbookTypes: {
+		groupAnswer: 'groupAnswer',
 		groupOverview: 'groupOverview',
 		newLogbook: 'newLogbook',
 		studentLogbook: 'studentLogbook'

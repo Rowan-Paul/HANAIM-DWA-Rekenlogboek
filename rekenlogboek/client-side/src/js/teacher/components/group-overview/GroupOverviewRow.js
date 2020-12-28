@@ -4,17 +4,17 @@ import { withRouter } from 'react-router-dom'
 
 import Button from '../../../common/Button'
 
-import '../../../../scss/teacher/components/groep-overview/GroupLogbookRow.scss'
+import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 import { getLogbookGroupOverview } from '../../../redux/group-overview/actions'
 import shortid from 'shortid'
 
-function GroupLogbookRow(props) {
-	const [answers, setAnswers] = useState(props.answers)
+function GroupOverviewRow(props) {
+	const [overview, setOverview] = useState(props.overview)
 	const [columns, setColumns] = useState(props.columns)
 	const [goal, setGoal] = useState(props.goal)
 
 	useEffect(() => {
-		setAnswers(props.answers)
+		setOverview(props.overview)
 		setColumns(props.columns)
 		setGoal(props.goal)
 	}, [props])
@@ -25,18 +25,18 @@ function GroupLogbookRow(props) {
 		)
 
 	const listAnswers = (row, column) => {
-		if (answers) {
-			if (answers.rows[row]) {
-				if (answers.rows[row][column]) {
-					return answers.rows[row][column].map(answer => (
+		if (overview) {
+			if (overview.rows[row]) {
+				if (overview.rows[row][column]) {
+					return overview.rows[row][column].map(overviewAnswer => (
 						<li key={shortid.generate()}>
 							<span>
-								{answer.count} x {answer.value}
+								{overviewAnswer.count} x {overviewAnswer.value}
 							</span>
 
 							<i
 								className="fa fa-info-circle"
-								onClick={() => redirect(row, column, answer.value)}
+								onClick={() => redirect(row, column, overviewAnswer.value)}
 							/>
 						</li>
 					))
@@ -52,7 +52,7 @@ function GroupLogbookRow(props) {
 					switch (column.position) {
 						case 0:
 							return (
-								<div className="Cell">
+								<div className="Cell" key={shortid.generate()}>
 									<div className="Title">
 										<h4>
 											Leerdoel {goal.position + 1}: {goal.title}
@@ -71,7 +71,7 @@ function GroupLogbookRow(props) {
 
 						default:
 							return (
-								<div className="Cell">
+								<div className="Cell" key={shortid.generate()}>
 									<div className="Title">
 										<h4>{column.title}</h4>
 										<span>{column.input.type}</span>
@@ -93,8 +93,8 @@ function GroupLogbookRow(props) {
 
 const mapStateToProps = state => {
 	return {
-		answers: state.groupOverview.answers,
-		columns: state.groupOverview.logbook.columns
+		columns: state.groupOverview.logbook.columns,
+		overview: state.groupOverview.overview
 	}
 }
 const mapDispatchToProps = dispatch => {
@@ -106,4 +106,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(withRouter(GroupLogbookRow))
+)(withRouter(GroupOverviewRow))

@@ -4,9 +4,10 @@ import shortid from 'shortid'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import GroupLogbookRow from '../../teacher/components/group-overview/GroupLogbookRow'
+import GroupOverviewRow from '../../teacher/components/group-overview/GroupOverviewRow'
 import LogbookRow from './new-logbook/NewLogbookRow'
 import StudentLogbookRow from './student-logbook/StudentLogbookRow'
+import GroupAnswerRow from '../../teacher/components/group-overview/GroupAnswerRow'
 
 export function LogbookRows(props) {
 	const [goals, setGoals] = useState(props.goals)
@@ -17,10 +18,18 @@ export function LogbookRows(props) {
 	const rowTypeHandler = () => {
 		if (goals) {
 			switch (props.type) {
+				// GROUP ANSWERS
+				case props.logbookTypes.groupAnswer:
+					return goals.map(studentInfo => (
+						<GroupAnswerRow
+							key={shortid.generate()}
+							studentInfo={studentInfo}
+						/>
+					))
 				// GROUP LOGBOOK
 				case props.logbookTypes.groupOverview:
 					return goals.map((goal, i) => (
-						<GroupLogbookRow
+						<GroupOverviewRow
 							key={shortid.generate()}
 							goal={goal}
 							rowPosition={i}
