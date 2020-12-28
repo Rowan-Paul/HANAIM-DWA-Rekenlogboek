@@ -70,10 +70,32 @@ router.get('/:id', (req, res) => {
 
 // Get all answers (from all students) for a logbook
 // Returns only the id, student and answers
-router.get('/logbooks/:logbookID/answers', (req, res) => {
+router.get('/:logbookID/group-answers', (req, res) => {
+	// Query Paramaters
+	const row = req.query.row
+	const column = req.query.column
+	const answer = req.query.answer
+
 	StudentLogbook.find({ logbookID: req.params.logbookID })
 		.select('student answers')
-		.then(response => {
+		.then(students => {
+			/**
+			 * Filters all student answers
+			 * Filter works if query param isset
+			 */
+			const response = [] // Define for pushing
+			students.map(student => {
+				student.answers = student.answers.filter(
+					a =>
+						(!row || a.goalPosition == row) &&
+						(!column || a.columnPosition == column) &&
+						(!answer || a.answer.value == answer)
+				)
+
+				// Only append if contains answers
+				if (student.answers[0]) response.push(student)
+			})
+
 			res.status(200).send(response)
 		})
 		.catch(err => {
