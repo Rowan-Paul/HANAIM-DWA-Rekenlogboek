@@ -336,6 +336,13 @@ export const saveAnswers = (answerValue, answer) => (dispatch, getState) => {
 	const newAnswers = currentAnswers.map(a => {
 		if (
 			a.columnPosition === answer.columnPosition &&
+			a.goalPosition === answer.goalPosition &&
+			answerValue === 'default'
+		) {
+			a.answer = { ...a.answer, value: '' }
+			return a
+		} else if (
+			a.columnPosition === answer.columnPosition &&
 			a.goalPosition === answer.goalPosition
 		) {
 			a.answer = { ...a.answer, value: answerValue }
