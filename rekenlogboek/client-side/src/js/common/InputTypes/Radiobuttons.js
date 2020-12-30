@@ -19,7 +19,7 @@ function RadioButtons(props) {
 							<li className={props.inputStates.inUse} key={shortid.generate()}>
 								<input
 									onChange={e => {
-										props.changeHandler(e.target.value, { ...props.answer })
+										props.changeHandler(e.target.value)
 									}}
 									type="radio"
 									value={option}

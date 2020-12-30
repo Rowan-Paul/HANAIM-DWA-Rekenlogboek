@@ -28,8 +28,12 @@ function Question(props) {
 						options={props.input.options}
 						state={props.state}
 						explanation={props.explanation}
-						changeHandler={(newAnswerValue, answer) => {
-							props.saveAnswers(newAnswerValue, answer)
+						changeHandler={newAnswerValue => {
+							props.saveAnswers(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
 						}}
 					/>
 				)
@@ -60,8 +64,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		saveAnswers: (answerValue, answer) =>
-			dispatch(saveAnswers(answerValue, answer))
+		saveAnswers: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswers(answerValue, goalPosition, columnPosition))
 	}
 }
 

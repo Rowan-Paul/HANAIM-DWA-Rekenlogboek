@@ -54,6 +54,8 @@ function AfterPreTestUI(props) {
 							/>
 							<Question
 								answer={getAnswer()}
+								goalPosition={props.currentGoal}
+								columnPosition={1}
 								input={props.column.input}
 								state={props.inputStates.inUse}
 								explanation={props.explanation}

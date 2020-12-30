@@ -324,54 +324,143 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
-export const saveAnswers = (answerValue, answer) => (dispatch, getState) => {
+export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
+	dispatch,
+	getState
+) => {
 	console.log(answerValue)
-	console.log(answer)
+	console.log(goalPosition)
+	console.log(columnPosition)
 
 	const currentAnswers = [...getState().studentLogbook.studentlogbook.answers]
 
 	console.log(currentAnswers)
 	console.log(getState().studentLogbook.studentlogbook.answers)
 
-	const newAnswers = currentAnswers.map(a => {
-		if (
-			a.columnPosition === answer.columnPosition &&
-			a.goalPosition === answer.goalPosition &&
-			answerValue === 'default'
-		) {
-			a.answer = { ...a.answer, value: '' }
+	if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition === columnPosition && a.goalPosition === goalPosition
+		).length > 0
+	) {
+		console.log('eentje')
+		const newAnswers = currentAnswers.map(a => {
+			if (
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition &&
+				answerValue === 'default'
+			) {
+				a.answer = { ...a.answer, value: '' }
+				return a
+			} else if (
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition
+			) {
+				a.answer = { ...a.answer, value: answerValue }
+				return a
+			}
+
 			return a
-		} else if (
-			a.columnPosition === answer.columnPosition &&
-			a.goalPosition === answer.goalPosition
-		) {
-			a.answer = { ...a.answer, value: answerValue }
-			return a
+		})
+		console.log(newAnswers)
+		console.log(getState().studentLogbook.studentlogbook.answers)
+
+		const logbookid = getState().studentLogbook.studentlogbook._id
+
+		const body = {
+			answers: newAnswers
 		}
 
-		return a
-	})
-
-	console.log(newAnswers)
-	console.log(getState().studentLogbook.studentlogbook.answers)
-
-	const logbookid = getState().studentLogbook.studentlogbook._id
-
-	const body = {
-		answers: newAnswers
-	}
-
-	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid, {
-		method: 'PUT',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(body)
-	})
-		.then(res => res.json())
-		.then(response => {
-			dispatch({
-				type: SAVE_ANSWERS,
-				response
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
 			})
+			.catch(error => console.log(error))
+	} else if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
+		).length > 0 &&
+		currentAnswers.length > 0
+	) {
+		console.log('tweetje')
+		const newAnswers = [...currentAnswers]
+		newAnswers.push({
+			goalPosition: goalPosition,
+			columnPosition: columnPosition,
+			answer: {
+				value: answerValue
+			}
 		})
-		.catch(error => console.log(error))
+
+		console.log(newAnswers)
+
+		const logbookid = getState().studentLogbook.studentlogbook._id
+
+		const body = {
+			answers: newAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	} else if (currentAnswers.length < 1) {
+		console.log('drietje')
+		const newAnswers = [
+			{
+				goalPosition: goalPosition,
+				columnPosition: columnPosition,
+				answer: {
+					value: answerValue
+				}
+			}
+		]
+
+		const logbookid = getState().studentLogbook.studentlogbook._id
+
+		const body = {
+			answers: newAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	}
 }
