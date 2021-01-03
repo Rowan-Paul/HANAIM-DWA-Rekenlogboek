@@ -24,17 +24,21 @@
 		.content-container {
 			display: flex;
 			flex-direction: row;
-			width: 90%;
+			width: 95%;
 			justify-content: space-evenly;
 			align-content: center;
 
+			.button-container {
+				margin: 3% 20px;
+			}
+
 			.explanation-container {
-				width: 40%;
+				width: 70%;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				height: 100%;
-				margin-right: 5%;
+				margin-right: 1%;
 			}
 		}
 	}
@@ -57,5 +61,9 @@
 				background-color: lighten($blue, 30%);
 			}
 		}
+	}
+
+	.Modal .Box .Body {
+		height: 70%;
 	}
 }
