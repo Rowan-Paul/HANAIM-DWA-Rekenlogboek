@@ -84,8 +84,8 @@ router.get('/:logbookID/group-answers', (req, res) => {
 			 * Filter works if query param isset
 			 */
 			const response = [] // Define for pushing
-			students.map(student => {
-				student.answers = student.answers.filter(
+			students.filter(student => {
+				const check = student.answers.map(
 					a =>
 						(!goal || a.goalPosition == goal) &&
 						(!column || a.columnPosition == column) &&
@@ -93,7 +93,8 @@ router.get('/:logbookID/group-answers', (req, res) => {
 				)
 
 				// Only append if contains answers
-				if (student.answers[0]) response.push(student)
+
+				if (check.indexOf(true) > -1) response.push(student)
 			})
 
 			res.status(200).send(response)
