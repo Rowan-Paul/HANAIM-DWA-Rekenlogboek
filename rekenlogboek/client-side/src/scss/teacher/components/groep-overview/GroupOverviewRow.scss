@@ -50,17 +50,19 @@
 		width: 90%;
 
 		li {
+			cursor: pointer;
+			color: $fontLight;
 			list-style: none;
+			font-size: 14px;
 			margin: 1vh 0;
+			transition: ease-in-out 0.5s;
 
 			i {
-				cursor: pointer;
 				padding-left: 0.5vw;
-				transition: ease-in-out 0.5s;
+			}
 
-				&:hover {
-					color: $fontLight;
-				}
+			&:hover {
+				color: $fontColor;
 			}
 		}
 	}
