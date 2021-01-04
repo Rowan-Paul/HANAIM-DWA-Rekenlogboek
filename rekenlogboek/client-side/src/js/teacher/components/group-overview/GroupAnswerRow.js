@@ -1,86 +1,65 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+
 import shortid from 'shortid'
-import Checkboxes from '../../../common/InputTypes/Checkboxes'
 import Evaluation from '../../../common/InputTypes/Evaluation'
-import Radiobuttons from '../../../common/InputTypes/Radiobuttons'
-import Textarea from '../../../common/InputTypes/Textarea'
+import Goal from '../../../common/logbook/Goal'
+import StudentLogbookInputType from '../../../common/logbook/student-logbook/StudentLogbookInputType'
+
+const queryParameters = () => new URLSearchParams(useLocation().search)
 
 function GroupAnswerRow(props) {
-	const [logbook, setLogbook] = useState(props.logbook)
 	const [studentInfo, setStudentInfo] = useState(props.studentInfo)
+	const [columns, setColumns] = useState(props.logbook.columns)
 
-	const handler = answer => {
-		if (answer) {
-			const column = logbook.columns[answer.columnPosition]
+	const query = queryParameters()
+	const goal = query.get('goal')
 
-			switch (answer.columnPosition) {
-				case 3: // evaluation
-					return (
-						<Evaluation
-							answer={answer}
-							key={shortid.generate()}
-							input={column.input}
-							state={props.inputStates.inPreview}
-						/>
-					)
-				default:
-					switch (answer.answer.inputType) {
-						// CHECKBOXES
-						case props.inputTypes.checkboxes:
-							return (
-								<Checkboxes
-									answer={answer}
-									options={column.input.options}
-									state={props.inputStates.inPreview}
-								/>
-							)
+	useEffect(() => {
+		setStudentInfo(props.studentInfo)
+		setColumns(props.logbook.columns)
+	}, [props.answers, props.columns])
 
-						// RADIOBUTTONS
-						case props.inputTypes.radiobuttons:
-							return (
-								<Radiobuttons
-									answer={answer}
-									options={column.input.options}
-									state={props.inputStates.inPreview}
-								/>
-							)
+	const findAnswer = column =>
+		studentInfo.answers.filter(
+			a =>
+				a.goalPosition === parseInt(goal) && a.columnPosition == column.position
+		)[0]
 
-						// TEXTAREA
-						case props.inputTypes.textarea:
-							return <Textarea state={props.inputStates.inPreview} />
-						default:
-							return <div className="Cell"></div>
-					}
-			}
-		} else {
-			return <div className="Cell"></div>
+	const handler = () => {
+		if (studentInfo) {
+			return columns.map(column => {
+				switch (column.position) {
+					case 0:
+						const goal = { title: studentInfo.student }
+						return <Goal goal={goal} state={props.inputStates.inPreview} />
+					case 3:
+						return (
+							<Evaluation
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								state={props.inputStates.inPreview}
+							/>
+						)
+
+					default:
+						return (
+							<StudentLogbookInputType
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								position={column.columnPosition}
+								state={props.inputStates.inPreview}
+							/>
+						)
+				}
+			})
 		}
 	}
 
-	return (
-		<div className="Row Body">
-			<div className="Cell">{studentInfo.student}</div>
-
-			<div className="InputType Cell" key={shortid.generate()}>
-				<ul>
-					<li>{handler(studentInfo.answers[0])}</li>
-				</ul>
-			</div>
-
-			<div className="InputType Cell" key={shortid.generate()}>
-				<ul>
-					<li>{handler(studentInfo.answers[1])}</li>
-				</ul>
-			</div>
-
-			<div className="InputType Cell" key={shortid.generate()}>
-				<ul>
-					<li>{handler(studentInfo.answers[2])}</li>
-				</ul>
-			</div>
-		</div>
-	)
+	return <div className="Row Body">{handler()}</div>
 }
 
 const mapStateToProps = state => {
