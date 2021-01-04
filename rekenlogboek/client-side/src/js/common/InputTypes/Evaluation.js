@@ -64,23 +64,30 @@ function Evaluation(props) {
 
 			// IN PREVIEW
 			case props.inputStates.inPreview:
-				return emotions.map(v => (
-					<li className={v.name} key={shortid.generate()}>
-						<label>
-							<input
-								checked={props.answer?.answer.value === v.name}
-								name="evaluation"
-								type="radio"
-								value={v.name}
-								disabled
-							/>
-							<div>
-								<img src={v.img} alt={v.text} />
-								<span>{v.text}</span>
-							</div>
-						</label>
-					</li>
-				))
+				return emotions.map(v => {
+					const checked = props.answer?.answer.value === v.name
+
+					return (
+						<li
+							className={checked ? `${v.name}-checked` : v.name}
+							key={shortid.generate()}
+						>
+							<label>
+								<input
+									checked={checked}
+									name="evaluation"
+									type="radio"
+									value={v.name}
+									disabled
+								/>
+								<div>
+									<img src={v.img} alt={v.text} />
+									<span>{v.text}</span>
+								</div>
+							</label>
+						</li>
+					)
+				})
 
 			default:
 				return (
