@@ -16,29 +16,34 @@ import Button from '../../../common/Button'
 const queryParameters = () => new URLSearchParams(useLocation().search)
 
 export const Answers = props => {
-	const q = queryParameters()
+	const query = queryParameters()
 
-	const goal = q.get('goal')
-	const column = q.get('column')
-	const answer = q.get('answer')
+	const goal = query.get('goal')
+	const column = query.get('column')
+	const answer = query.get('answer')
 
 	const [answers, setAnswers] = useState(props.answers)
 	const [logbook, setLogbook] = useState(props.logbook)
+	const [loaded, isLoaded] = useState(true)
 
 	useEffect(() => {
 		setAnswers(props.answers)
 		setLogbook(props.logbook)
 	}, [props])
 
+	useEffect(() => {
+		isLoaded(false)
+		props.getLogbookGroupAnswers({ goal, column, answer })
+		isLoaded(true)
+	}, [query.get('goal'), query.get('column', query.get('answer'))])
+
 	// LOAD DATA
 	if (!logbook) {
 		props.getLogbook()
 		return ''
 	}
-	if (!answers) {
-		props.getLogbookGroupAnswers({ goal, column, answer })
-		return ''
-	}
+	if (!loaded) return 'loading'
+
 	return (
 		<div className="GroupOverviewAnswers">
 			<Jumbotron>
@@ -53,6 +58,7 @@ export const Answers = props => {
 					/>
 					<LogbookRows
 						goals={answers}
+						rowPosition={goal}
 						type={props.logbookTypes.groupAnswer}
 						logbookTypes={props.logbookTypes}
 					/>
