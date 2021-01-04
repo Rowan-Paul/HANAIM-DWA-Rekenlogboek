@@ -10,4 +10,4 @@ In principe kan de site zodra hij gedeployed is, gelijk worden gebruikt. Als de 
 
 Zoals besproken in hoofdstuk 4, geeft het team geen ondersteuning na het opleveren. Maar als het goed is moet een ieder developer met behulp van dit software guidebook de applicatie goed genoeg ondersteunen. Ook zorgt het team voor goede comments bij de code zelf die het abnormale dingen uitleggen.
 
-<!-- hoe worden errors gelogged? -->
+Vanwege de gelimiteerde tijd en scope worden op dit moment errors gelogged op de console. Er is dus niet een specifieke error afhandeling in plaats op dit moment.
