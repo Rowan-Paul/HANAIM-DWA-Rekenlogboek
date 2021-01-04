@@ -324,7 +324,7 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
-export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
+export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
 	dispatch,
 	getState
 ) => {
@@ -344,13 +344,14 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 		).length > 0
 	) {
 		console.log('eentje')
+		// vervang al eerder gegeven antwoord voor nieuwe
 		const newAnswers = currentAnswers.map(a => {
 			if (
 				a.columnPosition === columnPosition &&
 				a.goalPosition === goalPosition &&
 				answerValue === 'default'
 			) {
-				a.answer = { ...a.answer, value: '' }
+				a.answer = { ...a.answer, value: answerValue }
 				return a
 			} else if (
 				a.columnPosition === columnPosition &&
@@ -362,13 +363,18 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 
 			return a
 		})
-		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value !== 'default'
+		})
+
+		console.log(filterAnswers)
 		console.log(getState().studentLogbook.studentlogbook.answers)
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
 
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -395,6 +401,184 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 		currentAnswers.length > 0
 	) {
 		console.log('tweetje')
+		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		const newAnswers = [...currentAnswers]
+		newAnswers.push({
+			goalPosition: goalPosition,
+			columnPosition: columnPosition,
+			answer: {
+				value: answerValue
+			}
+		})
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value !== 'default'
+		})
+
+		console.log(newAnswers)
+
+		const logbookid = getState().studentLogbook.studentlogbook._id
+
+		const body = {
+			answers: filterAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	} else if (currentAnswers.length < 1) {
+		console.log('drietje')
+		// er is nog geen antwoord in de database
+		const newAnswers = [
+			{
+				goalPosition: goalPosition,
+				columnPosition: columnPosition,
+				answer: {
+					value: answerValue
+				}
+			}
+		]
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value !== 'default'
+		})
+
+		const logbookid = getState().studentLogbook.studentlogbook._id
+
+		const body = {
+			answers: filterAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	}
+}
+
+export const saveAnswersCheck = (
+	answerValue,
+	goalPosition,
+	columnPosition
+) => async (dispatch, getState) => {
+	console.log(answerValue)
+	console.log(goalPosition)
+	console.log(columnPosition)
+
+	const logbookid = getState().studentLogbook.studentlogbook._id
+
+	const currentAnswers = await fetch(
+		process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response => response.answers)
+		.catch(error => console.log(error))
+
+	console.log(currentAnswers)
+
+	if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition === columnPosition && a.goalPosition === goalPosition
+		).length > 0
+	) {
+		console.log('eentje')
+		// vervang al eerder gegeven antwoord voor nieuwe
+
+		const newAnswers = currentAnswers.map(a => {
+			if (
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition
+			) {
+				const currentAnswerValue = a.answer.value
+				const splittedValues = currentAnswerValue.split(',')
+				console.log(splittedValues)
+
+				if (splittedValues.includes(answerValue)) {
+					//selected value zit al in de db
+					console.log('include')
+
+					const index = splittedValues.indexOf(answerValue)
+					splittedValues.splice(index, 1)
+				} else if (!splittedValues.includes(answerValue)) {
+					// selected value zit nog niet in db
+					console.log('not include')
+
+					splittedValues.push(answerValue)
+				}
+
+				console.log(splittedValues)
+				console.log(splittedValues.toString())
+
+				a.answer = { ...a.answer, value: splittedValues.toString() }
+				return a
+			}
+
+			return a
+		})
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value !== ''
+		})
+
+		const body = {
+			answers: filterAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	} else if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
+		).length > 0 &&
+		currentAnswers.length > 0
+	) {
+		console.log('tweetje')
+		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
 			goalPosition: goalPosition,
@@ -405,8 +589,6 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 		})
 
 		console.log(newAnswers)
-
-		const logbookid = getState().studentLogbook.studentlogbook._id
 
 		const body = {
 			answers: newAnswers
@@ -430,6 +612,7 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 			.catch(error => console.log(error))
 	} else if (currentAnswers.length < 1) {
 		console.log('drietje')
+		// er is nog geen antwoord in de database
 		const newAnswers = [
 			{
 				goalPosition: goalPosition,
@@ -439,8 +622,6 @@ export const saveAnswers = (answerValue, goalPosition, columnPosition) => (
 				}
 			}
 		]
-
-		const logbookid = getState().studentLogbook.studentlogbook._id
 
 		const body = {
 			answers: newAnswers

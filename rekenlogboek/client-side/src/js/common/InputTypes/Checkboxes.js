@@ -16,7 +16,9 @@ function Checkboxes(props) {
 					<li className="inUse" key={shortid.generate()}>
 						<input
 							checked={props.answer?.answer.value === option}
-							onChange={() => alert('Gebruik hier AUB een redux functie!')}
+							onChange={e => {
+								props.changeHandler(e.target.value)
+							}}
 							value={option}
 							type="checkbox"
 						/>

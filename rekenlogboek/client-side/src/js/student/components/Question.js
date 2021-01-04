@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import Checkboxes from '../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
-import { saveAnswers } from '../../redux/studentlogbook/actions'
+import {
+	saveAnswersRadio,
+	saveAnswersCheck
+} from '../../redux/studentlogbook/actions'
 
 function Question(props) {
 	const handler = () => {
@@ -17,6 +20,13 @@ function Question(props) {
 						options={props.input.options}
 						state={props.state}
 						explanation={props.explanation}
+						changeHandler={newAnswerValue => {
+							props.saveAnswersCheck(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
 					/>
 				)
 
@@ -29,7 +39,7 @@ function Question(props) {
 						state={props.state}
 						explanation={props.explanation}
 						changeHandler={newAnswerValue => {
-							props.saveAnswers(
+							props.saveAnswersRadio(
 								newAnswerValue,
 								props.goalPosition,
 								props.columnPosition
@@ -64,8 +74,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		saveAnswers: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswers(answerValue, goalPosition, columnPosition))
+		saveAnswersRadio: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswersRadio(answerValue, goalPosition, columnPosition)),
+		saveAnswersCheck: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswersCheck(answerValue, goalPosition, columnPosition))
 	}
 }
 
