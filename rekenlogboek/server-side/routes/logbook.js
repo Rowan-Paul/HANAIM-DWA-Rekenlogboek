@@ -174,4 +174,26 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 		})
 })
 
+router.get('/groups/:group/years/:year/periods', (req, res) => {
+	console.log('?')
+	Logbook.find(
+		{
+			year: req.params.year,
+			group: req.params.group
+		},
+		'_id period'
+	)
+		.distinct('period')
+		.then(response => {
+			console.log('res:', response)
+			res.status(200).send({
+				response
+			})
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 module.exports = router
