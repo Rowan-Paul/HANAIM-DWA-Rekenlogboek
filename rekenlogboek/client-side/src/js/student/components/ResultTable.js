@@ -9,6 +9,8 @@ import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 export default function ResultText(props) {
 	const getTableRows = () => {
 		{
+			console.log(props.answers)
+
 			let columnAnswers = []
 			props.answers.forEach(answer => {
 				if (answer.columnPosition === props.columnPosition) {
@@ -16,31 +18,41 @@ export default function ResultText(props) {
 				}
 			})
 
+			// columnAnswers.sort((answer1, answer2) => {
+			// 	return answer1.goalPosition < answer2.goalPosition
+			// })
+
+			console.log(columnAnswers)
+			console.log(props.results)
+
 			if (columnAnswers.length > 0)
 				return props.results.map((result, i) => {
-					if (columnAnswers[i].goalPosition === result.position) {
-						if (columnAnswers[i].answer.value === 'default') {
+					const answer = columnAnswers.find(
+						a => a.goalPosition === result.position
+					)
+					if (answer !== undefined) {
+						if (answer.value === 'default') {
 							result.answer = 'Ik weet het nog niet'
-						} else if (columnAnswers[i].answer.value === 'Happy') {
+						} else if (answer.value === 'Happy') {
 							result.answer = (
 								<div>
 									<img src={Happy} alt="Happy" />
 								</div>
 							)
-						} else if (columnAnswers[i].answer.value === 'Sceptic') {
+						} else if (answer.value === 'Sceptic') {
 							result.answer = (
 								<div>
 									<img src={Sceptic} alt="Sceptic" />
 								</div>
 							)
-						} else if (columnAnswers[i].answer.value === 'Sad') {
+						} else if (answer.value === 'Sad') {
 							result.answer = (
 								<div>
 									<img src={Sad} alt="Sad" />
 								</div>
 							)
 						} else {
-							result.answer = columnAnswers[i].answer.value
+							result.answer = answer.answer.value
 						}
 					}
 

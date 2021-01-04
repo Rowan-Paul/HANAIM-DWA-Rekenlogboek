@@ -37,7 +37,7 @@ import TabConfig from './teams/TabConfig'
 // STUDENT PAGES
 import { Default } from './student/containers/Default2'
 import { AfterPreTest } from './student/containers/AfterPreTest2'
-import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
+import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd2'
 import { InstructionsEnd } from './student/containers/InstructionsEnd'
 import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 import { Instructions } from './student/containers/Instructions'

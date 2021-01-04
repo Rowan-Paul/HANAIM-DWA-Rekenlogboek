@@ -38,13 +38,16 @@ function AfterPreTestUI(props) {
 	const nextPage = () => {
 		if (props.currentGoal < props.goals.length - 1) {
 			props.incrementCurrentGoal()
+		} else {
+			props.history.push('/student/pretest/done')
 		}
 	}
 
 	if (props.column.input !== undefined) {
+		console.log('yoloboy')
 		return (
 			<div className="after-pre-test student-container">
-				<ProgressBar itemCount={props.goalAmount} done={[1, 3]} />
+				{/* <ProgressBar itemCount={props.goals.length} done={[1, 3]} /> */}
 				<Jumbotron columns={1}>
 					<div className="learn-goal-container">
 						<div className="left-side">
