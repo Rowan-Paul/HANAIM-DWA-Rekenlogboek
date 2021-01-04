@@ -29,15 +29,15 @@ function GroupOverviewRow(props) {
 			if (overview.rows[row]) {
 				if (overview.rows[row][column]) {
 					return overview.rows[row][column].map(overviewAnswer => (
-						<li key={shortid.generate()}>
+						<li
+							key={shortid.generate()}
+							onClick={() => redirect(row, column, overviewAnswer.value)}
+						>
 							<span>
 								{overviewAnswer.count} x {overviewAnswer.value}
 							</span>
 
-							<i
-								className="fa fa-info-circle"
-								onClick={() => redirect(row, column, overviewAnswer.value)}
-							/>
+							<i className="fa fa-info-circle" />
 						</li>
 					))
 				}
