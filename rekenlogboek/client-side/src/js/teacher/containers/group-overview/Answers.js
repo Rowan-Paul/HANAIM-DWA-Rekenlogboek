@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { LogbookRows } from '../../../common/logbook/LogbookRows'
 
 import Jumbotron from '../../../common/Jumbotron'
 import LogbookHeader from '../../../common/logbook/LogbookHeader'
@@ -9,9 +10,9 @@ import TopBar from '../../../common/logbook/TopBar'
 
 import * as actions from '../../../redux/group-overview/actions'
 
-import '../../../../scss/teacher/containers/group-overview/Answers.scss'
-import { LogbookRows } from '../../../common/logbook/LogbookRows'
 import Button from '../../../common/Button'
+
+import '../../../../scss/teacher/containers/group-overview/Answers.scss'
 
 const queryParameters = () => new URLSearchParams(useLocation().search)
 
