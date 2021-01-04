@@ -645,3 +645,148 @@ export const saveAnswersCheck = (
 			.catch(error => console.log(error))
 	}
 }
+
+export const saveAnswersText = (
+	answerValue,
+	goalPosition,
+	columnPosition
+) => async (dispatch, getState) => {
+	console.log(answerValue)
+	console.log(goalPosition)
+	console.log(columnPosition)
+
+	const logbookid = getState().studentLogbook.studentlogbook._id
+
+	const currentAnswers = await fetch(
+		process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response => response.answers)
+		.catch(error => console.log(error))
+
+	console.log(currentAnswers)
+
+	if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition === columnPosition && a.goalPosition === goalPosition
+		).length > 0
+	) {
+		console.log('eentje')
+		// vervang al eerder gegeven antwoord voor nieuwe
+
+		const newAnswers = currentAnswers.map(a => {
+			if (
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition
+			) {
+				a.answer = { ...a.answer, value: answerValue }
+				return a
+			}
+
+			return a
+		})
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value !== ''
+		})
+
+		const body = {
+			answers: filterAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	} else if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
+		).length > 0 &&
+		currentAnswers.length > 0
+	) {
+		console.log('tweetje')
+		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		const newAnswers = [...currentAnswers]
+		newAnswers.push({
+			goalPosition: goalPosition,
+			columnPosition: columnPosition,
+			answer: {
+				value: answerValue
+			}
+		})
+
+		console.log(newAnswers)
+
+		const body = {
+			answers: newAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	} else if (currentAnswers.length < 1) {
+		console.log('drietje')
+		// er is nog geen antwoord in de database
+		const newAnswers = [
+			{
+				goalPosition: goalPosition,
+				columnPosition: columnPosition,
+				answer: {
+					value: answerValue
+				}
+			}
+		]
+
+		const body = {
+			answers: newAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	}
+}

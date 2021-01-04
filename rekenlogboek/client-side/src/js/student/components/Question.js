@@ -6,7 +6,8 @@ import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
 import {
 	saveAnswersRadio,
-	saveAnswersCheck
+	saveAnswersCheck,
+	saveAnswersText
 } from '../../redux/studentlogbook/actions'
 
 function Question(props) {
@@ -50,7 +51,19 @@ function Question(props) {
 
 			// TEXTAREA
 			case props.inputTypes.textarea:
-				return <Textarea state={props.state} />
+				return (
+					<Textarea
+						answer={props.answer}
+						state={props.state}
+						changeHandler={newAnswerValue => {
+							props.saveAnswersText(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
+					/>
+				)
 			default:
 				return ''
 		}
@@ -77,7 +90,9 @@ const mapDispatchToProps = dispatch => {
 		saveAnswersRadio: (answerValue, goalPosition, columnPosition) =>
 			dispatch(saveAnswersRadio(answerValue, goalPosition, columnPosition)),
 		saveAnswersCheck: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswersCheck(answerValue, goalPosition, columnPosition))
+			dispatch(saveAnswersCheck(answerValue, goalPosition, columnPosition)),
+		saveAnswersText: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswersText(answerValue, goalPosition, columnPosition))
 	}
 }
 
