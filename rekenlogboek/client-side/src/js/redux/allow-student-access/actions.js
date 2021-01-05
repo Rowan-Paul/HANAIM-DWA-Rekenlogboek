@@ -61,6 +61,7 @@ export const getFilterOptions = (dispatch, getState) => {
 }
 
 export const getActiveLogbook = payload => (dispatch, getState) => {
+	console.log(payload)
 	try {
 		const group = getState().main.user.groups[1]
 		payload.groupNumber = group.substring(group.indexOf(' ') + 1)
@@ -124,10 +125,17 @@ export const updateActiveGoal = payload => dispatch => {
 export const getPeriods = payload => (dispatch, getState) => {
 	fetchPeriods(payload, getState)
 		.then(response => response.json())
-		.then(data => {
+		.then(periods => {
 			return dispatch({
 				type: types.GET_PERIODS,
-				payload: data.response
+				payload: { periods, selectedPeriod: periods[0] }
 			})
 		})
+}
+
+export const changeSelectedPeriod = payload => {
+	return {
+		type: types.CHANGE_SELECTED_PERIOD,
+		payload
+	}
 }

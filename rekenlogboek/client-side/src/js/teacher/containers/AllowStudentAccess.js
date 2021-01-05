@@ -44,6 +44,7 @@ function AllowStudentAccess(props) {
 	}
 
 	const filterClick = (schoolYear, period) => {
+		console.log(schoolYear, period)
 		props.getLogbookData({ schoolYear, period })
 	}
 

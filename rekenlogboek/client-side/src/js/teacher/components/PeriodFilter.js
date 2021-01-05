@@ -5,17 +5,15 @@ import classNames from 'classnames'
 
 import {
 	getFilterOptions,
-	getPeriods
+	getPeriods,
+	changeSelectedPeriod
 } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
-	console.log(props.activePeriod)
-	console.log(props.currentSchoolYear)
 	const [selectedSchoolYear, setSelectedSchoolYear] = useState(
 		props.currentSchoolYear
 	)
-	const [selectedPeriod, setSelectedPeriod] = useState(props.activePeriod)
 
 	useEffect(() => {
 		props.getFilterOptions()
@@ -42,11 +40,7 @@ function PeriodFilter(props) {
 		if (Array.isArray(props.periods)) {
 			return props?.periods.map(period => {
 				return (
-					<option
-						value={period}
-						key={period}
-						// className={classNames({ active: props?.activePeriod === period })}
-					>
+					<option value={period} key={period}>
 						{period}
 					</option>
 				)
@@ -64,8 +58,9 @@ function PeriodFilter(props) {
 		props.getPeriodsBySchoolYear({ schoolYear })
 	}
 
-	const updatePeriodValue = period => {
-		setSelectedPeriod(period)
+	const updateSelectedPeriod = period => {
+		console.log(period)
+		props.changeSelectedPeriod(period)
 	}
 
 	return (
@@ -83,15 +78,17 @@ function PeriodFilter(props) {
 			<div>Blok:</div>
 			<select
 				id="select-period"
-				value={selectedPeriod}
-				onChange={e => updatePeriodValue(e.target.value)}
+				value={props.selectedPeriod}
+				onChange={e => updateSelectedPeriod(e.target.value)}
 			>
 				{getPeriodOptions()}
 			</select>
 
 			<Button
 				color="blue"
-				handler={() => props.filterClick(selectedSchoolYear, selectedPeriod)}
+				handler={() =>
+					props.filterClick(selectedSchoolYear, props.selectedPeriod)
+				}
 				value="Kies blok"
 			/>
 		</div>
@@ -104,14 +101,16 @@ const mapStateToProps = state => {
 		schoolYears: studentAccess.schoolYears,
 		currentSchoolYear: studentAccess.currentSchoolYear,
 		periods: studentAccess.periods,
-		activePeriod: studentAccess.activePeriod
+		activePeriod: studentAccess.activePeriod,
+		selectedPeriod: studentAccess.selectedPeriod
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		getFilterOptions: () => dispatch(getFilterOptions),
-		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload))
+		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload)),
+		changeSelectedPeriod: payload => dispatch(changeSelectedPeriod(payload))
 	}
 }
 

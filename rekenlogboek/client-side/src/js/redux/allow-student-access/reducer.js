@@ -20,6 +20,7 @@ const INITIAL_STATE = {
 	currentSchoolYear: getCurrentSchoolYear(),
 	schoolYears: [],
 	periods: [],
+	selectedPeriod: undefined,
 	activePeriod: undefined, //which period has a currentPhase !== notVisible
 	currentLogbook: {}
 }
@@ -58,6 +59,12 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				periods: action.payload
+			}
+		case types.CHANGE_SELECTED_PERIOD:
+			console.log(action.payload)
+			return {
+				...state,
+				selectedPeriod: action.payload
 			}
 		default:
 			return state
