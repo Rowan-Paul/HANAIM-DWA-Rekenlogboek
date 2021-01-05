@@ -16,13 +16,20 @@ function PeriodFilter(props) {
 	}, [])
 
 	const getSchoolYearOptions = () => {
-		return props.schoolYears?.map(year => {
-			return (
-				<option value={year} key={year}>
-					{year}
-				</option>
-			)
-		})
+		if (Array.isArray(props.schoolYears)) {
+			return props.schoolYears.map(year => {
+				return (
+					<option value={year} key={year}>
+						{year}
+					</option>
+				)
+			})
+		} else if (props.schoolYears !== undefined) {
+			const year = props.schoolYears
+			return <option value={year}>{year}</option>
+		} else {
+			return null
+		}
 	}
 
 	const getPeriods = () => {

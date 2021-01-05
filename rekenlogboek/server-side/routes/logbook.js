@@ -55,9 +55,11 @@ router.put('/:id/currentPhase', (req, res) => {
 	})
 })
 
-// Get all years
-router.get('/years', (req, res) => {
-	Logbook.find()
+// Get all years from a group
+router.get('/groups/:group/years', (req, res) => {
+	Logbook.find({
+		group: req.params.group
+	})
 		.distinct('year')
 		.then(response => res.status(200).send(response))
 		.catch(err => {
@@ -175,6 +177,7 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 		})
 })
 
+// Get all periods based on group and year
 router.get('/groups/:group/years/:year/periods', (req, res) => {
 	console.log('?')
 	Logbook.find(

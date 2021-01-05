@@ -1,7 +1,12 @@
 import * as types from './types'
 
-export const getYears = dispatch => {
-	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/years')
+export const getYears = (dispatch, getState) => {
+	const group = getState().main.user.groups[1]
+	const groupNumber = group.substring(group.indexOf(' ') + 1)
+	fetch(
+		process.env.REACT_APP_SERVER_ADDRESS +
+			`/logbook/groups/${groupNumber}/years`
+	)
 		.then(response => response.json())
 		.then(payload => {
 			return dispatch({
