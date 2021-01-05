@@ -5,9 +5,9 @@ import Checkboxes from '../../common/InputTypes/Checkboxes'
 import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
 import {
-	saveAnswersRadio,
-	saveAnswersCheck,
-	saveAnswersText,
+	saveAnswerRadio,
+	saveAnswerCheck,
+	saveAnswerText,
 	saveExplanation
 } from '../../redux/studentlogbook/actions'
 
@@ -23,7 +23,7 @@ function Question(props) {
 						state={props.state}
 						explanation={props.explanation}
 						changeHandler={newAnswerValue => {
-							props.saveAnswersCheck(
+							props.saveAnswerCheck(
 								newAnswerValue,
 								props.goalPosition,
 								props.columnPosition
@@ -48,7 +48,7 @@ function Question(props) {
 						state={props.state}
 						explanation={props.explanation}
 						changeHandler={newAnswerValue => {
-							props.saveAnswersRadio(
+							props.saveAnswerRadio(
 								newAnswerValue,
 								props.goalPosition,
 								props.columnPosition
@@ -71,7 +71,7 @@ function Question(props) {
 						answer={props.answer}
 						state={props.state}
 						changeHandler={newAnswerValue => {
-							props.saveAnswersText(
+							props.saveAnswerText(
 								newAnswerValue,
 								props.goalPosition,
 								props.columnPosition
@@ -102,12 +102,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		saveAnswersRadio: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswersRadio(answerValue, goalPosition, columnPosition)),
-		saveAnswersCheck: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswersCheck(answerValue, goalPosition, columnPosition)),
-		saveAnswersText: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswersText(answerValue, goalPosition, columnPosition)),
+		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
+		saveAnswerCheck: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerCheck(answerValue, goalPosition, columnPosition)),
+		saveAnswerText: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerText(answerValue, goalPosition, columnPosition)),
 		saveExplanation: (newExplanationValue, goalPosition, columnPosition) =>
 			dispatch(
 				saveExplanation(newExplanationValue, goalPosition, columnPosition)

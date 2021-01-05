@@ -120,11 +120,7 @@ function RadioButtons(props) {
 			return (
 				<Explanation
 					state={props.state}
-					text={
-						props.answer?.answer.explanation
-							? props.answer?.answer.explanation
-							: 'Omdat...'
-					}
+					text={props.answer?.answer.explanation}
 					changeHandler={props.explanationChangeHandler}
 				/>
 			)

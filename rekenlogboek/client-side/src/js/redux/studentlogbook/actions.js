@@ -324,7 +324,7 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
-export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
+export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 	dispatch,
 	getState
 ) => {
@@ -364,8 +364,19 @@ export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
 			return a
 		})
 
+		console.log(newAnswers)
+
+		newAnswers.map(a => {
+			if (a.answer.value === 'default') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== 'default'
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		console.log(filterAnswers)
@@ -411,8 +422,17 @@ export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
 			}
 		})
 
+		newAnswers.map(a => {
+			if (a.answer.value === 'default') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== 'default'
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		console.log(newAnswers)
@@ -452,8 +472,17 @@ export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
 			}
 		]
 
+		newAnswers.map(a => {
+			if (a.answer.value === 'default') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== 'default'
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
@@ -481,7 +510,7 @@ export const saveAnswersRadio = (answerValue, goalPosition, columnPosition) => (
 	}
 }
 
-export const saveAnswersCheck = (
+export const saveAnswerCheck = (
 	answerValue,
 	goalPosition,
 	columnPosition
@@ -519,20 +548,26 @@ export const saveAnswersCheck = (
 				a.goalPosition === goalPosition
 			) {
 				const currentAnswerValue = a.answer.value
-				const splittedValues = currentAnswerValue.split(',')
-				console.log(splittedValues)
+				let splittedValues
 
-				if (splittedValues.includes(answerValue)) {
-					//selected value zit al in de db
-					console.log('include')
+				if (currentAnswerValue) {
+					splittedValues = currentAnswerValue.split(',')
+					console.log(splittedValues)
 
-					const index = splittedValues.indexOf(answerValue)
-					splittedValues.splice(index, 1)
-				} else if (!splittedValues.includes(answerValue)) {
-					// selected value zit nog niet in db
-					console.log('not include')
+					if (splittedValues.includes(answerValue)) {
+						//selected value zit al in de db
+						console.log('include')
 
-					splittedValues.push(answerValue)
+						const index = splittedValues.indexOf(answerValue)
+						splittedValues.splice(index, 1)
+					} else if (!splittedValues.includes(answerValue)) {
+						// selected value zit nog niet in db
+						console.log('not include')
+
+						splittedValues.push(answerValue)
+					}
+				} else {
+					splittedValues = [answerValue]
 				}
 
 				console.log(splittedValues)
@@ -545,9 +580,17 @@ export const saveAnswersCheck = (
 			return a
 		})
 		console.log(newAnswers)
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== ''
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		const body = {
@@ -588,10 +631,21 @@ export const saveAnswersCheck = (
 			}
 		})
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
 		console.log(newAnswers)
 
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -623,8 +677,21 @@ export const saveAnswersCheck = (
 			}
 		]
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -646,7 +713,7 @@ export const saveAnswersCheck = (
 	}
 }
 
-export const saveAnswersText = (
+export const saveAnswerText = (
 	answerValue,
 	goalPosition,
 	columnPosition
@@ -691,8 +758,17 @@ export const saveAnswersText = (
 		})
 		console.log(newAnswers)
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== ''
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		const body = {
@@ -735,8 +811,21 @@ export const saveAnswersText = (
 
 		console.log(newAnswers)
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -768,8 +857,21 @@ export const saveAnswersText = (
 			}
 		]
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -836,8 +938,17 @@ export const saveExplanation = (
 		})
 		console.log(newAnswers)
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
 		const filterAnswers = newAnswers.filter(answer => {
-			return answer.answer.value !== ''
+			return answer.answer.value || answer.answer.explanation
 		})
 
 		const body = {
@@ -880,8 +991,21 @@ export const saveExplanation = (
 
 		console.log(newAnswers)
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
@@ -913,8 +1037,21 @@ export const saveExplanation = (
 			}
 		]
 
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		console.log(newAnswers)
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
 		const body = {
-			answers: newAnswers
+			answers: filterAnswers
 		}
 
 		fetch(
