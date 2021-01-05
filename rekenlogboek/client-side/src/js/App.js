@@ -46,6 +46,7 @@ import Instructions from './student/containers/Instructions'
 import Evaluations from './student/containers/Evaluations'
 
 import '../scss/App.scss'
+import AuthMiddleware from './AuthMiddleware'
 
 function App() {
 	// Check for the Microsoft Teams SDK object.
@@ -56,79 +57,81 @@ function App() {
 			return (
 				<div>
 					<Router>
-						<Header />
-						<main>
-							<Switch>
-								{/* LOGBOOK DESIGNER -> NEW LOGBOOK */}
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/general"
-									component={newLBGeneral}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/columns"
-									component={newLBColumns}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/goals"
-									component={newLBGoals}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/overview"
-									component={newLBOverview}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/done"
-									component={newLBCompleted}
-								/>
+						<AuthMiddleware>
+							<Header />
+							<main>
+								<Switch>
+									{/* LOGBOOK DESIGNER -> NEW LOGBOOK */}
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/general"
+										component={newLBGeneral}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/columns"
+										component={newLBColumns}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/goals"
+										component={newLBGoals}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/overview"
+										component={newLBOverview}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/done"
+										component={newLBCompleted}
+									/>
 
-								{/* LOGBOOK DESIGNER INDEX  */}
-								<Route
-									path="/logbook-designer"
-									exact
-									component={LBDesignerIndex}
-								/>
+									{/* LOGBOOK DESIGNER INDEX  */}
+									<Route
+										path="/logbook-designer"
+										exact
+										component={LBDesignerIndex}
+									/>
 
-								{/* LOGBOOK VIEWER */}
-								<Route
-									exact
-									path="/teacher/logbooks"
-									component={Logbooks}
-								></Route>
-								<Route
-									exact
-									path="/teacher/logbooks/studentlogbook"
-									component={StudentLogbook}
-								></Route>
+									{/* LOGBOOK VIEWER */}
+									<Route
+										exact
+										path="/teacher/logbooks"
+										component={Logbooks}
+									></Route>
+									<Route
+										exact
+										path="/teacher/logbooks/studentlogbook"
+										component={StudentLogbook}
+									></Route>
 
-								{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
-								<Route
-									path="/teacher/group-overview/answers"
-									component={GroupOverviewAnswers}
-								/>
+									{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
+									<Route
+										path="/teacher/group-overview/answers"
+										component={GroupOverviewAnswers}
+									/>
 
-								{/* LOGBOOK GROUP OVERVIEW */}
-								<Route
-									path="/teacher/group-overview"
-									component={GroupOverview}
-								/>
+									{/* LOGBOOK GROUP OVERVIEW */}
+									<Route
+										path="/teacher/group-overview"
+										component={GroupOverview}
+									/>
 
-								{/* LANDING PAGE */}
-								<Route path="/teacher" exact component={TeacherIndex} />
+									{/* LANDING PAGE */}
+									<Route path="/teacher" exact component={TeacherIndex} />
 
-								{/* SIGN-IN */}
-								<Route exact path="/" component={SignIn} />
-								<Route exact path="/auth/succes" component={Succes} />
+									{/* SIGN-IN */}
+									<Route exact path="/" component={SignIn} />
+									<Route exact path="/auth/succes" component={Succes} />
 
-								{/* ERROR PAGES */}
-								<Route exact path="/no-access" component={NoAccess} />
-								{/* <Route component={NotFound} /> */}
-							</Switch>
-						</main>
+									{/* ERROR PAGES */}
+									<Route exact path="/no-access" component={NoAccess} />
+									{/* <Route component={NotFound} /> */}
+								</Switch>
+							</main>
+						</AuthMiddleware>
 					</Router>
 				</div>
 			)
