@@ -65,49 +65,45 @@ function InstructionsUI(props) {
 		return numbers.filter(number => number !== undefined)
 	}
 
-	if (props.column.input !== undefined) {
-		return (
-			<div className="after-pre-test student-container">
-				<ProgressBar
-					itemCount={props.goals.length}
-					done={getProgressBarNumbers()}
-				/>
-				<Jumbotron columns={1}>
-					<div className="learn-goal-container">
-						<div className="left-side">
-							<LearnGoal
-								goal={props.goals[props.currentGoal].title}
-								description={props.goals[props.currentGoal].description}
-							/>
-							<Question
-								answer={getAnswer()}
-								goalPosition={props.currentGoal}
-								columnPosition={2}
-								input={props.column.input}
-								state={props.inputStates.inUse}
-								explanation={props.explanation}
-							/>
-						</div>
-						<div className="right-side">
-							<LearnGoalImage
-								src={props.goals[props.currentGoal].imageLink}
-								title="Dit gaf je aan na de pretoets: "
-								description={getPretestAnswer()}
-							/>
-						</div>
+	return (
+		<div className="after-pre-test student-container">
+			<ProgressBar
+				itemCount={props.goals.length}
+				done={getProgressBarNumbers()}
+			/>
+			<Jumbotron columns={1}>
+				<div className="learn-goal-container">
+					<div className="left-side">
+						<LearnGoal
+							goal={props.goals[props.currentGoal].title}
+							description={props.goals[props.currentGoal].description}
+						/>
+						<Question
+							answer={getAnswer()}
+							goalPosition={props.currentGoal}
+							columnPosition={2}
+							input={props.column.input}
+							state={props.inputStates.inUse}
+							explanation={props.explanation}
+						/>
 					</div>
-				</Jumbotron>
-				<div className="prev button">
-					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+					<div className="right-side">
+						<LearnGoalImage
+							src={props.goals[props.currentGoal].imageLink}
+							title="Dit gaf je aan na de pretoets: "
+							description={getPretestAnswer()}
+						/>
+					</div>
 				</div>
-				<div className="next button">
-					<Button color="blue" value="Volgende" handler={() => nextPage()} />
-				</div>
+			</Jumbotron>
+			<div className="prev button">
+				<Button color="gray" value="Vorige" handler={() => previousPage()} />
 			</div>
-		)
-	} else {
-		return <p>Loading</p>
-	}
+			<div className="next button">
+				<Button color="blue" value="Volgende" handler={() => nextPage()} />
+			</div>
+		</div>
+	)
 }
 
 function mapStateToProps(state) {

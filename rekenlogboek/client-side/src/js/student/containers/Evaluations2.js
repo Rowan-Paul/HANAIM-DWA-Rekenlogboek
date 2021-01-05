@@ -44,40 +44,36 @@ function EvaluationsUI(props) {
 		return numbers.filter(number => number !== undefined)
 	}
 
-	if (props.column.input !== undefined) {
-		return (
-			<div className="after-pre-test student-container">
-				<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
-				<Jumbotron columns={1}>
-					<div className="learn-goal-container">
-						<div className="left-side">
-							<LearnGoal
-								goal={props.goals[props.currentGoal].title}
-								description={props.goals[props.currentGoal].description}
-							/>
+	return (
+		<div className="after-pre-test student-container">
+			<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
+			<Jumbotron columns={1}>
+				<div className="learn-goal-container">
+					<div className="left-side">
+						<LearnGoal
+							goal={props.goals[props.currentGoal].title}
+							description={props.goals[props.currentGoal].description}
+						/>
 
-							<h2>{props.column.title}</h2>
-							<Evaluation
-								state={props.inputStates.inUse}
-								answer={getAnswer()}
-								changeHandler={newAnswerValue => {
-									props.saveAnswerRadio(newAnswerValue, props.currentGoal, 3)
-								}}
-							/>
-						</div>
-						<div className="right-side">
-							<LearnGoalImage src={props.goals[props.currentGoal].imageLink} />
-						</div>
+						<h2>{props.column.title}</h2>
+						<Evaluation
+							state={props.inputStates.inUse}
+							answer={getAnswer()}
+							changeHandler={newAnswerValue => {
+								props.saveAnswerRadio(newAnswerValue, props.currentGoal, 3)
+							}}
+						/>
 					</div>
-				</Jumbotron>
-				<div className="next button">
-					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+					<div className="right-side">
+						<LearnGoalImage src={props.goals[props.currentGoal].imageLink} />
+					</div>
 				</div>
+			</Jumbotron>
+			<div className="next button">
+				<Button color="blue" value="Volgende" handler={() => nextPage()} />
 			</div>
-		)
-	} else {
-		return <p>Loading</p>
-	}
+		</div>
+	)
 }
 
 function mapStateToProps(state) {
