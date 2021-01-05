@@ -53,7 +53,6 @@ export const updateCurrentPhase = payload => dispatch => {
 }
 
 export const updateActiveGoal = payload => dispatch => {
-	console.log(payload)
 	const body = {
 		activeGoal: payload.activeGoal
 	}
@@ -71,4 +70,26 @@ export const updateActiveGoal = payload => dispatch => {
 			payload: body.activeGoal
 		})
 	})
+}
+
+export const getPeriods = payload => (dispatch, getState) => {
+	const group = getState().main.user.groups[1]
+	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+	console.log(group, payload)
+
+	fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${payload.groupNumber}/years/${payload.schoolYear}/periods`,
+		{
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}
+	)
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+			// return dispatch({
+			// 	type: types.GET_PERIODS,
+			// 	payload: data
+			// })
+		})
 }
