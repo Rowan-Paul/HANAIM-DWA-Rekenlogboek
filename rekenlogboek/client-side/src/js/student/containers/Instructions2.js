@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import '../../../scss/student/containers/AfterPreTest.scss'
+import '../../../scss/student/containers/Instructions.scss'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
