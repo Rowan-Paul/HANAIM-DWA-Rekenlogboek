@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
 
-import { getYears } from '../../redux/allow-student-access/actions'
+import { getYears, getPeriods } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
@@ -25,12 +25,13 @@ function PeriodFilter(props) {
 		})
 	}
 
-	const updateSelectValue = value => {
-		setSelectedSchoolYear(value)
+	const updateSelectValue = schoolYear => {
+		setSelectedSchoolYear(schoolYear)
+		props.getPeriodsBySchoolYear({ schoolYear })
 	}
 
-	const updatePeriodValue = value => {
-		setSelectedPeriod(value)
+	const updatePeriodValue = period => {
+		setSelectedPeriod(period)
 	}
 
 	return (
@@ -63,6 +64,7 @@ function PeriodFilter(props) {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return {
 		schoolYears: state.allowStudentAccess.schoolYears,
 		currentSchoolYear: state.allowStudentAccess.currentSchoolYear
@@ -71,7 +73,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getSchoolYears: () => dispatch(getYears)
+		getSchoolYears: () => dispatch(getYears),
+		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload))
 	}
 }
 
