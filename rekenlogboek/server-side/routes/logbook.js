@@ -75,9 +75,12 @@ router.get('/groups/:group', (req, res) => {
 			group: req.params.group,
 			currentPhase: { $ne: 'notVisible' }
 		},
-		'_id currentPhase year'
+		'_id currentPhase year period'
 	)
-		.then(response => res.status(200).send(response))
+		.then(response => {
+			console.log(response)
+			res.status(200).send(response)
+		})
 		.catch(err => {
 			console.log(err)
 			res.status(500).send(err)
@@ -179,16 +182,13 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 
 // Get all periods based on group and year
 router.get('/groups/:group/years/:year/periods', (req, res) => {
-	Logbook.find(
-		{
-			year: req.params.year,
-			group: req.params.group
-		},
-		'_id period'
-	)
-		.distinct('period')
+	Logbook.find({
+		year: req.params.year,
+		group: req.params.group
+	})
+		.distinct('period', () => {})
 		.then(response => {
-			console.log('res:', response)
+			console.log(response)
 			res.status(200).send(response)
 		})
 		.catch(err => {
