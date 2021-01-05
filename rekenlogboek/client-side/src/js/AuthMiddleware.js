@@ -14,9 +14,9 @@ function AuthMiddleware(props) {
 			case props.roles.Leerling:
 				return pathName.includes('student') ? null : redirect()
 			case props.roles.Leraar:
-				return pathName?.includes('teacher') ? null : redirect()
+				return pathName.includes('teacher') ? null : redirect()
 			case props.roles.Logboekontwerper:
-				return pathName?.includes('logbook-designer') ? null : redirect()
+				return pathName.includes('logbook-designer') ? null : redirect()
 			default:
 				redirect()
 		}
