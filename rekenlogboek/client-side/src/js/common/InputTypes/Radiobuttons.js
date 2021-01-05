@@ -125,6 +125,7 @@ function RadioButtons(props) {
 							? props.answer?.answer.explanation
 							: 'Omdat...'
 					}
+					changeHandler={props.explanationChangeHandler}
 				/>
 			)
 		}

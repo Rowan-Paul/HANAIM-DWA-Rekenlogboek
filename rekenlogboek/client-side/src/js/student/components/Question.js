@@ -7,7 +7,8 @@ import Textarea from '../../common/InputTypes/Textarea'
 import {
 	saveAnswersRadio,
 	saveAnswersCheck,
-	saveAnswersText
+	saveAnswersText,
+	saveExplanation
 } from '../../redux/studentlogbook/actions'
 
 function Question(props) {
@@ -42,6 +43,13 @@ function Question(props) {
 						changeHandler={newAnswerValue => {
 							props.saveAnswersRadio(
 								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
+						explanationChangeHandler={newExplanationValue => {
+							props.saveExplanation(
+								newExplanationValue,
 								props.goalPosition,
 								props.columnPosition
 							)
@@ -92,7 +100,11 @@ const mapDispatchToProps = dispatch => {
 		saveAnswersCheck: (answerValue, goalPosition, columnPosition) =>
 			dispatch(saveAnswersCheck(answerValue, goalPosition, columnPosition)),
 		saveAnswersText: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswersText(answerValue, goalPosition, columnPosition))
+			dispatch(saveAnswersText(answerValue, goalPosition, columnPosition)),
+		saveExplanation: (newExplanationValue, goalPosition, columnPosition) =>
+			dispatch(
+				saveExplanation(newExplanationValue, goalPosition, columnPosition)
+			)
 	}
 }
 
