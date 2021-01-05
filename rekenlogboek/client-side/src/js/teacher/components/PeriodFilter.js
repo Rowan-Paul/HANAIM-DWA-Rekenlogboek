@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
 
-import { getYears, getPeriods } from '../../redux/allow-student-access/actions'
+import {
+	getFilterOptions,
+	getPeriods
+} from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
@@ -12,7 +15,7 @@ function PeriodFilter(props) {
 	const [selectedPeriod, setSelectedPeriod] = useState(1)
 
 	useEffect(() => {
-		props.getSchoolYears()
+		props.getFilterOptions()
 	}, [])
 
 	const getSchoolYearOptions = () => {
@@ -33,13 +36,14 @@ function PeriodFilter(props) {
 	}
 
 	const getPeriods = () => {
-		return props.periods.map(period => {
-			return (
-				<option value={period} key={period}>
-					{period}
-				</option>
-			)
-		})
+		console.log(props.periods)
+		// return props?.periods.map(period => {
+		// 	return (
+		// 		<option value={period} key={period}>
+		// 			{period}
+		// 		</option>
+		// 	)
+		// })
 	}
 
 	const updateSelectedSchoolYear = schoolYear => {
@@ -92,7 +96,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getSchoolYears: () => dispatch(getYears),
+		getFilterOptions: () => dispatch(getFilterOptions),
 		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload))
 	}
 }

@@ -31,10 +31,11 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				currentLogbook: action.payload
 			}
-		case types.GET_YEARS:
+		case types.GET_FILTER_OPTIONS:
 			return {
 				...state,
-				schoolYears: action.payload
+				schoolYears: action.payload.schoolYears,
+				periods: action.payload.periods
 			}
 		case types.UPDATE_CURRENT_PHASE:
 			console.log(action.payload)

@@ -1,18 +1,37 @@
 import * as types from './types'
 
-export const getYears = (dispatch, getState) => {
+const fetchPeriods = payload => {
+	return fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${payload.groupNumber}/years/${payload.schoolYear}/periods`,
+		{
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}
+	)
+}
+
+export const getFilterOptions = (dispatch, getState) => {
 	const group = getState().main.user.groups[1]
 	const groupNumber = group.substring(group.indexOf(' ') + 1)
+
+	const payload = {}
+
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
 			`/logbook/groups/${groupNumber}/years`
 	)
 		.then(response => response.json())
-		.then(payload => {
-			return dispatch({
-				type: types.GET_YEARS,
-				payload
-			})
+		.then(schoolYears => {
+			payload.schoolYears = schoolYears
+			fetchPeriods(payload)
+				.then(response => response.json())
+				.then(periods => {
+					payload.periods = periods
+					return dispatch({
+						type: types.GET_FILTER_OPTIONS,
+						payload
+					})
+				})
 		})
 }
 
@@ -82,13 +101,7 @@ export const getPeriods = payload => (dispatch, getState) => {
 	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
 	console.log(group, payload)
 
-	fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${payload.groupNumber}/years/${payload.schoolYear}/periods`,
-		{
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		}
-	)
+	fetchPeriods(payload)
 		.then(response => response.json())
 		.then(data => {
 			return dispatch({
