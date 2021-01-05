@@ -19,6 +19,7 @@ const getCurrentSchoolYear = () => {
 const INITIAL_STATE = {
 	currentSchoolYear: getCurrentSchoolYear(),
 	schoolYears: [],
+	periods: [],
 	currentLogbook: {}
 }
 
@@ -51,6 +52,11 @@ const reducer = (state = INITIAL_STATE, action) => {
 					...state.currentLogbook,
 					activeGoal: action.payload
 				}
+			}
+		case types.GET_PERIODS:
+			return {
+				...state,
+				periods: action.payload
 			}
 		default:
 			return state

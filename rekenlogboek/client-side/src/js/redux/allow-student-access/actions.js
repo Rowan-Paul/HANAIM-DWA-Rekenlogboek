@@ -86,10 +86,9 @@ export const getPeriods = payload => (dispatch, getState) => {
 	)
 		.then(response => response.json())
 		.then(data => {
-			console.log(data)
-			// return dispatch({
-			// 	type: types.GET_PERIODS,
-			// 	payload: data
-			// })
+			return dispatch({
+				type: types.GET_PERIODS,
+				payload: data.response
+			})
 		})
 }
