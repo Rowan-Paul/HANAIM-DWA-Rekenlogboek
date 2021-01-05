@@ -27,7 +27,7 @@ export const getLogbookGroupAnswers = payload => (dispatch, getState) => {
 	const answer = `&answer=${payload.answer}`
 	const URI = `studentlogbook/${logbookID}/group-answers/?${goal}&${column}&${answer}`
 
-	fetch(`http://localhost:3000/${URI}`, {
+	fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/${URI}`, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' }
 	})
