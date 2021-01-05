@@ -3,7 +3,7 @@ import * as types from './types'
 // GET_LOGBOOK
 export const getLogbook = () => (dispatch, getState) => {
 	const logbookID = getState().groupOverview.logbookID // Temp for developing frontend
-	fetch(`http://localhost:3000/logbook/${logbookID}`, {
+	fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/${logbookID}`, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' }
 	})
