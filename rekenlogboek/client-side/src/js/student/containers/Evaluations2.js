@@ -33,10 +33,22 @@ function EvaluationsUI(props) {
 		}
 	}
 
+	const getProgressBarNumbers = () => {
+		const numbers = props.answers.map(answer => {
+			if (
+				answer.columnPosition === 3 &&
+				answer.goalPosition === props.currentGoal
+			) {
+				return 0
+			}
+		})
+		return numbers.filter(number => number !== undefined)
+	}
+
 	if (props.column.input !== undefined) {
 		return (
 			<div className="after-pre-test student-container">
-				{/* <ProgressBar itemCount={props.goals.length} done={[1, 3]} /> */}
+				<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
 				<Jumbotron columns={1}>
 					<div className="learn-goal-container">
 						<div className="left-side">
@@ -53,15 +65,6 @@ function EvaluationsUI(props) {
 									props.saveAnswerRadio(newAnswerValue, props.currentGoal, 3)
 								}}
 							/>
-
-							{/* <Question
-								answer={getAnswer()}
-								goalPosition={props.currentGoal}
-								columnPosition={3}
-								input={props.column.input}
-								state={props.inputStates.inUse}
-								explanation={props.explanation}
-							/> */}
 						</div>
 						<div className="right-side">
 							<LearnGoalImage src={props.goals[props.currentGoal].imageLink} />

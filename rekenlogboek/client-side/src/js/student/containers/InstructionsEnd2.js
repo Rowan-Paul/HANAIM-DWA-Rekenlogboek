@@ -16,9 +16,21 @@ function InstructionsEndUI(props) {
 		props.history.push('/student/instruction')
 	}
 
+	const getProgressBarNumbers = () => {
+		const numbers = props.answers.map(answer => {
+			if (answer.columnPosition === 2) {
+				return answer.goalPosition
+			}
+		})
+		return numbers.filter(number => number !== undefined)
+	}
+
 	return (
 		<div className="end-screen student-container">
-			{/* <ProgressBar itemCount={props.goalAmount} done={[0, 1, 2, 3, 4]} /> */}
+			<ProgressBar
+				itemCount={props.allGoals.length}
+				done={getProgressBarNumbers()}
+			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
