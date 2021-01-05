@@ -29,6 +29,19 @@ function InstructionsUI(props) {
 				answer.goalPosition === props.currentGoal && answer.columnPosition === 2
 		)[0]
 
+	const getPretestAnswer = () => {
+		const answer = props.answers.filter(
+			answer =>
+				answer.goalPosition === props.currentGoal && answer.columnPosition === 1
+		)[0]
+
+		if (answer === undefined) {
+			return '-'
+		} else {
+			return answer.answer.value
+		}
+	}
+
 	const previousPage = () => {
 		if (props.currentGoal > 0) {
 			props.decrementCurrentGoal()
@@ -76,7 +89,11 @@ function InstructionsUI(props) {
 							/>
 						</div>
 						<div className="right-side">
-							<LearnGoalImage src={props.goals[props.currentGoal].imageLink} />
+							<LearnGoalImage
+								src={props.goals[props.currentGoal].imageLink}
+								title="Dit gaf je aan na de pretoets: "
+								description={getPretestAnswer()}
+							/>
 						</div>
 					</div>
 				</Jumbotron>

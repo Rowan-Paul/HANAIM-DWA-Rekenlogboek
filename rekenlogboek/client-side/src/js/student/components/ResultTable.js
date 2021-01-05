@@ -22,7 +22,7 @@ export default function ResultText(props) {
 			console.log(props.results)
 
 			if (columnAnswers.length > 0)
-				return props.results.map((result, i) => {
+				return props.results.map(result => {
 					const answer = columnAnswers.find(
 						a => a.goalPosition === result.position
 					)

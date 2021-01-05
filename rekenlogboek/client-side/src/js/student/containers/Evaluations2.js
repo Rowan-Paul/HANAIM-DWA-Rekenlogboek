@@ -7,7 +7,6 @@ import '../../../scss/student/Student.scss'
 import ProgressBar from '../components/ProgressBar'
 import LearnGoal from '../components/LearnGoal'
 import LearnGoalImage from '../components/LearnGoalImage'
-import Question from '../components/Question'
 import Evaluation from '../../common/InputTypes/Evaluation'
 
 import Jumbotron from '../../common/Jumbotron'
