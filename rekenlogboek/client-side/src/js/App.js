@@ -40,7 +40,7 @@ import { AfterPreTest } from './student/containers/AfterPreTest2'
 import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd2'
 import { InstructionsEnd } from './student/containers/InstructionsEnd'
 import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
-import { Instructions } from './student/containers/Instructions'
+import { Instructions } from './student/containers/Instructions2'
 import { Evaluations } from './student/containers/Evaluations'
 
 import '../scss/App.scss'
