@@ -25,7 +25,17 @@ function PeriodFilter(props) {
 		})
 	}
 
-	const updateSelectValue = schoolYear => {
+	const getPeriods = () => {
+		return props.periods.map(period => {
+			return (
+				<option value={period} key={period}>
+					{period}
+				</option>
+			)
+		})
+	}
+
+	const updateSelectedSchoolYear = schoolYear => {
 		setSelectedSchoolYear(schoolYear)
 		props.getPeriodsBySchoolYear({ schoolYear })
 	}
@@ -41,19 +51,19 @@ function PeriodFilter(props) {
 				id="select-school-year"
 				value={selectedSchoolYear}
 				onChange={e => {
-					updateSelectValue(e.target.value)
+					updateSelectedSchoolYear(e.target.value)
 				}}
 			>
 				{getSchoolYearOptions()}
 			</select>
 			<div>Blok:</div>
-			<input
-				type="number"
-				defaultValue="1"
-				min="1"
-				max="99"
+			<select
 				onChange={e => updatePeriodValue(e.target.value)}
-			/>
+				id="select-period"
+			>
+				{getPeriods()}
+			</select>
+
 			<Button
 				color="blue"
 				handler={() => props.filterClick(selectedSchoolYear, selectedPeriod)}
@@ -65,9 +75,11 @@ function PeriodFilter(props) {
 
 const mapStateToProps = state => {
 	console.log(state)
+	const studentAccess = state.allowStudentAccess
 	return {
-		schoolYears: state.allowStudentAccess.schoolYears,
-		currentSchoolYear: state.allowStudentAccess.currentSchoolYear
+		schoolYears: studentAccess.schoolYears,
+		currentSchoolYear: studentAccess.currentSchoolYear,
+		periods: studentAccess.periods
 	}
 }
 
