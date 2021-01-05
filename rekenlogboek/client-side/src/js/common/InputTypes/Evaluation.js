@@ -36,9 +36,12 @@ function Evaluation(props) {
 						<label>
 							<input
 								name="evaluation"
-								onChange={() => alert('Gebruik hier een redux action')}
+								onChange={e => {
+									props.changeHandler(e.target.value)
+								}}
 								type="radio"
 								value={v.name}
+								checked={props.answer?.answer.value === v.name}
 							/>
 							<div>
 								<img src={v.img} alt={v.text} />

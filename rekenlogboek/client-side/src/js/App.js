@@ -39,9 +39,9 @@ import { Default } from './student/containers/Default2'
 import { AfterPreTest } from './student/containers/AfterPreTest2'
 import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd2'
 import { InstructionsEnd } from './student/containers/InstructionsEnd2'
-import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd2'
 import { Instructions } from './student/containers/Instructions2'
-import { Evaluations } from './student/containers/Evaluations'
+import { Evaluations } from './student/containers/Evaluations2'
 
 import '../scss/App.scss'
 

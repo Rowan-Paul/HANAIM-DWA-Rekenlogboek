@@ -27,21 +27,21 @@ export default function ResultText(props) {
 						a => a.goalPosition === result.position
 					)
 					if (answer !== undefined) {
-						if (answer.value === 'default') {
+						if (answer.answer.value === 'default') {
 							result.answer = 'Ik weet het nog niet'
-						} else if (answer.value === 'Happy') {
+						} else if (answer.answer.value === 'Happy') {
 							result.answer = (
 								<div>
 									<img src={Happy} alt="Happy" />
 								</div>
 							)
-						} else if (answer.value === 'Sceptic') {
+						} else if (answer.answer.value === 'Sceptic') {
 							result.answer = (
 								<div>
 									<img src={Sceptic} alt="Sceptic" />
 								</div>
 							)
-						} else if (answer.value === 'Sad') {
+						} else if (answer.answer.value === 'Sad') {
 							result.answer = (
 								<div>
 									<img src={Sad} alt="Sad" />
