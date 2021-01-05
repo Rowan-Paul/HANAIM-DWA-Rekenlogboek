@@ -12,7 +12,7 @@ function AuthMiddleware(props) {
 		}
 		switch (jobTitle) {
 			case props.roles.Leerling:
-				return pathName.includes('student') ? null : redirect()
+				return props.history.push('./no-access')
 			case props.roles.Leraar:
 				return pathName.includes('teacher') ? null : redirect()
 			case props.roles.Logboekontwerper:
