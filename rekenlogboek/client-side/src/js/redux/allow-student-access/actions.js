@@ -1,6 +1,9 @@
 import * as types from './types'
 
-const fetchPeriods = payload => {
+const fetchPeriods = (payload, getState) => {
+	const group = getState().main.user.groups[1]
+	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+
 	return fetch(
 		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${payload.groupNumber}/years/${payload.schoolYear}/periods`,
 		{
@@ -14,7 +17,7 @@ export const getFilterOptions = (dispatch, getState) => {
 	const group = getState().main.user.groups[1]
 	const groupNumber = group.substring(group.indexOf(' ') + 1)
 
-	const payload = {}
+	const reducerPayload = {}
 
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS +
@@ -22,14 +25,15 @@ export const getFilterOptions = (dispatch, getState) => {
 	)
 		.then(response => response.json())
 		.then(schoolYears => {
-			payload.schoolYears = schoolYears
-			fetchPeriods(payload)
+			reducerPayload.schoolYears = schoolYears
+			fetchPeriods(schoolYears, getState)
 				.then(response => response.json())
 				.then(periods => {
-					payload.periods = periods
+					console.log(periods)
+					reducerPayload.periods = periods
 					return dispatch({
 						type: types.GET_FILTER_OPTIONS,
-						payload
+						payload: { ...reducerPayload }
 					})
 				})
 		})
@@ -97,11 +101,7 @@ export const updateActiveGoal = payload => dispatch => {
 }
 
 export const getPeriods = payload => (dispatch, getState) => {
-	const group = getState().main.user.groups[1]
-	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
-	console.log(group, payload)
-
-	fetchPeriods(payload)
+	fetchPeriods(payload, getState)
 		.then(response => response.json())
 		.then(data => {
 			return dispatch({

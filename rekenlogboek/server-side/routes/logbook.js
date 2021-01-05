@@ -179,7 +179,6 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 
 // Get all periods based on group and year
 router.get('/groups/:group/years/:year/periods', (req, res) => {
-	console.log('?')
 	Logbook.find(
 		{
 			year: req.params.year,

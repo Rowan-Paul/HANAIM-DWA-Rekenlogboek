@@ -26,19 +26,18 @@ const INITIAL_STATE = {
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case types.GET_ACTIVE_LOGBOOK:
-			console.log(action.payload)
 			return {
 				...state,
 				currentLogbook: action.payload
 			}
 		case types.GET_FILTER_OPTIONS:
+			console.log(action.payload)
 			return {
 				...state,
 				schoolYears: action.payload.schoolYears,
 				periods: action.payload.periods
 			}
 		case types.UPDATE_CURRENT_PHASE:
-			console.log(action.payload)
 			return {
 				...state,
 				currentLogbook: {
