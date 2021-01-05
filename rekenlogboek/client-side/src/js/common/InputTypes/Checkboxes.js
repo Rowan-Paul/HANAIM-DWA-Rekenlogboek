@@ -66,6 +66,7 @@ function Checkboxes(props) {
 				<Explanation
 					state={props.state}
 					text={props.answer?.answer.explanation}
+					changeHandler={props.explanationChangeHandler}
 				/>
 			)
 		}

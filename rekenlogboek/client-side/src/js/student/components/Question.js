@@ -29,6 +29,13 @@ function Question(props) {
 								props.columnPosition
 							)
 						}}
+						explanationChangeHandler={newExplanationValue => {
+							props.saveExplanation(
+								newExplanationValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
 					/>
 				)
 
