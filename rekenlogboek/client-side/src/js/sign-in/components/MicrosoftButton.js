@@ -16,6 +16,9 @@ function MicrosoftButtonUI(props) {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [user, setUser] = useState({})
 	const [error, setError] = useState(null)
+	const [silentLoginAttemptPerformed, silentLoginIsPerformed] = useState(false)
+	const [silentLoginAttemptOngoing, silentLoginIsOngoing] = useState(false)
+	const [loadingContext, IsLoadingContext] = useState(true)
 	const [userAgentApplication] = useState(
 		() =>
 			new UserAgentApplication({
@@ -30,46 +33,63 @@ function MicrosoftButtonUI(props) {
 			})
 	)
 
+	//Actions performed once
 	useEffect(() => {
+		if (window.parent === window.self) {
+			IsLoadingContext(false)
+		}
 		microsoftTeams.initialize()
 
 		microsoftTeams.getContext((context, error) => {
 			props.doSetContext(context)
+			IsLoadingContext(false)
 			if (error) {
 				console.log(error)
 			}
 		})
 	}, [])
 
+	//Actions performed before each render
+	useEffect(() => {
+		if (error) {
+			console.log(error)
+		}
+
+		if (isAuthenticated) {
+			props.doSaveUser(user)
+			if (props.user.name !== undefined) props.history.push('/auth/succes')
+		}
+	})
+
 	const silentLogin = async () => {
 		try {
 			const user = await getUserProfile(userAgentApplication, config.scopes)
 
-			// if in teams, check if the user logged in is the same
-			// as the user logged in teams
+			//Failed silent login
+			if (user === null) {
+				silentLoginIsPerformed(true)
+				return
+			}
+
+			//(When in the teams app) Checks if the user that's logged in on the website is the same as the user logged in on the teams app
 			if (window.parent !== window.self) {
 				if (props.context.loginHint !== user.userPrincipalName) {
 					throw new Error('Logged in as two different users')
-				} else {
-					setIsAuthenticated(true)
-					setUser({
-						name: user.displayName,
-						email: user.mail || user.userPrincipalName,
-						jobTitle: user.jobTitle,
-						groups: user.groups
-					})
 				}
-			} else {
-				setIsAuthenticated(true)
-				setUser({
-					name: user.displayName,
-					email: user.mail || user.userPrincipalName,
-					jobTitle: user.jobTitle,
-					groups: user.groups
-				})
 			}
+
+			setIsAuthenticated(true)
+			setUser({
+				name: user.displayName,
+				email: user.mail || user.userPrincipalName,
+				jobTitle: user.jobTitle,
+				groups: user.groups
+			})
+
+			silentLoginIsPerformed(true)
 			setError(null)
 		} catch (err) {
+			silentLoginIsPerformed(true)
 			setIsAuthenticated(false)
 			setUser({})
 			setError(normalizeError(err))
@@ -100,20 +120,22 @@ function MicrosoftButtonUI(props) {
 		}
 	}
 
-	useEffect(() => {
-		if (error) {
-			console.log(error)
+	if (loadingContext) {
+		return <p>Aan het laden...</p>
+	} else if (!silentLoginAttemptPerformed) {
+		//Makes sure that login attempt doesn't get performed after each render. Just once
+		if (!silentLoginAttemptOngoing) {
+			silentLoginIsOngoing(true)
+			silentLogin()
 		}
 
-		if (isAuthenticated) {
-			props.doSaveUser(user)
-			if (props.user.name !== undefined) props.history.push('/auth/succes')
-		}
-	})
-
-	if (window.parent === window.self || props.context.loginHint !== undefined) {
+		return <p>Proberen je in te loggen...</p>
+	} else if (
+		window.parent === window.self ||
+		props.context.loginHint !== undefined
+	) {
 		return (
-			<button className="MicrosoftButton" onLoad={silentLogin} onClick={login}>
+			<button className="MicrosoftButton" onClick={login}>
 				<div>
 					<img src={MicrosoftLogo} alt="Microsoft Logo" />
 					<span>Login met Microsoft</span>
@@ -121,7 +143,7 @@ function MicrosoftButtonUI(props) {
 			</button>
 		)
 	} else {
-		return <p>Proberen je in te loggen...</p>
+		return <p>Er is iets mis gegaan...</p>
 	}
 }
 
