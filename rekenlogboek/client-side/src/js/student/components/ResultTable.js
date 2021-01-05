@@ -18,10 +18,6 @@ export default function ResultText(props) {
 				}
 			})
 
-			// columnAnswers.sort((answer1, answer2) => {
-			// 	return answer1.goalPosition < answer2.goalPosition
-			// })
-
 			console.log(columnAnswers)
 			console.log(props.results)
 

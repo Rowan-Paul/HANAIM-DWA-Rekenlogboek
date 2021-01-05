@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -11,15 +11,7 @@ import ResultTable from '../components/ResultTable'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
-// import {
-// 	fetchAllGoals,
-// 	previousGoal,
-// 	nextGoal,
-// 	fetchAnswers
-// } from '../../redux/studentlogbook/actions'
-
 function AfterPreTestEndUI(props) {
-	//TODO: fix it going back and actually loading the page
 	const previousPage = () => {
 		props.history.push('/student/pretest')
 	}
@@ -60,16 +52,7 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		doFetchAnswers: () => dispatch(fetchAnswers()),
-		doNextGoal: () => dispatch(nextGoal()),
-		doPreviousGoal: () => dispatch(previousGoal()),
-		doFetchAllGoals: () => dispatch(fetchAllGoals())
-	}
-}
-
 export const AfterPreTestEnd = connect(
 	mapStateToProps,
-	mapDispatchToProps
+	null
 )(withRouter(AfterPreTestEndUI))

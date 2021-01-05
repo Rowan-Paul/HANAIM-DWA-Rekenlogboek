@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/AfterPreTest.scss'
@@ -44,7 +44,6 @@ function AfterPreTestUI(props) {
 	}
 
 	if (props.column.input !== undefined) {
-		console.log('yoloboy')
 		return (
 			<div className="after-pre-test student-container">
 				{/* <ProgressBar itemCount={props.goals.length} done={[1, 3]} /> */}
