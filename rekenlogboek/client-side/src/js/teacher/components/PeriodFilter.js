@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
+import classNames from 'classnames'
 
 import {
 	getFilterOptions,
@@ -9,10 +10,12 @@ import {
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
+	console.log(props.activePeriod)
+	console.log(props.currentSchoolYear)
 	const [selectedSchoolYear, setSelectedSchoolYear] = useState(
 		props.currentSchoolYear
 	)
-	const [selectedPeriod, setSelectedPeriod] = useState(1)
+	const [selectedPeriod, setSelectedPeriod] = useState(props.activePeriod)
 
 	useEffect(() => {
 		props.getFilterOptions()
@@ -35,15 +38,25 @@ function PeriodFilter(props) {
 		}
 	}
 
-	const getPeriods = () => {
-		console.log(props.periods)
-		// return props?.periods.map(period => {
-		// 	return (
-		// 		<option value={period} key={period}>
-		// 			{period}
-		// 		</option>
-		// 	)
-		// })
+	const getPeriodOptions = () => {
+		if (Array.isArray(props.periods)) {
+			return props?.periods.map(period => {
+				return (
+					<option
+						value={period}
+						key={period}
+						// className={classNames({ active: props?.activePeriod === period })}
+					>
+						{period}
+					</option>
+				)
+			})
+		} else if (props.periods !== undefined) {
+			const period = props.periods
+			return <option value={period}>{period}</option>
+		} else {
+			return null
+		}
 	}
 
 	const updateSelectedSchoolYear = schoolYear => {
@@ -69,10 +82,11 @@ function PeriodFilter(props) {
 			</select>
 			<div>Blok:</div>
 			<select
-				onChange={e => updatePeriodValue(e.target.value)}
 				id="select-period"
+				value={selectedPeriod}
+				onChange={e => updatePeriodValue(e.target.value)}
 			>
-				{getPeriods()}
+				{getPeriodOptions()}
 			</select>
 
 			<Button
@@ -85,12 +99,12 @@ function PeriodFilter(props) {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	const studentAccess = state.allowStudentAccess
 	return {
 		schoolYears: studentAccess.schoolYears,
 		currentSchoolYear: studentAccess.currentSchoolYear,
-		periods: studentAccess.periods
+		periods: studentAccess.periods,
+		activePeriod: studentAccess.activePeriod
 	}
 }
 

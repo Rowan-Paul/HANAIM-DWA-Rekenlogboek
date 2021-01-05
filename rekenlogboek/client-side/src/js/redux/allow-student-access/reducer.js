@@ -20,6 +20,7 @@ const INITIAL_STATE = {
 	currentSchoolYear: getCurrentSchoolYear(),
 	schoolYears: [],
 	periods: [],
+	activePeriod: undefined, //which period has a currentPhase !== notVisible
 	currentLogbook: {}
 }
 
@@ -31,11 +32,11 @@ const reducer = (state = INITIAL_STATE, action) => {
 				currentLogbook: action.payload
 			}
 		case types.GET_FILTER_OPTIONS:
-			console.log(action.payload)
 			return {
 				...state,
 				schoolYears: action.payload.schoolYears,
-				periods: action.payload.periods
+				periods: action.payload.periods,
+				activePeriod: action.payload.activePeriod
 			}
 		case types.UPDATE_CURRENT_PHASE:
 			return {
