@@ -28,7 +28,9 @@ function EvaluationsUI(props) {
 		)[0]
 
 	const nextPage = () => {
-		props.history.push('/student/evaluation/done')
+		if (getAnswer()) {
+			props.history.push('/student/evaluation/done')
+		}
 	}
 
 	if (props.column.input !== undefined) {
@@ -81,7 +83,7 @@ function mapStateToProps(state) {
 		inputStates: state.main.inputStates,
 		answers: state.studentLogbook.studentlogbook.answers,
 		column: state.studentLogbook.logbook.columns[3],
-		currentGoal: state.studentLogbook.currentGoal,
+		currentGoal: state.studentLogbook.logbook.activeGoal,
 		goals: state.studentLogbook.logbook.goals
 	}
 }

@@ -64,7 +64,7 @@ function EvaluationsEndUI(props) {
 
 function mapStateToProps(state) {
 	return {
-		currentGoal: state.studentLogbook.currentGoal,
+		currentGoal: state.studentLogbook.logbook.activeGoal,
 		answers: state.studentLogbook.studentlogbook.answers,
 		allGoals: state.studentLogbook.logbook.goals
 	}
