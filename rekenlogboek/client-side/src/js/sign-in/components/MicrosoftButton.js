@@ -35,6 +35,9 @@ function MicrosoftButtonUI(props) {
 
 	//Actions performed once
 	useEffect(() => {
+		if (window.parent === window.self) {
+			IsLoadingContext(false)
+		}
 		microsoftTeams.initialize()
 
 		microsoftTeams.getContext((context, error) => {
