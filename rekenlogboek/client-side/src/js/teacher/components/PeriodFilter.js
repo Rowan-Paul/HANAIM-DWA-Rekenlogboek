@@ -31,8 +31,6 @@ function PeriodFilter(props) {
 		} else if (props.schoolYears !== undefined) {
 			const year = props.schoolYears
 			return <option value={year}>{year}</option>
-		} else {
-			return null
 		}
 	}
 
@@ -48,8 +46,6 @@ function PeriodFilter(props) {
 		} else if (props.periods !== undefined) {
 			const period = props.periods
 			return <option value={period}>{period}</option>
-		} else {
-			return null
 		}
 	}
 

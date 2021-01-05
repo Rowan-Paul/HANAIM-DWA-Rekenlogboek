@@ -58,7 +58,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 		case types.GET_PERIODS:
 			return {
 				...state,
-				periods: action.payload
+				periods: action.payload.periods,
+				selectedPeriod: action.payload.selectedPeriod
 			}
 		case types.CHANGE_SELECTED_PERIOD:
 			console.log(action.payload)
