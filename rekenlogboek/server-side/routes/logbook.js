@@ -34,24 +34,25 @@ router.put('/:id/currentPhase', (req, res) => {
 		{
 			currentPhase: req.body.currentPhase
 		}
-	)
-		.then(response => {
-			Logbook.updateMany(
-				{
-					$and: [
-						{ currentPhase: { $ne: 'notVisible' } },
-						{ group: response.group },
-						{ _id: { $ne: response._id } }
-					]
-				},
-				{ currentPhase: 'notVisible' }
-			)
-			res.sendStatus(200)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
+	).then(response => {
+		Logbook.updateMany(
+			{
+				$and: [
+					{ currentPhase: { $ne: 'notVisible' } },
+					{ group: response.group },
+					{ _id: { $ne: response._id } }
+				]
+			},
+			{ currentPhase: 'notVisible' }
+		)
+			.then(() => {
+				res.sendStatus(200)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500)
+			})
+	})
 })
 
 // Get all years
