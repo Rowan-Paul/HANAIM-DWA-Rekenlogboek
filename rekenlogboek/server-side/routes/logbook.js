@@ -75,7 +75,7 @@ router.get('/groups/:group', (req, res) => {
 			group: req.params.group,
 			currentPhase: { $ne: 'notVisible' }
 		},
-		'_id currentPhase'
+		'_id currentPhase year'
 	)
 		.then(response => res.status(200).send(response))
 		.catch(err => {
@@ -189,9 +189,7 @@ router.get('/groups/:group/years/:year/periods', (req, res) => {
 		.distinct('period')
 		.then(response => {
 			console.log('res:', response)
-			res.status(200).send({
-				response
-			})
+			res.status(200).send(response)
 		})
 		.catch(err => {
 			console.log(err)

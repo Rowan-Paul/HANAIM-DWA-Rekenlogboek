@@ -2,10 +2,27 @@ import * as types from './types'
 
 const fetchPeriods = (payload, getState) => {
 	const group = getState().main.user.groups[1]
-	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+	const groupNumber = group.substring(group.indexOf(' ') + 1)
+
+	console.log(
+		'fetch to:',
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`
+	)
+	return fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`,
+		{
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}
+	)
+}
+
+const fetchActiveLogbook = getState => {
+	const group = getState().main.user.groups[1]
+	const groupNumber = group.substring(group.indexOf(' ') + 1)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${payload.groupNumber}/years/${payload.schoolYear}/periods`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -26,15 +43,20 @@ export const getFilterOptions = (dispatch, getState) => {
 		.then(response => response.json())
 		.then(schoolYears => {
 			reducerPayload.schoolYears = schoolYears
-			fetchPeriods(schoolYears, getState)
+			fetchActiveLogbook(getState)
 				.then(response => response.json())
-				.then(periods => {
-					console.log(periods)
-					reducerPayload.periods = periods
-					return dispatch({
-						type: types.GET_FILTER_OPTIONS,
-						payload: { ...reducerPayload }
-					})
+				.then(activeLogbook => {
+					console.log('active year:', activeLogbook.year)
+					fetchPeriods({ schoolYear: activeLogbook.year }, getState)
+						.then(response => response.json())
+						.then( => {
+							console.log()
+							reducerPayload.periods = 
+							return dispatch({
+								type: types.GET_FILTER_OPTIONS,
+								payload: { ...reducerPayload }
+							})
+						})
 				})
 		})
 }
