@@ -6,7 +6,8 @@ import Header from '../js/common/Header'
 
 // TEACHER PAGES
 import TeacherIndex from './teacher/containers/Index'
-
+import GroupOverview from './teacher/containers/group-overview/Index'
+import GroupOverviewAnswers from './teacher/containers/group-overview/Answers'
 // LOGBOOK DESIGNER PAGES
 import LBDesignerIndex from './logbook-designer/containers/Index'
 
@@ -104,8 +105,20 @@ function App() {
 									component={StudentLogbook}
 								></Route>
 
+								{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
+								<Route
+									path="/teacher/group-overview/answers"
+									component={GroupOverviewAnswers}
+								/>
+
+								{/* LOGBOOK GROUP OVERVIEW */}
+								<Route
+									path="/teacher/group-overview"
+									component={GroupOverview}
+								/>
+
 								{/* LANDING PAGE */}
-								<Route path="/teacher" component={TeacherIndex} />
+								<Route path="/teacher" exact component={TeacherIndex} />
 
 								{/* SIGN-IN */}
 								<Route exact path="/" component={SignIn} />

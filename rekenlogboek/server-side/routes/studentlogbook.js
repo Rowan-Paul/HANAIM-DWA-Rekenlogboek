@@ -70,10 +70,33 @@ router.get('/:id', (req, res) => {
 
 // Get all answers (from all students) for a logbook
 // Returns only the id, student and answers
-router.get('/logbooks/:logbookID/answers', (req, res) => {
+router.get('/:logbookID/group-answers', (req, res) => {
+	// Query Paramaters
+	const goal = req.query.goal
+	const column = req.query.column
+	const answer = req.query.answer
+
 	StudentLogbook.find({ logbookID: req.params.logbookID })
 		.select('student answers')
-		.then(response => {
+		.then(students => {
+			/**
+			 * Filters all student answers
+			 * Filter works if query param isset
+			 */
+			const response = [] // Define for pushing
+			students.filter(student => {
+				const check = student.answers.map(
+					a =>
+						(!goal || a.goalPosition == goal) &&
+						(!column || a.columnPosition == column) &&
+						(!answer || a.answer.value == answer)
+				)
+
+				// Only append if contains answers
+
+				if (check.indexOf(true) > -1) response.push(student)
+			})
+
 			res.status(200).send(response)
 		})
 		.catch(err => {
@@ -159,6 +182,45 @@ router.get('/logbook/:logbookid/student/:student', (req, res) => {
 		.catch(err => {
 			res.status(500).send(err)
 		})
+})
+
+/**
+ * Shows an group overview including all answers sorted by row, column
+ */
+router.get('/:id/group-overview', async (req, res) => {
+	/** Init object property if not exist */
+	Object.prototype.initProperty = function (name, defaultValue) {
+		if (!(name in this)) this[name] = defaultValue
+	}
+
+	const students = await StudentLogbook.find({ logbookID: req.params.id })
+	const answers = {
+		rows: {}
+	}
+
+	// Code for creating overview
+	students.map(student => {
+		student.answers.map(answer => {
+			// Create row prop if not exist
+			answers.rows.initProperty(answer.goalPosition, {})
+
+			// Create column within row if not exist
+			answers.rows[answer.goalPosition].initProperty(0, {}) // Default 0 for goal
+			answers.rows[answer.goalPosition].initProperty(answer.columnPosition, [])
+
+			// Upsert times answered
+			const cell = answers.rows[answer.goalPosition][answer.columnPosition]
+			const item = cell.findIndex(a => a.value === answer.answer.value)
+
+			if (item > -1) {
+				cell[item] = { ...cell[item], count: ++cell[item].count }
+			} else {
+				cell.push({ value: answer.answer.value, count: 1 })
+			}
+		})
+	})
+
+	res.status(200).send(answers)
 })
 
 module.exports = router

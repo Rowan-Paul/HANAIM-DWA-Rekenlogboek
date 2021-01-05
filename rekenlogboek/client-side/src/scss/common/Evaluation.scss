@@ -7,6 +7,16 @@
 	height: 20%;
 	padding: 0;
 	width: 70%;
+
+	.Happy-checked div {
+		background: #c2f0c2 !important;
+	}
+	.Sceptic-checked div {
+		background: #e4e280;
+	}
+	.Sad-checked div {
+		background: #f0c2c2;
+	}
 	li {
 		list-style-type: none;
 		text-align: center;
@@ -14,27 +24,6 @@
 		width: 90%;
 		position: relative;
 		border-radius: 15px;
-
-		&.Happy {
-			input:checked + div {
-				background: #c2f0c2;
-				font-weight: 700;
-			}
-		}
-
-		&.Sceptic {
-			input:checked + div {
-				background: #f0efc2;
-				font-weight: 700;
-			}
-		}
-
-		&.Sad {
-			input:checked {
-				background: #f0c2c2;
-				font-weight: 700;
-			}
-		}
 
 		label {
 			background: green;

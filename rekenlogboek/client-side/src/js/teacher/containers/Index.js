@@ -32,6 +32,14 @@ function Index(props) {
 						value="Ingevulde logboeken"
 						handler={() => props.history.push('/teacher/logbooks')}
 					/>
+
+					<ButtonContainer
+						icon={createLogbookSVG}
+						color="green"
+						description="Bekijk hier het logboek groepsoverzicht"
+						value="Groepsoverzicht logboek"
+						handler={() => props.history.push('/teacher/group-overview/')}
+					/>
 				</div>
 			</div>
 		</div>
