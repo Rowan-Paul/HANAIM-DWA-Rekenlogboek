@@ -45,6 +45,7 @@ function StudentAccessSelector(props) {
 	return (
 		<div className="content-container">
 			<div className="explanation-container">
+				<h3>{`Leerjaar ${props.logbookData.year}, blok ${props.logbookData.period}`}</h3>
 				<h1>Bepaal wat uw leerlingen zien.</h1>
 				<p>
 					Kies welk deel van het logboek u wilt ontgrendelen. Er kan maar een

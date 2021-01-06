@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
 import {
-	getActiveLogbook,
+	getSelectedLogbook,
 	updateActiveGoal
 } from '../../redux/allow-student-access/actions'
 import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
@@ -73,6 +73,10 @@ function AllowStudentAccess(props) {
 			<Jumbotron>
 				{Object.keys(props.currentLogbook).length !== 0 ? (
 					<StudentAccessSelector
+						logbookData={{
+							year: props.currentLogbook.year,
+							period: props.currentLogbook.period
+						}}
 						updatePhase={updatePhase}
 						selectGoal={selectGoal}
 					/>
