@@ -90,7 +90,14 @@ function PeriodFilter(props) {
 			<Button
 				color="blue"
 				handler={() =>
-					props.filterClick(props.selectedSchoolYear, props.selectedPeriod)
+					props.filterClick(
+						props.selectedSchoolYear !== undefined
+							? props.selectedSchoolYear
+							: props.activeSchoolYear,
+						props.selectedPeriod !== undefined
+							? props.selectedPeriod
+							: props.activePeriod
+					)
 				}
 				value="Kies blok"
 			/>
