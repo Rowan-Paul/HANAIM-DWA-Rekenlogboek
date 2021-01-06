@@ -35,13 +35,13 @@ import NoAccess from '../js/no-access/NoAccess'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
-import { Default } from './student/containers/Default2'
-import { AfterPreTest } from './student/containers/AfterPreTest2'
-import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd2'
-import { InstructionsEnd } from './student/containers/InstructionsEnd2'
-import { EvaluationsEnd } from './student/containers/EvaluationsEnd2'
-import { Instructions } from './student/containers/Instructions2'
-import { Evaluations } from './student/containers/Evaluations2'
+import { Default } from './student/containers/Default'
+import { AfterPreTest } from './student/containers/AfterPreTest'
+import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
+import { Instructions } from './student/containers/Instructions'
+import { InstructionsEnd } from './student/containers/InstructionsEnd'
+import { Evaluations } from './student/containers/Evaluations'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 
 import '../scss/App.scss'
 

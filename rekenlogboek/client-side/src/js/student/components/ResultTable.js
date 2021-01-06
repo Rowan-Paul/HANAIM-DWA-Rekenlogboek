@@ -8,59 +8,52 @@ import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
 
 export default function ResultText(props) {
 	const getTableRows = () => {
-		{
-			console.log(props.answers)
+		let columnAnswers = []
+		props.answers.forEach(answer => {
+			if (answer.columnPosition === props.columnPosition) {
+				columnAnswers.push(answer)
+			}
+		})
 
-			let columnAnswers = []
-			props.answers.forEach(answer => {
-				if (answer.columnPosition === props.columnPosition) {
-					columnAnswers.push(answer)
-				}
-			})
-
-			console.log(columnAnswers)
-			console.log(props.results)
-
-			if (columnAnswers.length > 0)
-				return props.results.map(result => {
-					const answer = columnAnswers.find(
-						a => a.goalPosition === result.position
-					)
-					if (answer !== undefined) {
-						if (answer.answer.value === 'default') {
-							result.answer = 'Ik weet het nog niet'
-						} else if (answer.answer.value === 'Happy') {
-							result.answer = (
-								<div>
-									<img src={Happy} alt="Happy" />
-								</div>
-							)
-						} else if (answer.answer.value === 'Sceptic') {
-							result.answer = (
-								<div>
-									<img src={Sceptic} alt="Sceptic" />
-								</div>
-							)
-						} else if (answer.answer.value === 'Sad') {
-							result.answer = (
-								<div>
-									<img src={Sad} alt="Sad" />
-								</div>
-							)
-						} else {
-							result.answer = answer.answer.value
-						}
+		if (columnAnswers.length > 0)
+			return props.results.map(result => {
+				const answer = columnAnswers.find(
+					a => a.goalPosition === result.position
+				)
+				if (answer !== undefined) {
+					if (answer.answer.value === 'default') {
+						result.answer = 'Ik weet het nog niet'
+					} else if (answer.answer.value === 'Happy') {
+						result.answer = (
+							<div>
+								<img src={Happy} alt="Happy" />
+							</div>
+						)
+					} else if (answer.answer.value === 'Sceptic') {
+						result.answer = (
+							<div>
+								<img src={Sceptic} alt="Sceptic" />
+							</div>
+						)
+					} else if (answer.answer.value === 'Sad') {
+						result.answer = (
+							<div>
+								<img src={Sad} alt="Sad" />
+							</div>
+						)
+					} else {
+						result.answer = answer.answer.value
 					}
+				}
 
-					return (
-						<div key={result.title} className="row">
-							<div className="cell">{result.title}</div>
-							<div className="cell">{result.description}</div>
-							<div className="cell">{result.answer}</div>
-						</div>
-					)
-				})
-		}
+				return (
+					<div key={result.title} className="row">
+						<div className="cell">{result.title}</div>
+						<div className="cell">{result.description}</div>
+						<div className="cell">{result.answer}</div>
+					</div>
+				)
+			})
 	}
 
 	return (
