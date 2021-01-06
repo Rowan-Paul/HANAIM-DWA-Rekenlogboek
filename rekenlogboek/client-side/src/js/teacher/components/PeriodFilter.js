@@ -5,15 +5,12 @@ import '../../../scss/teacher/components/PeriodFilter.scss'
 import {
 	getFilterOptions,
 	getPeriods,
-	changeSelectedPeriod
+	changeSelectedPeriod,
+	changeSelectedSchoolYear
 } from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
 
 function PeriodFilter(props) {
-	const [selectedSchoolYear, setSelectedSchoolYear] = useState(
-		props.selectedYear
-	)
-
 	useEffect(() => {
 		props.getFilterOptions()
 	}, [])
@@ -49,7 +46,7 @@ function PeriodFilter(props) {
 	}
 
 	const updateSelectedSchoolYear = schoolYear => {
-		setSelectedSchoolYear(schoolYear)
+		props.changeSelectedYear(schoolYear)
 		props.getPeriodsBySchoolYear({ schoolYear })
 	}
 
@@ -63,7 +60,7 @@ function PeriodFilter(props) {
 			<div>Leerjaar:</div>
 			<select
 				id="select-school-year"
-				value={selectedSchoolYear}
+				value={props.selectedYear}
 				onChange={e => {
 					updateSelectedSchoolYear(e.target.value)
 				}}
@@ -82,7 +79,7 @@ function PeriodFilter(props) {
 			<Button
 				color="blue"
 				handler={() =>
-					props.filterClick(selectedSchoolYear, props.selectedPeriod)
+					props.filterClick(props.selectedYear, props.selectedPeriod)
 				}
 				value="Kies blok"
 			/>
@@ -106,7 +103,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getFilterOptions: () => dispatch(getFilterOptions),
 		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload)),
-		changeSelectedPeriod: payload => dispatch(changeSelectedPeriod(payload))
+		changeSelectedPeriod: payload => dispatch(changeSelectedPeriod(payload)),
+		changeSelectedYear: payload => dispatch(changeSelectedSchoolYear(payload))
 	}
 }
 
