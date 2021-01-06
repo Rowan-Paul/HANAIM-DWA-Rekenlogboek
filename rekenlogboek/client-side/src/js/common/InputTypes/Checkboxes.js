@@ -12,9 +12,7 @@ function Checkboxes(props) {
 		const givenAnswer = props.answer?.answer.value
 		let splittedValues = []
 
-		if (givenAnswer) {
-			splittedValues = givenAnswer.split(',')
-		}
+		if (givenAnswer) splittedValues = givenAnswer.split(',')
 
 		switch (props.state) {
 			// If active
