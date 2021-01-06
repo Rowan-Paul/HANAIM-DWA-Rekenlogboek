@@ -110,7 +110,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		modalHide: () => dispatch(modalHide()),
-		getLogbookData: payload => dispatch(getActiveLogbook(payload)),
+		getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
 		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
 		updateActiveGoal: payload => dispatch(updateActiveGoal(payload))
 	}

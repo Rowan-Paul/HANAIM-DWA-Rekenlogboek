@@ -2,29 +2,29 @@ import * as types from './types'
 
 const INITIAL_STATE = {
 	schoolYears: [],
-	activeSchoolYear: undefined,
-	selectedSchoolYear: undefined,
+	activeSchoolYear: undefined, //which school year has a period with a currentPhase !== notVisible
+	selectedSchoolYear: undefined, //currently selected year in the filter
 	periods: [],
-	selectedPeriod: undefined,
 	activePeriod: undefined, //which period has a currentPhase !== notVisible
+	selectedPeriod: undefined, //currently selected period in the filter
 	currentLogbook: {}
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case types.GET_ACTIVE_LOGBOOK:
-			return {
-				...state,
-				currentLogbook: action.payload
-			}
 		case types.GET_FILTER_OPTIONS:
-			console.log(action.payload)
 			return {
 				...state,
 				schoolYears: action.payload.schoolYears,
+				activeSchoolYear: action.payload.activeSchoolYear,
 				periods: action.payload.periods,
 				activePeriod: action.payload.activePeriod,
-				activeSchoolYear: action.payload.activeSchoolYear
+				currentLogbook: action.payload.currentLogbook
+			}
+		case types.GET_SELECTED_LOGBOOK:
+			return {
+				...state,
+				currentLogbook: action.payload
 			}
 		case types.UPDATE_CURRENT_PHASE:
 			return {

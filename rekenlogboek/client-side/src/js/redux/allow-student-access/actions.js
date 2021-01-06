@@ -4,10 +4,6 @@ const fetchPeriods = (payload, getState) => {
 	const group = getState().main.user.groups[1]
 	const groupNumber = group.substring(group.indexOf(' ') + 1)
 
-	console.log(
-		'fetch to:',
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`
-	)
 	return fetch(
 		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`,
 		{
@@ -46,6 +42,9 @@ export const getFilterOptions = (dispatch, getState) => {
 			fetchActiveLogbook(getState)
 				.then(response => response.json())
 				.then(activeLogbook => {
+					//the current logbook will change whenever the filter button gets pressed. the active period and schoolYear will only update when an activePhase changes.
+					//since this action is kicked off when loading the page this will be the only time where all 3 of them change simultaneously.
+					reducerPayload.currentLogbook = activeLogbook
 					reducerPayload.activePeriod = activeLogbook.period
 					reducerPayload.activeSchoolYear = activeLogbook.year
 					console.log(activeLogbook)
@@ -63,7 +62,7 @@ export const getFilterOptions = (dispatch, getState) => {
 		})
 }
 
-export const getActiveLogbook = payload => (dispatch, getState) => {
+export const getSelectedLogbook = payload => (dispatch, getState) => {
 	console.log(payload)
 	try {
 		const group = getState().main.user.groups[1]
@@ -74,7 +73,7 @@ export const getActiveLogbook = payload => (dispatch, getState) => {
 			.then(response => response.json())
 			.then(payload => {
 				return dispatch({
-					type: types.GET_ACTIVE_LOGBOOK,
+					type: types.GET_SELECTED_LOGBOOK,
 					payload
 				})
 			})
