@@ -50,8 +50,10 @@ function InstructionsEndUI(props) {
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
+			<div className="buttons">
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				</div>
 			</div>
 		</div>
 	)

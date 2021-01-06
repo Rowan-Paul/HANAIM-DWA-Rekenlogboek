@@ -69,8 +69,10 @@ function EvaluationsUI(props) {
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => nextPage()} />
+			<div className="buttons">
+				<div className="next button">
+					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+				</div>
 			</div>
 		</div>
 	)

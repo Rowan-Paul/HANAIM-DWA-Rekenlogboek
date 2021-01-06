@@ -96,11 +96,13 @@ function InstructionsUI(props) {
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
-			</div>
-			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => nextPage()} />
+			<div className="buttons">
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				</div>
+				<div className="next button">
+					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+				</div>
 			</div>
 		</div>
 	)
