@@ -1,56 +1,72 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
-import Jumbotron from '../../common/Jumbotron'
-import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function InstructionsEnd() {
-	const saveAnswers = () => {}
+import Jumbotron from '../../common/Jumbotron'
+import Button from '../../common/Button'
 
-	const results = [
-		{ goalCount: 'Doel 1', goalName: 'Optellen', answer: 'Geen instructie' },
-		{
-			goalCount: 'Doel 2',
-			goalName: 'Breuken',
-			answer: 'Geen instructie'
-		},
-		{
-			goalCount: 'Doel 3',
-			goalName: 'Keersommen',
-			answer: 'Geen instructie'
-		}
-	]
+function InstructionsEndUI(props) {
+	const previousPage = () => {
+		props.history.push('/student/instruction')
+	}
+
+	const getProgressBarNumbers = () => {
+		const numbers = props.answers.map(answer => {
+			if (answer.columnPosition === 2) {
+				return answer.goalPosition
+			}
+		})
+		return numbers.filter(number => number !== undefined)
+	}
 
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
+			<ProgressBar
+				itemCount={props.allGoals.length}
+				done={getProgressBarNumbers()}
+			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
 						<ResultText
 							title="Je bent klaar!"
-							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							description="De door jou ingevoerde antwoorden zijn naar jouw leraar verstuurd."
 							image=""
 						/>
 					</div>
 					<div className="right-side">
 						<ResultTable
-							results={results}
-							description="Dit zijn de door jou ingevulde antwoorden:"
+							results={props.allGoals}
+							answers={props.answers}
+							columnPosition={2}
+							description="Dit heb je bij je leerdoelen beantwoord:"
 						/>
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="next button">
-				<Button color="blue" value="Afsluiten" handler={() => saveAnswers()} />
+			<div className="buttons">
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				</div>
 			</div>
 		</div>
 	)
 }
 
-export default withRouter(InstructionsEnd)
+function mapStateToProps(state) {
+	return {
+		answers: state.studentLogbook.studentlogbook.answers,
+		allGoals: state.studentLogbook.logbook.goals
+	}
+}
+
+export const InstructionsEnd = connect(
+	mapStateToProps,
+	null
+)(withRouter(InstructionsEndUI))

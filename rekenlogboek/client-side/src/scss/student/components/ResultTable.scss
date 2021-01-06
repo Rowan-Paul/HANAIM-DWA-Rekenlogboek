@@ -17,6 +17,8 @@
 		border: 1px solid $gray;
 		display: flex;
 		flex-direction: column;
+		height: 16rem;
+		overflow-y: scroll;
 
 		.row {
 			display: flex;

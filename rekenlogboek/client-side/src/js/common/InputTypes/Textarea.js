@@ -1,4 +1,5 @@
 import React from 'react'
+import shortid from 'shortid'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -12,8 +13,12 @@ function Textarea(props) {
 				return (
 					<textarea
 						className="Textarea"
+						key={shortid.generate()}
 						placeholder="Omschrijving toevoegen"
-						onChange={() => alert('Redux functie AUB')}
+						defaultValue={props.answer?.answer.value}
+						onBlur={e => {
+							props.changeHandler(e.target.value)
+						}}
 					></textarea>
 				)
 

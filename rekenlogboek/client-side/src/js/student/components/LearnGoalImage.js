@@ -8,7 +8,9 @@ export default function LearnGoalImage(props) {
 			<h2>{props?.title}</h2>
 			<p>{props?.description}</p>
 			<img
-				src={'http://localhost:3000' + props.src}
+				src={
+					process.env.REACT_APP_SERVER_ADDRESS + '/uploads/goals/' + props.src
+				}
 				alt="leerdoel afbeelding"
 			/>
 		</div>

@@ -9,14 +9,21 @@ import Explanation from './Explanation'
 
 function Checkboxes(props) {
 	const stateHandler = () => {
+		const givenAnswer = props.answer?.answer.value
+		let splittedValues = []
+
+		if (givenAnswer) splittedValues = givenAnswer.split(',')
+
 		switch (props.state) {
 			// If active
 			case props.inputStates.inUse:
 				return props.options.map((option, i) => (
 					<li className="inUse" key={shortid.generate()}>
 						<input
-							checked={props.answer?.answer.value === option}
-							onChange={() => alert('Gebruik hier AUB een redux functie!')}
+							checked={splittedValues.includes(option)}
+							onChange={e => {
+								props.changeHandler(e.target.value)
+							}}
 							value={option}
 							type="checkbox"
 						/>
@@ -41,7 +48,7 @@ function Checkboxes(props) {
 				return props.options.map((option, i) => (
 					<li className="inPreview" key={shortid.generate()}>
 						<input
-							checked={props.answer?.answer.value === option}
+							checked={splittedValues.includes(option)}
 							value={option}
 							type="checkbox"
 							disabled
@@ -64,6 +71,7 @@ function Checkboxes(props) {
 				<Explanation
 					state={props.state}
 					text={props.answer?.answer.explanation}
+					changeHandler={props.explanationChangeHandler}
 				/>
 			)
 		}

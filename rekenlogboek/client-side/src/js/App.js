@@ -36,14 +36,13 @@ import NoAccess from '../js/no-access/NoAccess'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
-import Default from './student/containers/Default'
-import defaultStudentPage from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
-import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
-import InstructionsEnd from './student/containers/InstructionsEnd'
-import EvaluationsEnd from './student/containers/EvaluationsEnd'
-import Instructions from './student/containers/Instructions'
-import Evaluations from './student/containers/Evaluations'
+import { Default } from './student/containers/Default'
+import { AfterPreTest } from './student/containers/AfterPreTest'
+import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
+import { Instructions } from './student/containers/Instructions'
+import { InstructionsEnd } from './student/containers/InstructionsEnd'
+import { Evaluations } from './student/containers/Evaluations'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 
 import '../scss/App.scss'
 import AuthMiddleware from './AuthMiddleware'
@@ -159,20 +158,16 @@ function App() {
 							path="/student/pretest/done"
 							component={AfterPreTestEnd}
 						/>
+						<Route exact path="/student/instruction" component={Instructions} />
 						<Route
 							exact
-							path="/student/instructions"
-							component={Instructions}
-						/>
-						<Route
-							exact
-							path="/student/instructions/done"
+							path="/student/instruction/done"
 							component={InstructionsEnd}
 						/>
 						<Route exact path="/student/evaluation" component={Evaluations} />
 						<Route
 							exact
-							path="/student/evaluation/end"
+							path="/student/evaluation/done"
 							component={EvaluationsEnd}
 						/>
 

@@ -74,6 +74,7 @@ function MicrosoftButtonUI(props) {
 			//(When in the teams app) Checks if the user that's logged in on the website is the same as the user logged in on the teams app
 			if (window.parent !== window.self) {
 				if (props.context.loginHint !== user.userPrincipalName) {
+					window.localStorage.clear()
 					throw new Error('Logged in as two different users')
 				}
 			}

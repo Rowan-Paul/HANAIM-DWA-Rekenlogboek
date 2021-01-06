@@ -1,4 +1,5 @@
 import React from 'react'
+import shortid from 'shortid'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -11,10 +12,13 @@ function Explanation(props) {
 					<li className="Explanation">
 						<textarea
 							type="text"
+							key={shortid.generate()}
 							name="explanation"
 							placeholder="Omdat..."
-							value={props.text}
-							onChange={() => alert('Gebruik hier AUB redux')}
+							defaultValue={props.text}
+							onBlur={e => {
+								props.changeHandler(e.target.value)
+							}}
 						/>
 					</li>
 				)
