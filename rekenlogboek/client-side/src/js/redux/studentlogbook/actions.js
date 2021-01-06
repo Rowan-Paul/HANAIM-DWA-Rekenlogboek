@@ -69,13 +69,14 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 ) => {
 	const currentAnswers = [...getState().studentLogbook.studentlogbook.answers]
 
+	//Checks if there was already an answer given for this goalposition and columnposition combination
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		// vervang al eerder gegeven antwoord voor nieuwe
+		// Replaces a given answer for a new answer
 		const newAnswers = currentAnswers.map(a => {
 			if (
 				a.columnPosition === columnPosition &&
@@ -95,6 +96,7 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			return a
 		})
 
+		// we don't want to save 'ik weet het niet' answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === 'default') {
 				delete a.answer.value
@@ -107,7 +109,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 		})
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
-
 		const body = {
 			answers: filterAnswers
 		}
@@ -128,14 +129,16 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (
+	}
+	// Checks if there was not an answer already given for this goalposition and columnposition combination
+	else if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		// Adds a new answer to the answers array
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
 			goalPosition: goalPosition,
@@ -145,6 +148,7 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			}
 		})
 
+		// we don't want to save 'ik weet het niet' answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === 'default') {
 				delete a.answer.value
@@ -157,7 +161,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 		})
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
-
 		const body = {
 			answers: filterAnswers
 		}
@@ -178,8 +181,10 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (currentAnswers.length < 1) {
-		// er is nog geen antwoord in de database
+	}
+	// Checks if there wasn't any answer given yet
+	else if (currentAnswers.length < 1) {
+		// Make a new answers array
 		const newAnswers = [
 			{
 				goalPosition: goalPosition,
@@ -190,6 +195,7 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			}
 		]
 
+		// we don't want to save 'ik weet het niet' answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === 'default') {
 				delete a.answer.value
@@ -202,7 +208,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 		})
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
-
 		const body = {
 			answers: filterAnswers
 		}
@@ -244,14 +249,14 @@ export const saveAnswerCheck = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
+	//Checks if there was already an answer given for this goalposition and columnposition combination
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		// vervang al eerder gegeven antwoord voor nieuwe
-
+		// Replaces a given answer for a new answer
 		const newAnswers = currentAnswers.map(a => {
 			if (
 				a.columnPosition === columnPosition &&
@@ -261,19 +266,23 @@ export const saveAnswerCheck = (
 				let splittedValues
 
 				if (currentAnswerValue) {
+					// if answer has a value
 					splittedValues = currentAnswerValue.split(',')
 
 					if (splittedValues.includes(answerValue)) {
-						//selected value zit al in de db
+						//selected value is already in the db
 
+						//remove the answer from the array
 						const index = splittedValues.indexOf(answerValue)
 						splittedValues.splice(index, 1)
 					} else if (!splittedValues.includes(answerValue)) {
-						// selected value zit nog niet in db
+						// selected value is not in the db yet
 
+						//add the answer to the array
 						splittedValues.push(answerValue)
 					}
 				} else {
+					// if answer doesn't have a value create new array with the answer
 					splittedValues = [answerValue]
 				}
 
@@ -284,6 +293,7 @@ export const saveAnswerCheck = (
 			return a
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -315,14 +325,16 @@ export const saveAnswerCheck = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (
+	}
+	// Checks if there was not an answer already given for this goalposition and columnposition combination
+	else if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		// Adds a new answer to the answers array
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
 			goalPosition: goalPosition,
@@ -332,6 +344,7 @@ export const saveAnswerCheck = (
 			}
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -363,8 +376,10 @@ export const saveAnswerCheck = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (currentAnswers.length < 1) {
-		// er is nog geen antwoord in de database
+	}
+	// Checks if there wasn't any answer given yet
+	else if (currentAnswers.length < 1) {
+		// Make a new answers array
 		const newAnswers = [
 			{
 				goalPosition: goalPosition,
@@ -375,6 +390,7 @@ export const saveAnswerCheck = (
 			}
 		]
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -427,14 +443,14 @@ export const saveAnswerText = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
+	//Checks if there was already an answer given for this goalposition and columnposition combination
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		// vervang al eerder gegeven antwoord voor nieuwe
-
+		// Replaces a given answer for a new answer
 		const newAnswers = currentAnswers.map(a => {
 			if (
 				a.columnPosition === columnPosition &&
@@ -447,6 +463,7 @@ export const saveAnswerText = (
 			return a
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -478,14 +495,16 @@ export const saveAnswerText = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (
+	}
+	// Checks if there was not an answer already given for this goalposition and columnposition combination
+	else if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		// Adds a new answer to the answers array
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
 			goalPosition: goalPosition,
@@ -495,6 +514,7 @@ export const saveAnswerText = (
 			}
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -526,8 +546,10 @@ export const saveAnswerText = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (currentAnswers.length < 1) {
-		// er is nog geen antwoord in de database
+	}
+	// Checks if there wasn't any answer given yet
+	else if (currentAnswers.length < 1) {
+		// Make a new answers array
 		const newAnswers = [
 			{
 				goalPosition: goalPosition,
@@ -538,6 +560,7 @@ export const saveAnswerText = (
 			}
 		]
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -590,14 +613,14 @@ export const saveExplanation = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
+	//Checks if there was already an answer given for this goalposition and columnposition combination
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		// vervang al eerder gegeven antwoord voor nieuwe
-
+		// Replaces a given answer for a new answer
 		const newAnswers = currentAnswers.map(a => {
 			if (
 				a.columnPosition === columnPosition &&
@@ -610,6 +633,7 @@ export const saveExplanation = (
 			return a
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -641,14 +665,16 @@ export const saveExplanation = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (
+	}
+	// Checks if there was not an answer already given for this goalposition and columnposition combination
+	else if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition !== columnPosition || a.goalPosition !== goalPosition
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
+		// Adds a new answer to the answers array
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
 			goalPosition: goalPosition,
@@ -658,6 +684,7 @@ export const saveExplanation = (
 			}
 		})
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
@@ -689,8 +716,10 @@ export const saveExplanation = (
 				})
 			})
 			.catch(error => console.log(error))
-	} else if (currentAnswers.length < 1) {
-		// er is nog geen antwoord in de database
+	}
+	// Checks if there wasn't any answer given yet
+	else if (currentAnswers.length < 1) {
+		// Make a new answers array
 		const newAnswers = [
 			{
 				goalPosition: goalPosition,
@@ -701,6 +730,7 @@ export const saveExplanation = (
 			}
 		]
 
+		// we don't want to save empty answers into the database so we filter them out
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
