@@ -32,7 +32,7 @@ function StudentUI(props) {
 					props.history.push('/student/pretest')
 					break
 
-				case 'instruction':
+				case 'instructions':
 					props.history.push('/student/instruction')
 					break
 
