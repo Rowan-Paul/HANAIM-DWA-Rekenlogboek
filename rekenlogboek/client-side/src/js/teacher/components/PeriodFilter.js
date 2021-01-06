@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import '../../../scss/teacher/components/PeriodFilter.scss'
-import classNames from 'classnames'
 
 import {
 	getFilterOptions,
@@ -12,7 +11,7 @@ import Button from '../../common/Button'
 
 function PeriodFilter(props) {
 	const [selectedSchoolYear, setSelectedSchoolYear] = useState(
-		props.currentSchoolYear
+		props.selectedYear
 	)
 
 	useEffect(() => {
@@ -95,7 +94,8 @@ const mapStateToProps = state => {
 	const studentAccess = state.allowStudentAccess
 	return {
 		schoolYears: studentAccess.schoolYears,
-		currentSchoolYear: studentAccess.currentSchoolYear,
+		activeSchoolYear: studentAccess.activeSchoolYear,
+		selectedYear: studentAccess.selectedYear,
 		periods: studentAccess.periods,
 		activePeriod: studentAccess.activePeriod,
 		selectedPeriod: studentAccess.selectedPeriod

@@ -47,10 +47,12 @@ export const getFilterOptions = (dispatch, getState) => {
 				.then(response => response.json())
 				.then(activeLogbook => {
 					reducerPayload.activePeriod = activeLogbook.period
+					reducerPayload.activeYear = activeLogbook.year
 					fetchPeriods({ schoolYear: activeLogbook.year }, getState)
 						.then(response => response.json())
 						.then(periods => {
 							reducerPayload.periods = periods
+							console.log(reducerPayload)
 							return dispatch({
 								type: types.GET_FILTER_OPTIONS,
 								payload: { ...reducerPayload }
@@ -136,6 +138,13 @@ export const getPeriods = payload => (dispatch, getState) => {
 export const changeSelectedPeriod = payload => {
 	return {
 		type: types.CHANGE_SELECTED_PERIOD,
+		payload
+	}
+}
+
+export const changeSelectedSchoolYear = payload => {
+	return {
+		type: types.CHANGE_SELECTED_SCHOOL_YEAR,
 		payload
 	}
 }
