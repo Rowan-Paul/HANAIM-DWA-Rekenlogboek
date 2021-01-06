@@ -20,7 +20,7 @@ export const fetchCurrentLogbook = () => (dispatch, getState) => {
 
 	const URI = `year/${year}/group/${group}/period/${period}`
 
-	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/${URI}', {
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/logbook/${URI}`, {
 		method: 'GET'
 	})
 		.then(response => response.json())
