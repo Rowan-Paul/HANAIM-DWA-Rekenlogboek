@@ -6,12 +6,12 @@ import {
 	DECREMENT_CURRENT_GOAL
 } from './types'
 
+// Loads a logbook
 export const loadLogbook = payload => dispatch => {
-	//Groep 7 -> select everything after the space -> 7
+	// Groep 7 -> select everything after the space -> 7
 	let groupNumber = payload.substring(payload.indexOf(' ') + 1)
 
-	//First fetch get's the phase of the logbook & LogbookID
-	//Second fetch get's the studentlogbookID and it's answers
+	// Fetches the logbook based on group number
 	fetch(
 		process.env.REACT_APP_SERVER_ADDRESS + `/logbook/groups/${groupNumber}`,
 		{
@@ -22,22 +22,25 @@ export const loadLogbook = payload => dispatch => {
 		.then(response => {
 			dispatch({
 				type: LOAD_LOGBOOK,
-				response // Called it response (from API) to distinguish it from payloads (from app)
+				response
 			})
 		})
 		.catch(error => console.log(error))
 }
 
+//Increments the current goal
 export const incrementCurrentGoal = () => {
 	return { type: INCREMENT_CURRENT_GOAL }
 }
 
+//Decrements the current goal
 export const decrementCurrentGoal = () => {
 	return {
 		type: DECREMENT_CURRENT_GOAL
 	}
 }
 
+//Loads a studentlogbook based on the loaded logbook and the logged in student
 export const loadStudentLogbook = () => (dispatch, getState) => {
 	const body = {
 		logbookID: getState().studentLogbook.logbook._id,
@@ -59,18 +62,12 @@ export const loadStudentLogbook = () => (dispatch, getState) => {
 		.catch(error => console.log(error))
 }
 
+//Saves given answers from radiobuttons
 export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 	dispatch,
 	getState
 ) => {
-	console.log(answerValue)
-	console.log(goalPosition)
-	console.log(columnPosition)
-
 	const currentAnswers = [...getState().studentLogbook.studentlogbook.answers]
-
-	console.log(currentAnswers)
-	console.log(getState().studentLogbook.studentlogbook.answers)
 
 	if (
 		currentAnswers.filter(
@@ -78,7 +75,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		console.log('eentje')
 		// vervang al eerder gegeven antwoord voor nieuwe
 		const newAnswers = currentAnswers.map(a => {
 			if (
@@ -99,8 +95,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			return a
 		})
 
-		console.log(newAnswers)
-
 		newAnswers.map(a => {
 			if (a.answer.value === 'default') {
 				delete a.answer.value
@@ -108,14 +102,9 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			return a
 		})
 
-		console.log(newAnswers)
-
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
 		})
-
-		console.log(filterAnswers)
-		console.log(getState().studentLogbook.studentlogbook.answers)
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
 
@@ -146,7 +135,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		console.log('tweetje')
 		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
@@ -164,13 +152,9 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			return a
 		})
 
-		console.log(newAnswers)
-
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
 		})
-
-		console.log(newAnswers)
 
 		const logbookid = getState().studentLogbook.studentlogbook._id
 
@@ -195,7 +179,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			})
 			.catch(error => console.log(error))
 	} else if (currentAnswers.length < 1) {
-		console.log('drietje')
 		// er is nog geen antwoord in de database
 		const newAnswers = [
 			{
@@ -213,8 +196,6 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -245,15 +226,12 @@ export const saveAnswerRadio = (answerValue, goalPosition, columnPosition) => (
 	}
 }
 
+//Saves given answers from checkboxes
 export const saveAnswerCheck = (
 	answerValue,
 	goalPosition,
 	columnPosition
 ) => async (dispatch, getState) => {
-	console.log(answerValue)
-	console.log(goalPosition)
-	console.log(columnPosition)
-
 	const logbookid = getState().studentLogbook.studentlogbook._id
 
 	const currentAnswers = await fetch(
@@ -266,15 +244,12 @@ export const saveAnswerCheck = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
-	console.log(currentAnswers)
-
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		console.log('eentje')
 		// vervang al eerder gegeven antwoord voor nieuwe
 
 		const newAnswers = currentAnswers.map(a => {
@@ -287,17 +262,14 @@ export const saveAnswerCheck = (
 
 				if (currentAnswerValue) {
 					splittedValues = currentAnswerValue.split(',')
-					console.log(splittedValues)
 
 					if (splittedValues.includes(answerValue)) {
 						//selected value zit al in de db
-						console.log('include')
 
 						const index = splittedValues.indexOf(answerValue)
 						splittedValues.splice(index, 1)
 					} else if (!splittedValues.includes(answerValue)) {
 						// selected value zit nog niet in db
-						console.log('not include')
 
 						splittedValues.push(answerValue)
 					}
@@ -305,24 +277,19 @@ export const saveAnswerCheck = (
 					splittedValues = [answerValue]
 				}
 
-				console.log(splittedValues)
-				console.log(splittedValues.toString())
-
 				a.answer = { ...a.answer, value: splittedValues.toString() }
 				return a
 			}
 
 			return a
 		})
-		console.log(newAnswers)
+
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -355,7 +322,6 @@ export const saveAnswerCheck = (
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		console.log('tweetje')
 		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
@@ -372,8 +338,6 @@ export const saveAnswerCheck = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -400,7 +364,6 @@ export const saveAnswerCheck = (
 			})
 			.catch(error => console.log(error))
 	} else if (currentAnswers.length < 1) {
-		console.log('drietje')
 		// er is nog geen antwoord in de database
 		const newAnswers = [
 			{
@@ -418,8 +381,6 @@ export const saveAnswerCheck = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -448,15 +409,12 @@ export const saveAnswerCheck = (
 	}
 }
 
+//Saves given answers from textareas
 export const saveAnswerText = (
 	answerValue,
 	goalPosition,
 	columnPosition
 ) => async (dispatch, getState) => {
-	console.log(answerValue)
-	console.log(goalPosition)
-	console.log(columnPosition)
-
 	const logbookid = getState().studentLogbook.studentlogbook._id
 
 	const currentAnswers = await fetch(
@@ -469,15 +427,12 @@ export const saveAnswerText = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
-	console.log(currentAnswers)
-
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		console.log('eentje')
 		// vervang al eerder gegeven antwoord voor nieuwe
 
 		const newAnswers = currentAnswers.map(a => {
@@ -491,7 +446,6 @@ export const saveAnswerText = (
 
 			return a
 		})
-		console.log(newAnswers)
 
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
@@ -499,8 +453,6 @@ export const saveAnswerText = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -533,7 +485,6 @@ export const saveAnswerText = (
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		console.log('tweetje')
 		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
@@ -544,16 +495,12 @@ export const saveAnswerText = (
 			}
 		})
 
-		console.log(newAnswers)
-
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -580,7 +527,6 @@ export const saveAnswerText = (
 			})
 			.catch(error => console.log(error))
 	} else if (currentAnswers.length < 1) {
-		console.log('drietje')
 		// er is nog geen antwoord in de database
 		const newAnswers = [
 			{
@@ -598,8 +544,6 @@ export const saveAnswerText = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -628,15 +572,12 @@ export const saveAnswerText = (
 	}
 }
 
+//Saves given explanations
 export const saveExplanation = (
 	newExplanationValue,
 	goalPosition,
 	columnPosition
 ) => async (dispatch, getState) => {
-	console.log(newExplanationValue)
-	console.log(goalPosition)
-	console.log(columnPosition)
-
 	const logbookid = getState().studentLogbook.studentlogbook._id
 
 	const currentAnswers = await fetch(
@@ -649,15 +590,12 @@ export const saveExplanation = (
 		.then(response => response.answers)
 		.catch(error => console.log(error))
 
-	console.log(currentAnswers)
-
 	if (
 		currentAnswers.filter(
 			a =>
 				a.columnPosition === columnPosition && a.goalPosition === goalPosition
 		).length > 0
 	) {
-		console.log('eentje')
 		// vervang al eerder gegeven antwoord voor nieuwe
 
 		const newAnswers = currentAnswers.map(a => {
@@ -671,7 +609,6 @@ export const saveExplanation = (
 
 			return a
 		})
-		console.log(newAnswers)
 
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
@@ -679,8 +616,6 @@ export const saveExplanation = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -713,7 +648,6 @@ export const saveExplanation = (
 		).length > 0 &&
 		currentAnswers.length > 0
 	) {
-		console.log('tweetje')
 		// antwoord voor betreffende goal position en columnposition is nog niet eerder gegeven
 		const newAnswers = [...currentAnswers]
 		newAnswers.push({
@@ -724,16 +658,12 @@ export const saveExplanation = (
 			}
 		})
 
-		console.log(newAnswers)
-
 		newAnswers.map(a => {
 			if (a.answer.value === '') {
 				delete a.answer.value
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
@@ -760,7 +690,6 @@ export const saveExplanation = (
 			})
 			.catch(error => console.log(error))
 	} else if (currentAnswers.length < 1) {
-		console.log('drietje')
 		// er is nog geen antwoord in de database
 		const newAnswers = [
 			{
@@ -778,8 +707,6 @@ export const saveExplanation = (
 			}
 			return a
 		})
-
-		console.log(newAnswers)
 
 		const filterAnswers = newAnswers.filter(answer => {
 			return answer.answer.value || answer.answer.explanation
