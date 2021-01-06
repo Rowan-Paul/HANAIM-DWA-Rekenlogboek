@@ -74,8 +74,7 @@ router.get('/groups/:group', (req, res) => {
 		{
 			group: req.params.group,
 			currentPhase: { $ne: 'notVisible' }
-		},
-		'_id currentPhase year period'
+		}
 	)
 		.then(response => {
 			console.log(response)
