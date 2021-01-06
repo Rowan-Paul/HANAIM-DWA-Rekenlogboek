@@ -51,6 +51,7 @@ function EvaluationsUI(props) {
 				<div className="learn-goal-container">
 					<div className="left-side">
 						<LearnGoal
+							currentGoal={props.currentGoal}
 							goal={props.goals[props.currentGoal].title}
 							description={props.goals[props.currentGoal].description}
 						/>
