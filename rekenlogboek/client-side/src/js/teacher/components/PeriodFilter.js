@@ -46,21 +46,32 @@ function PeriodFilter(props) {
 	}
 
 	const updateSelectedSchoolYear = schoolYear => {
-		props.changeSelectedYear(schoolYear)
+		props.changeSelectedSchoolYear(schoolYear)
 		props.getPeriodsBySchoolYear({ schoolYear })
 	}
 
 	const updateSelectedPeriod = period => {
-		console.log(period)
 		props.changeSelectedPeriod(period)
 	}
 
+	console.log(
+		'all',
+		props.schoolYears,
+		'select',
+		props.selectedSchoolYear,
+		'active',
+		props.activeSchoolYear
+	)
 	return (
 		<div className="period-filter">
 			<div>Leerjaar:</div>
 			<select
 				id="select-school-year"
-				value={props.selectedYear}
+				value={
+					props.selectedSchoolYear !== undefined
+						? props.selectedSchoolYear
+						: props.activeSchoolYear
+				}
 				onChange={e => {
 					updateSelectedSchoolYear(e.target.value)
 				}}
@@ -79,7 +90,7 @@ function PeriodFilter(props) {
 			<Button
 				color="blue"
 				handler={() =>
-					props.filterClick(props.selectedYear, props.selectedPeriod)
+					props.filterClick(props.selectedSchoolYear, props.selectedPeriod)
 				}
 				value="Kies blok"
 			/>
@@ -92,7 +103,7 @@ const mapStateToProps = state => {
 	return {
 		schoolYears: studentAccess.schoolYears,
 		activeSchoolYear: studentAccess.activeSchoolYear,
-		selectedYear: studentAccess.selectedYear,
+		selectedSchoolYear: studentAccess.selectedSchoolYear,
 		periods: studentAccess.periods,
 		activePeriod: studentAccess.activePeriod,
 		selectedPeriod: studentAccess.selectedPeriod
@@ -104,7 +115,8 @@ const mapDispatchToProps = dispatch => {
 		getFilterOptions: () => dispatch(getFilterOptions),
 		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload)),
 		changeSelectedPeriod: payload => dispatch(changeSelectedPeriod(payload)),
-		changeSelectedYear: payload => dispatch(changeSelectedSchoolYear(payload))
+		changeSelectedSchoolYear: payload =>
+			dispatch(changeSelectedSchoolYear(payload))
 	}
 }
 
