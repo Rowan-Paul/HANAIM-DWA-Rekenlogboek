@@ -69,7 +69,7 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<PeriodFilter filterClick={filterClick} />
+			{props.currentLogbook && <PeriodFilter filterClick={filterClick} />}
 			<Jumbotron>
 				{props.currentLogbook &&
 				Object.keys(props.currentLogbook).length !== 0 ? (
@@ -84,14 +84,19 @@ function AllowStudentAccess(props) {
 				) : (
 					<div className="no-logbook-found">
 						<h1>Geen logboek gevonden</h1>
-						<p>
-							Kies rechtsbovenin een leerjaar en blok om de opties voor een
-							logboek in te laden.
-						</p>
-						<p>
-							Mocht de filter leeg zijn, neem dan contact met een
-							logboekontwerper op.
-						</p>
+						{props.currentLogbook ? (
+							<p>
+								Kies rechtsbovenin een leerjaar en blok om de opties voor een
+								logboek in te laden.
+							</p>
+						) : (
+							<span>
+								<p>
+									Neem contact op met een logboekontwerper om er een aan te
+									maken voor uw groep.
+								</p>
+							</span>
+						)}
 					</div>
 				)}
 			</Jumbotron>
