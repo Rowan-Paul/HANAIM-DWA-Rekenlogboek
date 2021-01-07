@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { LogbookRows } from '../../../common/logbook/LogbookRows'
+import { io } from 'socket.io-client'
 
+import Button from '../../../common/Button'
 import Jumbotron from '../../../common/Jumbotron'
 import LogbookHeader from '../../../common/logbook/LogbookHeader'
 import LogbookFrame from '../../../common/logbook/LogbookFrame'
 import TopBar from '../../../common/logbook/TopBar'
 
 import * as actions from '../../../redux/group-overview/actions'
-
-import Button from '../../../common/Button'
 
 import '../../../../scss/teacher/containers/group-overview/Answers.scss'
 
@@ -26,6 +26,13 @@ export const Answers = props => {
 	const [answers, setAnswers] = useState(props.answers)
 	const [logbook, setLogbook] = useState(props.logbook)
 	const [loaded, isLoaded] = useState(true)
+
+	useEffect(() => {
+		const socket = io('ws://localhost:3000')
+		socket.on('NEW_ANSWER', data => {
+			props.getLogbookGroupAnswers({ goal, column, answer })
+		})
+	}, [])
 
 	useEffect(() => {
 		setAnswers(props.answers)
