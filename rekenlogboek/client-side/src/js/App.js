@@ -20,6 +20,7 @@ import newLBCompleted from './logbook-designer/containers/new-logbook/Completed'
 
 import Logbooks from './teacher/containers/Logbooks'
 import StudentLogbook from './teacher/containers/Studentlogbook'
+import AllowStudentAccess from './teacher/containers/AllowStudentAccess'
 
 // SIGN IN PAGES
 import SignIn from '../js/sign-in/SignIn'
@@ -117,6 +118,11 @@ function App() {
 										path="/teacher/group-overview"
 										component={GroupOverview}
 									/>
+        
+                  <Route
+                    path="/teacher/allow-student-access"
+                    component={AllowStudentAccess}
+                  />
 
 									{/* LANDING PAGE */}
 									<Route path="/teacher" exact component={TeacherIndex} />
