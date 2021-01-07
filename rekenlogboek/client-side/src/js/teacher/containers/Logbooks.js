@@ -30,7 +30,7 @@ function Logbooks(props) {
 				<Button
 					color="gray"
 					value="Vorige"
-					handler={() => props.history.push('./')}
+					handler={() => props.history.push('/teacher')}
 				/>
 			</div>
 		</div>
