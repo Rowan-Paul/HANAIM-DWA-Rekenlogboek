@@ -260,24 +260,29 @@ router.get('/:id/group-overview', async (req, res) => {
 
 	// Code for creating overview
 	students.map(student => {
-		student.answers.map(answer => {
-			// Create row prop if not exist
-			answers.rows.initProperty(answer.goalPosition, {})
+		if (student.answers && student.answers.length) {
+			student.answers.map(answer => {
+				// Create row prop if not exist
+				answers.rows.initProperty(answer.goalPosition, {})
 
-			// Create column within row if not exist
-			answers.rows[answer.goalPosition].initProperty(0, {}) // Default 0 for goal
-			answers.rows[answer.goalPosition].initProperty(answer.columnPosition, [])
+				// Create column within row if not exist
+				answers.rows[answer.goalPosition].initProperty(0, {}) // Default 0 for goal
+				answers.rows[answer.goalPosition].initProperty(
+					answer.columnPosition,
+					[]
+				)
 
-			// Upsert times answered
-			const cell = answers.rows[answer.goalPosition][answer.columnPosition]
-			const item = cell.findIndex(a => a.value === answer.answer.value)
+				// Upsert times answered
+				const cell = answers.rows[answer.goalPosition][answer.columnPosition]
+				const item = cell.findIndex(a => a.value === answer.answer.value)
 
-			if (item > -1) {
-				cell[item] = { ...cell[item], count: ++cell[item].count }
-			} else {
-				cell.push({ value: answer.answer.value, count: 1 })
-			}
-		})
+				if (item > -1) {
+					cell[item] = { ...cell[item], count: ++cell[item].count }
+				} else {
+					cell.push({ value: answer.answer.value, count: 1 })
+				}
+			})
+		}
 	})
 
 	res.status(200).send(answers)
