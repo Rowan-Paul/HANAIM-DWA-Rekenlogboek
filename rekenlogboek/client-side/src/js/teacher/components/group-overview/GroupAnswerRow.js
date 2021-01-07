@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-
 import shortid from 'shortid'
+
 import Evaluation from '../../../common/InputTypes/Evaluation'
 import Goal from '../../../common/logbook/Goal'
 import StudentLogbookInputType from '../../../common/logbook/student-logbook/StudentLogbookInputType'
@@ -33,7 +33,14 @@ function GroupAnswerRow(props) {
 				switch (column.position) {
 					case 0:
 						const goal = { title: studentInfo.student }
-						return <Goal goal={goal} state={props.inputStates.inPreview} />
+
+						return (
+							<Goal
+								goal={goal}
+								key={shortid.generate()}
+								state={props.inputStates.inPreview}
+							/>
+						)
 					case 3:
 						return (
 							<Evaluation
