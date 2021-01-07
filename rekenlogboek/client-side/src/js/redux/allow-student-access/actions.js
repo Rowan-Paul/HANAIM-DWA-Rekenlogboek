@@ -26,6 +26,14 @@ const fetchActiveLogbook = getState => {
 	)
 }
 
+const fetchLogbook = payload => getState => {
+	const group = getState().main.user.groups[1]
+	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+	return fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
+	)
+}
+
 export const getFilterOptions = (dispatch, getState) => {
 	const group = getState().main.user.groups[1]
 	const groupNumber = group.substring(group.indexOf(' ') + 1)
@@ -44,36 +52,59 @@ export const getFilterOptions = (dispatch, getState) => {
 			}
 			reducerPayload.schoolYears = schoolYears
 			fetchActiveLogbook(getState)
-				.then(response => response.json())
+				.then(response => {
+					//in the server-side a 204 status will be sent when the response is empty
+					if (response && response.status !== 204) {
+						return response.json()
+					} else {
+						//sending false to the next then will make sure that the code stops looking for an active logbook but instead looks for the first available logbook
+						return false
+					}
+				})
 				.then(activeLogbook => {
 					//the current logbook will change whenever the filter button gets pressed. the active period and schoolYear will only update when an activePhase changes.
 					//since this action is kicked off when loading the page this will be the only time where all 3 of them change simultaneously.
-					reducerPayload.currentLogbook = activeLogbook
-					reducerPayload.activePeriod = activeLogbook.period
-					reducerPayload.activeSchoolYear = activeLogbook.year
-					console.log(activeLogbook)
-					fetchPeriods({ schoolYear: activeLogbook.year }, getState)
-						.then(response => response.json())
-						.then(periods => {
-							reducerPayload.periods = periods
-							console.log(reducerPayload)
-							return dispatch({
-								type: types.GET_FILTER_OPTIONS,
-								payload: { ...reducerPayload }
+					if (activeLogbook) {
+						reducerPayload.currentLogbook = activeLogbook
+						reducerPayload.activePeriod = activeLogbook.period
+						reducerPayload.activeSchoolYear = activeLogbook.year
+						fetchPeriods({ schoolYear: activeLogbook.year }, getState)
+							.then(response => response.json())
+							.then(periods => {
+								reducerPayload.periods = periods
+								console.log(reducerPayload)
+								return dispatch({
+									type: types.GET_FILTER_OPTIONS,
+									payload: { ...reducerPayload }
+								})
 							})
-						})
+					} else {
+						//if there's no active logbook, show the first one available
+						fetchPeriods({ schoolYear: schoolYears[0] }, getState)
+							.then(response => response.json())
+							.then(periods => {
+								fetchLogbook({ schoolYear: schoolYears[0], period: periods[0] })
+									.then(response => response.json())
+									.then(logbook => {
+										reducerPayload.currentLogbook = logbook
+										reducerPayload.activePeriod = logbook.period
+										reducerPayload.activeSchoolYear = logbook.year
+										reducerPayload.periods = periods
+										console.log(reducerPayload)
+										return dispatch({
+											type: types.GET_FILTER_OPTIONS,
+											payload: { ...reducerPayload }
+										})
+									})
+							})
+					}
 				})
 		})
 }
 
 export const getSelectedLogbook = payload => (dispatch, getState) => {
-	console.log(payload)
 	try {
-		const group = getState().main.user.groups[1]
-		payload.groupNumber = group.substring(group.indexOf(' ') + 1)
-		fetch(
-			`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
-		)
+		fetchLogbook(payload)
 			.then(response => response.json())
 			.then(payload => {
 				return dispatch({

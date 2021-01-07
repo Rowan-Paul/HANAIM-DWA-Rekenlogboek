@@ -69,7 +69,7 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			{props.currentLogbook && <PeriodFilter filterClick={filterClick} />}
+			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
 				{props.currentLogbook &&
 				Object.keys(props.currentLogbook).length !== 0 ? (
