@@ -38,6 +38,10 @@ export const getFilterOptions = (dispatch, getState) => {
 	)
 		.then(response => response.json())
 		.then(schoolYears => {
+			if (schoolYears === undefined || schoolYears.length === 0) {
+				//no logbooks available for the teacher's group
+				return
+			}
 			reducerPayload.schoolYears = schoolYears
 			fetchActiveLogbook(getState)
 				.then(response => response.json())

@@ -6,8 +6,7 @@ const INITIAL_STATE = {
 	selectedSchoolYear: undefined, //currently selected year in the filter
 	periods: [],
 	activePeriod: undefined, //which period has a currentPhase !== notVisible
-	selectedPeriod: undefined, //currently selected period in the filter
-	currentLogbook: {}
+	selectedPeriod: undefined //currently selected period in the filter
 }
 
 const reducer = (state = INITIAL_STATE, action) => {

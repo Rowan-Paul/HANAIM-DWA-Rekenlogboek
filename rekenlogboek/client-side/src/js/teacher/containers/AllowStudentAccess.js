@@ -71,7 +71,8 @@ function AllowStudentAccess(props) {
 		<div className="allow-student-access">
 			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
-				{Object.keys(props.currentLogbook).length !== 0 ? (
+				{props.currentLogbook &&
+				Object.keys(props.currentLogbook).length !== 0 ? (
 					<StudentAccessSelector
 						logbookData={{
 							year: props.currentLogbook.year,
@@ -86,6 +87,10 @@ function AllowStudentAccess(props) {
 						<p>
 							Kies rechtsbovenin een leerjaar en blok om de opties voor een
 							logboek in te laden.
+						</p>
+						<p>
+							Mocht de filter leeg zijn, neem dan contact met een
+							logboekontwerper op.
 						</p>
 					</div>
 				)}
