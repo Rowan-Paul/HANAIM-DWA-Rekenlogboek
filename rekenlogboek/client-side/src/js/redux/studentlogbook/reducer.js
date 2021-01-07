@@ -2,6 +2,7 @@ import {
 	SAVE_ANSWERS,
 	LOAD_STUDENTLOGBOOK,
 	LOAD_LOGBOOK,
+	SET_CURRENT_GOAL,
 	INCREMENT_CURRENT_GOAL,
 	DECREMENT_CURRENT_GOAL
 } from './types'
@@ -23,6 +24,11 @@ const studentLogbookreducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				logbook: action.response
+			}
+		case SET_CURRENT_GOAL:
+			return {
+				...state,
+				currentGoal: action.payload
 			}
 		case INCREMENT_CURRENT_GOAL:
 			return {

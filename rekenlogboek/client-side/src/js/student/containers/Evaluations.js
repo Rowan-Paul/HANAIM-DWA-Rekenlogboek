@@ -12,8 +12,11 @@ import Evaluation from '../../common/InputTypes/Evaluation'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
-import { loadStudentLogbook } from '../../redux/studentlogbook/actions'
-import { saveAnswerRadio } from '../../redux/studentlogbook/actions'
+import {
+	setCurrentGoal,
+	loadStudentLogbook,
+	saveAnswerRadio
+} from '../../redux/studentlogbook/actions'
 
 function EvaluationsUI(props) {
 	useEffect(() => {
@@ -46,7 +49,11 @@ function EvaluationsUI(props) {
 
 	return (
 		<div className="after-pre-test student-container">
-			<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
+			<ProgressBar
+				itemCount={1}
+				done={getProgressBarNumbers()}
+				changeHandler={props.setCurrentGoal}
+			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
@@ -91,6 +98,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
+		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
 		loadStudentLogbook: () => dispatch(loadStudentLogbook()),
 		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
 			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition))

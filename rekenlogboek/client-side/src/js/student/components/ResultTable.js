@@ -60,7 +60,14 @@ export default function ResultText(props) {
 		<div className="result-table">
 			<p>{props.description}</p>
 
-			<div className="table">{getTableRows()}</div>
+			<div className="table">
+				<div className="row first">
+					<div className="cell">Leerdoel</div>
+					<div className="cell">Beschrijving</div>
+					<div className="cell">Jouw antwoord</div>
+				</div>
+				{getTableRows()}
+			</div>
 		</div>
 	)
 }
