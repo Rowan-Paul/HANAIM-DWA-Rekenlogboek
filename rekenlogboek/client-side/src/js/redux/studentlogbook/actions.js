@@ -2,6 +2,7 @@ import {
 	SAVE_ANSWERS,
 	LOAD_STUDENTLOGBOOK,
 	LOAD_LOGBOOK,
+	SET_CURRENT_GOAL,
 	INCREMENT_CURRENT_GOAL,
 	DECREMENT_CURRENT_GOAL
 } from './types'
@@ -26,6 +27,11 @@ export const loadLogbook = payload => dispatch => {
 			})
 		})
 		.catch(error => console.log(error))
+}
+
+//Sets the current goal
+export const setCurrentGoal = payload => {
+	return { type: SET_CURRENT_GOAL, payload }
 }
 
 //Increments the current goal

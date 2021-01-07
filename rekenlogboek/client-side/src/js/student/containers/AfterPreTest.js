@@ -13,6 +13,7 @@ import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
 import {
+	setCurrentGoal,
 	decrementCurrentGoal,
 	incrementCurrentGoal,
 	loadStudentLogbook
@@ -57,6 +58,7 @@ function AfterPreTestUI(props) {
 			<ProgressBar
 				itemCount={props.goals.length}
 				done={getProgressBarNumbers()}
+				changeHandler={props.setCurrentGoal}
 			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
@@ -105,6 +107,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
+		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
 		incrementCurrentGoal: () => dispatch(incrementCurrentGoal()),
 		decrementCurrentGoal: () => dispatch(decrementCurrentGoal()),
 		loadStudentLogbook: () => dispatch(loadStudentLogbook())
