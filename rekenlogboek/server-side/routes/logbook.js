@@ -70,15 +70,17 @@ router.get('/groups/:group/years', (req, res) => {
 
 // Get the active logbook for a certain group
 router.get('/groups/:group', (req, res) => {
-	Logbook.findOne(
-		{
-			group: req.params.group,
-			currentPhase: { $ne: 'notVisible' }
-		}
-	)
+	Logbook.findOne({
+		group: req.params.group,
+		currentPhase: { $ne: 'notVisible' }
+	})
 		.then(response => {
 			console.log(response)
-			res.status(200).send(response)
+			if (response) {
+				res.status(200).send(response)
+			} else {
+				res.status(204).send(response)
+			}
 		})
 		.catch(err => {
 			console.log(err)
