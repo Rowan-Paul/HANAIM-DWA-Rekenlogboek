@@ -2,13 +2,18 @@ import * as types from './types'
 
 const INITIAL_STATE = {
 	answers: undefined,
-	logbookID: '5fbbcad37f53f84d0c6fbb75',
+	logbookID: undefined,
 	logbook: undefined,
 	overview: undefined
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case types.GET_LOGBOOK_ID:
+			return {
+				...state,
+				logbookID: action.response._id
+			}
 		case types.GET_LOGBOOK:
 			return {
 				...state,
