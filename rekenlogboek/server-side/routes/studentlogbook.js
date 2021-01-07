@@ -248,11 +248,6 @@ router.get('/logbook/:logbookid/student/:student', (req, res) => {
  * Shows an group overview including all answers sorted by row, column
  */
 router.get('/:id/group-overview', async (req, res) => {
-	/** Init object property if not exist */
-	Object.prototype.initProperty = function (name, defaultValue) {
-		if (!(name in this)) this[name] = defaultValue
-	}
-
 	const students = await StudentLogbook.find({ logbookID: req.params.id })
 	const answers = {
 		rows: {}
@@ -263,14 +258,15 @@ router.get('/:id/group-overview', async (req, res) => {
 		if (student.answers && student.answers.length) {
 			student.answers.map(answer => {
 				// Create row prop if not exist
-				answers.rows.initProperty(answer.goalPosition, {})
+				if (!answers.rows[answer.goalPosition]) {
+					answers.rows[answer.goalPosition] = {}
+				}
 
 				// Create column within row if not exist
-				answers.rows[answer.goalPosition].initProperty(0, {}) // Default 0 for goal
-				answers.rows[answer.goalPosition].initProperty(
-					answer.columnPosition,
-					[]
-				)
+				answers.rows[answer.goalPosition][0] = [] // Default 0 for goal
+				if (!answers.rows[answer.goalPosition][answer.columnPosition]) {
+					answers.rows[answer.goalPosition][answer.columnPosition] = []
+				}
 
 				// Upsert times answered
 				const cell = answers.rows[answer.goalPosition][answer.columnPosition]
