@@ -39,17 +39,11 @@ function LogbookHeader(props) {
 				case props.logbookTypes.newLogbook:
 					return (
 						<li className="Row Header">
-							<div className="Cell">
-								<h4>Doelen</h4>
-							</div>
 							{colums.map(column => (
 								<div key={column.position} className="Cell">
 									<h4>{column.added ? column.title : ''}</h4>
 								</div>
 							))}
-							<div className="Cell">
-								<h4>Evaluatie</h4>
-							</div>
 						</li>
 					)
 				// STUDENT LOGBOOK HEADER

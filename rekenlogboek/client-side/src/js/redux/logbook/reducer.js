@@ -34,6 +34,11 @@ if (month < 8) {
 const INITIAL_STATE = {
 	columns: [
 		{
+			added: true,
+			position: 0,
+			title: 'Doelen'
+		},
+		{
 			added: false,
 			explanation: false,
 			position: 1,
@@ -52,6 +57,11 @@ const INITIAL_STATE = {
 				type: 'radiobuttons',
 				options: []
 			}
+		},
+		{
+			added: true,
+			position: 3,
+			title: 'Evaluatie'
 		}
 	],
 	goals: [],
