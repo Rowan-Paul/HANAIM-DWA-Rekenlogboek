@@ -92,7 +92,7 @@ function AllowStudentAccess(props) {
 						) : (
 							<span>
 								<p>
-									Neem contact op met een logboekontwerper om er een aan te
+									Neem contact op met een logboekontwerper om een logboek aan te
 									maken voor uw groep.
 								</p>
 							</span>

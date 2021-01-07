@@ -72,7 +72,6 @@ export const getFilterOptions = (dispatch, getState) => {
 							.then(response => response.json())
 							.then(periods => {
 								reducerPayload.periods = periods
-								console.log(reducerPayload)
 								return dispatch({
 									type: types.GET_FILTER_OPTIONS,
 									payload: { ...reducerPayload }
@@ -93,7 +92,6 @@ export const getFilterOptions = (dispatch, getState) => {
 										reducerPayload.activePeriod = logbook.period
 										reducerPayload.activeSchoolYear = logbook.year
 										reducerPayload.periods = periods
-										console.log(reducerPayload)
 										return dispatch({
 											type: types.GET_FILTER_OPTIONS,
 											payload: { ...reducerPayload }
@@ -106,20 +104,14 @@ export const getFilterOptions = (dispatch, getState) => {
 }
 
 export const getSelectedLogbook = payload => (dispatch, getState) => {
-	try {
-		fetchLogbook(payload)
-			.then(response => response.json())
-			.then(payload => {
-				return dispatch({
-					type: types.GET_SELECTED_LOGBOOK,
-					payload
-				})
+	fetchLogbook(payload, getState)
+		.then(response => response.json())
+		.then(payload => {
+			return dispatch({
+				type: types.GET_SELECTED_LOGBOOK,
+				payload
 			})
-	} catch {
-		console.log(
-			'Het ophalen van een logboek is mislukt. Probeer opnieuw in te loggen.'
-		)
-	}
+		})
 }
 
 export const updateCurrentPhase = payload => dispatch => {

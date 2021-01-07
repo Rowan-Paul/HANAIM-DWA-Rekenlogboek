@@ -54,14 +54,7 @@ function PeriodFilter(props) {
 		props.changeSelectedPeriod(period)
 	}
 
-	console.log(
-		'all',
-		props.schoolYears,
-		'select',
-		props.selectedSchoolYear,
-		'active',
-		props.activeSchoolYear
-	)
+	console.log('selected', props.selectedPeriod, 'active', props.activePeriod)
 	return (
 		<div className="period-filter">
 			<div>Leerjaar:</div>
@@ -81,7 +74,11 @@ function PeriodFilter(props) {
 			<div>Blok:</div>
 			<select
 				id="select-period"
-				value={props.selectedPeriod}
+				value={
+					props.selectedPeriod !== undefined
+						? props.selectedPeriod
+						: props.activePeriod
+				}
 				onChange={e => updateSelectedPeriod(e.target.value)}
 			>
 				{getPeriodOptions()}
