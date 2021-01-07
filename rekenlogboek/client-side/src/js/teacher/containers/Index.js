@@ -8,6 +8,7 @@ import ButtonContainer from '../../common/ButtonContainer'
 
 import archiveSVG from '../../../img/icons/archive.svg'
 import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
+import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 
 function Index(props) {
 	return (
@@ -21,7 +22,9 @@ function Index(props) {
 						color="yellow"
 						description="Bepaal wat de leerlingen in mogen vullen."
 						value="Bepaal toegang"
-						handler={() => history.push('../teacher/allow-student-access')} //TODO: add page
+						handler={() =>
+							props.history.push('../teacher/allow-student-access')
+						}
 					/>
 
 					<ButtonContainer

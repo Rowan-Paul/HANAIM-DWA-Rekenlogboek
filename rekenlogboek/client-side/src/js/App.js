@@ -118,11 +118,11 @@ function App() {
 										path="/teacher/group-overview"
 										component={GroupOverview}
 									/>
-        
-                  <Route
-                    path="/teacher/allow-student-access"
-                    component={AllowStudentAccess}
-                  />
+
+									<Route
+										path="/teacher/allow-student-access"
+										component={AllowStudentAccess}
+									/>
 
 									{/* LANDING PAGE */}
 									<Route path="/teacher" exact component={TeacherIndex} />

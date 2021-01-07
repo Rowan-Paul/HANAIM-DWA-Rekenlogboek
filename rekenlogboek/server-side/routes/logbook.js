@@ -73,14 +73,14 @@ router.get('/groups/:group', (req, res) => {
 	Logbook.findOne({
 		group: req.params.group,
 		currentPhase: { $ne: 'notVisible' }
+	}).then(response => {
+		console.log(response)
+		if (response) {
+			res.status(200).send(response)
+		} else {
+			res.status(204).send(response)
+		}
 	})
-		.then(response => {
-			console.log(response)
-			if (response) {
-				res.status(200).send(response)
-			} else {
-				res.status(204).send(response)
-			}
 })
 
 // Get the teacher for a logbook
