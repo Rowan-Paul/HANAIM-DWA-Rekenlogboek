@@ -6,7 +6,8 @@ import Header from '../js/common/Header'
 
 // TEACHER PAGES
 import TeacherIndex from './teacher/containers/Index'
-
+import GroupOverview from './teacher/containers/group-overview/Index'
+import GroupOverviewAnswers from './teacher/containers/group-overview/Answers'
 // LOGBOOK DESIGNER PAGES
 import LBDesignerIndex from './logbook-designer/containers/Index'
 
@@ -36,16 +37,16 @@ import NoAccess from '../js/no-access/NoAccess'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
-import Default from './student/containers/Default'
-import defaultStudentPage from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
-import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
-import InstructionsEnd from './student/containers/InstructionsEnd'
-import EvaluationsEnd from './student/containers/EvaluationsEnd'
-import Instructions from './student/containers/Instructions'
-import Evaluations from './student/containers/Evaluations'
+import { Default } from './student/containers/Default'
+import { AfterPreTest } from './student/containers/AfterPreTest'
+import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
+import { Instructions } from './student/containers/Instructions'
+import { InstructionsEnd } from './student/containers/InstructionsEnd'
+import { Evaluations } from './student/containers/Evaluations'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 
 import '../scss/App.scss'
+import AuthMiddleware from './AuthMiddleware'
 
 function App() {
 	// Check for the Microsoft Teams SDK object.
@@ -56,72 +57,86 @@ function App() {
 			return (
 				<div>
 					<Router>
-						<Header />
-						<main>
-							<Switch>
-								{/* LOGBOOK DESIGNER -> NEW LOGBOOK */}
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/general"
-									component={newLBGeneral}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/columns"
-									component={newLBColumns}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/goals"
-									component={newLBGoals}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/overview"
-									component={newLBOverview}
-								/>
-								<Route
-									exact
-									path="/logbook-designer/new-logbook/done"
-									component={newLBCompleted}
-								/>
+						<AuthMiddleware>
+							<Header />
+							<main>
+								<Switch>
+									{/* LOGBOOK DESIGNER -> NEW LOGBOOK */}
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/general"
+										component={newLBGeneral}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/columns"
+										component={newLBColumns}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/goals"
+										component={newLBGoals}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/overview"
+										component={newLBOverview}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/done"
+										component={newLBCompleted}
+									/>
 
-								{/* LOGBOOK DESIGNER INDEX  */}
-								<Route
-									path="/logbook-designer"
-									exact
-									component={LBDesignerIndex}
-								/>
+									{/* LOGBOOK DESIGNER INDEX  */}
+									<Route
+										path="/logbook-designer"
+										exact
+										component={LBDesignerIndex}
+									/>
 
-								{/* LOGBOOK VIEWER */}
-								<Route
-									exact
-									path="/teacher/logbooks"
-									component={Logbooks}
-								></Route>
-								<Route
-									exact
-									path="/teacher/logbooks/studentlogbook"
-									component={StudentLogbook}
-								></Route>
+									{/* LOGBOOK VIEWER */}
+									<Route
+										exact
+										path="/teacher/logbooks"
+										component={Logbooks}
+									></Route>
+									<Route
+										exact
+										path="/teacher/logbooks/studentlogbook"
+										component={StudentLogbook}
+									></Route>
 
-								<Route
-									path="/teacher/allow-student-access"
-									component={AllowStudentAccess}
-								/>
+									{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
+									<Route
+										path="/teacher/group-overview/answers"
+										component={GroupOverviewAnswers}
+									/>
 
-								{/* LANDING PAGE */}
-								<Route path="/teacher" component={TeacherIndex} />
+									{/* LOGBOOK GROUP OVERVIEW */}
+									<Route
+										path="/teacher/group-overview"
+										component={GroupOverview}
+									/>
+        
+                  <Route
+                    path="/teacher/allow-student-access"
+                    component={AllowStudentAccess}
+                  />
 
-								{/* SIGN-IN */}
-								<Route exact path="/" component={SignIn} />
-								<Route exact path="/auth/succes" component={Succes} />
+									{/* LANDING PAGE */}
+									<Route path="/teacher" exact component={TeacherIndex} />
 
-								{/* ERROR PAGES */}
-								<Route exact path="/no-access" component={NoAccess} />
-								{/* <Route component={NotFound} /> */}
-							</Switch>
-						</main>
+									{/* SIGN-IN */}
+									<Route exact path="/" component={SignIn} />
+									<Route exact path="/auth/succes" component={Succes} />
+
+									{/* ERROR PAGES */}
+									<Route exact path="/no-access" component={NoAccess} />
+									{/* <Route component={NotFound} /> */}
+								</Switch>
+							</main>
+						</AuthMiddleware>
 					</Router>
 				</div>
 			)
@@ -149,20 +164,16 @@ function App() {
 							path="/student/pretest/done"
 							component={AfterPreTestEnd}
 						/>
+						<Route exact path="/student/instruction" component={Instructions} />
 						<Route
 							exact
-							path="/student/instructions"
-							component={Instructions}
-						/>
-						<Route
-							exact
-							path="/student/instructions/done"
+							path="/student/instruction/done"
 							component={InstructionsEnd}
 						/>
 						<Route exact path="/student/evaluation" component={Evaluations} />
 						<Route
 							exact
-							path="/student/evaluation/end"
+							path="/student/evaluation/done"
 							component={EvaluationsEnd}
 						/>
 

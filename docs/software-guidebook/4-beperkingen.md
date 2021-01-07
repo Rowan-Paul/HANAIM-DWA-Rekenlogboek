@@ -21,3 +21,7 @@ Hetzelfde geldt eigenlijk voor de Microsoft Authentication Framework waarmee geb
 ### 4.3 SCRUM
 
 Tijdens het project zal gebruik worden gemaakt van SCRUM. Dit betekent dat elke ochtend een daily stand-up wordt gehouden en elke sprint een planning en review. Dit zijn momenten die het team niet kan besteden aan ontwikkelen, maar zijn wel waardevolle momenten omdat deze ervoor zorgen dat het proces goed gaat.
+
+### 4.4 Definition of done
+
+Tijdens het project zal er ook gebruik worden gemaakt van een definition of done waarin staat waar werk aan moet voldoen voordat het af is. Dit is ook een beperking omdat al het werk moet voldoen aan deze definition of done. Maar de definition of done helpt wel met het hoog houden van de kwaliteit van het werk.

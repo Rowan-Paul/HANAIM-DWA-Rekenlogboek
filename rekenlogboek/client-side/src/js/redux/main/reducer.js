@@ -10,13 +10,19 @@ const initialMainState = {
 		Leraar: 'Leraar',
 		Logboekontwerper: 'Logboekontwerper'
 	},
-	// For later use
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
 		textarea: 'textarea'
 	},
+	inputStates: {
+		inUse: 'inUse',
+		onEdit: 'onEdit',
+		inPreview: 'inPreview'
+	},
 	logbookTypes: {
+		groupAnswer: 'groupAnswer',
+		groupOverview: 'groupOverview',
 		newLogbook: 'newLogbook',
 		studentLogbook: 'studentLogbook'
 	}

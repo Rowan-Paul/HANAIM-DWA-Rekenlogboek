@@ -6,6 +6,7 @@
 
 'use strict'
 
+const { response } = require('express')
 //Database mocking for later?!
 
 //https://zellwk.com/blog/endpoint-testing/
@@ -119,6 +120,17 @@ describe('Studentlogbook route tests', () => {
 		expect(createResponse).toEqual(200)
 	})
 
+	test('Get all answers from all students for a logbook', async () => {
+		const createResponse = await fetch(
+			'http://localhost:3000/studentlogbook/logbooks/5fbf66ca14b7c811a829fadf/answers',
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
+		expect(createResponse).toEqual(200)
+	})
+
 	test('Get information about studentlogbook by ID', async () => {
 		const studentlogbookID = await getTestStudentlogbook()
 
@@ -179,5 +191,50 @@ describe('Studentlogbook route tests', () => {
 
 		expect(response[0].answer.value).toEqual('This is an answer 1')
 		expect(response[1].answer.value).toEqual('This is an answer 2')
+	})
+	test('GET group answers with filters', async () => {
+		const studentlogbookID = '5fbbcad37f53f84d0c6fbb75'
+
+		let response
+		response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-answers?row=0&column=3&answer=Happy`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response[0].student).toEqual('janpiet')
+
+		response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-answers?row=0&column=3&answer=Sad`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response[0].student).toEqual('klaas')
+	})
+
+	test('Get group-overview (answers of all students)', async () => {
+		const studentlogbookID = '5fbbcad37f53f84d0c6fbb75'
+
+		const response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-overview`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response.rows[0][0]).toEqual({})
+		expect(response.rows[0][1]).toEqual([
+			{
+				value: 'sdsadasd',
+				count: 1
+			},
+			{
+				value: 'sadasdasdasd',
+				count: 1
+			}
+		])
 	})
 })

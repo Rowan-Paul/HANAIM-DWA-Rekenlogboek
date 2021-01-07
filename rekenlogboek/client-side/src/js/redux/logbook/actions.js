@@ -78,7 +78,7 @@ export const postImage = () => (dispatch, getState) => {
 				// Parse to file
 				const formData = new FormData()
 				formData.append('file', file, goal.imageName)
-				fetch('http://localhost:3000/files/uploads/goals', {
+				fetch(process.env.REACT_APP_SERVER_ADDRESS + '/files/uploads/goals', {
 					method: 'POST',
 					body: formData
 				})
@@ -100,7 +100,7 @@ export const resetLogbook = () => {
 }
 
 export const saveLogbook = () => (dispatch, getState) => {
-	fetch(`http://localhost:3000/logbook/`, {
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + '/logbook/', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(getState().logbook)

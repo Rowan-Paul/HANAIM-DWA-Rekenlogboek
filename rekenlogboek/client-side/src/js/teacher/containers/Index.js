@@ -10,7 +10,6 @@ import archiveSVG from '../../../img/icons/archive.svg'
 import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
 
 function Index(props) {
-	const history = useHistory()
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
@@ -30,7 +29,15 @@ function Index(props) {
 						color="blue"
 						description="Bekijk ingevulde logboeken."
 						value="Ingevulde logboeken"
-						handler={() => history.push('../teacher/logbooks')}
+						handler={() => props.history.push('/teacher/logbooks')}
+					/>
+
+					<ButtonContainer
+						icon={createLogbookSVG}
+						color="green"
+						description="Bekijk hier het logboek groepsoverzicht"
+						value="Groepsoverzicht logboek"
+						handler={() => props.history.push('/teacher/group-overview/')}
 					/>
 				</div>
 			</div>

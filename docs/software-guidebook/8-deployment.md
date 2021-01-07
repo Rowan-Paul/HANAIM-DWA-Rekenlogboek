@@ -2,11 +2,16 @@
 
 In dit hoofdstuk wordt besproken hoe de applicatie precies wordt gedeployed. De applicatie bestaat eigenlijk uit 2 delen die apart zouden moeten worden gedeployed: de client-side en de server-side.
 
+Om de applicatie te deployen moeten de volgende stappen worden uitgevoerd in elk van de folders (dat zijn dus rekenlogboek/client-side en rekenlogboek/server-side):
+
+- npm install
+- npm start
+
 ### 8.1 Deployment diagram
 
 Hieronder staat het deployment diagram waarin weergeven wordt hoe het project kan worden gebruikt.
 
-@import "./c4-model/Deployment diagram.svg"
+@import "./c4-model/deployment.svg"
 
 ### 8.2 Deployen van de Microsoft Teams app
 

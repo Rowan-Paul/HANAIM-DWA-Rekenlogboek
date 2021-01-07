@@ -36,7 +36,7 @@ async function seedLogbook() {
 			period: 1,
 			group: 6,
 			year: '2020 - 2021',
-			currentPhase: 'test',
+			currentPhase: 'pretest',
 			activeGoal: 1,
 			columns: [
 				{
@@ -76,28 +76,28 @@ async function seedLogbook() {
 					position: 0,
 					title: 'Leer rekenen',
 					description: 'test0000',
-					imagelink: 'xxxxxxxxxxxxxx'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7b',
 					position: 1,
 					title: 'Leer 1+1',
 					description: 'test1111',
-					imagelink: 'xxxxxxxxxxssaasdasdaxx'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7c',
 					position: 2,
 					title: 'Leer 1*1',
 					description: 'test2222',
-					imagelink: 'aaaaaaa'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7d',
 					position: 3,
 					title: 'Les 5',
 					description: 'test333333',
-					imagelink: 'aaaaaaa'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				}
 			],
 			__v: 0

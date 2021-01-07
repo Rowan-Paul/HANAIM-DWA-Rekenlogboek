@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import shortid from 'shortid'
 import { connect } from 'react-redux'
 
 import Evaluation from '../../InputTypes/Evaluation'
@@ -6,57 +7,67 @@ import Goal from '../Goal'
 import StudentLogbookInputType from './StudentLogbookInputType'
 
 function StudentLogbookRow(props) {
-	const [inputAnswer1, setAnswer1] = useState('')
-	const [inputAnswer2, setAnswer2] = useState('')
-	const [studentExplanation1, setExplanation1] = useState('')
-	const [studentExplanation2, setExplanation2] = useState('')
-	const [studentEvaluation, setEvaluation] = useState('')
+	const [answers, setAnswers] = useState(props.answers)
+	const [columns, setColumns] = useState(props.columns)
+	const [goal, setGoal] = useState(props.goal)
 
 	useEffect(() => {
-		const answersGoal = props.answers.filter(
-			answer => answer.goalPosition === props.goalid
-		)
+		setAnswers(props.answers)
+		setColumns(props.columns)
+		setGoal(props.goal)
+	}, [props.answers, props.columns, props.goal])
 
-		const answer1 = answersGoal.filter(answer => answer.columnPosition === 1)[0]
+	const findAnswer = column =>
+		answers.filter(
+			a =>
+				a.goalPosition === goal.position && a.columnPosition == column.position
+		)[0]
 
-		const answer2 = answersGoal.filter(answer => answer.columnPosition === 2)[0]
-		const answer3 = answersGoal.filter(answer => answer.columnPosition === 3)[0]
+	const handler = () => {
+		if (answers) {
+			return columns.map(column => {
+				switch (column.position) {
+					case 0:
+						return (
+							<Goal
+								goal={props.goal}
+								key={shortid.generate()}
+								state={props.inputStates.inPreview}
+							/>
+						)
+					case 3:
+						return (
+							<Evaluation
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								state={props.inputStates.inPreview}
+							/>
+						)
 
-		if (answer1 !== undefined) {
-			setAnswer1(answer1.answer.value)
-			setExplanation1(answer1.answer.explanation)
+					default:
+						return (
+							<StudentLogbookInputType
+								answer={findAnswer(column)}
+								key={shortid.generate()}
+								input={column.input}
+								position={column.columnPosition}
+								state={props.inputStates.inPreview}
+							/>
+						)
+				}
+			})
 		}
-		if (answer2 !== undefined) {
-			setAnswer2(answer2.answer.value)
-			setExplanation2(answer2.answer.explanation)
-		}
-		if (answer3 !== undefined) {
-			setEvaluation(answer3.answer.value)
-		}
-	})
-	return (
-		<div className="Row Body">
-			<Goal goal={props.goal} />
-			<StudentLogbookInputType
-				position={1}
-				inputAnswer={inputAnswer1}
-				studentExplanation={studentExplanation1}
-				row={props.goalid}
-			/>
-			<StudentLogbookInputType
-				position={2}
-				inputAnswer={inputAnswer2}
-				studentExplanation={studentExplanation2}
-				row={props.goalid}
-			/>
-			<Evaluation inputAnswer={studentEvaluation} />
-		</div>
-	)
+	}
+
+	return <div className="Row Body">{handler()}</div>
 }
 
 const mapStateToProps = state => {
 	return {
-		answers: state.logbookoverview.activeStudentlogbook.answers
+		inputStates: state.main.inputStates,
+		answers: state.logbookoverview.activeStudentlogbook.answers,
+		columns: state.logbookoverview.currentLogbook.columns
 	}
 }
 

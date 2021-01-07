@@ -284,7 +284,7 @@ describe('Logbook route tests', () => {
 
 		expect(test).toEqual(['2019 - 2020'])
 	})
-
+  
 	test('Update activeGoal with a String', async () => {
 		const body = {
 			activeGoal: 'a string'

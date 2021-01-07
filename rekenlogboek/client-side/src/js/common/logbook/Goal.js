@@ -1,32 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteGoal, modalShow } from '../../redux/logbook/actions'
 
 import '../../../scss/common/logbook/Goal.scss'
+import EditGoal from './EditGoal'
 function Goal(props) {
+	if (!props.state) {
+		return (
+			<p className="ErrorMessage">
+				Goal: props.state not set! (see state.main.inputStates)
+			</p>
+		)
+	}
+
 	return (
 		<div className="Goal Cell">
 			<ul>
 				<li>
 					<h4>{props.goal.title}</h4>
 
-					{props.type === 'edit' && (
-						<div>
-							<button
-								onClick={() =>
-									props.modalShow({
-										position: props.goal.position,
-										title: 'Leerdoel wijzigen'
-									})
-								}
-							>
-								<i className="fa fa-pencil"></i>
-							</button>
-
-							<button onClick={() => props.deleteGoal(props.goal.position)}>
-								<i className="fa fa-trash"></i>
-							</button>
-						</div>
+					{props.state === props.inputStates.onEdit && (
+						<EditGoal position={props.goal.position} />
 					)}
 				</li>
 				<li>
@@ -37,7 +30,9 @@ function Goal(props) {
 					<li>
 						<img
 							src={
-								'http://localhost:3000/uploads/goals/' + props.goal.imageLink
+								process.env.REACT_APP_SERVER_ADDRESS +
+								'/uploads/goals/' +
+								props.goal.imageLink
 							}
 						/>
 					</li>
@@ -48,7 +43,9 @@ function Goal(props) {
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		inputStates: state.main.inputStates
+	}
 }
 
 const mapDispatchToProps = dispatch => {

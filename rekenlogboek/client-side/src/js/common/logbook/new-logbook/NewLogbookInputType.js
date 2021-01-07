@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { modalShow } from '../../../redux/logbook/actions'
 
 import Checkboxes from '../../InputTypes/Checkboxes'
+import InputEditHeader from '../EditInput'
+import NewColumnButton from '../../../logbook-designer/components/column/NewColumnButton'
 import RadioButtons from '../../InputTypes/Radiobuttons'
 import Textarea from '../../InputTypes/Textarea'
 
@@ -15,54 +16,46 @@ function InputType(props) {
 		setColumn(column)
 	}, [props.columns])
 
-	if (column.added) {
-		let inputType
+	const getInputType = () => {
 		switch (column.input.type) {
-			case 'checkboxes':
-				inputType = (
+			// CHECKBOXES
+			case props.inputTypes.checkboxes:
+				return (
 					<Checkboxes
 						explanation={column.explanation}
 						options={column.input.options}
-						type={props.type}
+						state={props.state}
 					/>
 				)
-				break
-			case 'radiobuttons':
-				inputType = (
+
+			// RADIOBUTTONS
+			case props.inputTypes.radiobuttons:
+				return (
 					<RadioButtons
 						explanation={column.explanation}
 						options={column.input.options}
-						type={props.type}
+						state={props.state}
 					/>
 				)
-				break
-			case 'textarea':
-				inputType = <Textarea type={props.type} />
-				break
+
+			// TEXTAREA
+			case props.inputTypes.textarea:
+				return <Textarea state={props.state} />
+
 			default:
-				inputType = ''
+				return ''
 		}
+	}
+
+	if (column.added) {
+		const inputType = getInputType()
 
 		return (
 			<div className="InputType Cell">
 				<ul>
-					{props.type === 'edit' && (
-						<li className="Header">
-							<h4>Invoertype:</h4>
-
-							<button
-								onClick={() =>
-									props.modalShow({
-										position: props.position,
-										title: 'Kolom toevoegen'
-									})
-								}
-							>
-								<i className="fa fa-pencil"></i>
-							</button>
-						</li>
+					{props.state === props.inputStates.onEdit && (
+						<InputEditHeader position={props.position} />
 					)}
-
 					<li>{inputType}</li>
 				</ul>
 			</div>
@@ -71,19 +64,8 @@ function InputType(props) {
 
 	return (
 		<div className="Cell">
-			{props.type === 'edit' && (
-				<div className="Plus">
-					<button
-						onClick={() =>
-							props.modalShow({
-								position: props.position,
-								title: 'Kolom toevoegen'
-							})
-						}
-					>
-						<i className="fa fa-plus"></i>
-					</button>
-				</div>
+			{props.state === props.inputStates.onEdit && (
+				<NewColumnButton position={props.position} />
 			)}
 		</div>
 	)
@@ -91,7 +73,9 @@ function InputType(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbook.columns
+		columns: state.logbook.columns,
+		inputStates: state.main.inputStates,
+		inputTypes: state.main.inputTypes
 	}
 }
 

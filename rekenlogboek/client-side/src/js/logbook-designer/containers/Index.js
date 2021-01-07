@@ -9,8 +9,6 @@ import ButtonContainer from '../../common/ButtonContainer'
 import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 
 function Index(props) {
-	const history = useHistory()
-
 	return (
 		<div className="teacher-landing">
 			<div className="flex-center">
@@ -23,7 +21,7 @@ function Index(props) {
 						description="Een nieuw logboek aanmaken."
 						value="Nieuw logboek"
 						handler={() =>
-							history.push('../../logbook-designer/new-logbook/general')
+							props.history.push('/logbook-designer/new-logbook/general')
 						}
 					/>
 				</div>

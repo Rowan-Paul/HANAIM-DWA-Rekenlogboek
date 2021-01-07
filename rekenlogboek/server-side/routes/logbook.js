@@ -81,6 +81,26 @@ router.get('/groups/:group', (req, res) => {
 			} else {
 				res.status(204).send(response)
 			}
+})
+
+// Get the teacher for a logbook
+router.get('/:id/teacher', (req, res) => {
+	Logbook.findById(req.params.id, 'teacher')
+		.lean()
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get all information about one logbook
+router.get('/:id', (req, res) => {
+	Logbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
 		})
 		.catch(err => {
 			console.log(err)
@@ -119,6 +139,30 @@ router.get('/:id', (req, res) => {
 		})
 })
 
+// Get all information about one logbook
+router.get('/:id', (req, res) => {
+	Logbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get all information about one logbook
+router.get('/:id/goals', (req, res) => {
+	Logbook.findById(req.params.id, 'goals')
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 // Get the id, position, title and inputType for one column from a specific logbook
 router.get('/:id/column/:position', (req, res) => {
 	Logbook.findById(req.params.id)
@@ -145,8 +189,15 @@ router.get('/:id/goal/:position', (req, res) => {
 	Logbook.findById(req.params.id)
 		.lean()
 		.then(response => {
+			let position
+			if (req.params.position === 'null') {
+				position = response.activeGoal
+			} else {
+				position = req.params.position
+			}
+
 			const goal = response.goals.find(object => {
-				return object.position === Number(req.params.position)
+				return object.position === Number(position)
 			})
 
 			if (goal === undefined) {

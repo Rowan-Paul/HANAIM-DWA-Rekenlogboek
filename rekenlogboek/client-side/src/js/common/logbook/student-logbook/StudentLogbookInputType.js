@@ -6,56 +6,47 @@ import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
 function InputType(props) {
-	const [column, setColumn] = useState({
-		input: {
-			type: 'textarea'
+	// const [column, setColumn] = useState()
+
+	// useEffect(() => {
+	// 	const column = props.columns[props.position]
+	// 	setColumn(column)
+	// }, [props.columns])
+
+	const handler = () => {
+		switch (props.input.type) {
+			// CHECKBOXES
+			case props.inputTypes.checkboxes:
+				return (
+					<Checkboxes
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
+					/>
+				)
+
+			// RADIOBUTTONS
+			case props.inputTypes.radiobuttons:
+				return (
+					<RadioButtons
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
+					/>
+				)
+
+			// TEXTAREA
+			case props.inputTypes.textarea:
+				return <Textarea state={props.state} />
+			default:
+				return ''
 		}
-	})
-
-	useEffect(() => {
-		const column = props.columns[props.position]
-		setColumn(column)
-	}, [props.columns])
-
-	let inputType
-	switch (column.input.type) {
-		case 'checkboxes':
-			inputType = (
-				<Checkboxes
-					explanation={column.explanation}
-					studentExplanation={props.studentExplanation}
-					options={column.input.options}
-					type={props.type}
-					inputAnswer={props.inputAnswer}
-					readonly
-				/>
-			)
-			break
-		case 'radiobuttons':
-			inputType = (
-				<RadioButtons
-					explanation={column.explanation}
-					studentExplanation={props.studentExplanation}
-					options={column.input.options}
-					type={props.type}
-					inputAnswer={props.inputAnswer}
-					row={props.row}
-					position={props.position}
-					readonly
-				/>
-			)
-			break
-		case 'textarea':
-			inputType = <Textarea type={props.type} />
-			break
-		default:
-			inputType = ''
 	}
 
 	return (
 		<div className="InputType Cell">
 			<ul>
-				<li>{inputType}</li>
+				<li>{handler()}</li>
 			</ul>
 		</div>
 	)
@@ -63,7 +54,8 @@ function InputType(props) {
 
 const mapStateToProps = state => {
 	return {
-		columns: state.logbookoverview.currentLogbook.columns
+		inputTypes: state.main.inputTypes,
+		inputStates: state.main.inputStates
 	}
 }
 

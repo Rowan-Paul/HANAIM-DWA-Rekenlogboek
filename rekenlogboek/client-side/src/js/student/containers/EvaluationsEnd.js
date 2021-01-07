@@ -1,63 +1,90 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import '../../../scss/student/Student.scss'
 
-import Happy from '../../../img/icons/evaluation/happy.svg'
-import Sad from '../../../img/icons/evaluation/sad.svg'
-import Sceptic from '../../../img/icons/evaluation/sceptic.svg'
-
 import ProgressBar from '../components/ProgressBar'
-import Jumbotron from '../../common/Jumbotron'
-import Button from '../../common/Button'
 import ResultText from '../components/ResultText'
 import ResultTable from '../components/ResultTable'
 
-function EvaluationsEnd() {
-	const saveAnswers = () => {}
+import Jumbotron from '../../common/Jumbotron'
+import Button from '../../common/Button'
 
-	const results = [
-		{
-			goalCount: 'Doel 1',
-			goalName: 'Optellen',
-			answer: <img src={Sad} alt="sad" />
-		},
-		{
-			goalCount: 'Doel 2',
-			goalName: 'Breuken',
-			answer: <img src={Happy} alt="happy" />
-		},
-		{
-			goalCount: 'Doel 3',
-			goalName: 'Keersommen',
-			answer: <img src={Happy} alt="happy" />
-		}
-	]
+function EvaluationsEndUI(props) {
+	const previousPage = () => {
+		props.history.push('/student/evaluation')
+	}
+
+	const filterCorrectAnswer = () => {
+		return [
+			props.answers.filter(
+				answer =>
+					answer.goalPosition === props.currentGoal &&
+					answer.columnPosition === 3
+			)[0]
+		]
+	}
+
+	const filterCorrectGoal = () => {
+		return [
+			props.allGoals.filter(goal => goal.position === props.currentGoal)[0]
+		]
+	}
+
+	const getProgressBarNumbers = () => {
+		const numbers = props.answers.map(answer => {
+			if (
+				answer.columnPosition === 3 &&
+				answer.goalPosition === props.currentGoal
+			) {
+				return 0
+			}
+		})
+		return numbers.filter(number => number !== undefined)
+	}
+
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={5} done={[0, 1, 2, 3, 4]} />
+			<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
 						<ResultText
 							title="Je bent klaar!"
-							description="De door jou ingevoerde antwoorden zijn naar jouw leerkracht verstuurd. Mocht je ze willen aanpassen dan kan je nog terug gaan naar de vorige pagina’s door op vorige te klikken of door op een van de blokjes hierboven te klikken."
+							description="De door jou ingevoerde antwoorden zijn naar jouw leraar verstuurd."
 							image=""
 						/>
 					</div>
 					<div className="right-side">
 						<ResultTable
-							results={results}
-							description="Dit zijn de door jou ingevulde antwoorden:"
+							results={filterCorrectGoal()}
+							answers={filterCorrectAnswer()}
+							columnPosition={3}
+							goalPosition={props.currentGoal}
+							description="Dit heb je bij je leerdoelen beantwoord:"
 						/>
 					</div>
 				</div>
 			</Jumbotron>
-			<div className="next button">
-				<Button color="blue" value="Afsluiten" handler={() => saveAnswers()} />
+			<div className="buttons">
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				</div>
 			</div>
 		</div>
 	)
 }
 
-export default withRouter(EvaluationsEnd)
+function mapStateToProps(state) {
+	return {
+		currentGoal: state.studentLogbook.logbook.activeGoal,
+		answers: state.studentLogbook.studentlogbook.answers,
+		allGoals: state.studentLogbook.logbook.goals
+	}
+}
+
+export const EvaluationsEnd = connect(
+	mapStateToProps,
+	null
+)(withRouter(EvaluationsEndUI))
