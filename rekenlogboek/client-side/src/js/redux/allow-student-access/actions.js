@@ -26,7 +26,7 @@ const fetchActiveLogbook = getState => {
 	)
 }
 
-const fetchLogbook = payload => getState => {
+const fetchLogbook = (payload, getState) => {
 	const group = getState().main.user.groups[1]
 	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
 	return fetch(
@@ -83,7 +83,10 @@ export const getFilterOptions = (dispatch, getState) => {
 						fetchPeriods({ schoolYear: schoolYears[0] }, getState)
 							.then(response => response.json())
 							.then(periods => {
-								fetchLogbook({ schoolYear: schoolYears[0], period: periods[0] })
+								fetchLogbook(
+									{ schoolYear: schoolYears[0], period: periods[0] },
+									getState
+								)
 									.then(response => response.json())
 									.then(logbook => {
 										reducerPayload.currentLogbook = logbook
