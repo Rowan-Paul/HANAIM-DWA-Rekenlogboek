@@ -175,6 +175,11 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				columns: [
 					{
+						added: true,
+						position: 0,
+						title: 'Doelen'
+					},
+					{
 						added: false,
 						explanation: false,
 						position: 1,
@@ -193,10 +198,15 @@ const reducer = (state = INITIAL_STATE, action) => {
 							type: 'radiobuttons',
 							options: []
 						}
+					},
+					{
+						added: true,
+						position: 3,
+						title: 'Evaluatie'
 					}
 				],
 				goals: [],
-				group: 0,
+				group: 5,
 				inputTypes: {
 					checkboxes: 'checkboxes',
 					radiobuttons: 'radiobuttons',
@@ -208,7 +218,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 					title: '',
 					visible: false
 				},
-				period: 0,
+				period: 1,
 				position: 0, // This property helps functions rembember which column or row is currently edited
 				teacher: '',
 				year: `${year1} - ${year2}`
