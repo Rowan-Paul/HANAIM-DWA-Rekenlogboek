@@ -29,7 +29,6 @@ function AllowStudentAccess(props) {
 	}
 
 	const openEvaluationPhase = () => {
-		console.log(selectedLearnGoal)
 		updatePhase('evaluation')
 		props.updateActiveGoal({
 			activeGoal: selectedLearnGoal,
@@ -39,21 +38,15 @@ function AllowStudentAccess(props) {
 	}
 
 	const selectGoal = nr => {
-		console.log(nr)
 		setSelectedLearnGoal(nr)
 	}
 
 	const filterClick = (schoolYear, period) => {
-		console.log(schoolYear, period)
 		props.getLogbookData({ schoolYear, period })
 	}
 
 	const getLearnGoals = () =>
 		props.currentLogbook.goals.map(goal => {
-			console.log(
-				`pos ${goal.position} selected ${selectedLearnGoal} active ${props.currentLogbook.activeGoal}`
-			)
-
 			return (
 				<div
 					className={classNames('goal', {
