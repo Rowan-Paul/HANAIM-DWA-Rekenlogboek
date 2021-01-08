@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 require('./models/logbook')
 require('./models/studentlogbook')
-require('./models/templates')
 
 const dbName = 'rekenlogboek'
 
@@ -9,7 +8,6 @@ const db = mongoose.connection
 
 const Logbook = mongoose.model('Logbook')
 const StudentLogbook = mongoose.model('StudentLogbook')
-const Templates = mongoose.model('Templates')
 
 mongoose
 	.connect(`mongodb://localhost:27017/${dbName}`, {
@@ -21,9 +19,6 @@ mongoose
 	})
 	.then(() => {
 		return seedStudentLogboek()
-	})
-	.then(() => {
-		return seedTemplates()
 	})
 	.catch(err => {
 		console.log(err)
@@ -37,100 +32,75 @@ async function seedLogbook() {
 
 	await Logbook.insertMany([
 		{
+			_id: '5fbbcad37f53f84d0c6fbb75',
 			period: 1,
-			group: 5,
-			year: '19/20',
-			teacher: 'xxx',
+			group: 6,
+			year: '2020 - 2021',
+			currentPhase: 'pretest',
+			activeGoal: 1,
 			columns: [
 				{
+					_id: '5fbbcad37f53f84d0c6fbb76',
 					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
+					title: 'Doelen'
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb77',
 					position: 1,
 					title: 'Lesofzo',
-					inputType: 'xx'
+					explanation: true,
+					input: {
+						type: 'radiobuttons',
+						options: ['sdsadasd', 'sadasdasdasd']
+					}
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb78',
 					position: 2,
 					title: 'Instructie nodig?',
-					inputType: 'xx'
+					explanation: false,
+					input: {
+						type: 'checkboxes',
+						options: ['sdsadasd', 'sadasdasdasd']
+					}
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb79',
 					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
+					title: 'Evaluatie'
 				}
 			],
 			goals: [
 				{
+					_id: '5fbbcad37f53f84d0c6fbb7a',
 					position: 0,
 					title: 'Leer rekenen',
 					description: 'test0000',
-					imagelink: 'xxxxxxxxxxxxxx'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb7b',
 					position: 1,
 					title: 'Leer 1+1',
 					description: 'test1111',
-					imagelink: 'xxxxxxxxxxssaasdasdaxx'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb7c',
 					position: 2,
 					title: 'Leer 1*1',
 					description: 'test2222',
-					imagelink: 'aaaaaaa'
-				}
-			]
-		},
-		{
-			period: 2,
-			group: 7,
-			year: '19/20',
-			teacher: 'yyyy',
-			columns: [
-				{
-					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				},
 				{
-					position: 1,
-					title: 'Lesofzo',
-					inputType: 'xx'
-				},
-				{
-					position: 2,
-					title: 'Instructie nodig?',
-					inputType: 'xx'
-				},
-				{
+					_id: '5fbbcad37f53f84d0c6fbb7d',
 					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
+					title: 'Les 5',
+					description: 'test333333',
+					imageLink: '1608197560601_achtegrondgoed2.png'
 				}
 			],
-			goals: [
-				{
-					position: 0,
-					title: 'Leer rekenen',
-					description: 'test0000',
-					imagelink: 'xxxxxxxxxxxxxx'
-				},
-				{
-					position: 1,
-					title: 'Leer 1+1',
-					description: 'test1111',
-					imagelink: 'xxxxxxxxxxssaasdasdaxx'
-				},
-				{
-					position: 2,
-					title: 'Leer 1*1',
-					description: 'test2222',
-					imagelink: 'aaaaaaa'
-				}
-			]
+			__v: 0
 		}
 	])
 }
@@ -142,87 +112,58 @@ async function seedStudentLogboek() {
 
 	await StudentLogbook.insertMany([
 		{
-			logbookID: logbook[0]._id,
+			_id: '5fbbcad37f53f84d0c6fbb85',
+			logbookID: '5fbbcad37f53f84d0c6fbb75',
 			student: 'janpiet',
 			answers: [
 				{
+					_id: '5fbbcad37f53f84d0c6fbb86',
 					goalPosition: 0,
-					columnPosition: 3,
+					columnPosition: 1,
 					answer: {
-						inputType: 'Evaluatie',
-						value: 'Happy',
-						boolean: false
+						inputType: 'radiobuttons',
+						value: 'sdsadasd',
+						explanation: 'sdsadasddsdsdsdsd'
 					}
 				},
 				{
+					_id: '5fbbcad37f53f84d0c6fbb87',
 					goalPosition: 0,
 					columnPosition: 2,
 					answer: {
-						inputType: 'Instruction',
-						value: "I'm bad at this",
-						boolean: true
+						inputType: 'checkboxes',
+						value: 'sdsadasd'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb87',
+					goalPosition: 0,
+					columnPosition: 3,
+					answer: {
+						value: 'Happy'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb89',
+					goalPosition: 1,
+					columnPosition: 1,
+					answer: {
+						inputType: 'radiobuttons',
+						value: 'sdsadasd',
+						explanation: 'sdsadasddsdsdsdsd'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb90',
+					goalPosition: 1,
+					columnPosition: 2,
+					answer: {
+						inputType: 'checkboxes',
+						value: 'sdsadasd'
 					}
 				}
-			]
-		}
-	])
-}
-
-async function seedTemplates() {
-	await Templates.deleteMany()
-
-	await Templates.insertMany([
-		{
-			name: 'groep 5 template',
-			group: 5,
-			columns: [
-				{
-					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
-				},
-				{
-					position: 1,
-					title: 'Lesofzo',
-					inputType: 'xx'
-				},
-				{
-					position: 2,
-					title: 'Instructie nodig?',
-					inputType: 'xx'
-				},
-				{
-					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
-				}
-			]
-		},
-		{
-			name: 'groep 7 18/19 template',
-			group: 7,
-			columns: [
-				{
-					position: 0,
-					title: 'Doelen',
-					inputType: 'xx'
-				},
-				{
-					position: 1,
-					title: 'Lesofzo',
-					inputType: 'xx'
-				},
-				{
-					position: 2,
-					title: 'Instructie nodig?',
-					inputType: 'xx'
-				},
-				{
-					position: 3,
-					title: 'Evaluatie',
-					inputType: 'xx'
-				}
-			]
+			],
+			__v: 0
 		}
 	])
 }

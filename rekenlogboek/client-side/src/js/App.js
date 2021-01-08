@@ -4,17 +4,23 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Header from '../js/common/Header'
 
-import { TeacherLanding } from './teacher/containers/TeacherLanding'
+// TEACHER PAGES
+import TeacherIndex from './teacher/containers/Index'
+import GroupOverview from './teacher/containers/group-overview/Index'
+import GroupOverviewAnswers from './teacher/containers/group-overview/Answers'
+// LOGBOOK DESIGNER PAGES
+import LBDesignerIndex from './logbook-designer/containers/Index'
 
-// LOGBOOK PAGES
-import newLBGeneral from './teacher/containers/General'
-import newLBColumns from './teacher/containers/Columns'
-import newLBGoals from './teacher/containers/Goals'
-import newLBOverview from './teacher/containers/Overview'
-import newLBCompleted from './teacher/containers/Completed'
+// NEW LOGBOOK PAGES (FLOW ORDER)
+import newLBGeneral from './logbook-designer/containers/new-logbook/General'
+import newLBColumns from './logbook-designer/containers/new-logbook/Columns'
+import newLBGoals from './logbook-designer/containers/new-logbook/Goals'
+import newLBOverview from './logbook-designer/containers/new-logbook/Overview'
+import newLBCompleted from './logbook-designer/containers/new-logbook/Completed'
 
 import Logbooks from './teacher/containers/Logbooks'
 import StudentLogbook from './teacher/containers/Studentlogbook'
+import AllowStudentAccess from './teacher/containers/AllowStudentAccess'
 
 // SIGN IN PAGES
 import SignIn from '../js/sign-in/SignIn'
@@ -31,16 +37,16 @@ import NoAccess from '../js/no-access/NoAccess'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES
-import Default from './student/containers/Default'
-import defaultStudentPage from './student/containers/Default'
-import AfterPreTest from './student/containers/AfterPreTest'
-import AfterPreTestEnd from './student/containers/AfterPreTestEnd'
-import InstructionsEnd from './student/containers/InstructionsEnd'
-import EvaluationsEnd from './student/containers/EvaluationsEnd'
-import Instructions from './student/containers/Instructions'
-import Evaluations from './student/containers/Evaluations'
+import { Default } from './student/containers/Default'
+import { AfterPreTest } from './student/containers/AfterPreTest'
+import { AfterPreTestEnd } from './student/containers/AfterPreTestEnd'
+import { Instructions } from './student/containers/Instructions'
+import { InstructionsEnd } from './student/containers/InstructionsEnd'
+import { Evaluations } from './student/containers/Evaluations'
+import { EvaluationsEnd } from './student/containers/EvaluationsEnd'
 
 import '../scss/App.scss'
+import AuthMiddleware from './AuthMiddleware'
 
 function App() {
 	// Check for the Microsoft Teams SDK object.
@@ -51,57 +57,86 @@ function App() {
 			return (
 				<div>
 					<Router>
-						<Header />
-						<main>
-							<Switch>
-								<Route
-									exact
-									path="/teacher/new-logbook/general"
-									component={newLBGeneral}
-								/>
-								<Route
-									exact
-									path="/teacher/new-logbook/columns"
-									component={newLBColumns}
-								/>
-								<Route
-									exact
-									path="/teacher/new-logbook/goals"
-									component={newLBGoals}
-								/>
-								<Route
-									exact
-									path="/teacher/new-logbook/overview"
-									component={newLBOverview}
-								/>
-								<Route
-									exact
-									path="/teacher/new-logbook/done"
-									component={newLBCompleted}
-								/>
-								{/* A few route so it gets the correct styling? */}
-								<Route path="/teacher/new-logbook"></Route>
-								<Route
-									exact
-									path="/teacher/logbooks"
-									component={Logbooks}
-								></Route>
-								<Route
-									exact
-									path="/teacher/logbooks/studentlogbook"
-									component={StudentLogbook}
-								></Route>
-								<Route path="/teacher" component={TeacherLanding} />
+						<AuthMiddleware>
+							<Header />
+							<main>
+								<Switch>
+									{/* LOGBOOK DESIGNER -> NEW LOGBOOK */}
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/general"
+										component={newLBGeneral}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/columns"
+										component={newLBColumns}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/goals"
+										component={newLBGoals}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/overview"
+										component={newLBOverview}
+									/>
+									<Route
+										exact
+										path="/logbook-designer/new-logbook/done"
+										component={newLBCompleted}
+									/>
 
-								{/* SIGN-IN */}
-								<Route exact path="/" component={SignIn} />
-								<Route exact path="/auth/succes" component={Succes} />
+									{/* LOGBOOK DESIGNER INDEX  */}
+									<Route
+										path="/logbook-designer"
+										exact
+										component={LBDesignerIndex}
+									/>
 
-								{/* ERROR PAGES */}
-								<Route exact path="/no-access" component={NoAccess} />
-								{/* <Route component={NotFound} /> */}
-							</Switch>
-						</main>
+									{/* LOGBOOK VIEWER */}
+									<Route
+										exact
+										path="/teacher/logbooks"
+										component={Logbooks}
+									></Route>
+									<Route
+										exact
+										path="/teacher/logbooks/studentlogbook"
+										component={StudentLogbook}
+									></Route>
+
+									{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
+									<Route
+										path="/teacher/group-overview/answers"
+										component={GroupOverviewAnswers}
+									/>
+
+									{/* LOGBOOK GROUP OVERVIEW */}
+									<Route
+										path="/teacher/group-overview"
+										component={GroupOverview}
+									/>
+
+									<Route
+										path="/teacher/allow-student-access"
+										component={AllowStudentAccess}
+									/>
+
+									{/* LANDING PAGE */}
+									<Route path="/teacher" exact component={TeacherIndex} />
+
+									{/* SIGN-IN */}
+									<Route exact path="/" component={SignIn} />
+									<Route exact path="/auth/succes" component={Succes} />
+
+									{/* ERROR PAGES */}
+									<Route exact path="/no-access" component={NoAccess} />
+									{/* <Route component={NotFound} /> */}
+								</Switch>
+							</main>
+						</AuthMiddleware>
 					</Router>
 				</div>
 			)
@@ -129,22 +164,27 @@ function App() {
 							path="/student/pretest/done"
 							component={AfterPreTestEnd}
 						/>
+						<Route exact path="/student/instruction" component={Instructions} />
 						<Route
 							exact
-							path="/student/instructions"
-							component={Instructions}
-						/>
-						<Route
-							exact
-							path="/student/instructions/done"
+							path="/student/instruction/done"
 							component={InstructionsEnd}
 						/>
 						<Route exact path="/student/evaluation" component={Evaluations} />
 						<Route
 							exact
-							path="/student/evaluation/end"
+							path="/student/evaluation/done"
 							component={EvaluationsEnd}
 						/>
+
+						{/* TEACHER */}
+						<Route exact path="/teacher/logbooks" component={Logbooks}></Route>
+						<Route
+							exact
+							path="/teacher/logbooks/studentlogbook"
+							component={StudentLogbook}
+						></Route>
+
 						{/* ERROR PAGES */}
 						<Route exact path="/no-access" component={NoAccess} />
 						{/* <Route component={NotFound} /> */}

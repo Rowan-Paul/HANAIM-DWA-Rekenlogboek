@@ -17,6 +17,8 @@
 		border: 1px solid $gray;
 		display: flex;
 		flex-direction: column;
+		height: 16rem;
+		overflow-y: scroll;
 
 		.row {
 			display: flex;
@@ -37,6 +39,11 @@
 					text-align: left;
 				}
 			}
+		}
+
+		.row.first {
+			font-weight: 700;
+			border-bottom-color: #000;
 		}
 	}
 }

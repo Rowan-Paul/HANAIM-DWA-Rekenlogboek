@@ -1,61 +1,118 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import Radiobuttons from '../../common/InputTypes/Radiobuttons'
 import Checkboxes from '../../common/InputTypes/Checkboxes'
+import RadioButtons from '../../common/InputTypes/Radiobuttons'
 import Textarea from '../../common/InputTypes/Textarea'
-import Evaluation from '../../common/InputTypes/Evaluation'
+import {
+	saveAnswerRadio,
+	saveAnswerCheck,
+	saveAnswerText,
+	saveExplanation
+} from '../../redux/studentlogbook/actions'
 
-export default function Question(props) {
-	const getInputTypes = () => {
-		switch (props.type) {
-			case 'radiobuttons':
-				return (
-					<Radiobuttons
-						explanation={props.explanation}
-						options={props.options}
-						readonly={true}
-						inputAnswer={props.inputAnswer}
-						changeAnswer={props.changeAnswer}
-						changeExplanation={props.changeExplanation}
-					/>
-				)
-				break
-			case 'checkboxes':
+function Question(props) {
+	const handler = () => {
+		switch (props.input.type) {
+			// CHECKBOXES
+			case props.inputTypes.checkboxes:
 				return (
 					<Checkboxes
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
 						explanation={props.explanation}
-						options={props.options}
-						readonly={true}
-						inputAnswer={props.inputAnswer}
-						changeAnswer={props.changeAnswer}
-						changeExplanation={props.changeExplanation}
+						changeHandler={newAnswerValue => {
+							props.saveAnswerCheck(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
+						explanationChangeHandler={newExplanationValue => {
+							props.saveExplanation(
+								newExplanationValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
 					/>
 				)
-				break
-			case 'textarea':
+
+			// RADIOBUTTONS
+			case props.inputTypes.radiobuttons:
+				return (
+					<RadioButtons
+						answer={props.answer}
+						options={props.input.options}
+						state={props.state}
+						explanation={props.explanation}
+						changeHandler={newAnswerValue => {
+							props.saveAnswerRadio(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
+						explanationChangeHandler={newExplanationValue => {
+							props.saveExplanation(
+								newExplanationValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
+					/>
+				)
+
+			// TEXTAREA
+			case props.inputTypes.textarea:
 				return (
 					<Textarea
-						changeAnswer={props.changeAnswer}
-						inputAnswer={props.inputAnswer}
+						answer={props.answer}
+						state={props.state}
+						changeHandler={newAnswerValue => {
+							props.saveAnswerText(
+								newAnswerValue,
+								props.goalPosition,
+								props.columnPosition
+							)
+						}}
 					/>
 				)
-				break
-			case 'evaluation':
-				return (
-					<Evaluation
-						changeAnswer={props.changeAnswer}
-						inputAnswer={props.inputAnswer}
-						readonly={true}
-					/>
-				)
-				break
+			default:
+				return ''
 		}
 	}
 
 	return (
-		<div className="question">
-			<h2>{props.title}</h2>
-			{getInputTypes()}
+		<div className="InputType Cell">
+			<ul>
+				<li>{handler()}</li>
+			</ul>
 		</div>
 	)
 }
+
+const mapStateToProps = state => {
+	return {
+		inputTypes: state.main.inputTypes,
+		inputStates: state.main.inputStates
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
+		saveAnswerCheck: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerCheck(answerValue, goalPosition, columnPosition)),
+		saveAnswerText: (answerValue, goalPosition, columnPosition) =>
+			dispatch(saveAnswerText(answerValue, goalPosition, columnPosition)),
+		saveExplanation: (newExplanationValue, goalPosition, columnPosition) =>
+			dispatch(
+				saveExplanation(newExplanationValue, goalPosition, columnPosition)
+			)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question)

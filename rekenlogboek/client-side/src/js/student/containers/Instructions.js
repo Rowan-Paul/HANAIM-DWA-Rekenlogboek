@@ -1,52 +1,137 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import '../../../scss/student/containers/Instructions.scss'
 import '../../../scss/student/Student.scss'
 
 import ProgressBar from '../components/ProgressBar'
 import LearnGoal from '../components/LearnGoal'
-import Jumbotron from '../../common/Jumbotron'
 import LearnGoalImage from '../components/LearnGoalImage'
 import Question from '../components/Question'
+
+import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
-function Instructions() {
-	const previousPage = () => {}
-	const nextPage = () => {}
+import {
+	setCurrentGoal,
+	decrementCurrentGoal,
+	incrementCurrentGoal,
+	loadStudentLogbook
+} from '../../redux/studentlogbook/actions'
+
+function InstructionsUI(props) {
+	useEffect(() => {
+		props.loadStudentLogbook()
+	}, [props.currentGoal])
+
+	const getAnswer = () =>
+		props.answers.filter(
+			answer =>
+				answer.goalPosition === props.currentGoal && answer.columnPosition === 2
+		)[0]
+
+	const getPretestAnswer = () => {
+		const answer = props.answers.filter(
+			answer =>
+				answer.goalPosition === props.currentGoal && answer.columnPosition === 1
+		)[0]
+
+		if (answer === undefined) {
+			return '-'
+		} else {
+			return answer.answer.value
+		}
+	}
+
+	const previousPage = () => {
+		if (props.currentGoal > 0) {
+			props.decrementCurrentGoal()
+		}
+	}
+
+	const nextPage = () => {
+		if (props.currentGoal < props.goals.length - 1) {
+			props.incrementCurrentGoal()
+		} else {
+			props.history.push('/student/instruction/done')
+		}
+	}
+
+	const getProgressBarNumbers = () => {
+		const numbers = props.answers.map(answer => {
+			if (answer.columnPosition === 2) {
+				return answer.goalPosition
+			}
+		})
+		return numbers.filter(number => number !== undefined)
+	}
 
 	return (
-		<div className="instructions student-container">
-			<ProgressBar itemCount={5} done={[1, 3]} />
+		<div className="after-pre-test student-container">
+			<ProgressBar
+				itemCount={props.goals.length}
+				done={getProgressBarNumbers()}
+				changeHandler={props.setCurrentGoal}
+			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
-						{/* TODO: replace with data from database */}
 						<LearnGoal
-							goal="Doel 1:test"
-							description="Je leert getallen afronden op tientallen, honderdtallen en duizendtallen. Je leert optellen en aftrekken met de afgeronde getallen."
+							currentGoal={props.currentGoal}
+							goal={props.goals[props.currentGoal].title}
+							description={props.goals[props.currentGoal].description}
 						/>
-						<Question />
+						<Question
+							answer={getAnswer()}
+							goalPosition={props.currentGoal}
+							columnPosition={2}
+							input={props.column.input}
+							state={props.inputStates.inUse}
+							explanation={props.explanation}
+						/>
 					</div>
 					<div className="right-side">
-						{/* TODO: replace with src from database */}
 						<LearnGoalImage
-							src="/uploads/goals/LearnGoalThumb.png"
-							title="Dit gaf je aan na de pre-toets:"
-							description="“Ik snap het, maar vind het nog lastig.”"
+							src={props.goals[props.currentGoal].imageLink}
+							title="Dit gaf je aan na de pretoets: "
+							description={getPretestAnswer()}
 						/>
 					</div>
 				</div>
 			</Jumbotron>
-			{/* TODO: create handlers */}
-			<div className="prev button">
-				<Button color="gray" value="Vorige" handler={() => previousPage()} />
-			</div>
-			<div className="next button">
-				<Button color="blue" value="Volgende" handler={() => nextPage()} />
+			<div className="buttons">
+				<div className="prev button">
+					<Button color="gray" value="Vorige" handler={() => previousPage()} />
+				</div>
+				<div className="next button">
+					<Button color="blue" value="Volgende" handler={() => nextPage()} />
+				</div>
 			</div>
 		</div>
 	)
 }
 
-export default withRouter(Instructions)
+function mapStateToProps(state) {
+	return {
+		explanation: state.studentLogbook.logbook.columns[2].explanation,
+		inputStates: state.main.inputStates,
+		answers: state.studentLogbook.studentlogbook.answers,
+		column: state.studentLogbook.logbook.columns[2],
+		currentGoal: state.studentLogbook.currentGoal,
+		goals: state.studentLogbook.logbook.goals
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
+		incrementCurrentGoal: () => dispatch(incrementCurrentGoal()),
+		decrementCurrentGoal: () => dispatch(decrementCurrentGoal()),
+		loadStudentLogbook: () => dispatch(loadStudentLogbook())
+	}
+}
+
+export const Instructions = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(InstructionsUI)

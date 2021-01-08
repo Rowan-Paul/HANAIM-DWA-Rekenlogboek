@@ -14,6 +14,6 @@ Testen zullen worden uitgevoerd voordat het gemerged wordt met de develop branch
 
 Het deployen van de site gebeurt op een Azure server die node kan draaien voor de server en react voor de front-end.
 
-<!-- Iets meer informatie over wat voor server etc -->
+De server kan bijvoorbeeld een VPS zijn met Ubuntu 20.04.
 
 Het ondersteunen en onderhouden van de applicatie tijdens deployment is niet de verantwoordelijkheid van het team, zoals beschreven in hoofdstuk 4.

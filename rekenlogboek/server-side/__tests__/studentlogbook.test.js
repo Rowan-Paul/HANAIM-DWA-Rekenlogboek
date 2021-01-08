@@ -2,8 +2,11 @@
  * @jest-environment node
  */
 
+//  CHANGE DB NAME IN app.js TO testrekenlogboek
+
 'use strict'
 
+const { response } = require('express')
 //Database mocking for later?!
 
 //https://zellwk.com/blog/endpoint-testing/
@@ -32,8 +35,6 @@
 //   });
 // });
 
-
-
 const mongoose = require('mongoose')
 const { default: fetch } = require('node-fetch')
 require('../models/studentlogbook')
@@ -41,132 +42,199 @@ require('../models/studentlogbook')
 const Studentlogbook = mongoose.model('StudentLogbook')
 
 const getTestStudentlogbook = async () => {
-    const studentlogbookID = await Studentlogbook.find({
-        student: 'James'
-    })
-    .lean()
-    .then(response => {
-        return response[0]._id
-    })
+	const studentlogbookID = await Studentlogbook.find({
+		student: 'James'
+	})
+		.lean()
+		.then(response => {
+			return response[0]._id
+		})
 
-    return studentlogbookID
+	return studentlogbookID
 }
 
 describe('Studentlogbook route tests', () => {
+	beforeAll(async () => {
+		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
+			useNewUrlParser: true,
+			useUnifiedTopology: true
+		})
 
-    beforeAll(async () => {
-        await mongoose.connect('mongodb://localhost:27017/rekenlogboek', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+		await Studentlogbook.create({
+			logbookID: '5fbf66ca14b7c811a829fadf',
+			student: 'James',
+			answers: [
+				{
+					goalPosition: 1,
+					columnPosition: 1,
+					answer: {
+						inputType: 'string',
+						value: 'This is an answer 1',
+						boolean: true
+					}
+				},
+				{
+					goalPosition: 1,
+					columnPosition: 2,
+					answer: {
+						inputType: 'string',
+						value: 'This is an answer 2',
+						boolean: true
+					}
+				},
+				{
+					goalPosition: 2,
+					columnPosition: 1,
+					answer: {
+						inputType: 'string',
+						value: 'This is an answer 3',
+						boolean: true
+					}
+				}
+			]
+		})
+	})
 
-        await Studentlogbook.create({
-            logbookID: "5fbf66ca14b7c811a829fadf",
-            student: 'James',
-            answers: [
-                {
-                    goalPosition: 1,
-                    columnPosition: 1,
-                    answer: {
-                       inputType: 'string',
-                       value: 'This is an answer 1',
-                       boolean: true
-                    }
-                },
-                {
-                    goalPosition: 1,
-                    columnPosition: 2,
-                    answer: {
-                       inputType: 'string',
-                       value: 'This is an answer 2',
-                       boolean: true
-                    }
-                },
-                {
-                    goalPosition: 2,
-                    columnPosition: 1,
-                    answer: {
-                       inputType: 'string',
-                       value: 'This is an answer 3',
-                       boolean: true
-                    }
-                }
-            ]
-        })
-    })
+	afterAll(async () => {
+		await Studentlogbook.deleteMany({
+			student: 'James'
+		})
+		await Studentlogbook.deleteMany({
+			student: 'Piet'
+		})
+		await mongoose.disconnect()
+	})
 
-    afterAll(async () => {
-        await Studentlogbook.deleteMany({
-            student: 'James'
-        })
-        await Studentlogbook.deleteMany({
-            student: 'Piet'
-        })
-        await mongoose.disconnect()
-    })
+	test('Create a new studentlogbook', async () => {
+		const createResponse = await fetch('http://localhost:3000/studentlogbook', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				logbookID: '5fbf66ca14b7c811a829fada',
+				student: 'Piet'
+			})
+		}).then(response => response.status)
 
-    test('Create a new studentlogbook', async () =>{
-        const createResponse = await fetch('http://localhost:3000/studentlogbook', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                logbookID: "5fbf66ca14b7c811a829fada",
-                student: 'Piet'
-            })
-        })
-        .then(response => response.status)
+		expect(createResponse).toEqual(200)
+	})
 
-        expect(createResponse).toEqual(200)
-    })
+	test('Get all answers from all students for a logbook', async () => {
+		const createResponse = await fetch(
+			'http://localhost:3000/studentlogbook/logbooks/5fbf66ca14b7c811a829fadf/answers',
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
 
-    test('Get information about studentlogbook by ID', async () => {
-        const studentlogbookID = await getTestStudentlogbook()
+		expect(createResponse).toEqual(200)
+	})
 
-        const response = await fetch('http://localhost:3000/studentlogbook/' + studentlogbookID, {
-            method: 'GET'
-        })
-        .then(response => response.json())
+	test('Get information about studentlogbook by ID', async () => {
+		const studentlogbookID = await getTestStudentlogbook()
 
-        expect(response.student).toEqual('James')
-    })
+		const response = await fetch(
+			'http://localhost:3000/studentlogbook/' + studentlogbookID,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
-    test('Get answers from Student by ID', async () => {
-        const studentlogbookID = await getTestStudentlogbook()
+		expect(response.student).toEqual('James')
+	})
 
-        const response = await fetch('http://localhost:3000/studentlogbook/' + studentlogbookID + '/answers', {
-            method: 'GET'
-        })
-        .then(response => response.json())
+	test('Get answers from Student by ID', async () => {
+		const studentlogbookID = await getTestStudentlogbook()
 
-        expect(response[0].answer.value).toEqual('This is an answer 1')
-        expect(response[1].answer.value).toEqual('This is an answer 2')
-        expect(response[2].answer.value).toEqual('This is an answer 3')
-    })
+		const response = await fetch(
+			'http://localhost:3000/studentlogbook/' + studentlogbookID + '/answers',
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
-    test('Get answers from a student from one column', async () => {
-        const studentlogbookID = await getTestStudentlogbook()
+		expect(response[0].answer.value).toEqual('This is an answer 1')
+		expect(response[1].answer.value).toEqual('This is an answer 2')
+		expect(response[2].answer.value).toEqual('This is an answer 3')
+	})
 
-        const response = await fetch('http://localhost:3000/studentlogbook/' + studentlogbookID + '/answers/column/' + 1, {
-            method: 'GET'
-        })
-        .then(response => response.json())
+	test('Get answers from a student from one column', async () => {
+		const studentlogbookID = await getTestStudentlogbook()
 
-        expect(response[0].answer.value).toEqual('This is an answer 1')
-        expect(response[1].answer.value).toEqual('This is an answer 3')
-    })
+		const response = await fetch(
+			'http://localhost:3000/studentlogbook/' +
+				studentlogbookID +
+				'/answers/column/' +
+				1,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
-    test('Get answers from a student from one row (goal)', async () => {
-        const studentlogbookID = await getTestStudentlogbook()
+		expect(response[0].answer.value).toEqual('This is an answer 1')
+		expect(response[1].answer.value).toEqual('This is an answer 3')
+	})
 
-        const response = await fetch('http://localhost:3000/studentlogbook/' + studentlogbookID + '/answers/goal/' + 1, {
-            method: 'GET'
-        })
-        .then(response => response.json())
+	test('Get answers from a student from one row (goal)', async () => {
+		const studentlogbookID = await getTestStudentlogbook()
 
-        expect(response[0].answer.value).toEqual('This is an answer 1')
-        expect(response[1].answer.value).toEqual('This is an answer 2')
-    })
+		const response = await fetch(
+			'http://localhost:3000/studentlogbook/' +
+				studentlogbookID +
+				'/answers/goal/' +
+				1,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
 
+		expect(response[0].answer.value).toEqual('This is an answer 1')
+		expect(response[1].answer.value).toEqual('This is an answer 2')
+	})
+	test('GET group answers with filters', async () => {
+		const studentlogbookID = '5fbbcad37f53f84d0c6fbb75'
+
+		let response
+		response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-answers?row=0&column=3&answer=Happy`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response[0].student).toEqual('janpiet')
+
+		response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-answers?row=0&column=3&answer=Sad`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response[0].student).toEqual('klaas')
+	})
+
+	test('Get group-overview (answers of all students)', async () => {
+		const studentlogbookID = '5fbbcad37f53f84d0c6fbb75'
+
+		const response = await fetch(
+			`http://localhost:3000/studentLogbook/${studentlogbookID}/group-overview`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(response.rows[0][0]).toEqual({})
+		expect(response.rows[0][1]).toEqual([
+			{
+				value: 'sdsadasd',
+				count: 1
+			},
+			{
+				value: 'sadasdasdasd',
+				count: 1
+			}
+		])
+	})
 })

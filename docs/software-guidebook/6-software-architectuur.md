@@ -8,19 +8,19 @@ Hieronder staan 3 verschillende diagrammen die de software architectuur duidelij
 
 #### 6.1.1 Container diagram
 
-In het container diagram hieronder is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 2 containers: de client-side en de server-side.
+In het container diagram hieronder is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 2 containers: de Single Page Application en de Server.
 
 @import "./c4-model/containers.svg"
 
-#### 6.1.2 Component diagram: client-side
+#### 6.1.2 Component diagram: Single Page Application
 
-Hieronder staat het component diagram van de client side die tracht in 1 oogopslag een overzicht te geven over de gehele client-side applicatie.
+Hieronder staat het component diagram van de Single Page Application, ook wel de client-side genoemd, die tracht in 1 oogopslag een overzicht te geven over de gehele client-side applicatie.
 
-@import "./c4-model/components-client.svg"
+@import "./c4-model/components-SPA.svg"
 
-#### 6.1.3 Component diagram: server-side
+#### 6.1.3 Component diagram: Server
 
-Hieronder staat het component diagram van de server side die tracht in 1 oogopslag een overzicht te geven over de gehele server-side applicatie.
+Hieronder staat het component diagram van de server die tracht in 1 oogopslag een overzicht te geven over de gehele server-side applicatie.
 
 @import "./c4-model/components-server.svg"
 
@@ -40,7 +40,7 @@ De client-side is opgedeeld in verschillende mappen voor verschillende onderdele
 /src
     /img    -> Bevat afbeeldingen voor de paginas.
     /js     -> Bevat de containers en componenten voor de pagina's.
-    /redux  -> Bevat de redux store, reducers en action creators.
+        /redux  -> Bevat de redux store, reducers en action creators.
     /scss   -> Bevat de styling voor de paginas.
 ```
 
@@ -54,3 +54,7 @@ app.js                  ->Hoofdbestand waarmee de server gestart kan worden
 ```
 
 Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `http://localhost:3000`) ervoor te zetten
+
+### 6.3 Real-time
+
+In onze applicatie wordt gebruik gemaakt van real-time updates in het logboekoverzicht van de leraar. Wanneer een leerling een antwoord veranderd of toevoegt wordt er een WebSocket bericht gestuurd naar de leraar via `Socket.io`. Dit is de enigste plek in de applicatie waar real-time wordt gebruikt.
