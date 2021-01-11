@@ -192,7 +192,6 @@ describe('Studentlogbook route tests', () => {
 		expect(response[0].answer.value).toEqual('This is an answer 1')
 		expect(response[1].answer.value).toEqual('This is an answer 2')
 	})
-
 	test('GET group answers with filters', async () => {
 		const studentlogbookID = '5fbbcad37f53f84d0c6fbb75'
 

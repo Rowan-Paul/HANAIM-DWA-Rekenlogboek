@@ -37,7 +37,7 @@ function InputType(props) {
 
 			// TEXTAREA
 			case props.inputTypes.textarea:
-				return <Textarea state={props.state} />
+				return <Textarea state={props.state} answer={props.answer} />
 			default:
 				return ''
 		}

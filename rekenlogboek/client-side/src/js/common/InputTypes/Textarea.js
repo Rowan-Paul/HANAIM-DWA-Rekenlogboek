@@ -38,6 +38,7 @@ function Textarea(props) {
 					<textarea
 						className="Textarea"
 						placeholder="Omschrijving toevoegen"
+						value={props.answer?.answer.value}
 						readOnly
 					></textarea>
 				)

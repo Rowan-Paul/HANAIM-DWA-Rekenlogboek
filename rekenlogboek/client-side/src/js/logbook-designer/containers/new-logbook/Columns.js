@@ -54,7 +54,7 @@ function Columns(props) {
 	return (
 		<div className="new-logbook">
 			{modal && (
-				<Modal handler={props.setColumn}>
+				<Modal handler={props.setColumn} btnValue="Toevoegen">
 					<AddColumn />
 				</Modal>
 			)}

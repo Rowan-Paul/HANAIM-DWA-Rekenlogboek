@@ -7,8 +7,8 @@ import { useHistory, withRouter } from 'react-router-dom'
 import ButtonContainer from '../../common/ButtonContainer'
 
 import archiveSVG from '../../../img/icons/archive.svg'
-import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 import viewLogbookSVG from '../../../img/icons/view_log_yellow.svg'
+import createLogbookSVG from '../../../img/icons/create_log_green.svg'
 
 function Index(props) {
 	return (
@@ -17,13 +17,15 @@ function Index(props) {
 				<h1>Welkom {props.user.name},</h1>
 				<p>Wat wilt u doen vandaag?</p>
 				<div className="buttons-container">
-					{/* <ButtonContainer
+					<ButtonContainer
 						icon={viewLogbookSVG}
 						color="yellow"
 						description="Bepaal wat de leerlingen in mogen vullen."
 						value="Bepaal toegang"
-						handler={() => changePage('overview')} //TODO: add page
-					/> */}
+						handler={() =>
+							props.history.push('../teacher/allow-student-access')
+						}
+					/>
 
 					<ButtonContainer
 						icon={archiveSVG}

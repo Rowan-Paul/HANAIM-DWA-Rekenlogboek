@@ -5,7 +5,7 @@ import { modalShow, setGoalPosition } from '../../redux/logbook/actions'
 import '../../../scss/common/logbook/TopBar.scss'
 
 function TopBar(props) {
-	const position = props.goals.length + 1
+	const position = props.goals.length
 
 	const newGoal = () => {
 		props.modalShow({ position, title: 'Leerdoelen toevoegen' }) // Show modal

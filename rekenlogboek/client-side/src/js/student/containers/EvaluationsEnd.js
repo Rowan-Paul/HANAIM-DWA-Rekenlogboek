@@ -11,6 +11,8 @@ import ResultTable from '../components/ResultTable'
 import Jumbotron from '../../common/Jumbotron'
 import Button from '../../common/Button'
 
+import { setCurrentGoal } from '../../redux/studentlogbook/actions'
+
 function EvaluationsEndUI(props) {
 	const previousPage = () => {
 		props.history.push('/student/evaluation')
@@ -46,7 +48,14 @@ function EvaluationsEndUI(props) {
 
 	return (
 		<div className="end-screen student-container">
-			<ProgressBar itemCount={1} done={getProgressBarNumbers()} />
+			<ProgressBar
+				itemCount={1}
+				done={getProgressBarNumbers()}
+				changeHandler={goal => {
+					props.setCurrentGoal(goal)
+					props.history.push('/student/evaluation')
+				}}
+			/>
 			<Jumbotron columns={1}>
 				<div className="learn-goal-container">
 					<div className="left-side">
@@ -84,7 +93,13 @@ function mapStateToProps(state) {
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+	return {
+		setCurrentGoal: goal => dispatch(setCurrentGoal(goal))
+	}
+}
+
 export const EvaluationsEnd = connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(withRouter(EvaluationsEndUI))

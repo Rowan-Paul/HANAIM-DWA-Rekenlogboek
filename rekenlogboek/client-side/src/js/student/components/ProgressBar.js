@@ -16,6 +16,9 @@ export default function ProgressBar(props) {
 						locked: props?.locked?.includes(i)
 					})}
 					key={shortid.generate()}
+					onClick={
+						props.changeHandler ? () => props.changeHandler(i) : () => {}
+					}
 				>
 					{/* start from 1 */}
 					{i + 1}

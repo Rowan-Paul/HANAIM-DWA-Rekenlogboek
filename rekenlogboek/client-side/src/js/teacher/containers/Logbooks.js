@@ -7,6 +7,7 @@ import Jumbotron from '../../common/Jumbotron'
 import LogbookList from '../components/LogbookList'
 import TopBar from '../../common/logbook/TopBar'
 import LogbookFrame from '../../common/logbook/LogbookFrame'
+import Button from '../../common/Button'
 
 function Logbooks(props) {
 	useEffect(() => {
@@ -14,15 +15,25 @@ function Logbooks(props) {
 	}, [props.period, props.group])
 
 	return (
-		<Jumbotron>
-			<TopBar title={'Overzicht logboeken'} noBreadcrumbs />
-			<LogbookFrame>
-				<LogbookList
-					logbook={props.logbook}
-					studentlogbooks={props.studentlogbooks}
-				></LogbookList>
-			</LogbookFrame>
-		</Jumbotron>
+		<div className="studentlogbook">
+			<Jumbotron>
+				<TopBar title={'Overzicht logboeken'} noBreadcrumbs />
+				<LogbookFrame>
+					<LogbookList
+						logbook={props.logbook}
+						studentlogbooks={props.studentlogbooks}
+					></LogbookList>
+				</LogbookFrame>
+			</Jumbotron>
+
+			<div className="prev button">
+				<Button
+					color="gray"
+					value="Vorige"
+					handler={() => props.history.push('/teacher')}
+				/>
+			</div>
+		</div>
 	)
 }
 

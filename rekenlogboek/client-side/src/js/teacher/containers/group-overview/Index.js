@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { io } from 'socket.io-client'
 
 import Jumbotron from '../../../common/Jumbotron'
 import TopBar from '../../../common/logbook/TopBar'
@@ -10,11 +11,28 @@ import * as actions from '../../../redux/group-overview/actions'
 import '../../../../scss/teacher/containers/group-overview/Index.scss'
 import Button from '../../../common/Button'
 export const Index = props => {
+	useEffect(() => {
+		const socket = io('ws://localhost:3000')
+		socket.on('NEW_ANSWER', data => {
+			props.getLogbookGroupOverview()
+		})
+	}, [])
+
+	const [logbookID, setLogbookID] = useState(props.logbookID)
 	const [logbook, setLogbook] = useState(props.logbook)
 	const [overview, setOverview] = useState(props.overview)
 
 	const logbookHandler = () => {
-		if (!logbook) {
+		if (!logbookID) {
+			props.userGroups.map(group => {
+				if (group.substr(0, 5) === 'Groep') {
+					const groupNo = group.substr(6, 1)
+					if (typeof Number(groupNo)) {
+						props.getLogbookID(groupNo)
+					}
+				}
+			})
+		} else if (!logbook) {
 			props.getLogbook()
 			return ''
 		} else if (!overview) {
@@ -30,6 +48,7 @@ export const Index = props => {
 	}
 
 	useEffect(() => {
+		setLogbookID(props.logbookID)
 		setLogbook(props.logbook)
 		setOverview(props.overview)
 	}, [props])
@@ -54,11 +73,14 @@ export const Index = props => {
 
 const mapStateToProps = state => ({
 	logbookTypes: state.main.logbookTypes,
+	logbookID: state.groupOverview.logbookID,
 	logbook: state.groupOverview.logbook,
-	overview: state.groupOverview.overview
+	overview: state.groupOverview.overview,
+	userGroups: state.main.user.groups
 })
 
 const mapDispatchToProps = dispatch => ({
+	getLogbookID: payload => dispatch(actions.getLogbookID(payload)),
 	getLogbook: () => dispatch(actions.getLogbook()),
 	getLogbookGroupOverview: () => dispatch(actions.getLogbookGroupOverview())
 })
