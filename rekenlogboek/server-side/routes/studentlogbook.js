@@ -11,8 +11,6 @@ const StudentLogbook = mongoose.model('StudentLogbook')
 
 // Check if a logbook exists for a student in a group
 router.get('/:student/logbooks/:logbookID', (req, res) => {
-	console.log(req.params.logbookID)
-	console.log(req.params.student)
 	StudentLogbook.findOne({
 		$and: [
 			{ logbookID: { $eq: req.params.logbookID } },
@@ -23,11 +21,6 @@ router.get('/:student/logbooks/:logbookID', (req, res) => {
 			if (response === null) {
 				res.sendStatus(404)
 			} else {
-				// const obj = {
-				// 	studentlogbookID: response._id
-				// }
-				// res.status(200).send(obj)
-				console.log('Logging the reponse on studentlogbook: ' + response)
 				res.status(200).send(response)
 			}
 		})
@@ -163,11 +156,9 @@ router.get('/:logbookID/group-answers', (req, res) => {
 
 // Get all answers given by the student
 router.get('/:id/answers', (req, res) => {
-	console.log('logging all ansers from student: ' + req.params.id)
 	StudentLogbook.findById(req.params.id)
 		.lean()
 		.then(response => {
-			console.log('Logging all answers from a student reponse: ' + response)
 			res.status(200).send(response.answers)
 		})
 		.catch(err => {

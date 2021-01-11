@@ -74,7 +74,6 @@ router.get('/groups/:group', (req, res) => {
 		group: req.params.group,
 		currentPhase: { $ne: 'notVisible' }
 	}).then(response => {
-		console.log(response)
 		if (response) {
 			res.status(200).send(response)
 		} else {
@@ -240,7 +239,6 @@ router.get('/groups/:group/years/:year/periods', (req, res) => {
 	})
 		.distinct('period', () => {})
 		.then(response => {
-			console.log(response)
 			res.status(200).send(response)
 		})
 		.catch(err => {
