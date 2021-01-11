@@ -24,6 +24,19 @@ function GroupOverviewRow(props) {
 			`/teacher/group-overview/answers?goal=${goal}&column=${column}&answer=${answer}`
 		)
 
+	const translate = v => {
+		switch (v) {
+			case 'Happy':
+				return 'Blij'
+			case 'Sceptic':
+				return 'OK / Ging wel'
+			case 'Sad':
+				return 'Slecht'
+			default:
+				return v
+		}
+	}
+
 	const listAnswers = (row, column) => {
 		if (overview) {
 			if (overview.rows[row]) {
@@ -34,7 +47,7 @@ function GroupOverviewRow(props) {
 							onClick={() => redirect(row, column, overviewAnswer.value)}
 						>
 							<span>
-								{overviewAnswer.count} x {overviewAnswer.value}
+								{overviewAnswer.count} x {translate(overviewAnswer.value)}
 							</span>
 
 							<i className="fa fa-info-circle" />
