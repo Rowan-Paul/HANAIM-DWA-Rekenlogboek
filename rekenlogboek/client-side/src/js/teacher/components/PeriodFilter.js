@@ -54,7 +54,6 @@ function PeriodFilter(props) {
 		props.changeSelectedPeriod(period)
 	}
 
-	console.log('selected', props.selectedPeriod, 'active', props.activePeriod)
 	return (
 		<div className="period-filter">
 			<div>Leerjaar:</div>

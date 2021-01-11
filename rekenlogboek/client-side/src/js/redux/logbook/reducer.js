@@ -65,7 +65,7 @@ const INITIAL_STATE = {
 		}
 	],
 	goals: [],
-	group: 0,
+	group: 5,
 	inputTypes: {
 		checkboxes: 'checkboxes',
 		radiobuttons: 'radiobuttons',
@@ -77,7 +77,7 @@ const INITIAL_STATE = {
 		title: '',
 		visible: false
 	},
-	period: 0,
+	period: 1,
 	position: 0, // This property helps functions rembember which column or row is currently edited
 	teacher: '',
 	year: `${year1} - ${year2}`

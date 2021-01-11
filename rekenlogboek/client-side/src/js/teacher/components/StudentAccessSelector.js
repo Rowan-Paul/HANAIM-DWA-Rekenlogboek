@@ -62,11 +62,11 @@ function StudentAccessSelector(props) {
 			<ButtonContainer
 				{...(equalsPhase(phases.PRE_TEST)
 					? {
-							description: openPage('pre-toets'),
+							description: closePage('pre-toets'),
 							...checkContainer
 					  }
 					: {
-							description: closePage('pre-toets'),
+							description: openPage('pre-toets'),
 							...lockContainer
 					  })}
 				handler={() => props.updatePhase(phases.PRE_TEST)}
@@ -75,11 +75,11 @@ function StudentAccessSelector(props) {
 			<ButtonContainer
 				{...(equalsPhase(phases.INSTRUCTIONS)
 					? {
-							description: openPage('instructies'),
+							description: closePage('instructies'),
 							...checkContainer
 					  }
 					: {
-							description: closePage('instructies'),
+							description: openPage('instructies'),
 							...lockContainer
 					  })}
 				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
@@ -88,11 +88,11 @@ function StudentAccessSelector(props) {
 			<ButtonContainer
 				{...(equalsPhase(phases.EVALUATION)
 					? {
-							description: openPage('evaluatie'),
+							description: closePage('evaluatie'),
 							...checkContainer
 					  }
 					: {
-							description: closePage('evaluatie'),
+							description: openPage('evaluatie'),
 							...lockContainer
 					  })}
 				handler={() => openLearnGoalModal()}
