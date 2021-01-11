@@ -3,7 +3,7 @@ import '../../../scss/teacher/containers/Studentlogbook.scss'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { io } from 'socket.io-client'
+import socket from '../../websocket/ws'
 import { fetchActiveStudentlogbook } from '../../redux/logbookoverview/actions'
 
 import Button from '../../common/Button'
@@ -13,16 +13,9 @@ import LogbookHeader from '../../common/logbook/LogbookHeader'
 import LogbookRows from '../../common/logbook/LogbookRows'
 
 function StudentLogbook(props) {
-	const socket = io('ws://localhost:3000')
-	const teacher = props.teacher
-
-	socket.on('connect', () => {
-		console.log('Socket id: ', socket.id)
-		socket.emit('join', teacher)
-	})
-
 	socket.on('NEW_ANSWER', data => {
-		if (data === props.student) {
+		if (data.studentlogbookID === props.logbookID) {
+			console.log('stud')
 			props.fetchStudentlogbook(props.logbookID)
 		}
 	})

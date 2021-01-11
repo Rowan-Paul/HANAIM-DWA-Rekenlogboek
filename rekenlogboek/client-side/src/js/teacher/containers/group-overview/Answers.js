@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { LogbookRows } from '../../../common/logbook/LogbookRows'
-import { io } from 'socket.io-client'
+import socket from '../../../websocket/ws'
 
 import Button from '../../../common/Button'
 import Jumbotron from '../../../common/Jumbotron'
@@ -28,9 +28,11 @@ export const Answers = props => {
 	const [loaded, isLoaded] = useState(true)
 
 	useEffect(() => {
-		const socket = io('ws://localhost:3000')
 		socket.on('NEW_ANSWER', data => {
-			props.getLogbookGroupAnswers({ goal, column, answer })
+			if (data.logbookID === props.logbook._id) {
+				console.log('answers')
+				props.getLogbookGroupAnswers({ goal, column, answer })
+			}
 		})
 	}, [])
 
