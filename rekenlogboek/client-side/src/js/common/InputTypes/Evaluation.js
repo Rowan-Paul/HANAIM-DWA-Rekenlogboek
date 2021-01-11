@@ -41,6 +41,7 @@ function Evaluation(props) {
 						>
 							<label>
 								<input
+									className={v.name}
 									name="evaluation"
 									onChange={e => {
 										props.changeHandler(e.target.value)
@@ -63,7 +64,13 @@ function Evaluation(props) {
 				return emotions.map(v => (
 					<li className={v.name} key={shortid.generate()}>
 						<label>
-							<input name="evaluation" type="radio" value={v.name} disabled />
+							<input
+								className={v.name}
+								name="evaluation"
+								type="radio"
+								value={v.name}
+								disabled
+							/>
 							<div>
 								<img src={v.img} alt={v.text} />
 								<span>{v.text}</span>
@@ -84,6 +91,7 @@ function Evaluation(props) {
 						>
 							<label>
 								<input
+									className={v.name}
 									checked={checked}
 									name="evaluation"
 									type="radio"

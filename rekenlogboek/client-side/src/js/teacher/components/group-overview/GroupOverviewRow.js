@@ -62,7 +62,10 @@ function GroupOverviewRow(props) {
 									<div className="Main">
 										<p>{goal.description}</p>
 
-										<button onClick={() => redirect(goal.position)}>
+										<button
+											className={`goal_${goal.position + 1}`}
+											onClick={() => redirect(goal.position)}
+										>
 											Antwoorden bekijken
 										</button>
 									</div>
