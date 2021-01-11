@@ -82,6 +82,7 @@ function InstructionsUI(props) {
 							description={props.goals[props.currentGoal].description}
 						/>
 						<Question
+							question={props.column.title}
 							answer={getAnswer()}
 							goalPosition={props.currentGoal}
 							columnPosition={2}
