@@ -45,6 +45,9 @@ function Evaluation(props) {
 									onChange={e => {
 										props.changeHandler(e.target.value)
 									}}
+									onClick={() => {
+										console.log('teees')
+									}}
 									type="radio"
 									value={v.name}
 									checked={checked}
