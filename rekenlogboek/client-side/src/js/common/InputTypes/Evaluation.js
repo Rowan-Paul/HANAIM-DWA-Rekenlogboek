@@ -45,8 +45,8 @@ function Evaluation(props) {
 									onChange={e => {
 										props.changeHandler(e.target.value)
 									}}
-									onClick={() => {
-										console.log('teees')
+									onClick={e => {
+										props.clickHandler(e.target.value)
 									}}
 									type="radio"
 									value={v.name}

@@ -770,3 +770,76 @@ export const saveExplanation = (
 			.catch(error => console.log(error))
 	}
 }
+
+//Deselects selected evaluation
+export const undoEvaluationSelection = (
+	selectedValue,
+	goalPosition,
+	columnPosition
+) => async (dispatch, getState) => {
+	const logbookid = getState().studentLogbook.studentlogbook._id
+
+	const currentAnswers = await fetch(
+		process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+		{
+			method: 'GET'
+		}
+	)
+		.then(res => res.json())
+		.then(response => response.answers)
+		.catch(error => console.log(error))
+
+	if (
+		currentAnswers.filter(
+			a =>
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition &&
+				a.answer.value === selectedValue
+		).length > 0
+	) {
+		const newAnswers = currentAnswers.map(a => {
+			if (
+				a.columnPosition === columnPosition &&
+				a.goalPosition === goalPosition &&
+				a.answer.value === selectedValue
+			) {
+				a.answer = { ...a.answer, value: '' }
+				return a
+			}
+
+			return a
+		})
+		// we don't want to save empty answers into the database so we filter them out
+		newAnswers.map(a => {
+			if (a.answer.value === '') {
+				delete a.answer.value
+			}
+			return a
+		})
+
+		const filterAnswers = newAnswers.filter(answer => {
+			return answer.answer.value || answer.answer.explanation
+		})
+
+		const body = {
+			answers: filterAnswers
+		}
+
+		fetch(
+			process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + logbookid,
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		)
+			.then(res => res.json())
+			.then(response => {
+				dispatch({
+					type: SAVE_ANSWERS,
+					response
+				})
+			})
+			.catch(error => console.log(error))
+	}
+}
