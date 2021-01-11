@@ -85,10 +85,13 @@ function Question(props) {
 	}
 
 	return (
-		<div className="InputType Cell">
-			<ul>
-				<li>{handler()}</li>
-			</ul>
+		<div>
+			<h2>{props.question}</h2>
+			<div className="InputType Cell">
+				<ul>
+					<li>{handler()}</li>
+				</ul>
+			</div>
 		</div>
 	)
 }
