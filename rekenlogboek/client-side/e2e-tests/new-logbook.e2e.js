@@ -55,6 +55,10 @@ describe(`Create new logbook as a logbook designer`, () => {
 		await oAuth.type('input[name=passwd]', user.pass)
 		await oAuth.click('input[type=submit]')
 
+		// Caption: "Aangemeld blijven?" -> click: "Ja"
+		await oAuth.waitForSelector('#idSIButton9')
+		await oAuth.click('#idSIButton9')
+
 		// Check if MS is closing
 		await oAuth.waitForTimeout(3000)
 		expect(oAuth.isClosed()).toBe(true)
@@ -164,6 +168,7 @@ describe(`Create new logbook as a logbook designer`, () => {
 	})
 
 	test(`Create logbook: Happy path - overview`, async () => {
+		await page.waitForSelector(`.next`)
 		await page.click(`.next`)
 		await page.waitForTimeout(500)
 

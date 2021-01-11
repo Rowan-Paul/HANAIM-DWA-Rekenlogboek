@@ -29,7 +29,9 @@ describe(`Rekenlogboek`, () => {
 		teams = await browser.newPage()
 	})
 
-	afterAll(async () => {})
+	afterAll(async () => {
+		await browser.close()
+	})
 
 	test(`Sign in on teams environment`, async () => {
 		await teams.goto('https://teams.microsoft.com')
@@ -53,7 +55,14 @@ describe(`Rekenlogboek`, () => {
 
 		const teamsIndex =
 			'https://teams.microsoft.com/_#/conversations/Algemeen?threadId=19:552907fdb29b4feda1aae0164015e58d@thread.tacv2&ctx=channel'
-		expect(teams.url()).toBe(teamsIndex)
+		const teamsIndexEN =
+			'https://teams.microsoft.com/_#/conversations/General?threadId=19:552907fdb29b4feda1aae0164015e58d@thread.tacv2&ctx=channel'
+
+		try {
+			expect(teams.url()).toBe(teamsIndex)
+		} catch {
+			expect(teams.url()).toBe(teamsIndexEN)
+		}
 	})
 
 	test(`Open 'rekenlogboek' tab within teams environment`, async () => {
