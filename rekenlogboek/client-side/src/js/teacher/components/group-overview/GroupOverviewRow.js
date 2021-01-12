@@ -27,7 +27,7 @@ function GroupOverviewRow(props) {
 	const translate = v => {
 		switch (v) {
 			case 'Happy':
-				return 'Blij'
+				return 'Goed'
 			case 'Sceptic':
 				return 'OK / Ging wel'
 			case 'Sad':
