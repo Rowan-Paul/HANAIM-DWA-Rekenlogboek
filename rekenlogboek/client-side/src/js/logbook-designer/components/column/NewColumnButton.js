@@ -19,7 +19,7 @@ function NewColumnButton(props) {
 	)
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
 	return {}
 }
 

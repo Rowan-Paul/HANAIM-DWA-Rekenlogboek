@@ -6,7 +6,11 @@ const router = express.Router()
 
 const Logbook = mongoose.model('Logbook')
 
-// Create a new logbook
+/**
+ * Creates a new logbook
+ * @route POST /logbook
+ * @param {body} - Object with logbook info
+ */
 router.post('/', (req, res) => {
 	Logbook.create({
 		period: req.body.period,
@@ -25,7 +29,11 @@ router.post('/', (req, res) => {
 		})
 })
 
-// Update a logbook's currentPhase
+/**
+ * Update a logbook's currentPhase
+ * @route PUT /:id/currentPhase
+ * @param id - id for the logbook to change
+ */
 router.put('/:id/currentPhase', (req, res) => {
 	Logbook.findOneAndUpdate(
 		{
