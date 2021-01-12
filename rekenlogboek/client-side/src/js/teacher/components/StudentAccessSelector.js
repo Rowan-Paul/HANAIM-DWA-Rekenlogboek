@@ -59,44 +59,50 @@ function StudentAccessSelector(props) {
 					beeld voor de leerlingen.
 				</p>
 			</div>
-			<ButtonContainer
-				{...(equalsPhase(phases.PRE_TEST)
-					? {
-							description: closePage('pre-toets'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('pre-toets'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.PRE_TEST)}
-			/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.INSTRUCTIONS)
-					? {
-							description: closePage('instructies'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('instructies'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
-			/>
+			<div className="button_containers">
+				<ButtonContainer
+					className="container-pretest"
+					{...(equalsPhase(phases.PRE_TEST)
+						? {
+								description: closePage('pre-toets'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('pre-toets'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.PRE_TEST)}
+				/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.EVALUATION)
-					? {
-							description: closePage('evaluatie'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('evaluatie'),
-							...lockContainer
-					  })}
-				handler={() => openLearnGoalModal()}
-			/>
+				<ButtonContainer
+					className="container-instructions"
+					{...(equalsPhase(phases.INSTRUCTIONS)
+						? {
+								description: closePage('instructies'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('instructies'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.INSTRUCTIONS)}
+				/>
+
+				<ButtonContainer
+					className="container-evaluation"
+					{...(equalsPhase(phases.EVALUATION)
+						? {
+								description: closePage('evaluatie'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('evaluatie'),
+								...lockContainer
+						  })}
+					handler={() => openLearnGoalModal()}
+				/>
+			</div>
 		</div>
 	)
 }
