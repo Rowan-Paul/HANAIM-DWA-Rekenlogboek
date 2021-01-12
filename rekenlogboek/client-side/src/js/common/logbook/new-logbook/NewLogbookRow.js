@@ -22,8 +22,4 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogbookRow)
+export default connect(mapStateToProps)(LogbookRow)

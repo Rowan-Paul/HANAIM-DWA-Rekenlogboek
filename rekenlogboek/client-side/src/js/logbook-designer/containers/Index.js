@@ -2,7 +2,7 @@ import '../../../scss/teacher/containers/TeacherLanding.scss'
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import ButtonContainer from '../../common/ButtonContainer'
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
@@ -6,13 +6,6 @@ import RadioButtons from '../../../common/InputTypes/Radiobuttons'
 import Textarea from '../../../common/InputTypes/Textarea'
 
 function InputType(props) {
-	// const [column, setColumn] = useState()
-
-	// useEffect(() => {
-	// 	const column = props.columns[props.position]
-	// 	setColumn(column)
-	// }, [props.columns])
-
 	const handler = () => {
 		switch (props.input.type) {
 			// CHECKBOXES
