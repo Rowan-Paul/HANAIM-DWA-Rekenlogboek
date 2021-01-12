@@ -62,6 +62,7 @@ function StudentAccessSelector(props) {
 
 			<div className="button_containers">
 				<ButtonContainer
+					className="container-pretest"
 					{...(equalsPhase(phases.PRE_TEST)
 						? {
 								description: closePage('pre-toets'),
@@ -75,6 +76,7 @@ function StudentAccessSelector(props) {
 				/>
 
 				<ButtonContainer
+					className="container-instructions"
 					{...(equalsPhase(phases.INSTRUCTIONS)
 						? {
 								description: closePage('instructies'),
@@ -88,6 +90,7 @@ function StudentAccessSelector(props) {
 				/>
 
 				<ButtonContainer
+					className="container-evaluation"
 					{...(equalsPhase(phases.EVALUATION)
 						? {
 								description: closePage('evaluatie'),
