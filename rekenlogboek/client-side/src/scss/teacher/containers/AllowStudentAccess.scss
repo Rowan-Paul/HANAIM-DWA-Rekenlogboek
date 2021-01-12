@@ -12,6 +12,9 @@ main {
 	height: auto;
 	width: 100%;
 
+	.Jumbotron {
+		padding: 0 0 2.5vh;
+	}
 	.no-logbook-found > * {
 		text-align: center;
 	}
