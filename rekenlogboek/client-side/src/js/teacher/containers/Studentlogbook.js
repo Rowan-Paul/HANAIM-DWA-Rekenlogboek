@@ -15,7 +15,6 @@ import LogbookRows from '../../common/logbook/LogbookRows'
 function StudentLogbook(props) {
 	socket.on('NEW_ANSWER', data => {
 		if (data.studentlogbookID === props.logbookID) {
-			console.log('stud')
 			props.fetchStudentlogbook(props.logbookID)
 		}
 	})
