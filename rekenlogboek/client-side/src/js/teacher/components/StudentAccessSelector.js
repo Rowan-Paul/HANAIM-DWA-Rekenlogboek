@@ -59,44 +59,47 @@ function StudentAccessSelector(props) {
 					beeld voor de leerlingen.
 				</p>
 			</div>
-			<ButtonContainer
-				{...(equalsPhase(phases.PRE_TEST)
-					? {
-							description: closePage('pre-toets'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('pre-toets'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.PRE_TEST)}
-			/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.INSTRUCTIONS)
-					? {
-							description: closePage('instructies'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('instructies'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
-			/>
+			<div className="button_containers">
+				<ButtonContainer
+					{...(equalsPhase(phases.PRE_TEST)
+						? {
+								description: closePage('pre-toets'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('pre-toets'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.PRE_TEST)}
+				/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.EVALUATION)
-					? {
-							description: closePage('evaluatie'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('evaluatie'),
-							...lockContainer
-					  })}
-				handler={() => openLearnGoalModal()}
-			/>
+				<ButtonContainer
+					{...(equalsPhase(phases.INSTRUCTIONS)
+						? {
+								description: closePage('instructies'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('instructies'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.INSTRUCTIONS)}
+				/>
+
+				<ButtonContainer
+					{...(equalsPhase(phases.EVALUATION)
+						? {
+								description: closePage('evaluatie'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('evaluatie'),
+								...lockContainer
+						  })}
+					handler={() => openLearnGoalModal()}
+				/>
+			</div>
 		</div>
 	)
 }
