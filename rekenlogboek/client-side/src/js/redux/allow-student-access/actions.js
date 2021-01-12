@@ -1,11 +1,15 @@
 import * as types from './types'
 
+const getGroup = getState => {
+	const fullGroupName = getState().main.user.groups[1]
+	return fullGroupName.substring(fullGroupName.indexOf(' ') + 1)
+}
+
 const fetchPeriods = (payload, getState) => {
-	const group = getState().main.user.groups[1]
-	const groupNumber = group.substring(group.indexOf(' ') + 1)
+	const group = getGroup(getState)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${group}/years/${payload.schoolYear}/periods`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -14,11 +18,10 @@ const fetchPeriods = (payload, getState) => {
 }
 
 const fetchActiveLogbook = getState => {
-	const group = getState().main.user.groups[1]
-	const groupNumber = group.substring(group.indexOf(' ') + 1)
+	const group = getGroup(getState)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${group}`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -27,23 +30,18 @@ const fetchActiveLogbook = getState => {
 }
 
 const fetchLogbook = (payload, getState) => {
-	const group = getState().main.user.groups[1]
-	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
+	const group = getGroup(getState)
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.group}/period/${payload.period}`
 	)
 }
 
 export const getFilterOptions = (dispatch, getState) => {
-	const group = getState().main.user.groups[1]
-	const groupNumber = group.substring(group.indexOf(' ') + 1)
+	const group = getGroup(getState)
 
 	const reducerPayload = {}
 
-	fetch(
-		process.env.REACT_APP_SERVER_ADDRESS +
-			`/logbook/groups/${groupNumber}/years`
-	)
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/logbook/groups/${group}/years`)
 		.then(response => response.json())
 		.then(schoolYears => {
 			if (schoolYears === undefined || schoolYears.length === 0) {
@@ -179,4 +177,18 @@ export const changeSelectedSchoolYear = payload => {
 	}
 }
 
-export const closeAllLogbooks = payload => {}
+export const closeAllLogbooks = () => (dispatch, getState) => {
+	const group = getGroup(getState)
+	fetch(
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/group/${group}/currentPhase`,
+		{
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' }
+		}
+	).then(response => {
+		return dispatch({
+			type: types.CLOSE_ALL_LOGBOOKS,
+			payload: response.status
+		})
+	})
+}

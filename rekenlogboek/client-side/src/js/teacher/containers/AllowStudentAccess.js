@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
 import {
 	getSelectedLogbook,
-	updateActiveGoal
+	updateActiveGoal,
+	closeAllLogbooks
 } from '../../redux/allow-student-access/actions'
 import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
@@ -62,7 +63,14 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<PeriodFilter filterClick={filterClick} />
+			<div className="top-bar">
+				<div className="lock-all-container ">
+					<button className="bttn blue" onClick={props.closeAllLogbooks}>
+						Vergrendel alles
+					</button>
+				</div>
+				<PeriodFilter filterClick={filterClick} />
+			</div>
 			<Jumbotron>
 				{props.currentLogbook &&
 				Object.keys(props.currentLogbook).length !== 0 ? (
@@ -119,7 +127,8 @@ const mapDispatchToProps = dispatch => {
 		modalHide: () => dispatch(modalHide()),
 		getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
 		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
-		updateActiveGoal: payload => dispatch(updateActiveGoal(payload))
+		updateActiveGoal: payload => dispatch(updateActiveGoal(payload)),
+		closeAllLogbooks: () => dispatch(closeAllLogbooks())
 	}
 }
 

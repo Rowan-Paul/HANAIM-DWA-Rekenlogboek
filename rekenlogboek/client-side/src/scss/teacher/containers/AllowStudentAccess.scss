@@ -6,6 +6,23 @@
 	width: 100vw;
 	min-height: 5vh;
 
+	.top-bar {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 95vw;
+
+		.lock-all-container {
+			margin: 18px;
+			margin-left: 74px;
+
+			.bttn {
+				width: 14vw;
+				padding: 12px 0px;
+			}
+		}
+	}
+
 	.no-logbook-found > * {
 		text-align: center;
 	}
