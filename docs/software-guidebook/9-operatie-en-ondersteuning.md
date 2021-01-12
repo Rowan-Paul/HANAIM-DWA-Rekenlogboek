@@ -13,7 +13,8 @@ _Let op: de server en de client moeten op aparte terminals draaien en zorg ervoo
 Programmas die vooraf moeten zijn geïnstalleerd:
 
 - Node.js
-- Robo 3T
+- MongoDB
+- Robo 3T, Studio 3T of een andere MongoDB client
 
 Als je een van deze programma's niet hebt, download deze dan eerst.
 
