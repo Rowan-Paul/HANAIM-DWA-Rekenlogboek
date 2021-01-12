@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { io } from 'socket.io-client'
+import socket from '../../../websocket/ws'
 
 import Jumbotron from '../../../common/Jumbotron'
 import TopBar from '../../../common/logbook/TopBar'
@@ -11,16 +11,17 @@ import * as actions from '../../../redux/group-overview/actions'
 import '../../../../scss/teacher/containers/group-overview/Index.scss'
 import Button from '../../../common/Button'
 export const Index = props => {
-	useEffect(() => {
-		const socket = io('ws://localhost:3000')
-		socket.on('NEW_ANSWER', data => {
-			props.getLogbookGroupOverview()
-		})
-	}, [])
-
 	const [logbookID, setLogbookID] = useState(props.logbookID)
 	const [logbook, setLogbook] = useState(props.logbook)
 	const [overview, setOverview] = useState(props.overview)
+
+	useEffect(() => {
+		socket.on('NEW_ANSWER', data => {
+			if (data.logbookID === props.logbookID) {
+				props.getLogbookGroupOverview()
+			}
+		})
+	}, [])
 
 	const logbookHandler = () => {
 		if (!logbookID) {

@@ -98,8 +98,19 @@ router.put('/:id', (req, res) => {
 		}
 	)
 		.then(response => {
-			app.io.emit('NEW_ANSWER', response.student)
-			res.status(200).send(response)
+			Logbook.findById(response.logbookID, '_id')
+				.then(logbookResponse => {
+					app.io.emit('NEW_ANSWER', {
+						student: response.student,
+						studentlogbookID: response._id,
+						logbookID: logbookResponse._id
+					})
+					res.status(200).send(response)
+				})
+				.catch(err => {
+					console.log('Error: ' + err)
+					res.status(500).send(err)
+				})
 		})
 		.catch(err => {
 			console.log('error: ' + err)
