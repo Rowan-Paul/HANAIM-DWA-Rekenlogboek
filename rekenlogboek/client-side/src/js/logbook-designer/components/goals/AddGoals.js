@@ -37,13 +37,13 @@ function AddGoals(props) {
 			if (!img) {
 				reject(new Error(`Geen afbeelding gevonden`))
 			}
-			// Check fileSize
-			if (img.size > 1000000) {
-				reject(new Error(`Afbeelding is te groot.`))
-			}
 			// Check extension
 			if (!img.name.match(/\.(jpg|jpeg|png)$/)) {
 				reject(new Error(`Extensie is niet toegestaan.`))
+			}
+			// Check fileSize
+			if (img.size > 1000000) {
+				reject(new Error(`Afbeelding is te groot.`))
 			}
 			// Create image
 			const image = new Image()
