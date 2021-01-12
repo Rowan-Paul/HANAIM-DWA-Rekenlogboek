@@ -15,20 +15,6 @@ function PeriodFilter(props) {
 		}
 	}, [])
 
-	console.log(
-		'schoolYears',
-		props.schoolYears,
-		'activeSchoolYear',
-		props.activeSchoolYear,
-		'selectedSchoolYear',
-		props.selectedSchoolYear,
-		'periods',
-		props.periods,
-		'activePeriod',
-		props.activePeriod,
-		'selectedPeriod',
-		props.selectedPeriod
-	)
 	const getSchoolYearOptions = () => {
 		if (Array.isArray(props.schoolYears)) {
 			return props.schoolYears.map(year => {
