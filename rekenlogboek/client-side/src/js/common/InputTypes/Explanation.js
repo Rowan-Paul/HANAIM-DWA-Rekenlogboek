@@ -68,5 +68,11 @@ const mapStateToProps = state => {
 		inputStates: state.main.inputStates
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(withRouter(Explanation))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Explanation))

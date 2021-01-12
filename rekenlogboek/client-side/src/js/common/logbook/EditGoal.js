@@ -24,6 +24,10 @@ function EditGoal(props) {
 	)
 }
 
+const mapStateToProps = state => {
+	return {}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		deleteGoal: payload => dispatch(deleteGoal(payload)),
@@ -31,4 +35,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapDispatchToProps)(EditGoal)
+export default connect(mapStateToProps, mapDispatchToProps)(EditGoal)

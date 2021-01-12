@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import Button from '../../../common/Button'
+
 import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 import { getLogbookGroupOverview } from '../../../redux/group-overview/actions'
 import shortid from 'shortid'

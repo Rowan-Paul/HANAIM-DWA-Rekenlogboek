@@ -17,7 +17,7 @@ function Checkboxes(props) {
 		switch (props.state) {
 			// If active
 			case props.inputStates.inUse:
-				return props.options.map(option => (
+				return props.options.map((option, i) => (
 					<li className="inUse" key={shortid.generate()}>
 						<input
 							checked={splittedValues.includes(option)}
@@ -45,7 +45,7 @@ function Checkboxes(props) {
 
 			// If only preview
 			case props.inputStates.inPreview:
-				return props.options.map(option => (
+				return props.options.map((option, i) => (
 					<li className="inPreview" key={shortid.generate()}>
 						<input
 							checked={splittedValues.includes(option)}
@@ -88,5 +88,11 @@ const mapStateToProps = state => {
 		inputStates: state.main.inputStates
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(withRouter(Checkboxes))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Checkboxes))

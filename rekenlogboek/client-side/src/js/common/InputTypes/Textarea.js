@@ -59,5 +59,11 @@ const mapStateToProps = state => {
 		inputStates: state.main.inputStates
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(withRouter(Textarea))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(Textarea))

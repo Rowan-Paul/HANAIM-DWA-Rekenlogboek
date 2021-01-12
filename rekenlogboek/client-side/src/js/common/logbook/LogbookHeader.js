@@ -82,4 +82,11 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(withRouter(LogbookHeader))
+const mapDispatchToProps = dispatch => {
+	return {}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(LogbookHeader))

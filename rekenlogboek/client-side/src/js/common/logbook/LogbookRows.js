@@ -71,5 +71,11 @@ const mapStateToProps = state => {
 		logbookTypes: state.main.logbookTypes
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(withRouter(LogbookRows))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(LogbookRows))

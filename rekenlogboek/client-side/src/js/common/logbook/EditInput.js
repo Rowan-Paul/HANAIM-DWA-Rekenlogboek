@@ -21,10 +21,14 @@ function EditInput(props) {
 	)
 }
 
+const mapStateToProps = state => {
+	return {}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		modalShow: payload => dispatch(modalShow(payload))
 	}
 }
 
-export default connect(mapDispatchToProps)(EditInput)
+export default connect(mapStateToProps, mapDispatchToProps)(EditInput)

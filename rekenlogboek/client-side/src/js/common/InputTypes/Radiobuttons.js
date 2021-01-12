@@ -15,7 +15,7 @@ function RadioButtons(props) {
 			case props.inputStates.inUse:
 				return (
 					<ul className="Radiobuttons">
-						{props.options.map(option => (
+						{props.options.map((option, i) => (
 							<li className={props.inputStates.inUse} key={shortid.generate()}>
 								<input
 									onChange={e => {
@@ -78,7 +78,7 @@ function RadioButtons(props) {
 			case props.inputStates.inPreview:
 				return (
 					<ul className="Radiobuttons">
-						{props.options.map(option => (
+						{props.options.map((option, i) => (
 							<li
 								className={props.inputStates.inPreview}
 								key={shortid.generate()}
@@ -134,5 +134,11 @@ const mapStateToProps = state => {
 		inputStates: state.main.inputStates
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(withRouter(RadioButtons))
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(RadioButtons))

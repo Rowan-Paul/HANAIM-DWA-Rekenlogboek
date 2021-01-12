@@ -19,10 +19,14 @@ function NewColumnButton(props) {
 	)
 }
 
+const mapStateToProps = state => {
+	return {}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		modalShow: payload => dispatch(modalShow(payload))
 	}
 }
 
-export default connect(mapDispatchToProps)(NewColumnButton)
+export default connect(mapStateToProps, mapDispatchToProps)(NewColumnButton)

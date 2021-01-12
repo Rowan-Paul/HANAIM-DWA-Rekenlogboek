@@ -77,5 +77,8 @@ const mapStateToProps = state => {
 		logbookTypes: state.main.logbookTypes
 	}
 }
+const mapDispatchToProps = dispatch => {
+	return {}
+}
 
-export default connect(mapStateToProps)(GroupAnswerRow)
+export default connect(mapStateToProps, mapDispatchToProps)(GroupAnswerRow)
