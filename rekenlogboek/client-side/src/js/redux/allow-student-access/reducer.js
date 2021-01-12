@@ -57,6 +57,10 @@ const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				selectedSchoolYear: action.payload
 			}
+		case types.CLOSE_ALL_LOGBOOKS:
+			return {
+				...state
+			}
 		default:
 			return state
 	}

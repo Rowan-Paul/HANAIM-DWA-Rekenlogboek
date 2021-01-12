@@ -178,3 +178,5 @@ export const changeSelectedSchoolYear = payload => {
 		payload
 	}
 }
+
+export const closeAllLogbooks = payload => {}
