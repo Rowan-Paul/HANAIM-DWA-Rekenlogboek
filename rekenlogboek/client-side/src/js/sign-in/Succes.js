@@ -22,11 +22,7 @@ export default function SuccesUI(props) {
 					break
 
 				case props.roles.Leraar:
-					if (teamsEnvironment() === true) {
-						props.history.push('/teacher/logbooks')
-					} else {
-						props.history.push('/teacher')
-					}
+					props.history.push('/teacher')
 					break
 
 				case props.roles.Logboekontwerper:

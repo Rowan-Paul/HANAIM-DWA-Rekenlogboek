@@ -178,12 +178,30 @@ function App() {
 						/>
 
 						{/* TEACHER */}
+						{/* LOGBOOK VIEWER */}
 						<Route exact path="/teacher/logbooks" component={Logbooks}></Route>
 						<Route
 							exact
 							path="/teacher/logbooks/studentlogbook"
 							component={StudentLogbook}
 						></Route>
+
+						{/* LOGBOOK GROUP OVERVIEW ANSWERS */}
+						<Route
+							path="/teacher/group-overview/answers"
+							component={GroupOverviewAnswers}
+						/>
+
+						{/* LOGBOOK GROUP OVERVIEW */}
+						<Route path="/teacher/group-overview" component={GroupOverview} />
+
+						<Route
+							path="/teacher/allow-student-access"
+							component={AllowStudentAccess}
+						/>
+
+						{/* LANDING PAGE */}
+						<Route path="/teacher" exact component={TeacherIndex} />
 
 						{/* ERROR PAGES */}
 						<Route exact path="/no-access" component={NoAccess} />
