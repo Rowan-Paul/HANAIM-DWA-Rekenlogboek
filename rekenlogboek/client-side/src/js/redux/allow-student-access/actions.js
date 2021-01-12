@@ -32,7 +32,7 @@ const fetchActiveLogbook = getState => {
 const fetchLogbook = (payload, getState) => {
 	const group = getGroup(getState)
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.group}/period/${payload.period}`
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${group}/period/${payload.period}`
 	)
 }
 
@@ -180,15 +180,14 @@ export const changeSelectedSchoolYear = payload => {
 export const closeAllLogbooks = () => (dispatch, getState) => {
 	const group = getGroup(getState)
 	fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/group/${group}/currentPhase`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${group}/currentPhase`,
 		{
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' }
 		}
-	).then(response => {
+	).then(() => {
 		return dispatch({
-			type: types.CLOSE_ALL_LOGBOOKS,
-			payload: response.status
+			type: types.CLOSE_ALL_LOGBOOKS
 		})
 	})
 }

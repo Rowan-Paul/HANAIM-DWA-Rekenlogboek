@@ -46,6 +46,11 @@ function AllowStudentAccess(props) {
 		props.getLogbookData({ schoolYear, period })
 	}
 
+	const closeAll = () => {
+		props.closeAllLogbooks()
+		selectGoal(undefined)
+	}
+
 	const getLearnGoals = () =>
 		props.currentLogbook.goals.map(goal => {
 			return (
@@ -65,7 +70,7 @@ function AllowStudentAccess(props) {
 		<div className="allow-student-access">
 			<div className="top-bar">
 				<div className="lock-all-container ">
-					<button className="bttn blue" onClick={props.closeAllLogbooks}>
+					<button className="bttn blue" onClick={() => closeAll()}>
 						Vergrendel alles
 					</button>
 				</div>
