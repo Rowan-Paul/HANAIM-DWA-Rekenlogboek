@@ -32,7 +32,6 @@ export default function Select(props) {
 					changeValue(e)
 				}}
 			>
-				<option defaultValue>Selecteer...</option>
 				{getOptions()}
 			</select>
 		</div>
