@@ -30,7 +30,6 @@ export const Answers = props => {
 	useEffect(() => {
 		socket.on('NEW_ANSWER', data => {
 			if (data.logbookID === props.logbook._id) {
-				console.log('answers')
 				props.getLogbookGroupAnswers({ goal, column, answer })
 			}
 		})
