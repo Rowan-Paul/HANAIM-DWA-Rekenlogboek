@@ -15,7 +15,8 @@ import Button from '../../common/Button'
 import {
 	setCurrentGoal,
 	loadStudentLogbook,
-	saveAnswerRadio
+	saveAnswerRadio,
+	undoEvaluationSelection
 } from '../../redux/studentlogbook/actions'
 
 function EvaluationsUI(props) {
@@ -70,6 +71,13 @@ function EvaluationsUI(props) {
 							changeHandler={newAnswerValue => {
 								props.saveAnswerRadio(newAnswerValue, props.currentGoal, 3)
 							}}
+							clickHandler={newAnswerValue => {
+								props.undoEvaluationSelection(
+									newAnswerValue,
+									props.currentGoal,
+									3
+								)
+							}}
 						/>
 					</div>
 					<div className="right-side">
@@ -101,7 +109,11 @@ function mapDispatchToProps(dispatch) {
 		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
 		loadStudentLogbook: () => dispatch(loadStudentLogbook()),
 		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition))
+			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
+		undoEvaluationSelection: (answerValue, goalPosition, columnPosition) =>
+			dispatch(
+				undoEvaluationSelection(answerValue, goalPosition, columnPosition)
+			)
 	}
 }
 
