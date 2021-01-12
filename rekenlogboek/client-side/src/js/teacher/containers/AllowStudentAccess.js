@@ -15,6 +15,8 @@ import Jumbotron from '../../common/Jumbotron'
 import Modal from '../../common/logbook/Modal'
 import PeriodFilter from '../components/PeriodFilter'
 import StudentAccessSelector from '../components/StudentAccessSelector'
+import TopBar from '../../common/logbook/TopBar'
+import Button from '../../common/Button'
 
 function AllowStudentAccess(props) {
 	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
@@ -64,6 +66,8 @@ function AllowStudentAccess(props) {
 		<div className="allow-student-access">
 			<PeriodFilter filterClick={filterClick} />
 			<Jumbotron>
+				<TopBar title={'Studenten toegang'} noBreadcrumbs />
+
 				{props.currentLogbook &&
 				Object.keys(props.currentLogbook).length !== 0 ? (
 					<StudentAccessSelector
@@ -92,6 +96,13 @@ function AllowStudentAccess(props) {
 						)}
 					</div>
 				)}
+				<div className="prev button">
+					<Button
+						color="gray"
+						value="Vorige"
+						handler={() => props.history.push('./')}
+					/>
+				</div>
 			</Jumbotron>
 
 			{props.modalVisible && (
