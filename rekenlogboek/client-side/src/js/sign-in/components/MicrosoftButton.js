@@ -51,14 +51,15 @@ function MicrosoftButtonUI(props) {
 
 	//Actions performed before each render
 	useEffect(() => {
-		if (error) console.log(error)
+		if (error) {
+			// console.log(error)
+		}
 
 		if (isAuthenticated) {
 			props.doSaveUser(user)
 			if (props.user.name !== undefined) props.history.push('/auth/succes')
 		}
-
-		return () => silentLogin()
+		return () => setIsAuthenticated(true)
 	})
 
 	const silentLogin = async () => {

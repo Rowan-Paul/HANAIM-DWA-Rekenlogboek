@@ -64,7 +64,7 @@ export const saveStudentLogbooks = payload => {
 }
 
 export const fetchActiveStudentlogbook = id => dispatch => {
-	fetch(`http://localhost:3000/studentlogbook/` + id, {
+	fetch(process.env.REACT_APP_SERVER_ADDRESS + `/studentlogbook/` + id, {
 		method: 'GET'
 	})
 		.then(response => response.json())
