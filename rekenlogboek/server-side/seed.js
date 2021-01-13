@@ -47,21 +47,20 @@ async function seedLogbook() {
 				{
 					_id: '5fbbcad37f53f84d0c6fbb77',
 					position: 1,
-					title: 'Lesofzo',
-					explanation: true,
+					title: 'Hoe heb je de toets gemaakt?',
+					explanation: false,
 					input: {
-						type: 'radiobuttons',
-						options: ['sdsadasd', 'sadasdasdasd']
+						type: 'textarea'
 					}
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb78',
 					position: 2,
-					title: 'Instructie nodig?',
-					explanation: false,
+					title: 'Heb je instructie nodig?',
+					explanation: true,
 					input: {
-						type: 'checkboxes',
-						options: ['sdsadasd', 'sadasdasdasd']
+						type: 'radiobuttons',
+						options: ['Ja', 'Nee']
 					}
 				},
 				{
@@ -75,29 +74,29 @@ async function seedLogbook() {
 					_id: '5fbbcad37f53f84d0c6fbb7a',
 					position: 0,
 					title: 'Leer rekenen',
-					description: 'test0000',
-					imageLink: '1608197560601_achtegrondgoed2.png'
+					description: 'De eerste som',
+					imageLink: 'learngoalthumb1.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7b',
 					position: 1,
 					title: 'Leer 1+1',
-					description: 'test1111',
-					imageLink: '1608197560601_achtegrondgoed2.png'
+					description: 'Moeilijkere som',
+					imageLink: 'learngoalthumb2.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7c',
 					position: 2,
 					title: 'Leer 1*1',
-					description: 'test2222',
-					imageLink: '1608197560601_achtegrondgoed2.png'
+					description: 'Moeilijke som',
+					imageLink: 'learngoalthumb1.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7d',
 					position: 3,
-					title: 'Les 5',
-					description: 'test333333',
-					imageLink: '1608197560601_achtegrondgoed2.png'
+					title: 'Leer 1 * 5 + 2',
+					description: 'Super moeilijke som',
+					imageLink: 'learngoalthumb2.png'
 				}
 			],
 			__v: 0
@@ -108,22 +107,34 @@ async function seedLogbook() {
 async function seedStudentLogboek() {
 	await StudentLogbook.deleteMany()
 
-	const logbook = await Logbook.find({}).limit(1)
-
 	await StudentLogbook.insertMany([
 		{
 			_id: '5fbbcad37f53f84d0c6fbb85',
 			logbookID: '5fbbcad37f53f84d0c6fbb75',
-			student: 'janpiet',
+			student: 'Jan Visser',
 			answers: [
 				{
 					_id: '5fbbcad37f53f84d0c6fbb86',
 					goalPosition: 0,
 					columnPosition: 1,
 					answer: {
-						inputType: 'radiobuttons',
-						value: 'sdsadasd',
-						explanation: 'sdsadasddsdsdsdsd'
+						value: 'Erg goed'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb89',
+					goalPosition: 1,
+					columnPosition: 1,
+					answer: {
+						value: 'De som was moeilijk'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb90',
+					goalPosition: 2,
+					columnPosition: 1,
+					answer: {
+						value: 'Deze opdracht ging snel'
 					}
 				},
 				{
@@ -131,8 +142,17 @@ async function seedStudentLogboek() {
 					goalPosition: 0,
 					columnPosition: 2,
 					answer: {
-						inputType: 'checkboxes',
-						value: 'sdsadasd'
+						value: 'Nee',
+						explanation: 'niet nodig'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb87',
+					goalPosition: 1,
+					columnPosition: 2,
+					answer: {
+						value: 'Ja',
+						explanation: 'ik deed lang over de som'
 					}
 				},
 				{
@@ -142,24 +162,80 @@ async function seedStudentLogboek() {
 					answer: {
 						value: 'Happy'
 					}
-				},
+				}
+			],
+			__v: 0
+		},
+
+		{
+			_id: '5fbbcad37f53f84d0c6fbb88',
+			logbookID: '5fbbcad37f53f84d0c6fbb75',
+			student: 'Eva de Jong',
+			answers: [
 				{
-					_id: '5fbbcad37f53f84d0c6fbb89',
-					goalPosition: 1,
+					_id: '5fbbcad37f53f84d0c6fbb66',
+					goalPosition: 0,
 					columnPosition: 1,
 					answer: {
-						inputType: 'radiobuttons',
-						value: 'sdsadasd',
-						explanation: 'sdsadasddsdsdsdsd'
+						value: 'Niet zo goed'
 					}
 				},
 				{
-					_id: '5fbbcad37f53f84d0c6fbb90',
+					_id: '5fbbcad37f53f84d0c6fbb61',
+					goalPosition: 1,
+					columnPosition: 1,
+					answer: {
+						value: 'De som was super moeilijk'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb68',
+					goalPosition: 2,
+					columnPosition: 1,
+					answer: {
+						value: 'Ik had het snel af'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb70',
+					goalPosition: 0,
+					columnPosition: 2,
+					answer: {
+						value: 'Ja',
+						explanation: 'niet nodig'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb73',
 					goalPosition: 1,
 					columnPosition: 2,
 					answer: {
-						inputType: 'checkboxes',
-						value: 'sdsadasd'
+						value: 'Ja',
+						explanation: 'ik deed lang over de som'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb73',
+					goalPosition: 2,
+					columnPosition: 2,
+					answer: {
+						value: 'Nee'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb78',
+					goalPosition: 0,
+					columnPosition: 3,
+					answer: {
+						value: 'Happy'
+					}
+				},
+				{
+					_id: '5fbbcad37f53f84d0c6fbb78',
+					goalPosition: 1,
+					columnPosition: 3,
+					answer: {
+						value: 'Sad'
 					}
 				}
 			],
