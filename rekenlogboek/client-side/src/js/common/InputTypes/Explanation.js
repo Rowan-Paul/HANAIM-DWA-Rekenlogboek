@@ -63,16 +63,8 @@ function Explanation(props) {
 	return handler()
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates
+})
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(Explanation))
+export default connect(mapStateToProps)(withRouter(Explanation))

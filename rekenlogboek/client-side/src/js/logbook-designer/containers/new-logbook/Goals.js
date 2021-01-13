@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { postImage, setGoal } from '../../../redux/logbook/actions'
 
 import AddGoals from '../../components/goals/AddGoals'
@@ -15,8 +15,6 @@ import TopBar from '../../../common/logbook/TopBar'
 import '../../../../scss/logbook-designer/NewLogbook.scss'
 
 function Goals(props) {
-	const history = useHistory()
-
 	const [nextButtonColor, setNextButtonColor] = useState('gray')
 	const [goals, setGoals] = useState(props.goals)
 	const verifyGoals = () =>
@@ -49,7 +47,7 @@ function Goals(props) {
 		setGoals(goals)
 
 		// Prevent skipping columns page
-		props.columns.map(c => !c.added && history.push('./columns'))
+		props.columns.map(c => !c.added && props.history.push('./columns'))
 	}, [props.goals])
 
 	return (
@@ -91,20 +89,16 @@ function Goals(props) {
 		</div>
 	)
 }
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		goals: state.logbook.goals,
-		logbookTypes: state.main.logbookTypes,
-		modalVisible: state.logbook.modal.visible
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	goals: state.logbook.goals,
+	logbookTypes: state.main.logbookTypes,
+	modalVisible: state.logbook.modal.visible
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		postImage: () => dispatch(postImage()),
-		setGoal: () => dispatch(setGoal())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	postImage: () => dispatch(postImage()),
+	setGoal: () => dispatch(setGoal())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Goals))

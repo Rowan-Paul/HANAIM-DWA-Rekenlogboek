@@ -42,17 +42,13 @@ function Goal(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates
-	}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		deleteGoal: payload => dispatch(deleteGoal(payload)),
-		modalShow: payload => dispatch(modalShow(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	deleteGoal: payload => dispatch(deleteGoal(payload)),
+	modalShow: payload => dispatch(modalShow(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Goal)

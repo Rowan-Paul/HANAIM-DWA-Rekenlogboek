@@ -71,18 +71,14 @@ function InputType(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		inputStates: state.main.inputStates,
-		inputTypes: state.main.inputTypes
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	inputStates: state.main.inputStates,
+	inputTypes: state.main.inputTypes
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalShow: payload => dispatch(modalShow(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalShow: payload => dispatch(modalShow(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputType)

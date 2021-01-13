@@ -66,16 +66,8 @@ export function LogbookRows(props) {
 
 	return <div>{rowTypeHandler()}</div>
 }
-const mapStateToProps = state => {
-	return {
-		logbookTypes: state.main.logbookTypes
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+const mapStateToProps = state => ({
+	logbookTypes: state.main.logbookTypes
+})
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(LogbookRows))
+export default connect(mapStateToProps)(withRouter(LogbookRows))

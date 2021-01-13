@@ -122,16 +122,8 @@ function Evaluation(props) {
 	return <ul className="Evaluation">{handler()}</ul>
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates
+})
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(Evaluation))
+export default connect(mapStateToProps)(withRouter(Evaluation))

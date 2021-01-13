@@ -38,19 +38,15 @@ function TopBar(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		goals: state.logbook.goals,
-		group: state.logbook.group,
-		period: state.logbook.period
-	}
-}
+const mapStateToProps = state => ({
+	goals: state.logbook.goals,
+	group: state.logbook.group,
+	period: state.logbook.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalShow: payload => dispatch(modalShow(payload)),
-		setGoalPosition: payload => dispatch(setGoalPosition(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalShow: payload => dispatch(modalShow(payload)),
+	setGoalPosition: payload => dispatch(setGoalPosition(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

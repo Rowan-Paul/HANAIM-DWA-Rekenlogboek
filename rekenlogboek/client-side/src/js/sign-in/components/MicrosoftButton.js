@@ -51,14 +51,14 @@ function MicrosoftButtonUI(props) {
 
 	//Actions performed before each render
 	useEffect(() => {
-		if (error) {
-			console.log(error)
-		}
+		if (error) console.log(error)
 
 		if (isAuthenticated) {
 			props.doSaveUser(user)
 			if (props.user.name !== undefined) props.history.push('/auth/succes')
 		}
+
+		return () => silentLogin()
 	})
 
 	const silentLogin = async () => {
@@ -148,19 +148,15 @@ function MicrosoftButtonUI(props) {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		user: state.main.user,
-		context: state.main.context
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user,
+	context: state.main.context
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		doSaveUser: payload => dispatch(saveUserAction(payload)),
-		doSetContext: payload => dispatch(setContext(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	doSaveUser: payload => dispatch(saveUserAction(payload)),
+	doSetContext: payload => dispatch(setContext(payload))
+})
 
 export const MicrosoftButton = connect(
 	mapStateToProps,
