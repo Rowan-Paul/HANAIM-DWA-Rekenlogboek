@@ -304,4 +304,50 @@ describe('/logbook routes', () => {
 
 		expect(test.status).toEqual(404)
 	})
+
+	/**
+	 * Update a logbook's currentGoal
+	 * and checks if the server gives back the correct logbook
+	 * @route PUT /logbook/:id/activeGoal
+	 */
+	test('PUT /logbook/:id/activeGoal - happy path', async () => {
+		const body = {
+			activeGoal: 69
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	/**
+	 * Update a logbook's currentGoal
+	 * and checks if the server gives back an error
+	 * @route PUT /logbook/:id/activeGoal
+	 */
+	test('PUT /logbook/:id/activeGoal - unhappy path with wrong body', async () => {
+		const body = {
+			activeGoal: 'astring'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/activeGoal',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(400)
+	})
 })

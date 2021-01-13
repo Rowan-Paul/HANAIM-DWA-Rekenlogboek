@@ -1,5 +1,11 @@
 ## Logbook
 
+removed routes:
+
+- GET /groups/:group/years
+- GET /logbook/:id/teacher
+- GET /:id
+
 **`POST`** `/logbook`
 
 Create a new logbook.
@@ -27,5 +33,15 @@ Get the active logbook for a certain group.
 | Parameters    | Send in body | Return as JSON      |
 | ------------- | ------------ | ------------------- |
 | group - group |              | The updated logbook |
+
+---
+
+**`PUT`** `/logbook/:id/activeGoal`
+
+Update a logbook's currentGoal
+
+| Parameters      | Send in body                    | Return as JSON |
+| --------------- | ------------------------------- | -------------- |
+| id - logbook id | JSON object with the activeGoal |                |
 
 ---
