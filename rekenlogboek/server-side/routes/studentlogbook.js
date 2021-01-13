@@ -16,48 +16,55 @@ const StudentLogbook = mongoose.model('StudentLogbook')
 router.post('/', (req, res) => {
 	if (req.body.logbookID === undefined || req.body.student === undefined) {
 		res.sendStatus(400)
-	}
-
-	StudentLogbook.create({
-		logbookID: req.body.logbookID,
-		student: req.body.student
-	})
-		.then(response => {
-			const obj = {
-				studentlogbookID: response._id
-			}
-			res.status(200).send(obj)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Update a studentlogbook
-router.put('/', (req, res) => {
-	StudentLogbook.findOneAndUpdate(
-		{
-			$and: [
-				{ logbookID: { $eq: req.body.logbookID } },
-				{ student: { $eq: req.body.student } }
-			]
-		},
-		{
+	} else {
+		StudentLogbook.create({
 			logbookID: req.body.logbookID,
 			student: req.body.student
-		},
-		{
-			new: true,
-			upsert: true // Make this update into an upsert
-		}
-	)
-		.then(response => {
-			res.status(200).send(response)
 		})
-		.catch(err => {
-			console.log('error 4: ' + err)
-			res.status(500).send(err)
-		})
+			.then(response => {
+				const obj = {
+					studentlogbookID: response._id
+				}
+				res.status(200).send(obj)
+			})
+			.catch(err => {
+				res.status(500).send(err)
+			})
+	}
+})
+
+/**
+ * Updates a studentlogbook
+ * @route PUT /studentlogbook
+ */
+router.put('/', (req, res) => {
+	if (req.body.logbookID === undefined || req.body.student === undefined) {
+		res.sendStatus(400)
+	} else {
+		StudentLogbook.findOneAndUpdate(
+			{
+				$and: [
+					{ logbookID: { $eq: req.body.logbookID } },
+					{ student: { $eq: req.body.student } }
+				]
+			},
+			{
+				logbookID: req.body.logbookID,
+				student: req.body.student
+			},
+			{
+				new: true,
+				upsert: true // Make this update into an upsert
+			}
+		)
+			.then(response => {
+				res.status(200).send(response)
+			})
+			.catch(err => {
+				console.log('error 4: ' + err)
+				res.status(500).send(err)
+			})
+	}
 })
 
 // Update a studentlogbook based on id

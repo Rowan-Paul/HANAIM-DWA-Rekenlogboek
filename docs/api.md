@@ -101,8 +101,18 @@ Get all years from a group
 
 Create a new studentlogbook
 
-| Parameters | Send in body                     | Return as JSON        |     |
-| ---------- | -------------------------------- | --------------------- | --- |
-|            | JSON with logbook id and student | The studentlogbook id |     |
+| Parameters | Send in body                     | Return as JSON        |
+| ---------- | -------------------------------- | --------------------- |
+|            | JSON with logbook id and student | The studentlogbook id |
+
+---
+
+**`PUT`** `/studentlogbook`
+
+Updates a studentlogbook
+
+| Parameters | Send in body                      | Return as JSON        |
+| ---------- | --------------------------------- | --------------------- |
+|            | JSON with id, answers and student | The studentlogbook id |
 
 ---

@@ -107,4 +107,44 @@ describe('/logbook routes', () => {
 
 		expect(test).toBe(400)
 	})
+
+	/**
+	 * Updates a studentlogbook
+	 * and checks if the server gives back the studentlogbook
+	 * @route PUT /studentlogbook
+	 */
+	test('PUT /studentlogbook - happy path', async () => {
+		const body = {
+			logbookID: '5fbf66ca14b7c811a829fada',
+			student: 'Emma Visser'
+		}
+
+		const test = await fetch(`http://localhost:3000/studentlogbook`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		}).then(response => response.json())
+
+		expect(test.logbookID).toBeDefined()
+		expect(test.student).toBeDefined()
+	})
+
+	/**
+	 * Updates a studentlogbook
+	 * and checks if the server gives back an error
+	 * @route PUT /studentlogbook
+	 */
+	test('PUT /studentlogbook - unhappy path with no student', async () => {
+		const body = {
+			logbookID: '5fbf66ca14b7c811a829fada'
+		}
+
+		const test = await fetch(`http://localhost:3000/studentlogbook`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		}).then(response => response.status)
+
+		expect(test).toBe(400)
+	})
 })
