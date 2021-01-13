@@ -62,3 +62,14 @@ Get all information about one logbook with specifications
 | period     |              |                       |     |
 
 ---
+
+**`GET`** `/logbook/years/:year/groups/:group/periods`
+
+Get the amount of periods based on group and year.
+
+| Parameters | Send in body | Return as JSON        |     |
+| ---------- | ------------ | --------------------- | --- |
+| year       |              | The requested logbook |     |
+| group      |              |                       |     |
+
+---

@@ -29,6 +29,18 @@ router.post('/', (req, res) => {
 		})
 })
 
+// Get all information about one logbook
+router.get('/:id', (req, res) => {
+	Logbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
 /**
  * Update a logbook's currentPhase
  * @route PUT /logbook/:id/currentPhase
@@ -148,26 +160,22 @@ router.get('/years/:year/groups/:group/periods/:period', (req, res) => {
 		})
 })
 
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all periods based on group and year
-router.get('/groups/:group/years/:year/periods', (req, res) => {
+/**
+ * Get the amount of periods based on group and year
+ * @route GET /logbook/years/:year/groups/:group/periods
+ * @param group - the group the logbook is in
+ * @param year - the year the logbook is in
+ */
+router.get('/years/:year/groups/:group/periods', (req, res) => {
 	Logbook.find({
 		year: req.params.year,
 		group: req.params.group
 	})
 		.distinct('period', () => {})
 		.then(response => {
+			if (response < 1) {
+				throw 'No matching logbooks'
+			}
 			res.status(200).send(response)
 		})
 		.catch(err => {

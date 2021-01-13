@@ -374,7 +374,7 @@ describe('/logbook routes', () => {
 
 	/**
 	 * Get all information about one logbook with specifications
-	 * and checks if the server gives back the correct logbook
+	 * and checks if the server gives back an error
 	 * @route GET /logbook/years/:year/groups/:group/periods/:period
 	 */
 	test('GET /logbook/years/:year/groups/:group/periods/:period - unhappy path with wrong group', async () => {
@@ -384,6 +384,44 @@ describe('/logbook routes', () => {
 
 		const test = await fetch(
 			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods/${period}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
+
+	/**
+	 * Get all periods based on group and year
+	 * and checks if the server gives back the correct logbook
+	 * @route GET /logbook/years/:year/groups/:group/periods
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods - happy path', async () => {
+		const year = '2020 - 2021'
+		const group = 7
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test[0]).toEqual(3)
+	})
+
+	/**
+	 * Get the amount of periods based on group and year
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/years/:year/groups/:group/periods/:period
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods - unhappy path with wrong group', async () => {
+		const year = '2020 - 2021'
+		const group = 6
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods`,
 			{
 				method: 'GET'
 			}

@@ -5,7 +5,7 @@ const fetchPeriods = (payload, getState) => {
 	const groupNumber = group.substring(group.indexOf(' ') + 1)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${groupNumber}/years/${payload.schoolYear}/periods`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${groupNumber}/periods`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
