@@ -9,28 +9,15 @@ const app = require('../app')
 const Logbook = mongoose.model('Logbook')
 const StudentLogbook = mongoose.model('StudentLogbook')
 
-// Check if a logbook exists for a student in a group
-router.get('/:student/logbooks/:logbookID', (req, res) => {
-	StudentLogbook.findOne({
-		$and: [
-			{ logbookID: { $eq: req.params.logbookID } },
-			{ student: { $eq: req.params.student } }
-		]
-	})
-		.then(response => {
-			if (response === null) {
-				res.sendStatus(404)
-			} else {
-				res.status(200).send(response)
-			}
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Create a new studentlogbook
+/**
+ * Create a new studentlogbook
+ * @route POST /studentlogbook
+ */
 router.post('/', (req, res) => {
+	if (req.body.logbookID === undefined || req.body.student === undefined) {
+		res.sendStatus(400)
+	}
+
 	StudentLogbook.create({
 		logbookID: req.body.logbookID,
 		student: req.body.student
@@ -66,17 +53,6 @@ router.put('/', (req, res) => {
 	)
 		.then(response => {
 			res.status(200).send(response)
-			// Logbook.findById(response.logbookID, 'teacher')
-			// 	.then(logbookResponse => {
-			// 		app.io
-			// 			.to(logbookResponse.teacher)
-			// 			.emit('NEW_ANSWER', req.body.student)
-			// 		res.status(200).send(response.answers)
-			// 	})
-			// 	.catch(err => {
-			// 		console.log('error 3: ' + err)
-			// 		res.status(500).send(err)
-			// })
 		})
 		.catch(err => {
 			console.log('error 4: ' + err)

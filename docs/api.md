@@ -7,7 +7,8 @@ removed routes:
 - GET /logbook/:id (x3)
 - GET /logbook/:id/goals
 - GET /logbook/:id/column/:position
-- GET /logbook/:id/goal/:position
+- GET /logbook/:id/goal/:
+- GET /studentlogbook/:student/logbooks/:logbookID
 
 ## Logbook
 
@@ -95,3 +96,13 @@ Get all years from a group
 ---
 
 ## Studentlogbook
+
+**`POST`** `/studentlogbook`
+
+Create a new studentlogbook
+
+| Parameters | Send in body                     | Return as JSON        |     |
+| ---------- | -------------------------------- | --------------------- | --- |
+|            | JSON with logbook id and student | The studentlogbook id |     |
+
+---
