@@ -30,7 +30,7 @@ const fetchLogbook = (payload, getState) => {
 	const group = getState().main.user.groups[1]
 	payload.groupNumber = group.substring(group.indexOf(' ') + 1)
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${payload.groupNumber}/period/${payload.period}`
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${payload.groupNumber}/periods/${payload.period}`
 	)
 }
 

@@ -103,112 +103,33 @@ router.put('/:id/activeGoal', (req, res) => {
 		!Number.isInteger(req.body.activeGoal)
 	) {
 		res.sendStatus(400)
+	} else {
+		Logbook.findOneAndUpdate(
+			{
+				_id: req.params.id
+			},
+			{
+				activeGoal: req.body.activeGoal
+			}
+		)
+			.then(() => {
+				res.sendStatus(200)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500).send(err)
+			})
 	}
-
-	Logbook.findOneAndUpdate(
-		{
-			_id: req.params.id
-		},
-		{
-			activeGoal: req.body.activeGoal
-		}
-	)
-		.then(() => {
-			res.sendStatus(200)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
 })
 
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id/goals', (req, res) => {
-	Logbook.findById(req.params.id, 'goals')
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the id, position, title and inputType for one column from a specific logbook
-router.get('/:id/column/:position', (req, res) => {
-	Logbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			const column = response.columns.find(object => {
-				return object.position === Number(req.params.position)
-			})
-
-			if (column === undefined) {
-				throw new Error('column does not exist')
-			}
-
-			res.status(200).send(column)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the id, position, title, description and imagelink for one goal for one logbook
-router.get('/:id/goal/:position', (req, res) => {
-	Logbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			let position
-			if (req.params.position === 'null') {
-				position = response.activeGoal
-			} else {
-				position = req.params.position
-			}
-
-			const goal = response.goals.find(object => {
-				return object.position === Number(position)
-			})
-
-			if (goal === undefined) {
-				throw new Error('goal does not exist')
-			}
-
-			res.status(200).send(goal)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook with specifications
-router.get('/year/:year/group/:group/period/:period', (req, res) => {
+/**
+ * Get all information about one logbook with specifications
+ * @route GET /logbook/years/:year/groups/:group/periods/:period
+ * @param year - the year the logbook is in
+ * @param group - the group the logbook is in
+ * @param period - the period the logbook is in
+ */
+router.get('/years/:year/groups/:group/periods/:period', (req, res) => {
 	Logbook.find({
 		year: req.params.year,
 		group: req.params.group,
@@ -216,10 +137,22 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 	})
 		.then(response => {
 			if (response.length < 1) {
-				res.status(200).send({})
+				res.sendStatus(500)
 			} else {
 				res.status(200).send(response[0])
 			}
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+// Get all information about one logbook
+router.get('/:id', (req, res) => {
+	Logbook.findById(req.params.id)
+		.then(response => {
+			res.status(200).send(response)
 		})
 		.catch(err => {
 			console.log(err)
