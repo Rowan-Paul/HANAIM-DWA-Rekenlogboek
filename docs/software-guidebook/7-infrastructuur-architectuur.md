@@ -33,7 +33,7 @@ Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich 
 | 3.  | Bekijken groepsoverzicht    | Bekijken van een groepsoverzicht + websocket implementatie i.c.m. studentenpagina's. | groupoverview.test.seed.js |
 | 4.  | Bekijken studentenlogboeken | Inzien van logboeken per student.                                                    | -                          |
 | 5.  | Wijzigen studententoegang   | Wijzig het formulier waar de student toegang tot heeft.                              | -                          |
-| 6.  | Studentpagina's             | Testen van het invullen van invoervelden en versturen van vragen.                    | -                          |
+| 6.  | Studentpagina's             | Testen van het invullen van invoervelden en versturen van vragen.                    | studentpages.test.seed.js  |
 
 ---
 
