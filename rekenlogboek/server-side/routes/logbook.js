@@ -178,7 +178,29 @@ router.get('/years/:year/groups/:group/periods', (req, res) => {
 		.distinct('period', () => {})
 		.then(response => {
 			if (response < 1) {
-				throw 'No matching logbooks'
+				throw 'Error: No matching logbooks'
+			}
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+/**
+ * Get all years from a group
+ * @route GET /logbook/groups/:group/years
+ * @param group - the group you want to check
+ */
+router.get('/groups/:group/years', (req, res) => {
+	Logbook.find({
+		group: req.params.group
+	})
+		.distinct('year')
+		.then(response => {
+			if (response.length < 1) {
+				throw 'Error: No matching logbooks'
 			}
 			res.status(200).send(response)
 		})

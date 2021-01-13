@@ -459,4 +459,40 @@ describe('/logbook routes', () => {
 
 		expect(test).toEqual(500)
 	})
+
+	/**
+	 * Get all years from a group
+	 * and checks if the server gives back the logbook
+	 * @route GET /logbook/groups/:group/years
+	 */
+	test('GET /logbook/groups/:group/years - happy path', async () => {
+		const group = 7
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/years`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test[0]).toEqual('2020 - 2021')
+	})
+
+	/**
+	 * Get all years from a group
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/groups/:group/years
+	 */
+	test('GET /logbook/groups/:group/years - unhappy path with a wrong group', async () => {
+		const group = 6
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/years`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
 })

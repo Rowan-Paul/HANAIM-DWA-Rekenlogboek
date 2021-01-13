@@ -84,4 +84,14 @@ Get the amount of periods based on group and year.
 
 ---
 
+**`GET`** `/logbook/groups/:group/years`
+
+Get all years from a group
+
+| Parameters | Send in body | Return as JSON        |     |
+| ---------- | ------------ | --------------------- | --- |
+| group      |              | The requested logbook |     |
+
+---
+
 ## Studentlogbook
