@@ -29,7 +29,7 @@ function LogbookList(props) {
 	}
 
 	const makeRows = () => {
-		return props.studentlogbooks.map(studentlogbook => (
+		return props.studentlogbooks.map((studentlogbook, i) => (
 			<li className="Student" key={studentlogbook.student}>
 				<div>
 					<span>{studentlogbook.student}</span>
@@ -40,6 +40,7 @@ function LogbookList(props) {
 				</div>
 				<div>
 					<button
+						className={`student-${i + 1}`}
 						onClick={() => {
 							props.setActiveStudentLogbook(studentlogbook)
 							props.history.push('/teacher/logbooks/studentlogbook')
