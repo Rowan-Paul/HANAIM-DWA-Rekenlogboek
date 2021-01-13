@@ -121,3 +121,6 @@ dist
 **/uploads/**/*.jpg
 **/uploads/**/*.jpeg
 **/uploads/**/*.png
+
+!learngoalthumb1.png
+!learngoalthumb2.png
