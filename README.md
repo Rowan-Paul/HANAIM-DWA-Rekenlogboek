@@ -10,7 +10,7 @@
 - Stef Schöningh
 - Michael Holstein
 - Rowan Paul Flynn
-- Stefan oude Lohuis
+- ~~Stefan oude Lohuis~~
 
 ## Product Owner
 
