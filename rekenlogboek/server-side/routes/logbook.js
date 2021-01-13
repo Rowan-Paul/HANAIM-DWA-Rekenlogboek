@@ -31,11 +31,10 @@ router.post('/', (req, res) => {
 
 /**
  * Update a logbook's currentPhase
- * @route PUT /:id/currentPhase
+ * @route PUT /logbook/:id/currentPhase
  * @param id - id for the logbook to change
  */
 router.put('/:id/currentPhase', (req, res) => {
-	console.log(req.body.currentPhase)
 	if (req.params.id === undefined || req.body.currentPhase === undefined)
 		res.sendStatus(400)
 
@@ -74,20 +73,11 @@ router.put('/:id/currentPhase', (req, res) => {
 	})
 })
 
-// Get all years from a group
-router.get('/groups/:group/years', (req, res) => {
-	Logbook.find({
-		group: req.params.group
-	})
-		.distinct('year')
-		.then(response => res.status(200).send(response))
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the active logbook for a certain group
+/**
+ * Get the active logbook for a certain group
+ * @route GET /logbooks/groups/:group
+ * @param group - the group to look for
+ */
 router.get('/groups/:group', (req, res) => {
 	Logbook.findOne({
 		group: req.params.group,
@@ -96,7 +86,7 @@ router.get('/groups/:group', (req, res) => {
 		if (response) {
 			res.status(200).send(response)
 		} else {
-			res.status(204).send(response)
+			res.sendStatus(404)
 		}
 	})
 })

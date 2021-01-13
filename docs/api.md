@@ -14,8 +14,18 @@ Create a new logbook.
 
 Updates the currentPhase for a logbook.
 
-| Parameters     | Send in body                  | Return as JSON |
-| -------------- | ----------------------------- | -------------- |
-| id - logbookid | JSON object with currentPhase |                |
+| Parameters     | Send in body                  | Return as JSON      |
+| -------------- | ----------------------------- | ------------------- |
+| id - logbookid | JSON object with currentPhase | The updated logbook |
+
+---
+
+**`GET`** `/logbook/groups/:group`
+
+Get the active logbook for a certain group.
+
+| Parameters    | Send in body | Return as JSON      |
+| ------------- | ------------ | ------------------- |
+| group - group |              | The updated logbook |
 
 ---

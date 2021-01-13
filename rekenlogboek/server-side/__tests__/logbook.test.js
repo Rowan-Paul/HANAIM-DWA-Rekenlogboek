@@ -235,7 +235,7 @@ describe('/logbook routes', () => {
 	 * and checks if the server gives back status 200
 	 * @route PUT /:id/currentPhase
 	 */
-	test('PUT /:id/currentPhase - happy path', async () => {
+	test('PUT /logbook/:id/currentPhase - happy path', async () => {
 		const body = {
 			currentPhase: 'evaluation'
 		}
@@ -258,7 +258,7 @@ describe('/logbook routes', () => {
 	 * and checks if the server gives back status 200
 	 * @route PUT /:id/currentPhase
 	 */
-	test('PUT /:id/currentPhase - unhappy path with wrong body', async () => {
+	test('PUT /logbook/:id/currentPhase - unhappy path with wrong body', async () => {
 		const body = {
 			currentPhase: 'judyisbae'
 		}
@@ -274,5 +274,34 @@ describe('/logbook routes', () => {
 		).then(response => response.status)
 
 		expect(test).toEqual(400)
+	})
+
+	/**
+	 * Get the active logbook for a certain group
+	 * and checks if the server gives back the correct logbook
+	 * @route GET /logbook/groups/:group
+	 */
+	test('GET /logbook/groups/:group - happy path', async () => {
+		const group = 7
+		const test = await fetch('http://localhost:3000/logbook/groups/' + group, {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test.year).toEqual('2020 - 2021')
+		expect(test.period).toEqual(3)
+	})
+
+	/**
+	 * Get the active logbook for a certain group
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/groups/:group
+	 */
+	test('GET /logbook/groups/:group - unhappy path with wrong group', async () => {
+		const group = 6
+		const test = await fetch('http://localhost:3000/logbook/groups/' + group, {
+			method: 'GET'
+		})
+
+		expect(test.status).toEqual(404)
 	})
 })
