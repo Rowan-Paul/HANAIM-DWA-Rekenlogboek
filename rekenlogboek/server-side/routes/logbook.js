@@ -35,6 +35,17 @@ router.post('/', (req, res) => {
  * @param id - id for the logbook to change
  */
 router.put('/:id/currentPhase', (req, res) => {
+	console.log(req.body.currentPhase)
+	if (req.params.id === undefined || req.body.currentPhase === undefined)
+		res.sendStatus(400)
+
+	if (
+		req.body.currentPhase !== 'pretest' &&
+		req.body.currentPhase !== 'instructions' &&
+		req.body.currentPhase !== 'evaluation'
+	)
+		res.sendStatus(400)
+
 	Logbook.findOneAndUpdate(
 		{
 			_id: req.params.id

@@ -93,7 +93,7 @@ describe('/logbook routes', () => {
 	})
 
 	afterAll(async () => {
-		await Logbook.remove({})
+		await Logbook.deleteMany({})
 		await mongoose.disconnect()
 	})
 
@@ -228,5 +228,51 @@ describe('/logbook routes', () => {
 		}).then(response => response.status)
 
 		expect(createResponse).toEqual(500)
+	})
+
+	/**
+	 * Update a logbook's currentPhase
+	 * and checks if the server gives back status 200
+	 * @route PUT /:id/currentPhase
+	 */
+	test('PUT /:id/currentPhase - happy path', async () => {
+		const body = {
+			currentPhase: 'evaluation'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/currentPhase',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
+
+	/**
+	 * Update a logbook's currentPhase
+	 * and checks if the server gives back status 200
+	 * @route PUT /:id/currentPhase
+	 */
+	test('PUT /:id/currentPhase - unhappy path with wrong body', async () => {
+		const body = {
+			currentPhase: 'judyisbae'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/currentPhase',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(400)
 	})
 })
