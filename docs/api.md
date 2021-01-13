@@ -1,7 +1,5 @@
 # temp file
 
-## Logbook
-
 removed routes:
 
 - GET /groups/:group/years
@@ -11,6 +9,8 @@ removed routes:
 - GET /logbook/:id/column/:position
 - GET /logbook/:id/goal/:position
 
+## Logbook
+
 **`POST`** `/logbook`
 
 Create a new logbook.
@@ -18,6 +18,16 @@ Create a new logbook.
 | Parameters | Send in body                  | Return as JSON |
 | ---------- | ----------------------------- | -------------- |
 | None       | JSON object with logbook info |                |
+
+---
+
+**`GET`** `/logbook/:id`
+
+Get all information about one logbook
+
+| Parameters      | Send in body | Return as JSON        |
+| --------------- | ------------ | --------------------- |
+| id - logbook id |              | The requested logbook |
 
 ---
 
@@ -73,3 +83,5 @@ Get the amount of periods based on group and year.
 | group      |              |                       |     |
 
 ---
+
+## Studentlogbook

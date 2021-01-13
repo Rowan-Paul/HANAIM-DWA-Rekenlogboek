@@ -231,6 +231,36 @@ describe('/logbook routes', () => {
 	})
 
 	/**
+	 * Get all information about one logbook
+	 * and checks if the server gives back the logbook
+	 * @route GET /logbook/:id
+	 */
+	test('GET /logbook/:id - happy path', async () => {
+		const test = await fetch(
+			`http://localhost:3000/logbook/${await getTestlogbookID()}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test.period).toEqual(3)
+		expect(test.year).toEqual('2020 - 2021')
+	})
+
+	/**
+	 * Get all information about one logbook
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/:id
+	 */
+	test('GET /logbook/:id - unhappy path with a wrong logbook id', async () => {
+		const test = await fetch(`http://localhost:3000/logbook/5`, {
+			method: 'GET'
+		}).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
+
+	/**
 	 * Update a logbook's currentPhase
 	 * and checks if the server gives back status 200
 	 * @route PUT /:id/currentPhase

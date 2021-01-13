@@ -29,7 +29,11 @@ router.post('/', (req, res) => {
 		})
 })
 
-// Get all information about one logbook
+/**
+ * Get all information about one logbook
+ * @route GET /logbook/:id
+ * @param id - id for the logbook
+ */
 router.get('/:id', (req, res) => {
 	Logbook.findById(req.params.id)
 		.then(response => {
