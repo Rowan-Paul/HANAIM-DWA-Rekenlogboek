@@ -75,28 +75,28 @@ async function seedLogbook() {
 					position: 0,
 					title: 'Leer rekenen',
 					description: 'De eerste som',
-					imageLink: 'learngoalthumb1.png'
+					imageLink: 'temp/learngoalthumb1.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7b',
 					position: 1,
 					title: 'Leer 1+1',
 					description: 'Moeilijkere som',
-					imageLink: 'learngoalthumb2.png'
+					imageLink: 'temp/learngoalthumb2.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7c',
 					position: 2,
 					title: 'Leer 1*1',
 					description: 'Moeilijke som',
-					imageLink: 'learngoalthumb1.png'
+					imageLink: 'temp/learngoalthumb1.png'
 				},
 				{
 					_id: '5fbbcad37f53f84d0c6fbb7d',
 					position: 3,
 					title: 'Leer 1 * 5 + 2',
 					description: 'Super moeilijke som',
-					imageLink: 'learngoalthumb2.png'
+					imageLink: 'temp/learngoalthumb2.png'
 				}
 			],
 			__v: 0
