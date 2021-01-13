@@ -4,7 +4,6 @@ jest.setTimeout(120000)
 describe(`Open en fill in logbook on Teams for students`, () => {
 	let browser, teams
 	let iframe, newWindow
-	// let iframe, newWindow
 
 	const student = {
 		email: `ldeboer@teamjaguarundi.onmicrosoft.com`,
@@ -12,17 +11,17 @@ describe(`Open en fill in logbook on Teams for students`, () => {
 	}
 
 	beforeAll(async () => {
-		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 70,
+			slowMo: 100,
 			ignoreHTTPSErrors: true,
 			args: [
 				'--start-maximized',
 				// Below needed for iframe -> https://stackoverflow.com/a/65489913/9401138
 				// Why ? I have no clue
 				'--disable-web-security',
-				'--disable-features=IsolateOrigins,site-per-process'
+				'--disable-features=IsolateOrigins,site-per-process',
+				'--disable-notifications'
 			],
 			defaultViewport: null
 		})
@@ -113,21 +112,36 @@ describe(`Open en fill in logbook on Teams for students`, () => {
 		expect(isRadioSelected).toBe(true)
 	})
 
-	test(`Go to the next goal`, async () => {
+	test(`Fill in explanation for 1st learngoal`, async () => {
 		const rekenlogboek = await iframe.contentFrame()
 
 		await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
-		await rekenlogboek.waitForSelector('.next button')
-		await rekenlogboek.click(`.next button`)
+		await rekenlogboek.type('textarea[name=explanation]', 'Ik had alles goed')
+		await rekenlogboek.click('.learn-goal-container')
 
+		const explanationText = await rekenlogboek.$eval(
+			'textarea[name=explanation]',
+			element => {
+				return element.innerHTML
+			}
+		)
+
+		expect(explanationText).toBe('Ik had alles goed')
+	})
+
+	test(`Go to the  2nd goal by clicking on progress bar`, async () => {
+		const rekenlogboek = await iframe.contentFrame()
+
+		await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
+		await rekenlogboek.waitForSelector('.square-2')
+		await rekenlogboek.click(`.square-2`)
 		await rekenlogboek.waitForSelector('.learngoal2')
 
-		// await rekenlogboek.waitForTimeout(5000)
+		const learngoalTitle = await rekenlogboek.$eval('.learngoal2', element => {
+			return element.innerText
+		})
 
-		// let learngoaltitle = await rekenlogboek.$('h1[name="Leerdoel 2: Doel 2"]')
-
-		// await learngoaltitle.getProperty('name').jsonValue()
-		// expect(learngoaltitle).toBe('Leerdoel 2: Doel 2')
+		expect(learngoalTitle).toBe('Leerdoel 2: Doel 2')
 	})
 
 	test(`Select a value for the 2nd learngoal`, async () => {
@@ -138,7 +152,6 @@ describe(`Open en fill in logbook on Teams for students`, () => {
 		await rekenlogboek.click('input[value="Ik snap het niet"]')
 
 		const radiobutton = await rekenlogboek.$('input[value="Ik snap het niet"]')
-
 		const isRadioSelected = await (
 			await radiobutton.getProperty('checked')
 		).jsonValue()
@@ -146,19 +159,18 @@ describe(`Open en fill in logbook on Teams for students`, () => {
 		expect(isRadioSelected).toBe(true)
 	})
 
-	// test(`Go to result page`, async () => {
-	// 	const rekenlogboek = await iframe.contentFrame()
+	test(`Go to result page with next button`, async () => {
+		const rekenlogboek = await iframe.contentFrame()
 
-	// 	await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
-	// 	await rekenlogboek.waitForSelector('.blue')
-	// 	await rekenlogboek.click('.blue')
+		await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
+		await rekenlogboek.waitForSelector('.next.button')
+		await rekenlogboek.click('.next.button')
+		await rekenlogboek.waitForSelector('.table')
 
-	// 	await rekenlogboek.waitForTimeout(3000)
+		const answer = await rekenlogboek.$eval('.cellanswer1', element => {
+			return element.innerText
+		})
 
-	// 	await rekenlogboek.waitForSelector('.table')
-
-	// 	const learngoaltitle = await rekenlogboek.$('.cell:nth-child(6)')
-
-	// 	expect(learngoaltitle).toBeDefined()
-	// })
+		expect(answer).toBe('Ik snap het goed')
+	})
 })
