@@ -25,6 +25,26 @@ router.post('/', (req, res) => {
 		})
 })
 
+// Update all currentPhases to notVisible
+router.put('/groups/:group/currentPhase', (req, res) => {
+	Logbook.updateMany(
+		{
+			$and: [
+				{ currentPhase: { $ne: 'notVisible' } },
+				{ group: req.params.group }
+			]
+		},
+		{ currentPhase: 'notVisible' }
+	)
+		.then(() => {
+			res.sendStatus(200)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500)
+		})
+})
+
 // Update a logbook's currentPhase
 router.put('/:id/currentPhase', (req, res) => {
 	Logbook.findOneAndUpdate(

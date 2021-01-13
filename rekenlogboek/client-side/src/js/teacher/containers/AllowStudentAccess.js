@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
 import {
 	getSelectedLogbook,
-	updateActiveGoal
+	updateActiveGoal,
+	closeAllLogbooks
 } from '../../redux/allow-student-access/actions'
 import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
@@ -47,6 +48,11 @@ function AllowStudentAccess(props) {
 		props.getLogbookData({ schoolYear, period })
 	}
 
+	const closeAll = () => {
+		props.closeAllLogbooks()
+		selectGoal(undefined)
+	}
+
 	const getLearnGoals = () =>
 		props.currentLogbook.goals.map(goal => {
 			return (
@@ -64,7 +70,14 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<PeriodFilter filterClick={filterClick} />
+			<div className="top-bar">
+				<div className="lock-all-container ">
+					<button className="bttn blue" onClick={() => closeAll()}>
+						Vergrendel alles
+					</button>
+				</div>
+				<PeriodFilter filterClick={filterClick} />
+			</div>
 			<Jumbotron>
 				<TopBar title={'Studenten toegang'} noBreadcrumbs />
 
@@ -130,7 +143,8 @@ const mapDispatchToProps = dispatch => {
 		modalHide: () => dispatch(modalHide()),
 		getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
 		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
-		updateActiveGoal: payload => dispatch(updateActiveGoal(payload))
+		updateActiveGoal: payload => dispatch(updateActiveGoal(payload)),
+		closeAllLogbooks: () => dispatch(closeAllLogbooks())
 	}
 }
 
