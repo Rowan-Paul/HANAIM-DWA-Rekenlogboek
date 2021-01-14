@@ -9,7 +9,7 @@ const fetchPeriods = (payload, getState) => {
 	const group = getGroup(getState)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${group}/years/${payload.schoolYear}/periods`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${group}/periods`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -32,7 +32,7 @@ const fetchActiveLogbook = getState => {
 const fetchLogbook = (payload, getState) => {
 	const group = getGroup(getState)
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${group}/period/${payload.period}`
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${group}/periods/${payload.period}`
 	)
 }
 
