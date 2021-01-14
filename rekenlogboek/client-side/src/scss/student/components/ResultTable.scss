@@ -32,7 +32,8 @@
 
 			.cell {
 				padding: 20px;
-				width: 100px;
+				min-width: 13vh;
+				max-width: 13vh;
 			}
 		}
 
