@@ -67,6 +67,8 @@ De routes groepering bevat alle mogelijke route components waar de client-side r
 
 De file route is de enige route file zonder eigen schema. Dit komt, omdat deze file ook niks van de database vraagt. Hij slaat namelijk zelf images op op de server. De path naar deze images wordt door een andere request in de logbook route file afgehandeld.
 
+Als laatst is het ook nog belangrijk om de verbinding met de client-side even kort aan te kaarten. Alle requests die via de client-side naar de server-sider gaan lopen over HTTPS en worden aangeroepen vanuit fetch. De responses van de server kunnen over zowel HTTPS als websockets zijn. Alle responses, inclusief de status codes worden terug gestuurd in een JSON format. De enigste route component dia websockets responses terugstuurt is de studentlogbook. Dit is namelijk van belang, omdat leraren zo direct kunnen zien wanneer logboeken worden gepdate
+
 ### 6.2 Bestandsstructuur
 
 In onze project map zijn er verschillende mappen, namelijk:

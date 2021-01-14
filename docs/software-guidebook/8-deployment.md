@@ -13,6 +13,10 @@ Hieronder staat het deployment diagram waarin weergeven wordt hoe het project ka
 
 @import "./c4-model/deployment.svg"
 
+Aan het begin van het project kreeg het ontwikkelteam te horen dat het wenselijk was om via Azure het project te deployen. Alhoewel het ons zelf niet gelukt is om dit realistisch te maken hebben we ervoor gekozen om het deployment diagram alsnog op basis van een Azure-omgeving weer te geven zodat een toekomstige developer hier mogelijk gebruik van kan maken.
+
+Per container staat in het deployment diagram weergegeven waar ze voor bedoeld zijn en waar ze "op draaien". Het gedeelte dat door ons gemaakt is valt binnen de groepering "rekenlogboek". Dit houd dus in dat wij aan het einde van het project een client-side, server-side en de bijbehorende database schemas opleveren. De web browser, database host en server host zijn echter onderdelen waar wij geen verdere verantwoording over hebben en deze zijn alleen verwerkt in het deployment diagram voor een duidelijk overzicht.
+
 ### 8.2 Deployen van de Microsoft Teams app
 
 Microsoft Teams is een dominante speler binnnen educatie en ook onze opdrachtgever maakt gebruik van Teams. De applicatie moet dan ook (gedeeltelijk) beschikbaar zijn op Microsoft Teams. Dit kan gedaan worden door de volgende stappen te volgen.
