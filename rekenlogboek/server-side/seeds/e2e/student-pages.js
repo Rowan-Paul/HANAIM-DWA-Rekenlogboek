@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-require('./models/logbook')
-require('./models/studentlogbook')
+require('../../models/logbook')
+require('../../models/studentlogbook')
 
 const dbName = 'rekenlogboek'
 
@@ -37,7 +37,7 @@ async function seedLogbook() {
 			period: 1,
 			group: 6,
 			year: '2020 - 2021',
-			currentPhase: 'evaluation',
+			currentPhase: 'pretest',
 			columns: [
 				{
 					input: {
@@ -53,7 +53,7 @@ async function seedLogbook() {
 						type: 'radiobuttons'
 					},
 					_id: '5ff7197fc149682931090eca',
-					explanation: false,
+					explanation: true,
 					position: 1,
 					title: 'Hoe heb je de toets gemaakt?'
 				},
@@ -63,7 +63,7 @@ async function seedLogbook() {
 							'Ik heb instructie nodig',
 							'Ik heb geen instructie nodig'
 						],
-						type: 'radiobuttons'
+						type: 'checkboxes'
 					},
 					_id: '5ff7197fc149682931090ecb',
 					explanation: false,
@@ -102,41 +102,6 @@ async function seedLogbook() {
 
 async function seedStudentLogboek() {
 	await StudentLogbook.deleteMany()
-
-	const logbook = await Logbook.find({}).limit(1)
-
-	await StudentLogbook.insertMany([
-		{
-			_id: '5ff72861b51be5f097228b39',
-			logbookID: '5ff7197fc149682931090ec8',
-			student: 'Lieke de Boer',
-			answers: [
-				{
-					_id: '5ff72db7af635e573c0b1baf',
-					answer: {
-						value: 'Ik snap het goed'
-					},
-					goalPosition: 1,
-					columnPosition: 1
-				},
-				{
-					_id: '5ff72dd3af635e573c0b1bb1',
-					answer: {
-						value: 'Ik snap het niet'
-					},
-					goalPosition: 0,
-					columnPosition: 1
-				},
-				{
-					_id: '5ffc40be539c93638788c8c6',
-					answer: {
-						value: 'Sad'
-					},
-					goalPosition: 0,
-					columnPosition: 3
-				}
-			],
-			__v: 0
-		}
-	])
 }
+console.log('Finished')
+
