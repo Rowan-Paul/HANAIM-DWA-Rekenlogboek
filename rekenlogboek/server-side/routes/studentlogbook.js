@@ -192,4 +192,45 @@ router.get('/:id/group/overview', async (req, res) => {
 		})
 })
 
+/**
+ * Get all answers (from all students) for a logbook
+ * @route GET /studentlogbook/:logbookid/group/answers
+ * @param logbookID - The logbook id
+ */
+router.get('/:logbookID/group/answers', (req, res) => {
+	// Query Paramaters
+	const goal = req.query.goal
+	const column = req.query.column
+	const answer = req.query.answer
+
+	StudentLogbook.find({ logbookID: req.params.logbookID })
+		.select('student answers')
+		.then(students => {
+			console.log(students)
+			/**
+			 * Filters all student answers
+			 * Filter works if query param isset
+			 */
+			const response = [] // Define for pushing
+			students.filter(student => {
+				const check = student.answers.map(
+					a =>
+						(!goal || a.goalPosition == goal) &&
+						(!column || a.columnPosition == column) &&
+						(!answer || a.answer.value == answer)
+				)
+
+				// Only append if contains answers
+
+				if (check.indexOf(true) > -1) response.push(student)
+			})
+
+			console.log('response: ', response)
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			res.status(500).send(err)
+		})
+})
+
 module.exports = router

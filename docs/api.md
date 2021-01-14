@@ -6,7 +6,6 @@
 - GET /logbook/:id/column/:position
 - GET /logbook/:id/goal/:
 - GET /studentlogbook/:student/logbooks/:logbookID
-- GET /studentlogbook/:logbookID/group-answers
 - GET /studentlogbook/:id/answers
 - GET /studentlogbook/:id/answers/column/:position
 - GET /studentlogbook/student/:student
@@ -168,5 +167,15 @@ Shows an group overview including all answers sorted by row, column
 | Parameters             | Send in body | Return as JSON     |
 | ---------------------- | ------------ | ------------------ |
 | id - studentlogbook id |              | The studentlogbook |
+
+---
+
+**`GET`** `/studentlogbook/:id/group/overview`
+
+Shows an group overview including all answers sorted by row, column
+
+| Parameters | Send in body | Return as JSON          |
+| ---------- | ------------ | ----------------------- |
+| logbookID  |              | id, student and answers |
 
 ---
