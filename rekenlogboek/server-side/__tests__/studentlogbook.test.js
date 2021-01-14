@@ -44,7 +44,7 @@ const getTestlogbookID = async () => {
 	return logbookID
 }
 
-describe('/logbook routes', () => {
+describe('/studentlogbook routes', () => {
 	beforeAll(async () => {
 		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
