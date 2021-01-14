@@ -67,41 +67,55 @@ router.put('/', (req, res) => {
 	}
 })
 
-// Update a studentlogbook based on id
+/**
+ * Update a studentlogbook based on id
+ * @route PUT /studentlogbook/:id
+ * @param id - The studentlogbook id
+ */
 router.put('/:id', (req, res) => {
-	StudentLogbook.findOneAndUpdate(
-		{
-			$and: [{ _id: { $eq: req.params.id } }]
-		},
-		{
-			answers: req.body.answers
-		},
-		{
-			new: true
-		}
-	)
-		.then(response => {
-			Logbook.findById(response.logbookID, '_id')
-				.then(logbookResponse => {
-					app.io.emit('NEW_ANSWER', {
-						student: response.student,
-						studentlogbookID: response._id,
-						logbookID: logbookResponse._id
+	if (req.params.id === undefined || req.body.answers === undefined) {
+		console.log('HELLO THERE')
+		res.sendStatus(400)
+	} else {
+		StudentLogbook.findOneAndUpdate(
+			{
+				$and: [{ _id: { $eq: req.params.id } }]
+			},
+			{
+				answers: req.body.answers
+			},
+			{
+				new: true
+			}
+		)
+			.then(response => {
+				Logbook.findById(response.logbookID, '_id')
+					.then(logbookResponse => {
+						app.io.emit('NEW_ANSWER', {
+							student: response.student,
+							studentlogbookID: response._id,
+							logbookID: logbookResponse._id
+						})
+						console.log(response)
+						res.status(200).send(response)
 					})
-					res.status(200).send(response)
-				})
-				.catch(err => {
-					console.log('Error: ' + err)
-					res.status(500).send(err)
-				})
-		})
-		.catch(err => {
-			console.log('error: ' + err)
-			res.status(500).send(err)
-		})
+					.catch(err => {
+						console.log('Error 1: ' + err)
+						res.status(500).send(err)
+					})
+			})
+			.catch(err => {
+				console.log('error 2: ' + err)
+				res.status(500).send(err)
+			})
+	}
 })
 
-// Get all information about a specific studentlogbook
+/**
+ * Get all information about a specific studentlogbook
+ * @route GET /studentlogbook/:id
+ * @param id - The studentlogbook id
+ */
 router.get('/:id', (req, res) => {
 	StudentLogbook.findById(req.params.id)
 		.then(response => {

@@ -116,3 +116,25 @@ Updates a studentlogbook
 |            | JSON with id, answers and student | The studentlogbook id |
 
 ---
+
+**`PUT`** `/studentlogbook/:id`
+
+Updates a studentlogbook based on id
+
+Also sends websocket
+
+| Parameters             | Send in body      | Return as JSON     |
+| ---------------------- | ----------------- | ------------------ |
+| id - studentlogbook id | JSON with answers | The studentlogbook |
+
+---
+
+**`GET`** `/studentlogbook/:id`
+
+Get all information about a specific studentlogbook
+
+| Parameters             | Send in body | Return as JSON     |
+| ---------------------- | ------------ | ------------------ |
+| id - studentlogbook id |              | The studentlogbook |
+
+---

@@ -89,6 +89,9 @@ describe('/logbook routes', () => {
 					title: 'Ik kan vermenigvuldigen'
 				}
 			]
+		}).catch(err => {
+			console.log(err)
+			throw 'Error: ' + err
 		})
 	})
 
