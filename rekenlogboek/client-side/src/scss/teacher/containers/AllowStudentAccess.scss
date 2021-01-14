@@ -49,9 +49,10 @@ main {
 		grid-template-columns: repeat(auto-fit, calc(100% / 5));
 		grid-column: span 4;
 		grid-row: span 4;
-		width: 92.5%;
+		overflow-y: scroll;
 		margin: 0 0 0 5%;
 		padding: 0;
+		width: 92.5%;
 
 		.explanation-container {
 			grid-column: span 2;
@@ -62,13 +63,7 @@ main {
 			}
 			p {
 				font-size: 16px;
-				line-height: 2;
-			}
-
-			@media only screen and (max-width: 1100px) {
-				p {
-					font-size: 11px;
-				}
+				line-height: 1.25;
 			}
 		}
 
