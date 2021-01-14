@@ -10,13 +10,58 @@ import '../../../../scss/logbook-designer/components/AddGoals.scss'
 function AddGoals(props) {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
+	const [error, setError] = useState('')
 
 	useEffect(() => {
 		const goal = props.goals.filter(goal => goal.position === props.position)[0]
-
 		setTitle(goal.title)
 		setDescription(goal.description)
 	}, [props.goals])
+
+	const imageHandler = async e => {
+		try {
+			await imageValidation(e.target.files[0])
+			props.setGoalImage({
+				imageBlobURL: window.URL.createObjectURL(e.target.files[0]),
+				imageName: e.target.files[0].name
+			})
+			setError('')
+		} catch (error) {
+			setError(error.message)
+		}
+	}
+
+	const imageValidation = img => {
+		return new Promise((resolve, reject) => {
+			// Check isset
+			if (!img) {
+				reject(new Error(`Geen afbeelding gevonden`))
+			}
+			// Check extension
+			if (!img.name.match(/\.(jpg|jpeg|png)$/)) {
+				reject(new Error(`Extensie is niet toegestaan.`))
+			}
+			// Check fileSize
+			if (img.size > 1000000) {
+				reject(new Error(`Afbeelding is te groot.`))
+			}
+			// Create image
+			const image = new Image()
+
+			// Set source
+			image.src = URL.createObjectURL(img)
+
+			// Check size
+			image.onload = () => {
+				if (image.height < 0) reject(new Error('Afbeelding niet hoog genoeg'))
+				if (image.width < 0) reject(new Error('Afbeelding niet breed genoeg'))
+				resolve(image)
+			}
+			// Check errors
+			image.onerror = () =>
+				reject(new Error('Afbeelding kan niet geladen worden'))
+		})
+	}
 
 	return (
 		<div className="AddGoals">
@@ -44,20 +89,10 @@ function AddGoals(props) {
 
 			<div className="Block">
 				<h4>Afbeelding:</h4>
+				<label className="error">{error}</label>
 				<input
 					name="image"
-					onChange={e => {
-						// check max file size is under 1mb
-						if (e.target.files[0].size < 1000000) {
-							props.setGoalImage({
-								imageBlobURL: window.URL.createObjectURL(e.target.files[0]),
-								imageName: e.target.files[0].name
-							})
-						} else {
-							console.log('Image too large')
-							e.target.value = null
-						}
-					}}
+					onChange={e => imageHandler(e)}
 					type="file"
 					accept=".jpeg, .jpg, .png"
 				/>

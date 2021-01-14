@@ -6,7 +6,8 @@ const INITIAL_STATE = {
 	selectedSchoolYear: undefined, //currently selected year in the filter
 	periods: [],
 	activePeriod: undefined, //which period has a currentPhase !== notVisible
-	selectedPeriod: undefined //currently selected period in the filter
+	selectedPeriod: undefined, //currently selected period in the filter,
+	currentLogbook: undefined
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -56,6 +57,15 @@ const reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				selectedSchoolYear: action.payload
+			}
+		case types.CLOSE_ALL_LOGBOOKS:
+			return {
+				...state,
+				currentLogbook: {
+					...state.currentLogbook,
+					currentPhase: undefined,
+					activeGoal: undefined
+				}
 			}
 		default:
 			return state
