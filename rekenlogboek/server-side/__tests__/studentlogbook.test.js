@@ -34,7 +34,7 @@ const getTestStudentlogbook = async () => {
  */
 const getTestlogbookID = async () => {
 	const logbookID = await Logbook.find({
-		group: 7
+		group: 6
 	})
 		.lean()
 		.then(response => {
@@ -55,7 +55,7 @@ describe('/studentlogbook routes', () => {
 		await Logbook.create({
 			activeGoal: 0,
 			period: 3,
-			group: 7,
+			group: 6,
 			year: '2020 - 2021',
 			currentPhase: 'notVisible',
 			columns: [

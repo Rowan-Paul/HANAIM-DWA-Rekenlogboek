@@ -18,7 +18,7 @@ const filesRouter = require('./routes/files')
 
 require('dotenv').config()
 
-const dbName = 'rekenlogboek'
+const dbName = 'testrekenlogboek'
 
 // Create Express App and Routes
 const app = express()
