@@ -26,15 +26,15 @@ Puppeteer maakt het mogelijk om bepaalde flows binnen de applicatie handmatig te
 
 Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich op de back-end server en zijn nodig om de test te laten slagen. Seed files kunnen geinstalleerd worden door het bijgevoegde commande in te voeren op de back-end.
 
-| #   | Test                        | Omschrijving                                                                         | Uitvoeren test                                                                        |
-| --- | --------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| 1.  | Inloggen met Microsoft      | Automatisch inloggen op Microsoft via applicatie                                     | client: `$ npm run e2e-auth`                                                          |
-| 2.  | Aanmaken nieuw logboek      | Aanmaken nieuw logboek                                                               | client: `$ npm run e2e-new-logbook`                                                   |
-| 3.  | Bekijken groepsoverzicht    | Bekijken van een groepsoverzicht + websocket implementatie i.c.m. studentenpagina's. | client: `$ npm run e2e-group-overview` server: `$ node seeds/e2e/group-overview.js`   |
-| 4.  | Bekijken studentenlogboeken | Inzien van logboeken per student.                                                    | client: `$ npm run e2e-student-logbook` server: `$ node seeds/e2e/student-logbook.js` |
-| 5.  | Wijzigen studententoegang   | Wijzig het formulier waar de student toegang tot heeft.                              | client: `$ npm run e2e-student-access` server: `$ node seeds/e2e/student-access.js`   |
-| 6.  | Studentpagina's             | Testen van het invullen van invoervelden en versturen van vragen.                    | -                                                                                     |
-| 7.  | Inloggen app via teams      | Inloggen via teams omgeving en rekenlogboek openen                                   | client: `$ npm run e2e-teams-login`                                                   |
+| #  	| Test                        	| Omschrijving                                                                         	| Uitvoeren test                                                                        	|
+|----	|-----------------------------	|--------------------------------------------------------------------------------------	|---------------------------------------------------------------------------------------	|
+| 1. 	| Inloggen met Microsoft      	| Automatisch inloggen op Microsoft via applicatie                                     	| client: `$ npm run e2e-auth`                                                          	|
+| 2. 	| Aanmaken nieuw logboek      	| Aanmaken nieuw logboek                                                               	| client: `$ npm run e2e-new-logbook`                                                   	|
+| 3. 	| Bekijken groepsoverzicht    	| Bekijken van een groepsoverzicht + websocket implementatie i.c.m. studentenpagina's. 	| client: `$ npm run e2e-group-overview`  server: `$ node seeds/e2e/group-overview.js`  	|
+| 4. 	| Bekijken studentenlogboeken 	| Inzien van logboeken per student.                                                    	| client: `$ npm run e2e-student-logbook` server: `$ node seeds/e2e/student-logbook.js` 	|
+| 5. 	| Wijzigen studententoegang   	| Wijzig het formulier waar de student toegang tot heeft.                              	| client: `$ npm run e2e-student-access` server: `$ node seeds/e2e/student-access.js`   	|
+| 6. 	| Studentpagina's             	| Testen van het invullen van invoervelden en versturen van vragen.                    	| client: `$ npm run e2e-student-pages`   server: `$ node seeds/e2e/student-pages.js`   	|
+| 7. 	| Inloggen app via teams      	| Inloggen via teams omgeving en rekenlogboek openen                                   	| client: `$ npm run e2e-teams-login`                                                   	|
 
 ---
 
