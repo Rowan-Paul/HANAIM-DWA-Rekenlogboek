@@ -10,7 +10,8 @@
 - GET /studentlogbook/:logbookID/group-answers
 - GET /studentlogbook/:id/answers
 - GET /studentlogbook/:id/answers/column/:position
-- GET /studentlogbook//student/:student
+- GET /studentlogbook/student/:student
+- GET /studentlogbook/logbook/:logbookid/student/:student
 
 ## Logbook routes
 
@@ -148,5 +149,15 @@ Get all studentlogbooks related to one logbook (not related to studentlogbook)
 | Parameters | Send in body | Return as JSON     |
 | ---------- | ------------ | ------------------ |
 | logbookid  |              | The studentlogbook |
+
+---
+
+**`GET`** `/studentlogbook/:id/group/overview`
+
+Shows an group overview including all answers sorted by row, column
+
+| Parameters             | Send in body | Return as JSON     |
+| ---------------------- | ------------ | ------------------ |
+| id - studentlogbook id |              | The studentlogbook |
 
 ---

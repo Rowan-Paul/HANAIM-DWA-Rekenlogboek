@@ -74,7 +74,6 @@ router.put('/', (req, res) => {
  */
 router.put('/:id', (req, res) => {
 	if (req.params.id === undefined || req.body.answers === undefined) {
-		console.log('HELLO THERE')
 		res.sendStatus(400)
 	} else {
 		StudentLogbook.findOneAndUpdate(
@@ -96,7 +95,6 @@ router.put('/:id', (req, res) => {
 							studentlogbookID: response._id,
 							logbookID: logbookResponse._id
 						})
-						console.log(response)
 						res.status(200).send(response)
 					})
 					.catch(err => {
@@ -143,58 +141,55 @@ router.get('/logbook/:logbookid', (req, res) => {
 		})
 })
 
-// Get the logbook from one student based on the logbookid (not based on the id of studentlogbook)
-router.get('/logbook/:logbookid/student/:student', (req, res) => {
-	StudentLogbook.find({
-		logbookID: req.params.logbookid,
-		student: req.params.student
-	})
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
 /**
  * Shows an group overview including all answers sorted by row, column
+ * @route GET /studentlogbook/:id/group/overview
+ * @param id - studentlogbook id
  */
-router.get('/:id/group-overview', async (req, res) => {
-	const students = await StudentLogbook.find({ logbookID: req.params.id })
+router.get('/:id/group/overview', async (req, res) => {
 	const answers = {
 		rows: {}
 	}
 
-	// Code for creating overview
-	students.map(student => {
-		if (student.answers && student.answers.length) {
-			student.answers.map(answer => {
-				// Create row prop if not exist
-				if (!answers.rows[answer.goalPosition]) {
-					answers.rows[answer.goalPosition] = {}
-				}
+	await StudentLogbook.find({
+		logbookID: req.params.id
+	})
+		.then(students => {
+			// Code for creating overview
+			students.map(student => {
+				if (student.answers && student.answers.length) {
+					student.answers.map(answer => {
+						// Create row prop if not exist
+						if (!answers.rows[answer.goalPosition]) {
+							answers.rows[answer.goalPosition] = {}
+						}
 
-				// Create column within row if not exist
-				answers.rows[answer.goalPosition][0] = [] // Default 0 for goal
-				if (!answers.rows[answer.goalPosition][answer.columnPosition]) {
-					answers.rows[answer.goalPosition][answer.columnPosition] = []
-				}
+						// Create column within row if not exist
+						answers.rows[answer.goalPosition][0] = [] // Default 0 for goal
+						if (!answers.rows[answer.goalPosition][answer.columnPosition]) {
+							answers.rows[answer.goalPosition][answer.columnPosition] = []
+						}
 
-				// Upsert times answered
-				const cell = answers.rows[answer.goalPosition][answer.columnPosition]
-				const item = cell.findIndex(a => a.value === answer.answer.value)
+						// Upsert times answered
+						const cell =
+							answers.rows[answer.goalPosition][answer.columnPosition]
+						const item = cell.findIndex(a => a.value === answer.answer.value)
 
-				if (item > -1) {
-					cell[item] = { ...cell[item], count: ++cell[item].count }
-				} else {
-					cell.push({ value: answer.answer.value, count: 1 })
+						if (item > -1) {
+							cell[item] = { ...cell[item], count: ++cell[item].count }
+						} else {
+							cell.push({ value: answer.answer.value, count: 1 })
+						}
+					})
 				}
 			})
-		}
-	})
-
-	res.status(200).send(answers)
+		})
+		.then(() => {
+			res.status(200).send(answers)
+		})
+		.catch(err => {
+			res.status(500).send(err)
+		})
 })
 
 module.exports = router

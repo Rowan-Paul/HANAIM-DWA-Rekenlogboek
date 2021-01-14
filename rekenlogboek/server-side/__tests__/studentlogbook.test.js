@@ -357,4 +357,36 @@ describe('/logbook routes', () => {
 
 		expect(test).toEqual(500)
 	})
+
+	/**
+	 * Shows an group overview including all answers sorted by row, column
+	 * and checks if the server gives back the logbook
+	 * @route GET /studentlogbook/:id/group/overview
+	 */
+	test('GET /studentlogbook/:id/group/overview - happy path', async () => {
+		const test = await fetch(
+			`http://localhost:3000/studentlogbook/${await getTestStudentlogbook()}/group/overview`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test).toEqual({ rows: {} })
+	})
+
+	/**
+	 * Shows an group overview including all answers sorted by row, column
+	 * and checks if the server gives back an error
+	 * @route GET /studentlogbook/:id/group/overview
+	 */
+	test('GET /studentlogbook/:id/group/overview - unhappy path with a wrong logbook id', async () => {
+		const test = await fetch(
+			`http://localhost:3000/studentlogbook/5/group/overview`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
 })

@@ -60,7 +60,7 @@ export const getLogbookGroupAnswers = payload => (dispatch, getState) => {
 export const getLogbookGroupOverview = () => (dispatch, getState) => {
 	const logbookID = getState().groupOverview.logbookID // Temp for developing frontend
 	fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/studentlogbook/${logbookID}/group-overview`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/studentlogbook/${logbookID}/group/overview`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
