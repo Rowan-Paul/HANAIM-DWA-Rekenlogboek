@@ -194,15 +194,13 @@ describe(`Open en view logbook group overview`, () => {
 	})
 
 	test(`Evaluation smiley after websocket change`, async () => {
-		await page.waitForTimeout(5000)
-		await page.waitForSelector('.goal-1 input.Happy')
-		const radiobutton = await page.$('.goal-1 input.Happy')
 
-		const isRadioSelected = await (
-			await radiobutton.getProperty('checked')
-		).jsonValue()
 
-		expect(isRadioSelected).toBe(true)
+		await page.waitForSelector('.goal-1 .Happy-checked')
+		const checkedDiv = await page.$('.goal-1 .Happy-checked')
+
+
+		expect(checkedDiv).toBeDefined()
 	})
 
 	test(`Set evaluation as sad (reset)`, async () => {
