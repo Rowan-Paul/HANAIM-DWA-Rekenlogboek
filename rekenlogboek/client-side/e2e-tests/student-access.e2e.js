@@ -20,7 +20,7 @@ describe(`Open and view logbook group overview`, () => {
 		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 70,
+			slowMo: 75,
 			ignoreHTTPSErrors: true,
 			args: ['--start-maximized'],
 			defaultViewport: null
