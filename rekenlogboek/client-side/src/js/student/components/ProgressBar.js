@@ -11,7 +11,7 @@ export default function ProgressBar(props) {
 			items.push(
 				<div
 					//the ?. syntax prevents errors when the binding is undefined
-					className={classNames('square', {
+					className={classNames(`square square-${i + 1}`, {
 						done: props.done.includes(i),
 						locked: props?.locked?.includes(i)
 					})}
