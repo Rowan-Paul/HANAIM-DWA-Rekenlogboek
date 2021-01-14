@@ -1,6 +1,5 @@
 ## Removed routes
 
-- GET /groups/:group/years
 - GET /logbook/:id/teacher
 - GET /logbook/:id (x3)
 - GET /logbook/:id/goals
@@ -69,11 +68,11 @@ Update a logbook's currentGoal
 
 Get all information about one logbook with specifications
 
-| Parameters | Send in body | Return as JSON        |     |
-| ---------- | ------------ | --------------------- | --- |
-| year       |              | The requested logbook |     |
-| group      |              |                       |     |
-| period     |              |                       |     |
+| Parameters | Send in body | Return as JSON        |
+| ---------- | ------------ | --------------------- |
+| year       |              | The requested logbook |
+| group      |              |                       |
+| period     |              |                       |
 
 ---
 
@@ -81,10 +80,10 @@ Get all information about one logbook with specifications
 
 Get the amount of periods based on group and year.
 
-| Parameters | Send in body | Return as JSON        |     |
-| ---------- | ------------ | --------------------- | --- |
-| year       |              | The requested logbook |     |
-| group      |              |                       |     |
+| Parameters | Send in body | Return as JSON        |
+| ---------- | ------------ | --------------------- |
+| year       |              | The requested logbook |
+| group      |              |                       |
 
 ---
 
@@ -92,9 +91,19 @@ Get the amount of periods based on group and year.
 
 Get all years from a group
 
-| Parameters | Send in body | Return as JSON        |     |
-| ---------- | ------------ | --------------------- | --- |
-| group      |              | The requested logbook |     |
+| Parameters | Send in body | Return as JSON        |
+| ---------- | ------------ | --------------------- |
+| group      |              | The requested logbook |
+
+---
+
+**`PUT`** `/logbook/groups/:group/currentPhase`
+
+Update all currentPhases to notVisible
+
+| Parameters | Send in body | Return as JSON |
+| ---------- | ------------ | -------------- |
+| group      |              |                |
 
 ---
 

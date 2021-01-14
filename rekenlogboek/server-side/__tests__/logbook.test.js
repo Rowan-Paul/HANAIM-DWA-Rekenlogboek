@@ -498,4 +498,22 @@ describe('/logbook routes', () => {
 
 		expect(test).toEqual(500)
 	})
+
+	/**
+	 * Update all currentPhases to notVisible
+	 * and checks if the server gives back the logbook
+	 * @route PUT /logbook/groups/:group/currentPhase
+	 */
+	test('PUT /logbook/groups/:group/currentPhase - happy path', async () => {
+		const group = 7
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/currentPhase`,
+			{
+				method: 'PUT'
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
+	})
 })

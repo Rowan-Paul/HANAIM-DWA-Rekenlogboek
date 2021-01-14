@@ -209,4 +209,32 @@ router.get('/groups/:group/years', (req, res) => {
 		})
 })
 
+/**
+ * Update all currentPhases to notVisible
+ * @route PUT /logbook/groups/:group/currentPhase
+ * @param group - The group the logbooks are in
+ */
+router.put('/groups/:group/currentPhase', (req, res) => {
+	if (req.params.group === undefined) {
+		res.sendStatus(400)
+	} else {
+		Logbook.updateMany(
+			{
+				$and: [
+					{ currentPhase: { $ne: 'notVisible' } },
+					{ group: req.params.group }
+				]
+			},
+			{ currentPhase: 'notVisible' }
+		)
+			.then(response => {
+				res.sendStatus(200)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500)
+			})
+	}
+})
+
 module.exports = router
