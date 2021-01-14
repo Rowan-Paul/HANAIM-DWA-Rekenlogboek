@@ -60,7 +60,7 @@ function StudentLogbookRow(props) {
 		}
 	}
 
-	return <div className="Row Body">{handler()}</div>
+	return <div className={`Row Body goal-${goal.position + 1}`}>{handler()}</div>
 }
 
 const mapStateToProps = state => {

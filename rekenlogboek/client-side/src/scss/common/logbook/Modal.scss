@@ -16,7 +16,7 @@
 		border-radius: 8px;
 		background: #fff;
 		width: 22.5%;
-		height: 87.5%;
+		height: 90%;
 		margin: auto;
 		padding: 0 1.25%;
 
@@ -56,6 +56,8 @@
 			display: flex;
 			padding: 1.25% 0;
 			height: 10%;
+			position: relative;
+			z-index: 5;
 		}
 	}
 }
