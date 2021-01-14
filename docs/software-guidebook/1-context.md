@@ -41,3 +41,7 @@ Hieronder een tabel met taken per rol.
 Op de afbeelding hieronder is het context diagram te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/systeem-context.svg"
+
+Het blauwe blok geeft de webapplicatie aan die het ontwikkelteam gemaakt heeft. Deze applicatie maakt gebruik van het Microsoft Identity Platform om gebruikers te autoriseren en van een Microsoft Teams Tab om de applicatie werkend te krijgen op Microsoft Teams applicatie.
+
+Verder zijn er nog 4 verschillende gebruikers. Voor de compleetheid staan ze al weergegeven in het context diagram, maar ze zullen in het container en component diagram pas echt van belang worden voor de c4-modellen.

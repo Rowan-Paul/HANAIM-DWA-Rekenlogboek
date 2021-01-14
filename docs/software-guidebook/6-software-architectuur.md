@@ -8,21 +8,64 @@ Hieronder staan 3 verschillende diagrammen die de software architectuur duidelij
 
 #### 6.1.1 Container diagram
 
-In het container diagram hieronder is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 2 containers: de Single Page Application en de Server.
+In de afbeelding hieronder is het container diagram te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/containers.svg"
 
+In het container diagram is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 3 containers: de Single Page Application, de Server en een database.
+
+De Single Page Application is een react app die gebruikt maakt van websockets en redux. Alhoewel de SPA zelf geen data verstuurd via de websockets ontvangt hij dit wel vanuit de server. Wat de SPA wel verstuurd naar de server zijn de API requests via fetch. De server kan vervolgens met data via HTTPS of websockets een response geven. Wanneer er een PUT/POST request werd verstuurd naar de server zal de server een response geven op basis van de status van het request.
+
+Verder is hier te zien dat de leeraar en leerling gebruikers niet alleen direct via de SPA werken, maar dat zij ook de optie hebben om vanuit de Microsoft Teams tab de applicatie kunnen benaderen.
+
+In de component diagram Single Page Application staan meer details over de verschillen tussen gebruikers.
+
 #### 6.1.2 Component diagram: Single Page Application
 
-Hieronder staat het component diagram van de Single Page Application, ook wel de client-side genoemd, die tracht in 1 oogopslag een overzicht te geven over de gehele client-side applicatie.
+In de afbeelding hieronder is het component diagram voor de Single Page Application te zien (ook wel de client-side genoemd), gebaseerd op het C4 model.
 
 @import "./c4-model/components-SPA.svg"
 
+Aangezien de SPA redelijk uitgebreid is kwam het team al snel tot de conclusie om hier meerdere groeperingen te maken binnen het component diagram. Dit zorgt ervoor dat er veel minder pijlen nodig zijn en daardoor het diagram ook een stuk overzichtelijker is.
+
+De groeperingen zijn vooral gebasseerd op welke omgevingen er binnen de applicatie beschikbaar zijn. Deze omgevingen geven onder andere aan voor welke gebruikers ze bedoeld zijn of voor welke functie ze dienen.
+
+Alle gebruikers hebben dus een eigen omgeving waarvoor specifieke component(s) gemaakt zijn. De logboekontwerper, leraar en student omgevingen hebben ook allemaal hun eigen UI-components. Dit is een groepering aan kleinere components die per pagina ingeladen kunnen worden. Ze zijn echter niet van heel groot belang voor het component diagram en voor het overzicht hebben we ze daarom ook weggelaten.
+
+De omgeving die er dan uitspringt is die van de ongeautoriseerde gebruiker. Aangezien gebruikers zonder de juiste rechten niet toegestaan zijn tot de belangrijke delen van de applicatie, worden ze vriendelijk doorgeleid naar een 'geen toegang' pagina.
+
+Verder hebben de andere drie gebruikers dus allemaal belangrijke pagina's. Hieronder een simpel overzicht per gebruiker wat deze pagina's en hun bijbehorende subgroepen inhouden.
+
+**Logboekontwerper**
+
+- Index (LogbookDesigner): de hoofdpagina voor de logboekontwerper. Vanuit hier kan hij/zij kiezen om een nieuw logboek aan te maken.
+- subgroep "Nieuw logboek pagina's": de pagina's die in deze subgroep staan moeten door een logboekontwerper worden doorlopen om een nieuw logboek te kunnen maken.
+
+**Leraar**
+
+- Index (Teacher): vanuit hier kan een leraar een overzicht zien van zijn/haar mogelijkheden binnen de applicatie. De leraar kan kiezen om studentenlogboeken in te zien, een groepsovericht te zien of om te bepalen welke pagina's beschikbaar zijn voor zijn/haar groep.
+- Studentlogbook: de pagina waarin de leraar een logboek van zijn/haar leerlingen kan kiezen en inzien.
+- Logbooks: de pagina waarin een overzicht staat van alle leerling logboeken.
+- AllowStudentAccess: de pagina waarin de leraar kan aangeven wat de leerlingen van zijn/haar groep mogen zien.
+
+**Student**
+
+- subgroep "Studentlogboek invulpagina's": in deze subgroep staan alle pagina's die opengezet kunnen worden door de leraar van een leerling, met een bijbehorende eind pagina voor wanneer een leerling klaar is met het invullen van zijn/haar logboek.
+- Default: wanneer een leraar geen logboek heeft openstaan zullen de leerlingen dit zien aan de hand van deze infopagina.
+
+Naast de omgevingen die de gebruikers visueel kunnen zien is er ook nog een Redux en een Sign in omgeving. De Redux omgeving bevat in dit overzicht alle reducers en per reducer wordt er met pijlen aangegeven door wie ze gebruikt worden. De Sign in omgeving bevat alleen een Signin en succespagina voor het inloggen. De Sign in pagina maakt gebruik van Microsoft Teams data via een component genaamd tabConfig. Tabconfig vraagt namelijk data op uit het Microsoft Identity Platform. De Microsoft Teams tab die ook aan de tabConfig gekoppeld staat geld alleen voor de leraren en leerlingen die op Teams werken. In princiepe heeft dit direct effect op hun complete omgeving, maar omdat in de sign in omgeving de autorisatie wordt gedaan voor een gebruiker en wordt bepaald of ze op Microsoft Teams werken of niet leek het ons handig de Teams Tab hieraan te koppelen.
+
 #### 6.1.3 Component diagram: Server
 
-Hieronder staat het component diagram van de server die tracht in 1 oogopslag een overzicht te geven over de gehele server-side applicatie.
+In de afbeelding hieronder is het component diagram voor de Server te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/components-server.svg"
+
+in "6.1.2 Component diagram: Single Page Application" staat beschreven hoe de client-side eruit ziet, maar het is natuurlijk ook belangrijk om te weten hoe de client-side met de server-side communiceerd en hoe deze in elkaar zit. Om dit op te lossen hebben we een 2de component diagram gemaakt voor de server-side. Zoals u kan zien in zijn hier weer 2 groeperingen gemaakt voor een duidelijk overzicht.
+
+De routes groepering bevat alle mogelijke route components waar de client-side requests naar kan sturen. De logbook en studentlogbook components kunnen vervolgens de schemas aanspreken uit de bijbehorende model files. Al is een request vanuit de client-side geldig dan kan er via het MongoDB Wire protocol een verzoek om data gedaan worden naar de MongoDB.
+
+De file route is de enige route file zonder eigen schema. Dit komt, omdat deze file ook niks van de database vraagt. Hij slaat namelijk zelf images op op de server. De path naar deze images wordt door een andere request in de logbook route file afgehandeld.
 
 ### 6.2 Bestandsstructuur
 
