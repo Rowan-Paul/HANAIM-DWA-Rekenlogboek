@@ -16,11 +16,11 @@ main {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 95vw;
+		width: 90%;
+		margin: 0 auto;
 
 		.lock-all-container {
-			margin: 6px;
-			margin-left: 74px;
+			margin: 6px 0;
 
 			.bttn {
 				width: 14vw;
