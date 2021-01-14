@@ -46,23 +46,19 @@ function StudentLogbook(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbookoverview.currentLogbook.columns,
-		goals: state.logbookoverview.currentLogbook.goals,
-		logbookID: state.logbookoverview.activeStudentlogbook._id,
-		logbookTypes: state.main.logbookTypes,
-		student: state.logbookoverview.activeStudentlogbook.student,
-		teacher: state.main.user.name
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbookoverview.currentLogbook.columns,
+	goals: state.logbookoverview.currentLogbook.goals,
+	logbookID: state.logbookoverview.activeStudentlogbook._id,
+	logbookTypes: state.main.logbookTypes,
+	student: state.logbookoverview.activeStudentlogbook.student,
+	teacher: state.main.user.name
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchStudentlogbook: logbookID =>
-			dispatch(fetchActiveStudentlogbook(logbookID))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	fetchStudentlogbook: logbookID =>
+		dispatch(fetchActiveStudentlogbook(logbookID))
+})
 
 export default connect(
 	mapStateToProps,

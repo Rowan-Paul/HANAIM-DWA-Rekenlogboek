@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveLogbook, resetLogbook } from '../../../redux/logbook/actions'
 
@@ -12,14 +12,13 @@ import TopBar from '../../../common/logbook/TopBar'
 
 import '../../../../scss/logbook-designer/NewLogbook.scss'
 function Overview(props) {
-	const history = useHistory()
 	useEffect(() => {
 		// Prevent skipping goals page
-		props.columns.map(c => !c.added && history.push('./goals'))
+		props.columns.map(c => !c.added && props.history.push('./goals'))
 
 		if (props.isSaved) {
 			props.resetLogbook()
-			history.push('./done')
+			props.history.push('./done')
 		}
 	})
 
@@ -58,21 +57,18 @@ function Overview(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		logbookTypes: state.main.logbookTypes,
-		group: state.logbook.group,
-		goals: state.logbook.goals,
-		isSaved: state.logbook.isSaved
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {
-		saveLogbook: () => dispatch(saveLogbook()),
-		resetLogbook: () => dispatch(resetLogbook())
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	logbookTypes: state.main.logbookTypes,
+	group: state.logbook.group,
+	goals: state.logbook.goals,
+	isSaved: state.logbook.isSaved
+})
+
+const mapDispatchToProps = dispatch => ({
+	saveLogbook: () => dispatch(saveLogbook()),
+	resetLogbook: () => dispatch(resetLogbook())
+})
 
 export default connect(
 	mapStateToProps,

@@ -107,18 +107,14 @@ function StudentAccessSelector(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		modalVisible: state.logbook.modal.visible,
-		currentLogbook: state.allowStudentAccess.currentLogbook
-	}
-}
+const mapStateToProps = state => ({
+	modalVisible: state.logbook.modal.visible,
+	currentLogbook: state.allowStudentAccess.currentLogbook
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalShow: payload => dispatch(modalShow(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalShow: payload => dispatch(modalShow(payload))
+})
 
 export default connect(
 	mapStateToProps,

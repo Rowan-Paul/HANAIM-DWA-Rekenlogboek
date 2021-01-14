@@ -83,18 +83,14 @@ function General(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		user: state.main.user,
-		group: state.logbook.group,
-		period: state.logbook.period
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user,
+	group: state.logbook.group,
+	period: state.logbook.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addLogbookPeriod: payload => dispatch(addLogbookPeriod(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	addLogbookPeriod: payload => dispatch(addLogbookPeriod(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(General))

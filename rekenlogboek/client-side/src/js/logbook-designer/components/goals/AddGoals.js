@@ -101,19 +101,15 @@ function AddGoals(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		goals: state.logbook.goals,
-		position: state.logbook.position
-	}
-}
+const mapStateToProps = state => ({
+	goals: state.logbook.goals,
+	position: state.logbook.position
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setGoalDescription: payload => dispatch(setGoalDescription(payload)),
-		setGoalImage: payload => dispatch(setGoalImage(payload)),
-		setGoalTitle: payload => dispatch(setGoalTitle(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setGoalDescription: payload => dispatch(setGoalDescription(payload)),
+	setGoalImage: payload => dispatch(setGoalImage(payload)),
+	setGoalTitle: payload => dispatch(setGoalTitle(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddGoals)

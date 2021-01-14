@@ -95,25 +95,21 @@ function AfterPreTestUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		explanation: state.studentLogbook.logbook.columns[1].explanation,
-		inputStates: state.main.inputStates,
-		answers: state.studentLogbook.studentlogbook.answers,
-		column: state.studentLogbook.logbook.columns[1],
-		currentGoal: state.studentLogbook.currentGoal,
-		goals: state.studentLogbook.logbook.goals
-	}
-}
+const mapStateToProps = state => ({
+	explanation: state.studentLogbook.logbook.columns[1].explanation,
+	inputStates: state.main.inputStates,
+	answers: state.studentLogbook.studentlogbook.answers,
+	column: state.studentLogbook.logbook.columns[1],
+	currentGoal: state.studentLogbook.currentGoal,
+	goals: state.studentLogbook.logbook.goals
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
-		incrementCurrentGoal: () => dispatch(incrementCurrentGoal()),
-		decrementCurrentGoal: () => dispatch(decrementCurrentGoal()),
-		loadStudentLogbook: () => dispatch(loadStudentLogbook())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
+	incrementCurrentGoal: () => dispatch(incrementCurrentGoal()),
+	decrementCurrentGoal: () => dispatch(decrementCurrentGoal()),
+	loadStudentLogbook: () => dispatch(loadStudentLogbook())
+})
 
 export const AfterPreTest = connect(
 	mapStateToProps,

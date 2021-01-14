@@ -65,18 +65,14 @@ function AfterPreTestEndUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		answers: state.studentLogbook.studentlogbook.answers,
-		allGoals: state.studentLogbook.logbook.goals
-	}
-}
+const mapStateToProps = state => ({
+	answers: state.studentLogbook.studentlogbook.answers,
+	allGoals: state.studentLogbook.logbook.goals
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		setCurrentGoal: goal => dispatch(setCurrentGoal(goal))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setCurrentGoal: goal => dispatch(setCurrentGoal(goal))
+})
 
 export const AfterPreTestEnd = connect(
 	mapStateToProps,

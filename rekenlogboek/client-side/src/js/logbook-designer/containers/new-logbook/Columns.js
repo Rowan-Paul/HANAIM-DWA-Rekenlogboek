@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setColumn } from '../../../redux/logbook/actions'
 
@@ -15,7 +15,6 @@ import TopBar from '../../../common/logbook/TopBar'
 
 import '../../../../scss/logbook-designer/NewLogbook.scss'
 function Columns(props) {
-	const history = useHistory()
 	const [columns, setColumns] = useState(props.columns)
 	const [modal, setModal] = useState(props.modalVisible)
 	const [nextButtonColor, setNextButtonColor] = useState('gray')
@@ -25,7 +24,7 @@ function Columns(props) {
 		if (!columns.every(c => c.added)) {
 			alert('Vul eerst alle kolommen in')
 		} else {
-			history.push('./goals')
+			props.history.push('./goals')
 		}
 	}
 
@@ -40,7 +39,7 @@ function Columns(props) {
 	useEffect(() => {
 		// Prevent skipping general page
 		if (props.group < 1 && props.period < 1) {
-			history.push('./general')
+			props.history.push('./general')
 		}
 
 		setColumns(props.columns)
@@ -100,21 +99,17 @@ function Columns(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		group: state.logbook.group,
-		inputStates: state.main.inputStates,
-		logbookTypes: state.main.logbookTypes,
-		modalVisible: state.logbook.modal.visible,
-		period: state.logbook.period
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	group: state.logbook.group,
+	inputStates: state.main.inputStates,
+	logbookTypes: state.main.logbookTypes,
+	modalVisible: state.logbook.modal.visible,
+	period: state.logbook.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setColumn: () => dispatch(setColumn())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setColumn: () => dispatch(setColumn())
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Columns)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Columns))

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import Checkboxes from '../../../common/InputTypes/Checkboxes'
@@ -52,11 +52,9 @@ function InputType(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		inputTypes: state.main.inputTypes,
-		inputStates: state.main.inputStates
-	}
-}
+const mapStateToProps = state => ({
+	inputTypes: state.main.inputTypes,
+	inputStates: state.main.inputStates
+})
 
 export default connect(mapStateToProps, null)(InputType)

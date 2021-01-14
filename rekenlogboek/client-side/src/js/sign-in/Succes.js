@@ -41,11 +41,9 @@ export default function SuccesUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		roles: state.main.roles,
-		user: state.main.user
-	}
-}
+const mapStateToProps = state => ({
+	roles: state.main.roles,
+	user: state.main.user
+})
 
 export const Succes = connect(mapStateToProps)(SuccesUI)
