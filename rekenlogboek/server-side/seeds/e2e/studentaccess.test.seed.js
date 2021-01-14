@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-require('./models/logbook')
-require('./models/studentlogbook')
+require('../models/logbook')
+require('../models/studentlogbook')
 
 const dbName = 'rekenlogboek'
 
