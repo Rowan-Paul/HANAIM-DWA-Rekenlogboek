@@ -788,3 +788,5 @@ async function seedStudentLogboek() {
 		}
 	])
 }
+
+console.log(`seed installed`)
