@@ -9,18 +9,18 @@ main {
 	position: absolute;
 	padding: 0 0 7.5vh;
 	top: 5vh;
-	height: auto;
+	height: 90%;
 	width: 100%;
 
 	.top-bar {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 95vw;
+		width: 90%;
+		margin: 0 auto;
 
 		.lock-all-container {
-			margin: 6px;
-			margin-left: 74px;
+			margin: 6px 0;
 
 			.bttn {
 				width: 14vw;
@@ -49,9 +49,10 @@ main {
 		grid-template-columns: repeat(auto-fit, calc(100% / 5));
 		grid-column: span 4;
 		grid-row: span 4;
-		width: 92.5%;
+		overflow-y: scroll;
 		margin: 0 0 0 5%;
 		padding: 0;
+		width: 92.5%;
 
 		.explanation-container {
 			grid-column: span 2;
@@ -62,9 +63,10 @@ main {
 			}
 			p {
 				font-size: 16px;
-				line-height: 2;
+				line-height: 1.25;
 			}
 		}
+
 		.button_containers {
 			display: grid;
 			grid-column: span 3;
@@ -74,6 +76,8 @@ main {
 		.button-container {
 			margin: auto;
 			width: 90%;
+			min-height: 300px;
+
 			p {
 				margin: 0 auto;
 				width: 80%;
@@ -81,8 +85,9 @@ main {
 			}
 		}
 	}
+
 	.prev {
-		padding: 2.5vh 0;
+		padding: 3.5vh 0;
 	}
 }
 
