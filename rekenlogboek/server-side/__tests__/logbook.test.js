@@ -330,7 +330,8 @@ describe('/logbook routes', () => {
 	 * @route GET /logbook/groups/:group
 	 */
 	test('GET /logbook/groups/:group - unhappy path with wrong group', async () => {
-		const group = 6
+		const group = 2
+
 		const test = await fetch('http://localhost:3000/logbook/groups/' + group, {
 			method: 'GET'
 		})
