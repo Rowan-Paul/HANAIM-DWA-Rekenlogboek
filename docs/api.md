@@ -1,6 +1,4 @@
-# temp file
-
-removed routes:
+## Removed routes
 
 - GET /groups/:group/years
 - GET /logbook/:id/teacher
@@ -9,8 +7,12 @@ removed routes:
 - GET /logbook/:id/column/:position
 - GET /logbook/:id/goal/:
 - GET /studentlogbook/:student/logbooks/:logbookID
+- GET /studentlogbook/:logbookID/group-answers
+- GET /studentlogbook/:id/answers
+- GET /studentlogbook/:id/answers/column/:position
+- GET /studentlogbook//student/:student
 
-## Logbook
+## Logbook routes
 
 **`POST`** `/logbook`
 
@@ -95,7 +97,7 @@ Get all years from a group
 
 ---
 
-## Studentlogbook
+## Studentlogbook routes
 
 **`POST`** `/studentlogbook`
 
@@ -136,5 +138,15 @@ Get all information about a specific studentlogbook
 | Parameters             | Send in body | Return as JSON     |
 | ---------------------- | ------------ | ------------------ |
 | id - studentlogbook id |              | The studentlogbook |
+
+---
+
+**`GET`** `/studentlogbook/logbook/:logbookid`
+
+Get all studentlogbooks related to one logbook (not related to studentlogbook)
+
+| Parameters | Send in body | Return as JSON     |
+| ---------- | ------------ | ------------------ |
+| logbookid  |              | The studentlogbook |
 
 ---

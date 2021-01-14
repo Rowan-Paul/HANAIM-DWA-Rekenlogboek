@@ -126,97 +126,11 @@ router.get('/:id', (req, res) => {
 		})
 })
 
-// Get all answers (from all students) for a logbook
-// Returns only the id, student and answers
-router.get('/:logbookID/group-answers', (req, res) => {
-	// Query Paramaters
-	const goal = req.query.goal
-	const column = req.query.column
-	const answer = req.query.answer
-
-	StudentLogbook.find({ logbookID: req.params.logbookID })
-		.select('student answers')
-		.then(students => {
-			/**
-			 * Filters all student answers
-			 * Filter works if query param isset
-			 */
-			const response = [] // Define for pushing
-			students.filter(student => {
-				const check = student.answers.map(
-					a =>
-						(!goal || a.goalPosition == goal) &&
-						(!column || a.columnPosition == column) &&
-						(!answer || a.answer.value == answer)
-				)
-
-				// Only append if contains answers
-
-				if (check.indexOf(true) > -1) response.push(student)
-			})
-
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all answers given by the student
-router.get('/:id/answers', (req, res) => {
-	StudentLogbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			res.status(200).send(response.answers)
-		})
-		.catch(err => {
-			console.log('error 5: ' + err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all answers from a student from one column
-router.get('/:id/answers/column/:position', (req, res) => {
-	StudentLogbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			const columnAnswers = response.answers.filter(object => {
-				return object.columnPosition === Number(req.params.position)
-			})
-			res.status(200).send(columnAnswers)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all answers from a student from one row which belongs to one goal
-router.get('/:id/answers/goal/:position', (req, res) => {
-	StudentLogbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			const columnAnswers = response.answers.filter(object => {
-				return object.goalPosition === Number(req.params.position)
-			})
-			res.status(200).send(columnAnswers)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all studentlogbooks from one student
-router.get('/student/:student', (req, res) => {
-	StudentLogbook.find({ student: req.params.student })
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			res.status(500).send(err)
-		})
-})
-
-// Get all studentlogbooks related to one logbook (not related to studentlogbook)
+/**
+ * Get all studentlogbooks related to one logbook (not related to studentlogbook)
+ * @route GET /studentlogbook/logbook/:logbookid
+ * @param logbookid - The logbook id
+ */
 router.get('/logbook/:logbookid', (req, res) => {
 	StudentLogbook.find({
 		logbookID: req.params.logbookid

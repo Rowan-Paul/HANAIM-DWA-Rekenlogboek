@@ -326,4 +326,35 @@ describe('/logbook routes', () => {
 
 		expect(test).toEqual(500)
 	})
+
+	/**
+	 * Get all studentlogbooks related to one logbook
+	 * (not related to studentlogbook)
+	 * and checks if the server gives back the logbook
+	 * @route GET /studentlogbook/logbook/:logbookid
+	 */
+	test('GET /studentlogbook/logbook/:logbookid - happy path', async () => {
+		const test = await fetch(
+			`http://localhost:3000/studentlogbook/logbook/${await getTestlogbookID()}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test[0].student).toEqual('Emma Visser')
+	})
+
+	/**
+	 * Get all studentlogbooks related to one logbook
+	 * (not related to studentlogbook)
+	 * and checks if the server gives back an error
+	 * @route GET /studentlogbook/logbook/:logbookid
+	 */
+	test('GET /studentlogbook/logbook/:logbookid - unhappy path with a wrong logbook id', async () => {
+		const test = await fetch(`http://localhost:3000/studentlogbook/logbook/5`, {
+			method: 'GET'
+		}).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
 })
