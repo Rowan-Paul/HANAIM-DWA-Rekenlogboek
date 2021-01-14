@@ -11,6 +11,7 @@ Hieronder staan 3 verschillende diagrammen die de software architectuur duidelij
 In de afbeelding hieronder is het container diagram te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/containers.svg"
+_Afbeelding 2: Container diagram._
 
 In het container diagram is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 3 containers: de Single Page Application, de Server en een database.
 
@@ -25,6 +26,7 @@ In de component diagram Single Page Application staan meer details over de versc
 In de afbeelding hieronder is het component diagram voor de Single Page Application te zien (ook wel de client-side genoemd), gebaseerd op het C4 model.
 
 @import "./c4-model/components-SPA.svg"
+_Afbeelding 3: Component diagram - Single Page Application._
 
 Aangezien de SPA redelijk uitgebreid is kwam het team al snel tot de conclusie om hier meerdere groeperingen te maken binnen het component diagram. Dit zorgt ervoor dat er veel minder pijlen nodig zijn en daardoor het diagram ook een stuk overzichtelijker is.
 
@@ -60,6 +62,7 @@ Naast de omgevingen die de gebruikers visueel kunnen zien is er ook nog een Redu
 In de afbeelding hieronder is het component diagram voor de Server te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/components-server.svg"
+_Afbeelding 4: Component diagram - Server._
 
 in "6.1.2 Component diagram: Single Page Application" staat beschreven hoe de client-side eruit ziet, maar het is natuurlijk ook belangrijk om te weten hoe de client-side met de server-side communiceerd en hoe deze in elkaar zit. Om dit op te lossen hebben we een 2de component diagram gemaakt voor de server-side. Zoals u kan zien in zijn hier weer 2 groeperingen gemaakt voor een duidelijk overzicht.
 

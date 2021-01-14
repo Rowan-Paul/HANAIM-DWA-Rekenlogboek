@@ -35,7 +35,7 @@ Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich 
 | 5.  | Wijzigen studententoegang   | Wijzig het formulier waar de student toegang tot heeft.                              | studentaccess.test.seed.js |
 | 6.  | Studentpagina's             | Testen van het invullen van invoervelden en versturen van vragen.                    | -                          |
 
----
+_Tabel 2: E2E-test overzicht._
 
 ### 7.2 Deployed ontwikkelomgeving
 

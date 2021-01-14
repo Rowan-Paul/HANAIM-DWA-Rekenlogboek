@@ -12,6 +12,7 @@ Om de applicatie te deployen moeten de volgende stappen worden uitgevoerd in elk
 Hieronder staat het deployment diagram waarin weergeven wordt hoe het project kan worden gebruikt.
 
 @import "./c4-model/deployment.svg"
+_Afbeelding 5: Deployment diagram._
 
 Aan het begin van het project kreeg het ontwikkelteam te horen dat het wenselijk was om via Azure het project te deployen. Alhoewel het ons zelf niet gelukt is om dit realistisch te maken hebben we ervoor gekozen om het deployment diagram alsnog op basis van een Azure-omgeving weer te geven zodat een toekomstige developer hier mogelijk gebruik van kan maken.
 

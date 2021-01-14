@@ -36,11 +36,14 @@ Hieronder een tabel met taken per rol.
 | Leerling         | Logboek invullen                                      |
 | Logboekontwerper | Maakt logboeken voor verschillende groepen en blokken |
 
+_Tabel 1: Rollen verdeling._
+
 ### 1.4 Context diagram
 
 Op de afbeelding hieronder is het context diagram te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/systeem-context.svg"
+_Afbeelding 1: Context diagram._
 
 Het blauwe blok geeft de webapplicatie aan die het ontwikkelteam gemaakt heeft. Deze applicatie maakt gebruik van het Microsoft Identity Platform om gebruikers te autoriseren en van een Microsoft Teams Tab om de applicatie werkend te krijgen op Microsoft Teams applicatie.
 
