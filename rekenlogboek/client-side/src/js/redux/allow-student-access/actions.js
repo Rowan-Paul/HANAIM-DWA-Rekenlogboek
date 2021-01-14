@@ -52,8 +52,8 @@ export const getFilterOptions = (dispatch, getState) => {
 			fetchActiveLogbook(getState)
 				.then(response => {
 					//in the server-side a 204 status will be sent when the response is empty
-					if (response && response.status !== 204) {
-						return response.json()
+					if (response && response.status !== 404) {
+						return
 					} else {
 						//sending false to the next then will make sure that the code stops looking for an active logbook but instead looks for the first available logbook
 						return false

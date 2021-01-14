@@ -96,8 +96,7 @@ router.put('/:id/currentPhase', (req, res) => {
  */
 router.get('/groups/:group', (req, res) => {
 	Logbook.findOne({
-		group: req.params.group,
-		currentPhase: { $ne: 'notVisible' }
+		group: req.params.group
 	}).then(response => {
 		if (response) {
 			res.status(200).send(response)
