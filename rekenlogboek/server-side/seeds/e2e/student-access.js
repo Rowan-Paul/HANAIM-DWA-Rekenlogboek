@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-require('./models/logbook')
-require('./models/studentlogbook')
+require('../../models/logbook')
+require('../../models/studentlogbook')
 
 const dbName = 'rekenlogboek'
 
@@ -37,7 +37,7 @@ async function seedLogbook() {
 			period: 1,
 			group: 6,
 			year: '2020 - 2021',
-			currentPhase: 'evaluation',
+			currentPhase: 'notVisible',
 			columns: [
 				{
 					input: {
@@ -140,3 +140,5 @@ async function seedStudentLogboek() {
 		}
 	])
 }
+
+console.log('Finished')

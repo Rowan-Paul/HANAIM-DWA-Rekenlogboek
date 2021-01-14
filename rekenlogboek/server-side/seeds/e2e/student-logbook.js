@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-require('./models/logbook')
-require('./models/studentlogbook')
+require('../../models/logbook')
+require('../../models/studentlogbook')
 
 const dbName = 'rekenlogboek'
 
@@ -32,73 +32,77 @@ async function seedLogbook() {
 
 	await Logbook.insertMany([
 		{
-			_id: '5ff7197fc149682931090ec8',
-			activeGoal: 0,
-			period: 1,
-			group: 6,
-			year: '2020 - 2021',
-			currentPhase: 'notVisible',
-			columns: [
+			"_id": "5ff7197fc149682931090ec8",
+			"activeGoal": 0,
+			"period": 1,
+			"group": 6,
+			"year": "2020 - 2021",
+			"currentPhase": "evaluation",
+			"columns": [
 				{
-					input: {
-						options: []
+					"input": {
+						"options": []
 					},
-					_id: '5ff7197fc149682931090ec9',
-					position: 0,
-					title: 'Doelen'
+					"_id": "5ff7197fc149682931090ec9",
+					"position": 0,
+					"title": "Doelen"
 				},
 				{
-					input: {
-						options: ['Ik snap het goed', 'Ik snap het niet'],
-						type: 'radiobuttons'
-					},
-					_id: '5ff7197fc149682931090eca',
-					explanation: false,
-					position: 1,
-					title: 'Hoe heb je de toets gemaakt?'
-				},
-				{
-					input: {
-						options: [
-							'Ik heb instructie nodig',
-							'Ik heb geen instructie nodig'
+					"input": {
+						"options": [
+							"Ik snap het goed",
+							"Ik snap het niet"
 						],
-						type: 'radiobuttons'
+						"type": "radiobuttons"
 					},
-					_id: '5ff7197fc149682931090ecb',
-					explanation: false,
-					position: 2,
-					title: 'Heb je instructie nodig?'
+					"_id": "5ff7197fc149682931090eca",
+					"explanation": false,
+					"position": 1,
+					"title": "Hoe heb je de toets gemaakt?"
 				},
 				{
-					input: {
-						options: []
+					"input": {
+						"options": [
+							"Ik heb instructie nodig",
+							"Ik heb geen instructie nodig"
+						],
+						"type": "radiobuttons"
 					},
-					_id: '5ff7197fc149682931090ecc',
-					position: 3,
-					title: 'Evaluatie'
-				}
-			],
-			goals: [
-				{
-					_id: '5ff7197fc149682931090ecd',
-					description: 'Omschrijving.',
-					imageLink: '1610029433492_temp-goal-thumb.png',
-					position: 0,
-					title: 'Doel 1'
+					"_id": "5ff7197fc149682931090ecb",
+					"explanation": false,
+					"position": 2,
+					"title": "Heb je instructie nodig?"
 				},
 				{
-					_id: '5ff7197fc149682931090ece',
-					description: 'Omschrijving.',
-					imageLink: '1610029439214_learngoalthumb.png',
-					position: 1,
-					title: 'Doel 2'
+					"input": {
+						"options": []
+					},
+					"_id": "5ff7197fc149682931090ecc",
+					"position": 3,
+					"title": "Evaluatie"
 				}
 			],
-			__v: 0
+			"goals": [
+				{
+					"_id": "5ff7197fc149682931090ecd",
+					"description": "Omschrijving.",
+					"imageLink": "1610029433492_temp-goal-thumb.png",
+					"position": 0,
+					"title": "Doel 1"
+				},
+				{
+					"_id": "5ff7197fc149682931090ece",
+					"description": "Omschrijving.",
+					"imageLink": "1610029439214_learngoalthumb.png",
+					"position": 1,
+					"title": "Doel 2"
+				}
+			],
+			"__v": 0
 		}
 	])
 }
+
 
 async function seedStudentLogboek() {
 	await StudentLogbook.deleteMany()
