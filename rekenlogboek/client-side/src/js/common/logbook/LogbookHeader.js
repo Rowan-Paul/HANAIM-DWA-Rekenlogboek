@@ -76,17 +76,8 @@ function LogbookHeader(props) {
 	return columnPropHandler()
 }
 
-const mapStateToProps = state => {
-	return {
-		logbookTypes: state.main.logbookTypes
-	}
-}
+const mapStateToProps = state => ({
+	logbookTypes: state.main.logbookTypes
+})
 
-const mapDispatchToProps = dispatch => {
-	return {}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(LogbookHeader))
+export default connect(mapStateToProps)(withRouter(LogbookHeader))

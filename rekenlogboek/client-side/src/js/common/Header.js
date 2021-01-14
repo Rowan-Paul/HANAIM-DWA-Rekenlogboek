@@ -51,18 +51,13 @@ function Header(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		user: state.main.user
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		doResetLogbook: () => dispatch(resetLogbook()),
-		doResetLogbookOverview: () => dispatch(resetLogbookOverview()),
-		doResetMain: () => dispatch(resetMain())
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user
+})
+const mapDispatchToProps = dispatch => ({
+	doResetLogbook: () => dispatch(resetLogbook()),
+	doResetLogbookOverview: () => dispatch(resetLogbookOverview()),
+	doResetMain: () => dispatch(resetMain())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))

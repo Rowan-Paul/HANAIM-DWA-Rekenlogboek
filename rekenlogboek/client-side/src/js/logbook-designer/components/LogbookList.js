@@ -93,23 +93,19 @@ function LogbookList(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		userGroups: state.main.user.groups,
-		year: state.logbookoverview.year,
-		group: state.logbookoverview.group,
-		period: state.logbookoverview.period
-	}
-}
+const mapStateToProps = state => ({
+	userGroups: state.main.user.groups,
+	year: state.logbookoverview.year,
+	group: state.logbookoverview.group,
+	period: state.logbookoverview.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setActiveStudentLogbook: logbook =>
-			dispatch(saveActiveStudentlogbook(logbook)),
-		setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
-		setGroup: group => dispatch(setGroup(group))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setActiveStudentLogbook: logbook =>
+		dispatch(saveActiveStudentlogbook(logbook)),
+	setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
+	setGroup: group => dispatch(setGroup(group))
+})
 
 export default connect(
 	mapStateToProps,

@@ -62,21 +62,17 @@ function StudentUI(props) {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		user: state.main.user,
-		logbookid: state.studentLogbook.logbook._id,
-		currentPhase: state.studentLogbook.logbook.currentPhase,
-		studentlogbookid: state.studentLogbook.studentlogbook._id,
-		context: state.main.context
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user,
+	logbookid: state.studentLogbook.logbook._id,
+	currentPhase: state.studentLogbook.logbook.currentPhase,
+	studentlogbookid: state.studentLogbook.studentlogbook._id,
+	context: state.main.context
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		loadLogbook: payload => dispatch(loadLogbook(payload)),
-		loadStudentLogbook: () => dispatch(loadStudentLogbook())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	loadLogbook: payload => dispatch(loadLogbook(payload)),
+	loadStudentLogbook: () => dispatch(loadStudentLogbook())
+})
 
 export const Default = connect(mapStateToProps, mapDispatchToProps)(StudentUI)

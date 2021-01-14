@@ -17,14 +17,8 @@ function InputHandlers(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {}
-}
+const mapDispatchToProps = dispatch => ({
+	deleteInputOption: payload => dispatch(deleteInputOption(payload))
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		deleteInputOption: payload => dispatch(deleteInputOption(payload))
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputHandlers)
+export default connect(null, mapDispatchToProps)(InputHandlers)

@@ -32,10 +32,8 @@ function addInputValueFunc(props) {
 	)
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addInputOption: payload => dispatch(addInputOption(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	addInputOption: payload => dispatch(addInputOption(payload))
+})
 
 export default connect(null, mapDispatchToProps)(addInputValueFunc)

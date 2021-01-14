@@ -2,7 +2,7 @@ import '../../../scss/teacher/containers/TeacherLanding.scss'
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import ButtonContainer from '../../common/ButtonContainer'
 
@@ -48,10 +48,8 @@ function Index(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		user: state.main.user
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user
+})
 
 export default connect(mapStateToProps)(withRouter(Index))

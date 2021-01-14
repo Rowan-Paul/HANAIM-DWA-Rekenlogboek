@@ -69,16 +69,11 @@ function GroupAnswerRow(props) {
 	return <div className="Row Body">{handler()}</div>
 }
 
-const mapStateToProps = state => {
-	return {
-		inputTypes: state.main.inputTypes,
-		inputStates: state.main.inputStates,
-		logbook: state.groupOverview.logbook,
-		logbookTypes: state.main.logbookTypes
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+const mapStateToProps = state => ({
+	inputTypes: state.main.inputTypes,
+	inputStates: state.main.inputStates,
+	logbook: state.groupOverview.logbook,
+	logbookTypes: state.main.logbookTypes
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupAnswerRow)
+export default connect(mapStateToProps)(GroupAnswerRow)

@@ -85,21 +85,17 @@ function AddColumn(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		inputStates: state.main.inputStates,
-		inputTypes: state.main.inputTypes,
-		position: state.logbook.position
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	inputStates: state.main.inputStates,
+	inputTypes: state.main.inputTypes,
+	position: state.logbook.position
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addInputOption: payload => dispatch(addInputOption(payload)),
-		setColumnTitle: payload => dispatch(setColumnTitle(payload)),
-		setInputType: payload => dispatch(setInputType(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	addInputOption: payload => dispatch(addInputOption(payload)),
+	setColumnTitle: payload => dispatch(setColumnTitle(payload)),
+	setInputType: payload => dispatch(setInputType(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddColumn)
