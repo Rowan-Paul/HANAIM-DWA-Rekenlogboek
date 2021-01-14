@@ -1,8 +1,7 @@
-// Run studentaccess.test.seed.js
 const puppeteer = require('puppeteer')
 jest.setTimeout(120000)
 
-describe(`Open and view logbook group overview`, () => {
+describe(`Open en view logbook group overview`, () => {
 	let teamsBrowser, teams
 	let browser, page
 	let iframe, newWindow
@@ -20,7 +19,7 @@ describe(`Open and view logbook group overview`, () => {
 		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 75,
+			slowMo: 70,
 			ignoreHTTPSErrors: true,
 			args: ['--start-maximized'],
 			defaultViewport: null
@@ -85,28 +84,31 @@ describe(`Open and view logbook group overview`, () => {
 		expect(oAuth.isClosed()).toBe(true)
 	})
 
-	test(`Go to unlock phase page`, async () => {
-		await page.click(`.bttn.yellow`)
+	test(`Student logbooks`, async () => {
+		await page.click(`.bttn.blue`)
+		expect(page.url()).toBe('https://localhost:3001/teacher/logbooks')
+	})
+
+	test(`Open logbook for student 1`, async () => {
+		// Select first learngoal
+		await page.waitForTimeout(1000)
+
+		await page.click(`.student-1`)
 
 		expect(page.url()).toBe(
-			'https://localhost:3001/teacher/allow-student-access'
+			'https://localhost:3001/teacher/logbooks/studentlogbook'
 		)
 	})
 
-	test(`Unlock pretest page`, async () => {
-		await page.waitForSelector('.container-pretest', { visible: true })
+	test(`Check if happy evaluation smiley isn't checked`, async () => {
+		await page.waitForSelector('.goal-1', { visible: true })
+		const radiobutton = await page.$('.goal-1 input.Happy')
 
-		// Click the first closed phase (pretest)
-		await page.click(`.container-pretest button`)
+		const isRadioSelected = await (
+			await radiobutton.getProperty('checked')
+		).jsonValue()
 
-		await page.waitForTimeout(1000)
-
-		expect(
-			await page.$eval(
-				'.container-pretest button',
-				e => getComputedStyle(e).backgroundColor
-			)
-		).toBe('rgb(0, 172, 91)') // it will be rgb(0, 223, 118) if you forget the seed file
+		expect(isRadioSelected).toBe(false)
 	})
 
 	test(`Sign in on teams environment`, async () => {
@@ -174,12 +176,40 @@ describe(`Open and view logbook group overview`, () => {
 		expect(oAuth.isClosed()).toBe(true)
 	})
 
-	test(`Test pretest is open`, async () => {
+	test(`Set evaluation as happy`, async () => {
 		const rekenlogboek = await iframe.contentFrame()
 
-		await rekenlogboek.waitForTimeout(1000)
+		await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
+		await rekenlogboek.waitForSelector('.Happy')
+		await rekenlogboek.click('.Happy div')
 
-		// Check if the iframe URL is student pretest
-		expect(rekenlogboek.url()).toBe('https://localhost:3001/student/pretest')
+		await rekenlogboek.waitForSelector('input.Happy')
+		const radiobutton = await rekenlogboek.$('input.Happy')
+
+		const isRadioSelected = await (
+			await radiobutton.getProperty('checked')
+		).jsonValue()
+
+		expect(isRadioSelected).toBe(true)
+	})
+
+	test(`Evaluation smiley after websocket change`, async () => {
+
+
+		await page.waitForSelector('.goal-1 .Happy-checked')
+		const checkedDiv = await page.$('.goal-1 .Happy-checked')
+
+
+		expect(checkedDiv).toBeDefined()
+	})
+
+	test(`Set evaluation as sad (reset)`, async () => {
+		const rekenlogboek = await iframe.contentFrame()
+
+		await rekenlogboek.waitForSelector('.Jumbotron', { visible: true })
+		await rekenlogboek.waitForSelector('.Sad')
+		await rekenlogboek.click('.Sad div')
+
+		await rekenlogboek.waitForTimeout(10000)
 	})
 })
