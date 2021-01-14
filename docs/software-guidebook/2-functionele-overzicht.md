@@ -4,7 +4,7 @@ Dit hoofdstuk bevat een functioneel overzicht van de gehele applicatie per gebru
 
 ### 2.1 Logboekontwerper
 
-Een logboekontwerper moet in staat om een nieuw logboek aan te maken en die te koppelen aan een groep en blok. Daarna moet de logboekontwerper in staat zijn de verschillende kolomnamen, invulmethoden en leerdoelen in te vullen. Dit logboek kan later ook nog bewerkt worden. Elke leraar is automatisch ook een logboekontwerper.
+Een logboekontwerper moet in staat zijn om een nieuw logboek aan te maken en die te koppelen aan een groep en blok. Daarna moet de logboekontwerper in staat zijn de verschillende kolomnamen, invulmethoden en leerdoelen in te vullen. Dit logboek kan later ook nog bewerkt worden.
 
 #### 2.1.1 User stories
 
@@ -16,7 +16,7 @@ Hieronder staan de user stories met betrekking tot de logboekontwerper. Niet all
 
 ### 2.2 Leraar
 
-Een leraar moet een logboek kunnen aanpassen als er een fout instaat. De leraar moet ook live meekunnen kijken wat leerlingen in hun logboek invullen om hulp te kunnen geven aan degene die dat nodig hebben.
+Een leraar moet een logboek kunnen aanpassen als er een fout instaat. De leraar moet ook live mee kunnen kijken wat zijn/haar leerlingen in hun logboek invullen om hulp te kunnen geven aan degene die dat nodig hebben.
 
 #### 2.2.1 User stories
 
@@ -24,12 +24,12 @@ Hieronder staan de user stories met betrekking tot de leraar. Niet alle user sto
 
 - Als leerkracht wil ik een logboek kunnen toevoegen aan mijn teams omgeving zodat ik gebruik kan maken van het logboek
 - Als leerkracht wil ik een snel en makkelijk overzicht van de ingevulde logboeken zodat ik in de les snel kan kijken of een leerling assistentie nodig heeft
-- Als leerkracht wil ik aangeven welke pagina de leerling op dit moment ziet zodat ik de leerling de vragen kan laten beantwoorden
+- Als leerkracht wil ik aangeven welke pagina de leerling op dat moment ziet zodat ik de leerling de vragen kan laten beantwoorden
 - Als leerkracht wil ik een groepsoverzicht per leerdoel zodat ik kan zien welke leerlingen instructie nodig hebben
 
 ### 2.3 Leerling
 
-Een leerling moet via het team van zijn groep op een tab kunnen drukken en automatisch terechtkomen op de juiste pagina om het logboek in te vullen. Alleen leerdoelen die op dat moment van toepassing zijn worden op dat moment getoond aan de leerling.
+Een leerling moet via het team van zijn groep op een tab kunnen drukken en automatisch terechtkomen op de juiste pagina om het logboek in te vullen. Alleen leerdoelen die op dat moment van toepassing zijn worden op dat moment getoond aan de leerling. Wanneer er geen logboek beschikbaar is moet een leerling hier een aparte pagina voor te zien krijgen.
 
 #### 2.3.1 User stories
 

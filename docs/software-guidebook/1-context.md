@@ -27,14 +27,13 @@ Het bestaat uit een omgeving voor de logboekontwerper om logboeken te maken/klaa
 Leraren en leerlingen zijn de gebruikers van de applicatie.
 Hieronder een tabel met taken per rol.
 
-| Rol              | Taken                                                 |
-| ---------------- | ----------------------------------------------------- |
-| Leraar           | Wijzigt/verwijdert logboeken indien nodig             |
-|                  | Evalueert de logboeken van leerlingen                 |
-|                  | Bepaalt wat de leerlingen te zien krijgen             |
-|                  | Bekijken van (oude) logboekresultaten                 |
-| Leerling         | Logboek invullen                                      |
-| Logboekontwerper | Maakt logboeken voor verschillende groepen en blokken |
+| Rol              | Taken                                                                       |
+| ---------------- | --------------------------------------------------------------------------- |
+| Leraar           | Evalueert de logboeken van leerlingen                                       |
+|                  | Bepaalt wat de leerlingen te zien krijgen                                   |
+|                  | Bekijken van (oude) logboekresultaten                                       |
+| Leerling         | studentlogboeken invullen (na pre-toets, instructies en evaluatie pagina's) |
+| Logboekontwerper | Maakt logboeken voor verschillende groepen en blokken                       |
 
 _Tabel 1: Rollen verdeling._
 
