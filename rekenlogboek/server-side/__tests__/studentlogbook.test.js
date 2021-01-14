@@ -150,6 +150,7 @@ describe('/logbook routes', () => {
 
 	afterAll(async () => {
 		await Studentlogbook.deleteMany({})
+		await Logbook.deleteMany({})
 		await mongoose.disconnect()
 	})
 
@@ -265,7 +266,7 @@ describe('/logbook routes', () => {
 			]
 		}
 
-		const response = await fetch(
+		const test = await fetch(
 			'http://localhost:3000/studentlogbook/' + logbookID,
 			{
 				method: 'PUT',
@@ -274,7 +275,7 @@ describe('/logbook routes', () => {
 			}
 		).then(response => response.json())
 
-		expect(response.answers[2].answer).toEqual({
+		expect(test.answers[2].answer).toEqual({
 			value: 'Ja'
 		})
 	})
@@ -287,13 +288,42 @@ describe('/logbook routes', () => {
 	test('PUT /studentlogbook/:id - unhappy path with no body', async () => {
 		const logbookID = await getTestStudentlogbook()
 
-		const response = await fetch(
+		const test = await fetch(
 			'http://localhost:3000/studentlogbook/' + logbookID,
 			{
 				method: 'PUT'
 			}
 		).then(response => response.status)
 
-		expect(response).toBe(400)
+		expect(test).toBe(400)
+	})
+
+	/**
+	 * Get all information about a specific studentlogbook
+	 * and checks if the server gives back the logbook
+	 * @route GET /studentlogbook/:id
+	 */
+	test('GET /studentlogbook/:id - happy path', async () => {
+		const test = await fetch(
+			`http://localhost:3000/studentlogbook/${await getTestStudentlogbook()}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test.student).toEqual('Emma Visser')
+	})
+
+	/**
+	 * Get all information about a specific studentlogbook
+	 * and checks if the server gives back an error
+	 * @route GET /studentlogbook/:id
+	 */
+	test('GET /studentlogbook/:id - unhappy path with a wrong studentlogbook id', async () => {
+		const test = await fetch(`http://localhost:3000/studentlogbook/5`, {
+			method: 'GET'
+		}).then(response => response.status)
+
+		expect(test).toEqual(500)
 	})
 })
