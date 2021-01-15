@@ -10,13 +10,13 @@ _Let op: de server en de client moeten op aparte terminals draaien en zorg ervoo
 
 #### Stap 1 - Vooraf
 
-Programmas die vooraf moeten zijn geïnstalleerd:
+Dit zijn de programma's die vooraf moeten zijn geïnstalleerd:
 
-- Node.js
-- MongoDB
-- Robo 3T, Studio 3T of een andere MongoDB client
+- Node.js v14.15.3
+- MongoDB v3.6.3
+- Robo 3T (aanbevolen), Studio 3T of een andere MongoDB client
 
-Als je een van deze programma's niet hebt, download deze dan eerst.
+Als je een van deze programma's niet hebt, download deze dan eerst. De versie die hierboven staan aangegeven zijn gebaseerd op de versies die het ontwikkelteam heeft gebruikt. Wij kunnen niet garanderen dat de applicatie werkt op eerdere versies.
 
 Clone daarna repository naar je lokale machine en open de repository in een code editor.
 
@@ -54,6 +54,6 @@ In principe kan de site zodra hij gedeployed is, gelijk worden gebruikt. Als de 
 
 ### 9.3 Ondersteuning
 
-Zoals besproken in hoofdstuk 4, geeft het team geen ondersteuning na het opleveren. Maar als het goed is moet een ieder developer met behulp van dit software guidebook de applicatie goed genoeg ondersteunen. Ook zorgt het team voor goede comments bij de code zelf die het abnormale dingen uitleggen.
+Zoals besproken in hoofdstuk 4, geeft het team geen ondersteuning na het opleveren. Maar het Software Guidebook is zo ingericht dat iedere developer met behulp van dit software guidebook de applicatie goed genoeg zou kunnen begrijpen om er in de toekomst mee verder te kunnen werken. Ook zorgt het team voor comments bij de code de complexere delen van de code uitleggen.
 
-Vanwege de gelimiteerde tijd en scope worden op dit moment errors gelogged op de console. Er is dus niet een specifieke error afhandeling in plaats op dit moment.
+Vanwege de gelimiteerde tijd en scope worden op dit moment errors gelogged in de server-side op de console. Er is dus niet een specifieke error afhandeling in plaats op dit moment, maar op zo veel mogelijk locaties binnen de code hebben we ons best gedaan om fouten op te vangen en goed te verwerken zodat beveligingslekken worden voorkomen en de gebruiker ongehinderd de applicatie kan gebruiken.
