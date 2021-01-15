@@ -106,3 +106,11 @@ Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server
 ### 6.3 Real-time
 
 In onze applicatie wordt gebruik gemaakt van real-time updates in het logboekoverzicht van de leraar. Wanneer een leerling een antwoord veranderd of toevoegt wordt er een WebSocket bericht gestuurd naar de leraar via `Socket.io`. Dit is de enigste plek in de applicatie waar real-time wordt gebruikt.
+
+### 6.4 Bekende problemen
+
+Onze app heeft een aantal bekende problemen die niet zijn opgelost tijdens de sprints of postgame:
+
+- gebruik van dark mode in Teams veranderd niks
+- privacy & terms of use pagina zijn verplicht voor Teams apps maar die hebben we niet
+- De app werkt niet in de Teams App maar wel als je Teams gebruikt in de browser
