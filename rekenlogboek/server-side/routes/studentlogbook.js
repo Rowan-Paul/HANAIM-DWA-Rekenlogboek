@@ -206,7 +206,6 @@ router.get('/:logbookID/group/answers', (req, res) => {
 	StudentLogbook.find({ logbookID: req.params.logbookID })
 		.select('student answers')
 		.then(students => {
-			console.log(students)
 			/**
 			 * Filters all student answers
 			 * Filter works if query param isset

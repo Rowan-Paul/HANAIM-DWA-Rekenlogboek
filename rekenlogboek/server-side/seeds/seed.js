@@ -789,4 +789,4 @@ async function seedStudentLogboek() {
 	])
 }
 
-console.log(`seed installed`)
+console.log(`Finished`)
