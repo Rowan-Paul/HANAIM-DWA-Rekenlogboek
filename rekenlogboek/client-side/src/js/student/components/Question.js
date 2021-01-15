@@ -85,34 +85,31 @@ function Question(props) {
 	}
 
 	return (
-		<div className="InputType Cell">
-			<ul>
-				<li>{handler()}</li>
-			</ul>
+		<div>
+			<h2>{props.question}</h2>
+			<div className="InputType Cell">
+				<ul>
+					<li>{handler()}</li>
+				</ul>
+			</div>
 		</div>
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		inputTypes: state.main.inputTypes,
-		inputStates: state.main.inputStates
-	}
-}
+const mapStateToProps = state => ({
+	inputTypes: state.main.inputTypes,
+	inputStates: state.main.inputStates
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
-		saveAnswerCheck: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswerCheck(answerValue, goalPosition, columnPosition)),
-		saveAnswerText: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswerText(answerValue, goalPosition, columnPosition)),
-		saveExplanation: (newExplanationValue, goalPosition, columnPosition) =>
-			dispatch(
-				saveExplanation(newExplanationValue, goalPosition, columnPosition)
-			)
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
+		dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
+	saveAnswerCheck: (answerValue, goalPosition, columnPosition) =>
+		dispatch(saveAnswerCheck(answerValue, goalPosition, columnPosition)),
+	saveAnswerText: (answerValue, goalPosition, columnPosition) =>
+		dispatch(saveAnswerText(answerValue, goalPosition, columnPosition)),
+	saveExplanation: (newExplanationValue, goalPosition, columnPosition) =>
+		dispatch(saveExplanation(newExplanationValue, goalPosition, columnPosition))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question)

@@ -15,7 +15,8 @@ import Button from '../../common/Button'
 import {
 	setCurrentGoal,
 	loadStudentLogbook,
-	saveAnswerRadio
+	saveAnswerRadio,
+	undoEvaluationSelection
 } from '../../redux/studentlogbook/actions'
 
 function EvaluationsUI(props) {
@@ -70,6 +71,13 @@ function EvaluationsUI(props) {
 							changeHandler={newAnswerValue => {
 								props.saveAnswerRadio(newAnswerValue, props.currentGoal, 3)
 							}}
+							clickHandler={newAnswerValue => {
+								props.undoEvaluationSelection(
+									newAnswerValue,
+									props.currentGoal,
+									3
+								)
+							}}
 						/>
 					</div>
 					<div className="right-side">
@@ -86,24 +94,22 @@ function EvaluationsUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		inputStates: state.main.inputStates,
-		answers: state.studentLogbook.studentlogbook.answers,
-		column: state.studentLogbook.logbook.columns[3],
-		currentGoal: state.studentLogbook.logbook.activeGoal,
-		goals: state.studentLogbook.logbook.goals
-	}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates,
+	answers: state.studentLogbook.studentlogbook.answers,
+	column: state.studentLogbook.logbook.columns[3],
+	currentGoal: state.studentLogbook.logbook.activeGoal,
+	goals: state.studentLogbook.logbook.goals
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
-		loadStudentLogbook: () => dispatch(loadStudentLogbook()),
-		saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
-			dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setCurrentGoal: goal => dispatch(setCurrentGoal(goal)),
+	loadStudentLogbook: () => dispatch(loadStudentLogbook()),
+	saveAnswerRadio: (answerValue, goalPosition, columnPosition) =>
+		dispatch(saveAnswerRadio(answerValue, goalPosition, columnPosition)),
+	undoEvaluationSelection: (answerValue, goalPosition, columnPosition) =>
+		dispatch(undoEvaluationSelection(answerValue, goalPosition, columnPosition))
+})
 
 export const Evaluations = connect(
 	mapStateToProps,

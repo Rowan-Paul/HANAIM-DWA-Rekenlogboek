@@ -50,7 +50,9 @@ export default function ResultText(props) {
 					<div key={result.title} className="row">
 						<div className="cell">{result.title}</div>
 						<div className="cell">{result.description}</div>
-						<div className="cell">{result.answer}</div>
+						<div className={`cell ${'cellanswer' + (result.position + 1)}`}>
+							{result.answer}
+						</div>
 					</div>
 				)
 			})

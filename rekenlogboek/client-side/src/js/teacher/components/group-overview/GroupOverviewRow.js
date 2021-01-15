@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import Button from '../../../common/Button'
-
-import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 import { getLogbookGroupOverview } from '../../../redux/group-overview/actions'
 import shortid from 'shortid'
+import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 
 function GroupOverviewRow(props) {
 	const [overview, setOverview] = useState(props.overview)
@@ -24,6 +22,19 @@ function GroupOverviewRow(props) {
 			`/teacher/group-overview/answers?goal=${goal}&column=${column}&answer=${answer}`
 		)
 
+	const translate = v => {
+		switch (v) {
+			case 'Happy':
+				return 'Goed'
+			case 'Sceptic':
+				return 'OK / Ging wel'
+			case 'Sad':
+				return 'Slecht'
+			default:
+				return v
+		}
+	}
+
 	const listAnswers = (row, column) => {
 		if (overview) {
 			if (overview.rows[row]) {
@@ -34,7 +45,7 @@ function GroupOverviewRow(props) {
 							onClick={() => redirect(row, column, overviewAnswer.value)}
 						>
 							<span>
-								{overviewAnswer.count} x {overviewAnswer.value}
+								{overviewAnswer.count} x {translate(overviewAnswer.value)}
 							</span>
 
 							<i className="fa fa-info-circle" />
@@ -62,7 +73,10 @@ function GroupOverviewRow(props) {
 									<div className="Main">
 										<p>{goal.description}</p>
 
-										<button onClick={() => redirect(goal.position)}>
+										<button
+											className={`goal_${goal.position + 1}`}
+											onClick={() => redirect(goal.position)}
+										>
 											Antwoorden bekijken
 										</button>
 									</div>
@@ -91,17 +105,13 @@ function GroupOverviewRow(props) {
 	return handler()
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.groupOverview.logbook.columns,
-		overview: state.groupOverview.overview
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {
-		getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.groupOverview.logbook.columns,
+	overview: state.groupOverview.overview
+})
+const mapDispatchToProps = dispatch => ({
+	getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
+})
 
 export default connect(
 	mapStateToProps,

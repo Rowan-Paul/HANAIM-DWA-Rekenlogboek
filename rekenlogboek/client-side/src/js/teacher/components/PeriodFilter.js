@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import '../../../scss/teacher/components/PeriodFilter.scss'
+import { withRouter } from 'react-router-dom'
 
-import {
-	getFilterOptions,
-	getPeriods,
-	changeSelectedPeriod,
-	changeSelectedSchoolYear
-} from '../../redux/allow-student-access/actions'
 import Button from '../../common/Button'
+import * as actions from '../../redux/allow-student-access/actions'
 
+import '../../../scss/teacher/components/PeriodFilter.scss'
 function PeriodFilter(props) {
 	useEffect(() => {
-		props.getFilterOptions()
+		if (!props.user.name) {
+			props.history.push('./')
+		} else {
+			props.getFilterOptions()
+		}
 	}, [])
 
 	const getSchoolYearOptions = () => {
@@ -109,18 +109,21 @@ const mapStateToProps = state => {
 		selectedSchoolYear: studentAccess.selectedSchoolYear,
 		periods: studentAccess.periods,
 		activePeriod: studentAccess.activePeriod,
-		selectedPeriod: studentAccess.selectedPeriod
+		selectedPeriod: studentAccess.selectedPeriod,
+		user: state.main.user
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		getFilterOptions: () => dispatch(getFilterOptions),
-		getPeriodsBySchoolYear: payload => dispatch(getPeriods(payload)),
-		changeSelectedPeriod: payload => dispatch(changeSelectedPeriod(payload)),
-		changeSelectedSchoolYear: payload =>
-			dispatch(changeSelectedSchoolYear(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	getFilterOptions: () => dispatch(actions.getFilterOptions),
+	getPeriodsBySchoolYear: payload => dispatch(actions.getPeriods(payload)),
+	changeSelectedPeriod: payload =>
+		dispatch(actions.changeSelectedPeriod(payload)),
+	changeSelectedSchoolYear: payload =>
+		dispatch(actions.changeSelectedSchoolYear(payload))
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(PeriodFilter)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(PeriodFilter))

@@ -170,8 +170,9 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case RESET_LOGBOOK:
+			state = INITIAL_STATE
+
 			return {
-				//TODO: figure out why just putting INITIAL_STATE here doesn't work
 				...state,
 				columns: [
 					{
@@ -205,25 +206,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 						title: 'Evaluatie'
 					}
 				],
-				goals: [],
-				group: 5,
-				inputTypes: {
-					checkboxes: 'checkboxes',
-					radiobuttons: 'radiobuttons',
-					textarea: 'textarea'
-				},
-				isAvailable: true,
-				isSaved: false,
-				modal: {
-					title: '',
-					visible: false
-				},
-				period: 1,
-				position: 0, // This property helps functions rembember which column or row is currently edited
-				teacher: '',
-				year: `${year1} - ${year2}`
 			}
-
 		case SAVE_LOGBOOK:
 			if (action.response.ok) {
 				return {

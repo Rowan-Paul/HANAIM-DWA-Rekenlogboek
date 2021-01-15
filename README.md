@@ -1,5 +1,9 @@
 # [Jaguarundi](https://nl.wikipedia.org/wiki/Jaguarundi)
 
+[Software Guidebook](https://github.com/HANICA-DWA/sep2020-project-jaguarundi/blob/main/docs/software-guidebook/software-guidebook.pdf)
+
+[Deployen van applicatie](https://github.com/HANICA-DWA/sep2020-project-jaguarundi/blob/main/docs/software-guidebook/8-deployment.md)
+
 ## Opdracht
 
 [Rekenlogboek](opdracht-rekenlogboek)

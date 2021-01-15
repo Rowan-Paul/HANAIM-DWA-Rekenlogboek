@@ -41,9 +41,13 @@ function Evaluation(props) {
 						>
 							<label>
 								<input
+									className={v.name}
 									name="evaluation"
 									onChange={e => {
 										props.changeHandler(e.target.value)
+									}}
+									onClick={e => {
+										props.clickHandler(e.target.value)
 									}}
 									type="radio"
 									value={v.name}
@@ -63,7 +67,13 @@ function Evaluation(props) {
 				return emotions.map(v => (
 					<li className={v.name} key={shortid.generate()}>
 						<label>
-							<input name="evaluation" type="radio" value={v.name} disabled />
+							<input
+								className={v.name}
+								name="evaluation"
+								type="radio"
+								value={v.name}
+								disabled
+							/>
 							<div>
 								<img src={v.img} alt={v.text} />
 								<span>{v.text}</span>
@@ -84,6 +94,7 @@ function Evaluation(props) {
 						>
 							<label>
 								<input
+									className={v.name}
 									checked={checked}
 									name="evaluation"
 									type="radio"
@@ -111,16 +122,8 @@ function Evaluation(props) {
 	return <ul className="Evaluation">{handler()}</ul>
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates
+})
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withRouter(Evaluation))
+export default connect(mapStateToProps)(withRouter(Evaluation))

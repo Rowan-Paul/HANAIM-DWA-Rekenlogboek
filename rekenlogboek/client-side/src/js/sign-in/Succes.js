@@ -22,11 +22,7 @@ export default function SuccesUI(props) {
 					break
 
 				case props.roles.Leraar:
-					if (teamsEnvironment() === true) {
-						props.history.push('/teacher/logbooks')
-					} else {
-						props.history.push('/teacher')
-					}
+					props.history.push('/teacher')
 					break
 
 				case props.roles.Logboekontwerper:
@@ -45,11 +41,9 @@ export default function SuccesUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		roles: state.main.roles,
-		user: state.main.user
-	}
-}
+const mapStateToProps = state => ({
+	roles: state.main.roles,
+	user: state.main.user
+})
 
 export const Succes = connect(mapStateToProps)(SuccesUI)

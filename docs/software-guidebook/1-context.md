@@ -27,17 +27,23 @@ Het bestaat uit een omgeving voor de logboekontwerper om logboeken te maken/klaa
 Leraren en leerlingen zijn de gebruikers van de applicatie.
 Hieronder een tabel met taken per rol.
 
-| Rol              | Taken                                                 |
-| ---------------- | ----------------------------------------------------- |
-| Leraar           | Wijzigt/verwijdert logboeken indien nodig             |
-|                  | Evalueert de logboeken van leerlingen                 |
-|                  | Bepaalt wat de leerlingen te zien krijgen             |
-|                  | Bekijken van (oude) logboekresultaten                 |
-| Leerling         | Logboek invullen                                      |
-| Logboekontwerper | Maakt logboeken voor verschillende groepen en blokken |
+| Rol              | Taken                                                                       |
+| ---------------- | --------------------------------------------------------------------------- |
+| Leraar           | Evalueert de logboeken van leerlingen                                       |
+|                  | Bepaalt wat de leerlingen te zien krijgen                                   |
+|                  | Bekijken van (oude) logboekresultaten                                       |
+| Leerling         | studentlogboeken invullen (na pre-toets, instructies en evaluatie pagina's) |
+| Logboekontwerper | Maakt logboeken voor verschillende groepen en blokken                       |
+
+_Tabel 1: Rollen verdeling._
 
 ### 1.4 Context diagram
 
 Op de afbeelding hieronder is het context diagram te zien, gebaseerd op het C4 model.
 
 @import "./c4-model/systeem-context.svg"
+_Afbeelding 1: Context diagram._
+
+Het blauwe blok geeft de webapplicatie aan die het ontwikkelteam gemaakt heeft. Deze applicatie maakt gebruik van het Microsoft Identity Platform om gebruikers te autoriseren en van een Microsoft Teams Tab om de applicatie werkend te krijgen op Microsoft Teams applicatie.
+
+Verder zijn er nog 4 verschillende gebruikers. Voor de compleetheid staan ze al weergegeven in het context diagram, maar ze zullen in het container en component diagram pas echt van belang worden voor de c4-modellen.

@@ -11,14 +11,15 @@
 
 	.table {
 		background: #fff;
-		font-size: $label-font-size;
+		font-size: 14px;
 		padding: 10px;
 		border-radius: 15px;
 		border: 1px solid $gray;
 		display: flex;
 		flex-direction: column;
-		height: 16rem;
+		height: 36vh;
 		overflow-y: scroll;
+		width: 60vh;
 
 		.row {
 			display: flex;
@@ -31,13 +32,8 @@
 
 			.cell {
 				padding: 20px;
-				width: 100px;
-				text-align: center;
-
-				&:last-child {
-					width: auto;
-					text-align: left;
-				}
+				min-width: 13vh;
+				max-width: 13vh;
 			}
 		}
 

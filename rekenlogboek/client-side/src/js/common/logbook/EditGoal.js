@@ -24,15 +24,9 @@ function EditGoal(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {}
-}
+const mapDispatchToProps = dispatch => ({
+	deleteGoal: payload => dispatch(deleteGoal(payload)),
+	modalShow: payload => dispatch(modalShow(payload))
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		deleteGoal: payload => dispatch(deleteGoal(payload)),
-		modalShow: payload => dispatch(modalShow(payload))
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditGoal)
+export default connect(null, mapDispatchToProps)(EditGoal)

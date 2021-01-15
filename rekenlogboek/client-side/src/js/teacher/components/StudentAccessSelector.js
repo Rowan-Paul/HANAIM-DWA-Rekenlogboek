@@ -59,60 +59,62 @@ function StudentAccessSelector(props) {
 					beeld voor de leerlingen.
 				</p>
 			</div>
-			<ButtonContainer
-				{...(equalsPhase(phases.PRE_TEST)
-					? {
-							description: closePage('pre-toets'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('pre-toets'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.PRE_TEST)}
-			/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.INSTRUCTIONS)
-					? {
-							description: closePage('instructies'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('instructies'),
-							...lockContainer
-					  })}
-				handler={() => props.updatePhase(phases.INSTRUCTIONS)}
-			/>
+			<div className="button_containers">
+				<ButtonContainer
+					className="container-pretest"
+					{...(equalsPhase(phases.PRE_TEST)
+						? {
+								description: closePage('pre-toets'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('pre-toets'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.PRE_TEST)}
+				/>
 
-			<ButtonContainer
-				{...(equalsPhase(phases.EVALUATION)
-					? {
-							description: closePage('evaluatie'),
-							...checkContainer
-					  }
-					: {
-							description: openPage('evaluatie'),
-							...lockContainer
-					  })}
-				handler={() => openLearnGoalModal()}
-			/>
+				<ButtonContainer
+					className="container-instructions"
+					{...(equalsPhase(phases.INSTRUCTIONS)
+						? {
+								description: closePage('instructies'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('instructies'),
+								...lockContainer
+						  })}
+					handler={() => props.updatePhase(phases.INSTRUCTIONS)}
+				/>
+
+				<ButtonContainer
+					className="container-evaluation"
+					{...(equalsPhase(phases.EVALUATION)
+						? {
+								description: closePage('evaluatie'),
+								...checkContainer
+						  }
+						: {
+								description: openPage('evaluatie'),
+								...lockContainer
+						  })}
+					handler={() => openLearnGoalModal()}
+				/>
+			</div>
 		</div>
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		modalVisible: state.logbook.modal.visible,
-		currentLogbook: state.allowStudentAccess.currentLogbook
-	}
-}
+const mapStateToProps = state => ({
+	modalVisible: state.logbook.modal.visible,
+	currentLogbook: state.allowStudentAccess.currentLogbook
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalShow: payload => dispatch(modalShow(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalShow: payload => dispatch(modalShow(payload))
+})
 
 export default connect(
 	mapStateToProps,

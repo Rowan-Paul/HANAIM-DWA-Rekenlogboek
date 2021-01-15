@@ -48,7 +48,6 @@ function General(props) {
 			<Jumbotron columns={3}>
 				<div className="vertical-center">
 					<form>
-						{/* TODO: remove dummy options & replace with dynamic data*/}
 						<Select
 							title="Kies een groep:"
 							selected={group}
@@ -83,18 +82,14 @@ function General(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		user: state.main.user,
-		group: state.logbook.group,
-		period: state.logbook.period
-	}
-}
+const mapStateToProps = state => ({
+	user: state.main.user,
+	group: state.logbook.group,
+	period: state.logbook.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addLogbookPeriod: payload => dispatch(addLogbookPeriod(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	addLogbookPeriod: payload => dispatch(addLogbookPeriod(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(General))

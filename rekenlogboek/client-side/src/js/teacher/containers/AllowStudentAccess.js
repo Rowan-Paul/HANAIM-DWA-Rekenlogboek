@@ -5,7 +5,8 @@ import classNames from 'classnames'
 import { modalHide } from '../../redux/logbook/actions'
 import {
 	getSelectedLogbook,
-	updateActiveGoal
+	updateActiveGoal,
+	closeAllLogbooks
 } from '../../redux/allow-student-access/actions'
 import { updateCurrentPhase } from '../../redux/allow-student-access/actions'
 
@@ -15,6 +16,8 @@ import Jumbotron from '../../common/Jumbotron'
 import Modal from '../../common/logbook/Modal'
 import PeriodFilter from '../components/PeriodFilter'
 import StudentAccessSelector from '../components/StudentAccessSelector'
+import TopBar from '../../common/logbook/TopBar'
+import Button from '../../common/Button'
 
 function AllowStudentAccess(props) {
 	const [selectedLearnGoal, setSelectedLearnGoal] = useState()
@@ -45,6 +48,11 @@ function AllowStudentAccess(props) {
 		props.getLogbookData({ schoolYear, period })
 	}
 
+	const closeAll = () => {
+		props.closeAllLogbooks()
+		selectGoal(undefined)
+	}
+
 	const getLearnGoals = () =>
 		props.currentLogbook.goals.map(goal => {
 			return (
@@ -62,8 +70,17 @@ function AllowStudentAccess(props) {
 
 	return (
 		<div className="allow-student-access">
-			<PeriodFilter filterClick={filterClick} />
+			<div className="top-bar">
+				<div className="lock-all-container ">
+					<button className="bttn blue" onClick={() => closeAll()}>
+						Vergrendel alles
+					</button>
+				</div>
+				<PeriodFilter filterClick={filterClick} />
+			</div>
 			<Jumbotron>
+				<TopBar title={'Studenten toegang'} noBreadcrumbs />
+
 				{props.currentLogbook &&
 				Object.keys(props.currentLogbook).length !== 0 ? (
 					<StudentAccessSelector
@@ -92,6 +109,13 @@ function AllowStudentAccess(props) {
 						)}
 					</div>
 				)}
+				<div className="prev button">
+					<Button
+						color="gray"
+						value="Vorige"
+						handler={() => props.history.push('./')}
+					/>
+				</div>
 			</Jumbotron>
 
 			{props.modalVisible && (
@@ -107,21 +131,18 @@ function AllowStudentAccess(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		modalVisible: state.logbook.modal.visible,
-		currentLogbook: state.allowStudentAccess.currentLogbook
-	}
-}
+const mapStateToProps = state => ({
+	modalVisible: state.logbook.modal.visible,
+	currentLogbook: state.allowStudentAccess.currentLogbook
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalHide: () => dispatch(modalHide()),
-		getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
-		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
-		updateActiveGoal: payload => dispatch(updateActiveGoal(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalHide: () => dispatch(modalHide()),
+	getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
+	updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
+	updateActiveGoal: payload => dispatch(updateActiveGoal(payload)),
+	closeAllLogbooks: () => dispatch(closeAllLogbooks())
+})
 
 export default connect(
 	mapStateToProps,
