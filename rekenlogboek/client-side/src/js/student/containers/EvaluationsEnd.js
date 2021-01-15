@@ -85,19 +85,15 @@ function EvaluationsEndUI(props) {
 	)
 }
 
-function mapStateToProps(state) {
-	return {
-		currentGoal: state.studentLogbook.logbook.activeGoal,
-		answers: state.studentLogbook.studentlogbook.answers,
-		allGoals: state.studentLogbook.logbook.goals
-	}
-}
+const mapStateToProps = state => ({
+	currentGoal: state.studentLogbook.logbook.activeGoal,
+	answers: state.studentLogbook.studentlogbook.answers,
+	allGoals: state.studentLogbook.logbook.goals
+})
 
-function mapDispatchToProps(dispatch) {
-	return {
-		setCurrentGoal: goal => dispatch(setCurrentGoal(goal))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setCurrentGoal: goal => dispatch(setCurrentGoal(goal))
+})
 
 export const EvaluationsEnd = connect(
 	mapStateToProps,

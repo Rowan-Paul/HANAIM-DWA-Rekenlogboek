@@ -6,7 +6,11 @@ const router = express.Router()
 
 const Logbook = mongoose.model('Logbook')
 
-// Create a new logbook
+/**
+ * Creates a new logbook
+ * @route POST /logbook
+ * @param {body} - Object with logbook info
+ */
 router.post('/', (req, res) => {
 	Logbook.create({
 		period: req.body.period,
@@ -25,28 +29,47 @@ router.post('/', (req, res) => {
 		})
 })
 
-// Update all currentPhases to notVisible
-router.put('/groups/:group/currentPhase', (req, res) => {
-	Logbook.updateMany(
-		{
-			$and: [
-				{ currentPhase: { $ne: 'notVisible' } },
-				{ group: req.params.group }
-			]
-		},
-		{ currentPhase: 'notVisible' }
-	)
-		.then(() => {
-			res.sendStatus(200)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500)
-		})
+/**
+ * Get all information about one logbook
+ * @route GET /logbook/:id
+ * @param id - id for the logbook
+ */
+router.get('/:id', (req, res) => {
+	if (
+		req.params.id === undefined ||
+		req.params.id == null ||
+		req.params.id == 'undefined'
+	) {
+		console.log('Error: undefined logbook id')
+		res.sendStatus(400)
+	} else {
+		Logbook.findById(req.params.id)
+			.then(response => {
+				res.status(200).send(response)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500).send(err)
+			})
+	}
 })
 
-// Update a logbook's currentPhase
+/**
+ * Update a logbook's currentPhase
+ * @route PUT /logbook/:id/currentPhase
+ * @param id - id for the logbook to change
+ */
 router.put('/:id/currentPhase', (req, res) => {
+	if (req.params.id === undefined || req.body.currentPhase === undefined)
+		res.sendStatus(400)
+
+	if (
+		req.body.currentPhase !== 'pretest' &&
+		req.body.currentPhase !== 'instructions' &&
+		req.body.currentPhase !== 'evaluation'
+	)
+		res.sendStatus(400)
+
 	Logbook.findOneAndUpdate(
 		{
 			_id: req.params.id
@@ -75,164 +98,62 @@ router.put('/:id/currentPhase', (req, res) => {
 	})
 })
 
-// Get all years from a group
-router.get('/groups/:group/years', (req, res) => {
-	Logbook.find({
-		group: req.params.group
-	})
-		.distinct('year')
-		.then(response => res.status(200).send(response))
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the active logbook for a certain group
+/**
+ * Get the active logbook for a certain group
+ * @route GET /logbooks/groups/:group
+ * @param group - the group to look for
+ */
 router.get('/groups/:group', (req, res) => {
 	Logbook.findOne({
-		group: req.params.group,
-		currentPhase: { $ne: 'notVisible' }
+		group: req.params.group
 	}).then(response => {
 		if (response) {
 			res.status(200).send(response)
 		} else {
-			res.status(204).send(response)
+			res.sendStatus(404)
 		}
 	})
 })
 
-// Get the teacher for a logbook
-router.get('/:id/teacher', (req, res) => {
-	Logbook.findById(req.params.id, 'teacher')
-		.lean()
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Update a logbook's currentGoal
+/**
+ * Update a logbook's currentGoal
+ * @route PUT /logbook/:id/activeGoal
+ * @param id - the logbook id
+ */
 router.put('/:id/activeGoal', (req, res) => {
-	Logbook.findOneAndUpdate(
-		{
-			_id: req.params.id
-		},
-		{
-			activeGoal: req.body.activeGoal
-		}
-	)
-		.then(() => {
-			res.sendStatus(200)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get all information about one logbook
-router.get('/:id/goals', (req, res) => {
-	Logbook.findById(req.params.id, 'goals')
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the id, position, title and inputType for one column from a specific logbook
-router.get('/:id/column/:position', (req, res) => {
-	Logbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			const column = response.columns.find(object => {
-				return object.position === Number(req.params.position)
+	if (
+		req.params.id === undefined ||
+		req.body.activeGoal === undefined ||
+		!Number.isInteger(req.body.activeGoal)
+	) {
+		res.sendStatus(400)
+	} else {
+		Logbook.findOneAndUpdate(
+			{
+				_id: req.params.id
+			},
+			{
+				activeGoal: req.body.activeGoal
+			}
+		)
+			.then(() => {
+				res.sendStatus(200)
 			})
-
-			if (column === undefined) {
-				throw new Error('column does not exist')
-			}
-
-			res.status(200).send(column)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
-})
-
-// Get the id, position, title, description and imagelink for one goal for one logbook
-router.get('/:id/goal/:position', (req, res) => {
-	Logbook.findById(req.params.id)
-		.lean()
-		.then(response => {
-			let position
-			if (req.params.position === 'null') {
-				position = response.activeGoal
-			} else {
-				position = req.params.position
-			}
-
-			const goal = response.goals.find(object => {
-				return object.position === Number(position)
+			.catch(err => {
+				console.log(err)
+				res.status(500).send(err)
 			})
-
-			if (goal === undefined) {
-				throw new Error('goal does not exist')
-			}
-
-			res.status(200).send(goal)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
+	}
 })
 
-// Get all information about one logbook with specifications
-router.get('/year/:year/group/:group/period/:period', (req, res) => {
+/**
+ * Get all information about one logbook with specifications
+ * @route GET /logbook/years/:year/groups/:group/periods/:period
+ * @param year - the year the logbook is in
+ * @param group - the group the logbook is in
+ * @param period - the period the logbook is in
+ */
+router.get('/years/:year/groups/:group/periods/:period', (req, res) => {
 	Logbook.find({
 		year: req.params.year,
 		group: req.params.group,
@@ -240,7 +161,7 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 	})
 		.then(response => {
 			if (response.length < 1) {
-				res.status(200).send({})
+				res.sendStatus(500)
 			} else {
 				res.status(200).send(response[0])
 			}
@@ -251,20 +172,78 @@ router.get('/year/:year/group/:group/period/:period', (req, res) => {
 		})
 })
 
-// Get all periods based on group and year
-router.get('/groups/:group/years/:year/periods', (req, res) => {
+/**
+ * Get the amount of periods based on group and year
+ * @route GET /logbook/years/:year/groups/:group/periods
+ * @param group - the group the logbook is in
+ * @param year - the year the logbook is in
+ */
+router.get('/years/:year/groups/:group/periods', (req, res) => {
 	Logbook.find({
 		year: req.params.year,
 		group: req.params.group
 	})
 		.distinct('period', () => {})
 		.then(response => {
+			if (response < 1) {
+				throw 'Error: No matching logbooks'
+			}
 			res.status(200).send(response)
 		})
 		.catch(err => {
 			console.log(err)
 			res.status(500).send(err)
 		})
+})
+
+/**
+ * Get all years from a group
+ * @route GET /logbook/groups/:group/years
+ * @param group - the group you want to check
+ */
+router.get('/groups/:group/years', (req, res) => {
+	Logbook.find({
+		group: req.params.group
+	})
+		.distinct('year')
+		.then(response => {
+			if (response.length < 1) {
+				throw 'Error: No matching logbooks'
+			}
+			res.status(200).send(response)
+		})
+		.catch(err => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+})
+
+/**
+ * Update all currentPhases to notVisible
+ * @route PUT /logbook/groups/:group/currentPhase
+ * @param group - The group the logbooks are in
+ */
+router.put('/groups/:group/currentPhase', (req, res) => {
+	if (req.params.group === undefined) {
+		res.sendStatus(400)
+	} else {
+		Logbook.updateMany(
+			{
+				$and: [
+					{ currentPhase: { $ne: 'notVisible' } },
+					{ group: req.params.group }
+				]
+			},
+			{ currentPhase: 'notVisible' }
+		)
+			.then(response => {
+				res.sendStatus(200)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500)
+			})
+	}
 })
 
 module.exports = router

@@ -60,15 +60,13 @@ function StudentLogbookRow(props) {
 		}
 	}
 
-	return <div className="Row Body">{handler()}</div>
+	return <div className={`Row Body goal-${goal.position + 1}`}>{handler()}</div>
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates,
-		answers: state.logbookoverview.activeStudentlogbook.answers,
-		columns: state.logbookoverview.currentLogbook.columns
-	}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates,
+	answers: state.logbookoverview.activeStudentlogbook.answers,
+	columns: state.logbookoverview.currentLogbook.columns
+})
 
 export default connect(mapStateToProps, null)(StudentLogbookRow)

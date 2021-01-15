@@ -11,7 +11,7 @@ main {
 	flex-direction: column;
 
 	.learn-goal-container {
-		margin: 16px;
+		padding: 16px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -47,11 +47,12 @@ main {
 
 	&.end-screen {
 		.left-side {
-			width: 40%;
+			width: 50%;
 		}
 		.right-side {
-			width: 60%;
-			margin-right: 2rem;
+			width: 50%;
+			margin-left: 5vh;
+			margin-right: 10vh;
 		}
 	}
 }

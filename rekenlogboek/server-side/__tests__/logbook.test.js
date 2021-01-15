@@ -2,9 +2,9 @@
  * @jest-environment node
  */
 
-//  CHANGE DB NAME IN app.js TO testrekenlogboek
-
 'use strict'
+
+//  README: change db name in `app.js` to `testrekenlogbook`
 
 const mongoose = require('mongoose')
 const { default: fetch } = require('node-fetch')
@@ -12,9 +12,11 @@ require('../models/logbook')
 
 const Logbook = mongoose.model('Logbook')
 
-// Get logbookID from logbook created before all tests
+/**
+ * Get logbookID from logbook created before all tests
+ */
 const getTestlogbookID = async () => {
-	const number = await Logbook.find({
+	const logbookID = await Logbook.find({
 		group: 7
 	})
 		.lean()
@@ -22,10 +24,10 @@ const getTestlogbookID = async () => {
 			return response[0]._id
 		})
 
-	return number
+	return logbookID
 }
 
-describe('Logbook route tests', () => {
+describe('/logbook routes', () => {
 	beforeAll(async () => {
 		await mongoose.connect('mongodb://localhost:27017/testrekenlogboek', {
 			useNewUrlParser: true,
@@ -34,136 +36,133 @@ describe('Logbook route tests', () => {
 
 		// Create logbook for tests
 		await Logbook.create({
+			activeGoal: 0,
 			period: 3,
 			group: 7,
-			year: '2019 - 2020',
-			currentPhase: 'pretest',
+			year: '2020 - 2021',
+			currentPhase: 'notVisible',
 			columns: [
 				{
+					input: {
+						options: []
+					},
 					position: 0,
 					title: 'Doelen'
 				},
 				{
+					input: {
+						options: ['Goed', 'Slecht'],
+						type: 'radiobuttons'
+					},
+					explanation: false,
 					position: 1,
-					title: 'Hoe ging de les',
-					input: {
-						type: 'Radiobuttons',
-						options: [
-							'Ik begrijp het goed',
-							'Ik begrijp het niet goed',
-							'Ik weet het nog niet'
-						]
-					},
-					explanation: true
+					title: 'Hoe ging de toets?'
 				},
 				{
+					input: {
+						options: ['Ja', 'Nee'],
+						type: 'radiobuttons'
+					},
+					explanation: false,
 					position: 2,
-					title: 'Instructie nodig?',
-					input: {
-						type: 'Tekstveld'
-					},
-					explanation: true
+					title: 'Heb je instructie nodig?'
 				},
 				{
+					input: {
+						options: []
+					},
 					position: 3,
-					title: 'Evaluatie',
-					explanation: false
+					title: 'Evaluatie'
 				}
 			],
 			goals: [
 				{
+					description: 'Bijvoorbeeld 1+1',
+					imageLink: '',
 					position: 0,
-					title: 'Les 1',
-					description: 'In deze les leer je 1+1',
-					imagelink: 'xxx'
+					title: 'Ik kan optellen'
 				},
 				{
+					description: 'Bijvoorbeeld 6 x 9',
+					imageLink: '',
 					position: 1,
-					title: 'Les 2',
-					description: 'In deze les leer je 2*2',
-					imagelink: 'xxx'
-				},
-				{
-					position: 2,
-					title: 'Les 3',
-					description: 'In deze les leer je 5*5',
-					imagelink: 'xxx'
+					title: 'Ik kan vermenigvuldigen'
 				}
 			]
+		}).catch(err => {
+			console.log(err)
+			throw 'Error: ' + err
 		})
 	})
 
 	afterAll(async () => {
-		await Logbook.deleteMany({
-			group: 7
-		})
-		await Logbook.deleteMany({
-			group: 5
-		})
+		await Logbook.deleteMany({})
 		await mongoose.disconnect()
 	})
 
-	test('Create logbook', async () => {
+	/**
+	 * Makes new logbook and checks if
+	 * the server gives back status 200
+	 * @route POST /logbook
+	 */
+	test('POST /logbook - happy path', async () => {
 		const createResponse = await fetch('http://localhost:3000/logbook', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
+				activeGoal: 0,
 				period: 1,
 				group: 5,
-				year: '2019 - 2020',
-				currentPhase: 'NOT_VISIBLE',
+				year: '2020 - 2021',
+				currentPhase: 'notVisible',
 				columns: [
 					{
+						input: {
+							options: []
+						},
 						position: 0,
 						title: 'Doelen'
 					},
 					{
+						input: {
+							options: ['Ja', 'Nee'],
+							type: 'radiobuttons'
+						},
+						explanation: false,
 						position: 1,
-						title: 'Hoe ging de les',
-						input: {
-							type: 'Radiobuttons',
-							options: [
-								'Ik begrijp het goed',
-								'Ik begrijp het niet goed',
-								'Ik weet het nog niet'
-							]
-						},
-						explanation: true
+						title: 'Snap je de toets?'
 					},
 					{
+						input: {
+							options: ['Zeker', 'Misschien', 'Nee'],
+							type: 'radiobuttons'
+						},
+						explanation: false,
 						position: 2,
-						title: 'Instructie nodig',
-						input: {
-							type: 'Tekstveld'
-						},
-						explanation: false
+						title: 'Heb je help nodig?'
 					},
 					{
+						input: {
+							options: []
+						},
 						position: 3,
-						title: 'Evaluatie',
-						explanation: false
+						title: 'Evaluatie'
 					}
 				],
 				goals: [
 					{
+						description: 'Bijvoorbeeld 3 + 9',
+						imageLink: '',
 						position: 0,
-						title: 'Les 1',
-						description: 'In deze les leer je 1+1',
-						imagelink: 'xxx'
+						title: 'Ik kan optellen'
 					},
 					{
+						description: 'Bijvoorbeeld 3 x 4',
+						imageLink: '',
 						position: 1,
-						title: 'Les 2',
-						description: 'In deze les leer je 2*2',
-						imagelink: 'xxx'
-					},
-					{
-						position: 2,
-						title: 'Les 3',
-						description: 'In deze les leer je 5*5',
-						imagelink: 'xxx'
+						title: 'Ik kan vermenigvuldigen'
 					}
 				]
 			})
@@ -172,7 +171,12 @@ describe('Logbook route tests', () => {
 		expect(createResponse).toEqual(200)
 	})
 
-	test('Create logbook with missing variable returns error code', async () => {
+	/**
+	 * Makes a new logbook with missing variables
+	 * and checks if the server gives back status 500
+	 * @route POST /logbook
+	 */
+	test('POST /logbook - unhappy path with missing variables', async () => {
 		const createResponse = await fetch('http://localhost:3000/logbook', {
 			method: 'POST',
 			headers: {
@@ -180,58 +184,47 @@ describe('Logbook route tests', () => {
 			},
 			body: JSON.stringify({
 				group: 5,
-				year: '2019 - 2020',
-				currentPhase: 'NOT_VISIBLE',
+				year: '2020 - 2021',
+				currentPhase: 'notVisible',
 				columns: [
 					{
 						position: 0,
 						title: 'Doelen'
 					},
 					{
+						explanation: false,
 						position: 1,
-						title: 'Hoe ging de les',
-						input: {
-							type: 'Radiobuttons',
-							options: [
-								'Ik begrijp het goed',
-								'Ik begrijp het niet goed',
-								'Ik weet het nog niet'
-							]
-						},
-						explanation: true
+						title: 'Snap je de toets?'
 					},
 					{
+						input: {
+							options: ['Zeker', 'Misschien', 'Nee'],
+							type: 'radiobuttons'
+						},
+						explanation: false,
 						position: 2,
-						title: 'Instructie nodig',
-						input: {
-							type: 'Tekstveld'
-						},
-						explanation: true
+						title: 'Heb je help nodig?'
 					},
 					{
+						input: {
+							options: []
+						},
 						position: 3,
-						title: 'Evaluatie',
-						explanation: false
+						title: 'Evaluatie'
 					}
 				],
 				goals: [
 					{
+						description: 'Bijvoorbeeld 3 + 9',
+						imageLink: '',
 						position: 0,
-						title: 'Les 1',
-						description: 'In deze les leer je 1+1',
-						imagelink: 'xxx'
+						title: 'Ik kan optellen'
 					},
 					{
+						description: 'Bijvoorbeeld 3 x 4',
+						imageLink: '',
 						position: 1,
-						title: 'Les 2',
-						description: 'In deze les leer je 2*2',
-						imagelink: 'xxx'
-					},
-					{
-						position: 2,
-						title: 'Les 3',
-						description: 'In deze les leer je 5*5',
-						imagelink: 'xxx'
+						title: 'Ik kan vermenigvuldigen'
 					}
 				]
 			})
@@ -240,7 +233,42 @@ describe('Logbook route tests', () => {
 		expect(createResponse).toEqual(500)
 	})
 
-	test('Update currentPhase', async () => {
+	/**
+	 * Get all information about one logbook
+	 * and checks if the server gives back the logbook
+	 * @route GET /logbook/:id
+	 */
+	test('GET /logbook/:id - happy path', async () => {
+		const test = await fetch(
+			`http://localhost:3000/logbook/${await getTestlogbookID()}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test.period).toEqual(3)
+		expect(test.year).toEqual('2020 - 2021')
+	})
+
+	/**
+	 * Get all information about one logbook
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/:id
+	 */
+	test('GET /logbook/:id - unhappy path with a wrong logbook id', async () => {
+		const test = await fetch(`http://localhost:3000/logbook/5`, {
+			method: 'GET'
+		}).then(response => response.status)
+
+		expect(test).toEqual(500)
+	})
+
+	/**
+	 * Update a logbook's currentPhase
+	 * and checks if the server gives back status 200
+	 * @route PUT /:id/currentPhase
+	 */
+	test('PUT /logbook/:id/currentPhase - happy path', async () => {
 		const body = {
 			currentPhase: 'evaluation'
 		}
@@ -258,7 +286,65 @@ describe('Logbook route tests', () => {
 		expect(test).toEqual(200)
 	})
 
-	test('Update activeGoal', async () => {
+	/**
+	 * Update a logbook's currentPhase
+	 * and checks if the server gives back status 200
+	 * @route PUT /:id/currentPhase
+	 */
+	test('PUT /logbook/:id/currentPhase - unhappy path with wrong body', async () => {
+		const body = {
+			currentPhase: 'judyisbae'
+		}
+
+		const logbookID = await getTestlogbookID()
+		const test = await fetch(
+			'http://localhost:3000/logbook/' + logbookID + '/currentPhase',
+			{
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(400)
+	})
+
+	/**
+	 * Get the active logbook for a certain group
+	 * and checks if the server gives back the correct logbook
+	 * @route GET /logbook/groups/:group
+	 */
+	test('GET /logbook/groups/:group - happy path', async () => {
+		const group = 7
+		const test = await fetch('http://localhost:3000/logbook/groups/' + group, {
+			method: 'GET'
+		}).then(response => response.json())
+
+		expect(test.year).toEqual('2020 - 2021')
+		expect(test.period).toEqual(3)
+	})
+
+	/**
+	 * Get the active logbook for a certain group
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/groups/:group
+	 */
+	test('GET /logbook/groups/:group - unhappy path with wrong group', async () => {
+		const group = 2
+
+		const test = await fetch('http://localhost:3000/logbook/groups/' + group, {
+			method: 'GET'
+		})
+
+		expect(test.status).toEqual(404)
+	})
+
+	/**
+	 * Update a logbook's currentGoal
+	 * and checks if the server gives back the correct logbook
+	 * @route PUT /logbook/:id/activeGoal
+	 */
+	test('PUT /logbook/:id/activeGoal - happy path', async () => {
 		const body = {
 			activeGoal: 69
 		}
@@ -276,18 +362,14 @@ describe('Logbook route tests', () => {
 		expect(test).toEqual(200)
 	})
 
-	test('Get all years', async () => {
-		const logbookID = await getTestlogbookID()
-		const test = await fetch('http://localhost:3000/logbook/years', {
-			method: 'GET'
-		}).then(response => response.json())
-
-		expect(test).toEqual(['2019 - 2020'])
-	})
-  
-	test('Update activeGoal with a String', async () => {
+	/**
+	 * Update a logbook's currentGoal
+	 * and checks if the server gives back an error
+	 * @route PUT /logbook/:id/activeGoal
+	 */
+	test('PUT /logbook/:id/activeGoal - unhappy path with wrong body', async () => {
 		const body = {
-			activeGoal: 'a string'
+			activeGoal: 'astring'
 		}
 
 		const logbookID = await getTestlogbookID()
@@ -300,67 +382,139 @@ describe('Logbook route tests', () => {
 			}
 		).then(response => response.status)
 
+		expect(test).toEqual(400)
+	})
+
+	/**
+	 * Get all information about one logbook with specifications
+	 * and checks if the server gives back the correct logbook
+	 * @route GET /logbook/years/:year/groups/:group/periods/:period
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods/:period - happy path', async () => {
+		const year = '2020 - 2021'
+		const group = 7
+		const period = 3
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods/${period}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.json())
+
+		expect(test.year).toEqual('2020 - 2021')
+		expect(test.period).toEqual(3)
+	})
+
+	/**
+	 * Get all information about one logbook with specifications
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/years/:year/groups/:group/periods/:period
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods/:period - unhappy path with wrong group', async () => {
+		const year = '2020 - 2021'
+		const group = 6
+		const period = 3
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods/${period}`,
+			{
+				method: 'GET'
+			}
+		).then(response => response.status)
+
 		expect(test).toEqual(500)
 	})
 
-	test('Get logbook from id', async () => {
-		const logbookID = await getTestlogbookID()
-		const test = await fetch('http://localhost:3000/logbook/' + logbookID, {
-			method: 'GET'
-		}).then(response => response.json())
+	/**
+	 * Get all periods based on group and year
+	 * and checks if the server gives back the correct logbook
+	 * @route GET /logbook/years/:year/groups/:group/periods
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods - happy path', async () => {
+		const year = '2020 - 2021'
+		const group = 7
 
-		expect(test.period).toEqual(3)
-		expect(test.group).toEqual(7)
-	})
-
-	test('Get logbook from with id not found gives error', async () => {
-		const test = await fetch('http://localhost:3000/logbook/' + 21321334333, {
-			method: 'GET'
-		}).then(response => response.json())
-
-		expect(test.period).toEqual(undefined)
-		expect(test.group).toEqual(undefined)
-	})
-
-	test('Get the id, position, title and inputType for one column from a specific logbook', async () => {
-		const logbookID = await getTestlogbookID()
-		const column = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/column/1',
-			{ method: 'GET' }
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods`,
+			{
+				method: 'GET'
+			}
 		).then(response => response.json())
 
-		expect(column.position).toEqual(1)
-		expect(column.title).toEqual('Hoe ging de les')
+		expect(test[0]).toEqual(3)
 	})
 
-	test('Get the id, position, title and inputType for one column from a specific logbook with not existing columnid gives error', async () => {
-		const logbookID = await getTestlogbookID()
-		const column = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/column/13',
-			{ method: 'GET' }
+	/**
+	 * Get the amount of periods based on group and year
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/years/:year/groups/:group/periods/:period
+	 */
+	test('GET /logbook/years/:year/groups/:group/periods - unhappy path with wrong group', async () => {
+		const year = '2020 - 2021'
+		const group = 6
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/years/${year}/groups/${group}/periods`,
+			{
+				method: 'GET'
+			}
 		).then(response => response.status)
 
-		expect(column).toEqual(500)
+		expect(test).toEqual(500)
 	})
 
-	test('Get the id, position, title, description and imagelink for one goal for one logbook', async () => {
-		const logbookID = await getTestlogbookID()
-		const goal = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/goal/1',
-			{ method: 'GET' }
+	/**
+	 * Get all years from a group
+	 * and checks if the server gives back the logbook
+	 * @route GET /logbook/groups/:group/years
+	 */
+	test('GET /logbook/groups/:group/years - happy path', async () => {
+		const group = 7
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/years`,
+			{
+				method: 'GET'
+			}
 		).then(response => response.json())
 
-		expect(goal.title).toEqual('Les 2')
-		expect(goal.description).toEqual('In deze les leer je 2*2')
+		expect(test[0]).toEqual('2020 - 2021')
 	})
 
-	test('Get the id, position, title, description and imagelink for one goal for one logbook gives error because not existing goalid', async () => {
-		const logbookID = await getTestlogbookID()
-		const goal = await fetch(
-			'http://localhost:3000/logbook/' + logbookID + '/goal/10',
-			{ method: 'GET' }
+	/**
+	 * Get all years from a group
+	 * and checks if the server gives back an error
+	 * @route GET /logbook/groups/:group/years
+	 */
+	test('GET /logbook/groups/:group/years - unhappy path with a wrong group', async () => {
+		const group = 6
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/years`,
+			{
+				method: 'GET'
+			}
 		).then(response => response.status)
 
-		expect(goal).toEqual(500)
+		expect(test).toEqual(500)
+	})
+
+	/**
+	 * Update all currentPhases to notVisible
+	 * and checks if the server gives back the logbook
+	 * @route PUT /logbook/groups/:group/currentPhase
+	 */
+	test('PUT /logbook/groups/:group/currentPhase - happy path', async () => {
+		const group = 7
+
+		const test = await fetch(
+			`http://localhost:3000/logbook/groups/${group}/currentPhase`,
+			{
+				method: 'PUT'
+			}
+		).then(response => response.status)
+
+		expect(test).toEqual(200)
 	})
 })

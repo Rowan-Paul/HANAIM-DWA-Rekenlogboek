@@ -29,7 +29,14 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"e2e": "jest --testMatch=\"**/*.e2e.js\""
+		"e2e": "jest --testMatch=\"**/*.e2e.js\"",
+		"e2e-auth": "jest --testMatch=\"**/auth.e2e.js\"",
+		"e2e-group-overview": "jest --testMatch=\"**/group-overview.e2e.js\"",
+		"e2e-new-logbook": "jest --testMatch=\"**/new-logbook.e2e.js\"",
+		"e2e-student-access": "jest --testMatch=\"**/student-access.e2e.js\"",
+		"e2e-student-logbook": "jest --testMatch=\"**/student-logbook.e2e.js\"",
+		"e2e-student-pages": "jest --testMatch=\"**/student-pages.e2e.js\"",
+		"e2e-teams-login": "jest --testMatch=\"**/teams-login.e2e.js\""
 	},
 	"eslintConfig": {
 		"extends": [

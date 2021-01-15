@@ -29,7 +29,7 @@ function LogbookList(props) {
 	}
 
 	const makeRows = () => {
-		return props.studentlogbooks.map(studentlogbook => (
+		return props.studentlogbooks.map((studentlogbook, i) => (
 			<li className="Student" key={studentlogbook.student}>
 				<div>
 					<span>{studentlogbook.student}</span>
@@ -40,6 +40,7 @@ function LogbookList(props) {
 				</div>
 				<div>
 					<button
+						className={`student-${i + 1}`}
 						onClick={() => {
 							props.setActiveStudentLogbook(studentlogbook)
 							props.history.push('/teacher/logbooks/studentlogbook')
@@ -93,23 +94,19 @@ function LogbookList(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		userGroups: state.main.user.groups,
-		year: state.logbookoverview.year,
-		group: state.logbookoverview.group,
-		period: state.logbookoverview.period
-	}
-}
+const mapStateToProps = state => ({
+	userGroups: state.main.user.groups,
+	year: state.logbookoverview.year,
+	group: state.logbookoverview.group,
+	period: state.logbookoverview.period
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setActiveStudentLogbook: logbook =>
-			dispatch(saveActiveStudentlogbook(logbook)),
-		setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
-		setGroup: group => dispatch(setGroup(group))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setActiveStudentLogbook: logbook =>
+		dispatch(saveActiveStudentlogbook(logbook)),
+	setPeriod: period => dispatch(setCurrentLogbookPeriod(period)),
+	setGroup: group => dispatch(setGroup(group))
+})
 
 export default connect(
 	mapStateToProps,

@@ -14,7 +14,7 @@ describe(`Authorise`, () => {
 		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 60,
+			slowMo: 70,
 			ignoreHTTPSErrors: true,
 			args: ['--start-maximized'],
 			defaultViewport: null

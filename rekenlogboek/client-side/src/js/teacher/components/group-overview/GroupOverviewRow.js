@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import Button from '../../../common/Button'
-
-import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 import { getLogbookGroupOverview } from '../../../redux/group-overview/actions'
 import shortid from 'shortid'
+import '../../../../scss/teacher/components/groep-overview/GroupOverviewRow.scss'
 
 function GroupOverviewRow(props) {
 	const [overview, setOverview] = useState(props.overview)
@@ -107,17 +105,13 @@ function GroupOverviewRow(props) {
 	return handler()
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.groupOverview.logbook.columns,
-		overview: state.groupOverview.overview
-	}
-}
-const mapDispatchToProps = dispatch => {
-	return {
-		getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.groupOverview.logbook.columns,
+	overview: state.groupOverview.overview
+})
+const mapDispatchToProps = dispatch => ({
+	getLogbookGroupOverview: () => dispatch(getLogbookGroupOverview())
+})
 
 export default connect(
 	mapStateToProps,

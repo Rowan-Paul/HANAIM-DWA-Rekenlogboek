@@ -15,7 +15,7 @@ describe(`Create new logbook as a logbook designer`, () => {
 		// create two browsers
 		browser = await puppeteer.launch({
 			headless: false,
-			slowMo: 60,
+			slowMo: 75,
 			ignoreHTTPSErrors: true,
 			args: ['--start-maximized'],
 			defaultViewport: null

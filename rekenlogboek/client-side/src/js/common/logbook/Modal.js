@@ -25,16 +25,12 @@ function Modal(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		title: state.logbook.modal.title
-	}
-}
+const mapStateToProps = state => ({
+	title: state.logbook.modal.title
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalHide: () => dispatch(modalHide())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalHide: () => dispatch(modalHide())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)

@@ -131,22 +131,18 @@ function AllowStudentAccess(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		modalVisible: state.logbook.modal.visible,
-		currentLogbook: state.allowStudentAccess.currentLogbook
-	}
-}
+const mapStateToProps = state => ({
+	modalVisible: state.logbook.modal.visible,
+	currentLogbook: state.allowStudentAccess.currentLogbook
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		modalHide: () => dispatch(modalHide()),
-		getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
-		updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
-		updateActiveGoal: payload => dispatch(updateActiveGoal(payload)),
-		closeAllLogbooks: () => dispatch(closeAllLogbooks())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	modalHide: () => dispatch(modalHide()),
+	getLogbookData: payload => dispatch(getSelectedLogbook(payload)),
+	updateCurrentPhase: payload => dispatch(updateCurrentPhase(payload)),
+	updateActiveGoal: payload => dispatch(updateActiveGoal(payload)),
+	closeAllLogbooks: () => dispatch(closeAllLogbooks())
+})
 
 export default connect(
 	mapStateToProps,

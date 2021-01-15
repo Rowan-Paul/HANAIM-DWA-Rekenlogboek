@@ -114,16 +114,14 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		getFilterOptions: () => dispatch(actions.getFilterOptions),
-		getPeriodsBySchoolYear: payload => dispatch(actions.getPeriods(payload)),
-		changeSelectedPeriod: payload =>
-			dispatch(actions.changeSelectedPeriod(payload)),
-		changeSelectedSchoolYear: payload =>
-			dispatch(actions.changeSelectedSchoolYear(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	getFilterOptions: () => dispatch(actions.getFilterOptions),
+	getPeriodsBySchoolYear: payload => dispatch(actions.getPeriods(payload)),
+	changeSelectedPeriod: payload =>
+		dispatch(actions.changeSelectedPeriod(payload)),
+	changeSelectedSchoolYear: payload =>
+		dispatch(actions.changeSelectedSchoolYear(payload))
+})
 
 export default connect(
 	mapStateToProps,

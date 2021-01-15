@@ -43,17 +43,13 @@ function Explanation(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		columns: state.logbook.columns,
-		position: state.logbook.position
-	}
-}
+const mapStateToProps = state => ({
+	columns: state.logbook.columns,
+	position: state.logbook.position
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setExplanation: payload => dispatch(setExplanation(payload))
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	setExplanation: payload => dispatch(setExplanation(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explanation)

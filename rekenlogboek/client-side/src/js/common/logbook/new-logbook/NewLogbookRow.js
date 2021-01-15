@@ -16,14 +16,8 @@ function LogbookRow(props) {
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		inputStates: state.main.inputStates
-	}
-}
+const mapStateToProps = state => ({
+	inputStates: state.main.inputStates
+})
 
-const mapDispatchToProps = dispatch => {
-	return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogbookRow)
+export default connect(mapStateToProps)(LogbookRow)

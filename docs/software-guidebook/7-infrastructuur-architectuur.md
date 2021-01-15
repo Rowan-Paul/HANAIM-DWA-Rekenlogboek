@@ -16,7 +16,7 @@ Voordat nieuwe features gemerged worden in de development branche worden deze aa
 
 De unit-testen bevinden zich op de server-side van de applicatie. Hier worden de verschillende routes van de API getest.
 
-De unit-testen kunnen gestart worden op de server-side met het volgende commando `npm start test`
+De unit-testen kunnen gestart worden op de back-end server door de dbName in app.js te veranderen naar `testrekenlogboek` en met het volgende commando `$ npm start test` uit te voeren.
 
 #### 7.1.2 E2E-testen
 
@@ -24,16 +24,17 @@ De client-side van de applicatie wordt ook getest door middel van end-to-end tes
 
 Puppeteer maakt het mogelijk om bepaalde flows binnen de applicatie geautomatiseerd te testen via de Chromium browser. In onderstaande tabel bevinden zich de verschillende testen.
 
-Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich op de server-side server en zijn nodig om de test te laten slagen. Seed files kunnen geinstalleerd worden met het volgende commando op de server-side server: `node seed_file_name.js`.
+Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich op de back-end server en zijn nodig om de test te laten slagen. Seed files kunnen geinstalleerd worden door het bijgevoegde commando in te voeren op de back-end.
 
-| #   | Test                        | Omschrijving                                                                         | Seedfile                   |
-| --- | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------- |
-| 1.  | Inloggen met Microsoft      | Automatisch inloggen op Microsoft via applicatie                                     | -                          |
-| 2.  | Aanmaken nieuw logboek      | Aanmaken nieuw logboek                                                               | -                          |
-| 3.  | Bekijken groepsoverzicht    | Bekijken van een groepsoverzicht + websocket implementatie i.c.m. studentenpagina's. | groupoverview.test.seed.js |
-| 4.  | Bekijken studentenlogboeken | Inzien van logboeken per student.                                                    | -                          |
-| 5.  | Wijzigen studententoegang   | Wijzig het formulier waar de student toegang tot heeft.                              | studentaccess.test.seed.js |
-| 6.  | Studentpagina's             | Testen van het invullen van invoervelden en versturen van vragen.                    | -                          |
+| #  	| Test                        	| Omschrijving                                                                         	| Uitvoeren test                                                                        	|
+|----	|-----------------------------	|--------------------------------------------------------------------------------------	|---------------------------------------------------------------------------------------	|
+| 1. 	| Inloggen met Microsoft      	| Automatisch inloggen op Microsoft via applicatie                                     	| client: `$ npm run e2e-auth`                                                          	|
+| 2. 	| Aanmaken nieuw logboek      	| Aanmaken nieuw logboek                                                               	| client: `$ npm run e2e-new-logbook`                                                   	|
+| 3. 	| Bekijken groepsoverzicht    	| Bekijken van een groepsoverzicht + websocket implementatie i.c.m. studentenpagina's. 	| client: `$ npm run e2e-group-overview`  server: `$ node seeds/e2e/group-overview.js`  	|
+| 4. 	| Bekijken studentenlogboeken 	| Inzien van logboeken per student.                                                    	| client: `$ npm run e2e-student-logbook` server: `$ node seeds/e2e/student-logbook.js` 	|
+| 5. 	| Wijzigen studententoegang   	| Wijzig het formulier waar de student toegang tot heeft.                              	| client: `$ npm run e2e-student-access` server: `$ node seeds/e2e/student-access.js`   	|
+| 6. 	| Studentpagina's             	| Testen van het invullen van invoervelden en versturen van vragen.                    	| client: `$ npm run e2e-student-pages`   server: `$ node seeds/e2e/student-pages.js`   	|
+| 7. 	| Inloggen app via teams      	| Inloggen via teams omgeving en rekenlogboek openen                                   	| client: `$ npm run e2e-teams-login`                                                   	|
 
 _Tabel 2: E2E-test overzicht._
 
