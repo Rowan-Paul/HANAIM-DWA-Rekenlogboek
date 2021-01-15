@@ -105,7 +105,7 @@ Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server
 
 ### 6.3 Real-time
 
-In onze applicatie wordt gebruik gemaakt van real-time updates in het logboekoverzicht van de leraar. Wanneer een leerling een antwoord veranderd of toevoegt wordt er een WebSocket bericht gestuurd naar de leraar via `Socket.io`. Dit is de enigste plek in de applicatie waar real-time wordt gebruikt.
+In onze applicatie wordt gebruik gemaakt van real-time updates in het logboekoverzicht van de leraar. Wanneer een leerling een antwoord verandert of toevoegt wordt er een WebSocket bericht met gestuurd naar de leraar via `Socket.io` waarin het id van het geüpdatete studentenlogboek, het id van het logboek waar deze bij hoort en de naam van de student wordt meegegeven. Deze informatie is nodig om te bepalen of er data gefetcht moet worden door de leraar. Dit Websocket bericht kan door de leraar worden opgevangen in het groepsoverzicht, tijdens het bekijken van antwoorden en tijdens het bekijken van hele logboeken. Als de nieuwe data relevant is voor de leraar fetcht hij/zij alle nieuwe data die nodig is.
 
 ### 6.4 Bekende problemen
 
