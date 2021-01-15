@@ -35,14 +35,23 @@ router.post('/', (req, res) => {
  * @param id - id for the logbook
  */
 router.get('/:id', (req, res) => {
-	Logbook.findById(req.params.id)
-		.then(response => {
-			res.status(200).send(response)
-		})
-		.catch(err => {
-			console.log(err)
-			res.status(500).send(err)
-		})
+	if (
+		req.params.id === undefined ||
+		req.params.id == null ||
+		req.params.id == 'undefined'
+	) {
+		console.log('Error: undefined logbook id')
+		res.sendStatus(400)
+	} else {
+		Logbook.findById(req.params.id)
+			.then(response => {
+				res.status(200).send(response)
+			})
+			.catch(err => {
+				console.log(err)
+				res.status(500).send(err)
+			})
+	}
 })
 
 /**

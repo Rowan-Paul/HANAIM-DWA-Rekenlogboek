@@ -223,8 +223,6 @@ router.get('/:logbookID/group/answers', (req, res) => {
 
 				if (check.indexOf(true) > -1) response.push(student)
 			})
-
-			console.log('response: ', response)
 			res.status(200).send(response)
 		})
 		.catch(err => {
