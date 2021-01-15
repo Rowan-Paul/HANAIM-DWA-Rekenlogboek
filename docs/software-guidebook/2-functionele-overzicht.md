@@ -4,7 +4,7 @@ Dit hoofdstuk bevat een functioneel overzicht van de gehele applicatie per gebru
 
 ### 2.1 Logboekontwerper
 
-Een logboekontwerper moet in staat zijn om een nieuw logboek aan te maken en die te koppelen aan een groep en blok. Daarna moet de logboekontwerper in staat zijn de verschillende kolomnamen, invulmethoden en leerdoelen in te vullen. Dit logboek kan later ook nog bewerkt worden.
+Een logboekontwerper moet in staat zijn om een nieuw logboek aan te maken en die te koppelen aan een groep en blok. Daarna moet de logboekontwerper in staat zijn de verschillende kolomnamen, invulmethoden en leerdoelen in te vullen.
 
 #### 2.1.1 User stories
 
