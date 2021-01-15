@@ -170,7 +170,43 @@ const reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case RESET_LOGBOOK:
-			return state = INITIAL_STATE
+			state = INITIAL_STATE
+
+			return {
+				...state,
+				columns: [
+					{
+						added: true,
+						position: 0,
+						title: 'Doelen'
+					},
+					{
+						added: false,
+						explanation: false,
+						position: 1,
+						title: '',
+						input: {
+							type: 'radiobuttons',
+							options: []
+						}
+					},
+					{
+						added: false,
+						explanation: false,
+						position: 2,
+						title: '',
+						input: {
+							type: 'radiobuttons',
+							options: []
+						}
+					},
+					{
+						added: true,
+						position: 3,
+						title: 'Evaluatie'
+					}
+				],
+			}
 		case SAVE_LOGBOOK:
 			if (action.response.ok) {
 				return {
