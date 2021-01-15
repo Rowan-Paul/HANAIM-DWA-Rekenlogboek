@@ -16,7 +16,7 @@ Voordat nieuwe features gemerged worden in de development branche worden deze aa
 
 De unit-testen bevinden zich op de back-end van de applicatie. Hier worden de verschillende routes van de API getest.
 
-De unit-testen kunnen gestart worden op de back-end server met het volgende commando `$ npm start test`
+De unit-testen kunnen gestart worden op de back-end server door de dbName in app.js te veranderen naar `testrekenlogboek` en met het volgende commando `$ npm start test` uit te voeren.
 
 #### 7.1.2 E2E-testen
 

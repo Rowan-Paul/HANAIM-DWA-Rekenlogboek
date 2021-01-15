@@ -9,7 +9,7 @@ const fetchPeriods = (payload, getState) => {
 	const group = getGroup(getState)
 
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/groups/${group}/years/${payload.schoolYear}/periods`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${group}/periods`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -32,7 +32,7 @@ const fetchActiveLogbook = getState => {
 const fetchLogbook = (payload, getState) => {
 	const group = getGroup(getState)
 	return fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/year/${payload.schoolYear}/group/${group}/period/${payload.period}`
+		`${process.env.REACT_APP_SERVER_ADDRESS}/logbook/years/${payload.schoolYear}/groups/${group}/periods/${payload.period}`
 	)
 }
 
@@ -52,8 +52,8 @@ export const getFilterOptions = (dispatch, getState) => {
 			fetchActiveLogbook(getState)
 				.then(response => {
 					//in the server-side a 204 status will be sent when the response is empty
-					if (response && response.status !== 204) {
-						return response.json()
+					if (response && response.status !== 404) {
+						return
 					} else {
 						//sending false to the next then will make sure that the code stops looking for an active logbook but instead looks for the first available logbook
 						return false

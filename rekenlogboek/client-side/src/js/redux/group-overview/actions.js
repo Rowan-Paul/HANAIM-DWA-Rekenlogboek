@@ -41,7 +41,7 @@ export const getLogbookGroupAnswers = payload => (dispatch, getState) => {
 	const goal = `goal=${payload.goal}`
 	const column = `column=${payload.column}`
 	const answer = `&answer=${payload.answer}`
-	const URI = `studentlogbook/${logbookID}/group-answers/?${goal}&${column}&${answer}`
+	const URI = `studentlogbook/${logbookID}/group/answers/?${goal}&${column}&${answer}`
 
 	fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/${URI}`, {
 		method: 'GET',
@@ -60,7 +60,7 @@ export const getLogbookGroupAnswers = payload => (dispatch, getState) => {
 export const getLogbookGroupOverview = () => (dispatch, getState) => {
 	const logbookID = getState().groupOverview.logbookID // Temp for developing frontend
 	fetch(
-		`${process.env.REACT_APP_SERVER_ADDRESS}/studentlogbook/${logbookID}/group-overview`,
+		`${process.env.REACT_APP_SERVER_ADDRESS}/studentlogbook/${logbookID}/group/overview`,
 		{
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
