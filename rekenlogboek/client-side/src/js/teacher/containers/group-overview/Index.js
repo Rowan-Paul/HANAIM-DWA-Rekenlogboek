@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import socket from '../../../websocket/ws'
+import { withRouter } from 'react-router-dom'
 
 import Jumbotron from '../../../common/Jumbotron'
 import TopBar from '../../../common/logbook/TopBar'
@@ -16,6 +17,7 @@ export const Index = props => {
 	const [overview, setOverview] = useState(props.overview)
 
 	useEffect(() => {
+
 		socket.on('NEW_ANSWER', data => {
 			if (data.logbookID === props.logbookID) {
 				props.getLogbookGroupOverview()
@@ -24,7 +26,8 @@ export const Index = props => {
 	}, [])
 
 	const logbookHandler = () => {
-		if (!logbookID) {
+		if (!props.user.name) props.history.push('../')
+		else if (!logbookID) {
 			props.userGroups.map(group => {
 				if (group.substr(0, 5) === 'Groep') {
 					const groupNo = group.substr(6, 1)
@@ -33,11 +36,10 @@ export const Index = props => {
 					}
 				}
 			})
-		} else if (!logbook) {
+		} else if (!logbook || !overview) {
 			props.getLogbook()
-			return ''
-		} else if (!overview) {
 			props.getLogbookGroupOverview()
+			return ''
 		} else {
 			return (
 				<LogbookRows
@@ -77,6 +79,7 @@ const mapStateToProps = state => ({
 	logbookID: state.groupOverview.logbookID,
 	logbook: state.groupOverview.logbook,
 	overview: state.groupOverview.overview,
+	user: state.main.user,
 	userGroups: state.main.user.groups
 })
 
@@ -86,4 +89,4 @@ const mapDispatchToProps = dispatch => ({
 	getLogbookGroupOverview: () => dispatch(actions.getLogbookGroupOverview())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Index))
