@@ -24,7 +24,7 @@ De front-end van de applicatie wordt ook getest door middel van end-to-end teste
 
 Puppeteer maakt het mogelijk om bepaalde flows binnen de applicatie handmatig te testen. In onderstaande tabel bevinden zich de verschillende testen.
 
-Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich op de back-end server en zijn nodig om de test te laten slagen. Seed files kunnen geinstalleerd worden door het bijgevoegde commande in te voeren op de back-end.
+Bij sommige testen bevind zich ook een seed file. Deze seed files bevinden zich op de back-end server en zijn nodig om de test te laten slagen. Seed files kunnen geinstalleerd worden door het bijgevoegde commando in te voeren op de back-end.
 
 | #  	| Test                        	| Omschrijving                                                                         	| Uitvoeren test                                                                        	|
 |----	|-----------------------------	|--------------------------------------------------------------------------------------	|---------------------------------------------------------------------------------------	|
