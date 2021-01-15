@@ -26,14 +26,6 @@ import AllowStudentAccess from './teacher/containers/AllowStudentAccess'
 import SignIn from '../js/sign-in/SignIn'
 import { Succes } from '../js/sign-in/Succes'
 import NoAccess from '../js/no-access/NoAccess'
-
-// TODO: make privacy and terms of use pages
-// those are required in order to add your app
-// to teams, though the pages aren't checked
-// if they actually exist
-
-// import Privacy from './Privacy'
-// import TermsOfUse from './TermsOfUse'
 import TabConfig from './teams/TabConfig'
 
 // STUDENT PAGES

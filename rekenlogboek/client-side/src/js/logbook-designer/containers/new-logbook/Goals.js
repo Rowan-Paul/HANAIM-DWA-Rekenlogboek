@@ -20,8 +20,7 @@ function Goals(props) {
 	const verifyGoals = () =>
 		props.goals.length > 0
 			? props.history.push('./overview')
-			: //TODO: replace this by something less evil than a alert
-			  alert('Je moet eerst leerdoelen invoeren.')
+			: alert('Je moet eerst leerdoelen invoeren.')
 
 	const addGoal = () => {
 		const goal = props.goals[props.goals.length - 1]

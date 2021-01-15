@@ -48,7 +48,6 @@ function General(props) {
 			<Jumbotron columns={3}>
 				<div className="vertical-center">
 					<form>
-						{/* TODO: remove dummy options & replace with dynamic data*/}
 						<Select
 							title="Kies een groep:"
 							selected={group}
