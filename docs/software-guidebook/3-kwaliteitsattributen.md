@@ -4,7 +4,7 @@ In dit hoofdstuk bevinden zich de verschillende kwaliteitseisen waaraan de softw
 
 ### 3.1 Data voor de applicatie
 
-De applicatie heeft leerdoelen nodig, maar die worden uit de rekenmethode gehaald die op dit moment gebruikt wordt. Het team is niet verantwoordelijk voor het aanleveren of beschikbaar stellen van deze leerdoelen, daarnaast is het team ook niet verantwoordelijk voor afbeeldingen voor het lesmateriaal en vooraf gemaakte logboeken. Om het al leveren wij dus geen database mee, alleen maar de schemas daarvoor zodat de applicatie de data juist kan opslaan in een MongoDB database.
+De applicatie heeft leerdoelen nodig, maar die worden uit de rekenmethode gehaald die op dit moment gebruikt wordt. Het team is niet verantwoordelijk voor het aanleveren of beschikbaar stellen van deze leerdoelen, daarnaast is het team ook niet verantwoordelijk voor afbeeldingen voor het lesmateriaal en vooraf gemaakte logboeken. Wij leveren geen database mee, alleen maar de schemas daarvoor zodat de applicatie de data juist kan opslaan in een MongoDB database.
 
 ### 3.2 Documentatie
 
