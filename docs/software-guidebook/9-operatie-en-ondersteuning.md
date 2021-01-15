@@ -54,6 +54,6 @@ In principe kan de site zodra hij gedeployed is, gelijk worden gebruikt. Als de 
 
 ### 9.3 Ondersteuning
 
-Zoals besproken in hoofdstuk 4, geeft het team geen ondersteuning na het opleveren. Maar het Software Guidebook is zo ingericht dat iedere developer met behulp van dit software guidebook de applicatie goed genoeg zou kunnen begrijpen om er in de toekomst mee verder te kunnen werken. Ook zorgt het team voor comments bij de code de complexere delen van de code uitleggen.
+Zoals besproken in hoofdstuk 4, geeft het team geen ondersteuning na het opleveren. Maar het Software Guidebook is zo ingericht dat iedere developer met behulp van dit software guidebook de applicatie goed genoeg zou kunnen moeten begrijpen om er in de toekomst mee verder te kunnen werken. Ook zorgt het team voor comments bij de code die complexere delen van de code uitleggen.
 
 Vanwege de gelimiteerde tijd en scope worden op dit moment errors gelogged in de server-side op de console. Er is dus niet een specifieke error afhandeling in plaats op dit moment, maar op zo veel mogelijk locaties binnen de code hebben we ons best gedaan om fouten op te vangen en goed te verwerken zodat beveligingslekken worden voorkomen en de gebruiker ongehinderd de applicatie kan gebruiken.
