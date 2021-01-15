@@ -15,7 +15,7 @@ _Afbeelding 2: Container diagram._
 
 In het container diagram is te zien hoe de verschillende systemen en gebruikers met elkaar communiceren. Het systeem bestaat uit 3 containers: de Single Page Application, de Server en een database.
 
-De Single Page Application is een react app die gebruikt maakt van websockets en redux. Alhoewel de SPA zelf geen data verstuurd via de websockets ontvangt hij dit wel vanuit de server. Wat de SPA wel verstuurd naar de server zijn de API requests via fetch. De server kan vervolgens met data via HTTPS of websockets een response geven. Wanneer er een PUT/POST request werd verstuurd naar de server zal de server een response geven op basis van de status van het request.
+De Single Page Application is een React app die gebruikt maakt van Websockets en Redux. Alhoewel de SPA zelf geen data verstuurd via de websockets ontvangt hij dit wel vanuit de server. Wat de SPA wel verstuurd naar de server zijn de API requests via fetch. De server kan vervolgens met data via HTTPS of websockets een response geven. Wanneer er een PUT/POST request werd verstuurd naar de server zal de server een response geven op basis van de status van het request.
 
 Verder is hier te zien dat de leeraar en leerling gebruikers niet alleen direct via de SPA werken, maar dat zij ook de optie hebben om vanuit de Microsoft Teams tab de applicatie kunnen benaderen.
 
@@ -34,14 +34,14 @@ De groeperingen zijn vooral gebasseerd op welke omgevingen er binnen de applicat
 
 Alle gebruikers hebben dus een eigen omgeving waarvoor specifieke component(s) gemaakt zijn. De logboekontwerper, leraar en student omgevingen hebben ook allemaal hun eigen UI-components. Dit is een groepering aan kleinere components die per pagina ingeladen kunnen worden. Ze zijn echter niet van heel groot belang voor het component diagram en voor het overzicht hebben we ze daarom ook weggelaten.
 
-De omgeving die er dan uitspringt is die van de ongeautoriseerde gebruiker. Aangezien gebruikers zonder de juiste rechten niet toegestaan zijn tot de belangrijke delen van de applicatie, worden ze vriendelijk doorgeleid naar een 'geen toegang' pagina.
+De omgeving die er dan uitspringt is die van de ongeautoriseerde gebruiker. Aangezien gebruikers zonder de juiste rechten niet toegestaan zijn tot de belangrijke delen van de applicatie, worden ze doorgeleid naar een 'geen toegang' pagina.
 
 Verder hebben de andere drie gebruikers dus allemaal belangrijke pagina's. Hieronder een simpel overzicht per gebruiker wat deze pagina's en hun bijbehorende subgroepen inhouden.
 
 **Logboekontwerper**
 
 - Index (LogbookDesigner): de hoofdpagina voor de logboekontwerper. Vanuit hier kan hij/zij kiezen om een nieuw logboek aan te maken.
-- subgroep "Nieuw logboek pagina's": de pagina's die in deze subgroep staan moeten door een logboekontwerper worden doorlopen om een nieuw logboek te kunnen maken.
+- Subgroep "Nieuw logboek pagina's": de pagina's die in deze subgroep staan moeten door een logboekontwerper worden doorlopen om een nieuw logboek te kunnen maken.
 
 **Leraar**
 
@@ -52,7 +52,7 @@ Verder hebben de andere drie gebruikers dus allemaal belangrijke pagina's. Hiero
 
 **Student**
 
-- subgroep "Studentlogboek invulpagina's": in deze subgroep staan alle pagina's die opengezet kunnen worden door de leraar van een leerling, met een bijbehorende eind pagina voor wanneer een leerling klaar is met het invullen van zijn/haar logboek.
+- Subgroep "Studentlogboek invulpagina's": in deze subgroep staan alle pagina's die opengezet kunnen worden door de leraar van een leerling, met een bijbehorende eind pagina voor wanneer een leerling klaar is met het invullen van zijn/haar logboek.
 - Default: wanneer een leraar geen logboek heeft openstaan zullen de leerlingen dit zien aan de hand van deze infopagina.
 
 Naast de omgevingen die de gebruikers visueel kunnen zien is er ook nog een Redux en een Sign in omgeving. De Redux omgeving bevat in dit overzicht alle reducers en per reducer wordt er met pijlen aangegeven door wie ze gebruikt worden. De Sign in omgeving bevat alleen een Signin en succespagina voor het inloggen. De Sign in pagina maakt gebruik van Microsoft Teams data via een component genaamd tabConfig. Tabconfig vraagt namelijk data op uit het Microsoft Identity Platform. De Microsoft Teams tab die ook aan de tabConfig gekoppeld staat geld alleen voor de leraren en leerlingen die op Teams werken. In princiepe heeft dit direct effect op hun complete omgeving, maar omdat in de sign in omgeving de autorisatie wordt gedaan voor een gebruiker en wordt bepaald of ze op Microsoft Teams werken of niet leek het ons handig de Teams Tab hieraan te koppelen.
@@ -80,15 +80,15 @@ In onze project map zijn er verschillende mappen, namelijk:
 - [opdracht-rekenlogboek](../../opdracht-rekenlogboek), wat de opdracht bevat die we uitvoeren voor de PO
 - [rekenlogboek](../../rekenlogboek), dit bevat de code van zowel de client-side als de server-side
 
-Binnen in de map `rekenlogboek` staat de client-side en server-side app in twee aparte folder met elk hun eigen node modules, eslint, prettier, etcetera.
+Binnen in de map `rekenlogboek` staat de client-side en server-side app in twee aparte folders met elk hun eigen node modules, EsLint, Prettier, Etcetera.
 
-De client-side is opgedeeld in verschillende mappen voor verschillende onderdelen, met het mapje `src/js` de javascript code en de `src/redux` map alles voor de reducers bevattend. Afbeeldingen worden in het mapje `src/img` gestopt. Het hoofdbestand is het bestand [App.js](../../rekenlogboek/client-side/src/js/app.js) waarin de Router staat.
+De client-side is opgedeeld in verschillende mappen voor verschillende onderdelen, met het mapje `src/js` de javascript code en de `src/redux` map alles voor de reducers bevattend. Afbeeldingen worden in het mapje `src/img` gestopt. Het hoofdbestand is het bestand [App.js](../../rekenlogboek/client-side/src/js/app.js) waarin de router staat.
 
 ```text
 /src
     /img    -> Bevat afbeeldingen voor de paginas.
     /js     -> Bevat de containers en componenten voor de pagina's.
-        /redux  -> Bevat de redux store, reducers en action creators.
+        /redux  -> Bevat de Redux store, reducers en action creators.
     /scss   -> Bevat de styling voor de paginas.
 ```
 
@@ -101,7 +101,7 @@ De server-side is opgedeeld in een map voor mongoose models en express routes. H
 app.js                  ->Hoofdbestand waarmee de server gestart kan worden
 ```
 
-Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server (bv `http://localhost:3000`) ervoor te zetten
+Afbeeldingen worden opgeslagen en geserved onder de `static` folder op de server, die een map bevat met uploads waarin bestanden geupload door gebruikers staat. Deze uploads maken gebruik van express-files en de `files` route. De path van de afbeelding wordt opgeslagen in de database base en kan worden opgehaald door de URL van de server door bijv. `http://localhost:3000` ervoor te zetten.
 
 ### 6.3 Real-time
 
