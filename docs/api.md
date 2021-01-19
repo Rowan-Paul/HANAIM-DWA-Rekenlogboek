@@ -1,16 +1,3 @@
-## Removed routes
-
-- GET /logbook/:id/teacher
-- GET /logbook/:id (x3)
-- GET /logbook/:id/goals
-- GET /logbook/:id/column/:position
-- GET /logbook/:id/goal/:
-- GET /studentlogbook/:student/logbooks/:logbookID
-- GET /studentlogbook/:id/answers
-- GET /studentlogbook/:id/answers/column/:position
-- GET /studentlogbook/student/:student
-- GET /studentlogbook/logbook/:logbookid/student/:student
-
 ## Logbook routes
 
 **`POST`** `/logbook`
